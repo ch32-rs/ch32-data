@@ -1,7 +1,7 @@
 {
   "name": "CH32V307RCT6",
-  "family": "QingKe RISC-V-based, general-purpose MCU",
-  "product_type": "QingKe V4F floating-point core, main frequency <= 144M",
+  "family": "QingKe RISC-V-based, BLE MCU",
+  "product_type": "QingKe Vx core, BLE",
   "subfamily": "Interconnectivity (USB high-speed, CAN, Ethernet, DVP, SDIO, FSMC)",
   "packages": [
     {
@@ -10,31 +10,27 @@
     }
   ],
   "_raw": {
-    "Part NO.": "CH32V307RCT6",
-    "Freq": "144MHz",
-    "Flash": "256K",
-    "SRAM": "64K",
-    "Package": "LQFP64M",
-    "GPIO": "51",
+    "ADC": "16*12b",
+    "DataFlash": "-",
+    "USB": "- / (480Mbps) H/D",
+    "ETH/SATA": "1000Mb/-",
+    "I/O": "51",
     "UART": "8",
-    "IIC": "2",
-    "DAC": "2",
-    "SPI": "3/2",
-    "OPA": "4",
-    "ADC": "2/16",
-    "Touchkey": "16",
-    "Advanced TM": "4/4",
-    "RTC": "1",
-    "WDOG": "2",
-    "USB_20": "OTG",
-    "USB_20H": "H/D \u5185\u7f6ePHY",
-    "CAN": "2",
-    "Ethernet": "1G MAC+10M PHY",
-    "TRNG": "1",
-    "SDIO": "1",
+    "SPI": "3",
+    "url": "http://www.wch.cn/products/CH32V307.html?",
+    "Encrypt": "-",
+    "head": "Part NO.",
+    "Other Features": "OPA /TRNG",
+    "CAP": "32/32",
+    "Timer": "10*16b",
+    "Part NO.": "CH32V307RCT6",
     "VDD": "2.5/3.3",
-    "BLE": "-",
-    "url": "http://www.wch.cn/products/CH32V307.html"
+    "Freq": "144MHz",
+    "row_no": "d9bbc39544a84f9db06c83172bfbf0be",
+    "Package": "LQFP64M",
+    "Flash": "256K",
+    "RAM": "64K",
+    "SERDES/HSPI/DVP": "-/-/-/1"
   },
   "memory": [
     {
@@ -60,7 +56,7 @@
       "type": "homepage",
       "title": "Unknow",
       "name": "",
-      "url": "http://www.wch.cn/products/CH32V307.html"
+      "url": "http://www.wch.cn/products/CH32V307.html?"
     },
     {
       "type": "demo_code",

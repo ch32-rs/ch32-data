@@ -88,7 +88,7 @@
           "address": 1073741824,
           "registers": {
             "kind": "gpio",
-            "version": "v2",
+            "version": "v1",
             "block": "GPIO",
             "configurations": {
               "lines": 16
