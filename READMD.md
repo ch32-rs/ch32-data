@@ -1,11 +1,9 @@
+# ch32-data
 
-<http://www.wch-ic.com/products/categories/47.html?pid=5>
+ch32-data is a project aiming to produce clean machine-readable data about the WCH's 32-bit microcontroller families.
 
-LQFP48
+## Families
 
-PA0 - PA15
-PB0 - PB15
-PC13, PC14, PC15
-
-TSSOP20(F8)/QSOP28(G8)
-PA0 - PA14
+- CH32V
+- CH32X
+- CH32L
