@@ -1,0 +1,49 @@
+Part NO.,Freq,Flash,SRAM,Package,GPIO,UART,IIC,DAC,SPI,OPA,ADC,Touchkey,Advanced TM,RTC,WDOG,USB_20,USB_20H,CAN,Ethernet,TRNG,SDIO,VDD,BLE,url
+CH32V003J4M6,48MHz,16K,2K,SOP8,6,1,1,-,-/-,1,1/6,-,1/1,-,2,-,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V003.html
+CH32V003A4M6,48MHz,16K,2K,SOP16,14,1,1,-,-/-,1,1/6,-,1/1,-,2,-,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V003.html
+CH32V003F4U6,48MHz,16K,2K,QFN20,18,1,1,-,1/-,1,1/8,-,1/1,-,2,-,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V003.html
+CH32V003F4P6,48MHz,16K,2K,TSSOP20,18,1,1,-,1/-,1,1/8,-,1/1,-,2,-,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V003.html
+CH32X035R8T6,48MHz,62K,20K,LQFP64M,60,4,1,-,1/-,2,1/14,14,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035C8T6,48MHz,62K,20K,LQFP48,46,4,1,-,1/-,2,1/10,10,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035G8U6,48MHz,62K,20K,QFN28,27,4,1,-,1/-,2,1/10,10,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035G8R6,48MHz,62K,20K,QSOP28,26,4,1,-,1/-,2,1/11,11,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035F8U6,48MHz,62K,20K,QFN20,19,3,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035F7P6,48MHz,48K,20K,TSSOP20,18,3,1,-,1/-,1,1/11,11,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X034F8U6,48MHz,62K,20K,QFN20,19,4,1,-,1/-,2,1/9,9,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X034F8P6,48MHz,62K,20K,TSSOP20,18,4,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X033F8P6,48MHz,62K,20K,TSSOP20,18,4,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32V103C6T6,80MHz,32K,10K,LQFP48,37,2,1,-,1/-,-,1/10,10,1/2,1,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V103.html
+CH32V103C8U6,80MHz,64K,20K,QFN48X7,37,3,2,-,2/-,-,1/10,10,1/3,1,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V103.html
+CH32V103C8T6,80MHz,64K,20K,LQFP48,37,3,2,-,2/-,-,1/10,10,1/3,1,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V103.html
+CH32V103R8T6,80MHz,64K,20K,LQFP64M,51,3,2,-,2/-,-,1/16,16,1/3,1,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32V103.html
+CH32L103F7P6,96MHz,48K,20K,TSSOP20,16,4,2,-,1/-,1,1/9,9,1/3,1,2,D,-,1,-,-,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32L103F8P6,96MHz,64K,20K,TSSOP20,18,4,2,-,2/-,1,1/9,9,1/3,1,2,H/D,-,1,-,-,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32L103F8U6,96MHz,64K,20K,QFN20,19,4,2,-,2/-,1,1/10,10,1/3,1,2,H/D,-,1,-,-,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32L103G8R6,96MHz,64K,20K,QSOP28,25,4,2,-,2/-,1,1/10,10,1/3,1,2,H/D,-,1,-,-,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32L103K8U6,96MHz,64K,20K,QFN32,28,4,2,-,1/-,1,1/10,10,1/3,1,2,H/D,-,1,-,-,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32L103C8T6,96MHz,64K,20K,LQFP48,37,4,2,-,2/-,1,1/10,10,1/3,1,2,H/D,-,1,-,,-,3.3,-,https://www.wch.cn/products/CH32L103.html
+CH32V203F6P6,144MHz,32K,10K,TSSOP20,16,1,-,-,1/-,1,2/9,9,1/3,1,2,D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203G6U6,144MHz,32K,10K,QFN28,24,2,1,-,1/-,2,2/10,10,1/3,1,2,D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203K6T6,144MHz,32K,10K,LQFP32,26,2,1,-,1/-,2,2/10,10,1/3,1,2,D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203C6T6,144MHz,32K,10K,LQFP48,37,2,1,-,1/-,2,2/10,10,1/3,1,2,D+H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203F8P6,144MHz,64K,20K,TSSOP20,17,2,1,-,1/-,2,2/9,9,1/3,1,2,H/D,-,-,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203F8U6,144MHz,64K,20K,QFN20,19,2,-,-,1/-,2,2/9,9,1/3,1,2,D,-,-,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203G8R6,144MHz,64K,20K,QSOP28,24,2,1,-,1/-,2,2/10,10,1/3,1,2,D+H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203K8T6,144MHz,64K,20K,LQFP32,26,2,1,-,1/-,2,2/10,10,1/3,1,2,D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203C8T6,144MHz,64K,20K,LQFP48,37,4,2,-,2/-,2,2/10,10,1/3,1,2,D+H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203C8U6,144MHz,64K,20K,QFN48X7,37,4,2,-,2/-,2,2/10,10,1/3,1,2,D+H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V203RBT6,144MHz,128K,64K,LQFP64M,51,4,2,-,2/-,2,1/16,16,1/3,1,2,D+H/D,-,1,10M PHY,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V203.html
+CH32V303CBT6,144MHz,128K,32K,LQFP48,37,3,2,2,2/-,4,2/10,10,1/3,1,2,H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
+CH32V303RBT6,144MHz,128K,32K,LQFP64M,51,3,2,2,2/-,4,2/16,16,1/3,1,2,H/D,-,1,-,-,-,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
+CH32V303RCT6,144MHz,256K,64K,LQFP64M,51,8,2,2,3/2,4,2/16,16,4/4,1,2,H/D,-,1,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
+CH32V303VCT6,144MHz,256K,64K,LQFP100,80,8,2,2,3/2,4,2/16,16,4/4,1,2,H/D,-,1,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
+CH32V305FBP6,144MHz,128K,32K,TSSOP20,17,2,2,1,1/1,-,2/1,1,4/4,1,2,-,H/D 内置PHY,1,-,1,-,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V305GBU6,144MHz,128K,32K,QFN28,24,5,2,1,3/2,1,2/6,6,4/4,1,2,-,H/D 内置PHY,2,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V305RBT6,144MHz,128K,32K,LQFP64M,51,5,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V307RCT6,144MHz,256K,64K,LQFP64M,51,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V307WCU6,144MHz,256K,64K,QFN68,54,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V307VCT6,144MHz,256K,64K,LQFP100,80,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V208GBU6,144MHz,128K,64K,QFN28,21,2,1,-,1/-,1,1/8,8,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
+CH32V208CBU6,144MHz,128K,64K,QFN48,37,4,2,-,2/-,2,1/10,10,1/4,1,2,D+H/D,-,1,-,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
+CH32V208RBT6,144MHz,128K,64K,LQFP64M,49,4,2,-,2/-,2,1/16,16,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
+CH32V208WBU6,144MHz,128K,64K,QFN68,53,4,2,-,2/-,2,1/16,16,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html

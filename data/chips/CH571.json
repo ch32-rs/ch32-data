@@ -1,0 +1,125 @@
+{
+  "name": "CH571",
+  "family": "QingKe RISC-V-based, BLE MCU",
+  "product_type": "QingKe Vx core, BLE",
+  "subfamily": null,
+  "packages": [
+    {
+      "name": "CH571",
+      "package": "QFN28/QFN20"
+    }
+  ],
+  "_raw": {
+    "DataFlash": "32K",
+    "USB": "1*D",
+    "PWM": "4",
+    "LCD": "-",
+    "RTC/WDOG": "\u221a/\u221a",
+    "SRAM": "18K",
+    "url": "http://www.wch.cn/products/CH573.html?",
+    "GPIO": "20",
+    "head": "Part NO.",
+    "TouchKey/ADC": "-/6*12b",
+    "Timer": "4*26b",
+    "Part NO.": "CH571",
+    "Ethernet": "-",
+    "VDD": "2.3/3.3",
+    "Freq": "20MHz",
+    "row_no": "bff986aa886947c1b2d86b0d3e7ce629",
+    "BLE": "4.2",
+    "LEDC": "-",
+    "Package": "QFN28/QFN20",
+    "Flash": "192K",
+    "UART/SPI/IIC": "2/1/-",
+    "Core": "RISC-V"
+  },
+  "memory": [
+    {
+      "name": "FLASH",
+      "kind": "flash",
+      "address": 0,
+      "size": "192K",
+      "settings": {
+        "erase_size": 1024,
+        "write_size": 64,
+        "erase_value": 255
+      }
+    },
+    {
+      "name": "SRAM",
+      "kind": "ram",
+      "address": 536870912,
+      "size": "18K"
+    }
+  ],
+  "docs": [
+    {
+      "type": "homepage",
+      "title": "Unknow",
+      "name": "",
+      "url": "http://www.wch.cn/products/CH573.html?"
+    },
+    {
+      "type": "demo_code",
+      "title": "Unknow",
+      "name": ""
+    },
+    {
+      "type": "datasheet",
+      "title": "Unknow",
+      "name": "",
+      "version": "1.0",
+      "url": "TODO"
+    },
+    {
+      "type": "reference_manual",
+      "title": "Unknow",
+      "name": "",
+      "version": "1.0",
+      "url": "TODO"
+    }
+  ],
+  "cores": [
+    {
+      "name": "qingke-v4",
+      "peripherals": [
+        {
+          "name": "GPIOA",
+          "address": 1073741824,
+          "registers": {
+            "kind": "gpio",
+            "version": "v2",
+            "block": "GPIO",
+            "configurations": {
+              "lines": 16
+            }
+          },
+          "rcc": {
+            "clock": "GPIO",
+            "enable": {
+              "register": "GPIOENR",
+              "field": "GPIOAEN"
+            },
+            "reset": {
+              "register": "GPIORSTR",
+              "field": "GPIOARST"
+            }
+          }
+        }
+      ],
+      "interrupts": [
+        {
+          "name": "WWDG",
+          "number": 1
+        }
+      ],
+      "dma_channels": [
+        {
+          "name": "DMA1_CH1",
+          "dma": "DMA1",
+          "channel": 0
+        }
+      ]
+    }
+  ]
+}

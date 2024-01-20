@@ -1,0 +1,128 @@
+{
+  "name": "CH32V003F4U6",
+  "family": "QingKe RISC-V-based, general-purpose MCU",
+  "product_type": "QingKe V2/V4 core, great value version, main frequency <= 48M",
+  "subfamily": "General-purpose",
+  "packages": [
+    {
+      "name": "CH32V003F4U6",
+      "package": "QFN20"
+    }
+  ],
+  "_raw": {
+    "Part NO.": "CH32V003F4U6",
+    "Freq": "48MHz",
+    "Flash": "16K",
+    "SRAM": "2K",
+    "Package": "QFN20",
+    "GPIO": "18",
+    "UART": "1",
+    "IIC": "1",
+    "DAC": "-",
+    "SPI": "1/-",
+    "OPA": "1",
+    "ADC": "1/8",
+    "Touchkey": "-",
+    "Advanced TM": "1/1",
+    "RTC": "-",
+    "WDOG": "2",
+    "USB_20": "-",
+    "USB_20H": "-",
+    "CAN": "-",
+    "Ethernet": "-",
+    "TRNG": "-",
+    "SDIO": "-",
+    "VDD": "3.3/5.0",
+    "BLE": "-",
+    "url": "http://www.wch.cn/products/CH32V003.html"
+  },
+  "memory": [
+    {
+      "name": "FLASH",
+      "kind": "flash",
+      "address": 0,
+      "size": "16K",
+      "settings": {
+        "erase_size": 1024,
+        "write_size": 64,
+        "erase_value": 255
+      }
+    },
+    {
+      "name": "SRAM",
+      "kind": "ram",
+      "address": 536870912,
+      "size": "2K"
+    }
+  ],
+  "docs": [
+    {
+      "type": "homepage",
+      "title": "Unknow",
+      "name": "",
+      "url": "http://www.wch.cn/products/CH32V003.html"
+    },
+    {
+      "type": "demo_code",
+      "title": "Unknow",
+      "name": ""
+    },
+    {
+      "type": "datasheet",
+      "title": "Unknow",
+      "name": "",
+      "version": "1.0",
+      "url": "TODO"
+    },
+    {
+      "type": "reference_manual",
+      "title": "Unknow",
+      "name": "",
+      "version": "1.0",
+      "url": "TODO"
+    }
+  ],
+  "cores": [
+    {
+      "name": "qingke-v4",
+      "peripherals": [
+        {
+          "name": "GPIOA",
+          "address": 1073741824,
+          "registers": {
+            "kind": "gpio",
+            "version": "v2",
+            "block": "GPIO",
+            "configurations": {
+              "lines": 16
+            }
+          },
+          "rcc": {
+            "clock": "GPIO",
+            "enable": {
+              "register": "GPIOENR",
+              "field": "GPIOAEN"
+            },
+            "reset": {
+              "register": "GPIORSTR",
+              "field": "GPIOARST"
+            }
+          }
+        }
+      ],
+      "interrupts": [
+        {
+          "name": "WWDG",
+          "number": 1
+        }
+      ],
+      "dma_channels": [
+        {
+          "name": "DMA1_CH1",
+          "dma": "DMA1",
+          "channel": 0
+        }
+      ]
+    }
+  ]
+}
