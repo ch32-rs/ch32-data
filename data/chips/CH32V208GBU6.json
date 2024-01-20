@@ -1,7 +1,7 @@
 {
   "name": "CH32V208GBU6",
-  "family": "QingKe RISC-V-based, BLE MCU",
-  "product_type": "QingKe Vx core, BLE",
+  "family": "QingKe RISC-V-based, general-purpose MCU",
+  "product_type": "QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M",
   "subfamily": "Wireless (BLE5.X, CAN, USB, Ethernet)",
   "packages": [
     {
@@ -10,28 +10,31 @@
     }
   ],
   "_raw": {
-    "DataFlash": "-",
-    "USB": "1*H/2*D",
-    "PWM": "20",
-    "LCD": "-",
-    "RTC/WDOG": "\u221a/\u221a",
-    "SRAM": "64K",
-    "url": "http://www.wch.cn/products/CH32V208.html?",
-    "GPIO": "21",
-    "head": "Part NO.",
-    "TouchKey/ADC": "8/1*12b",
-    "Timer": "4*16b/1*32b",
     "Part NO.": "CH32V208GBU6",
-    "Ethernet": "10M",
-    "VDD": "2.5/3.3",
     "Freq": "144MHz",
-    "row_no": "c39bcab2fe2740348f6dd85c64f70a0c",
-    "BLE": "5.3",
-    "LEDC": "-",
-    "Package": "QFN28",
     "Flash": "128K",
-    "UART/SPI/IIC": "2/1/1",
-    "Core": "RISC-V"
+    "SRAM": "64K",
+    "Package": "QFN28",
+    "GPIO": "21",
+    "UART": "2",
+    "IIC": "1",
+    "DAC": "-",
+    "SPI": "1/-",
+    "OPA": "1",
+    "ADC": "1/8",
+    "Touchkey": "8",
+    "Advanced TM": "1/4",
+    "RTC": "1",
+    "WDOG": "2",
+    "USB_20": "D+H/D",
+    "USB_20H": "-",
+    "CAN": "1",
+    "Ethernet": "10M",
+    "TRNG": "-",
+    "SDIO": "-",
+    "VDD": "2.5/3.3",
+    "BLE": "5.3",
+    "url": "http://www.wch.cn/products/CH32V208.html"
   },
   "memory": [
     {
@@ -57,7 +60,7 @@
       "type": "homepage",
       "title": "Unknow",
       "name": "",
-      "url": "http://www.wch.cn/products/CH32V208.html?"
+      "url": "http://www.wch.cn/products/CH32V208.html"
     },
     {
       "type": "demo_code",
