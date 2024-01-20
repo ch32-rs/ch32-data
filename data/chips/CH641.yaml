@@ -1,0 +1,86 @@
+_raw:
+  ADC: 15*10b
+  CAP: 5/5
+  DataFlash: '-'
+  ETH/SATA: -/-
+  Encrypt: '-'
+  Flash: 16KB
+  Freq: 48MHz
+  I/O: '25'
+  Other Features: QII/ISP<br>BC/USB PD
+  Package: QFN28/QSOP24<br>QFN20/QFN16
+  Part NO.: CH641
+  RAM: 2KB
+  SERDES/HSPI/DVP: -/-/-/-
+  SPI: '-'
+  Timer: 2*16b
+  UART: '1'
+  USB: '-'
+  VDD: 5-12
+  head: Part NO.
+  row_no: ca25e07005c0447bb56edcbcb9e5952d
+  url: /products/CH641.html
+cores:
+- dma_channels:
+  - channel: 0
+    dma: DMA1
+    name: DMA1_CH1
+  interrupts:
+  - name: WWDG
+    number: 1
+  name: qingke-v4
+  peripherals:
+  - address: 1073741824
+    name: GPIOA
+    rcc:
+      clock: GPIO
+      enable:
+        field: GPIOAEN
+        register: GPIOENR
+      reset:
+        field: GPIOARST
+        register: GPIORSTR
+    registers:
+      block: GPIO
+      configurations:
+        lines: 16
+      kind: gpio
+      version: v2
+docs:
+- name: ''
+  title: Unknow
+  type: homepage
+  url: /products/CH641.html
+- name: ''
+  title: Unknow
+  type: demo_code
+- name: ''
+  title: Unknow
+  type: datasheet
+  url: TODO
+  version: '1.0'
+- name: ''
+  title: Unknow
+  type: reference_manual
+  url: TODO
+  version: '1.0'
+family: QingKe RISC-V-based, BLE MCU
+memory:
+- address: 0
+  kind: flash
+  name: FLASH
+  settings:
+    erase_size: 1024
+    erase_value: 255
+    write_size: 64
+  size: 16KB
+- address: 536870912
+  kind: ram
+  name: SRAM
+  size: 2KB
+name: CH641
+packages:
+- name: CH641
+  package: QFN28/QSOP24<br>QFN20/QFN16
+product_type: QingKe Vx core, BLE
+subfamily: null

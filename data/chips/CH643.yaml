@@ -1,0 +1,86 @@
+_raw:
+  ADC: 14*12b
+  CAP: 10/10
+  DataFlash: '-'
+  ETH/SATA: -/-
+  Encrypt: '-'
+  Flash: 62K
+  Freq: 48MHz
+  I/O: '60'
+  Other Features: LEDPWM<br>OPA/CMP<br>PIOC/USB PD
+  Package: QSOP28/LQFP48<br>LQFP64/QFN80
+  Part NO.: CH643
+  RAM: 20K
+  SERDES/HSPI/DVP: -/-/-/-
+  SPI: '1'
+  Timer: 3*16b
+  UART: '4'
+  USB: '- / (12Mbps) H/D'
+  VDD: 3.3/5.0
+  head: Part NO.
+  row_no: 7100940effde4a2a8cb5ba22aaa8c260
+  url: /products/CH643.html?
+cores:
+- dma_channels:
+  - channel: 0
+    dma: DMA1
+    name: DMA1_CH1
+  interrupts:
+  - name: WWDG
+    number: 1
+  name: qingke-v4
+  peripherals:
+  - address: 1073741824
+    name: GPIOA
+    rcc:
+      clock: GPIO
+      enable:
+        field: GPIOAEN
+        register: GPIOENR
+      reset:
+        field: GPIOARST
+        register: GPIORSTR
+    registers:
+      block: GPIO
+      configurations:
+        lines: 16
+      kind: gpio
+      version: v2
+docs:
+- name: ''
+  title: Unknow
+  type: homepage
+  url: /products/CH643.html?
+- name: ''
+  title: Unknow
+  type: demo_code
+- name: ''
+  title: Unknow
+  type: datasheet
+  url: TODO
+  version: '1.0'
+- name: ''
+  title: Unknow
+  type: reference_manual
+  url: TODO
+  version: '1.0'
+family: QingKe RISC-V-based, BLE MCU
+memory:
+- address: 0
+  kind: flash
+  name: FLASH
+  settings:
+    erase_size: 1024
+    erase_value: 255
+    write_size: 64
+  size: 62K
+- address: 536870912
+  kind: ram
+  name: SRAM
+  size: 20K
+name: CH643
+packages:
+- name: CH643
+  package: QSOP28/LQFP48<br>LQFP64/QFN80
+product_type: QingKe Vx core, BLE
+subfamily: null

@@ -1,0 +1,86 @@
+_raw:
+  ADC: '-'
+  CAP: 8/8
+  DataFlash: '-'
+  ETH/SATA: 100Mb/-
+  Encrypt: '-'
+  Flash: 224K
+  Freq: 125MHz
+  I/O: '40'
+  Other Features: USB PD
+  Package: QFN68/QFN32
+  Part NO.: CH645
+  RAM: 80K
+  SERDES/HSPI/DVP: -/-/-/1
+  SPI: '2'
+  Timer: 2*16b
+  UART: '2'
+  USB: -/(480Mbps)H/D
+  VDD: '3.3'
+  head: Part NO.
+  row_no: 897f4e281c8c4932b217cb914cfe0371
+  url: /products/CH645.html?
+cores:
+- dma_channels:
+  - channel: 0
+    dma: DMA1
+    name: DMA1_CH1
+  interrupts:
+  - name: WWDG
+    number: 1
+  name: qingke-v4
+  peripherals:
+  - address: 1073741824
+    name: GPIOA
+    rcc:
+      clock: GPIO
+      enable:
+        field: GPIOAEN
+        register: GPIOENR
+      reset:
+        field: GPIOARST
+        register: GPIORSTR
+    registers:
+      block: GPIO
+      configurations:
+        lines: 16
+      kind: gpio
+      version: v2
+docs:
+- name: ''
+  title: Unknow
+  type: homepage
+  url: /products/CH645.html?
+- name: ''
+  title: Unknow
+  type: demo_code
+- name: ''
+  title: Unknow
+  type: datasheet
+  url: TODO
+  version: '1.0'
+- name: ''
+  title: Unknow
+  type: reference_manual
+  url: TODO
+  version: '1.0'
+family: QingKe RISC-V-based, BLE MCU
+memory:
+- address: 0
+  kind: flash
+  name: FLASH
+  settings:
+    erase_size: 1024
+    erase_value: 255
+    write_size: 64
+  size: 224K
+- address: 536870912
+  kind: ram
+  name: SRAM
+  size: 80K
+name: CH645
+packages:
+- name: CH645
+  package: QFN68/QFN32
+product_type: QingKe Vx core, BLE
+subfamily: null

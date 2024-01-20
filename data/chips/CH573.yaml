@@ -1,0 +1,87 @@
+_raw:
+  BLE: '4.2'
+  Core: RISC-V
+  DataFlash: 32K
+  Ethernet: '-'
+  Flash: 448K
+  Freq: 20MHz
+  GPIO: '22'
+  LCD: '-'
+  LEDC: '-'
+  PWM: '12'
+  Package: QFN32/QFN28
+  Part NO.: CH573
+  RTC/WDOG: "\u221A/\u221A"
+  SRAM: 18K
+  Timer: 4*26b
+  TouchKey/ADC: 10/10*12b
+  UART/SPI/IIC: 4/1/-
+  USB: 1*H/1*D
+  VDD: 1.7/3.3
+  head: Part NO.
+  row_no: 9f43e7849a3a4ce385020a544ccd0e33
+  url: http://www.wch.cn/products/CH573.html
+cores:
+- dma_channels:
+  - channel: 0
+    dma: DMA1
+    name: DMA1_CH1
+  interrupts:
+  - name: WWDG
+    number: 1
+  name: qingke-v4
+  peripherals:
+  - address: 1073741824
+    name: GPIOA
+    rcc:
+      clock: GPIO
+      enable:
+        field: GPIOAEN
+        register: GPIOENR
+      reset:
+        field: GPIOARST
+        register: GPIORSTR
+    registers:
+      block: GPIO
+      configurations:
+        lines: 16
+      kind: gpio
+      version: v2
+docs:
+- name: ''
+  title: Unknow
+  type: homepage
+  url: http://www.wch.cn/products/CH573.html
+- name: ''
+  title: Unknow
+  type: demo_code
+- name: ''
+  title: Unknow
+  type: datasheet
+  url: TODO
+  version: '1.0'
+- name: ''
+  title: Unknow
+  type: reference_manual
+  url: TODO
+  version: '1.0'
+family: QingKe RISC-V-based, BLE MCU
+memory:
+- address: 0
+  kind: flash
+  name: FLASH
+  settings:
+    erase_size: 1024
+    erase_value: 255
+    write_size: 64
+  size: 448K
+- address: 536870912
+  kind: ram
+  name: SRAM
+  size: 18K
+name: CH573
+packages:
+- name: CH573
+  package: QFN32/QFN28
+product_type: QingKe Vx core, BLE
+subfamily: null
