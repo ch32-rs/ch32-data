@@ -2,11 +2,12 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Chip {
     pub name: String,
     pub family: String,
     pub subfamily: String,
+    pub product_type: String,
     pub device_id: u32,
     pub packages: Vec<chip::Package>,
     pub memory: Vec<chip::Memory>,
