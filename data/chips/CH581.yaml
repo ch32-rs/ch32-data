@@ -1,76 +1,73 @@
-_raw:
-  BLE: "5.3"
-  Core: RISC-V
-  DataFlash: 32K
-  Ethernet: "-"
-  Flash: 192K
-  Freq: 20MHz
-  GPIO: "20"
-  LCD: "-"
-  LEDC: "-"
-  PWM: "10"
-  Package: QFN28
-  Part NO.: CH581
-  RTC/WDOG: "\u221A/\u221A"
-  SRAM: 32K
-  Timer: 4*26b
-  TouchKey/ADC: -/6*12b
-  UART/SPI/IIC: 2/1/-
-  USB: 1*D
-  VDD: 2.3/3.3
-  head: Part NO.
-  row_no: 7ff4059f2c324afaa6caa9edff69ad27
-  url: http://www.wch.cn/products/CH583.html?
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: http://www.wch.cn/products/CH583.html?
-
-family: QingKe RISC-V-based, BLE MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 192K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 32K
 name: CH581
-device_id: 0x81000000
+family: QingKe RISC-V-based, BLE MCU
+subfamily: RISC-V Core BLE5.3 Wireless MCU
+product_type: QingKe V4A core, BLE
+device_id: 2164260864
 packages:
   - name: CH581F
     package: QFN28
-product_type: QingKe V4A core, BLE
-subfamily: RISC-V Core BLE5.3 Wireless MCU
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 196608
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 32768
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: http://www.wch.cn/products/CH583.html?
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  Freq: 20MHz
+  head: Part NO.
+  RTC/WDOG: √/√
+  Flash: 192K
+  LCD: "-"
+  SRAM: 32K
+  Timer: 4*26b
+  USB: 1*D
+  GPIO: "20"
+  row_no: 7ff4059f2c324afaa6caa9edff69ad27
+  Part NO.: CH581
+  PWM: "10"
+  VDD: 2.3/3.3
+  UART/SPI/IIC: 2/1/-
+  url: http://www.wch.cn/products/CH583.html?
+  DataFlash: 32K
+  Core: RISC-V
+  TouchKey/ADC: -/6*12b
+  Package: QFN28
+  BLE: "5.3"
+  Ethernet: "-"
+  LEDC: "-"

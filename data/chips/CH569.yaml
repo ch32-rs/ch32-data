@@ -1,77 +1,8 @@
-_raw:
-  ADC: "-"
-  CAP: 3/4
-  DataFlash: 32K
-  ETH/SATA: 1000Mb/-
-  Encrypt: AES/SM4
-  Flash: 448K
-  Freq: 120MHz
-  I/O: "49"
-  Other Features: BUS8
-  Package: QFN68/QFN40
-  Part NO.: CH569
-  RAM: 48K/80K
-  SERDES/HSPI/DVP: 1.25Gb/3.8Gb/96MHz/1
-  SPI: "2"
-  Timer: 3*26b
-  UART: "4"
-  USB: (5Gbps) H/D/ (480Mbps) H/D
-  VDD: "3.3"
-  head: Part NO.
-  row_no: 87fc163029794917847dc18dd995acc7
-  url: http://www.wch.cn/products/CH569.html?
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: "Homepage"
-    title: "32位USB3.0超高速接口MCU CH569"
-    type: homepage
-    url: http://www.wch.cn/products/CH569.html
-
-family: QingKe RISC-V-based MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 448K
-  - address: 0x20000000
-    kind: ram
-    name: RAMS
-    size: 16K
-  - address: 0x20020000
-    kind: ram
-    name: RAMX # 128bit width
-    size: 96K # choice from 32K/64K/96K
 name: CH569
-device_id: 0x69000000
+family: QingKe RISC-V-based MCU
+subfamily: USB3.0 Super-Speed Interface MCU
+product_type: QingKe V3A core
+device_id: 1761607680
 packages:
   - name: CH569W
     package: QFN68
@@ -79,5 +10,71 @@ packages:
     package: QFN68
   - name: CH565M
     package: QFN40
-product_type: QingKe V3A core
-subfamily: USB3.0 Super-Speed Interface MCU
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 458752
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: RAMS
+    kind: ram
+    address: 536870912
+    size: 16384
+  - name: RAMX
+    kind: ram
+    address: 537001984
+    size: 98304
+docs:
+  - type: homepage
+    title: 32位USB3.0超高速接口MCU CH569
+    name: Homepage
+    url: http://www.wch.cn/products/CH569.html
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  Other Features: BUS8
+  Encrypt: AES/SM4
+  head: Part NO.
+  Package: QFN68/QFN40
+  Part NO.: CH569
+  SPI: "2"
+  SERDES/HSPI/DVP: 1.25Gb/3.8Gb/96MHz/1
+  RAM: 48K/80K
+  USB: (5Gbps) H/D/ (480Mbps) H/D
+  Flash: 448K
+  ADC: "-"
+  row_no: 87fc163029794917847dc18dd995acc7
+  UART: "4"
+  CAP: 3/4
+  Freq: 120MHz
+  ETH/SATA: 1000Mb/-
+  I/O: "49"
+  url: http://www.wch.cn/products/CH569.html?
+  DataFlash: 32K
+  VDD: "3.3"
+  Timer: 3*26b

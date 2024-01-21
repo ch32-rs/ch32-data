@@ -1,7 +1,7 @@
 name: CH32X035G8U6
-product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: Connectivity (USB, USB PD/Type C)
+product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 device_id: 0x03560601
 packages:
   - name: CH32X035G8U6

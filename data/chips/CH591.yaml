@@ -1,76 +1,73 @@
-_raw:
-  BLE: "5.4"
-  Core: RISC-V
-  DataFlash: 32K
-  Ethernet: "-"
-  Flash: 192K
-  Freq: 20MHz
-  GPIO: "20"
-  LCD: 16*4
-  LEDC: "-"
-  PWM: "10"
-  Package: QFN28/QFN20/TSSOP16
-  Part NO.: CH591
-  RTC/WDOG: "\u221A/\u221A"
-  SRAM: 26K
-  Timer: 4*26b
-  TouchKey/ADC: -/6*12b
-  UART/SPI/IIC: 2/1/-
-  USB: 1*D
-  VDD: 2.3/3.3
-  head: Part NO.
-  row_no: 4459858be5f145ea993f89cea2aad7e3
-  url: /products/CH592.html?
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: /products/CH592.html?
-
-family: QingKe RISC-V-based, BLE MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 192K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 26K
 name: CH591
-device_id: 0x91000000
+family: QingKe RISC-V-based, BLE MCU
+subfamily: BLE 5.4 MCU
+product_type: QingKe V4C core, BLE
+device_id: 2432696320
 packages:
   - name: CH591
     package: QFN28/QFN20/TSSOP16
-product_type: QingKe V4C core, BLE
-subfamily: BLE 5.4 MCU
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 196608
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 26624
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: /products/CH592.html?
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  Freq: 20MHz
+  Part NO.: CH591
+  Core: RISC-V
+  SRAM: 26K
+  UART/SPI/IIC: 2/1/-
+  RTC/WDOG: √/√
+  PWM: "10"
+  Timer: 4*26b
+  row_no: 4459858be5f145ea993f89cea2aad7e3
+  Flash: 192K
+  GPIO: "20"
+  Ethernet: "-"
+  LCD: 16*4
+  VDD: 2.3/3.3
+  BLE: "5.4"
+  url: /products/CH592.html?
+  LEDC: "-"
+  USB: 1*D
+  DataFlash: 32K
+  TouchKey/ADC: -/6*12b
+  head: Part NO.
+  Package: QFN28/QFN20/TSSOP16

@@ -1,79 +1,76 @@
-_raw:
-  ADC: 2/16
-  Advanced TM: 4/4
-  BLE: "-"
-  CAN: "2"
-  DAC: "2"
-  Ethernet: "-"
-  Flash: 128K
-  Freq: 144MHz
-  GPIO: "51"
-  IIC: "2"
-  OPA: "4"
-  Package: LQFP64M
-  Part NO.: CH32V305RBT6
-  RTC: "1"
-  SDIO: "1"
-  SPI: 3/2
-  SRAM: 32K
-  TRNG: "1"
-  Touchkey: "16"
-  UART: "5"
-  USB_20: OTG
-  USB_20H: "H/D \u5185\u7F6EPHY"
-  VDD: 2.5/3.3
-  WDOG: "2"
-  url: http://www.wch.cn/products/CH32V307.html
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: http://www.wch.cn/products/CH32V307.html
-
-family: QingKe RISC-V-based, general-purpose MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 128K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 32K
 name: CH32V305RBT6
-device_id: 0x30500508
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: Connectivity (USB high-speed, SDIO, CAN)
+product_type: QingKe V4F floating-point core, main frequency <= 144M
+device_id: 810550536
 packages:
   - name: CH32V305RBT6
     package: LQFP64M
-product_type: QingKe V4F floating-point core, main frequency <= 144M
-subfamily: Connectivity (USB high-speed, SDIO, CAN)
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 131072
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 32768
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: http://www.wch.cn/products/CH32V307.html
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  url: http://www.wch.cn/products/CH32V307.html
+  BLE: "-"
+  Ethernet: "-"
+  Freq: 144MHz
+  Package: LQFP64M
+  Touchkey: "16"
+  USB_20: OTG
+  USB_20H: H/D 内置PHY
+  SPI: 3/2
+  SRAM: 32K
+  Flash: 128K
+  Part NO.: CH32V305RBT6
+  VDD: 2.5/3.3
+  UART: "5"
+  RTC: "1"
+  CAN: "2"
+  ADC: 2/16
+  TRNG: "1"
+  GPIO: "51"
+  IIC: "2"
+  Advanced TM: 4/4
+  DAC: "2"
+  OPA: "4"
+  SDIO: "1"
+  WDOG: "2"

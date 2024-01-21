@@ -1,79 +1,76 @@
-_raw:
-  ADC: 1/9
-  Advanced TM: 1/3
-  BLE: "-"
-  CAN: "1"
-  DAC: "-"
-  Ethernet: "-"
-  Flash: 48K
-  Freq: 96MHz
-  GPIO: "16"
-  IIC: "2"
-  OPA: "1"
-  Package: TSSOP20
-  Part NO.: CH32L103F7P6
-  RTC: "1"
-  SDIO: "-"
-  SPI: 1/-
-  SRAM: 20K
-  TRNG: "-"
-  Touchkey: "9"
-  UART: "4"
-  USB_20: D
-  USB_20H: "-"
-  VDD: "3.3"
-  WDOG: "2"
-  url: https://www.wch.cn/products/CH32L103.html
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: https://www.wch.cn/products/CH32L103.html
-
-family: QingKe RISC-V-based, low power MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 48K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 20K
 name: CH32L103F7P6
-device_id: 0x10370700
+family: QingKe RISC-V-based, low power MCU
+subfamily: General-purpose
+product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
+device_id: 272041728
 packages:
   - name: CH32L103F7P6
     package: TSSOP20
-product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
-subfamily: General-purpose
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 49152
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 20480
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: https://www.wch.cn/products/CH32L103.html
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  DAC: "-"
+  GPIO: "16"
+  ADC: 1/9
+  url: https://www.wch.cn/products/CH32L103.html
+  USB_20H: "-"
+  CAN: "1"
+  Part NO.: CH32L103F7P6
+  SPI: 1/-
+  BLE: "-"
+  SRAM: 20K
+  USB_20: D
+  IIC: "2"
+  Freq: 96MHz
+  Ethernet: "-"
+  Package: TSSOP20
+  Touchkey: "9"
+  OPA: "1"
+  RTC: "1"
+  Flash: 48K
+  SDIO: "-"
+  TRNG: "-"
+  UART: "4"
+  VDD: "3.3"
+  WDOG: "2"
+  Advanced TM: 1/3

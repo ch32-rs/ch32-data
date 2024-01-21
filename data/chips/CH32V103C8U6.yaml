@@ -1,79 +1,76 @@
-_raw:
-  ADC: 1/10
-  Advanced TM: 1/3
-  BLE: "-"
-  CAN: "-"
-  DAC: "-"
-  Ethernet: "-"
-  Flash: 64K
-  Freq: 80MHz
-  GPIO: "37"
-  IIC: "2"
-  OPA: "-"
-  Package: QFN48X7
-  Part NO.: CH32V103C8U6
-  RTC: "1"
-  SDIO: "-"
-  SPI: 2/-
-  SRAM: 20K
-  TRNG: "-"
-  Touchkey: "10"
-  UART: "3"
-  USB_20: H/D
-  USB_20H: "-"
-  VDD: 3.3/5.0
-  WDOG: "2"
-  url: http://www.wch.cn/products/CH32V103.html
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: http://www.wch.cn/products/CH32V103.html
-
-family: QingKe RISC-V-based, general-purpose MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 64K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 20K
 name: CH32V103C8U6
-device_id: 0x0 #TODO
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: General-purpose
+product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
+device_id: 0
 packages:
   - name: CH32V103C8U6
     package: QFN48X7
-product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
-subfamily: General-purpose
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 65536
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 20480
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: http://www.wch.cn/products/CH32V103.html
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  Ethernet: "-"
+  Touchkey: "10"
+  Package: QFN48X7
+  BLE: "-"
+  VDD: 3.3/5.0
+  CAN: "-"
+  IIC: "2"
+  Advanced TM: 1/3
+  USB_20H: "-"
+  OPA: "-"
+  SRAM: 20K
+  SPI: 2/-
+  GPIO: "37"
+  Part NO.: CH32V103C8U6
+  ADC: 1/10
+  SDIO: "-"
+  DAC: "-"
+  Freq: 80MHz
+  TRNG: "-"
+  UART: "3"
+  Flash: 64K
+  WDOG: "2"
+  url: http://www.wch.cn/products/CH32V103.html
+  RTC: "1"
+  USB_20: H/D

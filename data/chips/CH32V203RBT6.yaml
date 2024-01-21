@@ -1,81 +1,76 @@
-_raw:
-  ADC: 1/16
-  Advanced TM: 1/3
-  BLE: "-"
-  CAN: "1"
-  DAC: "-"
-  Ethernet: 10M PHY
-  Flash: 128K
-  Freq: 144MHz
-  GPIO: "51"
-  IIC: "2"
-  OPA: "2"
-  Package: LQFP64M
-  Part NO.: CH32V203RBT6
-  RTC: "1"
-  SDIO: "-"
-  SPI: 2/-
-  SRAM: 64K
-  TRNG: "-"
-  Touchkey: "16"
-  UART: "4"
-  USB_20: D+H/D
-  USB_20H: "-"
-  VDD: 2.5/3.3
-  WDOG: "2"
-  url: http://www.wch.cn/products/CH32V203.html
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 1
-    name: qingke-v4
-    peripherals:
-      - address: 1073741824
-        name: GPIOA
-        rcc:
-          clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          settings:
-            lines: 16
-          kind: gpio
-          version: v2
-docs:
-  - name: ""
-    title: Unknow
-    type: homepage
-    url: http://www.wch.cn/products/CH32V203.html
-
-family: QingKe RISC-V-based, general-purpose MCU
-memory:
-  - address: 0
-    kind: flash
-    name: FLASH
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 64
-    size: 128K
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 64K
 name: CH32V203RBT6
-device_id: 0x2034050C
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: General-purpose
+product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
+device_id: 540280076
 packages:
   - name: CH32V203RBT6
     package: LQFP64M
-product_type:
-  QingKe V4 non-floating-point core, enhanced version, main frequency
-  <= 144M
-subfamily: General-purpose
+memory:
+  - name: FLASH
+    kind: flash
+    address: 0
+    size: 131072
+    settings:
+      erase_size: 1024
+      write_size: 64
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 65536
+docs:
+  - type: homepage
+    title: Unknow
+    name: ""
+    url: http://www.wch.cn/products/CH32V203.html
+cores:
+  - name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 1073741824
+        registers:
+          kind: gpio
+          version: v2
+          block: GPIO
+        rcc:
+          clock: GPIO
+          enable:
+            register: GPIOENR
+            field: GPIOAEN
+          reset:
+            register: GPIORSTR
+            field: GPIOARST
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
+  CAN: "1"
+  Flash: 128K
+  OPA: "2"
+  Ethernet: 10M PHY
+  DAC: "-"
+  Package: LQFP64M
+  IIC: "2"
+  Freq: 144MHz
+  RTC: "1"
+  SRAM: 64K
+  TRNG: "-"
+  BLE: "-"
+  SDIO: "-"
+  USB_20H: "-"
+  VDD: 2.5/3.3
+  Touchkey: "16"
+  UART: "4"
+  Advanced TM: 1/3
+  Part NO.: CH32V203RBT6
+  USB_20: D+H/D
+  SPI: 2/-
+  WDOG: "2"
+  GPIO: "51"
+  url: http://www.wch.cn/products/CH32V203.html
+  ADC: 1/16
