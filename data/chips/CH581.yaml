@@ -23,7 +23,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: http://www.wch.cn/products/CH583.html?
+    url: http://www.wch.cn/products/CH583.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -63,7 +63,7 @@ _raw:
   PWM: "10"
   VDD: 2.3/3.3
   UART/SPI/IIC: 2/1/-
-  url: http://www.wch.cn/products/CH583.html?
+  url: http://www.wch.cn/products/CH583.html
   DataFlash: 32K
   Core: RISC-V
   TouchKey/ADC: -/6*12b

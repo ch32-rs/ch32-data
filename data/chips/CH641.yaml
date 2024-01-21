@@ -31,7 +31,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: /products/CH641.html
+    url: http://www.wch.cn/products/CH641.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -62,7 +62,7 @@ _raw:
   Timer: 2*16b
   USB: "-"
   Freq: 48MHz
-  url: /products/CH641.html
+  url: http://www.wch.cn/products/CH641.html
   Flash: 16KB
   Encrypt: "-"
   UART: "1"

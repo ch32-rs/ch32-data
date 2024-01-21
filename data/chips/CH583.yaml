@@ -23,7 +23,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: http://www.wch.cn/products/CH583.html?
+    url: http://www.wch.cn/products/CH583.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -68,6 +68,6 @@ _raw:
   UART/SPI/IIC: 4/2/1
   Ethernet: "-"
   head: Part NO.
-  url: http://www.wch.cn/products/CH583.html?
+  url: http://www.wch.cn/products/CH583.html
   Core: RISC-V
   Package: QFN48

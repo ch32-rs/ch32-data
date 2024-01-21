@@ -74,7 +74,7 @@ _raw:
   Freq: 120MHz
   ETH/SATA: 1000Mb/-
   I/O: "49"
-  url: http://www.wch.cn/products/CH569.html?
+  url: http://www.wch.cn/products/CH569.html
   DataFlash: 32K
   VDD: "3.3"
   Timer: 3*26b

@@ -29,7 +29,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: /products/CH643.html
+    url: http://www.wch.cn/products/CH643.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -67,7 +67,7 @@ _raw:
   Package: QSOP28/LQFP48<br>LQFP64/QFN80
   SERDES/HSPI/DVP: -/-/-/-
   Part NO.: CH643
-  url: /products/CH643.html?
+  url: http://www.wch.cn/products/CH643.html
   Timer: 3*16b
   SPI: "1"
   ETH/SATA: -/-

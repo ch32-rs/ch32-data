@@ -23,7 +23,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: /products/CH592.html?
+    url: http://www.wch.cn/products/CH592.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -57,7 +57,7 @@ _raw:
   VDD: 1.7/3.3
   head: Part NO.
   TouchKey/ADC: 12/12*12b
-  url: /products/CH592.html?
+  url: http://www.wch.cn/products/CH592.html
   PWM: "12"
   USB: 1*H/1*D
   Flash: 448K

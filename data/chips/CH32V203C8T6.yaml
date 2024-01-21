@@ -1,6 +1,6 @@
-name: ""
+name: CH32V203C8T6
 family: QingKe RISC-V-based, general-purpose MCU
-subfamily: General-purpose
+subfamily: General-purpose, Low Power MCU
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
 device_id: 540083456
 packages:

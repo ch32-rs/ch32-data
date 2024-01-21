@@ -27,7 +27,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: http://www.wch.cn/products/CH573.html?
+    url: http://www.wch.cn/products/CH573.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -56,7 +56,7 @@ _raw:
   BLE: "4.2"
   LCD: "-"
   row_no: bff986aa886947c1b2d86b0d3e7ce629
-  url: http://www.wch.cn/products/CH573.html?
+  url: http://www.wch.cn/products/CH573.html
   Ethernet: "-"
   LEDC: "-"
   PWM: "4"

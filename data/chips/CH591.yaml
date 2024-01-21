@@ -23,7 +23,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: /products/CH592.html?
+    url: http://www.wch.cn/products/CH592.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -64,7 +64,7 @@ _raw:
   LCD: 16*4
   VDD: 2.3/3.3
   BLE: "5.4"
-  url: /products/CH592.html?
+  url: http://www.wch.cn/products/CH592.html
   LEDC: "-"
   USB: 1*D
   DataFlash: 32K

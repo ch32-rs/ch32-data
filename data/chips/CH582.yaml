@@ -25,7 +25,7 @@ docs:
   - type: homepage
     title: Unknow
     name: ""
-    url: http://www.wch.cn/products/CH583.html?
+    url: http://www.wch.cn/products/CH583.html
 cores:
   - name: qingke-v4
     peripherals:
@@ -57,7 +57,7 @@ _raw:
   USB: 2*H/2*D
   LEDC: "-"
   VDD: 2.3/3.3
-  url: http://www.wch.cn/products/CH583.html?
+  url: http://www.wch.cn/products/CH583.html
   BLE: "5.3"
   TouchKey/ADC: 14/14*12b
   Timer: 4*26b
