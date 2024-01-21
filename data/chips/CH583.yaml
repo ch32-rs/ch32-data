@@ -13,7 +13,7 @@ memory:
     size: 458752
     settings:
       erase_size: 1024
-      write_size: 64
+      write_size: 256
       erase_value: 255
   - name: SRAM
     kind: ram

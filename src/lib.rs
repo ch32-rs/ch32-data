@@ -9,6 +9,8 @@ pub struct Chip {
     pub subfamily: String,
     pub product_type: String,
     pub device_id: u32,
+    #[serde(default)]
+    pub keywords: Vec<String>,
     pub packages: Vec<chip::Package>,
     pub memory: Vec<chip::Memory>,
     pub docs: Vec<chip::Doc>,

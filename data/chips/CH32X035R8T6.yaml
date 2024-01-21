@@ -3,6 +3,9 @@ family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: Connectivity (USB, USB PD/Type C)
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 device_id: 55576065
+keywords:
+  - USBPD
+  - PIOC
 packages:
   - name: CH32X035R8T6
     package: LQFP64M
@@ -13,7 +16,7 @@ memory:
     size: 63488
     settings:
       erase_size: 1024
-      write_size: 64
+      write_size: 256
       erase_value: 255
   - name: SRAM
     kind: ram

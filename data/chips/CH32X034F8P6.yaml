@@ -3,6 +3,8 @@ family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: "null"
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 device_id: 0
+keywords:
+  - PIOC
 packages:
   - name: CH32X034F8P6
     package: TSSOP20
@@ -13,7 +15,7 @@ memory:
     size: 63488
     settings:
       erase_size: 1024
-      write_size: 64
+      write_size: 256
       erase_value: 255
   - name: SRAM
     kind: ram
