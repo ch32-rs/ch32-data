@@ -300,6 +300,49 @@ cores:
           - { pin: "PC14", signal: "CC1" }
           - { pin: "PC15", signal: "CC2" }
 
+      - name: TIM1
+        address: 0x40012C00
+        registers:
+          block: TIM
+          kind: adtm
+          version: v1
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: TIM1EN
+          reset:
+            register: APB2PRSTR
+            field: TIM1RST
+      - name: TIM2
+        address: 0x40000000
+        registers:
+          block: TIM
+          kind: adtm
+          version: v1
+        rcc:
+          clock: APB1
+          enable:
+            register: APB1PCENR
+            field: TIM2EN
+          reset:
+            register: APB1PRSTR
+            field: TIM2RST
+      - name: TIM3
+        address: 0x40000400
+        registers:
+          block: TIM
+          kind: gptm
+          version: v1
+        rcc:
+          clock: APB1
+          enable:
+            register: APB1PCENR
+            field: TIM3EN
+          reset:
+            register: APB1PRSTR
+            field: TIM3RST
+
 _raw:
   ADC: 1/10
   Advanced TM: 2/1
