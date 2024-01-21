@@ -46,7 +46,7 @@ cores:
             register: GPIORSTR
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 16
           kind: gpio
           version: v2

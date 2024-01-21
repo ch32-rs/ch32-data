@@ -42,7 +42,7 @@ cores:
             register: GPIORSTR
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 16
           kind: gpio
           version: v2
@@ -52,7 +52,7 @@ docs:
     type: homepage
     url: /products/CH641.html
 
-family: QingKe RISC-V-based, BLE MCU
+family: QingKe RISC-V-based MCU
 memory:
   - address: 0
     kind: flash
@@ -67,10 +67,17 @@ memory:
     name: SRAM
     size: 2KB
 name: CH641
-# TODO: split CH641F/D/U/P
 device_id: 0x64100000
 packages:
-  - name: CH641
-    package: QFN28/QSOP24/QFN20/QFN16
-product_type: QingKe Vx core, BLE
+  - name: CH641F
+    package: QFN28
+  - name: CH641U
+    package: QSOP24
+  - name: CH641D
+    package: QFN20
+  - name: CH641X
+    package: QFN20
+  - name: CH641P
+    package: QFN16
+product_type: QingKe Vx core
 subfamily: null

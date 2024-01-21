@@ -42,7 +42,7 @@ cores:
             register: GPIORSTR
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 16
           kind: gpio
           version: v2
@@ -50,9 +50,9 @@ docs:
   - name: ""
     title: Unknow
     type: homepage
-    url: /products/CH643.html?
+    url: /products/CH643.html
 
-family: QingKe RISC-V-based, BLE MCU
+family: QingKe RISC-V-based MCU
 memory:
   - address: 0
     kind: flash
@@ -67,10 +67,15 @@ memory:
     name: SRAM
     size: 20K
 name: CH643
-# TODO: split CH643W/Q/L/U
 device_id: 0x64300000
 packages:
-  - name: CH643
-    package: QSOP28/LQFP48<br>LQFP64/QFN80
-product_type: QingKe Vx core, BLE
+  - name: CH643W
+    package: QFN80
+  - name: CH643Q
+    package: LQFP64
+  - name: CH643L
+    package: LQFP48
+  - name: CH643U
+    package: QSOP28
+product_type: QingKe V4C core
 subfamily: null

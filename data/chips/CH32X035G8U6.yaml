@@ -55,7 +55,7 @@ cores:
           block: GPIO
           kind: gpio
           version: v2
-          configurations:
+          settings:
             lines: 24
             bitmap: 0xffffff
         rcc:
@@ -70,7 +70,7 @@ cores:
         address: 0x40010C00
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 24
             bitmap: 0xffffff
           kind: gpio
@@ -87,7 +87,7 @@ cores:
         address: 0x40011000
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 24
             bitmap: 0xffffff
           kind: gpio

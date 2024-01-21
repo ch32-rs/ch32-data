@@ -42,17 +42,17 @@ cores:
             register: GPIORSTR
         registers:
           block: GPIO
-          configurations:
+          settings:
             lines: 16
           kind: gpio
           version: v2
 docs:
-  - name: ""
-    title: Unknow
+  - name: "Homepage"
+    title: "32位USB3.0超高速接口MCU CH569"
     type: homepage
-    url: http://www.wch.cn/products/CH569.html?
+    url: http://www.wch.cn/products/CH569.html
 
-family: QingKe RISC-V-based, BLE MCU
+family: QingKe RISC-V-based MCU
 memory:
   - address: 0
     kind: flash
@@ -73,7 +73,11 @@ memory:
 name: CH569
 device_id: 0x69000000
 packages:
-  - name: CH569
-    package: QFN68/QFN40
-product_type: QingKe Vx core, BLE
+  - name: CH569W
+    package: QFN68
+  - name: CH565W
+    package: QFN68
+  - name: CH565M
+    package: QFN40
+product_type: QingKe V3 core
 subfamily: null
