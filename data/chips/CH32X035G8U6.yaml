@@ -1,90 +1,323 @@
+name: CH32X035G8U6
+product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
+family: QingKe RISC-V-based, dedicated architecture or special IO
+subfamily: Connectivity (USB, USB PD/Type C)
+packages:
+  - name: CH32X035G8U6
+    package: QFN28
+memory:
+  - address: 0x08000000
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 62K
+  - address: 0x20000000
+    kind: ram
+    name: SRAM
+    size: 20K
+docs:
+  - name: "Homepage"
+    title: "32位USB+USB PD单片机 CH32X035"
+    type: homepage
+    url: http://www.wch.cn/products/CH32X035.html
+  - name: "CH32X035EVT.ZIP"
+    type: demo_code
+    url: https://www.wch.cn/downloads/CH32X035EVT_ZIP.html
+    version: latest
+  - name: "CH32X035RM.PDF"
+    title: "CH32X035系列应用手册"
+    type: reference_manual
+    url: https://www.wch.cn/downloads/CH32X035RM_PDF.html
+    version: latest
+  - name: "CH32X035DS0.PDF"
+    title: "CH32X035数据手册"
+    type: datasheet
+    url: https://www.wch.cn/downloads/CH32X035DS0_PDF.html
+    version: latest
+cores:
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - name: GPIOA
+        address: 0x40010800
+        registers:
+          block: GPIO
+          kind: gpio
+          version: v2
+          configurations:
+            lines: 24
+            bitmap: 0xffffff
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: IOPAEN
+          reset:
+            register: APB2PRSTR
+            field: IOPARST
+      - name: GPIOB
+        address: 0x40010C00
+        registers:
+          block: GPIO
+          configurations:
+            lines: 24
+            bitmap: 0xffffff
+          kind: gpio
+          version: v2
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: IOPBEN
+          reset:
+            register: APB2PRSTR
+            field: IOPBRST
+      - name: GPIOC
+        address: 0x40011000
+        registers:
+          block: GPIO
+          configurations:
+            lines: 24
+            bitmap: 0xffffff
+          kind: gpio
+          version: v2
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: IOPCEN
+          reset:
+            register: APB2PRSTR
+            field: IOPCRST
+      - name: AFIO
+        address: 0x40010000
+        registers:
+          block: AFIO
+          kind: afio
+          version: v2
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: AFIOEN
+          reset:
+            register: APB2PRSTR
+            field: AFIORST
+      - name: USART1
+        address: 0x40013800
+        registers:
+          block: USART
+          kind: usart
+          version: v2
+        rcc:
+          clock: APB2
+          enable:
+            register: APB2PCENR
+            field: USART1EN
+          reset:
+            register: APB2PRSTR
+            field: USART1RST
+        pins:
+          - { pin: "PB11", signal: "RX", remap: 0 }
+          - { pin: "PC16", signal: "CTS", remap: 0 }
+          - { pin: "PB10", signal: "TX", remap: 0 }
+          - { pin: "PB9", signal: "CK", remap: 0 }
+          - { pin: "PC17", signal: "RTS", remap: 0 }
+          - { pin: "PA11", signal: "RX", remap: 1 }
+          - { pin: "PC16", signal: "CTS", remap: 1 }
+          - { pin: "PA10", signal: "TX", remap: 1 }
+          - { pin: "PB9", signal: "CK", remap: 1 }
+          - { pin: "PC17", signal: "RTS", remap: 1 }
+          - { pin: "PB11", signal: "RX", remap: 2 }
+          - { pin: "PA9", signal: "CTS", remap: 2 }
+          - { pin: "PB10", signal: "TX", remap: 2 }
+          - { pin: "PB5", signal: "CK", remap: 2 }
+          - { pin: "PA8", signal: "RTS", remap: 2 }
+          - { pin: "PB2", signal: "RX", remap: 3 }
+          - { pin: "PA13", signal: "CTS", remap: 3 }
+          - { pin: "PA7", signal: "TX", remap: 3 }
+          - { pin: "PB12", signal: "CK", remap: 3 }
+          - { pin: "PA14", signal: "RTS", remap: 3 }
+      - name: USART2
+        address: 0x40004400
+        registers:
+          block: USART
+          kind: usart
+          version: v2
+        rcc:
+          clock: APB1
+          enable:
+            register: APB1PCENR
+            field: USART2EN
+          reset:
+            register: APB1PRSTR
+            field: USART2RST
+        pins:
+          # 000:映射(RX/PA3，CTS/PA0，TX/PA2，CK/PA4， RTS/PA1)
+          - { pin: "PA3", signal: "RX", remap: 0 }
+          - { pin: "PA0", signal: "CTS", remap: 0 }
+          - { pin: "PA2", signal: "TX", remap: 0 }
+          - { pin: "PA4", signal: "CK", remap: 0 }
+          - { pin: "PA1", signal: "RTS", remap: 0 }
+          # 001:映射(RX/PA19，CTS/PA1，TX/PA20，CK/PA23， RTS/PA2)
+          - { pin: "PA19", signal: "RX", remap: 1 }
+          - { pin: "PA1", signal: "CTS", remap: 1 }
+          - { pin: "PA20", signal: "TX", remap: 1 }
+          - { pin: "PA23", signal: "CK", remap: 1 }
+          - { pin: "PA2", signal: "RTS", remap: 1 }
+          # 010:映射(RX/PA16，CTS/PA17，TX/PA15， CK/PA22，RTS/PA21)
+          - { pin: "PA16", signal: "RX", remap: 2 }
+          - { pin: "PA17", signal: "CTS", remap: 2 }
+          - { pin: "PA15", signal: "TX", remap: 2 }
+          - { pin: "PA22", signal: "CK", remap: 2 }
+          - { pin: "PA21", signal: "RTS", remap: 2 }
+          # 011:映射(RX/PC1，CTS/PC2，TX/PC0，CK/PB20， RTS/PC3)
+          - { pin: "PC1", signal: "RX", remap: 3 }
+          - { pin: "PC2", signal: "CTS", remap: 3 }
+          - { pin: "PC0", signal: "TX", remap: 3 }
+          - { pin: "PB20", signal: "CK", remap: 3 }
+          - { pin: "PC3", signal: "RTS", remap: 3 }
+          # 1xx:映射(RX/PA16，CTS/PA17，TX/PA15， CK/PA22，RTS/PC3)
+          - { pin: "PA16", signal: "RX", remap: 4 }
+          - { pin: "PA17", signal: "CTS", remap: 4 }
+          - { pin: "PA15", signal: "TX", remap: 4 }
+          - { pin: "PA22", signal: "CK", remap: 4 }
+          - { pin: "PC3", signal: "RTS", remap: 4 }
+      - name: USART3
+        address: 0x40004800
+        registers:
+          block: USART
+          kind: usart
+          version: v2
+        rcc:
+          clock: APB1
+          enable:
+            register: APB1PCENR
+            field: USART3EN
+          reset:
+            register: APB1PRSTR
+            field: USART3RST
+        pins:
+          # 00:映射(RX/PB4，CTS/PB6，TX/PB3，CK/PB5， RTS/PB7)
+          - { pin: "PB4", signal: "RX", remap: 0 }
+          - { pin: "PB6", signal: "CTS", remap: 0 }
+          - { pin: "PB3", signal: "TX", remap: 0 }
+          - { pin: "PB5", signal: "CK", remap: 0 }
+          - { pin: "PB7", signal: "RTS", remap: 0 }
+          # 01:映射(RX/PC19，CTS/PB6，TX/PC18，CK/PB5， RTS/PB7)
+          - { pin: "PC19", signal: "RX", remap: 1 }
+          - { pin: "PB6", signal: "CTS", remap: 1 }
+          - { pin: "PC18", signal: "TX", remap: 1 }
+          - { pin: "PB5", signal: "CK", remap: 1 }
+          - { pin: "PB7", signal: "RTS", remap: 1 }
+          # 10:映射(RX/PB14，CTS/PA3，TX/PA18，CK/PB8， RTS/PA4)
+          - { pin: "PB14", signal: "RX", remap: 2 }
+          - { pin: "PA3", signal: "CTS", remap: 2 }
+          - { pin: "PA18", signal: "TX", remap: 2 }
+          - { pin: "PB8", signal: "CK", remap: 2 }
+          - { pin: "PA4", signal: "RTS", remap: 2 }
+      - name: USART4
+        address: 0x40004C00
+        registers:
+          block: USART
+          kind: usart
+          version: v2
+        rcc:
+          clock: APB1
+          enable:
+            register: APB1PCENR
+            field: USART4EN
+          reset:
+            register: APB1PRSTR
+            field: USART4RST
+        pins:
+          # 000:映射(RX/PB1，CTS/PB15，TX/PB0，CK/PB2， RTS/PA8)
+          - { pin: "PB1", signal: "RX", remap: 0 }
+          - { pin: "PB15", signal: "CTS", remap: 0 }
+          - { pin: "PB0", signal: "TX", remap: 0 }
+          - { pin: "PB2", signal: "CK", remap: 0 }
+          - { pin: "PA8", signal: "RTS", remap: 0 }
+          # 001:映射(RX/PA9，CTS/PA7，TX/PA5，CK/PA6， RTS/PB21)
+          - { pin: "PA9", signal: "RX", remap: 1 }
+          - { pin: "PA7", signal: "CTS", remap: 1 }
+          - { pin: "PA5", signal: "TX", remap: 1 }
+          - { pin: "PA6", signal: "CK", remap: 1 }
+          - { pin: "PB21", signal: "RTS", remap: 1 }
+          # 010:映射(RX/PC17，CTS/PB15，TX/PC16，CK/PB2， 0 RTS/PA8)
+          - { pin: "PC17", signal: "RX", remap: 2 }
+          - { pin: "PB15", signal: "CTS", remap: 2 }
+          - { pin: "PC16", signal: "TX", remap: 2 }
+          - { pin: "PB2", signal: "CK", remap: 2 }
+          - { pin: "PA8", signal: "RTS", remap: 2 }
+          # 011:映射(RX/PA10，CTS/PA14，TX/PB9，CK/PB8， RTS/PA13)
+          - { pin: "PA10", signal: "RX", remap: 3 }
+          - { pin: "PA14", signal: "CTS", remap: 3 }
+          - { pin: "PB9", signal: "TX", remap: 3 }
+          - { pin: "PB8", signal: "CK", remap: 3 }
+          - { pin: "PA13", signal: "RTS", remap: 3 }
+          # 1x0:映射(RX/PC19，CTS/PA5，TX/PB13，CK/PA8， RTS/PA6)
+          - { pin: "PC19", signal: "RX", remap: 4 }
+          - { pin: "PA5", signal: "CTS", remap: 4 }
+          - { pin: "PB13", signal: "TX", remap: 4 }
+          - { pin: "PA8", signal: "CK", remap: 4 }
+          - { pin: "PA6", signal: "RTS", remap: 4 }
+          # 1x1:映射(RX/PC16，CTS/PB15，TX/PC17，CK/PB2， RTS/PA8)
+          - { pin: "PC16", signal: "RX", remap: 5 }
+          - { pin: "PB15", signal: "CTS", remap: 5 }
+          - { pin: "PC17", signal: "TX", remap: 5 }
+          - { pin: "PB2", signal: "CK", remap: 5 }
+          - { pin: "PA8", signal: "RTS", remap: 5 }
+
+      - name: USBPD
+        address: 0x40027000
+        registers:
+          block: USBPD
+          kind: usbpd
+          version: v1
+        rcc:
+          clock: AHB
+          enable:
+            register: AHBPCENR
+            field: USBPDEN # original USBPD
+          reset:
+            register: AHBRSTR
+            field: USBPDRST
+        pins:
+          - { pin: "PC14", signal: "CC1" }
+          - { pin: "PC15", signal: "CC2" }
+
 _raw:
   ADC: 1/10
   Advanced TM: 2/1
-  BLE: '-'
-  CAN: '-'
-  DAC: '-'
-  Ethernet: '-'
+  BLE: "-"
+  CAN: "-"
+  DAC: "-"
+  Ethernet: "-"
   Flash: 62K
   Freq: 48MHz
-  GPIO: '27'
-  IIC: '1'
-  OPA: '2'
+  GPIO: "27"
+  IIC: "1"
+  OPA: "2"
   Package: QFN28
   Part NO.: CH32X035G8U6
-  RTC: '-'
-  SDIO: '-'
+  RTC: "-"
+  SDIO: "-"
   SPI: 1/-
   SRAM: 20K
-  TRNG: '-'
-  Touchkey: '10'
-  UART: '4'
+  TRNG: "-"
+  Touchkey: "10"
+  UART: "4"
   USB_20: H/D
-  USB_20H: '-'
+  USB_20H: "-"
   VDD: 3.3/5.0
-  WDOG: '2'
+  WDOG: "2"
   url: http://www.wch.cn/products/CH32X035.html
-cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
-docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: http://www.wch.cn/products/CH32X035.html
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
-family: QingKe RISC-V-based, dedicated architecture or special IO
-memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 62K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 20K
-name: CH32X035G8U6
-packages:
-- name: CH32X035G8U6
-  package: QFN28
-product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-subfamily: Connectivity (USB, USB PD/Type C)
