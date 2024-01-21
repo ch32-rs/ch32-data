@@ -72,5 +72,5 @@ device_id: 0x92000000
 packages:
   - name: CH592
     package: QFN32/QFN28
-product_type: QingKe Vx core, BLE
-subfamily: null
+product_type: QingKe V4C core, BLE
+subfamily: BLE 5.4 MCU

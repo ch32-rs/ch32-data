@@ -1,6 +1,8 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Chip {
     pub name: String,
     pub family: String,
@@ -10,6 +12,7 @@ pub struct Chip {
     pub memory: Vec<chip::Memory>,
     pub docs: Vec<chip::Doc>,
     pub cores: Vec<chip::Core>,
+    pub _raw: HashMap<String, String>,
 }
 
 pub mod chip {

@@ -79,5 +79,5 @@ packages:
     package: QFN68
   - name: CH565M
     package: QFN40
-product_type: QingKe V3 core
-subfamily: null
+product_type: QingKe V3A core
+subfamily: USB3.0 Super-Speed Interface MCU

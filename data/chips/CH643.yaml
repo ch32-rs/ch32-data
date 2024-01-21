@@ -78,4 +78,4 @@ packages:
   - name: CH643U
     package: QSOP28
 product_type: QingKe V4C core
-subfamily: null
+subfamily: RGB Display Driver MCU

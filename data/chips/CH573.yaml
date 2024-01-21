@@ -70,7 +70,11 @@ memory:
 name: CH573
 device_id: 0x73000000
 packages:
-  - name: CH573
-    package: QFN32/QFN28
-product_type: QingKe Vx core, BLE
-subfamily: null
+  - name: CH573X
+    package: QFN32
+  - name: CH573F
+    package: QFN28
+  - name: CH573Q
+    package: LQFP32
+product_type: QingKe V3A core, BLE
+subfamily: RISC-V Core BLE Wireless MCU

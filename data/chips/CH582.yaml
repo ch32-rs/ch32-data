@@ -70,7 +70,9 @@ memory:
 name: CH582
 device_id: 0x82000000
 packages:
-  - name: CH582
-    package: QFN48/QFN28
-product_type: QingKe Vx core, BLE
-subfamily: null
+  - name: CH582M
+    package: QFN48
+  - name: CH582F
+    package: QFN28
+product_type: QingKe V4A core, BLE
+subfamily: RISC-V Core BLE5.3 Wireless MCU

@@ -70,7 +70,7 @@ memory:
 name: CH583
 device_id: 0x82000000
 packages:
-  - name: CH583
+  - name: CH583M
     package: QFN48
-product_type: QingKe Vx core, BLE
-subfamily: null
+product_type: QingKe V4A core, BLE
+subfamily: RISC-V Core BLE5.3 Wireless MCU

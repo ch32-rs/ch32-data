@@ -70,7 +70,7 @@ memory:
 name: CH581
 device_id: 0x81000000
 packages:
-  - name: CH581
+  - name: CH581F
     package: QFN28
-product_type: QingKe Vx core, BLE
-subfamily: null
+product_type: QingKe V4A core, BLE
+subfamily: RISC-V Core BLE5.3 Wireless MCU

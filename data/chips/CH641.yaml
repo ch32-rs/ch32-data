@@ -79,5 +79,5 @@ packages:
     package: QFN20
   - name: CH641P
     package: QFN16
-product_type: QingKe Vx core
-subfamily: null
+product_type: QingKe V2A core
+subfamily: Wireless Charging Dedicated MCU

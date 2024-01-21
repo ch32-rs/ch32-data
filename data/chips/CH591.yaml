@@ -72,5 +72,5 @@ device_id: 0x91000000
 packages:
   - name: CH591
     package: QFN28/QFN20/TSSOP16
-product_type: QingKe Vx core, BLE
-subfamily: null
+product_type: QingKe V4C core, BLE
+subfamily: BLE 5.4 MCU

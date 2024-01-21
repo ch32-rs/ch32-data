@@ -70,7 +70,11 @@ memory:
 name: CH571
 device_id: 0x71000000
 packages:
-  - name: CH571
-    package: QFN28/QFN20
-product_type: QingKe Vx core, BLE
-subfamily: null
+  - name: CH571F
+    package: QFN28
+  - name: CH571D
+    package: QFN20
+  - name: CH571K
+    package: ESSOP10
+product_type: QingKe V3A core, BLE
+subfamily: RISC-V Core BLE Wireless MCU
