@@ -2,6 +2,7 @@ name: CH32X035G8U6
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: Connectivity (USB, USB PD/Type C)
+device_id: 0x03560601
 packages:
   - name: CH32X035G8U6
     package: QFN28
@@ -24,6 +25,7 @@ docs:
     type: homepage
     url: http://www.wch.cn/products/CH32X035.html
   - name: "CH32X035EVT.ZIP"
+    title: "EVT Demo Code"
     type: demo_code
     url: https://www.wch.cn/downloads/CH32X035EVT_ZIP.html
     version: latest

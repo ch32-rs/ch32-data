@@ -1,91 +1,81 @@
 _raw:
   ADC: 1/16
   Advanced TM: 1/4
-  BLE: '5.3'
-  CAN: '1'
-  DAC: '-'
+  BLE: "5.3"
+  CAN: "1"
+  DAC: "-"
   Ethernet: 10M
   Flash: 128K
   Freq: 144MHz
-  GPIO: '49'
-  IIC: '2'
-  OPA: '2'
+  GPIO: "49"
+  IIC: "2"
+  OPA: "2"
   Package: LQFP64M
   Part NO.: CH32V208RBT6
-  RTC: '1'
-  SDIO: '-'
+  RTC: "1"
+  SDIO: "-"
   SPI: 2/-
   SRAM: 64K
-  TRNG: '-'
-  Touchkey: '16'
-  UART: '4'
+  TRNG: "-"
+  Touchkey: "16"
+  UART: "4"
   USB_20: D+H/D
-  USB_20H: '-'
+  USB_20H: "-"
   VDD: 2.5/3.3
-  WDOG: '2'
+  WDOG: "2"
   url: http://www.wch.cn/products/CH32V208.html
 cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - address: 1073741824
+        name: GPIOA
+        rcc:
+          clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          configurations:
+            lines: 16
+          kind: gpio
+          version: v2
 docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: http://www.wch.cn/products/CH32V208.html
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
+  - name: ""
+    title: Unknow
+    type: homepage
+    url: http://www.wch.cn/products/CH32V208.html
+
 family: QingKe RISC-V-based, general-purpose MCU
 memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 128K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 64K
+  - address: 0
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 128K
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 64K
 name: CH32V208RBT6
+device_id: 0x2081050C
 packages:
-- name: CH32V208RBT6
-  package: LQFP64M
-product_type: QingKe V4 non-floating-point core, enhanced version, main frequency
+  - name: CH32V208RBT6
+    package: LQFP64M
+product_type:
+  QingKe V4 non-floating-point core, enhanced version, main frequency
   <= 144M
 subfamily: Wireless (BLE5.X, CAN, USB, Ethernet)

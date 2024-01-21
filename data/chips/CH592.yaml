@@ -1,14 +1,14 @@
 _raw:
-  BLE: '5.4'
+  BLE: "5.4"
   Core: RISC-V
   DataFlash: 32K
-  Ethernet: '-'
+  Ethernet: "-"
   Flash: 448K
   Freq: 20MHz
-  GPIO: '24'
+  GPIO: "24"
   LCD: 20*4
-  LEDC: '-'
-  PWM: '12'
+  LEDC: "-"
+  PWM: "12"
   Package: QFN32/QFN28
   Part NO.: CH592
   RTC/WDOG: "\u221A/\u221A"
@@ -22,66 +22,55 @@ _raw:
   row_no: 2626bb78642246beac86ef0601afe578
   url: /products/CH592.html?
 cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - address: 1073741824
+        name: GPIOA
+        rcc:
+          clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          configurations:
+            lines: 16
+          kind: gpio
+          version: v2
 docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: /products/CH592.html?
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
+  - name: ""
+    title: Unknow
+    type: homepage
+    url: /products/CH592.html?
+
 family: QingKe RISC-V-based, BLE MCU
 memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 448K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 26K
+  - address: 0
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 448K
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 26K
 name: CH592
+device_id: 0x92000000
 packages:
-- name: CH592
-  package: QFN32/QFN28
+  - name: CH592
+    package: QFN32/QFN28
 product_type: QingKe Vx core, BLE
 subfamily: null

@@ -1,90 +1,79 @@
 _raw:
   ADC: 2/6
   Advanced TM: 4/4
-  BLE: '-'
-  CAN: '2'
-  DAC: '1'
-  Ethernet: '-'
+  BLE: "-"
+  CAN: "2"
+  DAC: "1"
+  Ethernet: "-"
   Flash: 128K
   Freq: 144MHz
-  GPIO: '24'
-  IIC: '2'
-  OPA: '1'
+  GPIO: "24"
+  IIC: "2"
+  OPA: "1"
   Package: QFN28
   Part NO.: CH32V305GBU6
-  RTC: '1'
-  SDIO: '1'
+  RTC: "1"
+  SDIO: "1"
   SPI: 3/2
   SRAM: 32K
-  TRNG: '1'
-  Touchkey: '6'
-  UART: '5'
-  USB_20: '-'
+  TRNG: "1"
+  Touchkey: "6"
+  UART: "5"
+  USB_20: "-"
   USB_20H: "H/D \u5185\u7F6EPHY"
   VDD: 2.5/3.3
-  WDOG: '2'
+  WDOG: "2"
   url: http://www.wch.cn/products/CH32V307.html
 cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - address: 1073741824
+        name: GPIOA
+        rcc:
+          clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          configurations:
+            lines: 16
+          kind: gpio
+          version: v2
 docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: http://www.wch.cn/products/CH32V307.html
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
+  - name: ""
+    title: Unknow
+    type: homepage
+    url: http://www.wch.cn/products/CH32V307.html
+
 family: QingKe RISC-V-based, general-purpose MCU
 memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 128K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 32K
+  - address: 0
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 128K
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 32K
 name: CH32V305GBU6
+device_id: 0x305B0508
 packages:
-- name: CH32V305GBU6
-  package: QFN28
+  - name: CH32V305GBU6
+    package: QFN28
 product_type: QingKe V4F floating-point core, main frequency <= 144M
 subfamily: Connectivity (USB high-speed, SDIO, CAN)

@@ -1,14 +1,14 @@
 _raw:
-  BLE: '4.2'
+  BLE: "4.2"
   Core: RISC-V
   DataFlash: 32K
-  Ethernet: '-'
+  Ethernet: "-"
   Flash: 192K
   Freq: 20MHz
-  GPIO: '20'
-  LCD: '-'
-  LEDC: '-'
-  PWM: '4'
+  GPIO: "20"
+  LCD: "-"
+  LEDC: "-"
+  PWM: "4"
   Package: QFN28/QFN20
   Part NO.: CH571
   RTC/WDOG: "\u221A/\u221A"
@@ -22,66 +22,55 @@ _raw:
   row_no: bff986aa886947c1b2d86b0d3e7ce629
   url: http://www.wch.cn/products/CH573.html?
 cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - address: 1073741824
+        name: GPIOA
+        rcc:
+          clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          configurations:
+            lines: 16
+          kind: gpio
+          version: v2
 docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: http://www.wch.cn/products/CH573.html?
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
+  - name: ""
+    title: Unknow
+    type: homepage
+    url: http://www.wch.cn/products/CH573.html?
+
 family: QingKe RISC-V-based, BLE MCU
 memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 192K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 18K
+  - address: 0
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 192K
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 18K
 name: CH571
+device_id: 0x71000000
 packages:
-- name: CH571
-  package: QFN28/QFN20
+  - name: CH571
+    package: QFN28/QFN20
 product_type: QingKe Vx core, BLE
 subfamily: null

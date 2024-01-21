@@ -1,90 +1,79 @@
 _raw:
   ADC: 1/10
   Advanced TM: 1/2
-  BLE: '-'
-  CAN: '-'
-  DAC: '-'
-  Ethernet: '-'
+  BLE: "-"
+  CAN: "-"
+  DAC: "-"
+  Ethernet: "-"
   Flash: 32K
   Freq: 80MHz
-  GPIO: '37'
-  IIC: '1'
-  OPA: '-'
+  GPIO: "37"
+  IIC: "1"
+  OPA: "-"
   Package: LQFP48
   Part NO.: CH32V103C6T6
-  RTC: '1'
-  SDIO: '-'
+  RTC: "1"
+  SDIO: "-"
   SPI: 1/-
   SRAM: 10K
-  TRNG: '-'
-  Touchkey: '10'
-  UART: '2'
+  TRNG: "-"
+  Touchkey: "10"
+  UART: "2"
   USB_20: H/D
-  USB_20H: '-'
+  USB_20H: "-"
   VDD: 3.3/5.0
-  WDOG: '2'
+  WDOG: "2"
   url: http://www.wch.cn/products/CH32V103.html
 cores:
-- dma_channels:
-  - channel: 0
-    dma: DMA1
-    name: DMA1_CH1
-  interrupts:
-  - name: WWDG
-    number: 1
-  name: qingke-v4
-  peripherals:
-  - address: 1073741824
-    name: GPIOA
-    rcc:
-      clock: GPIO
-      enable:
-        field: GPIOAEN
-        register: GPIOENR
-      reset:
-        field: GPIOARST
-        register: GPIORSTR
-    registers:
-      block: GPIO
-      configurations:
-        lines: 16
-      kind: gpio
-      version: v2
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 1
+    name: qingke-v4
+    peripherals:
+      - address: 1073741824
+        name: GPIOA
+        rcc:
+          clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          configurations:
+            lines: 16
+          kind: gpio
+          version: v2
 docs:
-- name: ''
-  title: Unknow
-  type: homepage
-  url: http://www.wch.cn/products/CH32V103.html
-- name: ''
-  title: Unknow
-  type: demo_code
-- name: ''
-  title: Unknow
-  type: datasheet
-  url: TODO
-  version: '1.0'
-- name: ''
-  title: Unknow
-  type: reference_manual
-  url: TODO
-  version: '1.0'
+  - name: ""
+    title: Unknow
+    type: homepage
+    url: http://www.wch.cn/products/CH32V103.html
+
 family: QingKe RISC-V-based, general-purpose MCU
 memory:
-- address: 0
-  kind: flash
-  name: FLASH
-  settings:
-    erase_size: 1024
-    erase_value: 255
-    write_size: 64
-  size: 32K
-- address: 536870912
-  kind: ram
-  name: SRAM
-  size: 10K
+  - address: 0
+    kind: flash
+    name: FLASH
+    settings:
+      erase_size: 1024
+      erase_value: 255
+      write_size: 64
+    size: 32K
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 10K
 name: CH32V103C6T6
+device_id: 0x0 #TODO
 packages:
-- name: CH32V103C6T6
-  package: LQFP48
+  - name: CH32V103C6T6
+    package: LQFP48
 product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
 subfamily: General-purpose
