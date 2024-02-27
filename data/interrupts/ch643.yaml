@@ -1,0 +1,74 @@
+# 16 - Window Watchdog interrupt
+WWDG: 16
+# 17 - PVD through EXTI line detection interrupt
+PVD: 17
+# 18 - Flash global interrupt
+FLASH: 18
+# 19 - LEDPWM global interrupt
+LEDPWM: 19
+# 20 - EXTI Line[7:0] interrupt
+EXTI7_0: 20
+# 21 - AWU global interrupt
+AWU: 21
+# 22 - DMA Channel1 global interrupt
+DMA_CHANNEL1: 22
+# 23 - DMA Channel2 global interrupt
+DMA_CHANNEL2: 23
+# 24 - DMA Channel3 global interrupt
+DMA_CHANNEL3: 24
+# 25 - DMA Channel4 global interrupt
+DMA_CHANNEL4: 25
+# 26 - DMA Channel5 global interrupt
+DMA_CHANNEL5: 26
+# 27 - DMA Channel6 global interrupt
+DMA_CHANNEL6: 27
+# 28 - DMA Channel7 global interrupt
+DMA_CHANNEL7: 28
+# 29 - ADC global interrupt
+ADC1: 29
+# 30 - I2C1 event interrupt
+I2C1_EV: 30
+# 31 - I2C1 error interrupt
+I2C1_ER: 31
+# 32 - USART1 global interrupt
+USART1: 32
+# 33 - SPI1 global interrupt
+SPI1: 33
+# 34 - TIM1 Break interrupt
+TIM1_BRK: 34
+# 35 - TIM1 Update interrupt
+TIM1_UP: 35
+# 36 - TIM1 Trigger and Commutation interrupts
+TIM1_TRG_COM: 36
+# 37 - TIM1 Capture Compare interrupt
+TIM1_CC: 37
+# 38 - TIM2 Update interrupt
+TIM2_UP: 38
+# 39 - USART2 global interrupt
+USART2: 39
+# 40 - EXTI Line[15:8] interrupts
+EXTI15_8: 40
+# 41 - EXTI Line[25:16] interrupts
+EXTI25_16: 41
+# 42 - USART3 global interrupt
+USART3: 42
+# 43 - UART4 global interrupt
+UART4: 43
+# 44 - DMA Channel8 global interrupt
+DMA_CHANNEL8: 44
+# 45 - USBFS
+USBFS: 45
+# 46 - USBFS_WKUP
+USBFS_WKUP: 46
+# 49 - USBPD global interrupt
+USBPD: 49
+# 50 - USBPD_WKUP global interrupt
+USBPD_WKUP: 50
+# 51 - TIM2 Capture Compare interrupt
+TIM2_CC: 51
+# 52 - TIM2 Trigger and Commutation interrupts
+TIM2_TRG_COM: 52
+# 53 - TIM2 Break interrupt
+TIM2_BRK: 53
+# 54 - TIM3 global interrupt
+TIM3: 54

@@ -1,0 +1,36 @@
+# 16 - TMR0_IRQHandler
+TMR0: 16
+# 17 - GPIOA
+GPIOA: 17
+# 18 - GPIOB
+GPIOB: 18
+# 19 - SPI0_IRQHandler
+SPI0: 19
+# 20 - LLE_IRQHandler
+# BLEL: 20
+# 21 - BB_IRQHandler
+# BLEB: 21
+# 22 - USB_IRQHandler
+USB: 22
+# 24 - TMR1_IRQHandler
+TMR1: 24
+# 25 - TMR2_IRQHandler
+TMR2: 25
+# 26 - UART0_IRQHandler
+UART0: 26
+# 27 - UART1_IRQHandler
+UART1: 27
+# 28 - RTC
+RTC: 28
+# 29 - ADC
+ADC: 29
+# 31 - PPWMX_IRQHandler
+PWMX: 31
+# 32 - TMR3_IRQHandler
+TMR3: 32
+# 33 - UART1_IRQHandler
+UART2: 33
+# 34 - UART3_IRQHandler
+UART3: 34
+# 35 - WDT_IRQHandler
+WDOG_BAT: 35
