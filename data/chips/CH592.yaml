@@ -4,8 +4,10 @@ subfamily: BLE 5.4 MCU
 product_type: QingKe V4C core, BLE
 device_id: 2449473536
 packages:
-  - name: CH592
-    package: QFN32/QFN28
+  - name: CH592X
+    package: QFN32
+  - name: CH592F
+    package: QFN28
 memory:
   - name: FLASH
     kind: flash
