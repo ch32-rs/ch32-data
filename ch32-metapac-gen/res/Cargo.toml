@@ -1,0 +1,47 @@
+[package]
+name = "ch32-metapac"
+version = "15.0.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ch32-rs/ch32-data"
+description = "Peripheral Access Crate (PAC) for all WCH's MCU chips, including metadata."
+
+# `cargo publish` is unable to figure out which .rs files are needed due to the include! magic.
+include = ["**/*.rs", "**/*.x", "Cargo.toml"]
+
+[package.metadata.docs.rs]
+features = ["ch32v307vct6", "pac", "metadata"]
+default-target = "riscv32imac-unknown-none-eabihf"
+targets = []
+
+[package.metadata.embassy_docs]
+features = ["pac", "metadata"]
+flavors = [
+    { regex_feature = "ch32v0.*", target = "riscv32i-unknown-none-eabi" },
+    { regex_feature = "ch32v1.*", target = "riscv32imac-unknown-none-elf" },
+    { regex_feature = "ch32v2.*", target = "riscv32imac-unknown-none-elf" },
+    { regex_feature = "ch32v3.*", target = "riscv32imacf-unknown-none-elf" },
+    { regex_feature = "ch32x0.*", target = "riscv32imac-unknown-none-elf" },
+    { regex_feature = "ch32l1.*", target = "riscv32imac-unknown-none-elf" },
+]
+
+[dependencies]
+riscv = "0.11.1"
+vcell = "0.1"
+
+[features]
+default = ["pac"]
+
+# Build the actual PAC. Set by default.
+# If you just want the metadata, unset it with `default-features = false`.
+pac = []
+
+# Build the chip metadata.
+# If set, a const `stm32_metapac::METADATA` will be exported, containing all the
+# metadata for the currently selected chip.
+metadata = []
+
+rt = []
+memory-x = []
+
+# Chip-selection features
