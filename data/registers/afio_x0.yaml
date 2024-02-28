@@ -1,0 +1,227 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+  - name: PCFR1
+    description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+    byte_offset: 4
+    fieldset: PCFR1
+  - name: EXTICR1
+    description: External interrupt configuration register 1 (AFIO_EXTICR1).
+    byte_offset: 8
+    fieldset: EXTICR1
+  - name: EXTICR2
+    description: External interrupt configuration register 2 (AFIO_EXTICR2).
+    byte_offset: 12
+    fieldset: EXTICR2
+  - name: CTLR
+    description: CTLR.
+    byte_offset: 24
+    fieldset: CTLR
+fieldset/CTLR:
+  description: CTLR.
+  fields:
+  - name: UDM_PUE
+    description: UDM_PUE configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: UDP_PUE
+    description: UDP_PUE configuration.
+    bit_offset: 2
+    bit_size: 2
+  - name: USB_PHY_V33
+    description: USB_PHY_V33 configuration.
+    bit_offset: 6
+    bit_size: 1
+  - name: USB_IOEN
+    description: USB_IOEN configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: USBPD_PHY_V33
+    description: USBPD_PHY_V33 configuration.
+    bit_offset: 8
+    bit_size: 1
+  - name: USBPD_IN_HVT
+    description: USBPD_IN_HVT configuration.
+    bit_offset: 9
+    bit_size: 1
+  - name: UDP_BC_VSRC
+    description: UDP_BC_VSRC configuration.
+    bit_offset: 16
+    bit_size: 1
+  - name: UDM_BC_VSRC
+    description: UDM_BC_VSRC configuration.
+    bit_offset: 17
+    bit_size: 1
+  - name: UDP_BC_CMPO
+    description: UDP_BC_CMPO configuration.
+    bit_offset: 18
+    bit_size: 1
+  - name: UDM_BC_CMPO
+    description: UDM_BC_CMPO configuration.
+    bit_offset: 19
+    bit_size: 1
+  - name: PA3_FILT_EN
+    description: PA3_FILT_EN configuration.
+    bit_offset: 24
+    bit_size: 1
+  - name: PA4_FILT_EN
+    description: PA4_FILT_EN configuration.
+    bit_offset: 25
+    bit_size: 1
+  - name: PB5_FILT_EN
+    description: PB5_FILT_EN configuration.
+    bit_offset: 26
+    bit_size: 1
+  - name: PB6_FILT_EN
+    description: PB6_FILT_EN configuration.
+    bit_offset: 27
+    bit_size: 1
+fieldset/EXTICR1:
+  description: External interrupt configuration register 1 (AFIO_EXTICR1).
+  fields:
+  - name: EXTI0
+    description: EXTI0 configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: EXTI1
+    description: EXTI1 configuration.
+    bit_offset: 2
+    bit_size: 2
+  - name: EXTI2
+    description: EXTI2 configuration.
+    bit_offset: 4
+    bit_size: 2
+  - name: EXTI3
+    description: EXTI3 configuration.
+    bit_offset: 6
+    bit_size: 2
+  - name: EXTI4
+    description: EXTI4 configuration.
+    bit_offset: 8
+    bit_size: 2
+  - name: EXTI5
+    description: EXTI5 configuration.
+    bit_offset: 10
+    bit_size: 2
+  - name: EXTI6
+    description: EXTI6 configuration.
+    bit_offset: 12
+    bit_size: 2
+  - name: EXTI7
+    description: EXTI7 configuration.
+    bit_offset: 14
+    bit_size: 2
+  - name: EXTI8
+    description: EXTI8 configuration.
+    bit_offset: 16
+    bit_size: 2
+  - name: EXTI9
+    description: EXTI9 configuration.
+    bit_offset: 18
+    bit_size: 2
+  - name: EXTI10
+    description: EXTI10 configuration.
+    bit_offset: 20
+    bit_size: 2
+  - name: EXTI11
+    description: EXTI11 configuration.
+    bit_offset: 22
+    bit_size: 2
+  - name: EXTI12
+    description: EXTI12 configuration.
+    bit_offset: 24
+    bit_size: 2
+  - name: EXTI13
+    description: EXTI13 configuration.
+    bit_offset: 26
+    bit_size: 2
+  - name: EXTI14
+    description: EXTI14 configuration.
+    bit_offset: 28
+    bit_size: 2
+  - name: EXTI15
+    description: EXTI15 configuration.
+    bit_offset: 30
+    bit_size: 2
+fieldset/EXTICR2:
+  description: External interrupt configuration register 2 (AFIO_EXTICR2).
+  fields:
+  - name: EXTI16
+    description: EXTI16 configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: EXTI17
+    description: EXTI17 configuration.
+    bit_offset: 2
+    bit_size: 2
+  - name: EXTI18
+    description: EXTI18 configuration.
+    bit_offset: 4
+    bit_size: 2
+  - name: EXTI19
+    description: EXTI19 configuration.
+    bit_offset: 6
+    bit_size: 2
+  - name: EXTI20
+    description: EXTI20 configuration.
+    bit_offset: 8
+    bit_size: 2
+  - name: EXTI21
+    description: EXTI21 configuration.
+    bit_offset: 10
+    bit_size: 2
+  - name: EXTI22
+    description: EXTI22 configuration.
+    bit_offset: 12
+    bit_size: 2
+  - name: EXTI23
+    description: EXTI23 configuration.
+    bit_offset: 14
+    bit_size: 2
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+  fields:
+  - name: SPI1RM
+    description: SPI1 remapping.
+    bit_offset: 0
+    bit_size: 2
+  - name: I2C1RM
+    description: I2C1 remapping.
+    bit_offset: 2
+    bit_size: 3
+  - name: USART1RM
+    description: USART1 remapping.
+    bit_offset: 5
+    bit_size: 2
+  - name: USART2RM
+    description: USART2 remapping.
+    bit_offset: 7
+    bit_size: 3
+  - name: USART3RM
+    description: USART3 remapping.
+    bit_offset: 10
+    bit_size: 2
+  - name: USART4RM
+    description: USART4 remapping.
+    bit_offset: 12
+    bit_size: 3
+  - name: TIM1RM
+    description: TIM1 remapping.
+    bit_offset: 15
+    bit_size: 3
+  - name: TIM2RM
+    description: TIM2 remapping.
+    bit_offset: 18
+    bit_size: 3
+  - name: TIM3RM
+    description: TIM3 remapping.
+    bit_offset: 21
+    bit_size: 2
+  - name: PLOC_RM
+    description: IO2W_RM remapping.
+    bit_offset: 23
+    bit_size: 1
+  - name: SW_CFG
+    description: SW_CFG Configuration.
+    bit_offset: 24
+    bit_size: 3

@@ -1,0 +1,68 @@
+block/SYSTICK:
+  description: System Tick Peripheral.
+  items:
+    - name: CTLR
+      description: SysTick Control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CNTL
+      description: SysTick counter low bits.
+      byte_offset: 4
+      fieldset: CNTL
+    - name: CNTH
+      description: SysTick counter high bits.
+      byte_offset: 8
+      fieldset: CNTH
+    - name: CMPLR
+      description: SysTick compare low bits.
+      byte_offset: 12
+      fieldset: CMPLR
+    - name: CMPHR
+      description: SysTick compare high bits.
+      byte_offset: 16
+      fieldset: CMPHR
+fieldset/CMPHR:
+  description: SysTick compare high bits.
+  fields:
+    - name: CNTL
+      description: SysTick compare high bits.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CMPLR:
+  description: SysTick compare low bits.
+  fields:
+    - name: CNTL
+      description: SysTick compare low bits.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CNTH:
+  description: SysTick counter high bits.
+  fields:
+    - name: CNTL
+      description: SysTick counter high bits.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CNTL:
+  description: SysTick counter low bits.
+  fields:
+    - name: CNTL
+      description: SysTick counter low bits.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CTLR:
+  description: SysTick Control register.
+  fields:
+    - name: STE
+      description: SysTick enable state.
+      bit_offset: 0
+      bit_size: 1
+      enum: STE
+enum/STE:
+  bit_size: 1
+  variants:
+    - name: Disabled
+      description: SysTick counter disabled.
+      value: 0
+    - name: Enabled
+      description: SysTick counter enabled.
+      value: 1

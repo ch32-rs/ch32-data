@@ -1,0 +1,308 @@
+block/GPIO:
+  description: General purpose I/O.
+  items:
+    - name: CFGLR
+      description: Port configuration register low (GPIOn_CFGLR).
+      byte_offset: 0
+      fieldset: CFGLR
+    - name: INDR
+      description: Port input data register (GPIOn_INDR).
+      byte_offset: 8
+      access: Read
+      fieldset: INDR
+    - name: OUTDR
+      description: Port output data register (GPIOn_OUTDR).
+      byte_offset: 12
+      fieldset: OUTDR
+    - name: BSHR
+      description: Port bit set/reset register (GPIOn_BSHR).
+      byte_offset: 16
+      access: Write
+      fieldset: BSHR
+    - name: BCR
+      description: Port bit reset register (GPIOn_BCR).
+      byte_offset: 20
+      access: Write
+      fieldset: BCR
+    - name: LCKR
+      description: Port configuration lock register.
+      byte_offset: 24
+      fieldset: LCKR
+fieldset/BCR:
+  description: Port bit reset register (GPIOn_BCR).
+  fields:
+    - name: BR0
+      description: Reset bit 0.
+      bit_offset: 0
+      bit_size: 1
+    - name: BR1
+      description: Reset bit 1.
+      bit_offset: 1
+      bit_size: 1
+    - name: BR2
+      description: Reset bit 1.
+      bit_offset: 2
+      bit_size: 1
+    - name: BR3
+      description: Reset bit 3.
+      bit_offset: 3
+      bit_size: 1
+    - name: BR4
+      description: Reset bit 4.
+      bit_offset: 4
+      bit_size: 1
+    - name: BR5
+      description: Reset bit 5.
+      bit_offset: 5
+      bit_size: 1
+    - name: BR6
+      description: Reset bit 6.
+      bit_offset: 6
+      bit_size: 1
+    - name: BR7
+      description: Reset bit 7.
+      bit_offset: 7
+      bit_size: 1
+fieldset/BSHR:
+  description: Port bit set/reset register (GPIOn_BSHR).
+  fields:
+    - name: BS0
+      description: Set bit 0.
+      bit_offset: 0
+      bit_size: 1
+    - name: BS1
+      description: Set bit 1.
+      bit_offset: 1
+      bit_size: 1
+    - name: BS2
+      description: Set bit 1.
+      bit_offset: 2
+      bit_size: 1
+    - name: BS3
+      description: Set bit 3.
+      bit_offset: 3
+      bit_size: 1
+    - name: BS4
+      description: Set bit 4.
+      bit_offset: 4
+      bit_size: 1
+    - name: BS5
+      description: Set bit 5.
+      bit_offset: 5
+      bit_size: 1
+    - name: BS6
+      description: Set bit 6.
+      bit_offset: 6
+      bit_size: 1
+    - name: BS7
+      description: Set bit 7.
+      bit_offset: 7
+      bit_size: 1
+    - name: BR0
+      description: Reset bit 0.
+      bit_offset: 16
+      bit_size: 1
+    - name: BR1
+      description: Reset bit 1.
+      bit_offset: 17
+      bit_size: 1
+    - name: BR2
+      description: Reset bit 2.
+      bit_offset: 18
+      bit_size: 1
+    - name: BR3
+      description: Reset bit 3.
+      bit_offset: 19
+      bit_size: 1
+    - name: BR4
+      description: Reset bit 4.
+      bit_offset: 20
+      bit_size: 1
+    - name: BR5
+      description: Reset bit 5.
+      bit_offset: 21
+      bit_size: 1
+    - name: BR6
+      description: Reset bit 6.
+      bit_offset: 22
+      bit_size: 1
+    - name: BR7
+      description: Reset bit 7.
+      bit_offset: 23
+      bit_size: 1
+fieldset/CFGLR:
+  description: Port configuration register low (GPIOn_CFGLR).
+  fields:
+    - name: MODE0
+      description: Port n.0 mode bits.
+      bit_offset: 0
+      bit_size: 2
+    - name: CNF0
+      description: Port n.0 configuration bits.
+      bit_offset: 2
+      bit_size: 2
+    - name: MODE1
+      description: Port n.1 mode bits.
+      bit_offset: 4
+      bit_size: 2
+    - name: CNF1
+      description: Port n.1 configuration bits.
+      bit_offset: 6
+      bit_size: 2
+    - name: MODE2
+      description: Port n.2 mode bits.
+      bit_offset: 8
+      bit_size: 2
+    - name: CNF2
+      description: Port n.2 configuration bits.
+      bit_offset: 10
+      bit_size: 2
+    - name: MODE3
+      description: Port n.3 mode bits.
+      bit_offset: 12
+      bit_size: 2
+    - name: CNF3
+      description: Port n.3 configuration bits.
+      bit_offset: 14
+      bit_size: 2
+    - name: MODE4
+      description: Port n.4 mode bits.
+      bit_offset: 16
+      bit_size: 2
+    - name: CNF4
+      description: Port n.4 configuration bits.
+      bit_offset: 18
+      bit_size: 2
+    - name: MODE5
+      description: Port n.5 mode bits.
+      bit_offset: 20
+      bit_size: 2
+    - name: CNF5
+      description: Port n.5 configuration bits.
+      bit_offset: 22
+      bit_size: 2
+    - name: MODE6
+      description: Port n.6 mode bits.
+      bit_offset: 24
+      bit_size: 2
+    - name: CNF6
+      description: Port n.6 configuration bits.
+      bit_offset: 26
+      bit_size: 2
+    - name: MODE7
+      description: Port n.7 mode bits.
+      bit_offset: 28
+      bit_size: 2
+    - name: CNF7
+      description: Port n.7 configuration bits.
+      bit_offset: 30
+      bit_size: 2
+fieldset/INDR:
+  description: Port input data register (GPIOn_INDR).
+  fields:
+    - name: IDR0
+      description: Port input data.
+      bit_offset: 0
+      bit_size: 1
+    - name: IDR1
+      description: Port input data.
+      bit_offset: 1
+      bit_size: 1
+    - name: IDR2
+      description: Port input data.
+      bit_offset: 2
+      bit_size: 1
+    - name: IDR3
+      description: Port input data.
+      bit_offset: 3
+      bit_size: 1
+    - name: IDR4
+      description: Port input data.
+      bit_offset: 4
+      bit_size: 1
+    - name: IDR5
+      description: Port input data.
+      bit_offset: 5
+      bit_size: 1
+    - name: IDR6
+      description: Port input data.
+      bit_offset: 6
+      bit_size: 1
+    - name: IDR7
+      description: Port input data.
+      bit_offset: 7
+      bit_size: 1
+fieldset/LCKR:
+  description: Port configuration lock register.
+  fields:
+    - name: LCK0
+      description: Port A Lock bit 0.
+      bit_offset: 0
+      bit_size: 1
+    - name: LCK1
+      description: Port A Lock bit 1.
+      bit_offset: 1
+      bit_size: 1
+    - name: LCK2
+      description: Port A Lock bit 2.
+      bit_offset: 2
+      bit_size: 1
+    - name: LCK3
+      description: Port A Lock bit 3.
+      bit_offset: 3
+      bit_size: 1
+    - name: LCK4
+      description: Port A Lock bit 4.
+      bit_offset: 4
+      bit_size: 1
+    - name: LCK5
+      description: Port A Lock bit 5.
+      bit_offset: 5
+      bit_size: 1
+    - name: LCK6
+      description: Port A Lock bit 6.
+      bit_offset: 6
+      bit_size: 1
+    - name: LCK7
+      description: Port A Lock bit 7.
+      bit_offset: 7
+      bit_size: 1
+    - name: LCKK
+      description: Lock key.
+      bit_offset: 8
+      bit_size: 1
+fieldset/OUTDR:
+  description: Port output data register (GPIOn_OUTDR).
+  fields:
+    - name: ODR0
+      description: Port output data.
+      bit_offset: 0
+      bit_size: 1
+    - name: ODR1
+      description: Port output data.
+      bit_offset: 1
+      bit_size: 1
+    - name: ODR2
+      description: Port output data.
+      bit_offset: 2
+      bit_size: 1
+    - name: ODR3
+      description: Port output data.
+      bit_offset: 3
+      bit_size: 1
+    - name: ODR4
+      description: Port output data.
+      bit_offset: 4
+      bit_size: 1
+    - name: ODR5
+      description: Port output data.
+      bit_offset: 5
+      bit_size: 1
+    - name: ODR6
+      description: Port output data.
+      bit_offset: 6
+      bit_size: 1
+    - name: ODR7
+      description: Port output data.
+      bit_offset: 7
+      bit_size: 1

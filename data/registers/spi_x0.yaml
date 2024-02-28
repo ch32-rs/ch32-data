@@ -1,0 +1,210 @@
+block/SPI:
+  description: Serial peripheral interface.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      bit_size: 16
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      bit_size: 16
+      fieldset: CTLR2
+    - name: STATR
+      description: status register.
+      byte_offset: 8
+      bit_size: 16
+      fieldset: STATR
+    - name: DATAR
+      description: data register.
+      byte_offset: 12
+      bit_size: 16
+      fieldset: DATAR
+    - name: CRCR
+      description: CRCR polynomial register.
+      byte_offset: 16
+      bit_size: 16
+      fieldset: CRCR
+    - name: RCRCR
+      description: RX CRC register.
+      byte_offset: 20
+      access: Read
+      bit_size: 16
+      fieldset: RCRCR
+    - name: TCRCR
+      description: send CRC register.
+      byte_offset: 24
+      access: Read
+      bit_size: 16
+      fieldset: TCRCR
+    - name: HSCR
+      description: high speed control register.
+      byte_offset: 36
+      access: Write
+      bit_size: 16
+      fieldset: HSCR
+fieldset/CRCR:
+  description: CRCR polynomial register.
+  bit_size: 16
+  fields:
+    - name: CRCPOLY
+      description: CRC polynomial register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR1:
+  description: control register 1.
+  bit_size: 16
+  fields:
+    - name: CPHA
+      description: Clock phase.
+      bit_offset: 0
+      bit_size: 1
+    - name: CPOL
+      description: Clock polarity.
+      bit_offset: 1
+      bit_size: 1
+    - name: MSTR
+      description: Master selection.
+      bit_offset: 2
+      bit_size: 1
+    - name: BR
+      description: Baud rate control.
+      bit_offset: 3
+      bit_size: 3
+    - name: SPE
+      description: SPI enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LSBFIRST
+      description: Frame format.
+      bit_offset: 7
+      bit_size: 1
+    - name: SSI
+      description: Internal slave select.
+      bit_offset: 8
+      bit_size: 1
+    - name: SSM
+      description: Software slave management.
+      bit_offset: 9
+      bit_size: 1
+    - name: RXONLY
+      description: Receive only.
+      bit_offset: 10
+      bit_size: 1
+    - name: DFF
+      description: Data frame format.
+      bit_offset: 11
+      bit_size: 1
+    - name: CRCNEXT
+      description: CRC transfer next.
+      bit_offset: 12
+      bit_size: 1
+    - name: CRCEN
+      description: Hardware CRC calculation enable.
+      bit_offset: 13
+      bit_size: 1
+    - name: BIDIOE
+      description: Output enable in bidirectional mode.
+      bit_offset: 14
+      bit_size: 1
+    - name: BIDIMODE
+      description: Bidirectional data mode enable.
+      bit_offset: 15
+      bit_size: 1
+fieldset/CTLR2:
+  description: control register 2.
+  bit_size: 16
+  fields:
+    - name: RXDMAEN
+      description: Rx buffer DMA enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXDMAEN
+      description: Tx buffer DMA enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: SSOE
+      description: SS output enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: ERRIE
+      description: Error interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: RXNEIE
+      description: RX buffer not empty interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: TXEIE
+      description: Tx buffer empty interrupt enable.
+      bit_offset: 7
+      bit_size: 1
+fieldset/DATAR:
+  description: data register.
+  bit_size: 16
+  fields:
+    - name: DR
+      description: Data register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/HSCR:
+  description: high speed control register.
+  bit_size: 16
+  fields:
+    - name: HSRXEN
+      description: High speed mode read enable.
+      bit_offset: 0
+      bit_size: 1
+fieldset/RCRCR:
+  description: RX CRC register.
+  bit_size: 16
+  fields:
+    - name: RXCRC
+      description: Rx CRC register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/STATR:
+  description: status register.
+  bit_size: 16
+  fields:
+    - name: RXNE
+      description: Receive buffer not empty.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXE
+      description: Transmit buffer empty.
+      bit_offset: 1
+      bit_size: 1
+    - name: CHSIDE
+      description: Channel side.
+      bit_offset: 2
+      bit_size: 1
+    - name: UDR
+      description: Underrun flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: CRCERR
+      description: CRC error flag.
+      bit_offset: 4
+      bit_size: 1
+    - name: MODF
+      description: Mode fault.
+      bit_offset: 5
+      bit_size: 1
+    - name: OVR
+      description: Overrun flag.
+      bit_offset: 6
+      bit_size: 1
+    - name: BSY
+      description: Busy flag.
+      bit_offset: 7
+      bit_size: 1
+fieldset/TCRCR:
+  description: send CRC register.
+  bit_size: 16
+  fields:
+    - name: TXCRC
+      description: Tx CRC register.
+      bit_offset: 0
+      bit_size: 16

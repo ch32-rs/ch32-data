@@ -1,0 +1,248 @@
+block/USART:
+  description: Universal synchronous asynchronous receiver transmitter.
+  items:
+    - name: STATR
+      description: Status register.
+      byte_offset: 0
+      fieldset: STATR
+    - name: DATAR
+      description: Data register.
+      byte_offset: 4
+      fieldset: DATAR
+    - name: BRR
+      description: Baud rate register.
+      byte_offset: 8
+      fieldset: BRR
+    - name: CTLR1
+      description: Control register 1.
+      byte_offset: 12
+      fieldset: CTLR1
+    - name: CTLR2
+      description: Control register 2.
+      byte_offset: 16
+      fieldset: CTLR2
+    - name: CTLR3
+      description: Control register 3.
+      byte_offset: 20
+      fieldset: CTLR3
+    - name: GPR
+      description: Guard time and prescaler register.
+      byte_offset: 24
+      fieldset: GPR
+fieldset/BRR:
+  description: Baud rate register.
+  fields:
+    - name: DIV_Fraction
+      description: fraction of USARTDIV.
+      bit_offset: 0
+      bit_size: 4
+    - name: DIV_Mantissa
+      description: mantissa of USARTDIV.
+      bit_offset: 4
+      bit_size: 12
+fieldset/CTLR1:
+  description: Control register 1.
+  fields:
+    - name: SBK
+      description: Send break.
+      bit_offset: 0
+      bit_size: 1
+    - name: RWU
+      description: Receiver wakeup.
+      bit_offset: 1
+      bit_size: 1
+    - name: RE
+      description: Receiver enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TE
+      description: Transmitter enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: IDLEIE
+      description: IDLE interrupt enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: RXNEIE
+      description: RXNE interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: TCIE
+      description: Transmission complete interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: TXEIE
+      description: TXE interrupt enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: PEIE
+      description: PE interrupt enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: PS
+      description: Parity selection.
+      bit_offset: 9
+      bit_size: 1
+    - name: PCE
+      description: Parity control enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: WAKE
+      description: Wakeup method.
+      bit_offset: 11
+      bit_size: 1
+    - name: M
+      description: Word length.
+      bit_offset: 12
+      bit_size: 1
+    - name: UE
+      description: USART enable.
+      bit_offset: 13
+      bit_size: 1
+fieldset/CTLR2:
+  description: Control register 2.
+  fields:
+    - name: ADD
+      description: Address of the USART node.
+      bit_offset: 0
+      bit_size: 4
+    - name: LBDL
+      description: lin break detection length.
+      bit_offset: 5
+      bit_size: 1
+    - name: LBDIE
+      description: LIN break detection interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LBCL
+      description: Last bit clock pulse.
+      bit_offset: 8
+      bit_size: 1
+    - name: CPHA
+      description: Clock phase.
+      bit_offset: 9
+      bit_size: 1
+    - name: CPOL
+      description: Clock polarity.
+      bit_offset: 10
+      bit_size: 1
+    - name: CLKEN
+      description: Clock enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: STOP
+      description: STOP bits.
+      bit_offset: 12
+      bit_size: 2
+    - name: LINEN
+      description: LIN mode enable.
+      bit_offset: 14
+      bit_size: 1
+fieldset/CTLR3:
+  description: Control register 3.
+  fields:
+    - name: EIE
+      description: Error interrupt enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: IREN
+      description: IrDA mode enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: IRLP
+      description: IrDA low-power.
+      bit_offset: 2
+      bit_size: 1
+    - name: HDSEL
+      description: Half-duplex selection.
+      bit_offset: 3
+      bit_size: 1
+    - name: NACK
+      description: Smartcard NACK enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: SCEN
+      description: Smartcard mode enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: DMAR
+      description: DMA enable receiver.
+      bit_offset: 6
+      bit_size: 1
+    - name: DMAT
+      description: DMA enable transmitter.
+      bit_offset: 7
+      bit_size: 1
+    - name: RTSE
+      description: RTS enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: CTSE
+      description: CTS enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: CTSIE
+      description: CTS interrupt enable.
+      bit_offset: 10
+      bit_size: 1
+fieldset/DATAR:
+  description: Data register.
+  fields:
+    - name: DR
+      description: Data value.
+      bit_offset: 0
+      bit_size: 9
+fieldset/GPR:
+  description: Guard time and prescaler register.
+  fields:
+    - name: PSC
+      description: Prescaler value.
+      bit_offset: 0
+      bit_size: 8
+    - name: GT
+      description: Guard time value.
+      bit_offset: 8
+      bit_size: 8
+fieldset/STATR:
+  description: Status register.
+  fields:
+    - name: PE
+      description: Parity error.
+      bit_offset: 0
+      bit_size: 1
+    - name: FE
+      description: Framing error.
+      bit_offset: 1
+      bit_size: 1
+    - name: NE
+      description: Noise error flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: ORE
+      description: Overrun error.
+      bit_offset: 3
+      bit_size: 1
+    - name: IDLE
+      description: IDLE line detected.
+      bit_offset: 4
+      bit_size: 1
+    - name: RXNE
+      description: Read data register not empty.
+      bit_offset: 5
+      bit_size: 1
+    - name: TC
+      description: Transmission complete.
+      bit_offset: 6
+      bit_size: 1
+    - name: TXE
+      description: Transmit data register empty.
+      bit_offset: 7
+      bit_size: 1
+    - name: LBD
+      description: LIN break detection flag.
+      bit_offset: 8
+      bit_size: 1
+    - name: CTS
+      description: CTS flag.
+      bit_offset: 9
+      bit_size: 1
