@@ -55,11 +55,11 @@ fn main() {
         chip_core_name
     );
     println!(
-        "cargo:rustc-env=STM32_METAPAC_PAC_PATH=chips/{}/pac.rs",
+        "cargo:rustc-env=CH32_METAPAC_PAC_PATH=chips/{}/pac.rs",
         chip_core_name
     );
     println!(
-        "cargo:rustc-env=STM32_METAPAC_METADATA_PATH=chips/{}/metadata.rs",
+        "cargo:rustc-env=CH32_METAPAC_METADATA_PATH=chips/{}/metadata.rs",
         chip_core_name
     );
 
