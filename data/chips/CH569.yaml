@@ -11,7 +11,7 @@ packages:
   - name: CH565M
     package: QFN40
 memory:
-  - name: FLASH
+  - name: BANK_1
     kind: flash
     address: 0
     size: 458752
@@ -35,20 +35,7 @@ docs:
 cores:
   - name: qingke-v4
     peripherals:
-      - name: GPIOA
-        address: 1073741824
-        registers:
-          kind: gpio
-          version: v2
-          block: GPIO
-        rcc:
-          clock: GPIO
-          enable:
-            register: GPIOENR
-            field: GPIOAEN
-          reset:
-            register: GPIORSTR
-            field: GPIOARST
+
     interrupts:
       - name: WWDG
         number: 1

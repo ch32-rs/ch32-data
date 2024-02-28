@@ -10,7 +10,7 @@ packages:
   - name: CH32X035F7P6
     package: TSSOP20
 memory:
-  - name: FLASH
+  - name: BANK_1
     kind: flash
     address: 0
     size: 49152
@@ -24,33 +24,153 @@ memory:
     size: 20480
 docs:
   - type: homepage
-    title: Unknow
+    title: Homepage
     name: ""
     url: http://www.wch.cn/products/CH32X035.html
 cores:
   - name: qingke-v4
     peripherals:
       - name: GPIOA
-        address: 1073741824
+        address: 1073741824 # 0x40010800
         registers:
           kind: gpio
-          version: v2
+          version: x0
           block: GPIO
         rcc:
-          clock: GPIO
+          bus_clock: HCLK
+          kernel_clock: HCLK
           enable:
-            register: GPIOENR
-            field: GPIOAEN
+            register: APB2PCENR
+            field: IOPAEN
           reset:
-            register: GPIORSTR
-            field: GPIOARST
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+            register: APB2PRSTR
+            field: IOPARST
+      - name: GPIOB
+        address: 0x40010C00
+        registers:
+          kind: gpio
+          version: x0
+          block: GPIO
+        rcc:
+          bus_clock: HCLK
+          kernel_clock: HCLK
+          enable:
+            register: APB2PCENR
+            field: IOPBEN
+          reset:
+            register: APB2PRSTR
+            field: IOPBRST
+      - name: GPIOC
+        address: 0x40011000
+        registers:
+          kind: gpio
+          version: x0
+          block: GPIO
+        rcc:
+          bus_clock: HCLK
+          kernel_clock: HCLK
+          enable:
+            register: APB2PCENR
+            field: IOPCEN
+          reset:
+            register: APB2PRSTR
+            field: IOPCRST
+      - name: AFIO
+        address: 0x40010004
+        registers:
+          kind: afio
+          version: x0
+          block: AFIO
+        rcc:
+          bus_clock: HCLK
+          kernel_clock: HCLK
+          enable:
+            register: APB2PCENR
+            field: AFIOEN
+          reset:
+            register: APB2PRSTR
+            field: AFIORST
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: x0
+          block: RCC
+        pins:
+          - pin: PB9
+            signal: MCO
+      - name: SPI1
+        address: 0x40013000
+        registers:
+          kind: spi
+          version: x0
+          block: SPI
+        rcc:
+          bus_clock: HCLK
+          kernel_clock: HCLK
+          enable:
+            register: APB2PCENR
+            field: SPI1EN
+          reset:
+            register: APB2PRSTR
+            field: SPI1RST
+        pins:
+          - pin: PA4
+            signal: NSS
+            remap: 0
+          - pin: PA5
+            signal: SCK
+            remap: 0
+          - pin: PA6
+            signal: MISO
+            remap: 0
+          - pin: PA7
+            signal: MOSI
+            remap: 0
+          - pin: PA8
+            signal: MISO
+            remap: 1
+          - pin: PA9
+            signal: MOSI
+            remap: 1
+          - pin: PA9
+            signal: MISO
+            remap: 2
+          - pin: PA10
+            signal: MOSI
+            remap: 2
+          - pin: PA12
+            signal: NSS
+            remap: 2
+          - pin: PB15
+            signal: SCK
+            remap: 1
+          - pin: PB21
+            signal: NSS
+            remap: 1
+          - pin: PC4
+            signal: NSS
+            remap: 3
+          - pin: PC5
+            signal: SCK
+            remap: 3
+          - pin: PC6
+            signal: MISO
+            remap: 3
+          - pin: PC7
+            signal: MOSI
+            remap: 3
+        interrupts:
+          - signal: GLOBAL
+            interrupt: SPI1
+
+    include_interrupts: "../interrupts/ch32x0.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32X0.yaml"
+    include_peripherals: []
+    interrupts: []
+    dma_channels: []
+
 _raw:
   OPA: "1"
   USB_20: D

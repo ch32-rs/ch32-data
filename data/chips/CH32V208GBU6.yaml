@@ -7,7 +7,7 @@ packages:
   - name: CH32V208GBU6
     package: QFN28
 memory:
-  - name: FLASH
+  - name: BANK_1
     kind: flash
     address: 0
     size: 131072
@@ -21,26 +21,13 @@ memory:
     size: 65536
 docs:
   - type: homepage
-    title: Unknow
+    title: Homepage
     name: ""
     url: http://www.wch.cn/products/CH32V208.html
 cores:
   - name: qingke-v4
     peripherals:
-      - name: GPIOA
-        address: 1073741824
-        registers:
-          kind: gpio
-          version: v2
-          block: GPIO
-        rcc:
-          clock: GPIO
-          enable:
-            register: GPIOENR
-            field: GPIOAEN
-          reset:
-            register: GPIORSTR
-            field: GPIOARST
+
     interrupts:
       - name: WWDG
         number: 1

@@ -1,14 +1,10 @@
-[package]
-name = "ch32-data"
-version = "0.1.0"
-edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-serde = { version = "1.0.195", features = ["derive"] }
-serde_yaml = "0.9.30"
-
-[dev-dependencies]
-itertools = "0.12.0"
-rayon = "1.8.1"
+[workspace]
+resolver = "2"
+members = [
+    "ch32-data-gen",
+    "ch32-data-serde",
+    "ch32-metapac-gen",
+    "ch32-data-macros",
+]
+exclude = ["build"]

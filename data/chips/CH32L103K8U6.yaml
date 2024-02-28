@@ -7,7 +7,7 @@ packages:
   - name: CH32L103K8U6
     package: QFN32
 memory:
-  - name: FLASH
+  - name: BANK_1
     kind: flash
     address: 0
     size: 65536
@@ -21,26 +21,13 @@ memory:
     size: 20480
 docs:
   - type: homepage
-    title: Unknow
+    title: Homepage
     name: ""
     url: https://www.wch.cn/products/CH32L103.html
 cores:
   - name: qingke-v4
     peripherals:
-      - name: GPIOA
-        address: 1073741824
-        registers:
-          kind: gpio
-          version: v2
-          block: GPIO
-        rcc:
-          clock: GPIO
-          enable:
-            register: GPIOENR
-            field: GPIOAEN
-          reset:
-            register: GPIORSTR
-            field: GPIOARST
+
     interrupts:
       - name: WWDG
         number: 1
