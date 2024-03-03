@@ -1,0 +1,341 @@
+block/GPTM:
+  description: General purpose timer.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      bit_size: 16
+      fieldset: CTLR1
+    - name: SMCFGR
+      description: slave mode control register.
+      byte_offset: 8
+      bit_size: 16
+      fieldset: SMCFGR
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      bit_size: 16
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      bit_size: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      bit_size: 16
+      fieldset: SWEVGR
+    - name: CHCTLR1_Input
+      description: capture/compare mode register 1 (input mode).
+      byte_offset: 24
+      bit_size: 16
+      fieldset: CHCTLR1_Input
+    - name: CHCTLR1_Output
+      description: capture/compare mode register 1 (output mode).
+      byte_offset: 24
+      bit_size: 16
+      fieldset: CHCTLR1_Output
+    - name: CCER
+      description: capture/compare enable register.
+      byte_offset: 32
+      bit_size: 16
+      fieldset: CCER
+    - name: CNT
+      description: counter.
+      byte_offset: 36
+      bit_size: 16
+      fieldset: CNT
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      bit_size: 16
+      fieldset: PSC
+    - name: ATRLR
+      description: auto-reload register.
+      byte_offset: 44
+      bit_size: 16
+      fieldset: ATRLR
+    - name: CH1CVR
+      description: capture/compare register 1.
+      byte_offset: 52
+      bit_size: 16
+      fieldset: CH1CVR
+    - name: CH2CVR
+      description: capture/compare register 2.
+      byte_offset: 56
+      bit_size: 16
+      fieldset: CH2CVR
+    - name: SPEC
+      description: SPEC.
+      byte_offset: 80
+      bit_size: 16
+      fieldset: SPEC
+fieldset/ATRLR:
+  description: auto-reload register.
+  bit_size: 16
+  fields:
+    - name: ATRLR
+      description: Auto-reload value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CCER:
+  description: capture/compare enable register.
+  bit_size: 16
+  fields:
+    - name: CC1E
+      description: Capture/Compare 1 output enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1P
+      description: Capture/Compare 1 output Polarity.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2E
+      description: Capture/Compare 2 output enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: CC2P
+      description: Capture/Compare 2 output Polarity.
+      bit_offset: 5
+      bit_size: 1
+fieldset/CH1CVR:
+  description: capture/compare register 1.
+  bit_size: 16
+  fields:
+    - name: CH1CVR
+      description: Capture/Compare 1 value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CH2CVR:
+  description: capture/compare register 2.
+  bit_size: 16
+  fields:
+    - name: CH2CVR
+      description: Capture/Compare 2 value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CHCTLR1_Input:
+  description: capture/compare mode register 1 (input mode).
+  bit_size: 16
+  fields:
+    - name: CC1S
+      description: Capture/Compare 1 selection.
+      bit_offset: 0
+      bit_size: 2
+    - name: IC1PSC
+      description: Input capture 1 prescaler.
+      bit_offset: 2
+      bit_size: 2
+    - name: IC1F
+      description: Input capture 1 filter.
+      bit_offset: 4
+      bit_size: 4
+    - name: CC2S
+      description: Capture/compare 2 selection.
+      bit_offset: 8
+      bit_size: 2
+    - name: IC2PSC
+      description: Input capture 2 prescaler.
+      bit_offset: 10
+      bit_size: 2
+    - name: IC2F
+      description: Input capture 2 filter.
+      bit_offset: 12
+      bit_size: 4
+fieldset/CHCTLR1_Output:
+  description: capture/compare mode register 1 (output mode).
+  bit_size: 16
+  fields:
+    - name: CC1S
+      description: Capture/Compare 1 selection.
+      bit_offset: 0
+      bit_size: 2
+    - name: OC1FE
+      description: Output compare 1 fast enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: OC1PE
+      description: Output compare 1 preload enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: OC1M
+      description: Output compare 1 mode.
+      bit_offset: 4
+      bit_size: 3
+    - name: OC1CE
+      description: Output compare 1 clear enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: CC2S
+      description: Capture/Compare 2 selection.
+      bit_offset: 8
+      bit_size: 2
+    - name: OC2FE
+      description: Output compare 2 fast enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: OC2PE
+      description: Output compare 2 preload enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: OC2M
+      description: Output compare 2 mode.
+      bit_offset: 12
+      bit_size: 3
+    - name: OC2CE
+      description: Output compare 2 clear enable.
+      bit_offset: 15
+      bit_size: 1
+fieldset/CNT:
+  description: counter.
+  bit_size: 16
+  fields:
+    - name: CNT
+      description: counter value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR1:
+  description: control register 1.
+  bit_size: 16
+  fields:
+    - name: CEN
+      description: Counter enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDIS
+      description: Update disable.
+      bit_offset: 1
+      bit_size: 1
+    - name: URS
+      description: Update request source.
+      bit_offset: 2
+      bit_size: 1
+    - name: OPM
+      description: One-pulse mode.
+      bit_offset: 3
+      bit_size: 1
+    - name: ARPE
+      description: Auto-reload preload enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: CKD
+      description: Clock division.
+      bit_offset: 8
+      bit_size: 2
+    - name: CAPOV
+      description: CAPOV.
+      bit_offset: 14
+      bit_size: 1
+    - name: CAPLVL
+      description: CAPLVL.
+      bit_offset: 15
+      bit_size: 1
+fieldset/DMAINTENR:
+  description: DMA/Interrupt enable register.
+  bit_size: 16
+  fields:
+    - name: UIE
+      description: Update interrupt enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1IE
+      description: Capture/Compare 1 interrupt enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2IE
+      description: Capture/Compare 2 interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TIE
+      description: Trigger interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+fieldset/INTFR:
+  description: status register.
+  bit_size: 16
+  fields:
+    - name: UIF
+      description: Update interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1IF
+      description: Capture/compare 1 interrupt flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2IF
+      description: Capture/Compare 2 interrupt flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: TIF
+      description: Trigger interrupt flag.
+      bit_offset: 6
+      bit_size: 1
+    - name: CC1OF
+      description: Capture/Compare 1 overcapture flag.
+      bit_offset: 9
+      bit_size: 1
+    - name: CC2OF
+      description: Capture/compare 2 overcapture flag.
+      bit_offset: 10
+      bit_size: 1
+fieldset/PSC:
+  description: prescaler.
+  bit_size: 16
+  fields:
+    - name: PSC
+      description: Prescaler value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/SMCFGR:
+  description: slave mode control register.
+  bit_size: 16
+  fields:
+    - name: SMS
+      description: Slave mode selection.
+      bit_offset: 0
+      bit_size: 3
+    - name: TS
+      description: Trigger selection.
+      bit_offset: 4
+      bit_size: 3
+fieldset/SPEC:
+  description: SPEC.
+  bit_size: 16
+  fields:
+    - name: PWM_EN
+      description: PWM_EN.
+      bit_offset: 0
+      bit_size: 1
+    - name: PWM_OC1
+      description: PWM_OC1.
+      bit_offset: 4
+      bit_size: 1
+    - name: PWM_OC2
+      description: PWM_OC2.
+      bit_offset: 5
+      bit_size: 1
+    - name: TOGGLE
+      description: TOGGLE.
+      bit_offset: 15
+      bit_size: 1
+fieldset/SWEVGR:
+  description: event generation register.
+  bit_size: 16
+  fields:
+    - name: UG
+      description: Update generation.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1G
+      description: Capture/compare 1 generation.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2G
+      description: Capture/compare 2 generation.
+      bit_offset: 2
+      bit_size: 1
+    - name: TG
+      description: Trigger generation.
+      bit_offset: 6
+      bit_size: 1

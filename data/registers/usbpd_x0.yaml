@@ -1,0 +1,358 @@
+block/USBPD:
+  description: USBPD configuration.
+  items:
+  - name: CONFIG
+    description: PD interrupt enable register.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: CONFIG
+  - name: BMC_CLK_CNT
+    description: BMC sampling clock counter.
+    byte_offset: 2
+    bit_size: 16
+    fieldset: BMC_CLK_CNT
+  - name: CONTROL
+    description: PD Send and receive enable register.
+    byte_offset: 4
+    bit_size: 8
+    fieldset: CONTROL
+  - name: TX_SEL
+    description: SOP port selection register.
+    byte_offset: 5
+    bit_size: 8
+    fieldset: TX_SEL
+  - name: BMC_TX_SZ
+    description: PD send length register.
+    byte_offset: 6
+    bit_size: 16
+    fieldset: BMC_TX_SZ
+  - name: DATA_BUF
+    description: DMA cache data register.
+    byte_offset: 8
+    bit_size: 8
+    fieldset: DATA_BUF
+  - name: STATUS
+    description: PD interrupt flag register.
+    byte_offset: 9
+    bit_size: 8
+    fieldset: STATUS
+  - name: BMC_BYTE_CNT
+    description: Byte counter.
+    byte_offset: 10
+    bit_size: 16
+    fieldset: BMC_BYTE_CNT
+  - name: PORT_CC1
+    description: CC1 port control register.
+    byte_offset: 12
+    bit_size: 16
+    fieldset: PORT_CC1
+  - name: PORT_CC2
+    description: CC2 port control register.
+    byte_offset: 14
+    bit_size: 16
+    fieldset: PORT_CC2
+  - name: DMA
+    description: PD buffer start address register.
+    byte_offset: 16
+    bit_size: 16
+    fieldset: DMA
+fieldset/BMC_BYTE_CNT:
+  description: Byte counter.
+  bit_size: 16
+  fields:
+  - name: BMC_BYTE_CNT
+    description: BMC_BYTE_CNT value.
+    bit_offset: 0
+    bit_size: 9
+fieldset/BMC_CLK_CNT:
+  description: BMC sampling clock counter.
+  bit_size: 16
+  fields:
+  - name: BMC_CLK_CNT
+    description: R/T counter.
+    bit_offset: 0
+    bit_size: 9
+fieldset/BMC_TX_SZ:
+  description: PD send length register.
+  bit_size: 16
+  fields:
+  - name: BMC_TX_SZ
+    description: BMC_TX_SZ value.
+    bit_offset: 0
+    bit_size: 9
+fieldset/CONFIG:
+  description: PD interrupt enable register.
+  bit_size: 16
+  fields:
+  - name: PD_ALL_CLR
+    description: PD ITClear.
+    bit_offset: 1
+    bit_size: 1
+  - name: CC_SEL
+    description: PD Commutation port.
+    bit_offset: 2
+    bit_size: 1
+    enum: CC_SEL
+  - name: PD_DMA_EN
+    description: PD DMA Enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: PD_RST_EN
+    description: PD RST Enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: WAKE_POLAR
+    description: wakeup polarity.
+    bit_offset: 5
+    bit_size: 1
+  - name: IE_PD_IO
+    description: IO Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: IE_RX_BIT
+    description: bit interrupt Enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: IE_RX_BYTE
+    description: Receive byte register.
+    bit_offset: 12
+    bit_size: 1
+  - name: IE_RX_ACT
+    description: Receive complete register.
+    bit_offset: 13
+    bit_size: 1
+  - name: IE_RX_RESET
+    description: Receive complete rst register.
+    bit_offset: 14
+    bit_size: 1
+  - name: IE_TX_END
+    description: transfer complete register.
+    bit_offset: 15
+    bit_size: 1
+fieldset/CONTROL:
+  description: PD Send and receive enable register.
+  bit_size: 8
+  fields:
+  - name: PD_TX_EN
+    description: PD_TX_EN value.
+    bit_offset: 0
+    bit_size: 1
+  - name: BMC_START
+    description: BMC_START value.
+    bit_offset: 1
+    bit_size: 1
+  - name: DATA_FLAG
+    description: DATA_FLAG value.
+    bit_offset: 5
+    bit_size: 1
+  - name: TX_BIT_BACK
+    description: TX_BIT_BACK value.
+    bit_offset: 6
+    bit_size: 1
+  - name: BMC_BYTE_HI
+    description: BMC_BYTE_HI value.
+    bit_offset: 7
+    bit_size: 1
+fieldset/DATA_BUF:
+  description: DMA cache data register.
+  bit_size: 8
+  fields:
+  - name: DATA_BUF
+    description: DATA_BUF value.
+    bit_offset: 0
+    bit_size: 8
+fieldset/DMA:
+  description: PD buffer start address register.
+  bit_size: 16
+  fields:
+  - name: USBPD_DMA_ADDR
+    description: USBPD_DMA_ADDR value.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PORT_CC1:
+  description: CC1 port control register.
+  bit_size: 16
+  fields:
+  - name: PA_CC_AI
+    description: PA_CC1_AI value.
+    bit_offset: 0
+    bit_size: 1
+  - name: CC_PD
+    description: CC port pull-down resistor enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: CC_PU
+    description: CC1_PU value.
+    bit_offset: 2
+    bit_size: 2
+    enum: PORT_CC1_CC_PU
+  - name: CC_LVE
+    description: CC1_LV0 value.
+    bit_offset: 4
+    bit_size: 1
+  - name: CC_CE
+    description: CC1_CE value.
+    bit_offset: 5
+    bit_size: 3
+    enum: PORT_CC1_CC_CE
+fieldset/PORT_CC2:
+  description: CC2 port control register.
+  bit_size: 16
+  fields:
+  - name: PA_CC_AI
+    description: PA_CC2_AI value.
+    bit_offset: 0
+    bit_size: 1
+  - name: CC_PU
+    description: CC2_PU value.
+    bit_offset: 2
+    bit_size: 2
+    enum: PORT_CC2_CC_PU
+  - name: CC_LVE
+    description: CC2_LV0 value.
+    bit_offset: 4
+    bit_size: 1
+  - name: CC_CE
+    description: CC2_CE value.
+    bit_offset: 5
+    bit_size: 3
+    enum: PORT_CC2_CC_CE
+fieldset/STATUS:
+  description: PD interrupt flag register.
+  bit_size: 8
+  fields:
+  - name: BMC_AUX
+    description: BMC_AUX value.
+    bit_offset: 0
+    bit_size: 2
+  - name: BUF_ERR
+    description: BUF_ERR value.
+    bit_offset: 2
+    bit_size: 1
+  - name: IF_RX_BIT
+    description: IF_RX_BIT value.
+    bit_offset: 3
+    bit_size: 1
+  - name: IF_RX_BYTE
+    description: IF_RX_BYTE value.
+    bit_offset: 4
+    bit_size: 1
+  - name: IF_RX_ACT
+    description: IF_RX_ACT value.
+    bit_offset: 5
+    bit_size: 1
+  - name: IF_RX_RESET
+    description: IF_RX_RESET value.
+    bit_offset: 6
+    bit_size: 1
+  - name: IF_TX_END
+    description: IF_TX_END value.
+    bit_offset: 7
+    bit_size: 1
+fieldset/TX_SEL:
+  description: SOP port selection register.
+  bit_size: 8
+  fields:
+  - name: TX_SEL1
+    description: TX_SEL1 value.
+    bit_offset: 0
+    bit_size: 1
+  - name: TX_SEL2
+    description: TX_SEL2 value.
+    bit_offset: 2
+    bit_size: 2
+  - name: TX_SEL3
+    description: TX_SEL3 value.
+    bit_offset: 4
+    bit_size: 2
+  - name: TX_SEL4
+    description: TX_SEL4 value.
+    bit_offset: 6
+    bit_size: 2
+enum/CC_SEL:
+  bit_size: 1
+  variants:
+  - name: CC1
+    description: Select CC1.
+    value: 0
+  - name: CC2
+    description: Select CC2.
+    value: 1
+enum/PORT_CC1_CC_CE:
+  bit_size: 3
+  variants:
+  - name: Closed
+    description: Closed.
+    value: 0
+  - name: V0_22
+    description: 0.22V.
+    value: 2
+  - name: V0_43
+    description: 0.43V.
+    value: 3
+  - name: V0_55
+    description: 0.55V.
+    value: 4
+  - name: V0_66
+    description: 0.66V.
+    value: 5
+  - name: V0_96
+    description: 0.96V.
+    value: 6
+  - name: V1_23
+    description: 1.23V.
+    value: 7
+enum/PORT_CC1_CC_PU:
+  bit_size: 2
+  variants:
+  - name: Closed
+    description: No pull up current.
+    value: 0
+  - name: uA330
+    description: 330uA.
+    value: 1
+  - name: uA180
+    description: 180uA.
+    value: 2
+  - name: uA80
+    description: 80uA.
+    value: 3
+enum/PORT_CC2_CC_CE:
+  bit_size: 3
+  variants:
+  - name: Closed
+    description: Closed.
+    value: 0
+  - name: V0_22
+    description: 0.22V.
+    value: 2
+  - name: V0_43
+    description: 0.43V.
+    value: 3
+  - name: V0_55
+    description: 0.55V.
+    value: 4
+  - name: V0_66
+    description: 0.66V.
+    value: 5
+  - name: V0_96
+    description: 0.96V.
+    value: 6
+  - name: V1_23
+    description: 1.23V.
+    value: 7
+enum/PORT_CC2_CC_PU:
+  bit_size: 2
+  variants:
+  - name: Closed
+    description: No pull up current.
+    value: 0
+  - name: uA330
+    description: 330uA.
+    value: 1
+  - name: uA180
+    description: 180uA.
+    value: 2
+  - name: uA80
+    description: 80uA.
+    value: 3

@@ -1,0 +1,248 @@
+block/OPA:
+  description: OPA configuration.
+  items:
+  - name: CFGR1
+    description: OPA Configuration register.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: CFGR1
+  - name: CFGR2
+    description: OPA Configuration register.
+    byte_offset: 2
+    bit_size: 16
+    fieldset: CFGR2
+  - name: CTLR1
+    description: OPA Control1 register.
+    byte_offset: 4
+    fieldset: CTLR1
+  - name: CTLR2
+    description: OPA Control2 register.
+    byte_offset: 8
+    fieldset: CTLR2
+  - name: OPA_KEY
+    description: OPA unlock key register.
+    byte_offset: 12
+    fieldset: OPA_KEY
+  - name: CMP_KEY
+    description: CMP unlock key register.
+    byte_offset: 16
+    fieldset: CMP_KEY
+  - name: POLL_KEY
+    description: POLL unlock key register.
+    byte_offset: 20
+    fieldset: POLL_KEY
+fieldset/CFGR1:
+  description: OPA Configuration register.
+  bit_size: 16
+  fields:
+  - name: POLL_EN1
+    description: POLL_EN1 Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: POLL_EN2
+    description: POLL_EN2 Enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: BKIN_EN1
+    description: BKIN_EN1 Enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: BKIN_EN2
+    description: BKIN_EN2 Enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: RST_EN1
+    description: RST_EN1 Enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: RST_EN2
+    description: RST_EN2 Enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: BKIN_SEL
+    description: BKIN_SEL select.
+    bit_offset: 6
+    bit_size: 1
+  - name: POLL_LOCK
+    description: POLL_LOCK select.
+    bit_offset: 7
+    bit_size: 1
+  - name: IE_OUT1
+    description: IE_OUT1 Enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: IE_OUT2
+    description: IE_OUT2 Enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: IE_CNT
+    description: IE_CNT Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: NMI_EN
+    description: NMI_EN Enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: IF_OUT1
+    description: IF_OUT1 Enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: IF_OUT2
+    description: IF_OUT2 Enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: IF_CNT
+    description: IF_CNT Configuration.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR2:
+  description: OPA Configuration register.
+  bit_size: 16
+  fields:
+  - name: POLL_VLU
+    description: POLL_VLU Configuration.
+    bit_offset: 0
+    bit_size: 9
+  - name: POLL1_NUM
+    description: POLL1_NUM Configuration.
+    bit_offset: 9
+    bit_size: 2
+  - name: POLL2_NUM
+    description: POLL2_NUM Configuration.
+    bit_offset: 11
+    bit_size: 2
+fieldset/CMP_KEY:
+  description: CMP unlock key register.
+  fields:
+  - name: CMP_KEY
+    description: CMP_KEY value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CTLR1:
+  description: OPA Control1 register.
+  fields:
+  - name: EN1
+    description: OPA1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: OPA1 mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: PSEL1
+    description: Input select.
+    bit_offset: 3
+    bit_size: 2
+  - name: FB_EN1
+    description: res inside enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: NSEL1
+    description: output select.
+    bit_offset: 6
+    bit_size: 3
+  - name: EN2
+    description: OPA2 enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: MODE2
+    description: OPA2 mode.
+    bit_offset: 17
+    bit_size: 1
+  - name: PSEL2
+    description: Input select.
+    bit_offset: 19
+    bit_size: 2
+  - name: FB_EN2
+    description: res inside enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: NSEL2
+    description: output select.
+    bit_offset: 22
+    bit_size: 3
+  - name: OPA_LOCK
+    description: OPA_LOCK.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR2:
+  description: OPA Control2 register.
+  fields:
+  - name: EN1
+    description: CMP1 Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: CMP1 OUT Selection.
+    bit_offset: 1
+    bit_size: 1
+  - name: NSEL1
+    description: CMP1 IN_N Selection.
+    bit_offset: 2
+    bit_size: 1
+  - name: PSEL1
+    description: CMP1 IN_P Selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: HYEN1
+    description: CMP1 HYEN Enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: EN2
+    description: CMP2 Enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: MODE2
+    description: CMP2 OUT Selection.
+    bit_offset: 6
+    bit_size: 1
+  - name: NSEL2
+    description: CMP2 IN_N Selection.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSEL2
+    description: CMP2 IN_P Selection.
+    bit_offset: 8
+    bit_size: 1
+  - name: HYEN2
+    description: CMP2 HYEN Enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: EN3
+    description: CMP3 Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: MODE3
+    description: CMP3 OUT Selection.
+    bit_offset: 11
+    bit_size: 1
+  - name: NSEL3
+    description: CMP3 IN_N Selection.
+    bit_offset: 12
+    bit_size: 1
+  - name: PSEL3
+    description: CMP3 IN_P Selection.
+    bit_offset: 13
+    bit_size: 1
+  - name: HYEN3
+    description: CMP3 HYEN Enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: CMP_LOCK
+    description: CMP_LOCK.
+    bit_offset: 31
+    bit_size: 1
+fieldset/OPA_KEY:
+  description: OPA unlock key register.
+  fields:
+  - name: OPA_KEY
+    description: OPA_KEY value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/POLL_KEY:
+  description: POLL unlock key register.
+  fields:
+  - name: POLL_KEY
+    description: POLL_KEY value.
+    bit_offset: 0
+    bit_size: 32
