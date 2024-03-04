@@ -187,6 +187,9 @@ impl Gen {
         let data = data.replace("cortex_m :: interrupt ", "crate ");
         let data = data.replace("cortex_m", "riscv"); // FIXME
 
+        // match riscv-rt interrupt name
+        let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
+
         // Remove inner attributes like #![no_std]
         let data = Regex::new("# *! *\\[.*\\]").unwrap().replace_all(&data, "");
 
