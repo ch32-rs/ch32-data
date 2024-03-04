@@ -150,9 +150,9 @@ cores:
           reset:
             register: APB2PRSTR
             field: USART1RST
-        af_remap:
+        remap:
           register: PCFR1
-          field: USART1_RM
+          field: USART1RM
         pins:
           - { pin: "PB11", signal: "RX", remap: 0 }
           - { pin: "PC16", signal: "CTS", remap: 0 }
@@ -200,9 +200,9 @@ cores:
           reset:
             register: APB1PRSTR
             field: USART2RST
-        af_remap:
+        remap:
           register: PCFR1
-          field: USART2_RM
+          field: USART2RM
         pins:
           # 000:映射(RX/PA3，CTS/PA0，TX/PA2，CK/PA4， RTS/PA1)
           - { pin: "PA3", signal: "RX", remap: 0 }
@@ -260,9 +260,9 @@ cores:
           reset:
             register: APB1PRSTR
             field: USART3RST
-        af_remap:
+        remap:
           register: PCFR1
-          field: USART3_RM
+          field: USART3RM
         pins:
           # 00:映射(RX/PB4，CTS/PB6，TX/PB3，CK/PB5， RTS/PB7)
           - { pin: "PB4", signal: "RX", remap: 0 }
@@ -304,13 +304,13 @@ cores:
           kernel_clock: HCLK
           enable:
             register: APB1PCENR
-            field: USART4EN
+            field: UART4EN
           reset:
             register: APB1PRSTR
             field: USART4RST
-        af_remap:
+        remap:
           register: PCFR1
-          field: USART4_RM
+          field: USART4RM
         pins:
           # 000:映射(RX/PB1，CTS/PB15，TX/PB0，CK/PB2， RTS/PA8)
           - { pin: "PB1", signal: "RX", remap: 0 }
@@ -441,7 +441,7 @@ cores:
           bus_clock: HCLK
           kernel_clock: HCLK
           enable:
-            register: APB2PCENR
+            register: AHBPCENR
             field: USBPD # FIXME: wrong naming, should be USBPDEN
           reset:
             register: AHBRSTR
