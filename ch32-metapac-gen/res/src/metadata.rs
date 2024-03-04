@@ -173,6 +173,7 @@ pub struct Peripheral {
     pub address: u64,
     pub registers: Option<PeripheralRegisters>,
     pub rcc: Option<PeripheralRcc>,
+    pub remap: Option<PeripheralRemapRegister>,
     pub pins: &'static [PeripheralPin],
     pub dma_channels: &'static [PeripheralDmaChannel],
     pub interrupts: &'static [PeripheralInterrupt],
@@ -208,6 +209,12 @@ pub struct PeripheralRccRegister {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
+pub struct PeripheralRemapRegister {
+    pub register: &'static str,
+    pub field: &'static str,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
 pub enum PeripheralRccKernelClock {
     Clock(&'static str),
     Mux(PeripheralRccRegister),
@@ -225,7 +232,7 @@ pub enum StopMode {
 pub struct PeripheralPin {
     pub pin: &'static str,
     pub signal: &'static str,
-    pub af: Option<u8>,
+    pub remap: Option<u8>,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]

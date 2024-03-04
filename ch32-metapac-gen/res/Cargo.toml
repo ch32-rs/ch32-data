@@ -1,10 +1,16 @@
 [package]
 name = "ch32-metapac"
-version = "15.0.0"
+version = "0.0.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/ch32-rs/ch32-data"
+homepage = "https://github.com/ch32-rs/ch32-data"
 description = "Peripheral Access Crate (PAC) for all WCH's MCU chips, including metadata."
+authors = ["Andelf <andelf@gmail.com>"]
+documentation = "https://docs.rs/ch32-metapac"
+categories = ["embedded", "no-std", "hardware-support"]
+keywords = ["wch", "ch32", "svd2rust", "no_std", "embedded"]
+readme = "README.md"
 
 # `cargo publish` is unable to figure out which .rs files are needed due to the include! magic.
 include = ["**/*.rs", "**/*.x", "Cargo.toml"]
@@ -27,6 +33,7 @@ flavors = [
 
 [dependencies]
 riscv = "0.11.1"
+# riscv-rt = { version = "0.12.2", optional = true }
 vcell = "0.1"
 
 [features]
@@ -37,7 +44,7 @@ default = ["pac"]
 pac = []
 
 # Build the chip metadata.
-# If set, a const `stm32_metapac::METADATA` will be exported, containing all the
+# If set, a const `ch32_metapac::METADATA` will be exported, containing all the
 # metadata for the currently selected chip.
 metadata = []
 

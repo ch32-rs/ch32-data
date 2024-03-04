@@ -182,6 +182,10 @@ impl Gen {
 
         let data = generate::render(&ir, &gen_opts()).unwrap().to_string();
         let data = data.replace("] ", "]\n");
+        // FIXME: conversion
+        let data = data.replace("pub use cortex_m_rt :: interrupt ;", "");
+        let data = data.replace("cortex_m :: interrupt ", "crate ");
+        let data = data.replace("cortex_m", "riscv"); // FIXME
 
         // Remove inner attributes like #![no_std]
         let data = Regex::new("# *! *\\[.*\\]").unwrap().replace_all(&data, "");

@@ -93,6 +93,8 @@ pub mod chip {
             pub registers: Option<peripheral::Registers>,
             #[serde(skip_serializing_if = "Option::is_none")]
             pub rcc: Option<peripheral::Rcc>,
+            #[serde(skip_serializing_if = "Option::is_none")]
+            pub remap: Option<peripheral::Remap>,
             #[serde(default, skip_serializing_if = "Vec::is_empty")]
             pub pins: Vec<peripheral::Pin>,
             #[serde(skip_serializing_if = "Option::is_none")]
@@ -159,6 +161,14 @@ pub mod chip {
                     pub register: String,
                     pub field: String,
                 }
+            }
+
+            #[derive(
+                Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+            )]
+            pub struct Remap {
+                pub register: String,
+                pub field: String,
             }
 
             #[derive(

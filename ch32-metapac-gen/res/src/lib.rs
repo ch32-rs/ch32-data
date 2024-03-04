@@ -14,3 +14,10 @@ pub mod metadata {
     include!("metadata.rs");
     include!(env!("CH32_METAPAC_METADATA_PATH"));
 }
+
+pub unsafe trait InterruptNumber: Copy {
+    /// Return the interrupt number associated with this variant.
+    ///
+    /// See trait documentation for safety requirements.
+    fn number(self) -> u16;
+}

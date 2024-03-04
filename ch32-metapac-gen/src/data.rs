@@ -376,6 +376,8 @@ pub struct Peripheral {
     #[serde(default)]
     pub rcc: Option<PeripheralRcc>,
     #[serde(default)]
+    pub remap: Option<PeripheralRemapRegister>,
+    #[serde(default)]
     pub pins: Vec<PeripheralPin>,
     #[serde(default)]
     pub dma_channels: Vec<PeripheralDmaChannel>,
@@ -392,6 +394,7 @@ impl std::fmt::Debug for Peripheral {
             .field("address", &format_args!("{:#x}", self.address))
             .field("registers", &self.registers)
             .field("rcc", &self.rcc)
+            .field("remap", &self.remap)
             .field("pins", &self.pins)
             .field("dma_channels", &self.dma_channels)
             .field("interrupts", &self.interrupts)
@@ -430,6 +433,12 @@ pub struct PeripheralRccRegister {
     pub field: String,
 }
 
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct PeripheralRemapRegister {
+    pub register: String,
+    pub field: String,
+}
+
 #[derive(EnumDebug, Eq, PartialEq, Clone, Deserialize, Default)]
 pub enum StopMode {
     #[default]
@@ -442,7 +451,7 @@ pub enum StopMode {
 pub struct PeripheralPin {
     pub pin: String,
     pub signal: String,
-    pub af: Option<u8>,
+    pub remap: Option<u8>,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
