@@ -50,14 +50,16 @@ EXTI15_8: 40
 EXTI25_16: 41
 # 42 - USART3 global interrupt
 USART3: 42
-# 43 - UART4 global interrupt
-UART4: 43
+# 43 - UART4 global interrupt - renamed
+USART4: 43
 # 44 - DMA Channel8 global interrupt
 DMA_CHANNEL8: 44
 # 45 - USBFS
 USBFS: 45
 # 46 - USBFS_WKUP
 USBFS_WKUP: 46
+# 47 - PIOC
+PIOC: 47
 # 49 - USBPD global interrupt
 USBPD: 49
 # 50 - USBPD_WKUP global interrupt
