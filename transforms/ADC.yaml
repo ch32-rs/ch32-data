@@ -1,0 +1,44 @@
+transforms:
+  - !MakeFieldArray
+    fieldsets: IOFR\d+
+    from: JOFFSET\d+
+    to: JOFFSET
+
+  - !MakeFieldArray
+    fieldsets: ISQR
+    from: JSQ\d+
+    to: JSQ
+
+  - !MakeFieldArray
+    fieldsets: RSQR\d+
+    from: SQ\d+
+    to: SQ
+
+  - !MakeFieldArray
+    fieldsets: SAMPTR\d
+    from: SMP\d+
+    to: SMP
+
+  - !MergeFieldsets
+    from: IDATAR\d
+    to: IDATAR
+  - !MergeFieldsets
+    from: IOFR\d
+    to: IOFR
+
+  # if they are the same, merge the fieldsets
+  - !MakeRegisterArray
+    blocks: ADC
+    from: IOFR\d+
+    to: IOFR
+
+  # the first RSQR1 is different from the others
+  #- !MakeRegisterArray
+  #  blocks: ADC
+  #  from: RSQR\d+
+  #  to: RSQR
+
+  - !MakeRegisterArray
+    blocks: ADC
+    from: IDATAR\d+
+    to: IDATAR

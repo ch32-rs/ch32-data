@@ -1,0 +1,9 @@
+transforms:
+  - !MakeRegisterArray
+    blocks: PFIC
+    from: IPRIOR\d+
+    to: IPRIOR
+  - !Delete
+    from: STK_.*
+  - !DeleteFieldsets
+    from: STK_.*

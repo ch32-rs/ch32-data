@@ -1,0 +1,6 @@
+transforms:
+  - !MakeFieldArray
+    fieldsets: (INDR|BCR|BSHR|BSXR|CFGHR|CFGLR|CFGXR|LCKR|OUTDR)
+    from: (IDR|ODR|BR|BS|MODE|CNF|LCK)\d+
+    to: $1
+  - !Fuck

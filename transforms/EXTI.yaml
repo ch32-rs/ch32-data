@@ -1,0 +1,9 @@
+transforms:
+  - !MakeFieldArray
+    fieldsets: (EVENR|FTENR|INTENR|INTFR|RTENR)
+    from: (MR|TR|IF)\d+
+    to: $1
+  - !MakeFieldArray
+    fieldsets: SWIEVR
+    from: SWIER\d+
+    to: SWIE
