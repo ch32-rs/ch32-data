@@ -185,7 +185,7 @@ fieldset/PORT_CC1:
     description: CC1_PU value.
     bit_offset: 2
     bit_size: 2
-    enum: PORT_CC1_CC_PU
+    enum: PORT_CC_PU
   - name: CC_LVE
     description: CC1_LV0 value.
     bit_offset: 4
@@ -194,7 +194,7 @@ fieldset/PORT_CC1:
     description: CC1_CE value.
     bit_offset: 5
     bit_size: 3
-    enum: PORT_CC1_CC_CE
+    enum: PORT_CC_CE
 fieldset/PORT_CC2:
   description: CC2 port control register.
   bit_size: 16
@@ -207,7 +207,7 @@ fieldset/PORT_CC2:
     description: CC2_PU value.
     bit_offset: 2
     bit_size: 2
-    enum: PORT_CC2_CC_PU
+    enum: PORT_CC_PU
   - name: CC_LVE
     description: CC2_LV0 value.
     bit_offset: 4
@@ -216,7 +216,7 @@ fieldset/PORT_CC2:
     description: CC2_CE value.
     bit_offset: 5
     bit_size: 3
-    enum: PORT_CC2_CC_CE
+    enum: PORT_CC_CE
 fieldset/STATUS:
   description: PD interrupt flag register.
   bit_size: 8
@@ -278,7 +278,7 @@ enum/CC_SEL:
   - name: CC2
     description: Select CC2.
     value: 1
-enum/PORT_CC1_CC_CE:
+enum/PORT_CC_CE:
   bit_size: 3
   variants:
   - name: Closed
@@ -302,46 +302,7 @@ enum/PORT_CC1_CC_CE:
   - name: V1_23
     description: 1.23V.
     value: 7
-enum/PORT_CC1_CC_PU:
-  bit_size: 2
-  variants:
-  - name: Closed
-    description: No pull up current.
-    value: 0
-  - name: uA330
-    description: 330uA.
-    value: 1
-  - name: uA180
-    description: 180uA.
-    value: 2
-  - name: uA80
-    description: 80uA.
-    value: 3
-enum/PORT_CC2_CC_CE:
-  bit_size: 3
-  variants:
-  - name: Closed
-    description: Closed.
-    value: 0
-  - name: V0_22
-    description: 0.22V.
-    value: 2
-  - name: V0_43
-    description: 0.43V.
-    value: 3
-  - name: V0_55
-    description: 0.55V.
-    value: 4
-  - name: V0_66
-    description: 0.66V.
-    value: 5
-  - name: V0_96
-    description: 0.96V.
-    value: 6
-  - name: V1_23
-    description: 1.23V.
-    value: 7
-enum/PORT_CC2_CC_PU:
+enum/PORT_CC_PU:
   bit_size: 2
   variants:
   - name: Closed

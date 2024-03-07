@@ -28,10 +28,15 @@ case "$CMD" in
 
         for f in `ls svd/ch32*`; do
             echo $f
+            svd_path=$f
             f=${f#"svd/ch32"}
             f=${f%".svd.patched"}
             echo -n processing $f ...
-            if chiptool extract-peripheral --svd svd/ch32$f.svd.patched --peripheral $peri $@ > tmp/$peri/$f.yaml 2> tmp/$peri/$f.err; then
+            if test -f  transforms/$peri.yaml; then
+                trans_args="--transform transforms/$peri.yaml"
+            fi
+
+            if chiptool extract-peripheral $trans_args --svd $svd_path --peripheral $peri $@ > tmp/$peri/$f.yaml 2> tmp/$peri/$f.err; then
                 rm tmp/$peri/$f.err
                 echo OK
             else
