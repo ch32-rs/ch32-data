@@ -1,4 +1,4 @@
-block/USBPD:
+block/USB_PD:
   description: USBPD configuration.
   items:
   - name: CONFIG
@@ -45,12 +45,12 @@ block/USBPD:
     description: CC1 port control register.
     byte_offset: 12
     bit_size: 16
-    fieldset: PORT_CC1
+    fieldset: PORT_CC
   - name: PORT_CC2
     description: CC2 port control register.
     byte_offset: 14
     bit_size: 16
-    fieldset: PORT_CC2
+    fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.
     byte_offset: 16
@@ -169,51 +169,25 @@ fieldset/DMA:
     description: USBPD_DMA_ADDR value.
     bit_offset: 0
     bit_size: 16
-fieldset/PORT_CC1:
+fieldset/PORT_CC:
   description: CC1 port control register.
   bit_size: 16
   fields:
   - name: PA_CC_AI
-    description: PA_CC1_AI value.
+    description: CC port comparator analog input.
     bit_offset: 0
     bit_size: 1
-  - name: CC_PD
-    description: CC port pull-down resistor enable.
-    bit_offset: 1
-    bit_size: 1
   - name: CC_PU
-    description: CC1_PU value.
+    description: CC port pull-up current.
     bit_offset: 2
     bit_size: 2
     enum: PORT_CC_PU
   - name: CC_LVE
-    description: CC1_LV0 value.
+    description: CC port level 0 voltage.
     bit_offset: 4
     bit_size: 1
   - name: CC_CE
-    description: CC1_CE value.
-    bit_offset: 5
-    bit_size: 3
-    enum: PORT_CC_CE
-fieldset/PORT_CC2:
-  description: CC2 port control register.
-  bit_size: 16
-  fields:
-  - name: PA_CC_AI
-    description: PA_CC2_AI value.
-    bit_offset: 0
-    bit_size: 1
-  - name: CC_PU
-    description: CC2_PU value.
-    bit_offset: 2
-    bit_size: 2
-    enum: PORT_CC_PU
-  - name: CC_LVE
-    description: CC2_LV0 value.
-    bit_offset: 4
-    bit_size: 1
-  - name: CC_CE
-    description: CC2_CE value.
+    description: CC port comparator enable.
     bit_offset: 5
     bit_size: 3
     enum: PORT_CC_CE

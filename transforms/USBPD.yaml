@@ -1,4 +1,18 @@
 transforms:
+  - !Rename
+    from: USBPD
+    to: USB_PD
+  - !MergeEnums
+    from: PORT_CC\d_CC_CE
+    to: PORT_CC_CE
+    check: Layout
+  - !MergeEnums
+    from: PORT_CC\d_CC_PU
+    to: PORT_CC_PU
+    check: Layout
+  - !MergeFieldsets
+    from: PORT_CC\d
+    to: PORT_CC
   - !MergeEnums
     from: PORT_CC\d_CC_CE
     to: PORT_CC_CE
