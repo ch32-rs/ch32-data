@@ -67,19 +67,22 @@ fn main() -> anyhow::Result<()> {
 
     //stopwatch.section("Parsing other stuff");
 
-    // stopwatch.section("Parsing registers");
+    stopwatch.section("Parsing registers");
     let registers = registers::Registers::parse()?;
     registers.write()?;
 
     let data_dir = Path::new("./data");
 
-    let chip_meta_files: Vec<_> = std::fs::read_dir(data_dir.join("chips"))
+    stopwatch.section("Parsing chips");
+
+    let mut chip_meta_files: Vec<_> = std::fs::read_dir(data_dir.join("chips"))
         .unwrap()
         .filter_map(|res| res.unwrap().file_name().to_str().map(|s| s.to_string()))
         .filter(|s| s.ends_with(".yaml"))
         .filter(|s| s.starts_with("CH32"))
         .map(|s| s.strip_suffix(".yaml").unwrap().to_string())
         .collect();
+    chip_meta_files.sort();
 
     println!("chips: {:?}", chip_meta_files);
 
@@ -140,7 +143,11 @@ fn main() -> anyhow::Result<()> {
                 //core.dma_channels.extend(dma);
             }
         }
-        println!("chip: {:#?}", chip);
+        println!(
+            "chip: {}, peripherals: {}",
+            chip.name,
+            chip.cores[0].peripherals.len()
+        );
         let dump = serde_json::to_string_pretty(&chip)?;
         std::fs::write(format!("build/data/chips/{name}.json"), dump)?;
     }
@@ -163,7 +170,6 @@ fn main() -> anyhow::Result<()> {
     // stopwatch.section("Parsing GPIO AF");
     // let af = gpio_af::Af::parse()?;
 
-    stopwatch.section("Parsing chip groups");
     //let (chips, chip_groups) = chips::parse_groups()?;
 
     //stopwatch.section("Processing chips");
