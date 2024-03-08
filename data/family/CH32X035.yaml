@@ -1,0 +1,23 @@
+- name: USBPD
+  address: 0x40027000
+  registers:
+    kind: usbpd
+    version: x0
+    block: USB_PD
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: USBPD # FIXME: wrong naming, should be USBPDEN
+    reset:
+      register: AHBRSTR
+      field: USBPDRST
+  pins:
+    - pin: PC14
+      signal: CC1
+    - pin: PC15
+      signal: CC2
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBPD

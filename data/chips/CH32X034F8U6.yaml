@@ -28,15 +28,15 @@ docs:
     url: http://www.wch.cn/products/CH32X035.html
 cores:
   - name: qingke-v4
-    peripherals:
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32X0.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32X0.yaml"
+    include_interrupts: "../interrupts/ch32x0.yaml"
+    interrupts: []
+    dma_channels: []
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
 _raw:
   UART: "4"
   RTC: "-"

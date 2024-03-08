@@ -1,0 +1,257 @@
+block/PIOC:
+  description: PIOC registers.
+  items:
+    - name: STATUS
+      description: SFR_STATUS_REG.
+      byte_offset: 3
+      access: Read
+      bit_size: 8
+    - name: INDIR_ADDR
+      description: PIOC indirect address register.
+      byte_offset: 4
+      bit_size: 8
+    - name: TMR0_COUNT
+      description: PIOC timer0 count register.
+      byte_offset: 5
+      bit_size: 8
+    - name: TMR0_CTRL
+      description: PIOC timer0 control register.
+      byte_offset: 6
+      bit_size: 8
+      fieldset: TMR0_CTRL
+    - name: TMR0_INIT
+      description: PIOC timer0 initial value register.
+      byte_offset: 7
+      bit_size: 8
+    - name: BIT_CYCLE
+      description: PIOC bit cycle register.
+      byte_offset: 8
+      bit_size: 8
+      fieldset: BIT_CYCLE
+    - name: INDIR_ADDR2
+      description: PIOC indirect address register2.
+      byte_offset: 9
+      bit_size: 8
+    - name: PORT_DIR
+      description: PIOC port direction register.
+      byte_offset: 10
+      bit_size: 8
+      fieldset: PORT_DIR
+    - name: PORT_IO
+      description: PIOC port input/output register.
+      byte_offset: 11
+      bit_size: 8
+      fieldset: PORT_IO
+    - name: BIT_CONFIG
+      description: PIOC bit configuration register.
+      byte_offset: 12
+      bit_size: 8
+      fieldset: BIT_CONFIG
+    - name: SYS_CFG
+      description: PIOC system configuration register.
+      byte_offset: 28
+      bit_size: 8
+      fieldset: SYS_CFG
+    - name: CTRL_RD
+      description: PIOC control read register.
+      byte_offset: 29
+      bit_size: 8
+    - name: CTRL_WR
+      description: PIOC control write register. SFR_CTRL_WR. master read-write, host read-only.
+      byte_offset: 30
+      bit_size: 8
+    - name: DATA_EXCH
+      description: PIOC data exchange register.
+      byte_offset: 31
+      bit_size: 8
+    - name: DATA_REG
+      description: PIOC data register%s.
+      array:
+        len: 32
+        stride: 1
+      byte_offset: 32
+      bit_size: 8
+fieldset/BIT_CONFIG:
+  description: PIOC bit configuration register.
+  bit_size: 8
+  fields:
+    - name: CYC_CNT3
+      description: CYC_CNT3.
+      bit_offset: 0
+      bit_size: 1
+    - name: CYC_CNT4
+      description: CYC_CNT4.
+      bit_offset: 1
+      bit_size: 1
+    - name: CYC_CNT5
+      description: CYC_CNT5.
+      bit_offset: 2
+      bit_size: 1
+    - name: CYC_CNT6
+      description: CYC_CNT6.
+      bit_offset: 3
+      bit_size: 1
+    - name: CYC_TAIL
+      description: CYC_TAIL.
+      bit_offset: 4
+      bit_size: 1
+    - name: IN_EDGE
+      description: IN_EDGE, 引脚输入电平采样时点选择.
+      bit_offset: 5
+      bit_size: 1
+    - name: CODE_MOD
+      description: CODE_MOD, 编码位的调制方式.
+      bit_offset: 6
+      bit_size: 1
+    - name: TX_EN
+      description: TX_EN, 编码位的发送使能.
+      bit_offset: 7
+      bit_size: 1
+fieldset/BIT_CYCLE:
+  description: PIOC bit cycle register.
+  bit_size: 8
+  fields:
+    - name: CYCLE
+      description: CYCLE.
+      bit_offset: 0
+      bit_size: 6
+    - name: TX_O0
+      description: TX_O0.
+      bit_offset: 7
+      bit_size: 1
+fieldset/PORT_DIR:
+  description: PIOC port direction register.
+  bit_size: 8
+  fields:
+    - name: DIR0
+      description: DIR0.
+      bit_offset: 0
+      bit_size: 1
+    - name: DIR1
+      description: DIR1.
+      bit_offset: 1
+      bit_size: 1
+    - name: PU0
+      description: PU0.
+      bit_offset: 2
+      bit_size: 1
+    - name: PU1
+      description: PU1.
+      bit_offset: 3
+      bit_size: 1
+    - name: MOD0
+      description: MOD0.
+      bit_offset: 4
+      bit_size: 1
+    - name: MOD1
+      description: MOD1.
+      bit_offset: 5
+      bit_size: 1
+    - name: MOD2
+      description: MOD2.
+      bit_offset: 6
+      bit_size: 1
+    - name: MOD3
+      description: MOD3.
+      bit_offset: 7
+      bit_size: 1
+fieldset/PORT_IO:
+  description: PIOC port input/output register.
+  bit_size: 8
+  fields:
+    - name: OUT0
+      description: OUT0.
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT1
+      description: OUT1.
+      bit_offset: 1
+      bit_size: 1
+    - name: XOR0
+      description: XOR0.
+      bit_offset: 2
+      bit_size: 1
+    - name: XOR1
+      description: XOR1.
+      bit_offset: 3
+      bit_size: 1
+    - name: IN0
+      description: IN0.
+      bit_offset: 4
+      bit_size: 1
+    - name: IN1
+      description: IN1.
+      bit_offset: 5
+      bit_size: 1
+    - name: BIT_RX_IO
+      description: BIT_RX_IO.
+      bit_offset: 6
+      bit_size: 1
+    - name: IN_XOR
+      description: IN_XOR.
+      bit_offset: 7
+      bit_size: 1
+fieldset/SYS_CFG:
+  description: PIOC system configuration register.
+  bit_size: 8
+  fields:
+    - name: CLK_GATE
+      description: CLK_GATE, eMCU CLK gate enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: RESET
+      description: RESET.
+      bit_offset: 1
+      bit_size: 1
+    - name: IO_EN0
+      description: IO_EN0.
+      bit_offset: 2
+      bit_size: 1
+    - name: IO_EN1
+      description: IO_EN1.
+      bit_offset: 3
+      bit_size: 1
+    - name: CFG_USER
+      description: CFG_USER, user defined.
+      bit_offset: 4
+      bit_size: 1
+    - name: DATA_MW_SR
+      description: DATA_MW_SR, master wating slave eMCU to read.
+      bit_offset: 5
+      bit_size: 1
+    - name: DATA_SW_MR
+      description: DATA_SW_MR, slave eMCU wating master to read.
+      bit_offset: 6
+      bit_size: 1
+    - name: INT_REQ
+      description: INT_REQ, int request.
+      bit_offset: 7
+      bit_size: 1
+fieldset/TMR0_CTRL:
+  description: PIOC timer0 control register.
+  bit_size: 8
+  fields:
+    - name: FREQ
+      description: FREQ.
+      bit_offset: 0
+      bit_size: 3
+    - name: MODE
+      description: MODE.
+      bit_offset: 3
+      bit_size: 1
+    - name: OUT_EN
+      description: OUT_EN.
+      bit_offset: 4
+      bit_size: 1
+    - name: EN
+      description: EN.
+      bit_offset: 5
+      bit_size: 1
+    - name: EN_LEVEL0
+      description: EN_LEVEL0.
+      bit_offset: 6
+      bit_size: 1
+    - name: EN_LEVEL1
+      description: EN_LEVEL1.
+      bit_offset: 7
+      bit_size: 1
