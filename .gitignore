@@ -4,3 +4,9 @@ Cargo.lock
 
 /trash
 /build
+
+/raw
+/svd
+/out
+/tmp
+tmp.yaml
