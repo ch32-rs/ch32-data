@@ -90,7 +90,7 @@ fn main() -> anyhow::Result<()> {
         let content = std::fs::read_to_string(&meta_yaml_path)?;
         let mut chip: ch32_data_serde::Chip = serde_yaml::from_str(&content)?;
 
-        // handle include_interrupts
+        // handle include_x
         for core in &mut chip.cores {
             if let Some(inc_path) = core.include_interrupts.take() {
                 let interrupts_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
@@ -105,6 +105,17 @@ fn main() -> anyhow::Result<()> {
                         .push(ch32_data_serde::chip::core::Interrupt { name, number });
                 }
                 // core.interrupts.extend(interrupts.interrupts);
+            }
+
+            // append peripherals from includes
+            if let Some(inc_paths) = &mut core.include_peripherals.take() {
+                for inc_path in inc_paths {
+                    let peripheral_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
+                    let content = std::fs::read_to_string(&peripheral_yaml_path)?;
+                    let peripherals: Vec<ch32_data_serde::chip::core::Peripheral> =
+                        serde_yaml::from_str(&content)?;
+                    core.peripherals.extend(peripherals);
+                }
             }
 
             if let Some(dma_channels_inc) = core.include_dma_channels.take() {
