@@ -3,6 +3,10 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4F floating-point core, main frequency <= 144M
 device_id: 808518916
+keywords:
+  - CAN
+  - SDIO
+  - I2S
 packages:
   - name: CH32V303RCT6
     package: LQFP64M

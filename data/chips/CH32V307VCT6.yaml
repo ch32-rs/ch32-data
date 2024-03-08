@@ -3,10 +3,23 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Interconnectivity (USB high-speed, CAN, Ethernet, DVP, SDIO, FSMC)
 product_type: QingKe V4F floating-point core, main frequency <= 144M
 device_id: 812647688
+keywords:
+  - USBHS
+  - CAN
+  - SDIO
+  - FSMC
+  - DVP
+  - ETH
+  - I2S
 packages:
   - name: CH32V307VCT6
     package: LQFP100
 memory:
+  # FIXME: This can be configured as one of
+  # 192K FLASH+128K SRAM
+  # 224K FLASH+96K SRAM
+  # 256K FLASH+64K SRAM
+  # 288K FLASH+32K SRAM
   - name: BANK_1
     kind: flash
     address: 0
@@ -17,7 +30,7 @@ memory:
       erase_value: 255
   - name: SRAM
     kind: ram
-    address: 536870912
+    address: 0x20000000
     size: 65536
 docs:
   - type: homepage
@@ -25,16 +38,17 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH32V307.html
 cores:
-  - name: qingke-v4
+  - name: qingke-v4f
     peripherals:
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+    include_interrupts: "../interrupts/ch32v2_v3.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+    include_peripherals: []
+    interrupts: []
+    dma_channels: []
+
 _raw:
   TRNG: "1"
   SPI: 3/2

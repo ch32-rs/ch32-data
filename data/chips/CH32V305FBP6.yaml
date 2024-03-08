@@ -3,6 +3,10 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Connectivity (USB high-speed, SDIO, CAN)
 product_type: QingKe V4F floating-point core, main frequency <= 144M
 device_id: 810681608
+keywords:
+  - USBHS
+  - CAN
+  - I2S
 packages:
   - name: CH32V305FBP6
     package: TSSOP20

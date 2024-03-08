@@ -3,10 +3,21 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Interconnectivity (USB high-speed, CAN, Ethernet, DVP, SDIO, FSMC)
 product_type: QingKe V4F floating-point core, main frequency <= 144M
 device_id: 812713224
+keywords:
+  - USBHS
+  - CAN
+  - SDIO
+  - ETH
+  - I2S
 packages:
   - name: CH32V307RCT6
     package: LQFP64M
 memory:
+  # FIXME: This can be configured as one of
+  # 192K FLASH+128K SRAM
+  # 224K FLASH+96K SRAM
+  # 256K FLASH+64K SRAM
+  # 288K FLASH+32K SRAM
   - name: BANK_1
     kind: flash
     address: 0
@@ -17,7 +28,7 @@ memory:
       erase_value: 255
   - name: SRAM
     kind: ram
-    address: 536870912
+    address: 0x20000000
     size: 65536
 docs:
   - type: homepage

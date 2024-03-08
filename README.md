@@ -15,7 +15,7 @@ With the following modifications:
   - SVD files are post-processed by [ch32-rs](https://github.com/ch32-rs/ch32-rs) project, adding fixes and patches
 - Misc info is retrieved from <https://github.com/openwch>
 
-## Families
+### Families
 
 - CH32V
 - CH32X
