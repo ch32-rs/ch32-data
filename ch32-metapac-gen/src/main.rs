@@ -19,7 +19,7 @@ fn main() {
             .filter(|s| s.ends_with(".json"))
             .map(|s| s.strip_suffix(".json").unwrap().to_string())
             .collect(),
-        _ => panic!("usage: ch32-metapac-gen [chip?]"),
+        _ => args[1..].iter().map(|s| s.clone()).collect(),
     };
 
     chips.sort();
