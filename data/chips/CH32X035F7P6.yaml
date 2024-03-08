@@ -436,7 +436,7 @@ cores:
         registers:
           kind: usbpd
           version: x0
-          block: USBPD
+          block: USB_PD
         rcc:
           bus_clock: HCLK
           kernel_clock: HCLK
