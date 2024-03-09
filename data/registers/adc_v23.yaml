@@ -1,0 +1,324 @@
+block/ADC:
+  description: Analog to digital converter.
+  items:
+    - name: STATR
+      description: status register.
+      byte_offset: 0
+      fieldset: STATR
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 4
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 8
+      fieldset: CTLR2
+    - name: SAMPTR1
+      description: sample time register 1.
+      byte_offset: 12
+      fieldset: SAMPTR1
+    - name: SAMPTR2
+      description: sample time register 2.
+      byte_offset: 16
+      fieldset: SAMPTR2
+    - name: WDHTR
+      description: watchdog higher threshold register.
+      byte_offset: 36
+      fieldset: WDHTR
+    - name: WDLTR
+      description: watchdog lower threshold register.
+      byte_offset: 40
+      fieldset: WDLTR
+    - name: RSQR1
+      description: regular sequence register 1.
+      byte_offset: 44
+      fieldset: RSQR1
+    - name: RSQR2
+      description: regular sequence register 2.
+      byte_offset: 48
+      fieldset: RSQR2
+    - name: RSQR3
+      description: regular sequence register 3.
+      byte_offset: 52
+      fieldset: RSQR3
+    - name: ISQR
+      description: injected sequence register.
+      byte_offset: 56
+      fieldset: ISQR
+    - name: RDATAR
+      description: regular data register.
+      byte_offset: 76
+      fieldset: RDATAR
+    - name: CTLR3
+      description: ADC control register 3.
+      byte_offset: 80
+      fieldset: CTLR3
+    - name: IOFR
+      description: injected channel data offset register x.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 20
+      fieldset: IOFR
+    - name: IDATAR
+      description: injected data register x
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 60
+      access: Read
+      fieldset: IDATAR
+fieldset/CTLR1:
+  description: control register 1.
+  fields:
+    - name: AWDCH
+      description: Analog watchdog channel select bits.
+      bit_offset: 0
+      bit_size: 4
+    - name: EOCIE
+      description: Interrupt enable for EOC.
+      bit_offset: 5
+      bit_size: 1
+    - name: AWDIE
+      description: Analog watchdog interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: JEOCIE
+      description: Interrupt enable for injected channels.
+      bit_offset: 7
+      bit_size: 1
+    - name: SCAN
+      description: Scan mode enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: AWDSGL
+      description: Enable the watchdog on a single channel in scan mode.
+      bit_offset: 9
+      bit_size: 1
+    - name: JAUTO
+      description: Automatic injected group conversion.
+      bit_offset: 10
+      bit_size: 1
+    - name: DISCEN
+      description: Discontinuous mode on regular channels.
+      bit_offset: 11
+      bit_size: 1
+    - name: JDISCEN
+      description: Discontinuous mode on injected channels.
+      bit_offset: 12
+      bit_size: 1
+    - name: DISCNUM
+      description: Discontinuous mode channel count.
+      bit_offset: 13
+      bit_size: 3
+    - name: JAWDEN
+      description: Analog watchdog enable on injected channels.
+      bit_offset: 22
+      bit_size: 1
+    - name: AWDEN
+      description: Analog watchdog enable on regular channels.
+      bit_offset: 23
+      bit_size: 1
+    - name: BUFEN
+      description: ADC BUFFER enable
+      bit_offset: 26
+      bit_size: 1
+    - name: PGA
+      description: ADC channel gain configuration
+      bit_offset: 27
+      bit_size: 2
+      enum: PGA
+fieldset/CTLR2:
+  description: control register 2.
+  fields:
+    - name: ADON
+      description: A/D converter ON / OFF.
+      bit_offset: 0
+      bit_size: 1
+    - name: CONT
+      description: Continuous conversion.
+      bit_offset: 1
+      bit_size: 1
+    - name: DMA
+      description: Direct memory access mode.
+      bit_offset: 8
+      bit_size: 1
+    - name: ALIGN
+      description: Data alignment.
+      bit_offset: 11
+      bit_size: 1
+    - name: JEXTSEL
+      description: External event select for injected group.
+      bit_offset: 12
+      bit_size: 3
+    - name: JEXTTRIG
+      description: External trigger conversion mode for injected channels.
+      bit_offset: 15
+      bit_size: 1
+    - name: EXTSEL
+      description: External event select for regular group.
+      bit_offset: 17
+      bit_size: 3
+    - name: EXTTRIG
+      description: External trigger conversion mode for regular channels.
+      bit_offset: 20
+      bit_size: 1
+    - name: JSWSTART
+      description: Start conversion of injected channels.
+      bit_offset: 21
+      bit_size: 1
+    - name: SWSTART
+      description: Start conversion of regular channels.
+      bit_offset: 22
+      bit_size: 1
+fieldset/CTLR3:
+  description: ADC control register 3.
+  fields:
+    - name: CLK_DIV
+      description: Clock divider.
+      bit_offset: 0
+      bit_size: 4
+fieldset/IDATAR:
+  description: injected data register x.
+  fields:
+    - name: JDATA
+      description: Injected data.
+      bit_offset: 0
+      bit_size: 16
+fieldset/IOFR:
+  description: injected channel data offset register x.
+  fields:
+    - name: JOFFSET
+      description: Data offset for injected channel x.
+      bit_offset: 0
+      bit_size: 12
+      array:
+        len: 1
+        stride: 0
+fieldset/ISQR:
+  description: injected sequence register.
+  fields:
+    - name: JL
+      description: Injected sequence length.
+      bit_offset: 20
+      bit_size: 2
+    - name: JSQ
+      description: 1st conversion in injected sequence.
+      bit_offset: 0
+      bit_size: 5
+      array:
+        len: 4
+        stride: 5
+fieldset/RDATAR:
+  description: regular data register
+  fields:
+    - name: DATA
+      description: Regular data
+      bit_offset: 0
+      bit_size: 16
+fieldset/RSQR1:
+  description: regular sequence register 1.
+  fields:
+    - name: L
+      description: Regular channel sequence length.
+      bit_offset: 20
+      bit_size: 4
+    - name: SQ
+      description: 13th conversion in regular sequence.
+      bit_offset: 0
+      bit_size: 5
+      array:
+        len: 4
+        stride: 5
+fieldset/RSQR2:
+  description: regular sequence register 2.
+  fields:
+    - name: SQ
+      description: 7th conversion in regular sequence.
+      bit_offset: 0
+      bit_size: 5
+      array:
+        len: 6
+        stride: 5
+fieldset/RSQR3:
+  description: regular sequence register 3.
+  fields:
+    - name: SQ
+      description: 1st conversion in regular sequence.
+      bit_offset: 0
+      bit_size: 5
+      array:
+        len: 6
+        stride: 5
+fieldset/SAMPTR1:
+  description: sample time register 1
+  fields:
+    - name: SMP
+      description: Channel 10 sample time selection.
+      bit_offset: 0
+      bit_size: 3
+      array:
+        len: 8
+        stride: 3
+fieldset/SAMPTR2:
+  description: sample time register 2
+  fields:
+    - name: SMP
+      description: Channel 0 sample time selection.
+      bit_offset: 0
+      bit_size: 3
+      array:
+        len: 10
+        stride: 3
+fieldset/STATR:
+  description: status register.
+  fields:
+    - name: AWD
+      description: Analog watchdog flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: EOC
+      description: Regular channel end of conversion.
+      bit_offset: 1
+      bit_size: 1
+    - name: JEOC
+      description: Injected channel end of conversion.
+      bit_offset: 2
+      bit_size: 1
+    - name: JSTRT
+      description: Injected channel start flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: STRT
+      description: Regular channel start flag.
+      bit_offset: 4
+      bit_size: 1
+fieldset/WDHTR:
+  description: watchdog higher threshold register.
+  fields:
+    - name: HT
+      description: Analog watchdog higher threshold.
+      bit_offset: 0
+      bit_size: 12
+fieldset/WDLTR:
+  description: watchdog lower threshold register.
+  fields:
+    - name: LT
+      description: Analog watchdog lower threshold.
+      bit_offset: 0
+      bit_size: 12
+enum/PGA:
+  bit_size: 2
+  variants:
+    - name: X1
+      descrption: x1
+      value: 0
+    - name: X4
+      description: x4
+      value: 1
+    - name: X16
+      description: x16
+      value: 2
+    - name: X64
+      description: x64
+      value: 3
