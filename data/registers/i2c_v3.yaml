@@ -1,0 +1,283 @@
+block/I2C:
+  description: Inter integrated circuit.
+  items:
+  - name: CTLR1
+    description: Control register 1.
+    byte_offset: 0
+    fieldset: CTLR1
+  - name: CTLR2
+    description: Control register 2.
+    byte_offset: 4
+    fieldset: CTLR2
+  - name: OADDR1
+    description: Own address register 1.
+    byte_offset: 8
+    fieldset: OADDR1
+  - name: OADDR2
+    description: Own address register 2.
+    byte_offset: 12
+    fieldset: OADDR2
+  - name: DATAR
+    description: Data register.
+    byte_offset: 16
+    fieldset: DATAR
+  - name: STAR1
+    description: Status register 1.
+    byte_offset: 20
+    fieldset: STAR1
+  - name: STAR2
+    description: Status register 2.
+    byte_offset: 24
+    access: Read
+    fieldset: STAR2
+  - name: CKCFGR
+    description: Clock control register.
+    byte_offset: 28
+    fieldset: CKCFGR
+  - name: RTR
+    description: Raise time register.
+    byte_offset: 32
+    fieldset: RTR
+fieldset/CKCFGR:
+  description: Clock control register.
+  fields:
+  - name: CCR
+    description: Clock control register in Fast/Standard mode (Master mode).
+    bit_offset: 0
+    bit_size: 12
+  - name: DUTY
+    description: Fast mode duty cycle.
+    bit_offset: 14
+    bit_size: 1
+  - name: F_S
+    description: I2C master mode selection.
+    bit_offset: 15
+    bit_size: 1
+fieldset/CTLR1:
+  description: Control register 1.
+  fields:
+  - name: PE
+    description: Peripheral enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: SMBUS
+    description: SMBus mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: SMBTYPE
+    description: SMBus type.
+    bit_offset: 3
+    bit_size: 1
+  - name: ENARP
+    description: ARP enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: ENPEC
+    description: PEC enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: ENGC
+    description: General call enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: NOSTRETCH
+    description: Clock stretching disable (Slave mode).
+    bit_offset: 7
+    bit_size: 1
+  - name: START
+    description: Start generation.
+    bit_offset: 8
+    bit_size: 1
+  - name: STOP
+    description: Stop generation.
+    bit_offset: 9
+    bit_size: 1
+  - name: ACK
+    description: Acknowledge enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: POS
+    description: Acknowledge/PEC Position (for data reception).
+    bit_offset: 11
+    bit_size: 1
+  - name: PEC
+    description: Packet error checking.
+    bit_offset: 12
+    bit_size: 1
+  - name: ALERT
+    description: SMBus alert.
+    bit_offset: 13
+    bit_size: 1
+  - name: SWRST
+    description: Software reset.
+    bit_offset: 15
+    bit_size: 1
+fieldset/CTLR2:
+  description: Control register 2.
+  fields:
+  - name: FREQ
+    description: Peripheral clock frequency.
+    bit_offset: 0
+    bit_size: 6
+  - name: ITERREN
+    description: Error interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: ITEVTEN
+    description: Event interrupt enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: ITBUFEN
+    description: Buffer interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: DMAEN
+    description: DMA requests enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: LAST
+    description: DMA last transfer.
+    bit_offset: 12
+    bit_size: 1
+fieldset/DATAR:
+  description: Data register.
+  fields:
+  - name: DATAR
+    description: 8-bit data register.
+    bit_offset: 0
+    bit_size: 8
+fieldset/OADDR1:
+  description: Own address register 1.
+  fields:
+  - name: ADD0
+    description: Interface address.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADD7_1
+    description: Interface address.
+    bit_offset: 1
+    bit_size: 7
+  - name: ADD9_8
+    description: Interface address.
+    bit_offset: 8
+    bit_size: 2
+  - name: MUST1
+    description: Must be 1.
+    bit_offset: 14
+    bit_size: 1
+  - name: ADDMODE
+    description: Addressing mode (slave mode).
+    bit_offset: 15
+    bit_size: 1
+fieldset/OADDR2:
+  description: Own address register 2.
+  fields:
+  - name: ENDUAL
+    description: Dual addressing mode enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADD2
+    description: Interface address.
+    bit_offset: 1
+    bit_size: 7
+fieldset/RTR:
+  description: Raise time register.
+  fields:
+  - name: TRISE
+    description: Maximum rise time in Fast/Standard mode (Master mode).
+    bit_offset: 0
+    bit_size: 6
+fieldset/STAR1:
+  description: Status register 1.
+  fields:
+  - name: SB
+    description: Start bit (Master mode).
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR
+    description: Address sent (master mode)/matched (slave mode).
+    bit_offset: 1
+    bit_size: 1
+  - name: BTF
+    description: Byte transfer finished.
+    bit_offset: 2
+    bit_size: 1
+  - name: ADD10
+    description: 10-bit header sent (Master mode).
+    bit_offset: 3
+    bit_size: 1
+  - name: STOPF
+    description: Stop detection (slave mode).
+    bit_offset: 4
+    bit_size: 1
+  - name: RxNE
+    description: Data register not empty (receivers).
+    bit_offset: 6
+    bit_size: 1
+  - name: TxE
+    description: Data register empty (transmitters).
+    bit_offset: 7
+    bit_size: 1
+  - name: BERR
+    description: Bus error.
+    bit_offset: 8
+    bit_size: 1
+  - name: ARLO
+    description: Arbitration lost (master mode).
+    bit_offset: 9
+    bit_size: 1
+  - name: AF
+    description: Acknowledge failure.
+    bit_offset: 10
+    bit_size: 1
+  - name: OVR
+    description: Overrun/Underrun.
+    bit_offset: 11
+    bit_size: 1
+  - name: PECERR
+    description: PEC Error in reception.
+    bit_offset: 12
+    bit_size: 1
+  - name: TIMEOUT
+    description: Timeout or Tlow error.
+    bit_offset: 14
+    bit_size: 1
+  - name: SMBALERT
+    description: SMBus alert.
+    bit_offset: 15
+    bit_size: 1
+fieldset/STAR2:
+  description: Status register 2.
+  fields:
+  - name: MSL
+    description: Master/slave.
+    bit_offset: 0
+    bit_size: 1
+  - name: BUSY
+    description: Bus busy.
+    bit_offset: 1
+    bit_size: 1
+  - name: TRA
+    description: Transmitter/receiver.
+    bit_offset: 2
+    bit_size: 1
+  - name: GENCALL
+    description: General call address (Slave mode).
+    bit_offset: 4
+    bit_size: 1
+  - name: SMBDEFAULT
+    description: SMBus device default address (Slave mode).
+    bit_offset: 5
+    bit_size: 1
+  - name: SMBHOST
+    description: SMBus host header (Slave mode).
+    bit_offset: 6
+    bit_size: 1
+  - name: DUALF
+    description: Dual flag (Slave mode).
+    bit_offset: 7
+    bit_size: 1
+  - name: PEC
+    description: acket error checking register.
+    bit_offset: 8
+    bit_size: 8

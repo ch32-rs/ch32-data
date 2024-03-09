@@ -169,10 +169,9 @@
     reset:
       register: APB1PRSTR
       field: USART2RST
-  # FIXME: single bit RM, handled manually
-  #remap:
-  #  register: PCFR1
-  #  field: USART2_RM
+  remap:
+    register: PCFR1
+    field: USART2_RM
 - name: USART3
   address: 0x40004800
   registers:
@@ -283,6 +282,41 @@
   remap:
     register: PCFR2
     field: USART8_RM
+
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: I2C1EN
+    reset:
+      register: APB1PRSTR
+      field: I2C1RST
+  remap:
+    register: PCFR1
+    field: I2C1_RM
+- name: I2C2
+  address: 0x40005800
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: I2C1EN
+    reset:
+      register: APB1PRSTR
+      field: I2C1RST
+  # No remap
 
 - name: ADC1
   address: 0x40012400
