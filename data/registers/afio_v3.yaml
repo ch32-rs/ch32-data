@@ -5,10 +5,10 @@ block/AFIO:
       description: Event Control Register (AFIO_ECR).
       byte_offset: 0
       fieldset: ECR
-    - name: PCFR
-      description: AF remap and debug I/O configuration register (AFIO_PCFR).
+    - name: PCFR1
+      description: AF remap and debug I/O configuration register (AFIO_PCFR1).
       byte_offset: 4
-      fieldset: PCFR
+      fieldset: PCFR1
     - name: EXTICR1
       description: External interrupt configuration register 1 (AFIO_EXTICR1).
       byte_offset: 8
@@ -120,8 +120,8 @@ fieldset/EXTICR4:
       description: EXTI15 configuration.
       bit_offset: 12
       bit_size: 4
-fieldset/PCFR:
-  description: AF remap and debug I/O configuration register (AFIO_PCFR).
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
   fields:
     - name: SPI1_RM
       description: SPI1 remapping.

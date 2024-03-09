@@ -169,9 +169,10 @@
     reset:
       register: APB1PRSTR
       field: USART2RST
-  remap:
-    register: PCFR1
-    field: USART2_RM
+  # FIXME: single bit RM, handled manually
+  #remap:
+  #  register: PCFR1
+  #  field: USART2_RM
 - name: USART3
   address: 0x40004800
   registers:
@@ -235,13 +236,13 @@
     version: common
     block: USART
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART6
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
     enable:
-      register: APB2PCENR
+      register: APB1PCENR
       field: USART6EN
     reset:
-      register: APB2PRSTR
+      register: APB1PRSTR
       field: USART6RST
   remap:
     register: PCFR2
@@ -253,13 +254,13 @@
     version: common
     block: USART
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART7
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
     enable:
-      register: APB2PCENR
+      register: APB1PCENR
       field: USART7EN
     reset:
-      register: APB2PRSTR
+      register: APB1PRSTR
       field: USART7RST
   remap:
     register: PCFR2
@@ -271,13 +272,13 @@
     version: common
     block: USART
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART8
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
     enable:
-      register: APB2PCENR
+      register: APB1PCENR
       field: USART8EN
     reset:
-      register: APB2PRSTR
+      register: APB1PRSTR
       field: USART8RST
   remap:
     register: PCFR2

@@ -17,9 +17,6 @@ fn main() {
         .collect();
 
     let mut chips = match &args[..] {
-        //[_, chip] => {
-        //    vec![chip.clone()]
-        //}
         [_] => all_chips.clone(),
         _ => {
             let mut chips = vec![];
