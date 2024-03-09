@@ -3,6 +3,9 @@ family: QingKe RISC-V-based, low power MCU
 subfamily: General-purpose
 product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
 device_id: 271648512
+keywords:
+  - USBPD
+  - Low Power
 packages:
   - name: CH32L103C8T6
     package: LQFP48
@@ -25,7 +28,7 @@ docs:
     name: ""
     url: https://www.wch.cn/products/CH32L103.html
 cores:
-  - name: qingke-v4
+  - name: qingke-v4c
     peripherals:
 
     interrupts:

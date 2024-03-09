@@ -43,7 +43,7 @@ docs:
     url: https://www.wch.cn/downloads/CH32X035DS0_PDF.html
     version: latest
 cores:
-  - name: qingke-v4
+  - name: qingke-v4c
     peripherals: []
     include_peripherals:
       - "../family/CH32X0.yaml"

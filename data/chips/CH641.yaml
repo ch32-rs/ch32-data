@@ -33,7 +33,7 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH641.html
 cores:
-  - name: qingke-v4
+  - name: qingke-v2a
     peripherals:
 
     interrupts:

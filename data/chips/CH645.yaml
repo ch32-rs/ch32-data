@@ -1,0 +1,40 @@
+name: CH645
+family: QingKe RISC-V-based MCU
+subfamily: USB Multi-Function MCU
+product_type: QingKe V4C core
+device_id: 1680867328 # 0x65000000
+packages:
+  - name: CH645W
+    package: QFN68
+  - name: CH645F
+    package: QFN32
+memory:
+  - name: BANK_1
+    kind: flash
+    address: 0
+    size: 229376
+    settings:
+      erase_size: 1024
+      write_size: 256
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    # 72K
+    size: 73728
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH646.html
+cores:
+  - name: qingke-v4c
+    peripherals:
+
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0

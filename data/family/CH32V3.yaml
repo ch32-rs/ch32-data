@@ -1,0 +1,136 @@
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv4
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv4
+    block: SYSTICK
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v2_v3
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI7_0
+    - signal: EXTI8
+      interrupt: EXTI15_8
+    - signal: EXTI16
+      interrupt: EXTI25_16
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: v3
+    block: RCC
+  pins:
+    # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
+    - pin: PA8
+      signal: MCO
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v1_v2_v3_l1
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v1_v2_v3_l1
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v1_v2_v3_l1
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v1_v2_v3_l1
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPDEN
+    reset:
+      register: APB2PRSTR
+      field: IOPDRST
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v1_v2_v3_l1
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPEEN
+    reset:
+      register: APB2PRSTR
+      field: IOPERST
+- name: AFIO
+  address: 0x40010004
+  registers:
+    kind: afio
+    version: v2_v3
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST

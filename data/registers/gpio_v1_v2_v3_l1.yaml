@@ -1,0 +1,129 @@
+block/GPIO:
+  description: General purpose I/O.
+  items:
+    - name: CFGLR
+      description: Port configuration register low (GPIOn_CFGLR).
+      byte_offset: 0
+      fieldset: CFGLR
+    - name: CFGHR
+      description: Port configuration register high (GPIOn_CFGHR).
+      byte_offset: 4
+      fieldset: CFGHR
+    - name: INDR
+      description: Port input data register (GPIOn_INDR).
+      byte_offset: 8
+      access: Read
+      fieldset: INDR
+    - name: OUTDR
+      description: Port output data register (GPIOn_OUTDR).
+      byte_offset: 12
+      fieldset: OUTDR
+    - name: BSHR
+      description: Port bit set/reset register (GPIOn_BSHR).
+      byte_offset: 16
+      access: Write
+      fieldset: BSHR
+    - name: BCR
+      description: Port bit reset register (GPIOn_BCR).
+      byte_offset: 20
+      access: Write
+      fieldset: BCR
+    - name: LCKR
+      description: Port configuration lock register.
+      byte_offset: 24
+      fieldset: LCKR
+fieldset/BCR:
+  description: Port bit reset register (GPIOn_BCR).
+  fields:
+    - name: BR
+      description: Reset bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/BSHR:
+  description: Port bit set/reset register (GPIOn_BSHR).
+  fields:
+    - name: BS
+      description: Set bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+    - name: BR
+      description: Reset bit 0.
+      bit_offset: 16
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/CFGHR:
+  description: Port configuration register high (GPIOn_CFGHR).
+  fields:
+    - name: MODE
+      description: Port n.8 mode bits.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+    - name: CNF
+      description: Port n.8 configuration bits.
+      bit_offset: 2
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+fieldset/CFGLR:
+  description: Port configuration register low (GPIOn_CFGLR).
+  fields:
+    - name: MODE
+      description: Port n.0 mode bits.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+    - name: CNF
+      description: Port n.0 configuration bits.
+      bit_offset: 2
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+fieldset/INDR:
+  description: Port input data register (GPIOn_INDR).
+  fields:
+    - name: IDR
+      description: Port input data.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/LCKR:
+  description: Port configuration lock register.
+  fields:
+    - name: LCK
+      description: Port A Lock bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+    - name: LCKK
+      description: Lock key.
+      bit_offset: 16
+      bit_size: 1
+fieldset/OUTDR:
+  description: Port output data register (GPIOn_OUTDR).
+  fields:
+    - name: ODR
+      description: Port output data.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1

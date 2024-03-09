@@ -39,13 +39,15 @@ docs:
     url: http://www.wch.cn/products/CH32V307.html
 cores:
   - name: qingke-v4f
-    peripherals:
+    peripherals: []
+
+    include_peripherals:
+      - "../family/CH32V3.yaml"
 
     include_interrupts: "../interrupts/ch32v2_v3.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V_V4F_DMA1.yaml"
       DMA2: "../dma/CH32V_V4F_DMA2.yaml"
-    include_peripherals: []
     interrupts: []
     dma_channels: []
 
