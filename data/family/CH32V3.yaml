@@ -318,6 +318,59 @@
       field: I2C1RST
   # No remap
 
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: SPI1EN
+    reset:
+      register: APB2PRSTR
+      field: SPI1RST
+  remap:
+    register: PCFR1
+    field: SPI1_RM
+- name: SPI2
+  address: 0x40003800
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: SPI2EN
+    reset:
+      register: APB1PRSTR
+      field: SPI2RST
+  # No remap
+- name: SPI3
+  address: 0x40003C00
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: SPI3EN
+    reset:
+      register: APB1PRSTR
+      field: SPI3RST
+  remap:
+    register: PCFR1
+    field: SPI3_RM
+
 - name: ADC1
   address: 0x40012400
   registers:
