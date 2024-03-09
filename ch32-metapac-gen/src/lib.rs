@@ -299,7 +299,7 @@ impl Gen {
         let mut chip_core_names: Vec<String> = Vec::new();
 
         for chip_name in &self.opts.chips.clone() {
-            println!("Generating {}...", chip_name);
+            println!("Generate Chip {}", chip_name);
 
             let mut chip = self.load_chip(chip_name);
 
@@ -332,7 +332,7 @@ impl Gen {
         }
 
         for (module, version) in &self.all_peripheral_versions {
-            println!("loading {} {}", module, version);
+            println!("Generate Peripheral {} {}", module, version);
 
             let regs_path = Path::new(&self.opts.data_dir)
                 .join("registers")
@@ -498,6 +498,19 @@ fn gen_memory_x(out_dir: &Path, chip: &Chip) {
         .unwrap();
     }
     write!(memory_x, "}}").unwrap();
+
+    write!(
+        memory_x,
+        r#"
+REGION_ALIAS("REGION_TEXT", FLASH);
+REGION_ALIAS("REGION_RODATA", FLASH);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+REGION_ALIAS("REGION_HEAP", RAM);
+REGION_ALIAS("REGION_STACK", RAM);
+    "#
+    )
+    .unwrap();
 
     fs::create_dir_all(out_dir.join("memory_x")).unwrap();
     let mut file = File::create(out_dir.join("memory_x").join("memory.x")).unwrap();
