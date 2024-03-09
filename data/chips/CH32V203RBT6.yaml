@@ -3,6 +3,8 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
 device_id: 540280076
+keywords:
+  - GPTM32
 packages:
   - name: CH32V203RBT6
     package: LQFP64M

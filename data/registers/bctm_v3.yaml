@@ -1,0 +1,142 @@
+block/BCTM:
+  description: Basic timer, 16-bit auto-reloadable.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      access: Write
+      fieldset: SWEVGR
+    - name: CNT
+      description: counter.
+      byte_offset: 36
+      fieldset: CNT
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      fieldset: PSC
+    - name: ATRLR
+      description: auto-reload register.
+      byte_offset: 44
+      fieldset: ATRLR
+fieldset/ATRLR:
+  description: auto-reload register.
+  fields:
+    - name: ATRLR
+      description: Auto-reload value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CNT:
+  description: counter.
+  fields:
+    - name: CNT
+      description: counter value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR1:
+  description: control register 1.
+  fields:
+    - name: CEN
+      description: Counter enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDIS
+      description: Update disable.
+      bit_offset: 1
+      bit_size: 1
+    - name: URS
+      description: Update request source.
+      bit_offset: 2
+      bit_size: 1
+    - name: OPM
+      description: One-pulse mode.
+      bit_offset: 3
+      bit_size: 1
+    - name: ARPE
+      description: Auto-reload preload enable.
+      bit_offset: 7
+      bit_size: 1
+fieldset/CTLR2:
+  description: control register 2.
+  fields:
+    - name: MMS
+      description: Master mode selection.
+      bit_offset: 4
+      bit_size: 3
+      enum: MASTER_MODE_SEL
+fieldset/DMAINTENR:
+  description: DMA/Interrupt enable register.
+  fields:
+    - name: UIE
+      description: Update interrupt enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDE
+      description: Update DMA request enable.
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTFR:
+  description: status register.
+  fields:
+    - name: UIF
+      description: Update interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+fieldset/PSC:
+  description: prescaler.
+  fields:
+    - name: PSC
+      description: Prescaler value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/SWEVGR:
+  description: event generation register.
+  fields:
+    - name: UG
+      description: Update generation.
+      bit_offset: 0
+      bit_size: 1
+enum/MASTER_MODE_SEL:
+  description: Master mode selection.
+  bit_size: 3
+  variants:
+    - name: RESET
+      description: Reset.
+      value: 0
+    - name: ENABLE
+      description: Enable.
+      value: 1
+    - name: UPDATE
+      description: Update.
+      value: 2
+    # Not available to BCTM
+    - name: COMPARE_PULSE
+      description: Compare pulse.
+      value: 3
+    - name: OC1REF
+      description: OC1REF signal is used as trigger output (TRGO).
+      value: 4
+    - name: OC2REF
+      description: OC2REF signal is used as trigger output (TRGO).
+      value: 5
+    - name: OC3REF
+      description: OC3REF signal is used as trigger output (TRGO).
+      value: 6
+    - name: OC4REF
+      description: OC4REF signal is used as trigger output (TRGO).
+      value: 7

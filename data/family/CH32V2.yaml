@@ -37,9 +37,10 @@
   address: 0x40021000
   registers:
     kind: rcc
-    version: v2
+    version: v3
     block: RCC
   pins:
+    # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
     - pin: PA8
       signal: MCO
 
@@ -103,6 +104,21 @@
     reset:
       register: APB2PRSTR
       field: IOPDRST
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPEEN
+    reset:
+      register: APB2PRSTR
+      field: IOPERST
 - name: AFIO
   address: 0x40010004
   registers:
@@ -134,9 +150,10 @@
     reset:
       register: APB2PRSTR
       field: USART1RST
-  remap:
-    register: PCFR1
-    field: USART1_RM
+  # NOTE: complex RM, handled manually
+  #remap:
+  #  register: PCFR1
+  #  field: USART1_RM
 - name: USART2
   address: 0x40004400
   registers:
@@ -173,7 +190,7 @@
   remap:
     register: PCFR1
     field: USART3_RM
-# The following are actually UART, not USART
+# The following are actually USART, not USART
 - name: USART4
   address: 0x40004C00
   registers:
@@ -185,41 +202,10 @@
     kernel_clock: USART4
     enable:
       register: APB1PCENR
-      field: UART4EN
+      field: USART4EN
     reset:
       register: APB1PRSTR
-      field: UART4RST
+      field: USART4RST
   remap:
     register: PCFR2
-    field: UART4_RM
-
-- name: ADC1
-  address: 0x40012400
-  registers:
-    kind: adc
-    version: v3
-    block: ADC
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: ADC
-    enable:
-      register: APB2PCENR
-      field: ADC1EN
-    reset:
-      register: APB2PRSTR
-      field: ADC1RST
-- name: ADC2
-  address: 0x40012800
-  registers:
-    kind: adc
-    version: v3
-    block: ADC
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: ADC
-    enable:
-      register: APB2PCENR
-      field: ADC2EN
-    reset:
-      register: APB2PRSTR
-      field: ADC2RST
+    field: USART4_RM

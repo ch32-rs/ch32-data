@@ -3,6 +3,9 @@ family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Wireless (BLE5.X, CAN, USB, Ethernet)
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
 device_id: 545391884
+keywords:
+  - GPTM32
+  - BLE
 packages:
   - name: CH32V208CBU6
     package: QFN48

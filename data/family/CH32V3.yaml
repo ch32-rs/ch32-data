@@ -301,6 +301,20 @@
   remap:
     register: PCFR1
     field: I2C1_RM
+  pins:
+    - pin: PB5
+      signal: SMBA
+    - pin: PB6
+      signal: SCL
+    - pin: PB7
+      signal: SDA
+    - pin: PB8
+      signal: SCL
+      remap: 1
+    - pin: PB9
+      signal: SDA
+      remap: 1
+
 - name: I2C2
   address: 0x40005800
   registers:
@@ -317,6 +331,13 @@
       register: APB1PRSTR
       field: I2C1RST
   # No remap
+  pins:
+    - pin: PB10
+      signal: SCL
+    - pin: PB11
+      signal: SDA
+    - pin: PB12
+      signal: SMBA
 
 - name: SPI1
   address: 0x40013000
