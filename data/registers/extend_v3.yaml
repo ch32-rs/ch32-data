@@ -1,0 +1,50 @@
+block/EXTEND:
+  description: Extend configuration.
+  items:
+  - name: EXTEND_CTR
+    description: EXTEND register.
+    byte_offset: 0
+    fieldset: EXTEND_CTR
+fieldset/EXTEND_CTR:
+  description: EXTEND register.
+  fields:
+  - name: USBDLS
+    description: USBD Lowspeed Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: USBDPU
+    description: USBD pullup Enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: ETH_10M_EN
+    description: ETH 10M Enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: ETH_RGMII_EN
+    description: ETH RGMII Enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: PLL_HSI_PRE
+    description: Whether HSI is divided.
+    bit_offset: 4
+    bit_size: 1
+  - name: LOCKUP_EN
+    description: LOCKUP_Eable.
+    bit_offset: 6
+    bit_size: 1
+  - name: LOCKUP_RSTF
+    description: LOCKUP RESET.
+    bit_offset: 7
+    bit_size: 1
+  - name: ULLDO_TRIM
+    description: ULLDO_TRIM.
+    bit_offset: 8
+    bit_size: 2
+  - name: LDO_TRIM
+    description: LDO_TRIM.
+    bit_offset: 10
+    bit_size: 2
+  - name: HSE_KEEP_LP
+    description: HSE_KEEP_LP.
+    bit_offset: 12
+    bit_size: 1

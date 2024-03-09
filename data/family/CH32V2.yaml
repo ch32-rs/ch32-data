@@ -37,10 +37,9 @@
   address: 0x40021000
   registers:
     kind: rcc
-    version: v3
+    version: v2
     block: RCC
   pins:
-    # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
     - pin: PA8
       signal: MCO
 
@@ -104,21 +103,6 @@
     reset:
       register: APB2PRSTR
       field: IOPDRST
-- name: GPIOE
-  address: 0x40011800
-  registers:
-    kind: gpio
-    version: v3
-    block: GPIO
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2
-    enable:
-      register: APB2PCENR
-      field: IOPEEN
-    reset:
-      register: APB2PRSTR
-      field: IOPERST
 - name: AFIO
   address: 0x40010004
   registers:
@@ -150,10 +134,9 @@
     reset:
       register: APB2PRSTR
       field: USART1RST
-  # NOTE: complex RM, handled manually
-  #remap:
-  #  register: PCFR1
-  #  field: USART1_RM
+  remap:
+    register: PCFR1
+    field: USART1_RM
 - name: USART2
   address: 0x40004400
   registers:
@@ -190,7 +173,7 @@
   remap:
     register: PCFR1
     field: USART3_RM
-# The following are actually USART, not USART
+# The following are actually UART, not USART
 - name: USART4
   address: 0x40004C00
   registers:
@@ -202,86 +185,13 @@
     kernel_clock: USART4
     enable:
       register: APB1PCENR
-      field: USART4EN
+      field: UART4EN
     reset:
       register: APB1PRSTR
-      field: USART4RST
+      field: UART4RST
   remap:
     register: PCFR2
-    field: USART4_RM
-
-- name: USART5
-  address: 0x40005000
-  registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK1
-    kernel_clock: USART5
-    enable:
-      register: APB1PCENR
-      field: USART5EN
-    reset:
-      register: APB1PRSTR
-      field: USART5RST
-  remap:
-    register: PCFR2
-    field: USART5_RM
-- name: USART6
-  address: 0x40001800
-  registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART6
-    enable:
-      register: APB2PCENR
-      field: USART6EN
-    reset:
-      register: APB2PRSTR
-      field: USART6RST
-  remap:
-    register: PCFR2
-    field: USART6_RM
-- name: USART7
-  address: 0x40001C00
-  registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART7
-    enable:
-      register: APB2PCENR
-      field: USART7EN
-    reset:
-      register: APB2PRSTR
-      field: USART7RST
-  remap:
-    register: PCFR2
-    field: USART7_RM
-- name: USART8
-  address: 0x40002000
-  registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: USART8
-    enable:
-      register: APB2PCENR
-      field: USART8EN
-    reset:
-      register: APB2PRSTR
-      field: USART8RST
-  remap:
-    register: PCFR2
-    field: USART8_RM
+    field: UART4_RM
 
 - name: ADC1
   address: 0x40012400

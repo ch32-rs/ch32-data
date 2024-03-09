@@ -25,7 +25,7 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH32V203.html
 cores:
-  - name: qingke-v4
+  - name: qingke-v4b
     peripherals:
 
     interrupts:

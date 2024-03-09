@@ -1,0 +1,260 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+    - name: ECR
+      description: Event Control Register (AFIO_ECR).
+      byte_offset: 0
+      fieldset: ECR
+    - name: PCFR
+      description: AF remap and debug I/O configuration register (AFIO_PCFR).
+      byte_offset: 4
+      fieldset: PCFR
+    - name: EXTICR1
+      description: External interrupt configuration register 1 (AFIO_EXTICR1).
+      byte_offset: 8
+      fieldset: EXTICR1
+    - name: EXTICR2
+      description: External interrupt configuration register 2 (AFIO_EXTICR2).
+      byte_offset: 12
+      fieldset: EXTICR2
+    - name: EXTICR3
+      description: External interrupt configuration register 3 (AFIO_EXTICR3).
+      byte_offset: 16
+      fieldset: EXTICR3
+    - name: EXTICR4
+      description: External interrupt configuration register 4 (AFIO_EXTICR4).
+      byte_offset: 20
+      fieldset: EXTICR4
+    - name: PCFR2
+      description: AF remap and debug I/O configuration register (AFIO_PCFR2).
+      byte_offset: 28
+      fieldset: PCFR2
+fieldset/ECR:
+  description: Event Control Register (AFIO_ECR).
+  fields:
+    - name: PIN
+      description: Pin selection.
+      bit_offset: 0
+      bit_size: 4
+    - name: PORT
+      description: Port selection.
+      bit_offset: 4
+      bit_size: 3
+    - name: EVOE
+      description: Event Output Enable.
+      bit_offset: 7
+      bit_size: 1
+fieldset/EXTICR1:
+  description: External interrupt configuration register 1 (AFIO_EXTICR1).
+  fields:
+    - name: EXTI0
+      description: EXTI0 configuration.
+      bit_offset: 0
+      bit_size: 4
+    - name: EXTI1
+      description: EXTI1 configuration.
+      bit_offset: 4
+      bit_size: 4
+    - name: EXTI2
+      description: EXTI2 configuration.
+      bit_offset: 8
+      bit_size: 4
+    - name: EXTI3
+      description: EXTI3 configuration.
+      bit_offset: 12
+      bit_size: 4
+fieldset/EXTICR2:
+  description: External interrupt configuration register 2 (AFIO_EXTICR2).
+  fields:
+    - name: EXTI4
+      description: EXTI4 configuration.
+      bit_offset: 0
+      bit_size: 4
+    - name: EXTI5
+      description: EXTI5 configuration.
+      bit_offset: 4
+      bit_size: 4
+    - name: EXTI6
+      description: EXTI6 configuration.
+      bit_offset: 8
+      bit_size: 4
+    - name: EXTI7
+      description: EXTI7 configuration.
+      bit_offset: 12
+      bit_size: 4
+fieldset/EXTICR3:
+  description: External interrupt configuration register 3 (AFIO_EXTICR3).
+  fields:
+    - name: EXTI8
+      description: EXTI8 configuration.
+      bit_offset: 0
+      bit_size: 4
+    - name: EXTI9
+      description: EXTI9 configuration.
+      bit_offset: 4
+      bit_size: 4
+    - name: EXTI10
+      description: EXTI10 configuration.
+      bit_offset: 8
+      bit_size: 4
+    - name: EXTI11
+      description: EXTI11 configuration.
+      bit_offset: 12
+      bit_size: 4
+fieldset/EXTICR4:
+  description: External interrupt configuration register 4 (AFIO_EXTICR4).
+  fields:
+    - name: EXTI12
+      description: EXTI12 configuration.
+      bit_offset: 0
+      bit_size: 4
+    - name: EXTI13
+      description: EXTI13 configuration.
+      bit_offset: 4
+      bit_size: 4
+    - name: EXTI14
+      description: EXTI14 configuration.
+      bit_offset: 8
+      bit_size: 4
+    - name: EXTI15
+      description: EXTI15 configuration.
+      bit_offset: 12
+      bit_size: 4
+fieldset/PCFR:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR).
+  fields:
+    - name: SPI1_RM
+      description: SPI1 remapping.
+      bit_offset: 0
+      bit_size: 1
+    - name: I2C1_RM
+      description: I2C1 remapping.
+      bit_offset: 1
+      bit_size: 1
+    - name: USART1_RM
+      description: USART1 remapping.
+      bit_offset: 2
+      bit_size: 1
+    - name: USART2_RM
+      description: USART2 remapping.
+      bit_offset: 3
+      bit_size: 1
+    - name: USART3_RM
+      description: USART3 remapping.
+      bit_offset: 4
+      bit_size: 2
+    - name: TIM1_RM
+      description: TIM1 remapping.
+      bit_offset: 6
+      bit_size: 2
+    - name: TIM2_RM
+      description: TIM2 remapping.
+      bit_offset: 8
+      bit_size: 2
+    - name: TIM3_RM
+      description: TIM3 remapping.
+      bit_offset: 10
+      bit_size: 2
+    - name: TIM4_RM
+      description: TIM4 remapping.
+      bit_offset: 12
+      bit_size: 1
+    - name: CAN1_RM
+      description: CAN1 remapping.
+      bit_offset: 13
+      bit_size: 2
+    - name: PD01_RM
+      description: Port D0/Port D1 mapping on OSCIN/OSCOUT.
+      bit_offset: 15
+      bit_size: 1
+    - name: TIM5CH4_RM
+      description: TIM5 channel4 internal remap.
+      bit_offset: 16
+      bit_size: 1
+    - name: ADC1_ETRGINJ_RM
+      description: ADC 1 External trigger injected conversion remapping.
+      bit_offset: 17
+      bit_size: 1
+    - name: ADC1_ETRGREG_RM
+      description: ADC 1 external trigger regular conversion remapping.
+      bit_offset: 18
+      bit_size: 1
+    - name: ADC2_ETRGINJ_RM
+      description: ADC 2 External trigger injected conversion remapping.
+      bit_offset: 19
+      bit_size: 1
+    - name: ADC2_ETRGREG_RM
+      description: ADC 2 external trigger regular conversion remapping.
+      bit_offset: 20
+      bit_size: 1
+    - name: ETH_RM
+      description: Ethernet remapping.
+      bit_offset: 21
+      bit_size: 1
+    - name: CAN2_RM
+      description: CAN2 remapping.
+      bit_offset: 22
+      bit_size: 1
+    - name: MII_RMII_SEL
+      description: MII_RMII_SEL.
+      bit_offset: 23
+      bit_size: 1
+    - name: SWCFG
+      description: Serial wire JTAG configuration.
+      bit_offset: 24
+      bit_size: 3
+    - name: SPI3_RM
+      description: SPI3 remapping.
+      bit_offset: 28
+      bit_size: 1
+    - name: TIM2ITRA_RM
+      description: TIM2 internally triggers 1 remapping.
+      bit_offset: 29
+      bit_size: 1
+    - name: PTP_PPSP_RM
+      description: Ethernet PTP_PPS remapping.
+      bit_offset: 30
+      bit_size: 1
+fieldset/PCFR2:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR2).
+  fields:
+    - name: TIM8_RM
+      description: TIM8 remapping.
+      bit_offset: 2
+      bit_size: 1
+    - name: TIM9_RM
+      description: TIM9 remapping.
+      bit_offset: 3
+      bit_size: 2
+    - name: TIM10_RM
+      description: TIM10 remapping.
+      bit_offset: 5
+      bit_size: 2
+    - name: FSMC_NADV
+      description: FSMC_NADV.
+      bit_offset: 10
+      bit_size: 1
+    - name: USART4_RM
+      description: USART4 remapping.
+      bit_offset: 16
+      bit_size: 2
+    - name: USART5_RM
+      description: USART5 remapping.
+      bit_offset: 18
+      bit_size: 2
+    - name: USART6_RM
+      description: USART6 remapping.
+      bit_offset: 20
+      bit_size: 2
+    - name: USART7_RM
+      description: USART7 remapping.
+      bit_offset: 22
+      bit_size: 2
+    - name: USART8_RM
+      description: USART8 remapping.
+      bit_offset: 24
+      bit_size: 2
+    - name: USART1_RM2
+      description: USART1 remapping.
+      bit_offset: 26
+      bit_size: 1
