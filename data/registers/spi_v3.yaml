@@ -1,0 +1,339 @@
+block/SPI:
+  description: Serial peripheral interface.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: STATR
+      description: status register.
+      byte_offset: 8
+      fieldset: STATR
+    - name: DATAR
+      description: data register.
+      byte_offset: 12
+      fieldset: DATAR
+    - name: CRCR
+      description: CRCR polynomial register.
+      byte_offset: 16
+      fieldset: CRCR
+    - name: RCRCR
+      description: RX CRC register.
+      byte_offset: 20
+      access: Read
+      fieldset: RCRCR
+    - name: TCRCR
+      description: TX CRC register.
+      byte_offset: 24
+      access: Read
+      fieldset: TCRCR
+    - name: I2S_CFGR
+      description: SPI_I2S configure register.
+      byte_offset: 28
+      fieldset: I2S_CFGR
+    - name: I2SPR
+      description: SPI_I2S prescaler register.
+      byte_offset: 32
+      fieldset: I2SPR
+    - name: HSCR
+      description: high speed control register.
+      byte_offset: 36
+      fieldset: HSCR
+fieldset/CRCR:
+  description: CRCR polynomial register.
+  fields:
+    - name: CRCPOLY
+      description: CRC polynomial register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR1:
+  description: control register 1.
+  fields:
+    - name: CPHA
+      description: Clock phase.
+      bit_offset: 0
+      bit_size: 1
+    - name: CPOL
+      description: Clock polarity.
+      bit_offset: 1
+      bit_size: 1
+    - name: MSTR
+      description: Master selection.
+      bit_offset: 2
+      bit_size: 1
+    - name: BR
+      description: Baud rate control.
+      bit_offset: 3
+      bit_size: 3
+      enum: BAUD_RATE
+    - name: SPE
+      description: SPI enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LSBFIRST
+      description: Frame format.
+      bit_offset: 7
+      bit_size: 1
+    - name: SSI
+      description: Internal slave select.
+      bit_offset: 8
+      bit_size: 1
+    - name: SSM
+      description: Software slave management.
+      bit_offset: 9
+      bit_size: 1
+    - name: RXONLY
+      description: Receive only.
+      bit_offset: 10
+      bit_size: 1
+    - name: DFF
+      description: Data frame format.
+      bit_offset: 11
+      bit_size: 1
+    - name: CRCNEXT
+      description: CRC transfer next.
+      bit_offset: 12
+      bit_size: 1
+    - name: CRCEN
+      description: Hardware CRC calculation enable.
+      bit_offset: 13
+      bit_size: 1
+    - name: BIDIOE
+      description: Output enable in bidirectional mode.
+      bit_offset: 14
+      bit_size: 1
+    - name: BIDIMODE
+      description: Bidirectional data mode enable.
+      bit_offset: 15
+      bit_size: 1
+fieldset/CTLR2:
+  description: control register 2.
+  fields:
+    - name: RXDMAEN
+      description: Rx buffer DMA enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXDMAEN
+      description: Tx buffer DMA enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: SSOE
+      description: SS output enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: ERRIE
+      description: Error interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: RXNEIE
+      description: RX buffer not empty interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: TXEIE
+      description: Tx buffer empty interrupt enable.
+      bit_offset: 7
+      bit_size: 1
+fieldset/DATAR:
+  description: data register.
+  fields:
+    - name: DATAR
+      description: Data register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/HSCR:
+  description: high speed control register.
+  fields:
+    - name: HSRXEN
+      description: High speed mode read enable.
+      bit_offset: 0
+      bit_size: 1
+fieldset/RCRCR:
+  description: RX CRC register.
+  fields:
+    - name: RXCRC
+      description: Rx CRC register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/I2S_CFGR:
+  description: SPI_I2S configure register.
+  fields:
+    - name: CHLEN
+      description: Channel length (number of bits per audio channel).
+      bit_offset: 0
+      bit_size: 1
+      enum: CHLEN
+    - name: DATLEN
+      description: DATLEN[1:0] bits (Data length to be transferred).
+      bit_offset: 1
+      bit_size: 2
+      enum: I2SDATLEN
+    - name: CKPOL
+      description: steady state clock polarity.
+      bit_offset: 3
+      bit_size: 1
+    - name: I2SSTD
+      description: I2SSTD[1:0] bits (I2S standard selection).
+      bit_offset: 4
+      bit_size: 2
+      enum: I2SSTD
+    - name: PCMSYNC
+      description: PCM frame synchronization.
+      bit_offset: 7
+      bit_size: 1
+    - name: I2SCFG
+      description: I2SCFG[1:0] bits (I2S configuration mode).
+      bit_offset: 8
+      bit_size: 2
+      enum: I2SCFG
+    - name: I2SE
+      description: I2S Enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: I2SMOD
+      description: I2S mode selection.
+      bit_offset: 11
+      bit_size: 1
+fieldset/STATR:
+  description: status register.
+  fields:
+    - name: RXNE
+      description: Receive buffer not empty.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXE
+      description: Transmit buffer empty.
+      bit_offset: 1
+      bit_size: 1
+    - name: CHSID
+      description: Channel side.
+      bit_offset: 2
+      bit_size: 1
+    - name: UDR
+      description: Underrun flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: CRCERR
+      description: CRC error flag.
+      bit_offset: 4
+      bit_size: 1
+    - name: MODF
+      description: Mode fault.
+      bit_offset: 5
+      bit_size: 1
+    - name: OVR
+      description: Overrun flag.
+      bit_offset: 6
+      bit_size: 1
+    - name: BSY
+      description: Busy flag.
+      bit_offset: 7
+      bit_size: 1
+fieldset/TCRCR:
+  description: TX CRC register.
+  fields:
+    - name: TXCRC
+      description: Tx CRC register.
+      bit_offset: 0
+      bit_size: 16
+fieldset/I2SPR:
+  description: SPI_I2S prescaler register.
+  fields:
+    - name: I2SDIV
+      description: I2SDIV[7:0] bits (I2S Linear prescaler).
+      bit_offset: 0
+      bit_size: 8
+    - name: ODD
+      description: Odd factor for the prescaler.
+      bit_offset: 8
+      bit_size: 1
+    - name: MCKOE
+      description: Master clock output enable.
+      bit_offset: 9
+      bit_size: 1
+enum/BAUD_RATE:
+  description: Baud rate control.
+  bit_size: 3
+  variants:
+    - name: DIV_2
+      description: fPCLK/2
+      value: 0
+    - name: DIV_4
+      description: fPCLK/4
+      value: 1
+    - name: DIV_8
+      description: fPCLK/8
+      value: 2
+    - name: DIV_16
+      description: fPCLK/16
+      value: 3
+    - name: DIV_32
+      description: fPCLK/32
+      value: 4
+    - name: DIV_64
+      description: fPCLK/64
+      value: 5
+    - name: DIV_128
+      description: fPCLK/128
+      value: 6
+    - name: DIV_256
+      description: fPCLK/256
+      value: 7
+enum/I2SSTD:
+  description: I2S standard selection.
+  bit_size: 2
+  variants:
+    - name: PHILIPS
+      description: I2S Philips standard.
+      value: 0
+    - name: MSB
+      description: MSB justified standard, left justified.
+      value: 1
+    - name: LSB
+      description: LSB justified standard, right justified.
+      value: 2
+    - name: PCM
+      description: PCM standard.
+      value: 3
+enum/I2SDATLEN:
+  description: Data length to be transferred.
+  bit_size: 2
+  variants:
+    - name: BIT16
+      description: 16-bit data length.
+      value: 0
+    - name: BIT24
+      description: 24-bit data length.
+      value: 1
+    - name: BIT32
+      description: 32-bit data length.
+      value: 2
+enum/CHLEN:
+  description: Channel length (number of bits per audio channel).
+  bit_size: 1
+  variants:
+    - name: BIT16
+      description: 16-bit data length.
+      value: 0
+    - name: BIT32
+      description: 32-bit data length.
+      value: 1
+enum/I2SCFG:
+  description: I2S mode selection
+  bit_size: 2
+  variants:
+    - name: SlaveTx
+      description: Slave transmit.
+      value: 0
+    - name: SlaveRx
+      description: Slave receive.
+      value: 1
+    - name: MasterTx
+      description: Master transmit.
+      value: 2
+    - name: MasterRx
+      description: Master receive.
+      value: 3
