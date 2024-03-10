@@ -425,3 +425,10 @@
     kind: adtm
     version: v3
     block: ADTM
+
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v3
+    block: EXTEND
