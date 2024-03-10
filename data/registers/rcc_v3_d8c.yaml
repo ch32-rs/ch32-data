@@ -787,13 +787,13 @@ fieldset/RSTSCKR:
       description: Low-power reset flag.
       bit_offset: 31
       bit_size: 1
-# CH32V20x_D8、CH32V20x_D8W、CH32F20x_D8W、 CH32V30x_D8、CH32F20x_D8、CH32V20x_D8、 CH32V20x_D8W、CH32F20x_D8W
+# CH32F20x_D8C, CH32V30x_D8C
 enum/PLL_MUL:
   description: PLL Multiplication Factor.
   bit_size: 4
   variants:
-    - name: MUL2
-      description: PLL input clock x 2.
+    - name: MUL18
+      description: PLL input clock x 18.
       value: 0b0000
     - name: MUL3
       description: PLL input clock x 3.
@@ -831,14 +831,14 @@ enum/PLL_MUL:
     - name: MUL14
       description: PLL input clock x 14.
       value: 0b1100
+    - name: MUL6_5
+      description: PLL input clock x 6.5.
+      value: 0b1101
     - name: MUL15
       description: PLL input clock x 15.
-      value: 0b1101
+      value: 0b1110
     - name: MUL16
       description: PLL input clock x 16.
-      value: 0b1110
-    - name: MUL18
-      description: PLL input clock x 18.
       value: 0b1111
 enum/SW:
   description: System clock Switch.

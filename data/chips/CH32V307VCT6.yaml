@@ -39,7 +39,17 @@ docs:
     url: http://www.wch.cn/products/CH32V307.html
 cores:
   - name: qingke-v4f
-    peripherals: []
+    peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v3_d8c
+          block: RCC
+        pins:
+          # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
+          - pin: PA8
+            signal: MCO
     include_peripherals:
       - "../family/CH32V3.yaml"
 
