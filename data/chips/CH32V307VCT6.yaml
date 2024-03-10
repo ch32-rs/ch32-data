@@ -40,7 +40,6 @@ docs:
 cores:
   - name: qingke-v4f
     peripherals: []
-
     include_peripherals:
       - "../family/CH32V3.yaml"
 

@@ -26,14 +26,16 @@ docs:
     url: http://www.wch.cn/products/CH32V203.html
 cores:
   - name: qingke-v4b
-    peripherals:
+    peripherals: []
     include_peripherals:
       - "../family/CH32V2.yaml"
+
     include_interrupts: "../interrupts/ch32v2_v3.yaml"
     include_dma_channels:
-      DMA: "../dma/CH32V_V4B.yaml"
+      DMA1: "../dma/CH32V_V4B.yaml"
     interrupts: []
     dma_channels: []
+
 _raw:
   RTC: "1"
   USB_20H: "-"

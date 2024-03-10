@@ -120,7 +120,7 @@
       register: APB2PRSTR
       field: IOPERST
 - name: AFIO
-  address: 0x40010004
+  address: 0x40010000
   registers:
     kind: afio
     version: v3
@@ -143,7 +143,7 @@
     block: USART
   rcc:
     bus_clock: PCLK2
-    kernel_clock: USART1
+    kernel_clock: PCLK1
     enable:
       register: APB2PCENR
       field: USART1EN
@@ -162,7 +162,7 @@
     block: USART
   rcc:
     bus_clock: PCLK1
-    kernel_clock: USART2
+    kernel_clock: PCLK1
     enable:
       register: APB1PCENR
       field: USART2EN
@@ -180,7 +180,7 @@
     block: USART
   rcc:
     bus_clock: PCLK1
-    kernel_clock: USART3
+    kernel_clock: PCLK1
     enable:
       register: APB1PCENR
       field: USART3EN
@@ -199,7 +199,7 @@
     block: USART
   rcc:
     bus_clock: PCLK1
-    kernel_clock: USART4
+    kernel_clock: PCLK1
     enable:
       register: APB1PCENR
       field: USART4EN
@@ -218,7 +218,7 @@
     block: USART
   rcc:
     bus_clock: PCLK1
-    kernel_clock: USART5
+    kernel_clock: PCLK1
     enable:
       register: APB1PCENR
       field: USART5EN
@@ -392,6 +392,8 @@
     register: PCFR1
     field: SPI3_RM
 
+# =======
+# 2 ADC
 - name: ADC1
   address: 0x40012400
   registers:
@@ -422,3 +424,15 @@
     reset:
       register: APB2PRSTR
       field: ADC2RST
+
+# =======
+# 2 DAC
+
+# ========
+# 4 ADTM + 4 GTPM + 2 BCTM
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: adtm
+    version: v3
+    block: ADTM

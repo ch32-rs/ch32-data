@@ -89,6 +89,7 @@
     reset:
       register: APB2PRSTR
       field: IOPCRST
+# PD0 to PD2
 - name: GPIOD
   address: 0x40011400
   registers:
@@ -104,23 +105,9 @@
     reset:
       register: APB2PRSTR
       field: IOPDRST
-- name: GPIOE
-  address: 0x40011800
-  registers:
-    kind: gpio
-    version: v3
-    block: GPIO
-  rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2
-    enable:
-      register: APB2PCENR
-      field: IOPEEN
-    reset:
-      register: APB2PRSTR
-      field: IOPERST
+
 - name: AFIO
-  address: 0x40010004
+  address: 0x40010000
   registers:
     kind: afio
     version: v3
@@ -162,7 +149,7 @@
     block: USART
   rcc:
     bus_clock: PCLK1
-    kernel_clock: USART2
+    kernel_clock: PCLK1
     enable:
       register: APB1PCENR
       field: USART2EN
@@ -172,40 +159,12 @@
   remap:
     register: PCFR1
     field: USART2_RM
-- name: USART3
-  address: 0x40004800
+
+# ========
+# 1 ADTM + 3 GTPM
+- name: TIM1
+  address: 0x40012C00
   registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK1
-    kernel_clock: USART3
-    enable:
-      register: APB1PCENR
-      field: USART3EN
-    reset:
-      register: APB1PRSTR
-      field: USART3RST
-  remap:
-    register: PCFR1
-    field: USART3_RM
-# The following are actually USART, not USART
-- name: USART4
-  address: 0x40004C00
-  registers:
-    kind: usart
-    version: common
-    block: USART
-  rcc:
-    bus_clock: PCLK1
-    kernel_clock: USART4
-    enable:
-      register: APB1PCENR
-      field: USART4EN
-    reset:
-      register: APB1PRSTR
-      field: USART4RST
-  remap:
-    register: PCFR2
-    field: USART4_RM
+    kind: adtm
+    version: v3
+    block: ADTM

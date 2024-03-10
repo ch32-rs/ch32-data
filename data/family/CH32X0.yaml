@@ -88,7 +88,7 @@
       register: APB2PRSTR
       field: IOPCRST
 - name: AFIO
-  address: 0x40010004
+  address: 0x40010000
   registers:
     kind: afio
     version: x0
