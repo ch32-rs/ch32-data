@@ -9,26 +9,17 @@ block/AFIO:
       description: AF remap and debug I/O configuration register (AFIO_PCFR1).
       byte_offset: 4
       fieldset: PCFR1
-    - name: EXTICR1
-      description: External interrupt configuration register 1 (AFIO_EXTICR1).
-      byte_offset: 8
-      fieldset: EXTICR1
-    - name: EXTICR2
-      description: External interrupt configuration register 2 (AFIO_EXTICR2).
-      byte_offset: 12
-      fieldset: EXTICR2
-    - name: EXTICR3
-      description: External interrupt configuration register 3 (AFIO_EXTICR3).
-      byte_offset: 16
-      fieldset: EXTICR3
-    - name: EXTICR4
-      description: External interrupt configuration register 4 (AFIO_EXTICR4).
-      byte_offset: 20
-      fieldset: EXTICR4
     - name: PCFR2
       description: AF remap and debug I/O configuration register (AFIO_PCFR2).
       byte_offset: 28
       fieldset: PCFR2
+    - name: EXTICR
+      description: External interrupt configuration registers (AFIO_EXTICRs).
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 8
+      fieldset: EXTICR
 fieldset/ECR:
   description: Event Control Register (AFIO_ECR).
   fields:
@@ -44,82 +35,16 @@ fieldset/ECR:
       description: Event Output Enable.
       bit_offset: 7
       bit_size: 1
-fieldset/EXTICR1:
-  description: External interrupt configuration register 1 (AFIO_EXTICR1).
+fieldset/EXTICR:
+  description: External interrupt configuration register (AFIO_EXTICRx).
   fields:
-    - name: EXTI0
-      description: EXTI0 configuration.
+    - name: EXTI
+      description: EXTI configuration.
       bit_offset: 0
       bit_size: 4
-    - name: EXTI1
-      description: EXTI1 configuration.
-      bit_offset: 4
-      bit_size: 4
-    - name: EXTI2
-      description: EXTI2 configuration.
-      bit_offset: 8
-      bit_size: 4
-    - name: EXTI3
-      description: EXTI3 configuration.
-      bit_offset: 12
-      bit_size: 4
-fieldset/EXTICR2:
-  description: External interrupt configuration register 2 (AFIO_EXTICR2).
-  fields:
-    - name: EXTI4
-      description: EXTI4 configuration.
-      bit_offset: 0
-      bit_size: 4
-    - name: EXTI5
-      description: EXTI5 configuration.
-      bit_offset: 4
-      bit_size: 4
-    - name: EXTI6
-      description: EXTI6 configuration.
-      bit_offset: 8
-      bit_size: 4
-    - name: EXTI7
-      description: EXTI7 configuration.
-      bit_offset: 12
-      bit_size: 4
-fieldset/EXTICR3:
-  description: External interrupt configuration register 3 (AFIO_EXTICR3).
-  fields:
-    - name: EXTI8
-      description: EXTI8 configuration.
-      bit_offset: 0
-      bit_size: 4
-    - name: EXTI9
-      description: EXTI9 configuration.
-      bit_offset: 4
-      bit_size: 4
-    - name: EXTI10
-      description: EXTI10 configuration.
-      bit_offset: 8
-      bit_size: 4
-    - name: EXTI11
-      description: EXTI11 configuration.
-      bit_offset: 12
-      bit_size: 4
-fieldset/EXTICR4:
-  description: External interrupt configuration register 4 (AFIO_EXTICR4).
-  fields:
-    - name: EXTI12
-      description: EXTI12 configuration.
-      bit_offset: 0
-      bit_size: 4
-    - name: EXTI13
-      description: EXTI13 configuration.
-      bit_offset: 4
-      bit_size: 4
-    - name: EXTI14
-      description: EXTI14 configuration.
-      bit_offset: 8
-      bit_size: 4
-    - name: EXTI15
-      description: EXTI15 configuration.
-      bit_offset: 12
-      bit_size: 4
+      array:
+        len: 4
+        stride: 4
 fieldset/PCFR1:
   description: AF remap and debug I/O configuration register (AFIO_PCFR1).
   fields:
