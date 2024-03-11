@@ -143,6 +143,72 @@
   #remap:
   #  register: PCFR1
   #  field: USART1_RM
+  pins:
+    # 00:默认映射(CK/PA8，TX/PA9，RX/PA10， CTS/PA11，RTS/PA12);
+    - pin: PA8
+      signal: CK
+      remap: 0b00
+    - pin: PA9
+      signal: TX
+      remap: 0b00
+    - pin: PA10
+      signal: RX
+      remap: 0b00
+    - pin: PA11
+      signal: CTS
+      remap: 0b00
+    - pin: PA12
+      signal: RTS
+      remap: 0b00
+    #01:重映射(CK/PA8，TX/PB6，RX/PB7， CTS/PA11，RTS/PA12);
+    - pin: PA8
+      signal: CK
+      remap: 0b01
+    - pin: PB6
+      signal: TX
+      remap: 0b01
+    - pin: PB7
+      signal: RX
+      remap: 0b01
+    - pin: PA11
+      signal: CTS
+      remap: 0b01
+    - pin: PA12
+      signal: RTS
+      remap: 0b01
+    # 10:重映射(CK/PA10，TX/PB15，RX/PA8， CTS/PA5，RTS/PA9);
+    - pin: PA10
+      signal: CK
+      remap: 0b10
+    - pin: PB15
+      signal: TX
+      remap: 0b10
+    - pin: PA8
+      signal: RX
+      remap: 0b10
+    - pin: PA5
+      signal: CTS
+      remap: 0b10
+    - pin: PA9
+      signal: RTS
+      remap: 0b10
+    # 11:重映射(CK/PA5，TX/PA6，RX/PA7，CTS/PC4， RTS/PC5)。
+    - pin: PA5
+      signal: CK
+      remap: 0b11
+    - pin: PA6
+      signal: TX
+      remap: 0b11
+    - pin: PA7
+      signal: RX
+      remap: 0b11
+    - pin: PC4
+      signal: CTS
+      remap: 0b11
+    - pin: PC5
+      signal: RTS
+      remap: 0b11
+
 - name: USART2
   address: 0x40004400
   registers:
@@ -161,6 +227,40 @@
   remap:
     register: PCFR1
     field: USART2_RM
+  pins:
+    # 0:默认映射(CTS/PA0，RTS/PA1，TX/PA2，RX/PA3，CK/PA4);
+    - pin: PA0
+      signal: CTS
+      remap: 0b0
+    - pin: PA1
+      signal: RTS
+      remap: 0b0
+    - pin: PA2
+      signal: TX
+      remap: 0b0
+    - pin: PA3
+      signal: RX
+      remap: 0b0
+    - pin: PA4
+      signal: CK
+      remap: 0b0
+    # 1:重映射(CTS/PD3，RTS/PD4，TX/PD5，RX/PD6， CK/PD7)
+    - pin: PD3
+      signal: CTS
+      remap: 0b1
+    - pin: PD4
+      signal: RTS
+      remap: 0b1
+    - pin: PD5
+      signal: TX
+      remap: 0b1
+    - pin: PD6
+      signal: RX
+      remap: 0b1
+    - pin: PD7
+      signal: CK
+      remap: 0b1
+
 - name: USART3
   address: 0x40004800
   registers:
@@ -179,6 +279,58 @@
   remap:
     register: PCFR1
     field: USART3_RM
+
+  pins:
+    # 00:默认映射(TX/PB10，RX/PB11，CK/PB12， CTS/PB13，RTS/PB14);
+    - pin: PB10
+      signal: TX
+      remap: 0b00
+    - pin: PB11
+      signal: RX
+      remap: 0b00
+    - pin: PB12
+      signal: CK
+      remap: 0b00
+    - pin: PB13
+      signal: CTS
+      remap: 0b00
+    - pin: PB14
+      signal: RTS
+      remap: 0b00
+    # 01:部分重映射(TX/PC10，RX/PC11，CK/PC12， CTS/PB13，RTS/PB14);
+    - pin: PC10
+      signal: TX
+      remap: 0b01
+    - pin: PC11
+      signal: RX
+      remap: 0b01
+    - pin: PC12
+      signal: CK
+      remap: 0b01
+    - pin: PB13
+      signal: CTS
+      remap: 0b01
+    - pin: PB14
+      signal: RTS
+      remap: 0b01
+    # 10:保留;
+    # 11:完全重映射(TX/PD8，RX/PD9，CK/PD10， CTS/PD11，RTS/PD12)
+    - pin: PD8
+      signal: TX
+      remap: 0b11
+    - pin: PD9
+      signal: RX
+      remap: 0b11
+    - pin: PD10
+      signal: CK
+      remap: 0b11
+    - pin: PD11
+      signal: CTS
+      remap: 0b11
+    - pin: PD12
+      signal: RTS
+      remap: 0b11
+
 # The following are actually USART, not USART
 - name: USART4
   address: 0x40004C00
@@ -198,6 +350,28 @@
   remap:
     register: PCFR2
     field: USART4_RM
+  pins:
+    # 00:默认映射(TX/PC10，RX/PC11);
+    - pin: PC10
+      signal: TX
+      remap: 0b00
+    - pin: PC11
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB0，RX/PB1);
+    - pin: PB0
+      signal: TX
+      remap: 0b01
+    - pin: PB1
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE0，RX/PE1)。
+    - pin: PE0
+      signal: TX
+      remap: 0b10
+    - pin: PE1
+      signal: RX
+      remap: 0b10
 
 - name: USART5
   address: 0x40005000
@@ -217,6 +391,29 @@
   remap:
     register: PCFR2
     field: USART5_RM
+  pins:
+    # 00:默认映射(TX/PC12，RX/PD2);
+    - pin: PC12
+      signal: TX
+      remap: 0b00
+    - pin: PD2
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB4，RX/PB5);
+    - pin: PB4
+      signal: TX
+      remap: 0b01
+    - pin: PB5
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE8，RX/PE9)
+    - pin: PE8
+      signal: TX
+      remap: 0b10
+    - pin: PE9
+      signal: RX
+      remap: 0b10
+
 - name: USART6
   address: 0x40001800
   registers:
@@ -235,6 +432,29 @@
   remap:
     register: PCFR2
     field: USART6_RM
+  pins:
+    # 00:默认映射(TX/PC0，RX/PC1);
+    - pin: PC0
+      signal: TX
+      remap: 0b00
+    - pin: PC1
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB8，RX/PB9);
+    - pin: PB8
+      signal: TX
+      remap: 0b01
+    - pin: PB9
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE10，RX/PE11)。
+    - pin: PE10
+      signal: TX
+      remap: 0b10
+    - pin: PE11
+      signal: RX
+      remap: 0b10
+
 - name: USART7
   address: 0x40001C00
   registers:
@@ -253,6 +473,29 @@
   remap:
     register: PCFR2
     field: USART7_RM
+  pins:
+    # 00:默认映射(TX/PC2，RX/PC3);
+    - pin: PC2
+      signal: TX
+      remap: 0b00
+    - pin: PC3
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PA6，RX/PA7);
+    - pin: PA6
+      signal: TX
+      remap: 0b01
+    - pin: PA7
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE12，RX/PE13)
+    - pin: PE12
+      signal: TX
+      remap: 0b10
+    - pin: PE13
+      signal: RX
+      remap: 0b10
+
 - name: USART8
   address: 0x40002000
   registers:
@@ -271,6 +514,25 @@
   remap:
     register: PCFR2
     field: USART8_RM
+  pins:
+    # 00:默认映射(TX/PC4，RX/PC5);
+    - pin: PC4
+      signal: TX
+      remap: 0b00
+    - pin: PC5
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PA14，RX/PA15);
+    - pin: PA14
+      signal: TX
+      remap: 0b01
+    - pin: PA15
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE14，RX/PE15)。
+    - pin: PE14
+      signal: TX
+      remap: 0b10
 
 - name: I2C1
   address: 0x40005400
@@ -291,12 +553,15 @@
     register: PCFR1
     field: I2C1_RM
   pins:
+    # 0:默认映射(SCL/PB6，SDA/PB7); 1:重映射(SCL/PB8，SDA/PB9)。
     - pin: PB5
       signal: SMBA
     - pin: PB6
       signal: SCL
+      remap: 0
     - pin: PB7
       signal: SDA
+      remap: 0
     - pin: PB8
       signal: SCL
       remap: 1
@@ -346,6 +611,34 @@
   remap:
     register: PCFR1
     field: SPI1_RM
+  pins:
+    # 0:默认映射(NSS/PA4，SCK/PA5，MISO/PA6， MOSI/PA7);
+    - pin: PA4
+      signal: NSS
+      remap: 0
+    - pin: PA5
+      signal: SCK
+      remap: 0
+    - pin: PA6
+      signal: MISO
+      remap: 0
+    - pin: PA7
+      signal: MOSI
+      remap: 0
+    # 1:重映射(NSS/PA15，SCK/PB3，MISO/PB4， MOSI/PB5)。
+    - pin: PA15
+      signal: NSS
+      remap: 1
+    - pin: PB3
+      signal: SCK
+      remap: 1
+    - pin: PB4
+      signal: MISO
+      remap: 1
+    - pin: PB5
+      signal: MOSI
+      remap: 1
+
 - name: SPI2
   address: 0x40003800
   registers:
@@ -380,6 +673,33 @@
   remap:
     register: PCFR1
     field: SPI3_RM
+  pins:
+    # 0:默认映射(NSS/PA15、SCK/PB3、MISO/PB4、 MOSI/PB5);
+    - pin: PA15
+      signal: NSS
+      remap: 0
+    - pin: PB3
+      signal: SCK
+      remap: 0
+    - pin: PB4
+      signal: MISO
+      remap: 0
+    - pin: PB5
+      signal: MOSI
+      remap: 0
+    # 1:重映射(NSS/PA4、SCK/PC10、MISO/PC11、 MOSI/PC12)
+    - pin: PA4
+      signal: NSS
+      remap: 1
+    - pin: PC10
+      signal: SCK
+      remap: 1
+    - pin: PC11
+      signal: MISO
+      remap: 1
+    - pin: PC12
+      signal: MOSI
+      remap: 1
 
 # =======
 # 2 ADC
@@ -398,6 +718,8 @@
     reset:
       register: APB2PRSTR
       field: ADC1RST
+  pins:
+
 - name: ADC2
   address: 0x40012800
   registers:
@@ -419,12 +741,201 @@
 
 # ========
 # 4 ADTM + 4 GTPM + 2 BCTM
+# ADTM(TIM1/8/9/10)
+# GPTM (TIM2、TIM3、TIM4 和 TIM5)
+# BCTM (TIM6 和 TIM7)
 - name: TIM1
   address: 0x40012C00
   registers:
     kind: adtm
     version: v3
     block: ADTM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: TIM1EN
+    reset:
+      register: APB2PRSTR
+      field: TIM1RST
+  pins:
+    # 00:默认映射(ETR/PA12，CH1/PA8，CH2/PA9， CH3/PA10，CH4/PA11，BKIN/PB12，CH1N/PB13， CH2N/PB14，CH3N/PB15);
+    - pin: PA12
+      signal: ETR
+      remap: 0b00
+    - pin: PA8
+      signal: CH1
+      remap: 0b00
+    - pin: PA9
+      signal: CH2
+      remap: 0b00
+    - pin: PA10
+      signal: CH3
+      remap: 0b00
+    - pin: PA11
+      signal: CH4
+      remap: 0b00
+    - pin: PB12
+      signal: BKIN
+      remap: 0b00
+    - pin: PB13
+      signal: CH1N
+      remap: 0b00
+    - pin: PB14
+      signal: CH2N
+      remap: 0b00
+    - pin: PB15
+      signal: CH3N
+      remap: 0b00
+    # 01:部分映射(ETR/PA12，CH1/PA8，CH2/PA9， CH3/PA10，CH4/PA11，BKIN/PA6，CH1N/PA7， CH2N/PB0，CH3N/PB1);
+    - pin: PA12
+      signal: ETR
+      remap: 0b01
+    - pin: PA8
+      signal: CH1
+      remap: 0b01
+    - pin: PA9
+      signal: CH2
+      remap: 0b01
+    - pin: PA10
+      signal: CH3
+      remap: 0b01
+    - pin: PA11
+      signal: CH4
+      remap: 0b01
+    - pin: PA6
+      signal: BKIN
+      remap: 0b01
+    - pin: PA7
+      signal: CH1N
+      remap: 0b01
+    - pin: PB0
+      signal: CH2N
+      remap: 0b01
+    - pin: PB1
+      signal: CH3N
+      remap: 0b01
+
+    # 10:保留;
+    # 11:完全映射(ETR/PE7，CH1/PE9，CH2/PE11， CH3/PE13，CH4/PE14，BKIN/PE15，CH1N/PE8， CH2N/PE10，CH3N/PE12)。
+    - pin: PE7
+      signal: ETR
+      remap: 0b11
+    - pin: PE9
+      signal: CH1
+      remap: 0b11
+    - pin: PE11
+      signal: CH2
+      remap: 0b11
+    - pin: PE13
+      signal: CH3
+      remap: 0b11
+    - pin: PE14
+      signal: CH4
+      remap: 0b11
+    - pin: PE15
+      signal: BKIN
+      remap: 0b11
+    - pin: PE8
+      signal: CH1N
+      remap: 0b11
+    - pin: PE10
+      signal: CH2N
+      remap: 0b11
+    - pin: PE12
+      signal: CH3N
+      remap: 0b11
+
+- name: TIM8
+  address: 0x40013400
+  registers:
+    kind: adtm
+    version: v3
+    block: ADTM
+  # 0:默认映射(ETR/PA0，CH1/PC6，CH2/PC7， CH3/PC8 ， CH4/PC9 ， BKIN/PA6 ， CH1N/PA7 ， CH2N/PB0，CH3N/PB1); 1:重映射(ETR/PA0，CH1/PB6，CH2/PB7， CH3/PB8，CH4/PC13，BKIN/PB9，CH1N/PA13， CH2N/PA14，CH3N/PA15);
+
+- name: TIM9
+  address: 0x40014C00
+  registers:
+    kind: adtm
+    version: v3
+    block: ADTM
+  # 00:默认映射(ETR/PA2，CH1/PA2，CH2/PA3， CH3/PA4 ， CH4/PC4 ， BKIN/PC5 ， CH1N/PC0 ， CH2N/PC1，CH3N/PC2); 01:部分映射(ETR/PA2，CH1/PA2，CH2/PA3， CH3/PA4，CH4/PC14，BKIN/PA1，CH1N/PB0， CH2N/PB1，CH3N/PB2); 1x:完全映射(ETR/PD9，CH1/PD9，CH2/PD11， CH3/PD13，CH4/PD15，BKIN/PD14，CH1N/PD8， CH2N/PD10，CH3N/PD12)。
+
+- name: TIM10
+  address: 0x40015000
+  registers:
+    kind: adtm
+    version: v3
+    block: ADTM
+  # T00:默认映射(ETR/PC10，CH1/PB8，CH2/PB9， CH3/PC3，CH4/PC11，BKIN/PC12，CH1N/PA12， CH2N/PA13，CH3N/PA14); 01:部分映射(ETR/PB11，CH1/PB3，CH2/PB4， CH3/PB5，CH4/PC15，BKIN/PB10，CH1N/PA5， CH2N/PA6，CH3N/PA7); 1x:完全映射(ETR/PD0，CH1/PD1，CH2/PD3， CH3/PD5 ， CH4/PD7 ， BKIN/PE2 ， CH1N/PE3 ， CH2N/PE4，CH3N/PE5)
+
+# GPTM
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+  # 00 : 默 认 映 射 (CH1/ETR/PA0 ， CH2/PA1 ， CH3/PA2，CH4/PA3);
+  # 01 : 部 分 映 射 (CH1/ETR/PA15 ， CH2/PB3 ， CH3/PA2，CH4/PA3);
+# 10 : 部 分 映 射 (CH1/ETR/PA0 ， CH2/PA1 ， CH3/PB10，CH4/PB11);
+# 11 : 完 全 映 射 (CH1/ETR/PA15 ， CH2/PB3 ， CH3/PB10，CH4/PB11)。
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+# 00:默认映射(CH1/PA6，CH2/PA7，CH3/PB0， CH4/PB1);
+# 01:保留; 10:部分映射(CH1/PB4，CH2/PB5，CH3/PB0， CH4/PB1); 11:完全映射(CH1/PC6，CH2/PC7，CH3/PC8，CH4/PC9);
+#重映射不影响在 PD2 上的 TIM3_ETR
+- name: TIM4
+  address: 0x40000800
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+  # 0:默认映射(CH1/PB6，CH2/PB7，CH3/PB8， 0 CH4/PB9); 1:重映射(CH1/PD12，CH2/PD13，CH3/PD14， CH4/PD15)
+- name: TIM5
+  address: 0x40000C00
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+
+- name: TIM6
+  address: 0x40001000
+  registers:
+    kind: bctm
+    version: v3
+    block: BCTM
+- name: TIM7
+  address: 0x40001400
+  registers:
+    kind: bctm
+    version: v3
+    block: BCTM
+
+- name: CAN1
+  address: 0x40006400
+  registers:
+    kind: can
+    version: v3
+    block: CAN
+  # 00:CAN1_RX 映射到 PA11，CAN1_TX 映射到 PA12;
+  # 10:CAN1_RX 映射到 PB8，CAN1_TX 映射到 PB9;
+  # 01:保留;
+  # 11:CAN1_RX 映射到 PD0，CAN1_TX 映射到 PD1
+
+- name: CAN2
+  address: 0x40006800
+  registers:
+    kind: can
+    version: v3
+    block: CAN
+  # 0:默认映射(CAN2_RX/PB12，CAN2_TX/PB13); 0 1:重映射(CAN2_RX/PB5，CAN2_TX/PB6)
 
 - name: EXTEND
   address: 0x40023800

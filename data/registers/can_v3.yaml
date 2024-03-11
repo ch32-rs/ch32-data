@@ -1,0 +1,619 @@
+block/CAN:
+  description: Controller area network.
+  items:
+    - name: CTLR
+      description: CAN Master control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: STATR
+      description: CAN master status register.
+      byte_offset: 4
+      fieldset: STATR
+    - name: TSTATR
+      description: CAN transmit status register.
+      byte_offset: 8
+      fieldset: TSTATR
+    - name: RFIFO0
+      description: CAN receive FIFO 0 register.
+      byte_offset: 12
+      fieldset: RFIFO0
+    - name: RFIFO1
+      description: CAN receive FIFO 1 register.
+      byte_offset: 16
+      fieldset: RFIFO1
+    - name: INTENR
+      description: CAN interrupt enable register.
+      byte_offset: 20
+      fieldset: INTENR
+    - name: ERRSR
+      description: CAN error status register.
+      byte_offset: 24
+      fieldset: ERRSR
+    - name: BTIMR
+      description: CAN bit timing register.
+      byte_offset: 28
+      fieldset: BTIMR
+    - name: TXMIR
+      description: CAN TX mailbox identifier register.
+      array:
+        len: 3
+        stride: 16
+      byte_offset: 384
+      fieldset: TXMIR
+    - name: TXMDTR
+      description: CAN mailbox data length control and time stamp register.
+      array:
+        len: 3
+        stride: 16
+      byte_offset: 388
+      fieldset: TXMDTR
+    - name: TXMDLR
+      description: CAN mailbox data low register.
+      array:
+        len: 3
+        stride: 16
+      byte_offset: 392
+      fieldset: TXMDLR
+    - name: TXMDHR
+      description: CAN mailbox data high register.
+      array:
+        len: 3
+        stride: 16
+      byte_offset: 396
+      fieldset: TXMDHR
+    - name: RXMIR
+      description: CAN receive FIFO mailbox identifier register.
+      array:
+        len: 2
+        stride: 16
+      byte_offset: 432
+      access: Read
+      fieldset: RXMIR
+    - name: RXMDTR
+      description: CAN receive FIFO mailbox data length control and time stamp register.
+      array:
+        len: 2
+        stride: 16
+      byte_offset: 436
+      access: Read
+      fieldset: RXMDTR
+    - name: RXMDLR
+      description: CAN receive FIFO mailbox data low register.
+      array:
+        len: 2
+        stride: 16
+      byte_offset: 440
+      access: Read
+      fieldset: RXMDLR
+    - name: RXMDHR
+      description: CAN receive FIFO mailbox data high register.
+      array:
+        len: 2
+        stride: 16
+      byte_offset: 444
+      access: Read
+      fieldset: RXMDHR
+    - name: FCTLR
+      description: CAN filter master register.
+      byte_offset: 512
+      fieldset: FCTLR
+    - name: FMCFGR
+      description: CAN filter mode register.
+      byte_offset: 516
+      fieldset: FMCFGR
+    - name: FSCFGR
+      description: CAN filter scale register.
+      byte_offset: 524
+      fieldset: FSCFGR
+    - name: FAFIFOR
+      description: CAN filter FIFO assignment register.
+      byte_offset: 532
+      fieldset: FAFIFOR
+    - name: FWR
+      description: CAN filter activation register.
+      byte_offset: 540
+      fieldset: FWR
+    - name: FR
+      description: Filter bank 0 register 1.
+      array:
+        len: 56
+        stride: 4
+      byte_offset: 576
+      fieldset: FR
+fieldset/BTIMR:
+  description: CAN bit timing register.
+  fields:
+    - name: BRP
+      description: Baud rate prescaler.
+      bit_offset: 0
+      bit_size: 10
+    - name: TS1
+      description: Time segment 1.
+      bit_offset: 16
+      bit_size: 4
+    - name: TS2
+      description: Time segment 2.
+      bit_offset: 20
+      bit_size: 3
+    - name: SJW
+      description: Resynchronization jump width.
+      bit_offset: 24
+      bit_size: 2
+    - name: LBKM
+      description: Loop back mode (debug).
+      bit_offset: 30
+      bit_size: 1
+    - name: SILM
+      description: Silent mode (debug).
+      bit_offset: 31
+      bit_size: 1
+fieldset/CTLR:
+  description: CAN Master control register.
+  fields:
+    - name: INRQ
+      description: Initialization request.
+      bit_offset: 0
+      bit_size: 1
+    - name: SLEEP
+      description: Sleep mode request.
+      bit_offset: 1
+      bit_size: 1
+    - name: TXFP
+      description: Transmit FIFO priority.
+      bit_offset: 2
+      bit_size: 1
+    - name: RFLM
+      description: Receive FIFO locked mode.
+      bit_offset: 3
+      bit_size: 1
+    - name: NART
+      description: No automatic retransmission.
+      bit_offset: 4
+      bit_size: 1
+    - name: AWUM
+      description: Automatic wakeup mode.
+      bit_offset: 5
+      bit_size: 1
+    - name: ABOM
+      description: Automatic bus-off management.
+      bit_offset: 6
+      bit_size: 1
+    - name: TTCM
+      description: Time triggered communication mode.
+      bit_offset: 7
+      bit_size: 1
+    - name: RESET
+      description: Software master reset.
+      bit_offset: 15
+      bit_size: 1
+    - name: DBF
+      description: Debug freeze.
+      bit_offset: 16
+      bit_size: 1
+fieldset/ERRSR:
+  description: CAN error status register.
+  fields:
+    - name: EWGF
+      description: Error warning flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: EPVF
+      description: Error passive flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: BOFF
+      description: Bus-off flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: LEC
+      description: Last error code.
+      bit_offset: 4
+      bit_size: 3
+    - name: TEC
+      description: Least significant byte of the 9-bit transmit error counter.
+      bit_offset: 16
+      bit_size: 8
+    - name: REC
+      description: Receive error counter.
+      bit_offset: 24
+      bit_size: 8
+fieldset/FAFIFOR:
+  description: CAN filter FIFO assignment register.
+  fields:
+    - name: FFA
+      description: Filter FIFO assignment for filter 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 14
+        stride: 1
+fieldset/FCTLR:
+  description: CAN filter master register.
+  fields:
+    - name: FINIT
+      description: Filter init mode.
+      bit_offset: 0
+      bit_size: 1
+    - name: CAN2SB
+      description: CAN2 start bank.
+      bit_offset: 8
+      bit_size: 6
+fieldset/FMCFGR:
+  description: CAN filter mode register.
+  fields:
+    - name: FBM
+      description: Filter mode.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 14
+        stride: 1
+fieldset/FR:
+  description: Filter bank 24 register 2.
+  fields:
+    - name: FB
+      description: Filter bits.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 32
+        stride: 1
+fieldset/FSCFGR:
+  description: CAN filter scale register.
+  fields:
+    - name: FSC
+      description: Filter scale configuration.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 14
+        stride: 1
+fieldset/FWR:
+  description: CAN filter activation register.
+  fields:
+    - name: FACT
+      description: Filter active.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 14
+        stride: 1
+fieldset/INTENR:
+  description: CAN interrupt enable register.
+  fields:
+    - name: TMEIE
+      description: Transmit mailbox empty interrupt enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: FMPIE0
+      description: FIFO message pending interrupt enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: FFIE0
+      description: FIFO full interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: FOVIE0
+      description: FIFO overrun interrupt enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: FMPIE1
+      description: FIFO message pending interrupt enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: FFIE1
+      description: FIFO full interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: FOVIE1
+      description: FIFO overrun interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: EWGIE
+      description: Error warning interrupt enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: EPVIE
+      description: Error passive interrupt enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: BOFIE
+      description: Bus-off interrupt enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: LECIE
+      description: Last error code interrupt enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: ERRIE
+      description: Error interrupt enable.
+      bit_offset: 15
+      bit_size: 1
+    - name: WKUIE
+      description: Wakeup interrupt enable.
+      bit_offset: 16
+      bit_size: 1
+    - name: SLKIE
+      description: Sleep interrupt enable.
+      bit_offset: 17
+      bit_size: 1
+fieldset/RFIFO0:
+  description: CAN receive FIFO 0 register.
+  fields:
+    - name: FMP0
+      description: FIFO 0 message pending.
+      bit_offset: 0
+      bit_size: 2
+    - name: FULL0
+      description: FIFO 0 full.
+      bit_offset: 3
+      bit_size: 1
+    - name: FOVR0
+      description: FIFO 0 overrun.
+      bit_offset: 4
+      bit_size: 1
+    - name: RFOM0
+      description: Release FIFO 0 output mailbox.
+      bit_offset: 5
+      bit_size: 1
+fieldset/RFIFO1:
+  description: CAN receive FIFO 1 register.
+  fields:
+    - name: FMP1
+      description: FIFO 1 message pending.
+      bit_offset: 0
+      bit_size: 2
+    - name: FULL1
+      description: FIFO 1 full.
+      bit_offset: 3
+      bit_size: 1
+    - name: FOVR1
+      description: FIFO 1 overrun.
+      bit_offset: 4
+      bit_size: 1
+    - name: RFOM1
+      description: Release FIFO 1 output mailbox.
+      bit_offset: 5
+      bit_size: 1
+fieldset/RXMDHR:
+  description: CAN receive FIFO mailbox data high register.
+  fields:
+    - name: DATA
+      description: DATA4.
+      bit_offset: 0
+      bit_size: 8
+      array:
+        len: 4
+        stride: 8
+fieldset/RXMDLR:
+  description: CAN receive FIFO mailbox data low register.
+  fields:
+    - name: DATA
+      description: Data Byte 0.
+      bit_offset: 0
+      bit_size: 8
+      array:
+        len: 4
+        stride: 8
+fieldset/RXMDTR:
+  description: CAN receive FIFO mailbox data length control and time stamp register.
+  fields:
+    - name: DLC
+      description: Data length code.
+      bit_offset: 0
+      bit_size: 4
+    - name: FMI
+      description: Filter match index.
+      bit_offset: 8
+      bit_size: 8
+    - name: TIME
+      description: Message time stamp.
+      bit_offset: 16
+      bit_size: 16
+fieldset/RXMIR:
+  description: CAN receive FIFO mailbox identifier register.
+  fields:
+    - name: RTR
+      description: Remote transmission request.
+      bit_offset: 1
+      bit_size: 1
+    - name: IDE
+      description: Identifier extension.
+      bit_offset: 2
+      bit_size: 1
+    - name: EXID
+      description: extended identifier.
+      bit_offset: 3
+      bit_size: 18
+    - name: STID
+      description: Standard identifier.
+      bit_offset: 21
+      bit_size: 11
+fieldset/STATR:
+  description: CAN master status register.
+  fields:
+    - name: INAK
+      description: Initialization acknowledge.
+      bit_offset: 0
+      bit_size: 1
+    - name: SLAK
+      description: Sleep acknowledge.
+      bit_offset: 1
+      bit_size: 1
+    - name: ERRI
+      description: Error interrupt.
+      bit_offset: 2
+      bit_size: 1
+    - name: WKUI
+      description: Wakeup interrupt.
+      bit_offset: 3
+      bit_size: 1
+    - name: SLAKI
+      description: Sleep acknowledge interrupt.
+      bit_offset: 4
+      bit_size: 1
+    - name: TXM
+      description: Transmit mode.
+      bit_offset: 8
+      bit_size: 1
+    - name: RXM
+      description: Receive mode.
+      bit_offset: 9
+      bit_size: 1
+    - name: SAMP
+      description: Last sample point.
+      bit_offset: 10
+      bit_size: 1
+    - name: RX
+      description: Rx signal.
+      bit_offset: 11
+      bit_size: 1
+fieldset/TSTATR:
+  description: CAN transmit status register.
+  fields:
+    - name: RQCP0
+      description: Request completed mailbox0.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXOK0
+      description: Transmission OK of mailbox0.
+      bit_offset: 1
+      bit_size: 1
+    - name: ALST0
+      description: Arbitration lost for mailbox0.
+      bit_offset: 2
+      bit_size: 1
+    - name: TERR0
+      description: Transmission error of mailbox0.
+      bit_offset: 3
+      bit_size: 1
+    - name: ABRQ0
+      description: Abort request for mailbox0.
+      bit_offset: 7
+      bit_size: 1
+    - name: RQCP1
+      description: Request completed mailbox1.
+      bit_offset: 8
+      bit_size: 1
+    - name: TXOK1
+      description: Transmission OK of mailbox1.
+      bit_offset: 9
+      bit_size: 1
+    - name: ALST1
+      description: Arbitration lost for mailbox1.
+      bit_offset: 10
+      bit_size: 1
+    - name: TERR1
+      description: Transmission error of mailbox1.
+      bit_offset: 11
+      bit_size: 1
+    - name: ABRQ1
+      description: Abort request for mailbox 1.
+      bit_offset: 15
+      bit_size: 1
+    - name: RQCP2
+      description: Request completed mailbox2.
+      bit_offset: 16
+      bit_size: 1
+    - name: TXOK2
+      description: Transmission OK of mailbox 2.
+      bit_offset: 17
+      bit_size: 1
+    - name: ALST2
+      description: Arbitration lost for mailbox 2.
+      bit_offset: 18
+      bit_size: 1
+    - name: TERR2
+      description: Transmission error of mailbox 2.
+      bit_offset: 19
+      bit_size: 1
+    - name: ABRQ2
+      description: Abort request for mailbox 2.
+      bit_offset: 23
+      bit_size: 1
+    - name: CODE
+      description: Mailbox code.
+      bit_offset: 24
+      bit_size: 2
+    - name: TME0
+      description: Transmit mailbox 0 empty.
+      bit_offset: 26
+      bit_size: 1
+    - name: TME1
+      description: Transmit mailbox 1 empty.
+      bit_offset: 27
+      bit_size: 1
+    - name: TME2
+      description: Transmit mailbox 2 empty.
+      bit_offset: 28
+      bit_size: 1
+    - name: LOW0
+      description: Lowest priority flag for mailbox 0.
+      bit_offset: 29
+      bit_size: 1
+    - name: LOW1
+      description: Lowest priority flag for mailbox 1.
+      bit_offset: 30
+      bit_size: 1
+    - name: LOW2
+      description: Lowest priority flag for mailbox 2.
+      bit_offset: 31
+      bit_size: 1
+fieldset/TXMDHR:
+  description: CAN mailbox data high register.
+  fields:
+    - name: DATA
+      description: Data byte 4.
+      bit_offset: 0
+      bit_size: 8
+      array:
+        len: 4
+        stride: 8
+fieldset/TXMDLR:
+  description: CAN mailbox data low register.
+  fields:
+    - name: DATA
+      description: Data byte 0.
+      bit_offset: 0
+      bit_size: 8
+      array:
+        len: 4
+        stride: 8
+fieldset/TXMDTR:
+  description: CAN mailbox data length control and time stamp register.
+  fields:
+    - name: DLC
+      description: Data length code.
+      bit_offset: 0
+      bit_size: 4
+    - name: TGT
+      description: Transmit global time.
+      bit_offset: 8
+      bit_size: 1
+    - name: TIME
+      description: Message time stamp.
+      bit_offset: 16
+      bit_size: 16
+fieldset/TXMIR:
+  description: CAN TX mailbox identifier register.
+  fields:
+    - name: TXRQ
+      description: Transmit mailbox request.
+      bit_offset: 0
+      bit_size: 1
+    - name: RTR
+      description: Remote transmission request.
+      bit_offset: 1
+      bit_size: 1
+    - name: IDE
+      description: Identifier extension.
+      bit_offset: 2
+      bit_size: 1
+    - name: EXID
+      description: extended identifier.
+      bit_offset: 3
+      bit_size: 18
+    - name: STID
+      description: Standard identifier.
+      bit_offset: 21
+      bit_size: 11
