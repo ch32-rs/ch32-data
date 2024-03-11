@@ -26,15 +26,15 @@ docs:
     url: http://www.wch.cn/products/CH32V003.html
 cores:
   - name: qingke-v2
-    peripherals:
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32V0.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V0.yaml"
+    include_interrupts: "../interrupts/ch32v0.yaml"
+    interrupts: []
+    dma_channels: []
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
 _raw:
   url: http://www.wch.cn/products/CH32V003.html
   Touchkey: "-"

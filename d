@@ -48,7 +48,7 @@ case "$CMD" in
     gen)
         rm -rf build/data
         echo "TODO: More chips to be added"
-        cargo run -p ch32-data-gen && cargo run -p ch32-metapac-gen -- "CH32X03*" CH32V307VCT6 CH32V203G6U6
+        cargo run -p ch32-data-gen && cargo run -p ch32-metapac-gen -- "CH32X03*" "CH32V003*" CH32V307VCT6 CH32V203G6U6
     ;;
     ci)
         echo TODO $CMD

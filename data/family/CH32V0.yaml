@@ -1,0 +1,86 @@
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv2
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv2
+    block: SYSTICK
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v0
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI7_0
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: v0
+    block: RCC
+  pins:
+    - pin: PC4
+      signal: MCO
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPDEN
+    reset:
+      register: APB2PRSTR
+      field: IOPDRST

@@ -26,15 +26,14 @@ docs:
     url: http://www.wch.cn/products/CH32V003.html
 cores:
   - name: qingke-v2
-    peripherals:
-
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32V0.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V0.yaml"
+    include_interrupts: "../interrupts/ch32v0.yaml"
+    interrupts: []
+    dma_channels: []
 _raw:
   WDOG: "2"
   ADC: 1/8
