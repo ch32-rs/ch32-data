@@ -39,6 +39,22 @@
     - pin: PC4
       signal: MCO
 
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: v0
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST
+
 - name: GPIOA
   address: 0x40010800
   registers:

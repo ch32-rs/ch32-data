@@ -375,7 +375,7 @@ enum/HPRE:
     - name: DIV4_ALT
       description: SYSCLK divided by 4.
       value: 0b1001
-    - name: DIV8
+    - name: DIV8_ALT
       description: SYSCLK divided by 8.
       value: 0b1010
     - name: DIV16

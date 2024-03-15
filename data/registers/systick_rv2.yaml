@@ -10,26 +10,20 @@ block/SYSTICK:
       byte_offset: 4
       fieldset: SR
     - name: CNT
-      description: System counter register.
+      description: System counter register, 32-bit.
       byte_offset: 8
-      fieldset: CNT
-    - name: CMPR
-      description: System count compare register.
-      byte_offset: 16
-      fieldset: CMPR
-fieldset/CMPR:
-  description: System count compare register.
-  fields:
-    - name: CMP
-      description: System count compare register.
-      bit_offset: 0
       bit_size: 32
-fieldset/CNT:
-  description: System counter register.
-  fields:
-    - name: CNT
-      description: System counter register.
-      bit_offset: 0
+    - name: CNTL
+      description: System counter register, 32-bit.
+      byte_offset: 8
+      bit_size: 32
+    - name: CMP
+      description: System count compare register, 32-bit.
+      byte_offset: 16
+      bit_size: 32
+    - name: CMPL
+      description: System count compare register, 32-bit.
+      byte_offset: 16
       bit_size: 32
 fieldset/CTLR:
   description: System count control register.
@@ -46,10 +40,12 @@ fieldset/CTLR:
       description: Counter system clock sourse selection bit.
       bit_offset: 2
       bit_size: 1
+      enum: STCLK
     - name: STRE
       description: Auto reload count enable bit.
       bit_offset: 3
       bit_size: 1
+      enum: MODE
     - name: SWIE
       description: Software interrupt enable.
       bit_offset: 31
@@ -61,3 +57,21 @@ fieldset/SR:
       description: Count value compare flag.
       bit_offset: 0
       bit_size: 1
+enum/MODE:
+  bit_size: 1
+  variants:
+    - name: Upcount
+      description: Upcount.
+      value: 0
+    - name: Downcount
+      description: Downcount.
+      value: 1
+enum/STCLK:
+  bit_size: 1
+  variants:
+    - name: HCLK_DIV8
+      description: HCLK/8.
+      value: 0
+    - name: HCLK
+      description: HCLK.
+      value: 1
