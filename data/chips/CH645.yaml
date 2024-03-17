@@ -26,7 +26,7 @@ docs:
   - type: homepage
     title: Homepage
     name: ""
-    url: http://www.wch.cn/products/CH646.html
+    url: https://www.wch.cn/products/CH645.html
 cores:
   - name: qingke-v4c
     peripherals:
