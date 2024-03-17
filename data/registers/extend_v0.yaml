@@ -1,15 +1,15 @@
 block/EXTEND:
   description: Extend configuration.
   items:
-    - name: EXTEND_CTR
+    - name: CTR
       description: Configure the extended control register.
       byte_offset: 0
-      fieldset: EXTEND_CTR
-    - name: EXTEND_KR
+      fieldset: CTR
+    - name: KEYR
       description: Configure the extended key register.
       byte_offset: 4
-      fieldset: EXTEND_KR
-fieldset/EXTEND_CTR:
+      fieldset: KEYR
+fieldset/CTR:
   description: Configure the extended control register.
   fields:
     - name: PLL_CFG
@@ -52,7 +52,7 @@ fieldset/EXTEND_CTR:
       description: OPA positive end channel selection.
       bit_offset: 18
       bit_size: 1
-fieldset/EXTEND_KR:
+fieldset/KEYR:
   description: Configure the extended key register.
   fields:
     - name: KEY
