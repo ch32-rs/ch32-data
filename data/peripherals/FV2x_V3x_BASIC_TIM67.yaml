@@ -1,0 +1,12 @@
+- name: TIM6
+  address: 0x40001000
+  registers:
+    kind: bctm
+    version: v3
+    block: BCTM
+- name: TIM7
+  address: 0x40001400
+  registers:
+    kind: bctm
+    version: v3
+    block: BCTM

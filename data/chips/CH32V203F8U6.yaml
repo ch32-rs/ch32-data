@@ -25,16 +25,24 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH32V203.html
 cores:
-  - name: qingke-v4
-    peripherals:
+  - name: qingke-v4b
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32V2.yaml"
+      - "../peripherals/FV2x_V3x_USART12.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+      - "../peripherals/FV2x_V3x_ADC1.yaml"
+      - "../peripherals/FV2x_V3x_ADC2.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+    include_interrupts: "../interrupts/ch32v2_v3.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4B.yaml"
+    interrupts: []
+    dma_channels: []
+
 _raw:
   UART: "2"
   Advanced TM: 1/3

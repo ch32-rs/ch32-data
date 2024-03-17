@@ -1,0 +1,40 @@
+- name: USART5
+  address: 0x40005000
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART5EN
+    reset:
+      register: APB1PRSTR
+      field: USART5RST
+  remap:
+    register: PCFR2
+    field: USART5_RM
+  pins:
+    # 00:默认映射(TX/PC12，RX/PD2);
+    - pin: PC12
+      signal: TX
+      remap: 0b00
+    - pin: PD2
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB4，RX/PB5);
+    - pin: PB4
+      signal: TX
+      remap: 0b01
+    - pin: PB5
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE8，RX/PE9)
+    - pin: PE8
+      signal: TX
+      remap: 0b10
+    - pin: PE9
+      signal: RX
+      remap: 0b10

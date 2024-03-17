@@ -1,0 +1,16 @@
+- name: SPI2
+  address: 0x40003800
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: SPI2EN
+    reset:
+      register: APB1PRSTR
+      field: SPI2RST
+  # No remap

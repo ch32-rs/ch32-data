@@ -1,0 +1,84 @@
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK1
+    enable:
+      register: APB2PCENR
+      field: USART1EN
+    reset:
+      register: APB2PRSTR
+      field: USART1RST
+  # NOTE: complex RM, handled manually
+  #remap:
+  #  register: PCFR1
+  #  field: USART1_RM
+  pins:
+    # 00:默认映射(CK/PA8，TX/PA9，RX/PA10， CTS/PA11，RTS/PA12);
+    - pin: PA8
+      signal: CK
+      remap: 0b00
+    - pin: PA9
+      signal: TX
+      remap: 0b00
+    - pin: PA10
+      signal: RX
+      remap: 0b00
+    - pin: PA11
+      signal: CTS
+      remap: 0b00
+    - pin: PA12
+      signal: RTS
+      remap: 0b00
+    #01:重映射(CK/PA8，TX/PB6，RX/PB7， CTS/PA11，RTS/PA12);
+    - pin: PA8
+      signal: CK
+      remap: 0b01
+    - pin: PB6
+      signal: TX
+      remap: 0b01
+    - pin: PB7
+      signal: RX
+      remap: 0b01
+    - pin: PA11
+      signal: CTS
+      remap: 0b01
+    - pin: PA12
+      signal: RTS
+      remap: 0b01
+    # 10:重映射(CK/PA10，TX/PB15，RX/PA8， CTS/PA5，RTS/PA9);
+    - pin: PA10
+      signal: CK
+      remap: 0b10
+    - pin: PB15
+      signal: TX
+      remap: 0b10
+    - pin: PA8
+      signal: RX
+      remap: 0b10
+    - pin: PA5
+      signal: CTS
+      remap: 0b10
+    - pin: PA9
+      signal: RTS
+      remap: 0b10
+    # 11:重映射(CK/PA5，TX/PA6，RX/PA7，CTS/PC4， RTS/PC5)。
+    - pin: PA5
+      signal: CK
+      remap: 0b11
+    - pin: PA6
+      signal: TX
+      remap: 0b11
+    - pin: PA7
+      signal: RX
+      remap: 0b11
+    - pin: PC4
+      signal: CTS
+      remap: 0b11
+    - pin: PC5
+      signal: RTS
+      remap: 0b11

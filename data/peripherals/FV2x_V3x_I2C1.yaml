@@ -1,0 +1,34 @@
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: I2C1EN
+    reset:
+      register: APB1PRSTR
+      field: I2C1RST
+  remap:
+    register: PCFR1
+    field: I2C1_RM
+  pins:
+    # 0:默认映射(SCL/PB6，SDA/PB7); 1:重映射(SCL/PB8，SDA/PB9)。
+    - pin: PB5
+      signal: SMBA
+    - pin: PB6
+      signal: SCL
+      remap: 0
+    - pin: PB7
+      signal: SDA
+      remap: 0
+    - pin: PB8
+      signal: SCL
+      remap: 1
+    - pin: PB9
+      signal: SDA
+      remap: 1

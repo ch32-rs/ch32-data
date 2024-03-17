@@ -1,0 +1,28 @@
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+  # 00 : 默 认 映 射 (CH1/ETR/PA0 ， CH2/PA1 ， CH3/PA2，CH4/PA3);
+  # 01 : 部 分 映 射 (CH1/ETR/PA15 ， CH2/PB3 ， CH3/PA2，CH4/PA3);
+  # 10 : 部 分 映 射 (CH1/ETR/PA0 ， CH2/PA1 ， CH3/PB10，CH4/PB11);
+  # 11 : 完 全 映 射 (CH1/ETR/PA15 ， CH2/PB3 ， CH3/PB10，CH4/PB11)。
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+  # 00:默认映射(CH1/PA6，CH2/PA7，CH3/PB0， CH4/PB1);
+  # 01:保留; 10:部分映射(CH1/PB4，CH2/PB5，CH3/PB0， CH4/PB1);
+  # 11:完全映射(CH1/PC6，CH2/PC7，CH3/PC8，CH4/PC9);
+  #重映射不影响在 PD2 上的 TIM3_ETR
+- name: TIM4
+  address: 0x40000800
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM
+  # 0:默认映射(CH1/PB6，CH2/PB7，CH3/PB8， 0 CH4/PB9);
+  # 1:重映射(CH1/PD12，CH2/PD13，CH3/PD14， CH4/PD15)

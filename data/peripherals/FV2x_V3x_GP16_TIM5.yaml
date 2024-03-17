@@ -1,0 +1,6 @@
+- name: TIM5
+  address: 0x40000C00
+  registers:
+    kind: gptm
+    version: v3
+    block: GPTM

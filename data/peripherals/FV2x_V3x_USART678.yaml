@@ -1,0 +1,119 @@
+- name: USART6
+  address: 0x40001800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART6EN
+    reset:
+      register: APB1PRSTR
+      field: USART6RST
+  remap:
+    register: PCFR2
+    field: USART6_RM
+  pins:
+    # 00:默认映射(TX/PC0，RX/PC1);
+    - pin: PC0
+      signal: TX
+      remap: 0b00
+    - pin: PC1
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB8，RX/PB9);
+    - pin: PB8
+      signal: TX
+      remap: 0b01
+    - pin: PB9
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE10，RX/PE11)。
+    - pin: PE10
+      signal: TX
+      remap: 0b10
+    - pin: PE11
+      signal: RX
+      remap: 0b10
+
+- name: USART7
+  address: 0x40001C00
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART7EN
+    reset:
+      register: APB1PRSTR
+      field: USART7RST
+  remap:
+    register: PCFR2
+    field: USART7_RM
+  pins:
+    # 00:默认映射(TX/PC2，RX/PC3);
+    - pin: PC2
+      signal: TX
+      remap: 0b00
+    - pin: PC3
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PA6，RX/PA7);
+    - pin: PA6
+      signal: TX
+      remap: 0b01
+    - pin: PA7
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE12，RX/PE13)
+    - pin: PE12
+      signal: TX
+      remap: 0b10
+    - pin: PE13
+      signal: RX
+      remap: 0b10
+
+- name: USART8
+  address: 0x40002000
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART8EN
+    reset:
+      register: APB1PRSTR
+      field: USART8RST
+  remap:
+    register: PCFR2
+    field: USART8_RM
+  pins:
+    # 00:默认映射(TX/PC4，RX/PC5);
+    - pin: PC4
+      signal: TX
+      remap: 0b00
+    - pin: PC5
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PA14，RX/PA15);
+    - pin: PA14
+      signal: TX
+      remap: 0b01
+    - pin: PA15
+      signal: RX
+      remap: 0b01
+    # 1x:重映射(TX/PE14，RX/PE15)。
+    - pin: PE14
+      signal: TX
+      remap: 0b10

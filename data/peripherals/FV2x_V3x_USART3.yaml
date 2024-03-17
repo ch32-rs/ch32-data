@@ -1,0 +1,68 @@
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART3EN
+    reset:
+      register: APB1PRSTR
+      field: USART3RST
+  remap:
+    register: PCFR1
+    field: USART3_RM
+  pins:
+    # 00:默认映射(TX/PB10，RX/PB11，CK/PB12， CTS/PB13，RTS/PB14);
+    - pin: PB10
+      signal: TX
+      remap: 0b00
+    - pin: PB11
+      signal: RX
+      remap: 0b00
+    - pin: PB12
+      signal: CK
+      remap: 0b00
+    - pin: PB13
+      signal: CTS
+      remap: 0b00
+    - pin: PB14
+      signal: RTS
+      remap: 0b00
+    # 01:部分重映射(TX/PC10，RX/PC11，CK/PC12， CTS/PB13，RTS/PB14);
+    - pin: PC10
+      signal: TX
+      remap: 0b01
+    - pin: PC11
+      signal: RX
+      remap: 0b01
+    - pin: PC12
+      signal: CK
+      remap: 0b01
+    - pin: PB13
+      signal: CTS
+      remap: 0b01
+    - pin: PB14
+      signal: RTS
+      remap: 0b01
+    # 10:保留;
+    # 11:完全重映射(TX/PD8，RX/PD9，CK/PD10， CTS/PD11，RTS/PD12)
+    - pin: PD8
+      signal: TX
+      remap: 0b11
+    - pin: PD9
+      signal: RX
+      remap: 0b11
+    - pin: PD10
+      signal: CK
+      remap: 0b11
+    - pin: PD11
+      signal: CTS
+      remap: 0b11
+    - pin: PD12
+      signal: RTS
+      remap: 0b11
