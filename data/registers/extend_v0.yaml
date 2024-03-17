@@ -1,0 +1,61 @@
+block/EXTEND:
+  description: Extend configuration.
+  items:
+    - name: EXTEND_CTR
+      description: Configure the extended control register.
+      byte_offset: 0
+      fieldset: EXTEND_CTR
+    - name: EXTEND_KR
+      description: Configure the extended key register.
+      byte_offset: 4
+      fieldset: EXTEND_KR
+fieldset/EXTEND_CTR:
+  description: Configure the extended control register.
+  fields:
+    - name: PLL_CFG
+      description: Configure the PLL clock delay time.
+      bit_offset: 0
+      bit_size: 4
+    - name: LOCKUP_EN
+      description: LOCKUP_Enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LOCKUP_RESET
+      description: LOCKUP RESET.
+      bit_offset: 7
+      bit_size: 1
+    - name: LDO_TRIM
+      description: LDO_TRIM.
+      bit_offset: 10
+      bit_size: 1
+    - name: FLASH_CLK_TRIM
+      description: FLASH clock trimming.
+      bit_offset: 11
+      bit_size: 3
+    - name: WR_EN
+      description: Control Register write enable.
+      bit_offset: 14
+      bit_size: 1
+    - name: WR_LOCK
+      description: Control Register write lock.
+      bit_offset: 15
+      bit_size: 1
+    - name: OPA_EN
+      description: OPA Enalbe.
+      bit_offset: 16
+      bit_size: 1
+    - name: OPA_NSEL
+      description: OPA negative end channel selection.
+      bit_offset: 17
+      bit_size: 1
+    - name: OPA_PSEL
+      description: OPA positive end channel selection.
+      bit_offset: 18
+      bit_size: 1
+fieldset/EXTEND_KR:
+  description: Configure the extended key register.
+  fields:
+    - name: KEY
+      description: Write key value.
+      bit_offset: 0
+      bit_size: 32

@@ -553,3 +553,65 @@
       channel: DMA1_CH3
     - signal: RX
       channel: DMA1_CH2
+
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v0
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: ADC1EN
+    reset:
+      register: APB2PRSTR
+      field: ADC1RST
+  pins:
+    - pin: PA2
+      signal: IN0
+    - pin: PA1
+      signal: IN1
+    - pin: PC4
+      signal: IN2
+    - pin: PD2
+      signal: IN3
+    - pin: PC3
+      signal: IN4
+    - pin: PD5
+      signal: IN5
+    - pin: PD6
+      signal: IN6
+    - pin: PD4
+      signal: IN7
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC
+  dma_channels:
+    - signal: GLOBAL
+      channel: DMA1_CH1
+
+# Fake peripheral
+- name: OPA
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v0
+    block: EXTEND
+  pins:
+    - pin: PA1
+      signal: NEG
+      remap: 0
+    - pin: PA2
+      signal: POS
+      remap: 0
+    - pin: PD0
+      signal: NEG
+      remap: 1
+    - pin: PD7
+      signal: POS
+      remap: 1
+    - pin: PD4
+      signal: OUT
