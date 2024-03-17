@@ -160,3 +160,10 @@
     kind: extend
     version: v3
     block: EXTEND
+
+- name: RTC
+  address: 0x40002800
+  registers:
+    kind: rtc
+    version: common
+    block: RTC

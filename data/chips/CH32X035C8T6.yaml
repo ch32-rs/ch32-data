@@ -32,7 +32,7 @@ cores:
     peripherals: []
     include_peripherals:
       - "../family/CH32X0.yaml"
-      - "../family/CH32X035.yaml"
+      - "../peripherals/X035_USBPD.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32X0.yaml"
     include_interrupts: "../interrupts/ch32x0.yaml"

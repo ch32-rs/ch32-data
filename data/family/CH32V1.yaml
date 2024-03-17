@@ -2,13 +2,13 @@
   address: 0xE000E000
   registers:
     kind: pfic
-    version: rv4
+    version: rv3
     block: PFIC
 - name: SYSTICK
   address: 0xE000F000
   registers:
     kind: systick
-    version: rv4
+    version: rv3
     block: SYSTICK
   interrupts:
     - signal: GLOBAL
@@ -17,7 +17,7 @@
   address: 0x40022000
   registers:
     kind: flash
-    version: v3
+    version: v1
     block: FLASH
 - name: EXTI
   address: 0x40010400
@@ -27,17 +27,35 @@
     block: EXTI
   interrupts:
     - signal: EXTI0
-      interrupt: EXTI7_0
-    - signal: EXTI8
-      interrupt: EXTI15_8
-    - signal: EXTI16
-      interrupt: EXTI25_16
+      interrupt: EXTI0
+    - signal: EXTI1
+      interrupt: EXTI1
+    - signal: EXTI2
+      interrupt: EXTI2
+    - signal: EXTI3
+      interrupt: EXTI3
+    - signal: EXTI4
+      interrupt: EXTI4
+    - signal: EXTI5
+      interrupt: EXTI9_5
+    - signal: EXTI10
+      interrupt: EXTI10
+    - signal: EXTI11
+      interrupt: EXTI11
+    - signal: EXTI12
+      interrupt: EXTI12
+    - signal: EXTI13
+      interrupt: EXTI13
+    - signal: EXTI14
+      interrupt: EXTI14
+    - signal: EXTI15
+      interrupt: EXTI15
 
 - name: RCC
   address: 0x40021000
   registers:
     kind: rcc
-    version: v3
+    version: v1
     block: RCC
   pins:
     - pin: PA8
@@ -88,7 +106,6 @@
     reset:
       register: APB2PRSTR
       field: IOPCRST
-# PD0 to PD2
 - name: GPIOD
   address: 0x40011400
   registers:
@@ -109,7 +126,7 @@
   address: 0x40010000
   registers:
     kind: afio
-    version: v3
+    version: v3 # compatible with v1
     block: AFIO
   rcc:
     bus_clock: PCLK2

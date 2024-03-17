@@ -1,0 +1,38 @@
+block/SYSTICK:
+  description: System Tick Peripheral.
+  items:
+    - name: CTLR
+      description: SysTick Control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CNT
+      description: System counter register.
+      byte_offset: 4
+      bit_size: 64
+    - name: CNTL
+      description: SysTick counter low bits.
+      byte_offset: 4
+      bit_size: 32
+    - name: CNTH
+      description: SysTick counter high bits.
+      byte_offset: 8
+      bit_size: 32
+    - name: CMP
+      description: System count compare register.
+      byte_offset: 12
+      bit_size: 64
+    - name: CMPL
+      description: SysTick compare low bits.
+      byte_offset: 12
+      bit_size: 32
+    - name: CMPH
+      description: SysTick compare high bits.
+      byte_offset: 16
+      bit_size: 32
+fieldset/CTLR:
+  description: SysTick Control register.
+  fields:
+    - name: STE
+      description: SysTick enable state. HCL/8
+      bit_offset: 0
+      bit_size: 1
