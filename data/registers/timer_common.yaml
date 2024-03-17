@@ -1,0 +1,594 @@
+block/ADTM:
+  description: Advanced timer.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: SMCFGR
+      description: slave mode control register.
+      byte_offset: 8
+      fieldset: SMCFGR
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      access: Write
+      fieldset: SWEVGR
+    - name: CHCTLR_Input
+      description: capture/compare mode register 1 (input mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Input
+    - name: CHCTLR_Output
+      description: capture/compare mode register (output mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Output
+    - name: CCER
+      description: capture/compare enable register.
+      byte_offset: 32
+      fieldset: CCER
+    - name: CNT
+      description: counter.
+      byte_offset: 36
+      fieldset: CNT
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      fieldset: PSC
+    - name: ATRLR
+      description: auto-reload register.
+      byte_offset: 44
+      fieldset: ATRLR
+    - name: RPTCR
+      description: repetition counter register.
+      byte_offset: 48
+      fieldset: RPTCR
+    - name: CHCVR
+      description: capture/compare register 1.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 52
+      fieldset: CHCVR
+    - name: BDTR
+      description: break and dead-time register.
+      byte_offset: 68
+      fieldset: BDTR
+    - name: DMACFGR
+      description: DMA control register.
+      byte_offset: 72
+      fieldset: DMACFGR
+    - name: DMAADR
+      description: DMA address for full transfer.
+      byte_offset: 76
+      fieldset: DMAADR
+    - name: SPEC
+      description: SPEC.
+      byte_offset: 80
+      bit_size: 16
+      fieldset: SPEC
+fieldset/ATRLR:
+  description: auto-reload register.
+  fields:
+    - name: ATRLR
+      description: Auto-reload value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/BDTR:
+  description: break and dead-time register.
+  fields:
+    - name: DTG
+      description: Dead-time generator setup.
+      bit_offset: 0
+      bit_size: 8
+    - name: LOCK
+      description: Lock configuration.
+      bit_offset: 8
+      bit_size: 2
+    - name: OSSI
+      description: Off-state selection for Idle mode.
+      bit_offset: 10
+      bit_size: 1
+    - name: OSSR
+      description: Off-state selection for Run mode.
+      bit_offset: 11
+      bit_size: 1
+    - name: BKE
+      description: Break enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: BKP
+      description: Break polarity.
+      bit_offset: 13
+      bit_size: 1
+    - name: AOE
+      description: Automatic output enable.
+      bit_offset: 14
+      bit_size: 1
+    - name: MOE
+      description: Main output enable.
+      bit_offset: 15
+      bit_size: 1
+fieldset/CCER:
+  description: capture/compare enable register.
+  fields:
+    - name: CCE
+      description: Capture/Compare 1 output enable.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 4
+        stride: 4
+    - name: CCP
+      description: Capture/Compare 1 output Polarity.
+      bit_offset: 1
+      bit_size: 1
+      array:
+        len: 4
+        stride: 4
+    - name: CCNE
+      description: Capture/Compare 1 complementary output enable.
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 3
+        stride: 4
+    - name: CCNP
+      description: Capture/Compare 1 output Polarity.
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 3
+        stride: 4
+fieldset/CHCTLR_Input:
+  description: capture/compare mode register 1 (input mode).
+  fields:
+    - name: CCS
+      description: Capture/Compare 1 selection.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 2
+        stride: 8
+    - name: ICPSC
+      description: Input capture 1 prescaler.
+      bit_offset: 2
+      bit_size: 2
+      array:
+        len: 2
+        stride: 8
+    - name: ICF
+      description: Input capture 1 filter.
+      bit_offset: 4
+      bit_size: 4
+      array:
+        len: 2
+        stride: 8
+fieldset/CHCTLR_Output:
+  description: capture/compare mode register (output mode).
+  fields:
+    - name: CCS
+      description: Capture/Compare 1 selection.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 2
+        stride: 8
+    - name: IOCFE
+      description: Output Compare 1 fast enable.
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 2
+        stride: 8
+    - name: OCPE
+      description: Output Compare 1 preload enable.
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 2
+        stride: 8
+    - name: OCM
+      description: Output Compare 1 mode.
+      bit_offset: 4
+      bit_size: 3
+      array:
+        len: 2
+        stride: 8
+    - name: OCCE
+      description: Output Compare 1 clear enable.
+      bit_offset: 7
+      bit_size: 1
+      array:
+        len: 2
+        stride: 8
+fieldset/CHCVR:
+  description: capture/compare register 4.
+  fields:
+    - name: CHCVR
+      description: Capture/Compare value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CNT:
+  description: counter.
+  fields:
+    - name: CNT
+      description: counter value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR1:
+  description: control register 1.
+  fields:
+    - name: CEN
+      description: Counter enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDIS
+      description: Update disable.
+      bit_offset: 1
+      bit_size: 1
+    - name: URS
+      description: Update request source.
+      bit_offset: 2
+      bit_size: 1
+    - name: OPM
+      description: One-pulse mode.
+      bit_offset: 3
+      bit_size: 1
+    - name: DIR
+      description: Direction.
+      bit_offset: 4
+      bit_size: 1
+    - name: CMS
+      description: Center-aligned mode selection.
+      bit_offset: 5
+      bit_size: 2
+    - name: ARPE
+      description: Auto-reload preload enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: CKD
+      description: Clock division.
+      bit_offset: 8
+      bit_size: 2
+      enum: CKD
+    - name: CAPOV
+      description: Timer capture value configuration enable.
+      bit_offset: 14
+      bit_size: 1
+    - name: CAPLVL
+      description: Timer capture level indication enable.
+      bit_offset: 15
+      bit_size: 1
+fieldset/CTLR2:
+  description: control register 2.
+  fields:
+    - name: CCPC
+      description: Capture/compare preloaded control.
+      bit_offset: 0
+      bit_size: 1
+    - name: CCUS
+      description: Capture/compare control update selection.
+      bit_offset: 2
+      bit_size: 1
+    - name: CCDS
+      description: Capture/compare DMA selection.
+      bit_offset: 3
+      bit_size: 1
+    - name: MMS
+      description: Master mode selection.
+      bit_offset: 4
+      bit_size: 3
+      enum: MMS
+    - name: TI1S
+      description: TI1 selection.
+      bit_offset: 7
+      bit_size: 1
+    - name: OIS
+      description: Output Idle state 1.
+      bit_offset: 8
+      bit_size: 1
+      array:
+        len: 4
+        stride: 2
+    - name: OISN
+      description: Output Idle state 1.
+      bit_offset: 9
+      bit_size: 1
+      array:
+        len: 3
+        stride: 2
+fieldset/DMAADR:
+  description: DMA address for full transfer.
+  fields:
+    - name: DMAADR
+      description: DMA register for burst accesses.
+      bit_offset: 0
+      bit_size: 16
+fieldset/DMACFGR:
+  description: DMA control register.
+  fields:
+    - name: DBA
+      description: DMA base address.
+      bit_offset: 0
+      bit_size: 5
+    - name: DBL
+      description: DMA burst length.
+      bit_offset: 8
+      bit_size: 5
+fieldset/DMAINTENR:
+  description: DMA/Interrupt enable register.
+  fields:
+    - name: UIE
+      description: Update interrupt enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1IE
+      description: Capture/Compare 1 interrupt enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2IE
+      description: Capture/Compare 2 interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: CC3IE
+      description: Capture/Compare 3 interrupt enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: CC4IE
+      description: Capture/Compare 4 interrupt enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: COMIE
+      description: COM interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: TIE
+      description: Trigger interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: BIE
+      description: Break interrupt enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: UDE
+      description: Update DMA request enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: CC1DE
+      description: Capture/Compare 1 DMA request enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: CC2DE
+      description: Capture/Compare 2 DMA request enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: CC3DE
+      description: Capture/Compare 3 DMA request enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: CC4DE
+      description: Capture/Compare 4 DMA request enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: COMDE
+      description: COM DMA request enable.
+      bit_offset: 13
+      bit_size: 1
+    - name: TDE
+      description: Trigger DMA request enable.
+      bit_offset: 14
+      bit_size: 1
+fieldset/INTFR:
+  description: status register.
+  fields:
+    - name: UIF
+      description: Update interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1IF
+      description: Capture/compare 1 interrupt flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2IF
+      description: Capture/Compare 2 interrupt flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: CC3IF
+      description: Capture/Compare 3 interrupt flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: CC4IF
+      description: Capture/Compare 4 interrupt flag.
+      bit_offset: 4
+      bit_size: 1
+    - name: COMIF
+      description: COM interrupt flag.
+      bit_offset: 5
+      bit_size: 1
+    - name: TIF
+      description: Trigger interrupt flag.
+      bit_offset: 6
+      bit_size: 1
+    - name: BIF
+      description: Break interrupt flag.
+      bit_offset: 7
+      bit_size: 1
+    - name: CC1OF
+      description: Capture/Compare 1 overcapture flag.
+      bit_offset: 9
+      bit_size: 1
+    - name: CC2OF
+      description: Capture/compare 2 overcapture flag.
+      bit_offset: 10
+      bit_size: 1
+    - name: CC3OF
+      description: Capture/Compare 3 overcapture flag.
+      bit_offset: 11
+      bit_size: 1
+    - name: CC4OF
+      description: Capture/Compare 4 overcapture flag.
+      bit_offset: 12
+      bit_size: 1
+fieldset/PSC:
+  description: prescaler.
+  fields:
+    - name: PSC
+      description: Prescaler value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/RPTCR:
+  description: repetition counter register.
+  fields:
+    - name: RPTCR
+      description: Repetition counter value.
+      bit_offset: 0
+      bit_size: 8
+fieldset/SMCFGR:
+  description: slave mode control register.
+  fields:
+    - name: SMS
+      description: Slave mode selection.
+      bit_offset: 0
+      bit_size: 3
+    - name: TS
+      description: Trigger selection.
+      bit_offset: 4
+      bit_size: 3
+    - name: MSM
+      description: Master/Slave mode.
+      bit_offset: 7
+      bit_size: 1
+    - name: ETF
+      description: External trigger filter.
+      bit_offset: 8
+      bit_size: 4
+    - name: ETPS
+      description: External trigger prescaler.
+      bit_offset: 12
+      bit_size: 2
+    - name: ECE
+      description: External clock enable.
+      bit_offset: 14
+      bit_size: 1
+    - name: ETP
+      description: External trigger polarity.
+      bit_offset: 15
+      bit_size: 1
+fieldset/SWEVGR:
+  description: event generation register.
+  fields:
+    - name: UG
+      description: Update generation.
+      bit_offset: 0
+      bit_size: 1
+    - name: CC1G
+      description: Capture/compare 1 generation.
+      bit_offset: 1
+      bit_size: 1
+    - name: CC2G
+      description: Capture/compare 2 generation.
+      bit_offset: 2
+      bit_size: 1
+    - name: CC3G
+      description: Capture/compare 3 generation.
+      bit_offset: 3
+      bit_size: 1
+    - name: CC4G
+      description: Capture/compare 4 generation.
+      bit_offset: 4
+      bit_size: 1
+    - name: COMG
+      description: Capture/Compare control update generation.
+      bit_offset: 5
+      bit_size: 1
+    - name: TG
+      description: Trigger generation.
+      bit_offset: 6
+      bit_size: 1
+    - name: BG
+      description: Break generation.
+      bit_offset: 7
+      bit_size: 1
+fieldset/SPEC:
+  description: SPEC.
+  bit_size: 16
+  fields:
+    - name: TOGGLE
+      description: TOGGLE.
+      bit_offset: 15
+      bit_size: 1
+    - name: PWM_EN
+      description: 通道 1 和通道 2 交替使能功能使能位.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 2
+        stride: 1
+    - name: PWM_OC
+      description: 交替使能模式下，通道 1 无效电平配置.
+      bit_offset: 4
+      bit_size: 1
+      array:
+        len: 4
+        stride: 1
+enum/MMS:
+  bit_size: 3
+  description: Master mode selection.
+  variants:
+    - name: Reset
+      description: Reset
+      value: 0b000
+    - name: Enable
+      description: Enable
+      value: 0b001
+    - name: Update
+      description: Update
+      value: 0b010
+    - name: Compare_Pulse
+      description: Compare Pulse
+      value: 0b011
+    - name: Compare_OC1REF
+      description: Compare OC1REF
+      value: 0b100
+    - name: Compare_OC2REF
+      description: Compare OC2REF
+      value: 0b101
+    - name: Compare_OC3REF
+      description: Compare OC3REF
+      value: 0b110
+    - name: Compare_OC4REF
+      description: Compare OC4REF
+      value: 0b111
+enum/CKD:
+  bit_size: 2
+  description: division ratio between the timer clock (CK_INT) frequency, the dead time and the sampling clock used by the dead time generator and the digital filter (ETR,TIx)
+  variants:
+    - name: Div_1
+      description: Tdts=Tck_int
+      value: 0b00
+    - name: Div_2
+      description: Tdts=2*Tck_int
+      value: 0b01
+    - name: Div_4
+      description: Tdts=4*Tck_int
+      value: 0b10
+    - name: Reserved
+      value: 0b11
