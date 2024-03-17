@@ -32,14 +32,25 @@ docs:
 cores:
   - name: qingke-v4f
     peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v3
+          block: RCC
+        pins:
+          - pin: PA8
+            signal: MCO
+    include_peripherals:
+      - "../family/CH32V3.yaml"
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+    include_interrupts: "../interrupts/ch32v2_v3.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+    interrupts: []
+    dma_channels: []
+
 _raw:
   OPA: "4"
   TRNG: "1"
