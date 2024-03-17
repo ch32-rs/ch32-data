@@ -100,3 +100,351 @@
     reset:
       register: APB2PRSTR
       field: IOPDRST
+
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: common
+    block: TIM_ADV
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: TIM1EN
+    reset:
+      register: APB2PRSTR
+      field: TIM1RST
+  remap:
+    register: PCFR
+    field: TIM1RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: CC
+      interrupt: TIM1_CC
+    - signal: COM
+      interrupt: TIM1_TRG_COM
+    - signal: TRG
+      interrupt: TIM1_TRG_COM
+    - signal: BRK
+      interrupt: TIM1_BRK
+  dma_channels:
+    - signal: CH1
+      channel: DMA1_CH2
+    - signal: CH2
+      channel: DMA1_CH3
+    - signal: CH3
+      channel: DMA1_CH6
+    - signal: CH4
+      channel: DMA1_CH4
+    - signal: TRIG
+      channel: DMA1_CH4
+    - signal: COM
+      channel: DMA1_CH4
+    - signal: UP
+      channel: DMA1_CH5
+  pins:
+    # 00：默认映射(ETR/PC5，CH1/PD2，CH2/PA1， CH3/PC3 ， CH4/PC4 ， BKIN/PC2 ， CH1N/PD0 ， CH2N/PA2，CH3N/PD1)；
+    - pin: PC5
+      signal: ETR
+      remap: 0b00
+    - pin: PD2
+      signal: CH1
+      remap: 0b00
+    - pin: PA1
+      signal: CH2
+      remap: 0b00
+    - pin: PC3
+      signal: CH3
+      remap: 0b00
+    - pin: PC4
+      signal: CH4
+      remap: 0b00
+    - pin: PC2
+      signal: BKIN
+      remap: 0b00
+    - pin: PD0
+      signal: CH1N
+      remap: 0b00
+    - pin: PA2
+      signal: CH2N
+      remap: 0b00
+    - pin: PD1
+      signal: CH3N
+      remap: 0b00
+    # 01：部分映射(ETR/PC5，CH1/PC6，CH2/PC7， CH3/PC0 ， CH4/PD3 ， BKIN/PC1 ， CH1N/PC3 ， CH2N/PC4，CH3N/PD1)；
+    - pin: PC5
+      signal: ETR
+      remap: 0b01
+    - pin: PC6
+      signal: CH1
+      remap: 0b01
+    - pin: PC7
+      signal: CH2
+      remap: 0b01
+    - pin: PC0
+      signal: CH3
+      remap: 0b01
+    - pin: PD3
+      signal: CH4
+      remap: 0b01
+    - pin: PC1
+      signal: BKIN
+      remap: 0b01
+    - pin: PC3
+      signal: CH1N
+      remap: 0b01
+    - pin: PC4
+      signal: CH2N
+      remap: 0b01
+    - pin: PD1
+      signal: CH3N
+      remap: 0b01
+    # 10：部分映射(ETR/PD4，CH1/PD2，CH2/PA1， CH3/PC3 ， CH4/PC4 ， BKIN/PC2 ， CH1N/PD0 ， CH2N/PA2，CH3N/PD1)；
+    - pin: PD4
+      signal: ETR
+      remap: 0b10
+    - pin: PD2
+      signal: CH1
+      remap: 0b10
+    - pin: PA1
+      signal: CH2
+      remap: 0b10
+    - pin: PC3
+      signal: CH3
+      remap: 0b10
+    - pin: PC4
+      signal: CH4
+      remap: 0b10
+    - pin: PC2
+      signal: BKIN
+      remap: 0b10
+    - pin: PD0
+      signal: CH1N
+      remap: 0b10
+    - pin: PA2
+      signal: CH2N
+      remap: 0b10
+    - pin: PD1
+      signal: CH3N
+      remap: 0b10
+    # 11：完全映射(ETR/PC2，CH1/PC4，CH2/PC7， CH3/PC5 ， CH4/PD4 ， BKIN/PC1 ， CH1N/PC3 ， CH2N/PD2，CH3N/PC6)。
+    - pin: PC2
+      signal: ETR
+      remap: 0b11
+    - pin: PC4
+      signal: CH1
+      remap: 0b11
+    - pin: PC7
+      signal: CH2
+      remap: 0b11
+    - pin: PC5
+      signal: CH3
+      remap: 0b11
+    - pin: PD4
+      signal: CH4
+      remap: 0b11
+    - pin: PC1
+      signal: BKIN
+      remap: 0b11
+    - pin: PC3
+      signal: CH1N
+      remap: 0b11
+    - pin: PD2
+      signal: CH2N
+      remap: 0b11
+    - pin: PC6
+      signal: CH3N
+      remap: 0b11
+
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: common
+    block: TIM_GP16
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: TIM2EN
+    reset:
+      register: APB21RSTR
+      field: TIM2RST
+  remap:
+    register: PCFR
+    field: TIM2RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM2
+  dma_channels:
+    - signal: CH1
+      channel: DMA1_CH5
+    - signal: CH2
+      channel: DMA1_CH7
+    - signal: CH3
+      channel: DMA1_CH1
+    - signal: CH4
+      channel: DMA1_CH7
+    - signal: UP
+      channel: DMA1_CH2
+  pins:
+    # 00 ： 默 认 映 射 (CH1/ETR/PD4 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
+    - pin: PD4
+      signal: ETR
+      remap: 0b00
+    - pin: PD4
+      signal: CH1
+      remap: 0b00
+    - pin: PD3
+      signal: CH2
+      remap: 0b00
+    - pin: PC0
+      signal: CH3
+      remap: 0b00
+    - pin: PD7
+      signal: CH4
+      remap: 0b00
+    # 01 ： 部 分 映 射 (CH1/ETR/PC5 ， CH2/PC2 ， CH3/PD2，CH4/PC1)；
+    - pin: PC5
+      signal: ETR
+      remap: 0b01
+    - pin: PC5
+      signal: CH1
+      remap: 0b01
+    - pin: PC2
+      signal: CH2
+      remap: 0b01
+    - pin: PD2
+      signal: CH3
+      remap: 0b01
+    - pin: PC1
+      signal: CH4
+      remap: 0b01
+    # 10 ： 部 分 映 射 (CH1/ETR/PC1 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
+    - pin: PC1
+      signal: ETR
+      remap: 0b10
+    - pin: PC1
+      signal: CH1
+      remap: 0b10
+    - pin: PD3
+      signal: CH2
+      remap: 0b10
+    - pin: PC0
+      signal: CH3
+      remap: 0b10
+    - pin: PD7
+      signal: CH4
+      remap: 0b10
+    # 11 ： 完 全 映 射 (CH1/ETR/PC1 ， CH2/PC7 ， CH3/PD6，CH4/PD5)。
+    - pin: PC1
+      signal: ETR
+      remap: 0b11
+    - pin: PC1
+      signal: CH1
+      remap: 0b11
+    - pin: PC7
+      signal: CH2
+      remap: 0b11
+    - pin: PD6
+      signal: CH3
+      remap: 0b11
+    - pin: PD5
+      signal: CH4
+      remap: 0b11
+
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: USART1EN
+    reset:
+      register: APB2PRSTR
+      field: USART1RST
+  remap:
+    register: PCFR
+    field: USART1RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+  dma_channels:
+    - signal: TX
+      channel: DMA1_CH4
+    - signal: RX
+      channel: DMA1_CH5
+  pins:
+    # 00 ： 默 认 映 射 (CK/PD4 ， TX/PD5 ， RX/PD6 ， CTS/PD3，RTS/PC2)
+    - pin: PD4
+      signal: CK
+      remap: 0b00
+    - pin: PD5
+      signal: TX
+      remap: 0b00
+    - pin: PD6
+      signal: RX
+      remap: 0b00
+    - pin: PD3
+      signal: CTS
+      remap: 0b00
+    - pin: PC2
+      signal: RTS
+      remap: 0b00
+    # 01：重映射(CK/PD7，TX/PD0，RX/PD1，CTS/PC3， RTS/PC2)；
+    - pin: PD7
+      signal: CK
+      remap: 0b01
+    - pin: PD0
+      signal: TX
+      remap: 0b01
+    - pin: PD1
+      signal: RX
+      remap: 0b01
+    - pin: PC3
+      signal: CTS
+      remap: 0b01
+    - pin: PC2
+      signal: RTS
+      remap: 0b01
+    # 10：重映射(CK/PD7，TX/PD6，RX/PD5，CTS/PC6， RTS/PC7)
+    - pin: PD7
+      signal: CK
+      remap: 0b10
+    - pin: PD6
+      signal: TX
+      remap: 0b10
+    - pin: PD5
+      signal: RX
+      remap: 0b10
+    - pin: PC6
+      signal: CTS
+      remap: 0b10
+    - pin: PC7
+      signal: RTS
+      remap: 0b10
+    # 11：重映射(CK/PC5，TX/PC0，RX/PC1，CTS/PC6， RTS/PC7)
+    - pin: PC5
+      signal: CK
+      remap: 0b11
+    - pin: PC0
+      signal: TX
+      remap: 0b11
+    - pin: PC1
+      signal: RX
+      remap: 0b11
+    - pin: PC6
+      signal: CTS
+      remap: 0b11
+    - pin: PC7
+      signal: RTS
+      remap: 0b11
