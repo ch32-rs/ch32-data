@@ -40,7 +40,6 @@
     version: v3
     block: RCC
   pins:
-    # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
     - pin: PA8
       signal: MCO
 
@@ -168,3 +167,53 @@
     kind: adtm
     version: v3
     block: ADTM
+
+# 1 ADC
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v3
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: APB2PCENR
+      field: ADC1EN
+    reset:
+      register: APB2PRSTR
+      field: ADC1RST
+  pins:
+    - pin: PA0
+      signal: IN0
+    - pin: PA1
+      signal: IN1
+    - pin: PA2
+      signal: IN2
+    - pin: PA3
+      signal: IN3
+    - pin: PA4
+      signal: IN4
+    - pin: PA5
+      signal: IN5
+    - pin: PA6
+      signal: IN6
+    - pin: PA7
+      signal: IN7
+    - pin: PB0
+      signal: IN8
+    - pin: PB1
+      signal: IN9
+    - pin: PC0
+      signal: IN10
+    - pin: PC1
+      signal: IN11
+    - pin: PC2
+      signal: IN12
+    - pin: PC3
+      signal: IN13
+    - pin: PC4
+      signal: IN14
+    - pin: PC5
+      signal: IN15
