@@ -1,4 +1,4 @@
-block/ADTM:
+block/TIM_ADV:
   description: Advanced timer.
   items:
     - name: CTLR1
@@ -24,7 +24,6 @@ block/ADTM:
     - name: SWEVGR
       description: event generation register.
       byte_offset: 20
-      access: Write
       fieldset: SWEVGR
     - name: CHCTLR_Input
       description: capture/compare mode register 1 (input mode).
@@ -47,15 +46,15 @@ block/ADTM:
     - name: CNT
       description: counter.
       byte_offset: 36
-      fieldset: CNT
+      bit_size: 16
     - name: PSC
       description: prescaler.
       byte_offset: 40
-      fieldset: PSC
+      bit_size: 16
     - name: ATRLR
       description: auto-reload register.
       byte_offset: 44
-      fieldset: ATRLR
+      bit_size: 16
     - name: RPTCR
       description: repetition counter register.
       byte_offset: 48
@@ -66,7 +65,7 @@ block/ADTM:
         len: 4
         stride: 4
       byte_offset: 52
-      fieldset: CHCVR
+      bit_size: 16
     - name: BDTR
       description: break and dead-time register.
       byte_offset: 68
@@ -84,12 +83,184 @@ block/ADTM:
       byte_offset: 80
       bit_size: 16
       fieldset: SPEC
-fieldset/ATRLR:
-  description: auto-reload register.
-  fields:
+block/TIM_GP16:
+  description: General purpose timer, 16bit.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: SMCFGR
+      description: slave mode control register.
+      byte_offset: 8
+      fieldset: SMCFGR
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      fieldset: SWEVGR
+    - name: CHCTLR_Input
+      description: capture/compare mode register 1 (input mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Input
+    - name: CHCTLR_Output
+      description: capture/compare mode register 1 (output mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Output
+    - name: CCER
+      description: capture/compare enable register.
+      byte_offset: 32
+      fieldset: CCER
+    - name: CNT
+      description: counter.
+      byte_offset: 36
+      bit_size: 16
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      bit_size: 16
     - name: ATRLR
-      description: Auto-reload value.
-      bit_offset: 0
+      description: auto-reload register.
+      byte_offset: 44
+      bit_size: 16
+    - name: CHCVR
+      description: capture/compare register 1.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 52
+      bit_size: 16
+    - name: DMACFGR
+      description: DMA control register.
+      byte_offset: 72
+      fieldset: DMACFGR
+    - name: DMAADR
+      description: DMA address for full transfer.
+      byte_offset: 76
+      fieldset: DMAADR
+block/TIM_GP32:
+  description: General purpose timer, 32bit.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: SMCFGR
+      description: slave mode control register.
+      byte_offset: 8
+      fieldset: SMCFGR
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      fieldset: SWEVGR
+    - name: CHCTLR_Input
+      description: capture/compare mode register 1 (input mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Input
+    - name: CHCTLR_Output
+      description: capture/compare mode register 1 (output mode).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 24
+      fieldset: CHCTLR_Output
+    - name: CCER
+      description: capture/compare enable register.
+      byte_offset: 32
+      fieldset: CCER
+    - name: CNT
+      description: counter, 32bit.
+      byte_offset: 36
+      bit_size: 32
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      bit_size: 16
+    - name: ATRLR
+      description: auto-reload register, 32bit.
+      byte_offset: 44
+      bit_size: 32
+    - name: CHCVR
+      description: capture/compare register, 32bit.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 52
+      bit_size: 32
+    - name: DMACFGR
+      description: DMA control register.
+      byte_offset: 72
+      fieldset: DMACFGR
+    - name: DMAADR
+      description: DMA address for full transfer.
+      byte_offset: 76
+      fieldset: DMAADR
+block/TIM_BASIC:
+  description: Basic timer.
+  items:
+    - name: CTLR1
+      description: control register 1.
+      byte_offset: 0
+      fieldset: CTLR1
+    - name: CTLR2
+      description: control register 2.
+      byte_offset: 4
+      fieldset: CTLR2
+    - name: DMAINTENR
+      description: DMA/Interrupt enable register.
+      byte_offset: 12
+      fieldset: DMAINTENR
+    - name: INTFR
+      description: status register.
+      byte_offset: 16
+      fieldset: INTFR
+    - name: SWEVGR
+      description: event generation register.
+      byte_offset: 20
+      fieldset: SWEVGR
+    - name: CNT
+      description: counter.
+      byte_offset: 36
+      bit_size: 16
+    - name: PSC
+      description: prescaler.
+      byte_offset: 40
+      bit_size: 16
+    - name: ATRLR
+      description: auto-reload register.
+      byte_offset: 44
       bit_size: 16
 fieldset/BDTR:
   description: break and dead-time register.
@@ -219,20 +390,6 @@ fieldset/CHCTLR_Output:
       array:
         len: 2
         stride: 8
-fieldset/CHCVR:
-  description: capture/compare register 4.
-  fields:
-    - name: CHCVR
-      description: Capture/Compare value.
-      bit_offset: 0
-      bit_size: 16
-fieldset/CNT:
-  description: counter.
-  fields:
-    - name: CNT
-      description: counter value.
-      bit_offset: 0
-      bit_size: 16
 fieldset/CTLR1:
   description: control register 1.
   fields:
@@ -256,10 +413,12 @@ fieldset/CTLR1:
       description: Direction.
       bit_offset: 4
       bit_size: 1
+      enum: DIR
     - name: CMS
       description: Center-aligned mode selection.
       bit_offset: 5
       bit_size: 2
+      enum: CMS
     - name: ARPE
       description: Auto-reload preload enable.
       bit_offset: 7
@@ -403,22 +562,13 @@ fieldset/INTFR:
       description: Update interrupt flag.
       bit_offset: 0
       bit_size: 1
-    - name: CC1IF
+    - name: CCIF
       description: Capture/compare 1 interrupt flag.
       bit_offset: 1
       bit_size: 1
-    - name: CC2IF
-      description: Capture/Compare 2 interrupt flag.
-      bit_offset: 2
-      bit_size: 1
-    - name: CC3IF
-      description: Capture/Compare 3 interrupt flag.
-      bit_offset: 3
-      bit_size: 1
-    - name: CC4IF
-      description: Capture/Compare 4 interrupt flag.
-      bit_offset: 4
-      bit_size: 1
+      array:
+        len: 4
+        stride: 1
     - name: COMIF
       description: COM interrupt flag.
       bit_offset: 5
@@ -431,29 +581,13 @@ fieldset/INTFR:
       description: Break interrupt flag.
       bit_offset: 7
       bit_size: 1
-    - name: CC1OF
+    - name: CCOF
       description: Capture/Compare 1 overcapture flag.
       bit_offset: 9
       bit_size: 1
-    - name: CC2OF
-      description: Capture/compare 2 overcapture flag.
-      bit_offset: 10
-      bit_size: 1
-    - name: CC3OF
-      description: Capture/Compare 3 overcapture flag.
-      bit_offset: 11
-      bit_size: 1
-    - name: CC4OF
-      description: Capture/Compare 4 overcapture flag.
-      bit_offset: 12
-      bit_size: 1
-fieldset/PSC:
-  description: prescaler.
-  fields:
-    - name: PSC
-      description: Prescaler value.
-      bit_offset: 0
-      bit_size: 16
+      array:
+        len: 4
+        stride: 1
 fieldset/RPTCR:
   description: repetition counter register.
   fields:
@@ -484,6 +618,7 @@ fieldset/SMCFGR:
       description: External trigger prescaler.
       bit_offset: 12
       bit_size: 2
+      enum: ETPS
     - name: ECE
       description: External clock enable.
       bit_offset: 14
@@ -499,22 +634,13 @@ fieldset/SWEVGR:
       description: Update generation.
       bit_offset: 0
       bit_size: 1
-    - name: CC1G
+    - name: CCG
       description: Capture/compare 1 generation.
       bit_offset: 1
       bit_size: 1
-    - name: CC2G
-      description: Capture/compare 2 generation.
-      bit_offset: 2
-      bit_size: 1
-    - name: CC3G
-      description: Capture/compare 3 generation.
-      bit_offset: 3
-      bit_size: 1
-    - name: CC4G
-      description: Capture/compare 4 generation.
-      bit_offset: 4
-      bit_size: 1
+      array:
+        len: 4
+        stride: 1
     - name: COMG
       description: Capture/Compare control update generation.
       bit_offset: 5
@@ -591,4 +717,46 @@ enum/CKD:
       description: Tdts=4*Tck_int
       value: 0b10
     - name: Reserved
+      value: 0b11
+enum/CMS:
+  bit_size: 2
+  description: Center-aligned mode selection.
+  variants:
+    - name: Edge_aligned
+      description: Edge-aligned mode
+      value: 0b00
+    - name: Center_aligned_1
+      description: Center-aligned mode 1
+      value: 0b01
+    - name: Center_aligned_2
+      description: Center-aligned mode 2
+      value: 0b10
+    - name: Center_aligned_3
+      description: Center-aligned mode 3
+      value: 0b11
+enum/DIR:
+  bit_size: 1
+  description: Direction
+  variants:
+    - name: Up
+      description: Up
+      value: 0b0
+    - name: Down
+      description: Down
+      value: 0b1
+enum/ETPS:
+  bit_size: 2
+  description: External trigger prescaler.
+  variants:
+    - name: Div_1
+      description: ETRP frequency divided by 1
+      value: 0b00
+    - name: Div_2
+      description: ETRP frequency divided by 2
+      value: 0b01
+    - name: Div_4
+      description: ETRP frequency divided by 4
+      value: 0b10
+    - name: Div_8
+      description: ETRP frequency divided by 8
       value: 0b11
