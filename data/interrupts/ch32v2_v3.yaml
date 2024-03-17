@@ -96,10 +96,10 @@ TIM8_CC: 62
 TIM5: 66
 # 67 - SPI3 global interrupt
 SPI3: 67
-# 68 - UART4 global interrupt
-UART4: 68
-# 69 - UART5 global interrupt
-UART5: 69
+# 68 - USART4 global interrupt
+USART4: 68
+# 69 - USART5 global interrupt
+USART5: 69
 # 77 - Ethernet global interrupt
 ETH: 77
 # 78 - Ethernet Wakeup through EXTI line interrupt
@@ -110,12 +110,12 @@ OTG_FS: 83
 USBHSWAKEUP: 84
 # 85 - USBHS
 USBHS: 85
-# 87 - UART6 global interrupt
-UART6: 87
-# 88 - UART7 global interrupt
-UART7: 88
-# 89 - UART8 global interrupt
-UART8: 89
+# 87 - USART6 global interrupt
+USART6: 87
+# 88 - USART7 global interrupt
+USART7: 88
+# 89 - USART8 global interrupt
+USART8: 89
 # 90 - TIM9 Break interrupt
 TIM9_BRK: 90
 # 91 - TIM9 Update interrupt

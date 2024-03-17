@@ -272,7 +272,7 @@
     kernel_clock: HCLK
     enable:
       register: APB1PCENR
-      field: UART4EN
+      field: USART4EN
     reset:
       register: APB1PRSTR
       field: USART4RST

@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -19,7 +17,7 @@ pub struct Chip {
 }
 
 pub mod chip {
-    use std::collections::{BTreeMap, HashMap};
+    use std::collections::BTreeMap;
 
     use serde::{Deserialize, Serialize};
 

@@ -272,7 +272,7 @@
       register: APB1PCENR
       field: TIM2EN
     reset:
-      register: APB21RSTR
+      register: APB1PRSTR
       field: TIM2RST
   remap:
     register: PCFR

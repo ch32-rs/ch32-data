@@ -88,8 +88,8 @@ LPTIM_WKUP: 58
 USBFS: 59
 # 60 - USBFS wake-up interrupt
 USBFS_WKUP: 60
-# 61 - UART4 global interrupt
-UART4: 61
+# 61 - USART4 global interrupt
+USART4: 61
 # 62 - DMA Channel8 global interrupt
 DMA_CH8: 62
 # 63 - LPTIM global interrupt
