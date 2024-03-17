@@ -1,13 +1,5 @@
 use std::{collections::HashMap, path::Path};
 
-// mod chips;
-//mod dma;
-//mod docs;
-// mod gpio_af;
-// mod header;
-// mod interrupts;
-// mod memory;
-// mod rcc;
 mod registers;
 
 #[macro_export]
@@ -129,7 +121,18 @@ fn main() -> anyhow::Result<()> {
                     let mut dma_map: Vec<(String, u8)> = dma_map.into_iter().collect();
                     dma_map.sort_by_key(|(_, number)| *number);
 
-                    for (name, channel) in dma_map {
+                    let max_ch = dma_map.iter().map(|(_, channel)| *channel).max().unwrap();
+
+                    /* Format
+                    {
+                        "name": "DMA1_CH1",
+                        "dma": "DMA1",
+                        "channel": 0
+                    },
+                    */
+                    for i in 0..max_ch {
+                        let name = format!("{}_CH{}", dma, i + 1);
+                        let channel = i; // 0 based
                         core.dma_channels
                             .push(ch32_data_serde::chip::core::DmaChannels {
                                 name,
