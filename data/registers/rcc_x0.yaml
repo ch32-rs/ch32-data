@@ -1,278 +1,278 @@
 block/RCC:
   description: Reset and clock control.
   items:
-  - name: CTLR
-    description: Clock control register.
-    byte_offset: 0
-    fieldset: CTLR
-  - name: CFGR0
-    description: Clock configuration register (RCC_CFGR0).
-    byte_offset: 4
-    fieldset: CFGR0
-  - name: APB2PRSTR
-    description: APB2 peripheral reset register (RCC_APB2PRSTR).
-    byte_offset: 12
-    fieldset: APB2PRSTR
-  - name: APB1PRSTR
-    description: APB1 peripheral reset register (RCC_APB1PRSTR).
-    byte_offset: 16
-    fieldset: APB1PRSTR
-  - name: AHBPCENR
-    description: AHB Peripheral Clock enable register (RCC_AHBPCENR).
-    byte_offset: 20
-    fieldset: AHBPCENR
-  - name: APB2PCENR
-    description: APB2 peripheral clock enable register (RCC_APB2PCENR).
-    byte_offset: 24
-    fieldset: APB2PCENR
-  - name: APB1PCENR
-    description: APB1 peripheral clock enable register (RCC_APB1PCENR).
-    byte_offset: 28
-    fieldset: APB1PCENR
-  - name: RSTSCKR
-    description: Control/status register (RCC_RSTSCKR).
-    byte_offset: 36
-    fieldset: RSTSCKR
-  - name: AHBRSTR
-    description: AHB reset register (RCC_APHBRSTR).
-    byte_offset: 40
-    fieldset: AHBRSTR
+    - name: CTLR
+      description: Clock control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CFGR0
+      description: Clock configuration register (RCC_CFGR0).
+      byte_offset: 4
+      fieldset: CFGR0
+    - name: APB2PRSTR
+      description: APB2 peripheral reset register (RCC_APB2PRSTR).
+      byte_offset: 12
+      fieldset: APB2PRSTR
+    - name: APB1PRSTR
+      description: APB1 peripheral reset register (RCC_APB1PRSTR).
+      byte_offset: 16
+      fieldset: APB1PRSTR
+    - name: AHBPCENR
+      description: AHB Peripheral Clock enable register (RCC_AHBPCENR).
+      byte_offset: 20
+      fieldset: AHBPCENR
+    - name: APB2PCENR
+      description: APB2 peripheral clock enable register (RCC_APB2PCENR).
+      byte_offset: 24
+      fieldset: APB2PCENR
+    - name: APB1PCENR
+      description: APB1 peripheral clock enable register (RCC_APB1PCENR).
+      byte_offset: 28
+      fieldset: APB1PCENR
+    - name: RSTSCKR
+      description: Control/status register (RCC_RSTSCKR).
+      byte_offset: 36
+      fieldset: RSTSCKR
+    - name: AHBRSTR
+      description: AHB reset register (RCC_APHBRSTR).
+      byte_offset: 40
+      fieldset: AHBRSTR
 fieldset/AHBPCENR:
   description: AHB Peripheral Clock enable register (RCC_AHBPCENR).
   fields:
-  - name: DMA1EN
-    description: DMA clock enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: SRAMEN
-    description: SRAM interface clock enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: USBFSEN
-    description: USBFS clock enable.
-    bit_offset: 12
-    bit_size: 1
-  - name: USBPD
-    description: USBPD clock enable.
-    bit_offset: 17
-    bit_size: 1
+    - name: DMA1EN
+      description: DMA clock enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: SRAMEN
+      description: SRAM interface clock enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: USBFSEN
+      description: USBFS clock enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: USBPD
+      description: USBPD clock enable.
+      bit_offset: 17
+      bit_size: 1
 fieldset/AHBRSTR:
   description: AHB reset register (RCC_APHBRSTR).
   fields:
-  - name: USBFSRST
-    description: USBFS reset.
-    bit_offset: 12
-    bit_size: 1
-  - name: PIOCRST
-    description: PIOC reset.
-    bit_offset: 13
-    bit_size: 1
-  - name: USBPDRST
-    description: USBPD reset.
-    bit_offset: 17
-    bit_size: 1
+    - name: USBFSRST
+      description: USBFS reset.
+      bit_offset: 12
+      bit_size: 1
+    - name: PIOCRST
+      description: PIOC reset.
+      bit_offset: 13
+      bit_size: 1
+    - name: USBPDRST
+      description: USBPD reset.
+      bit_offset: 17
+      bit_size: 1
 fieldset/APB1PCENR:
   description: APB1 peripheral clock enable register (RCC_APB1PCENR).
   fields:
-  - name: TIM2EN
-    description: Timer 2 clock enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: TIM3EN
-    description: Timer 3 clock enable.
-    bit_offset: 1
-    bit_size: 1
-  - name: WWDGEN
-    description: Window watchdog clock enable.
-    bit_offset: 11
-    bit_size: 1
-  - name: USART2EN
-    description: USART 2 clock enable.
-    bit_offset: 17
-    bit_size: 1
-  - name: USART3EN
-    description: USART 3 clock enable.
-    bit_offset: 18
-    bit_size: 1
-  - name: UART4EN
-    description: UART 4 clock enable.
-    bit_offset: 19
-    bit_size: 1
-  - name: I2C1EN
-    description: I2C 1 clock enable.
-    bit_offset: 21
-    bit_size: 1
-  - name: PWREN
-    description: Power interface clock enable.
-    bit_offset: 28
-    bit_size: 1
+    - name: TIM2EN
+      description: Timer 2 clock enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: TIM3EN
+      description: Timer 3 clock enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: WWDGEN
+      description: Window watchdog clock enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: USART2EN
+      description: USART 2 clock enable.
+      bit_offset: 17
+      bit_size: 1
+    - name: USART3EN
+      description: USART 3 clock enable.
+      bit_offset: 18
+      bit_size: 1
+    - name: USART4EN
+      description: USART 4 clock enable.
+      bit_offset: 19
+      bit_size: 1
+    - name: I2C1EN
+      description: I2C 1 clock enable.
+      bit_offset: 21
+      bit_size: 1
+    - name: PWREN
+      description: Power interface clock enable.
+      bit_offset: 28
+      bit_size: 1
 fieldset/APB1PRSTR:
   description: APB1 peripheral reset register (RCC_APB1PRSTR).
   fields:
-  - name: TIM2RST
-    description: Timer 2 reset.
-    bit_offset: 0
-    bit_size: 1
-  - name: TIM3RST
-    description: Timer 3 reset.
-    bit_offset: 1
-    bit_size: 1
-  - name: WWDGRST
-    description: Window watchdog reset.
-    bit_offset: 11
-    bit_size: 1
-  - name: USART2RST
-    description: USART 2 reset.
-    bit_offset: 17
-    bit_size: 1
-  - name: USART3RST
-    description: USART 3 reset.
-    bit_offset: 18
-    bit_size: 1
-  - name: USART4RST
-    description: USART 4 reset.
-    bit_offset: 19
-    bit_size: 1
-  - name: I2C1RST
-    description: I2C1 reset.
-    bit_offset: 21
-    bit_size: 1
-  - name: PWRRST
-    description: Power interface reset.
-    bit_offset: 28
-    bit_size: 1
+    - name: TIM2RST
+      description: Timer 2 reset.
+      bit_offset: 0
+      bit_size: 1
+    - name: TIM3RST
+      description: Timer 3 reset.
+      bit_offset: 1
+      bit_size: 1
+    - name: WWDGRST
+      description: Window watchdog reset.
+      bit_offset: 11
+      bit_size: 1
+    - name: USART2RST
+      description: USART 2 reset.
+      bit_offset: 17
+      bit_size: 1
+    - name: USART3RST
+      description: USART 3 reset.
+      bit_offset: 18
+      bit_size: 1
+    - name: USART4RST
+      description: USART 4 reset.
+      bit_offset: 19
+      bit_size: 1
+    - name: I2C1RST
+      description: I2C1 reset.
+      bit_offset: 21
+      bit_size: 1
+    - name: PWRRST
+      description: Power interface reset.
+      bit_offset: 28
+      bit_size: 1
 fieldset/APB2PCENR:
   description: APB2 peripheral clock enable register (RCC_APB2PCENR).
   fields:
-  - name: AFIOEN
-    description: Alternate function I/O clock enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: IOPAEN
-    description: I/O port A clock enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: IOPBEN
-    description: I/O port B clock enable.
-    bit_offset: 3
-    bit_size: 1
-  - name: IOPCEN
-    description: I/O port C clock enable.
-    bit_offset: 4
-    bit_size: 1
-  - name: ADC1EN
-    description: ADC1 interface clock enable.
-    bit_offset: 9
-    bit_size: 1
-  - name: TIM1EN
-    description: TIM1 Timer clock enable.
-    bit_offset: 11
-    bit_size: 1
-  - name: SPI1EN
-    description: SPI 1 clock enable.
-    bit_offset: 12
-    bit_size: 1
-  - name: USART1EN
-    description: USART1 clock enable.
-    bit_offset: 14
-    bit_size: 1
+    - name: AFIOEN
+      description: Alternate function I/O clock enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: IOPAEN
+      description: I/O port A clock enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: IOPBEN
+      description: I/O port B clock enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: IOPCEN
+      description: I/O port C clock enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: ADC1EN
+      description: ADC1 interface clock enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: TIM1EN
+      description: TIM1 Timer clock enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: SPI1EN
+      description: SPI 1 clock enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: USART1EN
+      description: USART1 clock enable.
+      bit_offset: 14
+      bit_size: 1
 fieldset/APB2PRSTR:
   description: APB2 peripheral reset register (RCC_APB2PRSTR).
   fields:
-  - name: AFIORST
-    description: Alternate function I/O reset.
-    bit_offset: 0
-    bit_size: 1
-  - name: IOPARST
-    description: IO port A reset.
-    bit_offset: 2
-    bit_size: 1
-  - name: IOPBRST
-    description: IO port B reset.
-    bit_offset: 3
-    bit_size: 1
-  - name: IOPCRST
-    description: IO port C reset.
-    bit_offset: 4
-    bit_size: 1
-  - name: ADC1RST
-    description: ADC 1 interface reset.
-    bit_offset: 9
-    bit_size: 1
-  - name: TIM1RST
-    description: TIM1 timer reset.
-    bit_offset: 11
-    bit_size: 1
-  - name: SPI1RST
-    description: SPI 1 reset.
-    bit_offset: 12
-    bit_size: 1
-  - name: USART1RST
-    description: USART1 reset.
-    bit_offset: 14
-    bit_size: 1
+    - name: AFIORST
+      description: Alternate function I/O reset.
+      bit_offset: 0
+      bit_size: 1
+    - name: IOPARST
+      description: IO port A reset.
+      bit_offset: 2
+      bit_size: 1
+    - name: IOPBRST
+      description: IO port B reset.
+      bit_offset: 3
+      bit_size: 1
+    - name: IOPCRST
+      description: IO port C reset.
+      bit_offset: 4
+      bit_size: 1
+    - name: ADC1RST
+      description: ADC 1 interface reset.
+      bit_offset: 9
+      bit_size: 1
+    - name: TIM1RST
+      description: TIM1 timer reset.
+      bit_offset: 11
+      bit_size: 1
+    - name: SPI1RST
+      description: SPI 1 reset.
+      bit_offset: 12
+      bit_size: 1
+    - name: USART1RST
+      description: USART1 reset.
+      bit_offset: 14
+      bit_size: 1
 fieldset/CFGR0:
   description: Clock configuration register (RCC_CFGR0).
   fields:
-  - name: HPRE
-    description: AHB prescaler.
-    bit_offset: 4
-    bit_size: 4
-  - name: MCO
-    description: Microcontroller clock output.
-    bit_offset: 24
-    bit_size: 3
+    - name: HPRE
+      description: AHB prescaler.
+      bit_offset: 4
+      bit_size: 4
+    - name: MCO
+      description: Microcontroller clock output.
+      bit_offset: 24
+      bit_size: 3
 fieldset/CTLR:
   description: Clock control register.
   fields:
-  - name: HSION
-    description: Internal High Speed clock enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: HSIRDY
-    description: Internal High Speed clock ready flag.
-    bit_offset: 1
-    bit_size: 1
-  - name: HSITRIM
-    description: Internal High Speed clock trimming.
-    bit_offset: 3
-    bit_size: 5
-  - name: HSICAL
-    description: Internal High Speed clock Calibration.
-    bit_offset: 8
-    bit_size: 8
+    - name: HSION
+      description: Internal High Speed clock enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: HSIRDY
+      description: Internal High Speed clock ready flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: HSITRIM
+      description: Internal High Speed clock trimming.
+      bit_offset: 3
+      bit_size: 5
+    - name: HSICAL
+      description: Internal High Speed clock Calibration.
+      bit_offset: 8
+      bit_size: 8
 fieldset/RSTSCKR:
   description: Control/status register (RCC_RSTSCKR).
   fields:
-  - name: RMVF
-    description: Remove reset flag.
-    bit_offset: 24
-    bit_size: 1
-  - name: OPARSTF
-    description: OPA reset flag.
-    bit_offset: 25
-    bit_size: 1
-  - name: PINRSTF
-    description: PIN reset flag.
-    bit_offset: 26
-    bit_size: 1
-  - name: PORRSTF
-    description: POR/PDR reset flag.
-    bit_offset: 27
-    bit_size: 1
-  - name: SFTRSTF
-    description: Software reset flag.
-    bit_offset: 28
-    bit_size: 1
-  - name: IWDGRSTF
-    description: Independent watchdog reset flag.
-    bit_offset: 29
-    bit_size: 1
-  - name: WWDGRSTF
-    description: Window watchdog reset flag.
-    bit_offset: 30
-    bit_size: 1
-  - name: LPWRRSTF
-    description: Low-power reset flag.
-    bit_offset: 31
-    bit_size: 1
+    - name: RMVF
+      description: Remove reset flag.
+      bit_offset: 24
+      bit_size: 1
+    - name: OPARSTF
+      description: OPA reset flag.
+      bit_offset: 25
+      bit_size: 1
+    - name: PINRSTF
+      description: PIN reset flag.
+      bit_offset: 26
+      bit_size: 1
+    - name: PORRSTF
+      description: POR/PDR reset flag.
+      bit_offset: 27
+      bit_size: 1
+    - name: SFTRSTF
+      description: Software reset flag.
+      bit_offset: 28
+      bit_size: 1
+    - name: IWDGRSTF
+      description: Independent watchdog reset flag.
+      bit_offset: 29
+      bit_size: 1
+    - name: WWDGRSTF
+      description: Window watchdog reset flag.
+      bit_offset: 30
+      bit_size: 1
+    - name: LPWRRSTF
+      description: Low-power reset flag.
+      bit_offset: 31
+      bit_size: 1

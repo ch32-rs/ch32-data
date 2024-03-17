@@ -70,6 +70,10 @@ fieldset/APB1PCENR:
 fieldset/APB1PRSTR:
   description: APB1 peripheral reset register (RCC_APB1PRSTR).
   fields:
+    - name: TIM2RST
+      description: Timer 2 clock reset.
+      bit_offset: 0
+      bit_size: 1
     - name: WWDGRST
       description: Window watchdog reset.
       bit_offset: 11
