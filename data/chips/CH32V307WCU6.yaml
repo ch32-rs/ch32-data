@@ -45,16 +45,18 @@ cores:
           version: v3_d8c
           block: RCC
         pins:
-          # 对于CH32V305FBP6和CH32V305GBU6芯片，PA8和PC9引脚在芯片内部短接合封，禁止将两个IO均配 置为输出功能，有功耗要求的注意引脚状态。
           - pin: PA8
             signal: MCO
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
+    include_peripherals:
+      - "../family/CH32V3.yaml"
+
+    include_interrupts: "../interrupts/ch32v2_v3.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+    interrupts: []
+    dma_channels: []
+
 _raw:
   WDOG: "2"
   url: http://www.wch.cn/products/CH32V307.html

@@ -16,7 +16,7 @@
   remap:
     register: PCFR1
     field: USART3_RM
-# The following are actually USART, not USART
+# The following are actually UART, not USART. Using pins to distinguish them.
 - name: USART4
   address: 0x40004C00
   registers:

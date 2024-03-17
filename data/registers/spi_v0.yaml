@@ -4,49 +4,39 @@ block/SPI:
     - name: CTLR1
       description: control register 1.
       byte_offset: 0
-      bit_size: 16
       fieldset: CTLR1
     - name: CTLR2
       description: control register 2.
       byte_offset: 4
-      bit_size: 16
       fieldset: CTLR2
     - name: STATR
       description: status register.
       byte_offset: 8
-      bit_size: 16
       fieldset: STATR
     - name: DATAR
       description: data register.
       byte_offset: 12
-      bit_size: 16
       fieldset: DATAR
     - name: CRCR
       description: CRCR polynomial register.
       byte_offset: 16
-      bit_size: 16
       fieldset: CRCR
     - name: RCRCR
       description: RX CRC register.
       byte_offset: 20
       access: Read
-      bit_size: 16
       fieldset: RCRCR
     - name: TCRCR
-      description: send CRC register.
+      description: TX CRC register.
       byte_offset: 24
       access: Read
-      bit_size: 16
       fieldset: TCRCR
     - name: HSCR
       description: high speed control register.
       byte_offset: 36
-      access: Write
-      bit_size: 16
       fieldset: HSCR
 fieldset/CRCR:
   description: CRCR polynomial register.
-  bit_size: 16
   fields:
     - name: CRCPOLY
       description: CRC polynomial register.
@@ -54,7 +44,6 @@ fieldset/CRCR:
       bit_size: 16
 fieldset/CTLR1:
   description: control register 1.
-  bit_size: 16
   fields:
     - name: CPHA
       description: Clock phase.
@@ -72,6 +61,7 @@ fieldset/CTLR1:
       description: Baud rate control.
       bit_offset: 3
       bit_size: 3
+      enum: BAUD_RATE
     - name: SPE
       description: SPI enable.
       bit_offset: 6
@@ -114,7 +104,6 @@ fieldset/CTLR1:
       bit_size: 1
 fieldset/CTLR2:
   description: control register 2.
-  bit_size: 16
   fields:
     - name: RXDMAEN
       description: Rx buffer DMA enable.
@@ -142,15 +131,13 @@ fieldset/CTLR2:
       bit_size: 1
 fieldset/DATAR:
   description: data register.
-  bit_size: 16
   fields:
-    - name: DR
+    - name: DATAR
       description: Data register.
       bit_offset: 0
       bit_size: 16
 fieldset/HSCR:
   description: high speed control register.
-  bit_size: 16
   fields:
     - name: HSRXEN
       description: High speed mode read enable.
@@ -158,7 +145,6 @@ fieldset/HSCR:
       bit_size: 1
 fieldset/RCRCR:
   description: RX CRC register.
-  bit_size: 16
   fields:
     - name: RXCRC
       description: Rx CRC register.
@@ -166,7 +152,6 @@ fieldset/RCRCR:
       bit_size: 16
 fieldset/STATR:
   description: status register.
-  bit_size: 16
   fields:
     - name: RXNE
       description: Receive buffer not empty.
@@ -201,10 +186,37 @@ fieldset/STATR:
       bit_offset: 7
       bit_size: 1
 fieldset/TCRCR:
-  description: RX CRC register.
-  bit_size: 16
+  description: TX CRC register.
   fields:
     - name: TXCRC
-      description: TX CRC register.
+      description: Tx CRC register.
       bit_offset: 0
       bit_size: 16
+enum/BAUD_RATE:
+  description: Baud rate control.
+  bit_size: 3
+  variants:
+    - name: DIV_2
+      description: fPCLK/2
+      value: 0
+    - name: DIV_4
+      description: fPCLK/4
+      value: 1
+    - name: DIV_8
+      description: fPCLK/8
+      value: 2
+    - name: DIV_16
+      description: fPCLK/16
+      value: 3
+    - name: DIV_32
+      description: fPCLK/32
+      value: 4
+    - name: DIV_64
+      description: fPCLK/64
+      value: 5
+    - name: DIV_128
+      description: fPCLK/128
+      value: 6
+    - name: DIV_256
+      description: fPCLK/256
+      value: 7

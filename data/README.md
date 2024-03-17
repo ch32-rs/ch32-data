@@ -43,3 +43,11 @@ BCTM vs GPTM
 - No CNT.DIR, .CMS, .CKD
 - No CTLR2.CC*, .TI1S
 - No DMAADDR, DMACFGR
+
+### i2c
+
+V003, no RTR, SMBUS
+
+### spi
+
+V003 has no I2S.

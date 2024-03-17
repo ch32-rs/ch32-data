@@ -1,0 +1,40 @@
+- name: TIM5
+  address: 0x40000C00
+  registers:
+    kind: timer
+    version: common
+    block: TIM_GP32
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: TIM5EN
+    reset:
+      register: APB1PRSTR
+      field: TIM5RST
+  pins:
+    - signal: CH1
+      pin: PA0
+    - signal: CH2
+      pin: PA1
+    - signal: CH3
+      pin: PA2
+    - signal: CH4
+      pin: PA3
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM5
+  dma_channels:
+    - signal: CH1
+      channel: DMA1_CH7
+    - signal: CH2
+      channel: DMA1_CH1
+    - signal: CH3
+      channel: DMA1_CH3
+    - signal: CH4
+      channel: DMA1_CH6
+    - signal: UP
+      channel: DMA1_CH8
+    - signal: TRIG
+      channel: DMA1_CH7

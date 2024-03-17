@@ -117,7 +117,7 @@
       register: APB2PRSTR
       field: TIM1RST
   remap:
-    register: PCFR
+    register: PCFR1
     field: TIM1RM
   interrupts:
     - signal: UP
@@ -275,7 +275,7 @@
       register: APB1PRSTR
       field: TIM2RST
   remap:
-    register: PCFR
+    register: PCFR1
     field: TIM2RM
   interrupts:
     - signal: GLOBAL
@@ -373,7 +373,7 @@
       register: APB2PRSTR
       field: USART1RST
   remap:
-    register: PCFR
+    register: PCFR1
     field: USART1RM
   interrupts:
     - signal: GLOBAL
@@ -448,3 +448,108 @@
     - pin: PC7
       signal: RTS
       remap: 0b11
+
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    # No SMBUS registers, others are the same as v3
+    # No idea if RTR is available
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: I2C1EN
+    reset:
+      register: APB1PRSTR
+      field: I2C1RST
+  # complex remap, handled manually
+  pins:
+    # 00：默认映射（SCL/PC2，SDA/PC1）
+    - pin: PC2
+      signal: SCL
+      remap: 0b00
+    - pin: PC1
+      signal: SDA
+      remap: 0b00
+    # 01：重映射（SCL/PD1，SDA/PD0
+    - pin: PD1
+      signal: SCL
+      remap: 0b01
+    - pin: PD0
+      signal: SDA
+      remap: 0b01
+    # 1X：重映射（SCL/PC5，SDA/PC6）
+    - pin: PC5
+      signal: SCL
+      remap: 0b10
+    - pin: PC6
+      signal: SDA
+      remap: 0b10
+  interrupts:
+    - signal: EV
+      interrupt: I2C1_EV
+    - signal: ER
+      interrupt: I2C1_ER
+  dma_channels:
+    - signal: TX
+      channel: DMA1_CH6
+    - signal: RX
+      channel: DMA1_CH7
+
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: v0
+    block: SPI
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: SPI1EN
+    reset:
+      register: APB2PRSTR
+      field: SPI1RST
+  remap:
+    register: PCFR1
+    field: SPI1RM
+  pins:
+    # 0：默认映射(NSS/PC1，CK/PC5，MISO/PC7，MOSI/PC6)；
+    # 1：重 映 射 (NSS/PC0 ， CK/PC5 ， MISO/PC7 ， MOSI/PC6)。
+    - pin: PC1
+      signal: NSS
+      remap: 0b0
+    - pin: PC5
+      signal: SCK
+      remap: 0b0
+    - pin: PC7
+      signal: MISO
+      remap: 0b0
+    - pin: PC6
+      signal: MOSI
+      remap: 0b0
+    - pin: PC0
+      signal: NSS
+      remap: 0b1
+    - pin: PC5
+      signal: SCK
+      remap: 0b1
+    - pin: PC7
+      signal: MISO
+      remap: 0b1
+    - pin: PC6
+      signal: MOSI
+      remap: 0b1
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI1
+  dma_channels:
+    - signal: TX
+      channel: DMA1_CH3
+    - signal: RX
+      channel: DMA1_CH2
