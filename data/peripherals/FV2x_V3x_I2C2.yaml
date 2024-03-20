@@ -9,10 +9,10 @@
     kernel_clock: PCLK1
     enable:
       register: APB1PCENR
-      field: I2C1EN
+      field: I2C2EN
     reset:
       register: APB1PRSTR
-      field: I2C1RST
+      field: I2C2RST
   # No remap
   pins:
     - pin: PB10
