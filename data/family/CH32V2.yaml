@@ -121,6 +121,13 @@
       register: APB2PRSTR
       field: AFIORST
 
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v3
+    block: EXTEND
+
 - name: RTC
   address: 0x40002800
   registers:
