@@ -1,0 +1,48 @@
+name: metapac publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use nightly Rust
+      run: rustup default nightly
+    - name: Deploy SSH key
+      run: |
+        mkdir ~/.ssh
+        echo "${{ secrets.NIGHTLIES_KEY }}" > ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -t rsa github.com 
+    - name: Build
+      run: |
+        COMMIT=$(git rev-parse HEAD)
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+        ./d gen
+        cd build/ch32-metapac/
+        cp -v ../../README.md .
+        cp -v ../../LICENSE* .
+        git init
+        git add .
+        git config user.name "ch32-data builder"
+        git config user.email "action@github.com"
+        git commit -m "ch32-rs/ch32-data master $COMMIT"
+        git branch -M main
+        git remote add origin git@github.com:ch32-rs/ch32-metapac.git
+    - name: Test
+      run: |
+        cd build/ch32-metapac/
+        cargo doc --features ch32v307vct6,metadata
+    - name: Push
+      run: |
+        cd build/ch32-metapac/
+        git push --force origin main
