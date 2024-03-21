@@ -1,0 +1,51 @@
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART2EN
+    reset:
+      register: APB1PRSTR
+      field: USART2RST
+  remap:
+    register: PCFR1
+    field: USART2_RM
+  pins:
+    # 0:默认映射(CTS/PA0，RTS/PA1，TX/PA2，RX/PA3，CK/PA4);
+    - pin: PA0
+      signal: CTS
+      remap: 0b0
+    - pin: PA1
+      signal: RTS
+      remap: 0b0
+    - pin: PA2
+      signal: TX
+      remap: 0b0
+    - pin: PA3
+      signal: RX
+      remap: 0b0
+    - pin: PA4
+      signal: CK
+      remap: 0b0
+    # 1:重映射(CTS/PD3，RTS/PD4，TX/PD5，RX/PD6， CK/PD7)
+    - pin: PD3
+      signal: CTS
+      remap: 0b1
+    - pin: PD4
+      signal: RTS
+      remap: 0b1
+    - pin: PD5
+      signal: TX
+      remap: 0b1
+    - pin: PD6
+      signal: RX
+      remap: 0b1
+    - pin: PD7
+      signal: CK
+      remap: 0b1

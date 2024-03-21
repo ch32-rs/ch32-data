@@ -43,7 +43,8 @@ cores:
             signal: MCO
     include_peripherals:
       - "../family/CH32V3.yaml"
-      - "../peripherals/FV2x_V3x_USART12.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
       - "../peripherals/FV2x_V3x_USART3.yaml"
       - "../peripherals/FV2x_V3x_USART4.yaml"
       - "../peripherals/FV2x_V3x_USART5.yaml"

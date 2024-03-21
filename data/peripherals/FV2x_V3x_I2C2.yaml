@@ -13,6 +13,9 @@
     reset:
       register: APB1PRSTR
       field: I2C2RST
+  interrupts:
+    - { "signal": "ER", "interrupt": "I2C2_ER" }
+    - { "signal": "EV", "interrupt": "I2C2_EV" }
   # No remap
   pins:
     - pin: PB10

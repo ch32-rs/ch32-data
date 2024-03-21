@@ -16,6 +16,9 @@
   remap:
     register: PCFR1
     field: SPI3_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI3
   pins:
     # 0:默认映射(NSS/PA15、SCK/PB3、MISO/PB4、 MOSI/PB5);
     - pin: PA15

@@ -13,4 +13,7 @@
     reset:
       register: APB1PRSTR
       field: SPI2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI2
   # No remap

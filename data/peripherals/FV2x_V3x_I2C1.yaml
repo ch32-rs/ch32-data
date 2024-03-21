@@ -16,6 +16,9 @@
   remap:
     register: PCFR1
     field: I2C1_RM
+  interrupts:
+    - { "signal": "ER", "interrupt": "I2C1_ER" }
+    - { "signal": "EV", "interrupt": "I2C1_EV" }
   pins:
     # 0:默认映射(SCL/PB6，SDA/PB7); 1:重映射(SCL/PB8，SDA/PB9)。
     - pin: PB5
