@@ -1,3 +1,5 @@
+# 12 - 64-bit System Timer
+SYSTICK: 12
 # 16 - TMR0_IRQHandler
 TMR0: 16
 # 17 - GPIOA_IRQHandler
