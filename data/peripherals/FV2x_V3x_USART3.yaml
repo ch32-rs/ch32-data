@@ -13,6 +13,9 @@
     reset:
       register: APB1PRSTR
       field: USART3RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART3
   remap:
     register: PCFR1
     field: USART3_RM
