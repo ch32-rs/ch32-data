@@ -1,5 +1,5 @@
 block/SYSTICK:
-  description: System Tick Peripheral.
+  description: Systick registers, 64-bit downcounter for CH32V103.
   items:
     - name: CTLR
       description: SysTick Control register.
@@ -33,6 +33,6 @@ fieldset/CTLR:
   description: SysTick Control register.
   fields:
     - name: STE
-      description: SysTick enable state. HCL/8
+      description: SysTick enable state. HCLK/8
       bit_offset: 0
       bit_size: 1

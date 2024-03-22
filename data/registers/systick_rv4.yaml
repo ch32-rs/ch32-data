@@ -1,83 +1,89 @@
 block/SYSTICK:
   description: Systick registers, 64-bit downcounter for QingKeV4.
   items:
-  - name: CTLR
-    description: System count control register.
-    byte_offset: 0
-    fieldset: CTLR
-  - name: SR
-    description: System count status register.
-    byte_offset: 4
-    fieldset: SR
-  - name: CNT
-    description: System counter register.
-    byte_offset: 8
-    bit_size: 64
-  - name: CNTL
-    description: System counter register, lower 32-bit.
-    byte_offset: 8
-  - name: CMP
-    description: System count compare register.
-    byte_offset: 16
-    bit_size: 64
-  - name: CMPL
-    description: System count compare register, lower 32-bit.
-    byte_offset: 16
+    - name: CTLR
+      description: System count control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: SR
+      description: System count status register.
+      byte_offset: 4
+      fieldset: SR
+    - name: CNTL
+      description: System counter register, lower 32-bit.
+      byte_offset: 8
+    - name: CNTH
+      description: System counter register, upper 32-bit.
+      byte_offset: 12
+    - name: CNT
+      description: System counter register.
+      byte_offset: 8
+      bit_size: 64
+    - name: CMP
+      description: System count compare register.
+      byte_offset: 16
+      bit_size: 64
+    - name: CMPL
+      description: System count compare register, lower 32-bit.
+      byte_offset: 16
+    - name: CMPH
+      description: System count compare register, upper 32-bit.
+      byte_offset: 20
 fieldset/CTLR:
   description: System count control register.
   fields:
-  - name: STE
-    description: Counter enable control bit.
-    bit_offset: 0
-    bit_size: 1
-  - name: STIE
-    description: Counter interrupt enable control bit.
-    bit_offset: 1
-    bit_size: 1
-  - name: STCLK
-    description: Counter system clock sourse selection bit.
-    bit_offset: 2
-    bit_size: 1
-    enum: STCLK
-  - name: STRE
-    description: Auto reload count enable bit.
-    bit_offset: 3
-    bit_size: 1
-  - name: MODE
-    description: Counter mode.
-    bit_offset: 4
-    bit_size: 1
-    enum: MODE
-  - name: INIT
-    description: Counter initial value update.
-    bit_offset: 5
-    bit_size: 1
-  - name: SWIE
-    description: Software interrupt enable.
-    bit_offset: 31
-    bit_size: 1
+    - name: STE
+      description: Counter enable control bit.
+      bit_offset: 0
+      bit_size: 1
+    - name: STIE
+      description: Counter interrupt enable control bit.
+      bit_offset: 1
+      bit_size: 1
+    - name: STCLK
+      description: Counter system clock sourse selection bit.
+      bit_offset: 2
+      bit_size: 1
+      enum: STCLK
+    - name: STRE
+      description: Auto reload count enable bit.
+      bit_offset: 3
+      bit_size: 1
+    - name: MODE
+      description: Counter mode.
+      bit_offset: 4
+      bit_size: 1
+      enum: MODE
+    - name: INIT
+      description: Counter initial value update.
+      bit_offset: 5
+      bit_size: 1
+    - name: SWIE
+      description: Software interrupt enable.
+      bit_offset: 31
+      bit_size: 1
 fieldset/SR:
   description: System count status register.
   fields:
-  - name: CNTIF
-    description: Count value compare flag.
-    bit_offset: 0
-    bit_size: 1
+    - name: CNTIF
+      description: Count value compare flag.
+      bit_offset: 0
+      bit_size: 1
 enum/MODE:
   bit_size: 1
   variants:
-  - name: Upcount
-    description: Upcount.
-    value: 0
-  - name: Downcount
-    description: Downcount.
-    value: 1
+    - name: Upcount
+      description: Upcount.
+      value: 0
+    - name: Downcount
+      description: Downcount.
+      value: 1
 enum/STCLK:
   bit_size: 1
   variants:
-  - name: HCLK_DIV8
-    description: HCLK/8.
-    value: 0
-  - name: HCLK
-    description: HCLK.
-    value: 1
+    - name: HCLK_DIV8
+      description: HCLK/8.
+      value: 0
+    - name: HCLK
+      description: HCLK.
+      value: 1
