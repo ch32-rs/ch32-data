@@ -6,7 +6,7 @@
     block: USART
   rcc:
     bus_clock: PCLK2
-    kernel_clock: PCLK1
+    kernel_clock: PCLK2
     enable:
       register: APB2PCENR
       field: USART1EN

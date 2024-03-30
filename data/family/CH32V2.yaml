@@ -27,11 +27,19 @@
     block: EXTI
   interrupts:
     - signal: EXTI0
-      interrupt: EXTI7_0
-    - signal: EXTI8
-      interrupt: EXTI15_8
-    - signal: EXTI16
-      interrupt: EXTI25_16
+      interrupt: EXTI0
+    - signal: EXTI1
+      interrupt: EXTI1
+    - signal: EXTI2
+      interrupt: EXTI2
+    - signal: EXTI3
+      interrupt: EXTI3
+    - signal: EXTI4
+      interrupt: EXTI4
+    - signal: EXTI5
+      interrupt: EXTI9_5
+    - signal: EXTI10
+      interrupt: EXTI15_10
 
 - name: RCC
   address: 0x40021000
