@@ -284,7 +284,7 @@ fieldset/SAMPTR1:
       array:
         len: 8
         stride: 3
-      enum: SMP
+      enum: SAMPLE_TIME
 fieldset/SAMPTR2:
   description: sample time register 2
   fields:
@@ -295,7 +295,7 @@ fieldset/SAMPTR2:
       array:
         len: 10
         stride: 3
-      enum: SMP
+      enum: SAMPLE_TIME
 fieldset/STATR:
   description: status register.
   fields:
@@ -405,7 +405,7 @@ enum/EXTSEL:
     - name: RSWSTART
       description: Software start
       value: 7
-enum/SMP:
+enum/SAMPLE_TIME:
   bit_size: 3
   description: Sample time selection
   variants:

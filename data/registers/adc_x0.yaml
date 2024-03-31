@@ -252,6 +252,7 @@ fieldset/SAMPTR1:
       array:
         len: 8
         stride: 3
+      enum: SAMPLE_TIME
 fieldset/SAMPTR2:
   description: sample time register 2
   fields:
@@ -262,6 +263,7 @@ fieldset/SAMPTR2:
       array:
         len: 10
         stride: 3
+      enum: SAMPLE_TIME
 fieldset/STATR:
   description: status register.
   fields:
@@ -299,3 +301,31 @@ fieldset/WDLTR:
       description: Analog watchdog lower threshold.
       bit_offset: 0
       bit_size: 12
+enum/SAMPLE_TIME:
+  bit_size: 3
+  description: Sample time selection
+  variants:
+    - name: Cycles4
+      description: 4 cycles
+      value: 0b000
+    - name: Cycles5
+      description: 5 cycles
+      value: 0b001
+    - name: Cycles6
+      description: 6 cycles
+      value: 0b010
+    - name: Cycles7
+      description: 7 cycles
+      value: 0b011
+    - name: Cycles8
+      description: 8 cycles
+      value: 0b100
+    - name: Cycles9
+      description: 9 cycles
+      value: 0b101
+    - name: Cycles10
+      description: 10 cycles
+      value: 0b110
+    - name: Cycles11
+      description: 11 cycles
+      value: 0b111

@@ -53,7 +53,7 @@ block/ADC:
       byte_offset: 56
       fieldset: ISQR
     - name: IDATAR
-      description: injected data register 1.
+      description: injected data register x.
       array:
         len: 4
         stride: 4
@@ -65,12 +65,8 @@ block/ADC:
       byte_offset: 76
       access: Read
       fieldset: RDATAR
-    - name: DLYR
-      description: delay data register.
-      byte_offset: 80
-      fieldset: DLYR
 fieldset/CTLR1:
-  description: control register 1/TKEY_V_CTLR.
+  description: control register 1.
   fields:
     - name: AWDCH
       description: Analog watchdog channel select bits.
@@ -89,7 +85,7 @@ fieldset/CTLR1:
       bit_offset: 7
       bit_size: 1
     - name: SCAN
-      description: Scan mode enable.
+      description: Scan mode.
       bit_offset: 8
       bit_size: 1
     - name: AWDSGL
@@ -112,6 +108,10 @@ fieldset/CTLR1:
       description: Discontinuous mode channel count.
       bit_offset: 13
       bit_size: 3
+    - name: DUALMOD
+      description: Dual mode selection.
+      bit_offset: 16
+      bit_size: 4
     - name: JAWDEN
       description: Analog watchdog enable on injected channels.
       bit_offset: 22
@@ -120,10 +120,10 @@ fieldset/CTLR1:
       description: Analog watchdog enable on regular channels.
       bit_offset: 23
       bit_size: 1
-    - name: CALVOL
-      description: ADC Calibration voltage selection.
-      bit_offset: 25
-      bit_size: 2
+    - name: TKENABLE
+      description: Touch key enable, including TKEY_F and TKEY_V.
+      bit_offset: 24
+      bit_size: 1
 fieldset/CTLR2:
   description: control register 2.
   fields:
@@ -175,21 +175,14 @@ fieldset/CTLR2:
       description: Start conversion of regular channels.
       bit_offset: 22
       bit_size: 1
-fieldset/DLYR:
-  description: delay data register.
-  fields:
-    - name: DLYVLU
-      description: External trigger data delay time configuration.
-      bit_offset: 0
-      bit_size: 9
-    - name: DLYSRC
-      description: External trigger source delay selection.
-      bit_offset: 9
+    - name: TSVREFE
+      description: Temperature sensor and VREFINT enable.
+      bit_offset: 23
       bit_size: 1
 fieldset/IDATAR:
-  description: injected data register 3.
+  description: injected data register x.
   fields:
-    - name: IDATA
+    - name: JDATA
       description: Injected data.
       bit_offset: 0
       bit_size: 16
@@ -199,7 +192,7 @@ fieldset/IOFR:
     - name: JOFFSET
       description: Data offset for injected channel x.
       bit_offset: 0
-      bit_size: 10
+      bit_size: 12
       array:
         len: 1
         stride: 0
@@ -223,7 +216,11 @@ fieldset/RDATAR:
     - name: DATA
       description: Regular data.
       bit_offset: 0
-      bit_size: 32
+      bit_size: 16
+    - name: ADC2DATA
+      description: ADC2 data.
+      bit_offset: 16
+      bit_size: 16
 fieldset/RSQR1:
   description: regular sequence register 1.
   fields:
@@ -259,14 +256,14 @@ fieldset/RSQR3:
         len: 6
         stride: 5
 fieldset/SAMPTR1:
-  description: sample time register.
+  description: sample time register 1.
   fields:
     - name: SMP
       description: Channel 10 sample time selection.
       bit_offset: 0
       bit_size: 3
       array:
-        len: 6
+        len: 8
         stride: 3
       enum: SAMPLE_TIME
 fieldset/SAMPTR2:
@@ -309,39 +306,39 @@ fieldset/WDHTR:
     - name: HT
       description: Analog watchdog higher threshold.
       bit_offset: 0
-      bit_size: 10
+      bit_size: 12
 fieldset/WDLTR:
   description: watchdog lower threshold register.
   fields:
     - name: LT
       description: Analog watchdog lower threshold.
       bit_offset: 0
-      bit_size: 10
+      bit_size: 12
 enum/SAMPLE_TIME:
   bit_size: 3
   description: Sample time selection
   variants:
-    - name: Cycles3
-      description: 3 cycles
+    - name: Cycles1_5
+      description: 1.5 cycles
       value: 0
-    - name: Cycles9
-      description: 9 cycles
+    - name: Cycles7_5
+      description: 7.5 cycles
       value: 1
-    - name: Cycles15
-      description: 15 cycles
+    - name: Cycles13_5
+      description: 13.5 cycles
       value: 2
-    - name: Cycles30
-      description: 30 cycles
+    - name: Cycles28_5
+      description: 28.5 cycles
       value: 3
-    - name: Cycles43
-      description: 43 cycles
+    - name: Cycles41_5
+      description: 41.5 cycles
       value: 4
-    - name: Cycles57
-      description: 57 cycles
+    - name: Cycles55_5
+      description: 55.5 cycles
       value: 5
-    - name: Cycles73
-      description: 73 cycles
+    - name: Cycles71_5
+      description: 71.5 cycles
       value: 6
-    - name: Cycles241
-      description: 241 cycles
+    - name: Cycles239_5
+      description: 239.5 cycles
       value: 7
