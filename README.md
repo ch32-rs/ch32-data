@@ -1,6 +1,6 @@
 # ch32-data
 
-ch32-data is a project aiming to produce clean machine-readable data about the WCH's 32-bit microcontroller families.
+ch32-data is a project that aims to provide structured, machine-readable data for WCH's 32-bit microcontrollers.
 
 This project is highly inspired by the [stm32-data](https://github.com/embassy-rs/stm32-data) project.
 With the following modifications:
@@ -11,7 +11,7 @@ With the following modifications:
 ## Data sources
 
 - Datasheets are provided by [wch.cn](https://www.wch.cn/) and [wch-ic.com](https://wch-ic.com/)
-- SVD files are provided by [](https://www.mounriver.com/)
+- SVD files are provided by [MounRiver Studio](https://www.mounriver.com/)
   - SVD files are post-processed by [ch32-rs](https://github.com/ch32-rs/ch32-rs) project, adding fixes and patches
 - Misc info is retrieved from <https://github.com/openwch>
 
@@ -20,17 +20,20 @@ With the following modifications:
 - CH32V
 - CH32X
 - CH32L
-- CH57x/CH58x/CH59x
-- CH569/CH565
-- CH641
 - CH643
 - CH645
+- CH641
+
+Not implemented yet(planing to implement using another crate):
+
+- CH57x/CH58x/CH59x
+- CH569/CH565
 
 ## Minimum supported Rust version(MSRV)
 
 This project is developed with a recent **nightly** version of Rust compiler. And is expected to work with beta versions of Rust.
 
-Feel free to change this if you did some testing with older versions of Rust.
+Feel free to change this if you did some testing with some version of Rust.
 
 ## Contributing
 
