@@ -13,6 +13,9 @@
     reset:
       register: APB2PRSTR
       field: ADC2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC
   pins:
     - pin: PA0
       signal: IN0
