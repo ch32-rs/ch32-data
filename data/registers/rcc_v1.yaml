@@ -305,30 +305,37 @@ fieldset/CFGR0:
       description: System clock Switch.
       bit_offset: 0
       bit_size: 2
+      enum: SW
     - name: SWS
       description: System Clock Switch Status.
       bit_offset: 2
       bit_size: 2
+      enum: SW
     - name: HPRE
       description: AHB prescaler.
       bit_offset: 4
       bit_size: 4
+      enum: HPRE
     - name: PPRE1
       description: APB Low speed prescaler(APB1).
       bit_offset: 8
       bit_size: 3
+      enum: PPRE
     - name: PPRE2
       description: APB High speed prescaler(APB2).
       bit_offset: 11
       bit_size: 3
+      enum: PPRE
     - name: ADCPRE
       description: ADC prescaler.
       bit_offset: 14
       bit_size: 2
+      enum: ADCPRE
     - name: PLLSRC
       description: PLL entry clock source.
       bit_offset: 16
       bit_size: 1
+      enum: PLLSRC
     - name: PLLXTPRE
       description: HSE divider for PLL entry.
       bit_offset: 17
@@ -498,3 +505,90 @@ fieldset/RSTSCKR:
       description: Low-power reset flag.
       bit_offset: 31
       bit_size: 1
+enum/PLLSRC:
+  bit_size: 1
+  variants:
+    - name: HSI
+      description: HSI or HSI/2 selected as PLL input clock.
+      value: 0
+    - name: HSE
+      description: HSE or HSE/2 selected as PLL input clock.
+      value: 1
+enum/SW:
+  bit_size: 2
+  variants:
+    - name: HSI
+      description: HSI selected as system clock.
+      value: 0b00
+    - name: HSE
+      description: HSE selected as system clock.
+      value: 0b01
+    - name: PLL
+      description: PLL selected as system clock.
+      value: 0b10
+    - name: RESERVED
+      description: Reserved.
+      value: 0b11
+enum/PPRE:
+  bit_size: 3
+  variants:
+    - name: DIV1
+      description: HCLK not divided.
+      value: 0b000
+    - name: DIV2
+      description: HCLK divided by 2.
+      value: 0b100
+    - name: DIV4
+      description: HCLK divided by 4.
+      value: 0b101
+    - name: DIV8
+      description: HCLK divided by 8.
+      value: 0b110
+    - name: DIV16
+      description: HCLK divided by 16.
+      value: 0b111
+enum/HPRE:
+  bit_size: 4
+  variants:
+    - name: DIV1
+      description: SYSCLK not divided.
+      value: 0b0000
+    - name: DIV2
+      description: SYSCLK divided by 2.
+      value: 0b1000
+    - name: DIV4
+      description: SYSCLK divided by 4.
+      value: 0b1001
+    - name: DIV8
+      description: SYSCLK divided by 8.
+      value: 0b1010
+    - name: DIV16
+      description: SYSCLK divided by 16.
+      value: 0b1011
+    - name: DIV64
+      description: SYSCLK divided by 64.
+      value: 0b1100
+    - name: DIV128
+      description: SYSCLK divided by 128.
+      value: 0b1101
+    - name: DIV256
+      description: SYSCLK divided by 256.
+      value: 0b1110
+    - name: DIV512
+      description: SYSCLK divided by 512.
+      value: 0b1111
+enum/ADCPRE:
+  bit_size: 2
+  variants:
+    - name: DIV2
+      description: PCLK2 divided by 2.
+      value: 0b00
+    - name: DIV4
+      description: PCLK2 divided by 4.
+      value: 0b01
+    - name: DIV6
+      description: PCLK2 divided by 6.
+      value: 0b10
+    - name: DIV8
+      description: PCLK2 divided by 8.
+      value: 0b11
