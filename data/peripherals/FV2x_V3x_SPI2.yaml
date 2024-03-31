@@ -17,3 +17,16 @@
     - signal: GLOBAL
       interrupt: SPI2
   # No remap
+  pins:
+    - pin: PB12
+      signal: NSS
+      remap: 0
+    - pin: PB13
+      signal: SCK
+      remap: 0
+    - pin: PB14
+      signal: MISO
+      remap: 0
+    - pin: PB15
+      signal: MOSI
+      remap: 0
