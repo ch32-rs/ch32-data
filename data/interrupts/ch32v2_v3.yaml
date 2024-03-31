@@ -94,6 +94,10 @@ TIM8_UP: 60
 TIM8_TRG_COM: 61
 # 62 - TIM8 Capture Compare interrupt
 TIM8_CC: 62
+# 63
+RNG: 63
+# 65
+SDIO: 65
 # 66 - TIM5 global interrupt
 TIM5: 66
 # 67 - SPI3 global interrupt

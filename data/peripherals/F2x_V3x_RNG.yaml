@@ -1,0 +1,15 @@
+- name: RNG
+  address: 0x40023C00
+  registers:
+    kind: rng
+    version: v3
+    block: RNG
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: TRNG_EN
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RNG
