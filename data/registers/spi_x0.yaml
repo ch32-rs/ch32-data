@@ -72,6 +72,7 @@ fieldset/CTLR1:
       description: Baud rate control.
       bit_offset: 3
       bit_size: 3
+      enum: BAUD_RATE
     - name: SPE
       description: SPI enable.
       bit_offset: 6
@@ -208,3 +209,31 @@ fieldset/TCRCR:
       description: TX CRC register.
       bit_offset: 0
       bit_size: 16
+enum/BAUD_RATE:
+  description: Baud rate control.
+  bit_size: 3
+  variants:
+    - name: DIV_2
+      description: fPCLK/2
+      value: 0
+    - name: DIV_4
+      description: fPCLK/4
+      value: 1
+    - name: DIV_8
+      description: fPCLK/8
+      value: 2
+    - name: DIV_16
+      description: fPCLK/16
+      value: 3
+    - name: DIV_32
+      description: fPCLK/32
+      value: 4
+    - name: DIV_64
+      description: fPCLK/64
+      value: 5
+    - name: DIV_128
+      description: fPCLK/128
+      value: 6
+    - name: DIV_256
+      description: fPCLK/256
+      value: 7
