@@ -39,17 +39,7 @@
     - signal: EXTI5
       interrupt: EXTI9_5
     - signal: EXTI10
-      interrupt: EXTI10
-    - signal: EXTI11
-      interrupt: EXTI11
-    - signal: EXTI12
-      interrupt: EXTI12
-    - signal: EXTI13
-      interrupt: EXTI13
-    - signal: EXTI14
-      interrupt: EXTI14
-    - signal: EXTI15
-      interrupt: EXTI15
+      interrupt: EXTI15_10
 
 - name: RCC
   address: 0x40021000
