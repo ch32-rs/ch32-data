@@ -175,3 +175,25 @@
     kind: rtc
     version: common
     block: RTC
+
+# 2*DAC
+- name: DAC
+  address: 0x40007400
+  registers:
+    kind: dac
+    version: v3
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: DAC
+    enable:
+      register: APB1PCENR
+      field: DACEN
+    reset:
+      register: APB1PRSTR
+      field: DACRST
+  pins:
+    - pin: PA4
+      signal: OUT0
+    - pin: PA5
+      signal: OUT1

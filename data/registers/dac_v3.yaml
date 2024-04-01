@@ -1,217 +1,253 @@
 block/DAC:
   description: Digital to analog converter.
   items:
-  - name: CTLR
-    description: Control register (DAC_CR).
-    byte_offset: 0
-    fieldset: CTLR
-  - name: SWTR
-    description: DAC software trigger register (DAC_SWTRIGR).
-    byte_offset: 4
-    access: Write
-    fieldset: SWTR
-  - name: R12BDHR1
-    description: DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1).
-    byte_offset: 8
-    fieldset: R12BDHR1
-  - name: L12BDHR1
-    description: DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1).
-    byte_offset: 12
-    fieldset: L12BDHR1
-  - name: R8BDHR1
-    description: DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1).
-    byte_offset: 16
-    fieldset: R8BDHR1
-  - name: R12BDHR2
-    description: DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2).
-    byte_offset: 20
-    fieldset: R12BDHR2
-  - name: L12BDHR2
-    description: DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2).
-    byte_offset: 24
-    fieldset: L12BDHR2
-  - name: R8BDHR2
-    description: DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2).
-    byte_offset: 28
-    fieldset: R8BDHR2
-  - name: RD12BDHR
-    description: Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved.
-    byte_offset: 32
-    fieldset: RD12BDHR
-  - name: LD12BDHR
-    description: DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved.
-    byte_offset: 36
-    fieldset: LD12BDHR
-  - name: RD8BDHR
-    description: DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved.
-    byte_offset: 40
-    fieldset: RD8BDHR
-  - name: DOR1
-    description: DAC channel1 data output register (DAC_DOR1).
-    byte_offset: 44
-    access: Read
-    fieldset: DOR1
-  - name: DOR2
-    description: DAC channel2 data output register (DAC_DOR2).
-    byte_offset: 48
-    access: Read
-    fieldset: DOR2
+    - name: CTLR
+      description: Control register (DAC_CR).
+      byte_offset: 0
+      fieldset: CTLR
+    - name: SWTR
+      description: DAC software trigger register (DAC_SWTRIGR).
+      byte_offset: 4
+      access: Write
+      fieldset: SWTR
+    - name: R12BDHR1
+      description: DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1).
+      byte_offset: 8
+      fieldset: R12BDHR1
+    - name: L12BDHR1
+      description: DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1).
+      byte_offset: 12
+      fieldset: L12BDHR1
+    - name: R8BDHR1
+      description: DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1).
+      byte_offset: 16
+      fieldset: R8BDHR1
+    - name: R12BDHR2
+      description: DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2).
+      byte_offset: 20
+      fieldset: R12BDHR2
+    - name: L12BDHR2
+      description: DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2).
+      byte_offset: 24
+      fieldset: L12BDHR2
+    - name: R8BDHR2
+      description: DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2).
+      byte_offset: 28
+      fieldset: R8BDHR2
+    - name: RD12BDHR
+      description: Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved.
+      byte_offset: 32
+      fieldset: RD12BDHR
+    - name: LD12BDHR
+      description: DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved.
+      byte_offset: 36
+      fieldset: LD12BDHR
+    - name: RD8BDHR
+      description: DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved.
+      byte_offset: 40
+      fieldset: RD8BDHR
+    - name: DOR
+      description: DAC channel1 data output register (DAC_DOR1).
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 44
+      access: Read
+      fieldset: DOR
 fieldset/CTLR:
   description: Control register (DAC_CR).
   fields:
-  - name: EN1
-    description: DAC channel1 enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: BOFF1
-    description: DAC channel1 output buffer disable.
-    bit_offset: 1
-    bit_size: 1
-  - name: TEN1
-    description: DAC channel1 trigger enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: TSEL1
-    description: DAC channel1 trigger selection.
-    bit_offset: 3
-    bit_size: 3
-  - name: WAVE1
-    description: DAC channel1 noise/triangle wave generation enable.
-    bit_offset: 6
-    bit_size: 2
-  - name: MAMP1
-    description: DAC channel1 mask/amplitude selector.
-    bit_offset: 8
-    bit_size: 4
-  - name: DMAEN1
-    description: DAC channel1 DMA enable.
-    bit_offset: 12
-    bit_size: 1
-  - name: EN2
-    description: DAC channel2 enable.
-    bit_offset: 16
-    bit_size: 1
-  - name: BOFF2
-    description: DAC channel2 output buffer disable.
-    bit_offset: 17
-    bit_size: 1
-  - name: TEN2
-    description: DAC channel2 trigger enable.
-    bit_offset: 18
-    bit_size: 1
-  - name: TSEL2
-    description: DAC channel2 trigger selection.
-    bit_offset: 19
-    bit_size: 3
-  - name: WAVE2
-    description: DAC channel2 noise/triangle wave generation enable.
-    bit_offset: 22
-    bit_size: 2
-  - name: MAMP2
-    description: DAC channel2 mask/amplitude selector.
-    bit_offset: 24
-    bit_size: 4
-  - name: DMAEN2
-    description: DAC channel2 DMA enable.
-    bit_offset: 28
-    bit_size: 1
-fieldset/DOR1:
+    - name: EN1
+      description: DAC channel1 enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: BOFF1
+      description: DAC channel1 output buffer disable.
+      bit_offset: 1
+      bit_size: 1
+    - name: TEN1
+      description: DAC channel1 trigger enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TSEL1
+      description: DAC channel1 trigger selection.
+      bit_offset: 3
+      bit_size: 3
+      enum: TRIG_SEL
+    - name: WAVE1
+      description: DAC channel1 noise/triangle wave generation enable.
+      bit_offset: 6
+      bit_size: 2
+      enum: WAVE
+    - name: MAMP1
+      description: DAC channel1 mask/amplitude selector.
+      bit_offset: 8
+      bit_size: 4
+    - name: DMAEN1
+      description: DAC channel1 DMA enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: EN2
+      description: DAC channel2 enable.
+      bit_offset: 16
+      bit_size: 1
+    - name: BOFF2
+      description: DAC channel2 output buffer disable.
+      bit_offset: 17
+      bit_size: 1
+    - name: TEN2
+      description: DAC channel2 trigger enable.
+      bit_offset: 18
+      bit_size: 1
+    - name: TSEL2
+      description: DAC channel2 trigger selection.
+      bit_offset: 19
+      bit_size: 3
+      enum: TRIG_SEL
+    - name: WAVE2
+      description: DAC channel2 noise/triangle wave generation enable.
+      bit_offset: 22
+      bit_size: 2
+      enum: WAVE
+    - name: MAMP2
+      description: DAC channel2 mask/amplitude selector.
+      bit_offset: 24
+      bit_size: 4
+    - name: DMAEN2
+      description: DAC channel2 DMA enable.
+      bit_offset: 28
+      bit_size: 1
+fieldset/DOR:
   description: DAC channel1 data output register (DAC_DOR1).
   fields:
-  - name: DACC1DOR
-    description: DAC channel1 data output.
-    bit_offset: 0
-    bit_size: 12
-fieldset/DOR2:
-  description: DAC channel2 data output register (DAC_DOR2).
-  fields:
-  - name: DACC2DOR
-    description: DAC channel2 data output.
-    bit_offset: 0
-    bit_size: 12
+    - name: DACC1DOR
+      description: DAC channel data output.
+      bit_offset: 0
+      bit_size: 12
 fieldset/L12BDHR1:
   description: DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1).
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 12-bit left-aligned data.
-    bit_offset: 4
-    bit_size: 12
+    - name: DACC1DHR
+      description: DAC channel1 12-bit left-aligned data.
+      bit_offset: 4
+      bit_size: 12
 fieldset/L12BDHR2:
   description: DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2).
   fields:
-  - name: DACC2DHR
-    description: DAC channel2 12-bit left-aligned data.
-    bit_offset: 4
-    bit_size: 12
+    - name: DACC2DHR
+      description: DAC channel2 12-bit left-aligned data.
+      bit_offset: 4
+      bit_size: 12
 fieldset/LD12BDHR:
   description: DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved.
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 12-bit left-aligned data.
-    bit_offset: 4
-    bit_size: 12
-  - name: DACC2DHR
-    description: DAC channel2 12-bit right-aligned data.
-    bit_offset: 20
-    bit_size: 12
+    - name: DACC1DHR
+      description: DAC channel1 12-bit left-aligned data.
+      bit_offset: 4
+      bit_size: 12
+    - name: DACC2DHR
+      description: DAC channel2 12-bit right-aligned data.
+      bit_offset: 20
+      bit_size: 12
 fieldset/R12BDHR1:
   description: DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1).
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 12-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 12
+    - name: DACC1DHR
+      description: DAC channel1 12-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 12
 fieldset/R12BDHR2:
   description: DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2).
   fields:
-  - name: DACC2DHR
-    description: DAC channel2 12-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 12
+    - name: DACC2DHR
+      description: DAC channel2 12-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 12
 fieldset/R8BDHR1:
   description: DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1).
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 8-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 8
+    - name: DACC1DHR
+      description: DAC channel1 8-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 8
 fieldset/R8BDHR2:
   description: DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2).
   fields:
-  - name: DACC2DHR
-    description: DAC channel2 8-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 8
+    - name: DACC2DHR
+      description: DAC channel2 8-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 8
 fieldset/RD12BDHR:
   description: Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved.
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 12-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 12
-  - name: DACC2DHR
-    description: DAC channel2 12-bit right-aligned data.
-    bit_offset: 16
-    bit_size: 12
+    - name: DACC1DHR
+      description: DAC channel1 12-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 12
+    - name: DACC2DHR
+      description: DAC channel2 12-bit right-aligned data.
+      bit_offset: 16
+      bit_size: 12
 fieldset/RD8BDHR:
   description: DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved.
   fields:
-  - name: DACC1DHR
-    description: DAC channel1 8-bit right-aligned data.
-    bit_offset: 0
-    bit_size: 8
-  - name: DACC2DHR
-    description: DAC channel2 8-bit right-aligned data.
-    bit_offset: 8
-    bit_size: 8
+    - name: DACC1DHR
+      description: DAC channel1 8-bit right-aligned data.
+      bit_offset: 0
+      bit_size: 8
+    - name: DACC2DHR
+      description: DAC channel2 8-bit right-aligned data.
+      bit_offset: 8
+      bit_size: 8
 fieldset/SWTR:
   description: DAC software trigger register (DAC_SWTRIGR).
   fields:
-  - name: SWTRIG1
-    description: DAC channel1 software trigger.
-    bit_offset: 0
-    bit_size: 1
-  - name: SWTRIG2
-    description: DAC channel2 software trigger.
-    bit_offset: 1
-    bit_size: 1
+    - name: SWTRIG1
+      description: DAC channel1 software trigger.
+      bit_offset: 0
+      bit_size: 1
+    - name: SWTRIG2
+      description: DAC channel2 software trigger.
+      bit_offset: 1
+      bit_size: 1
+enum/WAVE:
+  bit_size: 2
+  description: DAC channel2 noise/triangle wave generation enable.
+  variants:
+    - name: DISABLE
+      description: Wave generation disabled.
+      value: 0b00
+    - name: NOISE
+      description: Noise wave generation enabled.
+      value: 0b01
+    - name: TRIANGLE
+      description: Triangle wave generation enabled.
+      value: 0b10
+enum/TRIG_SEL:
+  bit_size: 3
+  description: DAC channel1/2 trigger selection.
+  variants:
+    - name: TIM6_TRGO
+      description: TIM6 TRGO event.
+      value: 0b000
+    - name: TIM8_TRGO
+      description: TIM8 TRGO event.
+      value: 0b001
+    - name: TIM7_TRGO
+      description: TIM7 TRGO event.
+      value: 0b010
+    - name: TIM5_TRGO
+      description: TIM5 TRGO event.
+      value: 0b011
+    - name: TIM2_TRGO
+      description: TIM2 TRGO event.
+      value: 0b100
+    - name: TIM4_TRGO
+      description: TIM4 TRGO event.
+      value: 0b101
+    - name: EXTI9
+      description: External line 9.
+      value: 0b110
+    - name: SOFTWARE
+      description: Software trigger.
+      value: 0b111
