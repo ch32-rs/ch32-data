@@ -155,6 +155,7 @@ fieldset/CTLR2:
       description: External event select for injected group.
       bit_offset: 12
       bit_size: 3
+      enum: JEXTSEL
     - name: JEXTTRIG
       description: External trigger conversion mode for injected channels.
       bit_offset: 15
@@ -163,6 +164,7 @@ fieldset/CTLR2:
       description: External event select for regular group.
       bit_offset: 17
       bit_size: 3
+      enum: EXTSEL
     - name: EXTTRIG
       description: External trigger conversion mode for regular channels.
       bit_offset: 20
@@ -345,3 +347,53 @@ enum/SAMPLE_TIME:
     - name: Cycles241
       description: 241 cycles
       value: 7
+enum/EXTSEL:
+  bit_size: 3
+  description: External event select for regular group.
+  variants:
+    - name: TIM1_TRGO
+      description: Timer 1 TRGO event.
+      value: 0b000
+    - name: TIM1_CC1
+      description: Timer 1 capture compare 1.
+      value: 0b001
+    - name: TIM1_CC2
+      description: Timer 1 capture compare 2.
+      value: 0b010
+    - name: TIM2_TRGO
+      description: Timer 2 TRGO event.
+      value: 0b011
+    - name: TIM2_CC1
+      description: Timer 2 capture compare 1.
+      value: 0b100
+    - name: TIM2_CC2
+      description: Timer 2 capture compare 2.
+      value: 0b101
+    - name: PD3_PC2
+      description: PD3/PC2 pin.
+      value: 0b110
+    - name: SWSTART
+      description: Software start.
+      value: 0b111
+enum/JEXTSEL:
+  bit_size: 3
+  description: External event select for injected group.
+  variants:
+    - name: TIM1_CC3
+      description: Timer 1 capture compare 3.
+      value: 0b000
+    - name: TIM1_CC4
+      description: Timer 1 capture compare 4.
+      value: 0b001
+    - name: TIM2_CC3
+      description: Timer 2 capture compare 3.
+      value: 0b010
+    - name: TIM2_CC4
+      description: Timer 2 capture compare 4.
+      value: 0b011
+    - name: PD1_PA2
+      description: PD1/PA2 pin.
+      value: 0b110
+    - name: JSWSTART
+      description: Software start.
+      value: 0b111

@@ -63,10 +63,9 @@ fn main() -> anyhow::Result<()> {
     let registers = registers::Registers::parse()?;
     registers.write()?;
 
-    let data_dir = Path::new("./data");
-
     stopwatch.section("Parsing chips");
 
+    let data_dir = Path::new("./data");
     let mut chip_meta_files: Vec<_> = std::fs::read_dir(data_dir.join("chips"))
         .unwrap()
         .filter_map(|res| res.unwrap().file_name().to_str().map(|s| s.to_string()))
