@@ -118,7 +118,7 @@
       field: TIM1RST
   remap:
     register: PCFR1
-    field: TIM1RM
+    field: TIM1_RM
   interrupts:
     - signal: UP
       interrupt: TIM1_UP
@@ -276,7 +276,7 @@
       field: TIM2RST
   remap:
     register: PCFR1
-    field: TIM2RM
+    field: TIM2_RM
   interrupts:
     - signal: GLOBAL
       interrupt: TIM2
@@ -374,7 +374,7 @@
       field: USART1RST
   remap:
     register: PCFR1
-    field: USART1RM
+    field: USART1_RM
   interrupts:
     - signal: GLOBAL
       interrupt: USART1
@@ -517,7 +517,7 @@
       field: SPI1RST
   remap:
     register: PCFR1
-    field: SPI1RM
+    field: SPI1_RM
   pins:
     # 0：默认映射(NSS/PC1，CK/PC5，MISO/PC7，MOSI/PC6)；
     # 1：重 映 射 (NSS/PC0 ， CK/PC5 ， MISO/PC7 ， MOSI/PC6)。

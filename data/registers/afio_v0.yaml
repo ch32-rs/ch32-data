@@ -22,47 +22,47 @@ fieldset/EXTICR:
 fieldset/PCFR1:
   description: AF remap and debug I/O configuration register (AFIO_PCFR).
   fields:
-    - name: SPI1RM
+    - name: SPI1_RM
       description: SPI1 remapping.
       bit_offset: 0
       bit_size: 1
-    - name: I2C1RM
+    - name: I2C1_RM
       description: I2C1 remapping.
       bit_offset: 1
       bit_size: 1
-    - name: USART1RM
+    - name: USART1_RM
       description: USART1 remapping.
       bit_offset: 2
       bit_size: 1
-    - name: TIM1RM
+    - name: TIM1_RM
       description: TIM1 remapping.
       bit_offset: 6
       bit_size: 2
-    - name: TIM2RM
+    - name: TIM2_RM
       description: TIM2 remapping.
       bit_offset: 8
       bit_size: 2
-    - name: PA12RM
+    - name: PA12_RM
       description: Port A1/Port A2 mapping on OSCIN/OSCOUT.
       bit_offset: 15
       bit_size: 1
-    - name: ADC1_ETRGINJ_RM
+    - name: ADC1_ETRGINJ__RM
       description: ADC 1 External trigger injected conversion remapping.
       bit_offset: 17
       bit_size: 1
-    - name: ADC1_ETRGREG_RM
+    - name: ADC1_ETRGREG__RM
       description: ADC 1 external trigger regular conversion remapping.
       bit_offset: 18
       bit_size: 1
-    - name: USART1REMAP1
+    - name: USART1_RM1
       description: USART1 remapping.
       bit_offset: 21
       bit_size: 1
-    - name: I2C1REMAP1
+    - name: I2C1_RM1
       description: I2C1 remapping.
       bit_offset: 22
       bit_size: 1
-    - name: TIM1_IREMAP
+    - name: TIM1_CH1_RM
       description: TIM1_CH1 channel selection.
       bit_offset: 23
       bit_size: 1
