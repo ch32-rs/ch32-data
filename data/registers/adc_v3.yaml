@@ -374,7 +374,7 @@ enum/JEXTSEL:
     - name: TIM8_CC4_EXTI15
       description: Timer 8 capture compare 4 and external interrupt line 15
       value: 6
-    - name: ISWSTART
+    - name: JSWSTART
       description: Software start
       value: 7
 enum/EXTSEL:
@@ -402,7 +402,7 @@ enum/EXTSEL:
     - name: TIM8_CC1_EXTI11
       description: Timer 8 capture compare 1 and external interrupt line 11
       value: 6
-    - name: RSWSTART
+    - name: SWSTART
       description: Software start
       value: 7
 enum/SAMPLE_TIME:

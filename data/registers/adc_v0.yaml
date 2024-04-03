@@ -225,7 +225,7 @@ fieldset/RDATAR:
     - name: DATA
       description: Regular data.
       bit_offset: 0
-      bit_size: 32
+      bit_size: 16
 fieldset/RSQR1:
   description: regular sequence register 1.
   fields:
