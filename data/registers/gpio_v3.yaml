@@ -69,6 +69,7 @@ fieldset/CFGHR:
       array:
         len: 8
         stride: 4
+      enum: MODE
     - name: CNF
       description: Port n.8 configuration bits.
       bit_offset: 2
@@ -76,6 +77,7 @@ fieldset/CFGHR:
       array:
         len: 8
         stride: 4
+      enum: CNF
 fieldset/CFGLR:
   description: Port configuration register low (GPIOn_CFGLR).
   fields:
@@ -86,6 +88,7 @@ fieldset/CFGLR:
       array:
         len: 8
         stride: 4
+      enum: MODE
     - name: CNF
       description: Port n.0 configuration bits.
       bit_offset: 2
@@ -93,6 +96,7 @@ fieldset/CFGLR:
       array:
         len: 8
         stride: 4
+      enum: CNF
 fieldset/INDR:
   description: Port input data register (GPIOn_INDR).
   fields:
@@ -127,3 +131,35 @@ fieldset/OUTDR:
       array:
         len: 16
         stride: 1
+enum/MODE:
+  bit_size: 2
+  desscription: port x mode selection, configure the corresponding port by these bits.
+  variants:
+    - name: INPUT
+      description: Input mode.
+      value: 0b00
+    - name: OUTPUT_10MHZ
+      description: Output mode.
+      value: 0b01
+    - name: OUTPUT_2MHZ
+      description: Output mode.
+      value: 0b10
+    - name: OUTPUT_50MHZ
+      description: Output mode.
+      value: 0b11
+enum/CNF:
+  bit_size: 2
+  description: port x configuration selection, configure the corresponding port by these bits.
+  variants:
+    - name: ANALOG_IN_PUSH_PULL_OUT
+      description: Analog input / push-pull output.
+      value: 0b00
+    - name: FLOATING_IN_OPEN_DRAIN_OUT
+      description: Floating input / open-drain output.
+      value: 0b01
+    - name: PULL_IN_AF_PUSH_PULL_OUT
+      description: Input with pull-up / AF pull-down.
+      value: 0b10
+    - name: AF_OPEN_DRAIN_OUT
+      description: Alternate function output push-pull
+      value: 0b11
