@@ -24,7 +24,7 @@ With the following modifications:
 - CH645
 - CH641
 
-Not implemented yet(planing to implement using another crate):
+Families that not implemented yet(planing to implement using another crate, as they are using different peripherals and features):
 
 - CH57x/CH58x/CH59x
 - CH569/CH565
