@@ -120,7 +120,7 @@
       field: USART1RST
   remap:
     register: PCFR1
-    field: USART1RM
+    field: USART1_RM
   pins:
     - { pin: "PB11", signal: "RX", remap: 0 }
     - { pin: "PC16", signal: "CTS", remap: 0 }
@@ -170,7 +170,7 @@
       field: USART2RST
   remap:
     register: PCFR1
-    field: USART2RM
+    field: USART2_RM
   pins:
     # 000:映射(RX/PA3，CTS/PA0，TX/PA2，CK/PA4， RTS/PA1)
     - { pin: "PA3", signal: "RX", remap: 0 }
@@ -230,7 +230,7 @@
       field: USART3RST
   remap:
     register: PCFR1
-    field: USART3RM
+    field: USART3_RM
   pins:
     # 00:映射(RX/PB4，CTS/PB6，TX/PB3，CK/PB5， RTS/PB7)
     - { pin: "PB4", signal: "RX", remap: 0 }
@@ -278,7 +278,7 @@
       field: USART4RST
   remap:
     register: PCFR1
-    field: USART4RM
+    field: USART4_RM
   pins:
     # 000:映射(RX/PB1，CTS/PB15，TX/PB0，CK/PB2， RTS/PA8)
     - { pin: "PB1", signal: "RX", remap: 0 }
@@ -342,6 +342,9 @@
     reset:
       register: APB2PRSTR
       field: SPI1RST
+  remap:
+    register: PCFR1
+    field: SPI1_RM
   pins:
     - pin: PA4
       signal: NSS

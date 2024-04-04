@@ -186,12 +186,12 @@ enum/CNF:
   bit_size: 2
   description: port x configuration selection, configure the corresponding port by these bits.
   variants:
-    - name: ANALOG_IN_PUSH_PULL_OUT
+    - name: ANALOG_IN__PUSH_PULL_OUT
       description: Analog input / push-pull output.
       value: 0b00
-    - name: FLOATING_IN
-      description: Floating input / open-drain output.
+    - name: FLOATING_IN__OPEN_DRAIN_OUT
+      description: Floating input, no Open Drain output.
       value: 0b01
-    - name: PULL_IN_AF_PUSH_PULL_OUT
-      description: Input with pull-up / AF pull-down.
+    - name: PULL_IN__AF_PUSH_PULL_OUT
+      description: Input with pull-up or pull down / AF pull output
       value: 0b10

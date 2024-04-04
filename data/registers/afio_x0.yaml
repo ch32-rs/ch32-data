@@ -88,44 +88,44 @@ fieldset/EXTICR:
 fieldset/PCFR1:
   description: AF remap and debug I/O configuration register (AFIO_PCFR1).
   fields:
-    - name: SPI1RM
+    - name: SPI1_RM
       description: SPI1 remapping.
       bit_offset: 0
       bit_size: 2
-    - name: I2C1RM
+    - name: I2C1_RM
       description: I2C1 remapping.
       bit_offset: 2
       bit_size: 3
-    - name: USART1RM
+    - name: USART1_RM
       description: USART1 remapping.
       bit_offset: 5
       bit_size: 2
-    - name: USART2RM
+    - name: USART2_RM
       description: USART2 remapping.
       bit_offset: 7
       bit_size: 3
-    - name: USART3RM
+    - name: USART3_RM
       description: USART3 remapping.
       bit_offset: 10
       bit_size: 2
-    - name: USART4RM
+    - name: USART4_RM
       description: USART4 remapping.
       bit_offset: 12
       bit_size: 3
-    - name: TIM1RM
+    - name: TIM1_RM
       description: TIM1 remapping.
       bit_offset: 15
       bit_size: 3
-    - name: TIM2RM
+    - name: TIM2_RM
       description: TIM2 remapping.
       bit_offset: 18
       bit_size: 3
-    - name: TIM3RM
+    - name: TIM3_RM
       description: TIM3 remapping.
       bit_offset: 21
       bit_size: 2
-    - name: PLOC_RM
-      description: IO2W_RM remapping.
+    - name: PIOC_RM
+      description: IO2W__RM remapping.
       bit_offset: 23
       bit_size: 1
     - name: SW_CFG
