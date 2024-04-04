@@ -454,7 +454,7 @@
       signal: IN13
   interrupts:
     - signal: GLOBAL
-      interrupt: ADC
+      interrupt: ADC1
   dma_channels:
     - signal: ADC
       dmamux: "DMAMUX1"
@@ -481,14 +481,16 @@
   pins:
     # TODO
   interrupts:
-    - signal: TIM1
-      interrupt: TIM1BRK
-    - signal: TIM1
-      interrupt: TIM1UP
-    - signal: TIM1
-      interrupt: TIM1TRG
-    - signal: TIM1
-      interrupt: TIM1CC
+    - signal: BRK
+      interrupt: TIM1_BRK
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: TRG
+      interrupt: TIM1_TRG_COM
+    - signal: COM
+      interrupt: TIM1_TRG_COM
+    - signal: CC
+      interrupt: TIM1_CC
   dma_channels:
     # TODO
 - name: TIM2
@@ -509,14 +511,16 @@
   pins:
     # TODO
   interrupts:
-    - signal: TIM2
-      interrupt: TIM2BRK
-    - signal: TIM2
-      interrupt: TIM2UP
-    - signal: TIM2
-      interrupt: TIM2TRG
-    - signal: TIM2
-      interrupt: TIM2CC
+    - signal: BRK
+      interrupt: TIM2_BRK
+    - signal: UP
+      interrupt: TIM2_UP
+    - signal: TRG
+      interrupt: TIM2_TRG_COM
+    - signal: COM
+      interrupt: TIM2_TRG_COM
+    - signal: CC
+      interrupt: TIM2_CC
   dma_channels:
     # TODO
 
@@ -538,8 +542,15 @@
   pins:
     # TODO
   interrupts:
-    - signal: GLOBAL
+    - signal: BRK
       interrupt: TIM3
+    - signal: UP
+      interrupt: TIM3
+    - signal: TRG
+      interrupt: TIM3
+    - signal: CC
+      interrupt: TIM3
+
   dma_channels:
     # TODO
 
