@@ -218,10 +218,12 @@ fieldset/CFGR0:
       description: AHB prescaler.
       bit_offset: 4
       bit_size: 4
+      enum: HPRE
     - name: MCO
       description: Microcontroller clock output.
       bit_offset: 24
       bit_size: 3
+      enum: MCO
 fieldset/CTLR:
   description: Clock control register.
   fields:
@@ -276,3 +278,68 @@ fieldset/RSTSCKR:
       description: Low-power reset flag.
       bit_offset: 31
       bit_size: 1
+enum/HPRE:
+  bit_size: 4
+  description: AHB prescaler.
+  variants:
+    - name: DIV1
+      description: SYSCLK not divided.
+      value: 0b0000
+    - name: DIV2
+      description: SYSCLK divided by 2.
+      value: 0b0001
+    - name: DIV3
+      description: SYSCLK divided by 3.
+      value: 0b0010
+    - name: DIV4
+      description: SYSCLK divided by 4.
+      value: 0b0011
+    - name: DIV5
+      description: SYSCLK divided by 5.
+      value: 0b0100
+    - name: DIV6
+      description: SYSCLK divided by 6.
+      value: 0b0101
+    - name: DIV7
+      description: SYSCLK divided by 7.
+      value: 0b0110
+    - name: DIV8
+      description: SYSCLK divided by 8.
+      value: 0b0111
+    - name: DIV2_ALT
+      description: SYSCLK divided by 2.
+      value: 0b1000
+    - name: DIV4_ALT
+      description: SYSCLK divided by 4.
+      value: 0b1001
+    - name: DIV8_ALT
+      description: SYSCLK divided by 8.
+      value: 0b1010
+    - name: DIV16
+      description: SYSCLK divided by 16.
+      value: 0b1011
+    - name: DIV32
+      description: SYSCLK divided by 32.
+      value: 0b1100
+    - name: DIV64
+      description: SYSCLK divided by 64.
+      value: 0b1101
+    - name: DIV128
+      description: SYSCLK divided by 128.
+      value: 0b1110
+    - name: DIV256
+      description: SYSCLK divided by 256.
+      value: 0b1111
+enum/MCO:
+  bit_size: 3
+  description: Microcontroller clock output.
+  variants:
+    - name: NOCLK
+      description: No clock output.
+      value: 0b000
+    - name: SYSCLK
+      description: SYSCLK selected.
+      value: 0b100
+    - name: HSI
+      description: HSI selected.
+      value: 0b101
