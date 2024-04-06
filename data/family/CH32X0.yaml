@@ -415,8 +415,9 @@
     version: x0
     block: ADC
   rcc:
-    bus_clock: HCLK
-    kernel_clock: ADC_CLK
+    # According to the reference manual, the ADC clock is derived from the SYSCLK div by CLK_DIV
+    bus_clock: SYSCLK
+    kernel_clock: SYSCLK
     enable:
       register: APB2PCENR
       field: ADC1EN
