@@ -72,14 +72,11 @@ cores:
 
 _raw:
   UART: "5"
-  Ethernet: "-"
   GPIO: "24"
   DAC: "1"
   OPA: "1"
   TRNG: "1"
   Touchkey: "6"
-  USB_20: "-"
-  BLE: "-"
   Freq: 144MHz
   url: http://www.wch.cn/products/CH32V307.html
   WDOG: "2"

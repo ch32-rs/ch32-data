@@ -40,9 +40,7 @@ cores:
     dma_channels: []
 
 _raw:
-  TRNG: "-"
   Advanced TM: 2/1
-  RTC: "-"
   SPI: 1/-
   Touchkey: "11"
   ADC: 1/11
@@ -53,14 +51,8 @@ _raw:
   WDOG: "2"
   url: http://www.wch.cn/products/CH32X035.html
   UART: "4"
-  DAC: "-"
-  SDIO: "-"
-  USB_20H: "-"
   SRAM: 20K
   VDD: 3.3/5.0
-  BLE: "-"
-  CAN: "-"
-  Ethernet: "-"
   Package: QSOP28
   IIC: "1"
   Flash: 62K

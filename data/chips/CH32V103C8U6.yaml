@@ -40,25 +40,17 @@ cores:
     dma_channels: []
 
 _raw:
-  Ethernet: "-"
   Touchkey: "10"
   Package: QFN48X7
-  BLE: "-"
   VDD: 3.3/5.0
-  CAN: "-"
   IIC: "2"
   Advanced TM: 1/3
-  USB_20H: "-"
-  OPA: "-"
   SRAM: 20K
   SPI: 2/-
   GPIO: "37"
   Part NO.: CH32V103C8U6
   ADC: 1/10
-  SDIO: "-"
-  DAC: "-"
   Freq: 80MHz
-  TRNG: "-"
   UART: "3"
   Flash: 64K
   WDOG: "2"

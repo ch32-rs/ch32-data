@@ -77,10 +77,8 @@ _raw:
   UART: "8"
   Package: LQFP100
   GPIO: "80"
-  Ethernet: "-"
   Touchkey: "16"
   IIC: "2"
-  USB_20H: "-"
   Part NO.: CH32V303VCT6
   VDD: 2.5/3.3
   CAN: "1"
@@ -93,6 +91,5 @@ _raw:
   SPI: 3/2
   Flash: 256K
   url: http://www.wch.cn/products/CH32V303.html
-  BLE: "-"
   USB_20: H/D
   ADC: 2/16

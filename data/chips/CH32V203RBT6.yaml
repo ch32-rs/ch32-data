@@ -55,16 +55,11 @@ _raw:
   Flash: 128K
   OPA: "2"
   Ethernet: 10M PHY
-  DAC: "-"
   Package: LQFP64M
   IIC: "2"
   Freq: 144MHz
   RTC: "1"
   SRAM: 64K
-  TRNG: "-"
-  BLE: "-"
-  SDIO: "-"
-  USB_20H: "-"
   VDD: 2.5/3.3
   Touchkey: "16"
   UART: "4"

@@ -44,7 +44,6 @@ _raw:
   LCD: "-"
   row_no: bff986aa886947c1b2d86b0d3e7ce629
   url: http://www.wch.cn/products/CH573.html
-  Ethernet: "-"
   LEDC: "-"
   PWM: "4"
   DataFlash: 32K

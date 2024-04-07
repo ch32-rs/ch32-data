@@ -51,7 +51,6 @@ _raw:
   row_no: 4459858be5f145ea993f89cea2aad7e3
   Flash: 192K
   GPIO: "20"
-  Ethernet: "-"
   LCD: 16*4
   VDD: 2.3/3.3
   BLE: "5.4"

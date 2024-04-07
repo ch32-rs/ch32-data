@@ -47,12 +47,9 @@ cores:
 _raw:
   Freq: 144MHz
   CAN: "1"
-  DAC: "-"
-  SDIO: "-"
   USB_20: D
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V203.html
-  TRNG: "-"
   UART: "2"
   OPA: "2"
   GPIO: "26"
@@ -65,8 +62,5 @@ _raw:
   SPI: 1/-
   Touchkey: "10"
   Advanced TM: 1/3
-  BLE: "-"
-  Ethernet: "-"
-  USB_20H: "-"
   RTC: "1"
   WDOG: "2"

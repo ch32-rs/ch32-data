@@ -42,24 +42,16 @@ cores:
 _raw:
   OPA: "1"
   USB_20: D
-  DAC: "-"
-  TRNG: "-"
   Freq: 48MHz
-  SDIO: "-"
   VDD: 3.3/5.0
-  CAN: "-"
   Part NO.: CH32X035F7P6
-  Ethernet: "-"
   SRAM: 20K
   Touchkey: "11"
-  USB_20H: "-"
   Advanced TM: 2/1
-  BLE: "-"
   Package: TSSOP20
   Flash: 48K
   WDOG: "2"
   GPIO: "18"
-  RTC: "-"
   ADC: 1/11
   SPI: 1/-
   UART: "3"

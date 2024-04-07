@@ -55,14 +55,10 @@ _raw:
   Advanced TM: 1/4
   Package: QFN28
   ADC: 1/8
-  TRNG: "-"
-  DAC: "-"
   Freq: 144MHz
   SPI: 1/-
   Ethernet: 10M
-  SDIO: "-"
   UART: "2"
-  USB_20H: "-"
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V208.html
   USB_20: D+H/D

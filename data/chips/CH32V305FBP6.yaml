@@ -67,19 +67,14 @@ cores:
 _raw:
   RTC: "1"
   WDOG: "2"
-  SDIO: "-"
   DAC: "1"
   TRNG: "1"
-  BLE: "-"
   Flash: 128K
-  Ethernet: "-"
   GPIO: "17"
-  OPA: "-"
   CAN: "1"
   IIC: "2"
   SPI: 1/1
   SRAM: 32K
-  USB_20: "-"
   Advanced TM: 4/4
   Touchkey: "1"
   VDD: 2.5/3.3

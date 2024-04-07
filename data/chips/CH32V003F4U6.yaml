@@ -42,22 +42,13 @@ _raw:
   ADC: 1/8
   url: http://www.wch.cn/products/CH32V003.html
   Package: QFN20
-  USB_20: "-"
   WDOG: "2"
   GPIO: "18"
-  Ethernet: "-"
-  CAN: "-"
   IIC: "1"
   OPA: "1"
   Freq: 48MHz
-  RTC: "-"
   Advanced TM: 1/1
-  SDIO: "-"
   SPI: 1/-
   Flash: 16K
-  DAC: "-"
   SRAM: 2K
-  TRNG: "-"
   UART: "1"
-  USB_20H: "-"
-  BLE: "-"

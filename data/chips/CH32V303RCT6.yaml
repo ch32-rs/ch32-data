@@ -70,12 +70,10 @@ cores:
     dma_channels: []
 
 _raw:
-  BLE: "-"
   USB_20: H/D
   Advanced TM: 4/4
   OPA: "4"
   Package: LQFP64M
-  USB_20H: "-"
   IIC: "2"
   VDD: 2.5/3.3
   GPIO: "51"
@@ -89,7 +87,6 @@ _raw:
   Part NO.: CH32V303RCT6
   TRNG: "1"
   RTC: "1"
-  Ethernet: "-"
   Flash: 256K
   SDIO: "1"
   UART: "8"

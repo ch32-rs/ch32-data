@@ -51,17 +51,9 @@ _raw:
   GPIO: "19"
   Touchkey: "10"
   ADC: 1/10
-  SDIO: "-"
   SRAM: 20K
   Flash: 62K
   OPA: "2"
-  DAC: "-"
-  BLE: "-"
   Part NO.: CH32X035F8U6
-  USB_20H: "-"
   WDOG: "2"
-  RTC: "-"
-  CAN: "-"
   Freq: 48MHz
-  TRNG: "-"
-  Ethernet: "-"

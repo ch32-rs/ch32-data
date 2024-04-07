@@ -41,14 +41,9 @@ _raw:
   Touchkey: "10"
   USB_20: H/D
   Advanced TM: 1/2
-  CAN: "-"
   VDD: 3.3/5.0
-  DAC: "-"
   SPI: 1/-
   Flash: 32K
-  OPA: "-"
-  SDIO: "-"
-  BLE: "-"
   WDOG: "2"
   ADC: 1/10
   Part NO.: CH32V103C6T6
@@ -58,8 +53,5 @@ _raw:
   Freq: 80MHz
   GPIO: "37"
   RTC: "1"
-  TRNG: "-"
-  USB_20H: "-"
   Package: LQFP48
-  Ethernet: "-"
   url: http://www.wch.cn/products/CH32V103.html

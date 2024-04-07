@@ -40,28 +40,20 @@ cores:
     dma_channels: []
 
 _raw:
-  DAC: "-"
   SPI: 1/-
-  USB_20H: "-"
-  TRNG: "-"
   UART: "4"
   ADC: 1/10
-  BLE: "-"
   Package: LQFP48
   Part NO.: CH32X035C8T6
-  RTC: "-"
-  Ethernet: "-"
   Advanced TM: 2/1
   Flash: 62K
   Touchkey: "10"
   GPIO: "46"
   IIC: "1"
   OPA: "2"
-  SDIO: "-"
   SRAM: 20K
   VDD: 3.3/5.0
   WDOG: "2"
   USB_20: H/D
-  CAN: "-"
   Freq: 48MHz
   url: http://www.wch.cn/products/CH32X035.html

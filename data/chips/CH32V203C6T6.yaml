@@ -47,16 +47,11 @@ cores:
 _raw:
   WDOG: "2"
   Flash: 32K
-  TRNG: "-"
   Touchkey: "10"
-  DAC: "-"
   GPIO: "37"
   IIC: "1"
   RTC: "1"
-  Ethernet: "-"
-  SDIO: "-"
   USB_20: D+H/D
-  BLE: "-"
   Part NO.: CH32V203C6T6
   ADC: 2/10
   Freq: 144MHz
@@ -68,5 +63,4 @@ _raw:
   SPI: 1/-
   url: http://www.wch.cn/products/CH32V203.html
   VDD: 2.5/3.3
-  USB_20H: "-"
   Package: LQFP48

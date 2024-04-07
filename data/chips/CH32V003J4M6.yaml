@@ -38,26 +38,17 @@ cores:
 _raw:
   SRAM: 2K
   Flash: 16K
-  USB_20: "-"
   WDOG: "2"
   IIC: "1"
   Package: SOP8
   SPI: -/-
   UART: "1"
-  TRNG: "-"
-  Ethernet: "-"
   VDD: 3.3/5.0
   Advanced TM: 1/1
-  USB_20H: "-"
   OPA: "1"
-  DAC: "-"
   Touchkey: "-"
   url: http://www.wch.cn/products/CH32V003.html
-  BLE: "-"
   ADC: 1/6
-  SDIO: "-"
-  RTC: "-"
   Part NO.: CH32V003J4M6
-  CAN: "-"
   Freq: 48MHz
   GPIO: "6"

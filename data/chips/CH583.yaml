@@ -53,7 +53,6 @@ _raw:
   SRAM: 32K
   GPIO: "40"
   UART/SPI/IIC: 4/2/1
-  Ethernet: "-"
   head: Part NO.
   url: http://www.wch.cn/products/CH583.html
   Core: RISC-V

@@ -40,7 +40,6 @@ cores:
         channel: 0
 _raw:
   USB_20: H/D
-  USB_20H: "-"
   OPA: "1"
   ADC: 1/10
   Flash: 64K
@@ -49,17 +48,12 @@ _raw:
   Part NO.: CH32L103K8U6
   WDOG: "2"
   CAN: "1"
-  Ethernet: "-"
   Touchkey: "10"
-  BLE: "-"
   SPI: 1/-
   Package: QFN32
-  SDIO: "-"
   UART: "4"
   VDD: "3.3"
   RTC: "1"
-  TRNG: "-"
-  DAC: "-"
   url: https://www.wch.cn/products/CH32L103.html
   IIC: "2"
   GPIO: "28"

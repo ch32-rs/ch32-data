@@ -51,21 +51,15 @@ _raw:
   Part NO.: CH32V203G8R6
   GPIO: "24"
   UART: "2"
-  USB_20H: "-"
-  Ethernet: "-"
   ADC: 2/10
   Advanced TM: 1/3
-  SDIO: "-"
   Touchkey: "10"
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V203.html
   RTC: "1"
   CAN: "1"
   OPA: "2"
-  TRNG: "-"
   USB_20: D+H/D
-  DAC: "-"
-  BLE: "-"
   SRAM: 20K
   Freq: 144MHz
   SPI: 1/-

@@ -51,17 +51,12 @@ cores:
 _raw:
   CAN: "1"
   WDOG: "2"
-  Ethernet: "-"
-  USB_20H: "-"
   VDD: 2.5/3.3
   ADC: 2/10
   Package: LQFP48
   RTC: "1"
-  BLE: "-"
   SPI: 2/-
-  SDIO: "-"
   Touchkey: "10"
-  TRNG: "-"
   url: http://www.wch.cn/products/CH32V203.html
   Part NO.: CH32V203C8T6
   USB_20: D+H/D
@@ -72,5 +67,4 @@ _raw:
   GPIO: "37"
   SRAM: 20K
   Flash: 64K
-  DAC: "-"
   IIC: "2"

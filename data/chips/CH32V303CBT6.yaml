@@ -60,7 +60,6 @@ cores:
     dma_channels: []
 
 _raw:
-  BLE: "-"
   Freq: 144MHz
   ADC: 2/10
   GPIO: "37"
@@ -72,16 +71,12 @@ _raw:
   url: http://www.wch.cn/products/CH32V303.html
   Advanced TM: 1/3
   SPI: 2/-
-  TRNG: "-"
   VDD: 2.5/3.3
   IIC: "2"
-  USB_20H: "-"
   RTC: "1"
-  Ethernet: "-"
   Package: LQFP48
   Part NO.: CH32V303CBT6
   OPA: "4"
-  SDIO: "-"
   CAN: "1"
   SRAM: 32K
   Touchkey: "10"

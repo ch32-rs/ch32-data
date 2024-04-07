@@ -40,26 +40,20 @@ cores:
         channel: 0
 _raw:
   UART: "4"
-  Ethernet: "-"
   USB_20: H/D
-  USB_20H: "-"
   Flash: 64K
   url: https://www.wch.cn/products/CH32L103.html
   WDOG: "2"
-  SDIO: "-"
   VDD: "3.3"
   Advanced TM: 1/3
   RTC: "1"
-  TRNG: "-"
   OPA: "1"
-  BLE: "-"
   GPIO: "18"
   IIC: "2"
   Package: TSSOP20
   SPI: 2/-
   CAN: "1"
   Freq: 96MHz
-  DAC: "-"
   SRAM: 20K
   Part NO.: CH32L103F8P6
   ADC: 1/9

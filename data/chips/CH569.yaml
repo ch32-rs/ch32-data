@@ -54,7 +54,6 @@ _raw:
   RAM: 48K/80K
   USB: (5Gbps) H/D/ (480Mbps) H/D
   Flash: 448K
-  ADC: "-"
   row_no: 87fc163029794917847dc18dd995acc7
   UART: "4"
   CAP: 3/4

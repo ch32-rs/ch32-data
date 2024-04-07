@@ -71,8 +71,6 @@ cores:
 
 _raw:
   url: http://www.wch.cn/products/CH32V307.html
-  BLE: "-"
-  Ethernet: "-"
   Freq: 144MHz
   Package: LQFP64M
   Touchkey: "16"

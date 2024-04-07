@@ -42,18 +42,11 @@ cores:
 _raw:
   UART: "4"
   Flash: 62K
-  DAC: "-"
   GPIO: "60"
   WDOG: "2"
-  USB_20H: "-"
   url: http://www.wch.cn/products/CH32X035.html
-  CAN: "-"
-  RTC: "-"
   Part NO.: CH32X035R8T6
   VDD: 3.3/5.0
-  BLE: "-"
-  Ethernet: "-"
-  SDIO: "-"
   OPA: "2"
   ADC: 1/14
   IIC: "1"
@@ -63,5 +56,4 @@ _raw:
   SPI: 1/-
   SRAM: 20K
   Package: LQFP64M
-  TRNG: "-"
   Touchkey: "14"

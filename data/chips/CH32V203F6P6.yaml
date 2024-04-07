@@ -45,17 +45,11 @@ cores:
 _raw:
   url: http://www.wch.cn/products/CH32V203.html
   ADC: 2/9
-  Ethernet: "-"
-  BLE: "-"
   IIC: "-"
-  SDIO: "-"
-  TRNG: "-"
   SRAM: 10K
   UART: "1"
   RTC: "1"
   GPIO: "16"
-  USB_20H: "-"
-  DAC: "-"
   Freq: 144MHz
   Touchkey: "9"
   VDD: 2.5/3.3

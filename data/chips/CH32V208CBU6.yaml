@@ -52,16 +52,13 @@ cores:
     dma_channels: []
 
 _raw:
-  USB_20H: "-"
   WDOG: "2"
   url: http://www.wch.cn/products/CH32V208.html
   SPI: 2/-
-  TRNG: "-"
   BLE: "5.3"
   Freq: 144MHz
   Package: QFN48
   Advanced TM: 1/4
-  SDIO: "-"
   Touchkey: "10"
   USB_20: D+H/D
   VDD: 2.5/3.3
@@ -71,9 +68,7 @@ _raw:
   Flash: 128K
   SRAM: 64K
   IIC: "2"
-  Ethernet: "-"
   Part NO.: CH32V208CBU6
   ADC: 1/10
-  DAC: "-"
   GPIO: "37"
   UART: "4"

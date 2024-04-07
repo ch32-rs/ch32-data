@@ -47,15 +47,12 @@ _raw:
   Package: QFN28/QSOP24<br>QFN20/QFN16
   CAP: 5/5
   Timer: 2*16b
-  USB: "-"
   Freq: 48MHz
   url: http://www.wch.cn/products/CH641.html
   Flash: 16KB
-  Encrypt: "-"
   UART: "1"
   VDD: 5-12
   row_no: ca25e07005c0447bb56edcbcb9e5952d
-  SPI: "-"
   SERDES/HSPI/DVP: -/-/-/-
   head: Part NO.
   RAM: 2KB

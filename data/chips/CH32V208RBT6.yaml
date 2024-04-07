@@ -56,10 +56,8 @@ _raw:
   UART: "4"
   url: http://www.wch.cn/products/CH32V208.html
   Package: LQFP64M
-  DAC: "-"
   Freq: 144MHz
   SPI: 2/-
-  TRNG: "-"
   Touchkey: "16"
   USB_20: D+H/D
   WDOG: "2"
@@ -70,10 +68,8 @@ _raw:
   OPA: "2"
   IIC: "2"
   SRAM: 64K
-  USB_20H: "-"
   RTC: "1"
   Flash: 128K
   Part NO.: CH32V208RBT6
   Advanced TM: 1/4
   ADC: 1/16
-  SDIO: "-"

@@ -52,7 +52,6 @@ cores:
     dma_channels: []
 
 _raw:
-  SDIO: "-"
   CAN: "1"
   GPIO: "53"
   SPI: 2/-
@@ -68,12 +67,9 @@ _raw:
   Freq: 144MHz
   OPA: "2"
   RTC: "1"
-  USB_20H: "-"
   Ethernet: 10M
   IIC: "2"
   WDOG: "2"
-  DAC: "-"
   Part NO.: CH32V208WBU6
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V208.html
-  TRNG: "-"

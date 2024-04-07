@@ -49,7 +49,6 @@ _raw:
   TouchKey/ADC: 14/14*12b
   Timer: 4*26b
   Part NO.: CH582
-  Ethernet: "-"
   Core: RISC-V
   DataFlash: 32K
   GPIO: "40"

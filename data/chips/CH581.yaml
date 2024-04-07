@@ -56,5 +56,4 @@ _raw:
   TouchKey/ADC: -/6*12b
   Package: QFN28
   BLE: "5.3"
-  Ethernet: "-"
   LEDC: "-"

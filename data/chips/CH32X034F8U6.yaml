@@ -39,27 +39,19 @@ cores:
 
 _raw:
   UART: "4"
-  RTC: "-"
   Package: QFN20
-  USB_20H: "-"
   url: http://www.wch.cn/products/CH32X035.html
   GPIO: "19"
   USB_20: D
   ADC: 1/9
   IIC: "1"
   OPA: "2"
-  DAC: "-"
   Flash: 62K
   SRAM: 20K
   Touchkey: "9"
   Freq: 48MHz
-  SDIO: "-"
-  TRNG: "-"
   Part NO.: CH32X034F8U6
   Advanced TM: 2/1
-  Ethernet: "-"
   SPI: 1/-
   WDOG: "2"
-  CAN: "-"
-  BLE: "-"
   VDD: 3.3/5.0

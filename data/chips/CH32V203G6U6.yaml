@@ -46,25 +46,19 @@ cores:
 
 _raw:
   RTC: "1"
-  USB_20H: "-"
   url: http://www.wch.cn/products/CH32V203.html
   UART: "2"
   GPIO: "24"
   Flash: 32K
   WDOG: "2"
-  SDIO: "-"
   SPI: 1/-
   USB_20: D
   Package: QFN28
   Advanced TM: 1/3
-  BLE: "-"
   Freq: 144MHz
-  DAC: "-"
-  Ethernet: "-"
   IIC: "1"
   Part NO.: CH32V203G6U6
   SRAM: 10K
-  TRNG: "-"
   ADC: 2/10
   CAN: "1"
   Touchkey: "10"

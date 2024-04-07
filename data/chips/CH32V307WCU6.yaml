@@ -86,7 +86,6 @@ _raw:
   SPI: 3/2
   Freq: 144MHz
   DAC: "2"
-  BLE: "-"
   USB_20: OTG
   Advanced TM: 4/4
   ADC: 2/16

@@ -48,19 +48,13 @@ _raw:
   UART: "2"
   Advanced TM: 1/3
   Part NO.: CH32V203F8U6
-  SDIO: "-"
-  USB_20H: "-"
-  Ethernet: "-"
   GPIO: "19"
-  BLE: "-"
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V203.html
   IIC: "-"
   WDOG: "2"
   ADC: 2/9
-  CAN: "-"
   Flash: 64K
-  DAC: "-"
   Freq: 144MHz
   Touchkey: "9"
   USB_20: D
@@ -69,4 +63,3 @@ _raw:
   SRAM: 20K
   OPA: "2"
   SPI: 1/-
-  TRNG: "-"

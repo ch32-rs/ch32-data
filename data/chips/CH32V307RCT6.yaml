@@ -82,7 +82,6 @@ _raw:
   DAC: "2"
   GPIO: "51"
   Ethernet: 1G MAC+10M PHY
-  BLE: "-"
   OPA: "4"
   RTC: "1"
   Touchkey: "16"

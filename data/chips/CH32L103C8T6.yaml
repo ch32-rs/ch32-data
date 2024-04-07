@@ -47,16 +47,11 @@ _raw:
   Freq: 96MHz
   SPI: 2/-
   url: https://www.wch.cn/products/CH32L103.html
-  Ethernet: "-"
-  USB_20H: "-"
   GPIO: "37"
   UART: "4"
-  SDIO: "-"
-  BLE: "-"
   Package: LQFP48
   Flash: 64K
   CAN: "1"
-  DAC: "-"
   USB_20: H/D
   Part NO.: CH32L103C8T6
   OPA: "1"

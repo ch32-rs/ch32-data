@@ -39,27 +39,21 @@ cores:
         dma: DMA1
         channel: 0
 _raw:
-  DAC: "-"
   GPIO: "16"
   ADC: 1/9
   url: https://www.wch.cn/products/CH32L103.html
-  USB_20H: "-"
   CAN: "1"
   Part NO.: CH32L103F7P6
   SPI: 1/-
-  BLE: "-"
   SRAM: 20K
   USB_20: D
   IIC: "2"
   Freq: 96MHz
-  Ethernet: "-"
   Package: TSSOP20
   Touchkey: "9"
   OPA: "1"
   RTC: "1"
   Flash: 48K
-  SDIO: "-"
-  TRNG: "-"
   UART: "4"
   VDD: "3.3"
   WDOG: "2"

@@ -46,10 +46,8 @@ cores:
 
 _raw:
   SRAM: 20K
-  TRNG: "-"
   Touchkey: "10"
   CAN: "1"
-  BLE: "-"
   Part NO.: CH32V203K8T6
   UART: "2"
   USB_20: D
@@ -57,14 +55,10 @@ _raw:
   ADC: 2/10
   Freq: 144MHz
   Advanced TM: 1/3
-  Ethernet: "-"
   GPIO: "26"
   Flash: 64K
-  SDIO: "-"
   SPI: 1/-
-  USB_20H: "-"
   WDOG: "2"
-  DAC: "-"
   VDD: 2.5/3.3
   url: http://www.wch.cn/products/CH32V203.html
   OPA: "2"

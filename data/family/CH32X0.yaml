@@ -415,7 +415,7 @@
     version: x0
     block: ADC
   rcc:
-    # According to the reference manual, the ADC clock is derived from the SYSCLK div by CLK_DIV
+    # According to RM, the ADC clock is derived from the SYSCLK div by CLK_DIV
     bus_clock: SYSCLK
     kernel_clock: SYSCLK
     enable:

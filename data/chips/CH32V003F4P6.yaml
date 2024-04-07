@@ -37,26 +37,17 @@ cores:
 _raw:
   WDOG: "2"
   ADC: 1/8
-  USB_20: "-"
-  DAC: "-"
   IIC: "1"
-  CAN: "-"
-  RTC: "-"
   Freq: 48MHz
   Advanced TM: 1/1
   Flash: 16K
   UART: "1"
-  BLE: "-"
   GPIO: "18"
   OPA: "1"
   VDD: 3.3/5.0
-  SDIO: "-"
-  USB_20H: "-"
-  Ethernet: "-"
   url: http://www.wch.cn/products/CH32V003.html
   Part NO.: CH32V003F4P6
   Touchkey: "-"
   SRAM: 2K
   Package: TSSOP20
   SPI: 1/-
-  TRNG: "-"

@@ -94,7 +94,6 @@ _raw:
   Part NO.: CH32V307VCT6
   SDIO: "1"
   ADC: 2/16
-  BLE: "-"
   Freq: 144MHz
   DAC: "2"
   Flash: 256K

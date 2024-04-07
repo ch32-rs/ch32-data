@@ -40,26 +40,18 @@ cores:
 _raw:
   USB_20: D
   Flash: 62K
-  RTC: "-"
   Touchkey: "10"
   Freq: 48MHz
   OPA: "2"
   ADC: 1/10
   SRAM: 20K
-  TRNG: "-"
   Advanced TM: 2/1
   SPI: 1/-
-  Ethernet: "-"
-  USB_20H: "-"
   VDD: 3.3/5.0
   WDOG: "2"
   url: http://www.wch.cn/products/CH32X035.html
-  DAC: "-"
   Part NO.: CH32X033F8P6
   GPIO: "18"
   IIC: "1"
   UART: "4"
   Package: TSSOP20
-  CAN: "-"
-  BLE: "-"
-  SDIO: "-"

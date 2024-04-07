@@ -38,21 +38,14 @@ cores:
     dma_channels: []
 
 _raw:
-  Ethernet: "-"
-  USB_20H: "-"
   Freq: 48MHz
   Advanced TM: 2/1
-  SDIO: "-"
   GPIO: "18"
   WDOG: "2"
-  CAN: "-"
   SPI: 1/-
   Flash: 62K
   IIC: "1"
-  TRNG: "-"
   UART: "4"
-  DAC: "-"
-  RTC: "-"
   USB_20: D
   VDD: 3.3/5.0
   url: http://www.wch.cn/products/CH32X035.html
@@ -61,5 +54,4 @@ _raw:
   OPA: "2"
   SRAM: 20K
   ADC: 1/10
-  BLE: "-"
   Touchkey: "10"

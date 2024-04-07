@@ -54,7 +54,6 @@ _raw:
   LCD: "-"
   UART/SPI/IIC: 4/1/-
   USB: 1*H/1*D
-  Ethernet: "-"
   SRAM: 18K
   head: Part NO.
   PWM: "12"

@@ -41,10 +41,8 @@ cores:
 
 _raw:
   ADC: 1/10
-  TRNG: "-"
   Advanced TM: 1/3
   Freq: 80MHz
-  Ethernet: "-"
   IIC: "2"
   UART: "3"
   RTC: "1"
@@ -52,16 +50,10 @@ _raw:
   SRAM: 20K
   USB_20: H/D
   VDD: 3.3/5.0
-  BLE: "-"
   url: http://www.wch.cn/products/CH32V103.html
   GPIO: "37"
   Flash: 64K
-  OPA: "-"
-  SDIO: "-"
-  CAN: "-"
   SPI: 2/-
   WDOG: "2"
   Touchkey: "10"
-  USB_20H: "-"
-  DAC: "-"
   Package: LQFP48

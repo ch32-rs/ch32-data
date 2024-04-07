@@ -38,7 +38,6 @@ cores:
         dma: DMA1
         channel: 0
 _raw:
-  Ethernet: "-"
   Core: RISC-V
   BLE: "5.4"
   Timer: 4*26b

@@ -38,26 +38,17 @@ cores:
 _raw:
   url: http://www.wch.cn/products/CH32V003.html
   Touchkey: "-"
-  BLE: "-"
   UART: "1"
   Part NO.: CH32V003A4M6
-  RTC: "-"
   SRAM: 2K
   Freq: 48MHz
-  CAN: "-"
   GPIO: "14"
   Package: SOP16
   OPA: "1"
-  SDIO: "-"
-  DAC: "-"
-  Ethernet: "-"
   SPI: -/-
-  USB_20: "-"
   WDOG: "2"
   IIC: "1"
   ADC: 1/6
   Flash: 16K
   VDD: 3.3/5.0
-  USB_20H: "-"
   Advanced TM: 1/1
-  TRNG: "-"

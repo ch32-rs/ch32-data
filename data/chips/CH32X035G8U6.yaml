@@ -57,10 +57,6 @@ cores:
 _raw:
   ADC: 1/10
   Advanced TM: 2/1
-  BLE: "-"
-  CAN: "-"
-  DAC: "-"
-  Ethernet: "-"
   Flash: 62K
   Freq: 48MHz
   GPIO: "27"
@@ -68,15 +64,11 @@ _raw:
   OPA: "2"
   Package: QFN28
   Part NO.: CH32X035G8U6
-  RTC: "-"
-  SDIO: "-"
   SPI: 1/-
   SRAM: 20K
-  TRNG: "-"
   Touchkey: "10"
   UART: "4"
   USB_20: H/D
-  USB_20H: "-"
   VDD: 3.3/5.0
   WDOG: "2"
   url: http://www.wch.cn/products/CH32X035.html
