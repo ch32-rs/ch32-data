@@ -3,6 +3,10 @@ family: QingKe RISC-V-based MCU
 subfamily: USB Multi-Function MCU
 product_type: QingKe V4C core
 device_id: 1680867328 # 0x65000000
+keywords:
+  - SDIO
+  - ETH
+  - USBPD
 packages:
   - name: CH645W
     package: QFN68

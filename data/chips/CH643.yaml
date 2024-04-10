@@ -3,6 +3,8 @@ family: QingKe RISC-V-based MCU
 subfamily: RGB Display Driver MCU
 product_type: QingKe V4C core
 device_id: 1680867328
+keywords:
+  - LEDPWM
 packages:
   - name: CH643W
     package: QFN80

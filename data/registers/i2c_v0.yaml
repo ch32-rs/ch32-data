@@ -34,10 +34,6 @@ block/I2C:
       description: Clock control register.
       byte_offset: 28
       fieldset: CKCFGR
-    - name: RTR
-      description: Raise time register.
-      byte_offset: 32
-      fieldset: RTR
 fieldset/CKCFGR:
   description: Clock control register.
   fields:
@@ -59,18 +55,6 @@ fieldset/CTLR1:
     - name: PE
       description: Peripheral enable.
       bit_offset: 0
-      bit_size: 1
-    - name: SMBUS
-      description: SMBus mode.
-      bit_offset: 1
-      bit_size: 1
-    - name: SMBTYPE
-      description: SMBus type.
-      bit_offset: 3
-      bit_size: 1
-    - name: ENARP
-      description: ARP enable.
-      bit_offset: 4
       bit_size: 1
     - name: ENPEC
       description: PEC enable.
@@ -180,13 +164,6 @@ fieldset/OADDR2:
       description: Interface address.
       bit_offset: 1
       bit_size: 7
-fieldset/RTR:
-  description: Raise time register.
-  fields:
-    - name: TRISE
-      description: Maximum rise time in Fast/Standard mode (Master mode).
-      bit_offset: 0
-      bit_size: 6
 fieldset/STAR1:
   description: Status register 1.
   fields:
@@ -237,14 +214,6 @@ fieldset/STAR1:
     - name: PECERR
       description: PEC Error in reception.
       bit_offset: 12
-      bit_size: 1
-    - name: TIMEOUT
-      description: Timeout or Tlow error.
-      bit_offset: 14
-      bit_size: 1
-    - name: SMBALERT
-      description: SMBus alert.
-      bit_offset: 15
       bit_size: 1
 fieldset/STAR2:
   description: Status register 2.

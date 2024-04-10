@@ -455,7 +455,7 @@
     kind: i2c
     # No SMBUS registers, others are the same as v3
     # No idea if RTR is available
-    version: v3
+    version: v0
     block: I2C
   rcc:
     bus_clock: PCLK1
@@ -475,7 +475,7 @@
     - pin: PC1
       signal: SDA
       remap: 0b00
-    # 01：重映射（SCL/PD1，SDA/PD0
+    # 01：重映射（SCL/PD1，SDA/PD0）
     - pin: PD1
       signal: SCL
       remap: 0b01
