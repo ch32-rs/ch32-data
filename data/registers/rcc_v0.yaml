@@ -340,10 +340,10 @@ fieldset/RSTSCKR:
 enum/PLLSRC:
   bit_size: 2
   variants:
-    - name: HSI_MUL2
+    - name: HSI
       description: HSI clock divided by 2 selected as PLL input clock.
       value: 0
-    - name: HSE_MUL2
+    - name: HSE
       description: HSE clock divided by 2 selected as PLL input clock.
       value: 3
 enum/HPRE:
@@ -409,7 +409,7 @@ enum/SW:
     - name: PLL
       description: PLL selected as system clock.
       value: 0b10
-    - name: RESERVED
+    - name: _RESERVED
       description: Reserved.
       value: 0b11
 enum/MCO:
