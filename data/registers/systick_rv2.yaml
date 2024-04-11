@@ -45,7 +45,6 @@ fieldset/CTLR:
       description: Auto reload count enable bit.
       bit_offset: 3
       bit_size: 1
-      enum: MODE
     - name: SWIE
       description: Software interrupt enable.
       bit_offset: 31
@@ -57,15 +56,6 @@ fieldset/SR:
       description: Count value compare flag.
       bit_offset: 0
       bit_size: 1
-enum/MODE:
-  bit_size: 1
-  variants:
-    - name: Upcount
-      description: Upcount.
-      value: 0
-    - name: Downcount
-      description: Downcount.
-      value: 1
 enum/STCLK:
   bit_size: 1
   variants:
