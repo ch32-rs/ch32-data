@@ -346,6 +346,10 @@
     register: PCFR1
     field: SPI1_RM
   pins:
+    # 00: Mapping (NSS/PA4, CK/PA5, MISO/PA6, MOSI/PA7)
+    # 01: Mapping (NSS/PB21, CK/PB15, MISO/PA8, MOSI/PA9)
+    # 10: Mapping (NSS/PA12, CK/PA11, MISO/PA9, MOSI/PA10)
+    # 11: Mapping (NSS/PC4, CK/PC5, MISO/PC6, MOSI/PC7)
     - pin: PA4
       signal: NSS
       remap: 0
