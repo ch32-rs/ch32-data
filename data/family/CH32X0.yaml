@@ -471,7 +471,7 @@
 - name: TIM1
   address: 0x40012C00
   registers:
-    kind: adtm
+    kind: timer
     version: x0
     block: ADTM
   rcc:
@@ -483,8 +483,50 @@
     reset:
       register: APB2PRSTR
       field: TIM1RST
+  remap:
+    register: PCFR1
+    field: TIM1_RM
   pins:
-    # TODO
+    # 000:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PC16 ， ETR/PC17 ， BKIN/PB5 ， C1N/PB6 ， C2N/PB7，C3N/PB8)
+    - { pin: "PB9", signal: "CH1", remap: 0b000 }
+    - { pin: "PB10", signal: "CH2", remap: 0b000 }
+    - { pin: "PB11", signal: "CH3", remap: 0b000 }
+    - { pin: "PC16", signal: "CH4", remap: 0b000 }
+    - { pin: "PC17", signal: "ETR", remap: 0b000 }
+    - { pin: "PB5", signal: "BKIN", remap: 0b000 }
+    - { pin: "PB6", signal: "CH1N", remap: 0b000 }
+    - { pin: "PB7", signal: "CH2N", remap: 0b000 }
+    - { pin: "PB8", signal: "CH3N", remap: 0b000 }
+    # 001:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PC16 ， ETR/PC17 ， BKIN/PA6 ， C1N/PA7 ， C2N/PB0，C3N/PB1)
+    - { pin: "PB9", signal: "CH1", remap: 0b001 }
+    - { pin: "PB10", signal: "CH2", remap: 0b001 }
+    - { pin: "PB11", signal: "CH3", remap: 0b001 }
+    - { pin: "PC16", signal: "CH4", remap: 0b001 }
+    - { pin: "PC17", signal: "ETR", remap: 0b001 }
+    - { pin: "PA6", signal: "BKIN", remap: 0b001 }
+    - { pin: "PA7", signal: "CH1N", remap: 0b001 }
+    - { pin: "PB0", signal: "CH2N", remap: 0b001 }
+    - { pin: "PB1", signal: "CH3N", remap: 0b001 }
+    # 010:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PB12 ， ETR/PC18 ， BKIN/PB5 ， C1N/PB6 ， C2N/PB7，C3N/PB8)
+    - { pin: "PB9", signal: "CH1", remap: 0b010 }
+    - { pin: "PB10", signal: "CH2", remap: 0b010 }
+    - { pin: "PB11", signal: "CH3", remap: 0b010 }
+    - { pin: "PB12", signal: "CH4", remap: 0b010 }
+    - { pin: "PC18", signal: "ETR", remap: 0b010 }
+    - { pin: "PB5", signal: "BKIN", remap: 0b010 }
+    - { pin: "PB6", signal: "CH1N", remap: 0b010 }
+    - { pin: "PB7", signal: "CH2N", remap: 0b010 }
+    - { pin: "PB8", signal: "CH3N", remap: 0b010 }
+    # 011:映射(CH1/PC0，CH2/PC1，CH3/PC2，CH4/PC3， ETR/PC18 ， BKIN/PC4 ， C1N/PC5 ， C2N/PC6 ， C3N/PC7)
+    - { pin: "PC0", signal: "CH1", remap: 0b011 }
+    - { pin: "PC1", signal: "CH2", remap: 0b011 }
+    - { pin: "PC2", signal: "CH3", remap: 0b011 }
+    - { pin: "PC3", signal: "CH4", remap: 0b011 }
+    - { pin: "PC18", signal: "ETR", remap: 0b011 }
+    - { pin: "PC4", signal: "BKIN", remap: 0b011 }
+    - { pin: "PC5", signal: "CH1N", remap: 0b011 }
+    - { pin: "PC6", signal: "CH2N", remap: 0b011 }
+    - { pin: "PC7", signal: "CH3N", remap: 0b011 }
   interrupts:
     - signal: BRK
       interrupt: TIM1_BRK
@@ -498,10 +540,11 @@
       interrupt: TIM1_CC
   dma_channels:
     # TODO
+
 - name: TIM2
   address: 0x40000000
   registers:
-    kind: adtm
+    kind: timer
     version: x0
     block: ADTM
   rcc:
@@ -513,8 +556,81 @@
     reset:
       register: APB1PRSTR
       field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
   pins:
-    # TODO
+    # 000:映射(CH1/PA0，CH2/PA1，CH3/PA2，CH4/PA3， ETR/PA19，BKIN/PA20，C1N/PA21，C2N/PA22， C3N/PA23)
+    - { pin: "PA0", signal: "CH1", remap: 0b000 }
+    - { pin: "PA1", signal: "CH2", remap: 0b000 }
+    - { pin: "PA2", signal: "CH3", remap: 0b000 }
+    - { pin: "PA3", signal: "CH4", remap: 0b000 }
+    - { pin: "PA19", signal: "ETR", remap: 0b000 }
+    - { pin: "PA20", signal: "BKIN", remap: 0b000 }
+    - { pin: "PA21", signal: "CH1N", remap: 0b000 }
+    - { pin: "PA22", signal: "CH2N", remap: 0b000 }
+    - { pin: "PA23", signal: "CH3N", remap: 0b000 }
+    # 001:映射(CH1/PB21，CH2/PB15，CH3/PA2， CH4/PA3 ， ETR/PA18 ， BKIN/PA9 ， C1N/PA12 ， C2N/PA13，C3N/PA14)
+    - { pin: "PB21", signal: "CH1", remap: 0b001 }
+    - { pin: "PB15", signal: "CH2", remap: 0b001 }
+    - { pin: "PA2", signal: "CH3", remap: 0b001 }
+    - { pin: "PA3", signal: "CH4", remap: 0b001 }
+    - { pin: "PA18", signal: "ETR", remap: 0b001 }
+    - { pin: "PA9", signal: "BKIN", remap: 0b001 }
+    - { pin: "PA12", signal: "CH1N", remap: 0b001 }
+    - { pin: "PA13", signal: "CH2N", remap: 0b001 }
+    - { pin: "PA14", signal: "CH3N", remap: 0b001 }
+    # 010:映射(CH1/PA0，CH2/PA1，CH3/PB3，CH4/PB4， ETR/PA19，BKIN/PA20，C1N/PC3，C2N/PA22， C3N/PA23)
+    - { pin: "PA0", signal: "CH1", remap: 0b010 }
+    - { pin: "PA1", signal: "CH2", remap: 0b010 }
+    - { pin: "PB3", signal: "CH3", remap: 0b010 }
+    - { pin: "PB4", signal: "CH4", remap: 0b010 }
+    - { pin: "PA19", signal: "ETR", remap: 0b010 }
+    - { pin: "PA20", signal: "BKIN", remap: 0b010 }
+    - { pin: "PC3", signal: "CH1N", remap: 0b010 }
+    - { pin: "PA22", signal: "CH2N", remap: 0b010 }
+    - { pin: "PA23", signal: "CH3N", remap: 0b010 }
+    # 011:映射(CH1/PB21，CH2/PB15，CH3/PB3， CH4/PB4 ， ETR/PA18 ， BKIN/PA9 ， C1N/PA12 ， C2N/PA13，C3N/PA14)
+    - { pin: "PB21", signal: "CH1", remap: 0b011 }
+    - { pin: "PB15", signal: "CH2", remap: 0b011 }
+    - { pin: "PB3", signal: "CH3", remap: 0b011 }
+    - { pin: "PB4", signal: "CH4", remap: 0b011 }
+    - { pin: "PA18", signal: "ETR", remap: 0b011 }
+    - { pin: "PA9", signal: "BKIN", remap: 0b011 }
+    - { pin: "PA12", signal: "CH1N", remap: 0b011 }
+    - { pin: "PA13", signal: "CH2N", remap: 0b011 }
+    - { pin: "PA14", signal: "CH3N", remap: 0b011 }
+    # 100:映射(CH1/PB16，CH2/PB17，CH3/PB18，CH4/PB19 ， ETR/PC4 ， BKIN/PC0 ， C1N/PC1 ， C2N/PC2，C3N/PC3)
+    - { pin: "PB16", signal: "CH1", remap: 0b100 }
+    - { pin: "PB17", signal: "CH2", remap: 0b100 }
+    - { pin: "PB18", signal: "CH3", remap: 0b100 }
+    - { pin: "PB19", signal: "CH4", remap: 0b100 }
+    - { pin: "PC4", signal: "ETR", remap: 0b100 }
+    - { pin: "PC0", signal: "BKIN", remap: 0b100 }
+    - { pin: "PC1", signal: "CH1N", remap: 0b100 }
+    - { pin: "PC2", signal: "CH2N", remap: 0b100 }
+    - { pin: "PC3", signal: "CH3N", remap: 0b100 }
+    # 101:映射(CH1/PC19，CH2/PA12，CH3/PA13， CH4/PC0 ， ETR/PA2 ， BKIN/PB4 ， C1N/PC18 ， C2N/PB12，C3N/PB3)
+    - { pin: "PC19", signal: "CH1", remap: 0b101 }
+    - { pin: "PA12", signal: "CH2", remap: 0b101 }
+    - { pin: "PA13", signal: "CH3", remap: 0b101 }
+    - { pin: "PC0", signal: "CH4", remap: 0b101 }
+    - { pin: "PA2", signal: "ETR", remap: 0b101 }
+    - { pin: "PB4", signal: "BKIN", remap: 0b101 }
+    - { pin: "PC18", signal: "CH1N", remap: 0b101 }
+    - { pin: "PB12", signal: "CH2N", remap: 0b101 }
+    - { pin: "PB3", signal: "CH3N", remap: 0b101 }
+    # 11x:映射(CH1/PC19，CH2/PC14，CH3/PC15， CH4/PC0 ， ETR/PA2 ， BKIN/PB4 ， C1N/PB11 ， C2N/PB12，C3N/PB3)
+    - { pin: "PC19", signal: "CH1", remap: 0b110 }
+    - { pin: "PC14", signal: "CH2", remap: 0b110 }
+    - { pin: "PC15", signal: "CH3", remap: 0b110 }
+    - { pin: "PC0", signal: "CH4", remap: 0b110 }
+    - { pin: "PA2", signal: "ETR", remap: 0b110 }
+    - { pin: "PB4", signal: "BKIN", remap: 0b110 }
+    - { pin: "PB11", signal: "CH1N", remap: 0b110 }
+    - { pin: "PB12", signal: "CH2N", remap: 0b110 }
+    - { pin: "PB3", signal: "CH3N", remap: 0b110 }
+
   interrupts:
     - signal: BRK
       interrupt: TIM2_BRK
@@ -532,7 +648,7 @@
 - name: TIM3
   address: 0x40000400
   registers:
-    kind: gptm
+    kind: timer
     version: x0
     block: GPTM
   rcc:
@@ -544,8 +660,22 @@
     reset:
       register: APB1PRSTR
       field: TIM3RST
+  remap:
+    register: PCFR1
+    field: TIM3_RM
   pins:
-    # TODO
+    # 00:默认映射(CH1/PA6，CH2/PA7)
+    - { pin: "PA6", signal: "CH1", remap: 0b00 }
+    - { pin: "PA7", signal: "CH2", remap: 0b00 }
+    # 01:映射(CH1/PB4，CH2/PB5)
+    - { pin: "PB4", signal: "CH1", remap: 0b01 }
+    - { pin: "PB5", signal: "CH2", remap: 0b01 }
+    # 10:映射(CH1/PC19，CH2/PC18)
+    - { pin: "PC19", signal: "CH1", remap: 0b10 }
+    - { pin: "PC18", signal: "CH2", remap: 0b10 }
+    # 11:映射(CH1/PA3，CH2/PA4)
+    - { pin: "PA3", signal: "CH1", remap: 0b11 }
+    - { pin: "PA4", signal: "CH2", remap: 0b11 }
   interrupts:
     - signal: BRK
       interrupt: TIM3
