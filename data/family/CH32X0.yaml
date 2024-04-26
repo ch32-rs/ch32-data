@@ -686,9 +686,6 @@
     - signal: CC
       interrupt: TIM3
 
-  dma_channels:
-    # TODO
-
 - name: OPA
   address: 0x40026000
   registers:
