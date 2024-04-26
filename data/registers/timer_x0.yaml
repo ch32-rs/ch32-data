@@ -116,7 +116,6 @@ block/ADTM:
         stride: 4
       byte_offset: 52
       bit_size: 16
-      fieldset: CHCVR
     - name: BDTR
       description: break and dead-time register.
       byte_offset: 68
@@ -205,7 +204,6 @@ block/GPTM:
         stride: 4
       byte_offset: 52
       bit_size: 16
-      fieldset: CHCVR
     - name: SPEC
       description: SPEC.
       byte_offset: 80
@@ -347,14 +345,6 @@ fieldset/CHCTLR_Output:
       array:
         len: 2
         stride: 8
-fieldset/CHCVR:
-  description: capture/compare register 1.
-  bit_size: 16
-  fields:
-    - name: CHCVR
-      description: Capture/Compare 1 value.
-      bit_offset: 0
-      bit_size: 16
 fieldset/CTLR1:
   description: control register 1.
   bit_size: 16
@@ -371,6 +361,7 @@ fieldset/CTLR1:
       description: Update request source.
       bit_offset: 2
       bit_size: 1
+      enum: URS
     - name: OPM
       description: One-pulse mode.
       bit_offset: 3
@@ -418,6 +409,7 @@ fieldset/CTLR2:
       description: Capture/compare DMA selection.
       bit_offset: 3
       bit_size: 1
+      enum: CCDS
     - name: MMS
       description: Master mode selection.
       bit_offset: 4
@@ -660,6 +652,7 @@ fieldset/CTLR1_GP2CH:
       description: Update request source.
       bit_offset: 2
       bit_size: 1
+      enum: URS
     - name: OPM
       description: One-pulse mode.
       bit_offset: 3
@@ -884,4 +877,22 @@ enum/DIR:
       value: 0
     - name: Down
       description: Counter used as downcounter
+      value: 1
+enum/URS:
+  bit_size: 1
+  variants:
+    - name: AnyEvent
+      description: Any of counter overflow/underflow, setting UG, or update through slave mode, generates an update interrupt or DMA request
+      value: 0
+    - name: CounterOnly
+      description: Only counter overflow/underflow generates an update interrupt or DMA request
+      value: 1
+enum/CCDS:
+  bit_size: 1
+  variants:
+    - name: OnCompare
+      description: CCx DMA request sent when CCx event occurs
+      value: 0
+    - name: OnUpdate
+      description: CCx DMA request sent when update event occurs
       value: 1
