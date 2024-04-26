@@ -1,6 +1,6 @@
 # timer x0
 # ADTM 4CH, 16bit, has SPEC (TIM2 is 3CH)
-# GPTM 2CH, 16bit, no CR2, has SPEC
+# GPTM 2CH, 16bit, no CR2, has SPEC (extend to 4CH)
 
 block/BCTM:
   description: Virtual timer for common part of ADTM and GPTM
@@ -9,12 +9,12 @@ block/BCTM:
       description: control register 1.
       byte_offset: 0
       bit_size: 16
-      fieldset: CTLR1_GP2CH
+      fieldset: CTLR1_GP
     - name: DMAINTENR
       description: DMA/Interrupt enable register.
       byte_offset: 12
       bit_size: 16
-      fieldset: DMAINTENR_GP2CH
+      fieldset: DMAINTENR_GP
     - name: INTFR
       description: status register.
       byte_offset: 16
@@ -24,7 +24,7 @@ block/BCTM:
       description: event generation register.
       byte_offset: 20
       bit_size: 16
-      fieldset: SWEVGR_GP2CH
+      fieldset: SWEVGR_GP
     - name: CNT
       description: counter.
       byte_offset: 36
@@ -143,17 +143,17 @@ block/GPTM:
       description: control register 1.
       byte_offset: 0
       bit_size: 16
-      fieldset: CTLR1_GP2CH
+      fieldset: CTLR1_GP
     - name: SMCFGR
       description: slave mode control register.
       byte_offset: 8
       bit_size: 16
-      fieldset: SMCFGR_GP2CH
+      fieldset: SMCFGR_GP
     - name: DMAINTENR
       description: DMA/Interrupt enable register.
       byte_offset: 12
       bit_size: 16
-      fieldset: DMAINTENR_GP2CH
+      fieldset: DMAINTENR_GP
     - name: INTFR
       description: status register.
       byte_offset: 16
@@ -163,11 +163,11 @@ block/GPTM:
       description: event generation register.
       byte_offset: 20
       bit_size: 16
-      fieldset: SWEVGR_GP2CH
+      fieldset: SWEVGR_GP
     - name: CHCTLR_Input
       description: capture/compare mode register 1 (input mode).
       array:
-        len: 1
+        len: 2
         stride: 4
       byte_offset: 24
       bit_size: 16
@@ -175,7 +175,7 @@ block/GPTM:
     - name: CHCTLR_Output
       description: capture/compare mode register 1 (output mode).
       array:
-        len: 1
+        len: 2
         stride: 4
       byte_offset: 24
       bit_size: 16
@@ -184,7 +184,7 @@ block/GPTM:
       description: capture/compare enable register.
       byte_offset: 32
       bit_size: 16
-      fieldset: CCER_GP2CH
+      fieldset: CCER_GP
     - name: CNT
       description: counter.
       byte_offset: 36
@@ -200,7 +200,7 @@ block/GPTM:
     - name: CHCVR
       description: capture/compare register 1.
       array:
-        len: 2
+        len: 4
         stride: 4
       byte_offset: 52
       bit_size: 16
@@ -208,7 +208,7 @@ block/GPTM:
       description: SPEC.
       byte_offset: 80
       bit_size: 16
-      fieldset: SPEC_GP2CH
+      fieldset: SPEC_GP
 fieldset/BDTR:
   description: break and dead-time register.
   bit_size: 16
@@ -618,7 +618,7 @@ fieldset/SWEVGR:
       description: Break generation.
       bit_offset: 7
       bit_size: 1
-fieldset/CCER_GP2CH:
+fieldset/CCER_GP:
   description: capture/compare enable register.
   bit_size: 16
   fields:
@@ -627,16 +627,16 @@ fieldset/CCER_GP2CH:
       bit_offset: 0
       bit_size: 1
       array:
-        len: 2
+        len: 4
         stride: 4
     - name: CCP
       description: Capture/Compare 1 output Polarity.
       bit_offset: 1
       bit_size: 1
       array:
-        len: 2
+        len: 4
         stride: 4
-fieldset/CTLR1_GP2CH:
+fieldset/CTLR1_GP:
   description: control register 1.
   bit_size: 16
   fields:
@@ -674,7 +674,7 @@ fieldset/CTLR1_GP2CH:
       description: CAPLVL.
       bit_offset: 15
       bit_size: 1
-fieldset/DMAINTENR_GP2CH:
+fieldset/DMAINTENR_GP:
   description: DMA/Interrupt enable register.
   bit_size: 16
   fields:
@@ -687,13 +687,13 @@ fieldset/DMAINTENR_GP2CH:
       bit_offset: 1
       bit_size: 1
       array:
-        len: 2
+        len: 4
         stride: 1
     - name: TIE
       description: Trigger interrupt enable.
       bit_offset: 6
       bit_size: 1
-fieldset/SMCFGR_GP2CH:
+fieldset/SMCFGR_GP:
   description: slave mode control register.
   bit_size: 16
   fields:
@@ -705,7 +705,7 @@ fieldset/SMCFGR_GP2CH:
       description: Trigger selection.
       bit_offset: 4
       bit_size: 3
-fieldset/SPEC_GP2CH:
+fieldset/SPEC_GP:
   description: SPEC.
   bit_size: 16
   fields:
@@ -718,13 +718,13 @@ fieldset/SPEC_GP2CH:
       bit_offset: 4
       bit_size: 1
       array:
-        len: 2
+        len: 4
         stride: 1
     - name: TOGGLE
       description: TOGGLE.
       bit_offset: 15
       bit_size: 1
-fieldset/SWEVGR_GP2CH:
+fieldset/SWEVGR_GP:
   description: event generation register.
   bit_size: 16
   fields:
