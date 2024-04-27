@@ -1,0 +1,195 @@
+# This file based on the bdma_v1.yaml copied from stm32-data project.
+# So the register names are not changed:
+#
+# - CR: CFGR
+# - NDTR: CNTR
+# - PAR: PADDR
+# - MAR: MADDR
+# - ISR: INTFR
+# - IFCR: INTFCR
+
+block/CH:
+  description: "Channel cluster: CCR?, CNDTR?, CPAR?, and CMAR? registers"
+  items:
+    - name: CR
+      description: DMA channel configuration register (DMA_CCR)
+      byte_offset: 0
+      fieldset: CR
+    - name: NDTR
+      description: DMA channel 1 number of data register
+      byte_offset: 4
+      fieldset: NDTR
+    - name: PAR
+      description: DMA channel 1 peripheral address register
+      byte_offset: 8
+    - name: MAR
+      description: DMA channel 1 memory address register
+      byte_offset: 12
+block/DMA:
+  description: DMA controller
+  items:
+    - name: ISR
+      description: DMA interrupt status register (DMA_ISR)
+      byte_offset: 0
+      access: Read
+      fieldset: ISR
+    - name: IFCR
+      description: DMA interrupt flag clear register (DMA_IFCR)
+      byte_offset: 4
+      access: Write
+      fieldset: ISR
+    - name: CH
+      description: "Channel cluster: CCR?, CNDTR?, CPAR?, and CMAR? registers"
+      array:
+        len: 8
+        stride: 20
+      byte_offset: 8
+      block: CH
+    # CH32 extensions for CH9 to CH11
+    # only in DMA2
+    - name: ECH
+      description: "Channel cluster: CCR?, CNDTR?, CPAR?, and CMAR? registers"
+      array:
+        len: 3
+        stride: 20
+      byte_offset: 0xA0
+      block: CH
+    - name: EISR
+      description: DMA interrupt status register (DMA_ISR)
+      byte_offset: 0xD0
+      access: Read
+      fieldset: ISR
+    - name: EIFCR
+      description: DMA interrupt flag clear register (DMA_IFCR)
+      byte_offset: 0xD4
+      access: Write
+      fieldset: ISR
+fieldset/CR:
+  description: DMA channel configuration register (DMA_CCR)
+  fields:
+    - name: EN
+      description: Channel enable
+      bit_offset: 0
+      bit_size: 1
+    - name: TCIE
+      description: Transfer complete interrupt enable
+      bit_offset: 1
+      bit_size: 1
+    - name: HTIE
+      description: Half Transfer interrupt enable
+      bit_offset: 2
+      bit_size: 1
+    - name: TEIE
+      description: Transfer error interrupt enable
+      bit_offset: 3
+      bit_size: 1
+    - name: DIR
+      description: Data transfer direction
+      bit_offset: 4
+      bit_size: 1
+      enum: DIR
+    - name: CIRC
+      description: Circular mode enabled
+      bit_offset: 5
+      bit_size: 1
+    - name: PINC
+      description: Peripheral increment mode enabled
+      bit_offset: 6
+      bit_size: 1
+    - name: MINC
+      description: Memory increment mode enabled
+      bit_offset: 7
+      bit_size: 1
+    - name: PSIZE
+      description: Peripheral size
+      bit_offset: 8
+      bit_size: 2
+      enum: SIZE
+    - name: MSIZE
+      description: Memory size
+      bit_offset: 10
+      bit_size: 2
+      enum: SIZE
+    - name: PL
+      description: Channel Priority level
+      bit_offset: 12
+      bit_size: 2
+      enum: PL
+    - name: MEM2MEM
+      description: Memory to memory mode  enabled
+      bit_offset: 14
+      bit_size: 1
+fieldset/ISR:
+  description: DMA interrupt status register (DMA_ISR)
+  fields:
+    - name: GIF
+      description: Channel 1 Global interrupt flag
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 8
+        stride: 4
+    - name: TCIF
+      description: Channel 1 Transfer Complete flag
+      bit_offset: 1
+      bit_size: 1
+      array:
+        len: 8
+        stride: 4
+    - name: HTIF
+      description: Channel 1 Half Transfer Complete flag
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 8
+        stride: 4
+    - name: TEIF
+      description: Channel 1 Transfer Error flag
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 8
+        stride: 4
+fieldset/NDTR:
+  description: DMA channel 1 number of data register
+  fields:
+    - name: NDT
+      description: Number of data to transfer
+      bit_offset: 0
+      bit_size: 16
+enum/DIR:
+  bit_size: 1
+  variants:
+    - name: FromPeripheral
+      description: Read from peripheral
+      value: 0
+    - name: FromMemory
+      description: Read from memory
+      value: 1
+enum/PL:
+  bit_size: 2
+  variants:
+    - name: Low
+      description: Low priority
+      value: 0
+    - name: Medium
+      description: Medium priority
+      value: 1
+    - name: High
+      description: High priority
+      value: 2
+    - name: VeryHigh
+      description: Very high priority
+      value: 3
+enum/SIZE:
+  bit_size: 2
+  variants:
+    - name: Bits8
+      description: 8-bit size
+      value: 0
+    - name: Bits16
+      description: 16-bit size
+      value: 1
+    - name: Bits32
+      description: 32-bit size
+      value: 2

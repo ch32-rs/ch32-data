@@ -42,6 +42,36 @@
     - pin: PB9
       signal: MCO
 
+- name: DMA1
+  address: 1073872896 # 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBENR
+      field: DMAEN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+    - signal: CH8
+      interrupt: DMA1_Channel8
+
 - name: GPIOA
   address: 0x40010800
   registers:
@@ -630,7 +660,6 @@
     - { pin: "PB11", signal: "CH1N", remap: 0b110 }
     - { pin: "PB12", signal: "CH2N", remap: 0b110 }
     - { pin: "PB3", signal: "CH3N", remap: 0b110 }
-
   interrupts:
     - signal: BRK
       interrupt: TIM2_BRK
@@ -685,6 +714,7 @@
       interrupt: TIM3
     - signal: CC
       interrupt: TIM3
+  # No DMA
 
 - name: OPA
   address: 0x40026000
