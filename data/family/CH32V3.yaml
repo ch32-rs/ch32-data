@@ -53,6 +53,22 @@
     enable:
       register: AHBPCENR
       field: DMA1EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+    # NO CH8
 - name: DMA2
   address: 0x40020400
   registers:
@@ -65,6 +81,29 @@
     enable:
       register: AHBPCENR
       field: DMA2EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA2_Channel1
+    - signal: CH2
+      interrupt: DMA2_Channel2
+    - signal: CH3
+      interrupt: DMA2_Channel3
+    - signal: CH4
+      interrupt: DMA2_Channel4
+    - signal: CH5
+      interrupt: DMA2_Channel5
+    - signal: CH6
+      interrupt: DMA2_Channel6
+    - signal: CH7
+      interrupt: DMA2_Channel7
+    - signal: CH8
+      interrupt: DMA2_Channel8
+    - signal: CH9
+      interrupt: DMA2_Channel9
+    - signal: CH10
+      interrupt: DMA2_Channel10
+    - signal: CH11
+      interrupt: DMA2_Channel11
 
 - name: GPIOA
   address: 0x40010800

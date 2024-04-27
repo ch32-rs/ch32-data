@@ -51,6 +51,23 @@
     enable:
       register: AHBPCENR
       field: DMA1EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+    - signal: CH8
+      interrupt: DMA1_Channel8
 
 - name: AFIO
   address: 0x40010000
