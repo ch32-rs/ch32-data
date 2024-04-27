@@ -67,8 +67,11 @@ pub mod chip {
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Core {
         pub name: String,
+        #[serde(default)]
         pub peripherals: Vec<core::Peripheral>,
+        #[serde(default)]
         pub interrupts: Vec<core::Interrupt>,
+        #[serde(default)]
         pub dma_channels: Vec<core::DmaChannels>,
 
         // include fields, for common peripherals
