@@ -1,1 +1,14 @@
 # TODO
+
+- name: DMA1
+  address: 1073872896 # 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA1EN

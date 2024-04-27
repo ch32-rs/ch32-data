@@ -41,6 +41,31 @@
     - signal: EXTI10
       interrupt: EXTI15_10
 
+- name: DMA1
+  address: 1073872896 # 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA1EN
+- name: DMA2
+  address: 0x40020400
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA2EN
+
 - name: GPIOA
   address: 0x40010800
   registers:
