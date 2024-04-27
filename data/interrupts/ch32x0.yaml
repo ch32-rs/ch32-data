@@ -10,20 +10,20 @@ FLASH: 18
 EXTI7_0: 20
 # 21 - AWU global interrupt
 AWU: 21
-# 22 - DMA Channel1 global interrupt
-DMA_CHANNEL1: 22
-# 23 - DMA Channel2 global interrupt
-DMA_CHANNEL2: 23
-# 24 - DMA Channel3 global interrupt
-DMA_CHANNEL3: 24
-# 25 - DMA Channel4 global interrupt
-DMA_CHANNEL4: 25
-# 26 - DMA Channel5 global interrupt
-DMA_CHANNEL5: 26
-# 27 - DMA Channel6 global interrupt
-DMA_CHANNEL6: 27
-# 28 - DMA Channel7 global interrupt
-DMA_CHANNEL7: 28
+# 22 - DMA1 Channel1 global interrupt
+DMA1_CHANNEL1: 22
+# 23 - DMA1 Channel2 global interrupt
+DMA1_CHANNEL2: 23
+# 24 - DMA1 Channel3 global interrupt
+DMA1_CHANNEL3: 24
+# 25 - DMA1 Channel4 global interrupt
+DMA1_CHANNEL4: 25
+# 26 - DMA1 Channel5 global interrupt
+DMA1_CHANNEL5: 26
+# 27 - DMA1 Channel6 global interrupt
+DMA1_CHANNEL6: 27
+# 28 - DMA1 Channel7 global interrupt
+DMA1_CHANNEL7: 28
 # 29 - ADC global interrupt
 ADC1: 29
 # 30 - I2C1 event interrupt
@@ -54,8 +54,8 @@ EXTI25_16: 41
 USART3: 42
 # 43 - USART4 global interrupt - renamed
 USART4: 43
-# 44 - DMA Channel8 global interrupt
-DMA_CHANNEL8: 44
+# 44 - DMA1 Channel8 global interrupt
+DMA1_CHANNEL8: 44
 # 45 - USBFS
 USBFS: 45
 # 46 - USBFS_WKUP
