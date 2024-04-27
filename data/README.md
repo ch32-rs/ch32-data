@@ -54,6 +54,8 @@ V003 has no I2S.
 
 ## DMA
 
+DMA is the same as STM32's BDMA v1, the only exception CH32V3's DMA2, which has 11 channels.
+
 ```yaml
 - dma_channels:
   - name: "DMA1_CH5"

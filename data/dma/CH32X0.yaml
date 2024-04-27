@@ -1,4 +1,4 @@
-ADC: 1
+ADC1: 1
 SPI_RX: 2
 SPI_TX: 3
 USART1_TX: 4
