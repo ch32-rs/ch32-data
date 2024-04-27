@@ -25,16 +25,3 @@
   interrupts:
     - signal: GLOBAL
       interrupt: TIM5
-  dma_channels:
-    - signal: CH1
-      channel: DMA1_CH7
-    - signal: CH2
-      channel: DMA1_CH1
-    - signal: CH3
-      channel: DMA1_CH3
-    - signal: CH4
-      channel: DMA1_CH6
-    - signal: UP
-      channel: DMA1_CH8
-    - signal: TRIG
-      channel: DMA1_CH7

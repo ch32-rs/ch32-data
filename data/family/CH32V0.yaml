@@ -130,21 +130,6 @@
       interrupt: TIM1_TRG_COM
     - signal: BRK
       interrupt: TIM1_BRK
-  dma_channels:
-    - signal: CH1
-      channel: DMA1_CH2
-    - signal: CH2
-      channel: DMA1_CH3
-    - signal: CH3
-      channel: DMA1_CH6
-    - signal: CH4
-      channel: DMA1_CH4
-    - signal: TRIG
-      channel: DMA1_CH4
-    - signal: COM
-      channel: DMA1_CH4
-    - signal: UP
-      channel: DMA1_CH5
   pins:
     # 00：默认映射(ETR/PC5，CH1/PD2，CH2/PA1， CH3/PC3 ， CH4/PC4 ， BKIN/PC2 ， CH1N/PD0 ， CH2N/PA2，CH3N/PD1)；
     - pin: PC5
@@ -280,17 +265,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: TIM2
-  dma_channels:
-    - signal: CH1
-      channel: DMA1_CH5
-    - signal: CH2
-      channel: DMA1_CH7
-    - signal: CH3
-      channel: DMA1_CH1
-    - signal: CH4
-      channel: DMA1_CH7
-    - signal: UP
-      channel: DMA1_CH2
   pins:
     # 00 ： 默 认 映 射 (CH1/ETR/PD4 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
     - pin: PD4
@@ -378,11 +352,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART1
-  dma_channels:
-    - signal: TX
-      channel: DMA1_CH4
-    - signal: RX
-      channel: DMA1_CH5
   pins:
     # 00 ： 默 认 映 射 (CK/PD4 ， TX/PD5 ， RX/PD6 ， CTS/PD3，RTS/PC2)
     - pin: PD4
@@ -494,11 +463,6 @@
       interrupt: I2C1_EV
     - signal: ER
       interrupt: I2C1_ER
-  dma_channels:
-    - signal: TX
-      channel: DMA1_CH6
-    - signal: RX
-      channel: DMA1_CH7
 
 - name: SPI1
   address: 0x40013000
@@ -548,11 +512,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: SPI1
-  dma_channels:
-    - signal: TX
-      channel: DMA1_CH3
-    - signal: RX
-      channel: DMA1_CH2
 
 - name: ADC1
   address: 0x40012400
@@ -589,9 +548,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: ADC
-  dma_channels:
-    - signal: GLOBAL
-      channel: DMA1_CH1
 
 # Fake peripheral
 - name: OPA

@@ -175,13 +175,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART1
-  dma_channels:
-    - signal: TX
-      dmamux: "DMAMUX1"
-      request: 4
-    - signal: RX
-      dmamux: "DMAMUX1"
-      request: 5
 
 - name: USART2
   address: 0x40004400
@@ -235,13 +228,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART2
-  dma_channels:
-    - signal: TX
-      dmamux: "DMAMUX1"
-      request: 7
-    - signal: RX
-      dmamux: "DMAMUX1"
-      request: 6
 
 - name: USART3
   address: 0x40004800
@@ -283,13 +269,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART3
-  dma_channels:
-    - signal: TX
-      dmamux: "DMAMUX1"
-      request: 2
-    - signal: RX
-      dmamux: "DMAMUX1"
-      request: 3
 
 - name: USART4
   address: 0x40004C00
@@ -349,13 +328,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART4
-  dma_channels:
-    - signal: TX
-      dmamux: "DMAMUX1"
-      request: 1
-    - signal: RX
-      dmamux: "DMAMUX1"
-      request: 8
 
 - name: SPI1
   address: 0x40013000
@@ -428,13 +400,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: SPI1
-  dma_channels:
-    - signal: RX
-      dmamux: "DMAMUX1"
-      request: 2
-    - signal: TX
-      dmamux: "DMAMUX1"
-      request: 3
 
 # ADC1, renamed from ADC
 # - has ADC_DIV
@@ -490,10 +455,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: ADC1
-  dma_channels:
-    - signal: ADC
-      dmamux: "DMAMUX1"
-      request: 1
 
 # Timers, 16-bit
 # - ADTM: TIM1, TIM2
@@ -568,8 +529,6 @@
       interrupt: TIM1_TRG_COM
     - signal: CC
       interrupt: TIM1_CC
-  dma_channels:
-    # TODO
 
 - name: TIM2
   address: 0x40000000
@@ -671,8 +630,6 @@
       interrupt: TIM2_TRG_COM
     - signal: CC
       interrupt: TIM2_CC
-  dma_channels:
-    # TODO
 
 - name: TIM3
   address: 0x40000400

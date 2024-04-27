@@ -29,15 +29,13 @@ docs:
     url: https://www.wch.cn/products/CH32L103.html
 cores:
   - name: qingke-v4c
-    peripherals:
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32L1.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4C_L1.yaml"
+    include_interrupts: "../interrupts/ch32l1.yaml"
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
 _raw:
   USB_20: H/D
   OPA: "1"
