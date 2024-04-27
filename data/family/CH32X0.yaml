@@ -52,8 +52,8 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: AHBENR
-      field: DMAEN
+      register: AHBPCENR
+      field: DMA1EN
   interrupts:
     - signal: CH1
       interrupt: DMA1_Channel1
