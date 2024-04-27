@@ -1,5 +1,6 @@
 use std::{collections::HashMap, path::Path};
 
+mod dma;
 mod registers;
 
 #[macro_export]
@@ -111,41 +112,11 @@ fn main() -> anyhow::Result<()> {
                     core.peripherals.extend(peripherals);
                 }
             }
-
-            if let Some(dma_channels_inc) = core.include_dma_channels.take() {
-                for (dma, inc_path) in dma_channels_inc {
-                    let dma_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
-                    let content = std::fs::read_to_string(&dma_yaml_path)?;
-                    let dma_map: HashMap<String, u8> = serde_yaml::from_str(&content)?;
-                    let mut dma_map: Vec<(String, u8)> = dma_map.into_iter().collect();
-                    dma_map.sort_by_key(|(_, number)| *number);
-
-                    let max_ch = dma_map.iter().map(|(_, channel)| *channel).max().unwrap();
-
-                    /* Format
-                    cores[0].dma_channels
-                    {
-                        "name": "DMA1_CH1",
-                        "dma": "DMA1",
-                        "channel": 0
-                    },
-                    */
-                    for i in 0..max_ch {
-                        let name = format!("{}_CH{}", dma, i + 1);
-                        let channel = i; // 0 based
-                        core.dma_channels
-                            .push(ch32_data_serde::chip::core::DmaChannels {
-                                name,
-                                dma: dma.clone(),
-                                channel,
-                            });
-                    }
-                }
-
-                //println!("dma: {:#?}", dma);
-                //core.dma_channels.extend(dma);
-            }
         }
+
+        // DMA includes and dma_channels
+        dma::handle_chip_dma_include(&meta_yaml_path, &mut chip)?;
+
         println!(
             "chip: {}, peripherals: {}",
             chip.name,
