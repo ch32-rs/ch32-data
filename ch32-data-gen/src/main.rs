@@ -123,6 +123,7 @@ fn main() -> anyhow::Result<()> {
                     let max_ch = dma_map.iter().map(|(_, channel)| *channel).max().unwrap();
 
                     /* Format
+                    cores[0].dma_channels
                     {
                         "name": "DMA1_CH1",
                         "dma": "DMA1",

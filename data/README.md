@@ -51,3 +51,12 @@ V003, no RTR, SMBUS
 ### spi
 
 V003 has no I2S.
+
+## DMA
+
+```yaml
+- dma_channels:
+  - name: "DMA1_CH5"
+    dma: "DMA1"
+    channel: 4
+```
