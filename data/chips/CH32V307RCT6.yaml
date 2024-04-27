@@ -73,8 +73,6 @@ cores:
     include_dma_channels:
       DMA1: "../dma/CH32V_V4F_DMA1.yaml"
       DMA2: "../dma/CH32V_V4F_DMA2.yaml"
-    interrupts: []
-    dma_channels: []
 
 _raw:
   Flash: 256K

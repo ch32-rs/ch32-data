@@ -48,8 +48,6 @@ cores:
     include_interrupts: "../interrupts/ch32v2_v3.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V_V4C.yaml"
-    interrupts: []
-    dma_channels: []
 
 _raw:
   CAN: "1"

@@ -36,8 +36,6 @@ cores:
     include_interrupts: "../interrupts/ch32v1.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V103.yaml"
-    interrupts: []
-    dma_channels: []
 
 _raw:
   ADC: 1/10
