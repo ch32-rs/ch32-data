@@ -48,7 +48,7 @@ block/RCC:
 fieldset/AHBPCENR:
   description: AHB Peripheral Clock enable register(RCC_AHBPCENR).
   fields:
-    - name: DMAEN
+    - name: DMA1EN
       description: DMA clock enable.
       bit_offset: 0
       bit_size: 1
