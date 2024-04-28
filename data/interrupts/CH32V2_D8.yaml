@@ -85,15 +85,15 @@ EXTI15_10: 56
 # RTC Alarm through EXTI Line
 RTC_ALARM: 57
 # USB Wake up from suspend
-USBWakeUp: 58
+USB_WKUP: 58
 # USBHD Break
 USBHD: 59
 # USBHD Wake up from suspend
-USBHDWakeUp: 60
+USBHD_WKUP: 60
 # ETH global
 ETH: 61
 # ETH Wake up
-ETHWakeUp: 62
+ETH_WKUP: 62
 # BB & LLE only for D8W
 # BLE BB
 BB: 63
@@ -108,4 +108,4 @@ DMA1_CHANNEL8: 67
 # OSC32KCal
 OSC32KCal: 68
 # OSC Wake Up
-OSCWakeUp: 69
+OSC_WKUP: 69

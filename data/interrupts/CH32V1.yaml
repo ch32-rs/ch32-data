@@ -79,6 +79,6 @@ EXTI15_10: 56
 # 57 - RTC Alarms through EXTI line interrupt
 RTCALARM: 57
 # 58 - USB Device FS Wakeup through EXTI line interrupt
-USBWAKE_UP: 58
+USB_WKUP: 58
 # 59 - USBHD_IRQHandler
 USBHD: 59

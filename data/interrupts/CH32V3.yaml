@@ -85,7 +85,7 @@ EXTI15_10: 56
 # 57 - RTC Alarms through EXTI line interrupt
 RTCALARM: 57
 # 58 - USB Device WakeUp from suspend through EXTI Line Interrupt
-USBWAKE_UP: 58
+USB_WKUP: 58
 # 59 - TIM8 Break interrupt
 TIM8_BRK: 59
 # 60 - TIM8 Update interrupt
@@ -126,7 +126,7 @@ CAN2_SCE: 82
 # 83 - OTG_FS
 OTG_FS: 83
 # 84 - USBHSWakeup
-USBHSWAKEUP: 84
+USBHS_WKUP: 84
 # 85 - USBHS
 USBHS: 85
 # 87 - USART6 global interrupt

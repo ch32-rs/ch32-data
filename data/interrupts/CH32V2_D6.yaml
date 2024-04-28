@@ -85,11 +85,11 @@ EXTI15_10: 56
 # RTC Alarm through EXTI Line
 RTC_ALARM: 57
 # USB Wake up from suspend
-USBWakeUp: 58
+USB_WKUP: 58
 # USBHD Break
 USBHD: 59
 # USBHD Wake up from suspend
-USBHDWakeUp: 60
+USBHD_WKUP: 60
 # UART4
 UART4: 61
 # DMA1 CHANNEL8
