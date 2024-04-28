@@ -366,7 +366,7 @@ enum/EXTSEL:
     - name: EXTI11
       description: External interrupt line 11.
       value: 0b110
-    - name: JWSTART
+    - name: SWSTART
       description: Software start.
       value: 0b111
 
