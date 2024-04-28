@@ -78,8 +78,6 @@
       interrupt: DMA1_Channel6
     - signal: CH7
       interrupt: DMA1_Channel7
-    - signal: CH8
-      interrupt: DMA1_Channel8
 
 - name: GPIOA
   address: 0x40010800
@@ -324,10 +322,10 @@
     kernel_clock: ADC
     enable:
       register: APB2PCENR
-      field: ADC1EN
+      field: ADCEN
     reset:
       register: APB2PRSTR
-      field: ADC1RST
+      field: ADCRST
   interrupts:
     - signal: GLOBAL
       interrupt: ADC
