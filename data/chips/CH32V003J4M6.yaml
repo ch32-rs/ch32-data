@@ -31,7 +31,7 @@ cores:
       - "../family/CH32V0.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V0.yaml"
-    include_interrupts: "../interrupts/ch32v0.yaml"
+    include_interrupts: "../interrupts/CH32V0.yaml"
 
 _raw:
   SRAM: 2K

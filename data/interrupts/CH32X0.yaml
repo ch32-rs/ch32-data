@@ -62,6 +62,8 @@ USBFS: 45
 USBFS_WKUP: 46
 # 47 - PIOC
 PIOC: 47
+# 48 - OPA
+OPA: 48
 # 49 - USBPD global interrupt
 USBPD: 49
 # 50 - USBPD_WKUP global interrupt

@@ -62,7 +62,7 @@ cores:
       - "../peripherals/FV2x_V3x_I2C2.yaml"
       - "../peripherals/F2x_V3x_RNG.yaml"
 
-    include_interrupts: "../interrupts/ch32v2_v3.yaml"
+    include_interrupts: "../interrupts/CH32V3.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V_V4F_DMA1.yaml"
       DMA2: "../dma/CH32V_V4F_DMA2.yaml"

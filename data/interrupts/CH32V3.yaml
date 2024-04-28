@@ -117,6 +117,12 @@ DMA2_CHANNEL5: 76
 ETH: 77
 # 78 - Ethernet Wakeup through EXTI line interrupt
 ETH_WKUP: 78
+
+CAN2_TX: 79
+CAN2_RX0: 80
+CAN2_RX1: 81
+CAN2_SCE: 82
+
 # 83 - OTG_FS
 OTG_FS: 83
 # 84 - USBHSWakeup
@@ -152,6 +158,3 @@ DMA2_CHANNEL8: 100
 DMA2_CHANNEL9: 101
 DMA2_CHANNEL10: 102
 DMA2_CHANNEL11: 103
-
-# BUG, the RM datasheet does not have a DMA1_CHANNEL8, but it's used in V4B and V4C
-DMA1_CHANNEL8: 250

@@ -31,7 +31,7 @@ cores:
       - "../family/CH32V1.yaml"
       - "../peripherals/FV2x_V3x_I2C1.yaml"
       - "../peripherals/FV2x_V3x_SPI1.yaml"
-    include_interrupts: "../interrupts/ch32v1.yaml"
+    include_interrupts: "../interrupts/CH32V1.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V103.yaml"
 

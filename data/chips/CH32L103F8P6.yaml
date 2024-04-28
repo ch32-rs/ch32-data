@@ -34,7 +34,7 @@ cores:
       - "../family/CH32L1.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V_V4C_L1.yaml"
-    include_interrupts: "../interrupts/ch32l1.yaml"
+    include_interrupts: "../interrupts/CH32L1.yaml"
 
 _raw:
   UART: "4"
