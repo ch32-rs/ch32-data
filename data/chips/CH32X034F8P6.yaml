@@ -33,7 +33,7 @@ cores:
       - "../family/CH32X0.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32X0.yaml"
-    include_interrupts: "../interrupts/ch32x0.yaml"
+    include_interrupts: "../interrupts/CH32X0.yaml"
 
 _raw:
   Freq: 48MHz

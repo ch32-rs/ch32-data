@@ -35,7 +35,7 @@ cores:
       - "../peripherals/X035_USBPD.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32X0.yaml"
-    include_interrupts: "../interrupts/ch32x0.yaml"
+    include_interrupts: "../interrupts/CH32X0.yaml"
 
 _raw:
   Advanced TM: 2/1
