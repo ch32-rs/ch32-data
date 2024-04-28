@@ -1,4 +1,4 @@
-block/TIM_ADV:
+block/ADTM:
   description: Advanced timer.
   items:
     - name: CTLR1
@@ -83,7 +83,7 @@ block/TIM_ADV:
       byte_offset: 80
       bit_size: 16
       fieldset: SPEC
-block/TIM_GP16:
+block/GPTM:
   description: General purpose timer, 16bit.
   items:
     - name: CTLR1
@@ -155,7 +155,7 @@ block/TIM_GP16:
       description: DMA address for full transfer.
       byte_offset: 76
       fieldset: DMAADR
-block/TIM_GP32:
+block/GPTM32:
   description: General purpose timer, 32bit.
   items:
     - name: CTLR1
@@ -227,7 +227,7 @@ block/TIM_GP32:
       description: DMA address for full transfer.
       byte_offset: 76
       fieldset: DMAADR
-block/TIM_BASIC:
+block/BCTM:
   description: Basic timer.
   items:
     - name: CTLR1
@@ -338,6 +338,7 @@ fieldset/CHCTLR_Input:
       array:
         len: 2
         stride: 8
+      enum: CCMR_Input_CCS
     - name: ICPSC
       description: Input capture 1 prescaler.
       bit_offset: 2
@@ -352,6 +353,7 @@ fieldset/CHCTLR_Input:
       array:
         len: 2
         stride: 8
+      enum: FilterValue
 fieldset/CHCTLR_Output:
   description: capture/compare mode register (output mode).
   fields:
@@ -362,6 +364,7 @@ fieldset/CHCTLR_Output:
       array:
         len: 2
         stride: 8
+      enum: CCMR_Output_CCS
     - name: IOCFE
       description: Output Compare 1 fast enable.
       bit_offset: 2
@@ -383,6 +386,7 @@ fieldset/CHCTLR_Output:
       array:
         len: 2
         stride: 8
+      enum: OCM
     - name: OCCE
       description: Output Compare 1 clear enable.
       bit_offset: 7
@@ -405,6 +409,7 @@ fieldset/CTLR1:
       description: Update request source.
       bit_offset: 2
       bit_size: 1
+      enum: URS
     - name: OPM
       description: One-pulse mode.
       bit_offset: 3
@@ -451,6 +456,7 @@ fieldset/CTLR2:
       description: Capture/compare DMA selection.
       bit_offset: 3
       bit_size: 1
+      enum: CCDS
     - name: MMS
       description: Master mode selection.
       bit_offset: 4
@@ -499,22 +505,13 @@ fieldset/DMAINTENR:
       description: Update interrupt enable.
       bit_offset: 0
       bit_size: 1
-    - name: CC1IE
+    - name: CCIE
       description: Capture/Compare 1 interrupt enable.
       bit_offset: 1
       bit_size: 1
-    - name: CC2IE
-      description: Capture/Compare 2 interrupt enable.
-      bit_offset: 2
-      bit_size: 1
-    - name: CC3IE
-      description: Capture/Compare 3 interrupt enable.
-      bit_offset: 3
-      bit_size: 1
-    - name: CC4IE
-      description: Capture/Compare 4 interrupt enable.
-      bit_offset: 4
-      bit_size: 1
+      array:
+        len: 4
+        stride: 1
     - name: COMIE
       description: COM interrupt enable.
       bit_offset: 5
@@ -531,22 +528,13 @@ fieldset/DMAINTENR:
       description: Update DMA request enable.
       bit_offset: 8
       bit_size: 1
-    - name: CC1DE
+    - name: CCDE
       description: Capture/Compare 1 DMA request enable.
       bit_offset: 9
       bit_size: 1
-    - name: CC2DE
-      description: Capture/Compare 2 DMA request enable.
-      bit_offset: 10
-      bit_size: 1
-    - name: CC3DE
-      description: Capture/Compare 3 DMA request enable.
-      bit_offset: 11
-      bit_size: 1
-    - name: CC4DE
-      description: Capture/Compare 4 DMA request enable.
-      bit_offset: 12
-      bit_size: 1
+      array:
+        len: 4
+        stride: 1
     - name: COMDE
       description: COM DMA request enable.
       bit_offset: 13
@@ -675,6 +663,161 @@ fieldset/SPEC:
       array:
         len: 4
         stride: 1
+
+enum/CCMR_Input_CCS:
+  bit_size: 2
+  variants:
+    - name: TI4
+      description: "CCx channel is configured as input, normal mapping: ICx mapped to TIx"
+      value: 1
+    - name: TI3
+      description: CCx channel is configured as input, alternate mapping (switches 1 with 2, 3 with 4)
+      value: 2
+    - name: TRC
+      description: CCx channel is configured as input, ICx is mapped on TRC
+      value: 3
+enum/CCMR_Output_CCS:
+  bit_size: 2
+  variants:
+    - name: Output
+      description: CCx channel is configured as output
+      value: 0
+enum/CKD:
+  bit_size: 2
+  description: division ratio between the timer clock (CK_INT) frequency, the dead time and the sampling clock used by the dead time generator and the digital filter (ETR,TIx)
+  variants:
+    - name: Div_1
+      description: Tdts=Tck_int
+      value: 0b00
+    - name: Div_2
+      description: Tdts=2*Tck_int
+      value: 0b01
+    - name: Div_4
+      description: Tdts=4*Tck_int
+      value: 0b10
+    - name: Reserved
+      value: 0b11
+enum/FilterValue:
+  bit_size: 4
+  variants:
+    - name: NoFilter
+      description: No filter, sampling is done at fDTS
+      value: 0
+    - name: FCK_INT_N2
+      description: fSAMPLING=fCK_INT, N=2
+      value: 1
+    - name: FCK_INT_N4
+      description: fSAMPLING=fCK_INT, N=4
+      value: 2
+    - name: FCK_INT_N8
+      description: fSAMPLING=fCK_INT, N=8
+      value: 3
+    - name: FDTS_Div2_N6
+      description: fSAMPLING=fDTS/2, N=6
+      value: 4
+    - name: FDTS_Div2_N8
+      description: fSAMPLING=fDTS/2, N=8
+      value: 5
+    - name: FDTS_Div4_N6
+      description: fSAMPLING=fDTS/4, N=6
+      value: 6
+    - name: FDTS_Div4_N8
+      description: fSAMPLING=fDTS/4, N=8
+      value: 7
+    - name: FDTS_Div8_N6
+      description: fSAMPLING=fDTS/8, N=6
+      value: 8
+    - name: FDTS_Div8_N8
+      description: fSAMPLING=fDTS/8, N=8
+      value: 9
+    - name: FDTS_Div16_N5
+      description: fSAMPLING=fDTS/16, N=5
+      value: 10
+    - name: FDTS_Div16_N6
+      description: fSAMPLING=fDTS/16, N=6
+      value: 11
+    - name: FDTS_Div16_N8
+      description: fSAMPLING=fDTS/16, N=8
+      value: 12
+    - name: FDTS_Div32_N5
+      description: fSAMPLING=fDTS/32, N=5
+      value: 13
+    - name: FDTS_Div32_N6
+      description: fSAMPLING=fDTS/32, N=6
+      value: 14
+    - name: FDTS_Div32_N8
+      description: fSAMPLING=fDTS/32, N=8
+      value: 15
+enum/OCM:
+  bit_size: 3
+  variants:
+    - name: Frozen
+      description: The comparison between the output compare register TIMx_CCRy and the counter TIMx_CNT has no effect on the outputs
+      value: 0
+    - name: ActiveOnMatch
+      description: Set channel to active level on match. OCyREF signal is forced high when the counter matches the capture/compare register
+      value: 1
+    - name: InactiveOnMatch
+      description: Set channel to inactive level on match. OCyREF signal is forced low when the counter matches the capture/compare register
+      value: 2
+    - name: Toggle
+      description: OCyREF toggles when TIMx_CNT=TIMx_CCRy
+      value: 3
+    - name: ForceInactive
+      description: OCyREF is forced low
+      value: 4
+    - name: ForceActive
+      description: OCyREF is forced high
+      value: 5
+    - name: PwmMode1
+      description: In upcounting, channel is active as long as TIMx_CNT<TIMx_CCRy else inactive. In downcounting, channel is inactive as long as TIMx_CNT>TIMx_CCRy else active
+      value: 6
+    - name: PwmMode2
+      description: Inversely to PwmMode1
+      value: 7
+enum/CMS:
+  bit_size: 2
+  variants:
+    - name: EdgeAligned
+      description: The counter counts up or down depending on the direction bit
+      value: 0
+    - name: CenterAligned1
+      description: The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting down.
+      value: 1
+    - name: CenterAligned2
+      description: The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting up.
+      value: 2
+    - name: CenterAligned3
+      description: The counter counts up and down alternatively. Output compare interrupt flags are set both when the counter is counting up or down.
+      value: 3
+enum/DIR:
+  bit_size: 1
+  variants:
+    - name: Up
+      description: Counter used as upcounter
+      value: 0
+    - name: Down
+      description: Counter used as downcounter
+      value: 1
+enum/URS:
+  bit_size: 1
+  variants:
+    - name: AnyEvent
+      description: Any of counter overflow/underflow, setting UG, or update through slave mode, generates an update interrupt or DMA request
+      value: 0
+    - name: CounterOnly
+      description: Only counter overflow/underflow generates an update interrupt or DMA request
+      value: 1
+enum/CCDS:
+  bit_size: 1
+  variants:
+    - name: OnCompare
+      description: CCx DMA request sent when CCx event occurs
+      value: 0
+    - name: OnUpdate
+      description: CCx DMA request sent when update event occurs
+      value: 1
+
 enum/MMS:
   bit_size: 3
   description: Master mode selection.
@@ -703,47 +846,6 @@ enum/MMS:
     - name: Compare_OC4REF
       description: Compare OC4REF
       value: 0b111
-enum/CKD:
-  bit_size: 2
-  description: division ratio between the timer clock (CK_INT) frequency, the dead time and the sampling clock used by the dead time generator and the digital filter (ETR,TIx)
-  variants:
-    - name: Div_1
-      description: Tdts=Tck_int
-      value: 0b00
-    - name: Div_2
-      description: Tdts=2*Tck_int
-      value: 0b01
-    - name: Div_4
-      description: Tdts=4*Tck_int
-      value: 0b10
-    - name: Reserved
-      value: 0b11
-enum/CMS:
-  bit_size: 2
-  description: Center-aligned mode selection.
-  variants:
-    - name: Edge_aligned
-      description: Edge-aligned mode
-      value: 0b00
-    - name: Center_aligned_1
-      description: Center-aligned mode 1
-      value: 0b01
-    - name: Center_aligned_2
-      description: Center-aligned mode 2
-      value: 0b10
-    - name: Center_aligned_3
-      description: Center-aligned mode 3
-      value: 0b11
-enum/DIR:
-  bit_size: 1
-  description: Direction
-  variants:
-    - name: Up
-      description: Up
-      value: 0b0
-    - name: Down
-      description: Down
-      value: 0b1
 enum/ETPS:
   bit_size: 2
   description: External trigger prescaler.

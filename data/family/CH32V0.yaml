@@ -134,7 +134,7 @@
   registers:
     kind: timer
     version: common
-    block: TIM_ADV
+    block: ADTM
   rcc:
     bus_clock: PCLK2
     kernel_clock: PCLK2
@@ -277,7 +277,7 @@
   registers:
     kind: timer
     version: common
-    block: TIM_GP16
+    block: GPTM
   rcc:
     bus_clock: PCLK1
     kernel_clock: PCLK1
@@ -291,8 +291,13 @@
     register: PCFR1
     field: TIM2_RM
   interrupts:
-    - signal: GLOBAL
+    - signal: UP
       interrupt: TIM2
+    - signal: CC
+      interrupt: TIM2
+    - signal: TRG
+      interrupt: TIM2
+
   pins:
     # 00 ： 默 认 映 射 (CH1/ETR/PD4 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
     - pin: PD4
