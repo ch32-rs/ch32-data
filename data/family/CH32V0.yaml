@@ -66,8 +66,6 @@
       interrupt: DMA1_Channel6
     - signal: CH7
       interrupt: DMA1_Channel7
-    - signal: CH8
-      interrupt: DMA1_Channel8
 
 - name: AFIO
   address: 0x40010000
