@@ -21,6 +21,13 @@ block/ADC:
       description: sample time register 2.
       byte_offset: 16
       fieldset: SAMPTR2
+    - name: IOFR
+      description: injected channel data offset register x.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 20
+      fieldset: IOFR
     - name: WDHTR
       description: watchdog higher threshold register.
       byte_offset: 36
@@ -45,6 +52,14 @@ block/ADC:
       description: injected sequence register.
       byte_offset: 56
       fieldset: ISQR
+    - name: IDATAR
+      description: injected data register x.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 60
+      access: Read
+      fieldset: IDATAR
     - name: RDATAR
       description: regular data register.
       byte_offset: 76
@@ -54,21 +69,6 @@ block/ADC:
       description: ADC control register 3.
       byte_offset: 80
       fieldset: CTLR3
-    - name: IOFR
-      description: injected channel data offset register x.
-      array:
-        len: 4
-        stride: 4
-      byte_offset: 20
-      fieldset: IOFR
-    - name: IDATAR
-      description: injected data register x
-      array:
-        len: 4
-        stride: 4
-      byte_offset: 60
-      access: Read
-      fieldset: IDATAR
 fieldset/CTLR1:
   description: control register 1.
   fields:
@@ -218,10 +218,6 @@ fieldset/IOFR:
 fieldset/ISQR:
   description: injected sequence register.
   fields:
-    - name: JL
-      description: Injected sequence length.
-      bit_offset: 20
-      bit_size: 2
     - name: JSQ
       description: 1st conversion in injected sequence.
       bit_offset: 0
@@ -229,6 +225,10 @@ fieldset/ISQR:
       array:
         len: 4
         stride: 5
+    - name: JL
+      description: Injected sequence length.
+      bit_offset: 20
+      bit_size: 2
 fieldset/RDATAR:
   description: regular data register
   fields:
@@ -243,10 +243,6 @@ fieldset/RDATAR:
 fieldset/RSQR1:
   description: regular sequence register 1.
   fields:
-    - name: L
-      description: Regular channel sequence length.
-      bit_offset: 20
-      bit_size: 4
     - name: SQ
       description: 13th conversion in regular sequence.
       bit_offset: 0
@@ -254,6 +250,10 @@ fieldset/RSQR1:
       array:
         len: 4
         stride: 5
+    - name: L
+      description: Regular channel sequence length.
+      bit_offset: 20
+      bit_size: 4
 fieldset/RSQR2:
   description: regular sequence register 2.
   fields:

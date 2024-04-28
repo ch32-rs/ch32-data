@@ -23,19 +23,19 @@ EXTI3: 25
 # 26 - EXTI Line4 interrupt
 EXTI4: 26
 # 27 - DMA1 Channel1 global interrupt
-DMA1_CH1: 27
+DMA1_CHANNEL1: 27
 # 28 - DMA1 Channel2 global interrupt
-DMA1_CH2: 28
+DMA1_CHANNEL2: 28
 # 29 - DMA1 Channel3 global interrupt
-DMA1_CH3: 29
+DMA1_CHANNEL3: 29
 # 30 - DMA1 Channel4 global interrupt
-DMA1_CH4: 30
+DMA1_CHANNEL4: 30
 # 31 - DMA1 Channel5 global interrupt
-DMA1_CH5: 31
+DMA1_CHANNEL5: 31
 # 32 - DMA1 Channel6 global interrupt
-DMA1_CH6: 32
+DMA1_CHANNEL6: 32
 # 33 - DMA1 Channel7 global interrupt
-DMA1_CH7: 33
+DMA1_CHANNEL7: 33
 # 34 - ADC1 global interrupt
 ADC: 34
 # 39 - EXTI Line[9:5]

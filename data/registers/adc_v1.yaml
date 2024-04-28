@@ -120,10 +120,6 @@ fieldset/CTLR1:
       description: Analog watchdog enable on regular channels.
       bit_offset: 23
       bit_size: 1
-    - name: TKENABLE
-      description: Touch key enable, including TKEY_F and TKEY_V.
-      bit_offset: 24
-      bit_size: 1
 fieldset/CTLR2:
   description: control register 2.
   fields:

@@ -22,6 +22,13 @@ block/ADC:
       description: sample time register 2
       byte_offset: 16
       fieldset: SAMPTR2
+    - name: IOFR
+      description: injected channel data offset register x.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 20
+      fieldset: IOFR
     - name: WDHTR
       description: watchdog higher threshold register.
       byte_offset: 36
@@ -46,21 +53,6 @@ block/ADC:
       description: injected sequence register.
       byte_offset: 56
       fieldset: ISQR
-    - name: RDATAR
-      description: regular data register
-      byte_offset: 76
-      fieldset: RDATAR
-    - name: CTLR3
-      description: ADC control register 3.
-      byte_offset: 80
-      fieldset: CTLR3
-    - name: IOFR
-      description: injected channel data offset register x.
-      array:
-        len: 4
-        stride: 4
-      byte_offset: 20
-      fieldset: IOFR
     - name: IDATAR
       description: injected data register x
       array:
@@ -69,6 +61,14 @@ block/ADC:
       byte_offset: 60
       access: Read
       fieldset: IDATAR
+    - name: RDATAR
+      description: regular data register
+      byte_offset: 76
+      fieldset: RDATAR
+    - name: CTLR3
+      description: ADC control register 3.
+      byte_offset: 80
+      fieldset: CTLR3
 fieldset/CTLR1:
   description: control register 1.
   fields:
