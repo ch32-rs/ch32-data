@@ -1,4 +1,5 @@
-# CH32V003, CH641
+# CH641
+# based on CH32V0.yaml
 ADC1: 1
 USART1_TX: 4
 USART1_RX: 5

@@ -1,0 +1,704 @@
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv4
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv4
+    block: SYSTICK
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: x0
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI7_0
+    - signal: EXTI8
+      interrupt: EXTI15_8
+    - signal: EXTI16
+      interrupt: EXTI25_16
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: x0
+    block: RCC
+  pins:
+    - pin: PB9
+      signal: MCO
+
+- name: DMA1
+  address: 1073872896 # 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA1EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+    - signal: CH8
+      interrupt: DMA1_Channel8
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: x0
+    block: GPIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: x0
+    block: GPIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: x0
+    block: GPIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: x0
+    block: AFIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST
+
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: USART1EN
+    reset:
+      register: APB2PRSTR
+      field: USART1RST
+  remap:
+    register: PCFR1
+    field: USART1_RM
+  pins:
+    - { pin: "PB11", signal: "RX", remap: 0 }
+    - { pin: "PC16", signal: "CTS", remap: 0 }
+    - { pin: "PB10", signal: "TX", remap: 0 }
+    - { pin: "PB9", signal: "CK", remap: 0 }
+    - { pin: "PC17", signal: "RTS", remap: 0 }
+    - { pin: "PA11", signal: "RX", remap: 1 }
+    - { pin: "PC16", signal: "CTS", remap: 1 }
+    - { pin: "PA10", signal: "TX", remap: 1 }
+    - { pin: "PB9", signal: "CK", remap: 1 }
+    - { pin: "PC17", signal: "RTS", remap: 1 }
+    - { pin: "PB11", signal: "RX", remap: 2 }
+    - { pin: "PA9", signal: "CTS", remap: 2 }
+    - { pin: "PB10", signal: "TX", remap: 2 }
+    - { pin: "PB5", signal: "CK", remap: 2 }
+    - { pin: "PA8", signal: "RTS", remap: 2 }
+    - { pin: "PB2", signal: "RX", remap: 3 }
+    - { pin: "PA13", signal: "CTS", remap: 3 }
+    - { pin: "PA7", signal: "TX", remap: 3 }
+    - { pin: "PB12", signal: "CK", remap: 3 }
+    - { pin: "PA14", signal: "RTS", remap: 3 }
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: USART2EN
+    reset:
+      register: APB1PRSTR
+      field: USART2RST
+  remap:
+    register: PCFR1
+    field: USART2_RM
+  pins:
+    # 000:映射(RX/PA3，CTS/PA0，TX/PA2，CK/PA4， RTS/PA1)
+    - { pin: "PA3", signal: "RX", remap: 0 }
+    - { pin: "PA0", signal: "CTS", remap: 0 }
+    - { pin: "PA2", signal: "TX", remap: 0 }
+    - { pin: "PA4", signal: "CK", remap: 0 }
+    - { pin: "PA1", signal: "RTS", remap: 0 }
+    # 001:映射(RX/PA19，CTS/PA1，TX/PA20，CK/PA23， RTS/PA2)
+    - { pin: "PA19", signal: "RX", remap: 1 }
+    - { pin: "PA1", signal: "CTS", remap: 1 }
+    - { pin: "PA20", signal: "TX", remap: 1 }
+    - { pin: "PA23", signal: "CK", remap: 1 }
+    - { pin: "PA2", signal: "RTS", remap: 1 }
+    # 010:映射(RX/PA16，CTS/PA17，TX/PA15， CK/PA22，RTS/PA21)
+    - { pin: "PA16", signal: "RX", remap: 2 }
+    - { pin: "PA17", signal: "CTS", remap: 2 }
+    - { pin: "PA15", signal: "TX", remap: 2 }
+    - { pin: "PA22", signal: "CK", remap: 2 }
+    - { pin: "PA21", signal: "RTS", remap: 2 }
+    # 011:映射(RX/PC1，CTS/PC2，TX/PC0，CK/PB20， RTS/PC3)
+    - { pin: "PC1", signal: "RX", remap: 3 }
+    - { pin: "PC2", signal: "CTS", remap: 3 }
+    - { pin: "PC0", signal: "TX", remap: 3 }
+    - { pin: "PB20", signal: "CK", remap: 3 }
+    - { pin: "PC3", signal: "RTS", remap: 3 }
+    # 1xx:映射(RX/PA16，CTS/PA17，TX/PA15， CK/PA22，RTS/PC3)
+    - { pin: "PA16", signal: "RX", remap: 4 }
+    - { pin: "PA17", signal: "CTS", remap: 4 }
+    - { pin: "PA15", signal: "TX", remap: 4 }
+    - { pin: "PA22", signal: "CK", remap: 4 }
+    - { pin: "PC3", signal: "RTS", remap: 4 }
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART2
+
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: USART3EN
+    reset:
+      register: APB1PRSTR
+      field: USART3RST
+  remap:
+    register: PCFR1
+    field: USART3_RM
+  pins:
+    # 00:映射(RX/PB4，CTS/PB6，TX/PB3，CK/PB5， RTS/PB7)
+    - { pin: "PB4", signal: "RX", remap: 0 }
+    - { pin: "PB6", signal: "CTS", remap: 0 }
+    - { pin: "PB3", signal: "TX", remap: 0 }
+    - { pin: "PB5", signal: "CK", remap: 0 }
+    - { pin: "PB7", signal: "RTS", remap: 0 }
+    # 01:映射(RX/PC19，CTS/PB6，TX/PC18，CK/PB5， RTS/PB7)
+    - { pin: "PC19", signal: "RX", remap: 1 }
+    - { pin: "PB6", signal: "CTS", remap: 1 }
+    - { pin: "PC18", signal: "TX", remap: 1 }
+    - { pin: "PB5", signal: "CK", remap: 1 }
+    - { pin: "PB7", signal: "RTS", remap: 1 }
+    # 10:映射(RX/PB14，CTS/PA3，TX/PA18，CK/PB8， RTS/PA4)
+    - { pin: "PB14", signal: "RX", remap: 2 }
+    - { pin: "PA3", signal: "CTS", remap: 2 }
+    - { pin: "PA18", signal: "TX", remap: 2 }
+    - { pin: "PB8", signal: "CK", remap: 2 }
+    - { pin: "PA4", signal: "RTS", remap: 2 }
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART3
+
+- name: USART4
+  address: 0x40004C00
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: USART4EN
+    reset:
+      register: APB1PRSTR
+      field: USART4RST
+  remap:
+    register: PCFR1
+    field: USART4_RM
+  pins:
+    # 000:映射(RX/PB1，CTS/PB15，TX/PB0，CK/PB2， RTS/PA8)
+    - { pin: "PB1", signal: "RX", remap: 0 }
+    - { pin: "PB15", signal: "CTS", remap: 0 }
+    - { pin: "PB0", signal: "TX", remap: 0 }
+    - { pin: "PB2", signal: "CK", remap: 0 }
+    - { pin: "PA8", signal: "RTS", remap: 0 }
+    # 001:映射(RX/PA9，CTS/PA7，TX/PA5，CK/PA6， RTS/PB21)
+    - { pin: "PA9", signal: "RX", remap: 1 }
+    - { pin: "PA7", signal: "CTS", remap: 1 }
+    - { pin: "PA5", signal: "TX", remap: 1 }
+    - { pin: "PA6", signal: "CK", remap: 1 }
+    - { pin: "PB21", signal: "RTS", remap: 1 }
+    # 010:映射(RX/PC17，CTS/PB15，TX/PC16，CK/PB2， 0 RTS/PA8)
+    - { pin: "PC17", signal: "RX", remap: 2 }
+    - { pin: "PB15", signal: "CTS", remap: 2 }
+    - { pin: "PC16", signal: "TX", remap: 2 }
+    - { pin: "PB2", signal: "CK", remap: 2 }
+    - { pin: "PA8", signal: "RTS", remap: 2 }
+    # 011:映射(RX/PA10，CTS/PA14，TX/PB9，CK/PB8， RTS/PA13)
+    - { pin: "PA10", signal: "RX", remap: 3 }
+    - { pin: "PA14", signal: "CTS", remap: 3 }
+    - { pin: "PB9", signal: "TX", remap: 3 }
+    - { pin: "PB8", signal: "CK", remap: 3 }
+    - { pin: "PA13", signal: "RTS", remap: 3 }
+    # 1x0:映射(RX/PC19，CTS/PA5，TX/PB13，CK/PA8， RTS/PA6)
+    - { pin: "PC19", signal: "RX", remap: 4 }
+    - { pin: "PA5", signal: "CTS", remap: 4 }
+    - { pin: "PB13", signal: "TX", remap: 4 }
+    - { pin: "PA8", signal: "CK", remap: 4 }
+    - { pin: "PA6", signal: "RTS", remap: 4 }
+    # 1x1:映射(RX/PC16，CTS/PB15，TX/PC17，CK/PB2， RTS/PA8)
+    - { pin: "PC16", signal: "RX", remap: 5 }
+    - { pin: "PB15", signal: "CTS", remap: 5 }
+    - { pin: "PC17", signal: "TX", remap: 5 }
+    - { pin: "PB2", signal: "CK", remap: 5 }
+    - { pin: "PA8", signal: "RTS", remap: 5 }
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART4
+
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: x0
+    block: SPI
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: SPI1EN
+    reset:
+      register: APB2PRSTR
+      field: SPI1RST
+  remap:
+    register: PCFR1
+    field: SPI1_RM
+  pins:
+    # 00: Mapping (NSS/PA4, CK/PA5, MISO/PA6, MOSI/PA7)
+    # 01: Mapping (NSS/PB21, CK/PB15, MISO/PA8, MOSI/PA9)
+    # 10: Mapping (NSS/PA12, CK/PA11, MISO/PA9, MOSI/PA10)
+    # 11: Mapping (NSS/PC4, CK/PC5, MISO/PC6, MOSI/PC7)
+    - pin: PA4
+      signal: NSS
+      remap: 0
+    - pin: PA5
+      signal: SCK
+      remap: 0
+    - pin: PA6
+      signal: MISO
+      remap: 0
+    - pin: PA7
+      signal: MOSI
+      remap: 0
+    - pin: PA8
+      signal: MISO
+      remap: 1
+    - pin: PA9
+      signal: MOSI
+      remap: 1
+    - pin: PA9
+      signal: MISO
+      remap: 2
+    - pin: PA10
+      signal: MOSI
+      remap: 2
+    - pin: PA12
+      signal: NSS
+      remap: 2
+    - pin: PB15
+      signal: SCK
+      remap: 1
+    - pin: PB21
+      signal: NSS
+      remap: 1
+    - pin: PC4
+      signal: NSS
+      remap: 3
+    - pin: PC5
+      signal: SCK
+      remap: 3
+    - pin: PC6
+      signal: MISO
+      remap: 3
+    - pin: PC7
+      signal: MOSI
+      remap: 3
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI1
+
+# ADC1, renamed from ADC
+# - has ADC_DIV
+# - no pin remap
+# - 12 bit resolution
+# - 14 external channels
+# - 1 internal channel
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: x0
+    block: ADC
+  rcc:
+    # According to RM, the ADC clock is derived from the SYSCLK div by CLK_DIV
+    bus_clock: SYSCLK
+    kernel_clock: SYSCLK
+    enable:
+      register: APB2PCENR
+      field: ADC1EN
+    reset:
+      register: APB2PRSTR
+      field: ADC1RST
+  pins:
+    - pin: PA0
+      signal: IN0
+    - pin: PA1
+      signal: IN1
+    - pin: PA2
+      signal: IN2
+    - pin: PA3 #
+      signal: IN3
+    - pin: PA4
+      signal: IN4
+    - pin: PA5
+      signal: IN5
+    - pin: PA6
+      signal: IN6
+    - pin: PA7
+      signal: IN7
+    - pin: PB0
+      signal: IN8
+    - pin: PB1
+      signal: IN9
+    - pin: PC0
+      signal: IN10
+    - pin: PC1
+      signal: IN11
+    - pin: PC2
+      signal: IN12
+    - pin: PC3
+      signal: IN13
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC1
+
+# Timers, 16-bit
+# - ADTM: TIM1, TIM2
+# - GPTM: TIM3
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: x0
+    block: ADTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: TIM1EN
+    reset:
+      register: APB2PRSTR
+      field: TIM1RST
+  remap:
+    register: PCFR1
+    field: TIM1_RM
+  pins:
+    # 000:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PC16 ， ETR/PC17 ， BKIN/PB5 ， C1N/PB6 ， C2N/PB7，C3N/PB8)
+    - { pin: "PB9", signal: "CH1", remap: 0b000 }
+    - { pin: "PB10", signal: "CH2", remap: 0b000 }
+    - { pin: "PB11", signal: "CH3", remap: 0b000 }
+    - { pin: "PC16", signal: "CH4", remap: 0b000 }
+    - { pin: "PC17", signal: "ETR", remap: 0b000 }
+    - { pin: "PB5", signal: "BKIN", remap: 0b000 }
+    - { pin: "PB6", signal: "CH1N", remap: 0b000 }
+    - { pin: "PB7", signal: "CH2N", remap: 0b000 }
+    - { pin: "PB8", signal: "CH3N", remap: 0b000 }
+    # 001:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PC16 ， ETR/PC17 ， BKIN/PA6 ， C1N/PA7 ， C2N/PB0，C3N/PB1)
+    - { pin: "PB9", signal: "CH1", remap: 0b001 }
+    - { pin: "PB10", signal: "CH2", remap: 0b001 }
+    - { pin: "PB11", signal: "CH3", remap: 0b001 }
+    - { pin: "PC16", signal: "CH4", remap: 0b001 }
+    - { pin: "PC17", signal: "ETR", remap: 0b001 }
+    - { pin: "PA6", signal: "BKIN", remap: 0b001 }
+    - { pin: "PA7", signal: "CH1N", remap: 0b001 }
+    - { pin: "PB0", signal: "CH2N", remap: 0b001 }
+    - { pin: "PB1", signal: "CH3N", remap: 0b001 }
+    # 010:映射(CH1/PB9，CH2/PB10，CH3/PB11， CH4/PB12 ， ETR/PC18 ， BKIN/PB5 ， C1N/PB6 ， C2N/PB7，C3N/PB8)
+    - { pin: "PB9", signal: "CH1", remap: 0b010 }
+    - { pin: "PB10", signal: "CH2", remap: 0b010 }
+    - { pin: "PB11", signal: "CH3", remap: 0b010 }
+    - { pin: "PB12", signal: "CH4", remap: 0b010 }
+    - { pin: "PC18", signal: "ETR", remap: 0b010 }
+    - { pin: "PB5", signal: "BKIN", remap: 0b010 }
+    - { pin: "PB6", signal: "CH1N", remap: 0b010 }
+    - { pin: "PB7", signal: "CH2N", remap: 0b010 }
+    - { pin: "PB8", signal: "CH3N", remap: 0b010 }
+    # 011:映射(CH1/PC0，CH2/PC1，CH3/PC2，CH4/PC3， ETR/PC18 ， BKIN/PC4 ， C1N/PC5 ， C2N/PC6 ， C3N/PC7)
+    - { pin: "PC0", signal: "CH1", remap: 0b011 }
+    - { pin: "PC1", signal: "CH2", remap: 0b011 }
+    - { pin: "PC2", signal: "CH3", remap: 0b011 }
+    - { pin: "PC3", signal: "CH4", remap: 0b011 }
+    - { pin: "PC18", signal: "ETR", remap: 0b011 }
+    - { pin: "PC4", signal: "BKIN", remap: 0b011 }
+    - { pin: "PC5", signal: "CH1N", remap: 0b011 }
+    - { pin: "PC6", signal: "CH2N", remap: 0b011 }
+    - { pin: "PC7", signal: "CH3N", remap: 0b011 }
+  interrupts:
+    - signal: BRK
+      interrupt: TIM1_BRK
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: TRG
+      interrupt: TIM1_TRG_COM
+    - signal: COM
+      interrupt: TIM1_TRG_COM
+    - signal: CC
+      interrupt: TIM1_CC
+
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: x0
+    block: ADTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: TIM2EN
+    reset:
+      register: APB1PRSTR
+      field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
+  pins:
+    # 000:映射(CH1/PA0，CH2/PA1，CH3/PA2，CH4/PA3， ETR/PA19，BKIN/PA20，C1N/PA21，C2N/PA22， C3N/PA23)
+    - { pin: "PA0", signal: "CH1", remap: 0b000 }
+    - { pin: "PA1", signal: "CH2", remap: 0b000 }
+    - { pin: "PA2", signal: "CH3", remap: 0b000 }
+    - { pin: "PA3", signal: "CH4", remap: 0b000 }
+    - { pin: "PA19", signal: "ETR", remap: 0b000 }
+    - { pin: "PA20", signal: "BKIN", remap: 0b000 }
+    - { pin: "PA21", signal: "CH1N", remap: 0b000 }
+    - { pin: "PA22", signal: "CH2N", remap: 0b000 }
+    - { pin: "PA23", signal: "CH3N", remap: 0b000 }
+    # 001:映射(CH1/PB21，CH2/PB15，CH3/PA2， CH4/PA3 ， ETR/PA18 ， BKIN/PA9 ， C1N/PA12 ， C2N/PA13，C3N/PA14)
+    - { pin: "PB21", signal: "CH1", remap: 0b001 }
+    - { pin: "PB15", signal: "CH2", remap: 0b001 }
+    - { pin: "PA2", signal: "CH3", remap: 0b001 }
+    - { pin: "PA3", signal: "CH4", remap: 0b001 }
+    - { pin: "PA18", signal: "ETR", remap: 0b001 }
+    - { pin: "PA9", signal: "BKIN", remap: 0b001 }
+    - { pin: "PA12", signal: "CH1N", remap: 0b001 }
+    - { pin: "PA13", signal: "CH2N", remap: 0b001 }
+    - { pin: "PA14", signal: "CH3N", remap: 0b001 }
+    # 010:映射(CH1/PA0，CH2/PA1，CH3/PB3，CH4/PB4， ETR/PA19，BKIN/PA20，C1N/PC3，C2N/PA22， C3N/PA23)
+    - { pin: "PA0", signal: "CH1", remap: 0b010 }
+    - { pin: "PA1", signal: "CH2", remap: 0b010 }
+    - { pin: "PB3", signal: "CH3", remap: 0b010 }
+    - { pin: "PB4", signal: "CH4", remap: 0b010 }
+    - { pin: "PA19", signal: "ETR", remap: 0b010 }
+    - { pin: "PA20", signal: "BKIN", remap: 0b010 }
+    - { pin: "PC3", signal: "CH1N", remap: 0b010 }
+    - { pin: "PA22", signal: "CH2N", remap: 0b010 }
+    - { pin: "PA23", signal: "CH3N", remap: 0b010 }
+    # 011:映射(CH1/PB21，CH2/PB15，CH3/PB3， CH4/PB4 ， ETR/PA18 ， BKIN/PA9 ， C1N/PA12 ， C2N/PA13，C3N/PA14)
+    - { pin: "PB21", signal: "CH1", remap: 0b011 }
+    - { pin: "PB15", signal: "CH2", remap: 0b011 }
+    - { pin: "PB3", signal: "CH3", remap: 0b011 }
+    - { pin: "PB4", signal: "CH4", remap: 0b011 }
+    - { pin: "PA18", signal: "ETR", remap: 0b011 }
+    - { pin: "PA9", signal: "BKIN", remap: 0b011 }
+    - { pin: "PA12", signal: "CH1N", remap: 0b011 }
+    - { pin: "PA13", signal: "CH2N", remap: 0b011 }
+    - { pin: "PA14", signal: "CH3N", remap: 0b011 }
+    # 100:映射(CH1/PB16，CH2/PB17，CH3/PB18，CH4/PB19 ， ETR/PC4 ， BKIN/PC0 ， C1N/PC1 ， C2N/PC2，C3N/PC3)
+    - { pin: "PB16", signal: "CH1", remap: 0b100 }
+    - { pin: "PB17", signal: "CH2", remap: 0b100 }
+    - { pin: "PB18", signal: "CH3", remap: 0b100 }
+    - { pin: "PB19", signal: "CH4", remap: 0b100 }
+    - { pin: "PC4", signal: "ETR", remap: 0b100 }
+    - { pin: "PC0", signal: "BKIN", remap: 0b100 }
+    - { pin: "PC1", signal: "CH1N", remap: 0b100 }
+    - { pin: "PC2", signal: "CH2N", remap: 0b100 }
+    - { pin: "PC3", signal: "CH3N", remap: 0b100 }
+    # 101:映射(CH1/PC19，CH2/PA12，CH3/PA13， CH4/PC0 ， ETR/PA2 ， BKIN/PB4 ， C1N/PC18 ， C2N/PB12，C3N/PB3)
+    - { pin: "PC19", signal: "CH1", remap: 0b101 }
+    - { pin: "PA12", signal: "CH2", remap: 0b101 }
+    - { pin: "PA13", signal: "CH3", remap: 0b101 }
+    - { pin: "PC0", signal: "CH4", remap: 0b101 }
+    - { pin: "PA2", signal: "ETR", remap: 0b101 }
+    - { pin: "PB4", signal: "BKIN", remap: 0b101 }
+    - { pin: "PC18", signal: "CH1N", remap: 0b101 }
+    - { pin: "PB12", signal: "CH2N", remap: 0b101 }
+    - { pin: "PB3", signal: "CH3N", remap: 0b101 }
+    # 11x:映射(CH1/PC19，CH2/PC14，CH3/PC15， CH4/PC0 ， ETR/PA2 ， BKIN/PB4 ， C1N/PB11 ， C2N/PB12，C3N/PB3)
+    - { pin: "PC19", signal: "CH1", remap: 0b110 }
+    - { pin: "PC14", signal: "CH2", remap: 0b110 }
+    - { pin: "PC15", signal: "CH3", remap: 0b110 }
+    - { pin: "PC0", signal: "CH4", remap: 0b110 }
+    - { pin: "PA2", signal: "ETR", remap: 0b110 }
+    - { pin: "PB4", signal: "BKIN", remap: 0b110 }
+    - { pin: "PB11", signal: "CH1N", remap: 0b110 }
+    - { pin: "PB12", signal: "CH2N", remap: 0b110 }
+    - { pin: "PB3", signal: "CH3N", remap: 0b110 }
+  interrupts:
+    - signal: BRK
+      interrupt: TIM2_BRK
+    - signal: UP
+      interrupt: TIM2_UP
+    - signal: TRG
+      interrupt: TIM2_TRG_COM
+    - signal: COM
+      interrupt: TIM2_TRG_COM
+    - signal: CC
+      interrupt: TIM2_CC
+
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: timer
+    version: x0
+    block: GPTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: TIM3EN
+    reset:
+      register: APB1PRSTR
+      field: TIM3RST
+  remap:
+    register: PCFR1
+    field: TIM3_RM
+  pins:
+    # 00:默认映射(CH1/PA6，CH2/PA7)
+    - { pin: "PA6", signal: "CH1", remap: 0b00 }
+    - { pin: "PA7", signal: "CH2", remap: 0b00 }
+    # 01:映射(CH1/PB4，CH2/PB5)
+    - { pin: "PB4", signal: "CH1", remap: 0b01 }
+    - { pin: "PB5", signal: "CH2", remap: 0b01 }
+    # 10:映射(CH1/PC19，CH2/PC18)
+    - { pin: "PC19", signal: "CH1", remap: 0b10 }
+    - { pin: "PC18", signal: "CH2", remap: 0b10 }
+    # 11:映射(CH1/PA3，CH2/PA4)
+    - { pin: "PA3", signal: "CH1", remap: 0b11 }
+    - { pin: "PA4", signal: "CH2", remap: 0b11 }
+  interrupts:
+    - signal: BRK
+      interrupt: TIM3
+    - signal: UP
+      interrupt: TIM3
+    - signal: TRG
+      interrupt: TIM3
+    - signal: CC
+      interrupt: TIM3
+  # No DMA
+
+- name: OPA
+  address: 0x40026000
+  registers:
+    kind: opa
+    version: x0
+    block: OPA
+  pins:
+    # TODO
+
+- name: PIOC
+  address: 0x40026C00
+  registers:
+    kind: pioc
+    version: x0
+    block: PIOC
+  remap:
+    register: PCFR1
+    field: PIOC_RM
+  pins:
+    - pin: PC18
+      signal: IO0
+    - pin: PC19
+      signal: IO1
+    - pin: PC7
+      signal: IO0
+      remap: 1
+  interrupts:
+    - signal: GLOBAL
+      interrupt: PIOC

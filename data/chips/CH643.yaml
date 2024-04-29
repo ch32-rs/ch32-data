@@ -35,14 +35,12 @@ docs:
 cores:
   - name: qingke-v4c
     peripherals:
+    include_peripherals:
+      - "../family/CH643.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32X0.yaml" # FIXME: rename this
+    include_interrupts: "../interrupts/CH643.yaml"
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
 _raw:
   Flash: 62K
   VDD: 3.3/5.0
