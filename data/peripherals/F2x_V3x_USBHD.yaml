@@ -15,7 +15,7 @@
       field: USBHDRST
   interrupts:
     - { "signal": "GLOBAL", "interrupt": "USBHS" }
-    - { "signal": "WAKEUP", "interrupt": "USBHSWakeUp" }
+    - { "signal": "WAKEUP", "interrupt": "USBHD_WKUP" }
   pins:
     - pin: PB6
       signal: DM
