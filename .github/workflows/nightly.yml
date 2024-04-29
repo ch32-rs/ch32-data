@@ -2,16 +2,14 @@ name: metapac publish
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Use nightly Rust
@@ -22,7 +20,7 @@ jobs:
         echo "${{ secrets.NIGHTLIES_KEY }}" > ~/.ssh/id_rsa
         chmod 700 ~/.ssh
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -t rsa github.com 
+        ssh-keyscan -t rsa github.com
     - name: Build
       run: |
         COMMIT=$(git rev-parse HEAD)
@@ -31,6 +29,7 @@ jobs:
         cd build/ch32-metapac/
         cp -v ../../README.md .
         cp -v ../../LICENSE* .
+        find src -iname '*.rs' -exec rustfmt -v {} \;
         git init
         git add .
         git config user.name "ch32-data builder"
