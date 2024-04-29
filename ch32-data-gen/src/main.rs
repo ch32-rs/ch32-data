@@ -71,7 +71,7 @@ fn main() -> anyhow::Result<()> {
         .unwrap()
         .filter_map(|res| res.unwrap().file_name().to_str().map(|s| s.to_string()))
         .filter(|s| s.ends_with(".yaml"))
-        .filter(|s| s.starts_with("CH32"))
+        .filter(|s| s.starts_with("CH32") || s.starts_with("CH64"))
         .map(|s| s.strip_suffix(".yaml").unwrap().to_string())
         .collect();
     chip_meta_files.sort();
