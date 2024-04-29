@@ -35,14 +35,12 @@ docs:
 cores:
   - name: qingke-v2a
     peripherals:
+    include_peripherals:
+      - "../family/CH32V0.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH641.yaml"
+    include_interrupts: "../interrupts/CH641.yaml"
 
-    interrupts:
-      - name: WWDG
-        number: 1
-    dma_channels:
-      - name: DMA1_CH1
-        dma: DMA1
-        channel: 0
 _raw:
   Package: QFN28/QSOP24<br>QFN20/QFN16
   CAP: 5/5
