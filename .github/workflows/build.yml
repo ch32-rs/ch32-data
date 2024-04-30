@@ -1,0 +1,28 @@
+name: metapac build
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths-ignore:
+      - '*.md'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use nightly Rust
+      run: |
+        rustup default nightly
+        rustup target add riscv32imac-unknown-none-elf
+    - name: Build
+      run: |
+        ./d gen
+    - name: Test
+      run: |
+        cd build/ch32-metapac/
+        cargo build --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
+        cargo doc --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
