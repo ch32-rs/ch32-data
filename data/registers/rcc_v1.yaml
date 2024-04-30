@@ -71,7 +71,7 @@ fieldset/AHBPCENR:
 fieldset/AHBRSTR:
   description: AHB reset register(RCC_APHBRSTR).
   fields:
-    - name: USBHDRST
+    - name: USBHSRST
       description: USBHD reset.
       bit_offset: 12
       bit_size: 1

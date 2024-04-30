@@ -1,21 +1,21 @@
-- name: USBHD
+- name: USBHS
   address: 0x40023400
   registers:
-    kind: usbhd
-    version: v3
-    block: USBHD
+    kind: usb
+    version: v3hs
+    block: USB
   rcc:
     bus_clock: HCLK
     kernel_clock: USBHSPLLCLK
     enable:
       register: AHBPCENR
-      field: USBHS_EN
+      field: USBHSEN
     reset:
       register: AHBRSTR
-      field: USBHDRST
+      field: USBHSRST
   interrupts:
     - { "signal": "GLOBAL", "interrupt": "USBHS" }
-    - { "signal": "WAKEUP", "interrupt": "USBHD_WKUP" }
+    - { "signal": "WAKEUP", "interrupt": "USBHS_WKUP" }
   pins:
     - pin: PB6
       signal: DM
