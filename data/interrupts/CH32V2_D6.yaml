@@ -3,7 +3,7 @@ SYSTICK: 12
 # Window Watchdog
 WWDG: 16
 # PVD through EXTI Line detect
-PVD: 16
+PVD: 17
 # TAMPER
 TAMPER: 18
 # RTC
