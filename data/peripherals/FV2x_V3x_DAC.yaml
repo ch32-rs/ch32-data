@@ -1,0 +1,22 @@
+# Digital-to-Analog Converter (DAC)
+- name: DAC1
+  address: 0x40007400
+  registers:
+    kind: dac
+    version: v3
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: DACEN
+    reset:
+      register: APB1PRSTR
+      field: DACRST
+  pins:
+    # Not available on V305 FB/GB
+    - pin: PA4
+      signal: OUT1
+    - pin: PA5
+      signal: OUT2
