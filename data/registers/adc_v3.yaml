@@ -125,6 +125,15 @@ fieldset/CTLR1:
       bit_offset: 23
       bit_size: 1
     # 24, 25 for TKEY
+    - name: TKENABLE
+      description: Touch key module enable
+      bit_offset: 24
+      bit_size: 1
+    - name: TKITUNE
+      description: Touch key current tune
+      bit_offset: 25
+      bit_size: 1
+      enum: TKITUNE
     - name: BUFEN
       description: ADC BUFFER enable
       bit_offset: 26
@@ -134,6 +143,26 @@ fieldset/CTLR1:
       bit_offset: 27
       bit_size: 2
       enum: PGA
+block/TKEY:
+  extends: ADC
+  description: Touch key
+  items:
+    # CHARGE1 mapped to SAMPTR1
+    # CHARGE2 mapped to SAMPTR2
+    # DR mapped to RDATAR
+    - name: CHGOFFSET
+      description: Charge time offset register (map of ADC_IDATAR1)
+      byte_offset: 0x3C
+      # change to u8
+      bit_size: 8
+    - name: ACT_DCG
+      description: Activate and discharge time register (map of ADC_RDATAR)
+      byte_offset: 0x4C
+      bit_size: 8
+    - name: DR
+      description: Data register
+      byte_offset: 0x4C
+      bit_size: 16
 fieldset/CTLR2:
   description: control register 2.
   fields:
@@ -433,3 +462,13 @@ enum/SAMPLE_TIME:
     - name: Cycles239_5
       description: 239.5 cycles
       value: 7
+enum/TKITUNE:
+  bit_size: 1
+  description: Touch key current tune
+  variants:
+    - name: Full
+      description: 35uA
+      value: 0
+    - name: Half
+      description: Decrease to half
+      value: 1

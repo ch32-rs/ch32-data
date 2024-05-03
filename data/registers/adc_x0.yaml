@@ -1,4 +1,3 @@
-# NOTE: This is not generated due to original SVD mixes ADC and TKEY registers
 block/ADC:
   description: Analog to digital converter.
   items:
@@ -69,6 +68,26 @@ block/ADC:
       description: ADC control register 3.
       byte_offset: 80
       fieldset: CTLR3
+block/TKEY:
+  extends: ADC
+  description: Touch key
+  items:
+    # CHARGE1 mapped to SAMPTR1
+    # CHARGE2 mapped to SAMPTR2
+    # DR mapped to RDATAR
+    - name: CHGOFFSET
+      description: Charge time offset register (map of ADC_IDATAR1)
+      byte_offset: 0x3C
+      # change to u8
+      bit_size: 8
+    - name: ACT_DCG
+      description: Activate and discharge time register (map of ADC_RDATAR)
+      byte_offset: 0x4C
+      bit_size: 8
+    - name: DR
+      description: Data register
+      byte_offset: 0x4C
+      bit_size: 16
 fieldset/CTLR1:
   description: control register 1.
   fields:
@@ -119,6 +138,10 @@ fieldset/CTLR1:
     - name: AWDEN
       description: Analog watchdog enable on regular channels.
       bit_offset: 23
+      bit_size: 1
+    - name: TKENABLE
+      description: Touch key module enable
+      bit_offset: 24
       bit_size: 1
 fieldset/CTLR2:
   description: control register 2.

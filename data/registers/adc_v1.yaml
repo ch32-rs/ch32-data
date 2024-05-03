@@ -1,5 +1,6 @@
+# TKEY module is totally different from others
 block/ADC:
-  description: Analog to digital converter.
+  description: Analog to digital converter of V103
   items:
     - name: STATR
       description: status register.
@@ -65,6 +66,22 @@ block/ADC:
       byte_offset: 76
       access: Read
       fieldset: RDATAR
+block/TKEY:
+  extends: ADC
+  description: Touch key
+  items:
+    - name: CTLR
+      description: TKEY_V control register
+      byte_offset: 0x0C
+      fieldset: TK_CTLR
+    - name: CHANNEL
+      description: Touch key channel selection register
+      byte_offset: 0x34
+      fieldset: TK_CHANNEL
+    - name: SDR
+      description: Status and data register
+      byte_offset: 0x4C
+      fieldset: TK_SDR
 fieldset/CTLR1:
   description: control register 1.
   fields:
@@ -119,6 +136,10 @@ fieldset/CTLR1:
     - name: AWDEN
       description: Analog watchdog enable on regular channels.
       bit_offset: 23
+      bit_size: 1
+    - name: TKENABLE
+      description: Touch key module enable
+      bit_offset: 24
       bit_size: 1
 fieldset/CTLR2:
   description: control register 2.
@@ -312,6 +333,49 @@ fieldset/WDLTR:
       description: Analog watchdog lower threshold.
       bit_offset: 0
       bit_size: 12
+# TKEY part
+fieldset/TK_CTLR:
+  description: Touch key control register
+  fields:
+    - name: TKENABLE
+      description: Touch key module enable
+      bit_offset: 24
+      bit_size: 1
+    - name: TKIEN
+      description: Touch key interrupt enable
+      bit_offset: 25
+      bit_size: 1
+    - name: TKCPS
+      description: Touch key counter period selection
+      bit_offset: 26
+      bit_size: 1
+      enum: TKCPS
+    - name: TKIF
+      description: Touch key conversion finished flag
+      bit_offset: 27
+      bit_size: 1
+    - name: CCSEL
+      description: Touch key counter time base
+      bit_offset: 28
+      bit_size: 3
+      enum: CCSEL
+fieldset/TK_CHANNEL:
+  description: Touch key channel selection register
+  fields:
+    - name: CHSEL
+      bit_offset: 0
+      bit_size: 5
+fieldset/TK_SDR:
+  description: Touch key status and data register
+  fields:
+    - name: TKDR
+      description: Touch key data
+      bit_offset: 0
+      bit_size: 14
+    - name: TKSTA
+      description: Touch key working status, 1 for converting, 0 for pausing(TKDR can be read)
+      bit_offset: 15
+      bit_size: 1
 enum/SAMPLE_TIME:
   bit_size: 3
   description: Sample time selection
@@ -369,7 +433,6 @@ enum/EXTSEL:
     - name: SWSTART
       description: Software start.
       value: 0b111
-
 enum/JEXTSEL:
   bit_size: 3
   description: External event select for injected group.
@@ -398,3 +461,27 @@ enum/JEXTSEL:
     - name: JSWSTART
       description: Software start.
       value: 0b111
+enum/CCSEL:
+  bit_size: 3
+  description: Counter clock selection
+  variants:
+    - name: CLOCK_8MHZ
+      value: 0b000
+    - name: CLOCK_12MHZ
+      value: 0b001
+    - name: CLOCK_24MHZ
+      value: 0b010
+    - name: CLOCK_36MHZ
+      value: 0b011
+    - name: CLOCK_48MHZ
+      value: 0b100
+    - name: CLOCK_56MHZ
+      value: 0b101
+enum/TKCPS:
+  bit_size: 1
+  description: Touch key counting period selection
+  variants:
+    - name: PERIOD_1MS
+      value: 1
+    - name: PERIOD_500US
+      value: 0

@@ -1,5 +1,5 @@
 block/ADC:
-  description: Analog to digital converter.
+  description: Analog to digital converter for V003. No TKEY
   items:
     - name: STATR
       description: status register.
@@ -124,6 +124,7 @@ fieldset/CTLR1:
       description: ADC Calibration voltage selection.
       bit_offset: 25
       bit_size: 2
+      enum: CALVOL
 fieldset/CTLR2:
   description: control register 2.
   fields:
@@ -397,3 +398,14 @@ enum/JEXTSEL:
     - name: JSWSTART
       description: Software start.
       value: 0b111
+enum/CALVOL:
+  bit_size: 2
+  description: Calibration voltage
+  variants:
+    - name: CaliVoltage2_4AVDD
+      descrption: 2/4 AVDD
+      value: 0b01
+    - name: CaliVoltage3_4AVDD
+      descrption: 3/4 AVDD
+      value: 0b10
+
