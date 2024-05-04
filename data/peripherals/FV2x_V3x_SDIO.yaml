@@ -1,0 +1,38 @@
+- name: SDIO
+  address: 0x40012400
+  registers:
+    kind: sdio
+    version: v3
+    block: SDIO
+  rcc:
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
+    enable:
+      register: AHBPCENR
+      field: SDIOEN
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SDIO
+  pins:
+    - pin: PC8
+      signal: D0
+    - pin: PC9
+      signal: D1
+    - pin: PC10
+      signal: D2
+    - pin: PC11
+      signal: D3
+    - pin: PB8
+      signal: D4
+    - pin: PB9
+      signal: D5
+    - pin: PC6
+      signal: D6
+    - pin: PC7
+      signal: D7
+    - pin: PC12
+      signal: CK
+    - pin: PD2
+      signal: CMD
+
+
