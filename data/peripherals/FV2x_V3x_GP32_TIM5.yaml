@@ -2,8 +2,8 @@
   address: 0x40000C00
   registers:
     kind: timer
-    version: common
-    block: TIM_GP32
+    version: v3
+    block: GPTM32
   rcc:
     bus_clock: PCLK1
     kernel_clock: PCLK1
@@ -23,5 +23,9 @@
     - signal: CH4
       pin: PA3
   interrupts:
-    - signal: GLOBAL
+    - signal: UP
+      interrupt: TIM5
+    - signal: TRG
+      interrupt: TIM5
+    - signal: CC
       interrupt: TIM5

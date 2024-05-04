@@ -1,12 +1,40 @@
+# BCTM, Basic Timer 6 and 7
+# Only Update interrupt is available
+
 - name: TIM6
   address: 0x40001000
   registers:
-    kind: bctm
+    kind: timer
     version: v3
     block: BCTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: TIM6EN
+    reset:
+      register: APB1PRSTR
+      field: TIM6RST
+  interrupts:
+    - signal: UP
+      interrupt: TIM6
+
 - name: TIM7
   address: 0x40001400
   registers:
-    kind: bctm
+    kind: timer
     version: v3
     block: BCTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: TIM7EN
+    reset:
+      register: APB1PRSTR
+      field: TIM7RST
+  interrupts:
+    - signal: UP
+      interrupt: TIM7
