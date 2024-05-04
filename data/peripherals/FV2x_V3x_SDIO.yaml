@@ -5,8 +5,8 @@
     version: v3
     block: SDIO
   rcc:
-    bus_clock: HCLK1
-    kernel_clock: HCLK1
+    bus_clock: HCLK
+    kernel_clock: HCLK
     enable:
       register: AHBPCENR
       field: SDIOEN
