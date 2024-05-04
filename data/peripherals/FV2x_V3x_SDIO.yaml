@@ -1,5 +1,5 @@
 - name: SDIO
-  address: 0x40012400
+  address: 0x40018000
   registers:
     kind: sdio
     version: v3
