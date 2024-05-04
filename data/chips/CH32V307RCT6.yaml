@@ -67,8 +67,8 @@ cores:
       - "../peripherals/FV2x_V3x_SPI3.yaml"
       - "../peripherals/FV2x_V3x_I2C1.yaml"
       - "../peripherals/FV2x_V3x_I2C2.yaml"
-      - "../peripherals/F2x_V3x_RNG.yaml"
-      - "../peripherals/F2x_V3x_USBHS.yaml"
+      - "../peripherals/FV2x_V3x_RNG.yaml"
+      - "../peripherals/FV2x_V3x_USBHS.yaml"
       - "../peripherals/FV2x_V3x_DAC.yaml"
 
     include_interrupts: "../interrupts/CH32V3.yaml"
