@@ -1,0 +1,46 @@
+block/EXTEND:
+  description: extension configuration.
+  items:
+    - name: CTR
+      description: EXTEND register.
+      byte_offset: 0
+      fieldset: CTR
+fieldset/CTR:
+  description: EXTEND register.
+  fields:
+    - name: USBDLS
+      description: USBD Lowspeed Enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: USBDPU
+      description: USBD pullup Enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: USBHDIO
+      description: USBHD IO(PB6/PB7) Enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: USB5VSEL
+      description: USB 5V Enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: HSIPRE
+      description: Whether HSI is divided.
+      bit_offset: 4
+      bit_size: 1
+    - name: LKUPEN
+      description: LOCKUP.
+      bit_offset: 6
+      bit_size: 1
+    - name: LKUPRESET
+      description: LOCKUP RESET.
+      bit_offset: 7
+      bit_size: 1
+    - name: ULLDOTRIM
+      description: ULLDOTRIM.
+      bit_offset: 8
+      bit_size: 2
+    - name: LDOTRIM
+      description: LDOTRIM.
+      bit_offset: 10
+      bit_size: 1

@@ -344,6 +344,7 @@ fieldset/CFGR0:
       description: PLL Multiplication Factor.
       bit_offset: 18
       bit_size: 4
+      enum: PLL_MUL
     - name: USBPRE
       description: USB prescaler.
       bit_offset: 22
@@ -592,3 +593,55 @@ enum/ADCPRE:
     - name: DIV8
       description: PCLK2 divided by 8.
       value: 0b11
+enum/PLL_MUL:
+  bit_size: 4
+  description: PLLMUL configuration. max 72MHz
+  variants:
+    - name: MUL2
+      description: PLL input clock x 2.
+      value: 0b0000
+    - name: MUL3
+      description: PLL input clock x 3.
+      value: 0b0001
+    - name: MUL4
+      description: PLL input clock x 4.
+      value: 0b0010
+    - name: MUL5
+      description: PLL input clock x 5.
+      value: 0b0011
+    - name: MUL6
+      description: PLL input clock x 6.
+      value: 0b0100
+    - name: MUL7
+      description: PLL input clock x 7.
+      value: 0b0101
+    - name: MUL8
+      description: PLL input clock x 8.
+      value: 0b0110
+    - name: MUL9
+      description: PLL input clock x 9.
+      value: 0b0111
+    - name: MUL10
+      description: PLL input clock x 10.
+      value: 0b1000
+    - name: MUL11
+      description: PLL input clock x 11.
+      value: 0b1001
+    - name: MUL12
+      description: PLL input clock x 12.
+      value: 0b1010
+    - name: MUL13
+      description: PLL input clock x 13.
+      value: 0b1011
+    - name: MUL14
+      description: PLL input clock x 14.
+      value: 0b1100
+    - name: MUL15
+      description: PLL input clock x 15.
+      value: 0b1101
+    - name: MUL16
+      description: PLL input clock x 16.
+      value: 0b1110
+    - name: MUL16_ALT
+      description: PLL input clock x 16.
+      value: 0b1111

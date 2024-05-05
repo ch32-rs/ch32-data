@@ -51,6 +51,13 @@
     - pin: PA8
       signal: MCO
 
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v1
+    block: EXTEND
+
 - name: DMA1
   address: 1073872896 # 0x40020000
   registers:
