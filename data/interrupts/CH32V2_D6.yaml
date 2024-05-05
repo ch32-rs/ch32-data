@@ -1,5 +1,3 @@
-# 12 - 64-bit System Timer
-SYSTICK: 12
 # Window Watchdog
 WWDG: 16
 # PVD through EXTI Line detect

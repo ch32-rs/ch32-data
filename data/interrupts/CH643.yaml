@@ -1,5 +1,3 @@
-# 12 - 32-bit System Timer
-SYSTICK: 12
 # 16 - Window Watchdog interrupt
 WWDG: 16
 # 17 - PVD through EXTI line detection interrupt

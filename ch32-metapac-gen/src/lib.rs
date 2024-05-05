@@ -189,6 +189,14 @@ impl Gen {
 
         // match riscv-rt interrupt name
         let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
+        // trim system vector, 0 to 15
+        // [Vector { _reserved : 0 } , Vector { _reserved : 0 } , Vector { _reserved : 0 }  ...
+        let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
+            .unwrap()
+            .replace_all(&data, "[");
+        if data.contains("[Vector { _reserved : 0 }") {
+            panic!("Unexpected Vector 16 {{ _reserved : 0 }}");
+        }
 
         // Remove inner attributes like #![no_std]
         let data = Regex::new("# *! *\\[.*\\]").unwrap().replace_all(&data, "");
