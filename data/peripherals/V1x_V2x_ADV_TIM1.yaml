@@ -7,7 +7,7 @@
     version: v3
     block: ADTM
   rcc:
-    bus_clock: PCLK2
+    bus_clock: PCLK2_TIM
     kernel_clock: PCLK2
     enable:
       register: APB2PCENR

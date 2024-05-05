@@ -129,6 +129,8 @@
       register: APB2PRSTR
       field: IOPDRST
 
+# TIM use hclk as bus clock
+
 - name: TIM1
   address: 0x40012C00
   registers:
@@ -136,8 +138,8 @@
     version: v3
     block: ADTM
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2
+    bus_clock: HCLK
+    kernel_clock: HCLK
     enable:
       register: APB2PCENR
       field: TIM1EN
@@ -279,8 +281,8 @@
     version: v3
     block: GPTM
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK
+    kernel_clock: HCLK
     enable:
       register: APB1PCENR
       field: TIM2EN

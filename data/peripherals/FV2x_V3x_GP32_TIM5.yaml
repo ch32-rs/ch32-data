@@ -5,7 +5,7 @@
     version: v3
     block: GPTM32
   rcc:
-    bus_clock: PCLK1
+    bus_clock: PCLK1_TIM
     kernel_clock: PCLK1
     enable:
       register: APB1PCENR
