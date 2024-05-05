@@ -27,11 +27,8 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32V208, BLE 5.3 (V4C)
 - CH32X0, PDUSB (V4C)
 - CH32L1, Low power, PDUSB (V4C)
-- CH32M, Motor control (V2C)
 - CH643, RGB driver (V4C)
-- CH645, USB HUB, SerDes (V4C)
 - CH641, USB PD, (V2A)
-- CH564/CH563, USBHS, 100M Ethernet (V4J)
 
 Families that not implemented yet(planing to implement using another crate, as they are using different peripherals and features):
 
@@ -42,6 +39,12 @@ Families that not implemented yet(planing to implement using another crate, as t
 
 For CH58X, you might want to check out my experimental project [ch58x-hal](https://github.com/ch32-rs/ch58x-hal),
 which is a HAL for CH58X series chips, with BLE support.
+
+Families that are not yet released(require more info):
+
+- CH564, USBHS, 100M Ethernet (V4J)
+- CH645, USB HUB, SerDes (V4C)
+- CH32M, Motor control (V2C)
 
 ### IP Cores
 
@@ -55,9 +58,9 @@ Common features:
 
 Cores:
 
-- V2 (no pmp)
+- V2 (no pmp, no user mode)
   - V2A: rv32ec, +xw
-  - V2C: rv32emc, +xw
+  - V2C: rv32ec, +xw, +Zmmul
 - V3 (no pmp)
   - V3A: rv32imac
 - V4
