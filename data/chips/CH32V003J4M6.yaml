@@ -25,7 +25,7 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH32V003.html
 cores:
-  - name: qingke-v2
+  - name: qingke-v2a
     peripherals: []
     include_peripherals:
       - "../family/CH32V0.yaml"

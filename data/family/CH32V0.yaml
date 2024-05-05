@@ -380,7 +380,7 @@
     reset:
       register: APB2PRSTR
       field: USART1RST
-  # field split into two registers, handled manually
+  # remap field split into two registers, handled manually
   interrupts:
     - signal: GLOBAL
       interrupt: USART1

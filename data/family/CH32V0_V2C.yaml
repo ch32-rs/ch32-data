@@ -1,0 +1,4 @@
+# Difference between CH32V0_V2C and CH32V0_V2A:
+# - Zmmul extension
+# - ADC has TKEY extension, 12 bit instead of 10bit
+

@@ -1,16 +1,20 @@
-name: CH32V003F4U6
+# CH32V007E8R6 62K 8K 22 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QSOP24
+# CH32V007F8U6 62K 8K 19 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QFN20
+name: CH32V007
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3212544
+device_id: 3343616
 packages:
-  - name: CH32V003F4U6
+  - name: CH32V007E8R6
+    package: QSOP24
+  - name: CH32V007F8U6
     package: QFN20
 memory:
   - name: BANK_1
     kind: flash
     address: 0
-    size: 16384
+    size: 63488 # 62K
     settings:
       erase_size: 1024
       write_size: 64
@@ -18,35 +22,17 @@ memory:
   - name: SRAM
     kind: ram
     address: 536870912
-    size: 2048
+    size: 8192 # 8K
 docs:
   - type: homepage
     title: Homepage
-    name: ""
-    url: http://www.wch.cn/products/CH32V003.html
+    name: "CH32V007"
+    url: http://www.wch.cn/products/CH32V007.html
 cores:
-  - name: qingke-v2a
+  - name: qingke-v2c
     peripherals: []
     include_peripherals:
       - "../family/CH32V0.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V0.yaml"
     include_interrupts: "../interrupts/CH32V0.yaml"
-
-_raw:
-  Touchkey: "-"
-  Part NO.: CH32V003F4U6
-  VDD: 3.3/5.0
-  ADC: 1/8
-  url: http://www.wch.cn/products/CH32V003.html
-  Package: QFN20
-  WDOG: "2"
-  GPIO: "18"
-  IIC: "1"
-  OPA: "1"
-  Freq: 48MHz
-  Advanced TM: 1/1
-  SPI: 1/-
-  Flash: 16K
-  SRAM: 2K
-  UART: "1"

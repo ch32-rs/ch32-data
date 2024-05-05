@@ -1,11 +1,19 @@
-name: CH32V003F4U6
+name: CH32V003
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3212544
+device_id: 3343616
 packages:
+  # no SPI
+  - name: CH32V003J4M6
+    package: SOP8
+  # no SPI
+  - name: CH32V003A4M6
+    package: SOP16
   - name: CH32V003F4U6
     package: QFN20
+  - name: CH32V003F4P6
+    package: TSSOP20
 memory:
   - name: BANK_1
     kind: flash
@@ -22,7 +30,7 @@ memory:
 docs:
   - type: homepage
     title: Homepage
-    name: ""
+    name: "CH32V003"
     url: http://www.wch.cn/products/CH32V003.html
 cores:
   - name: qingke-v2a
@@ -34,19 +42,19 @@ cores:
     include_interrupts: "../interrupts/CH32V0.yaml"
 
 _raw:
-  Touchkey: "-"
-  Part NO.: CH32V003F4U6
-  VDD: 3.3/5.0
-  ADC: 1/8
-  url: http://www.wch.cn/products/CH32V003.html
-  Package: QFN20
-  WDOG: "2"
-  GPIO: "18"
-  IIC: "1"
-  OPA: "1"
-  Freq: 48MHz
-  Advanced TM: 1/1
-  SPI: 1/-
-  Flash: 16K
   SRAM: 2K
+  Flash: 16K
+  WDOG: "2"
+  IIC: "1"
+  Package: SOP8
+  SPI: -/-
   UART: "1"
+  VDD: 3.3/5.0
+  Advanced TM: 1/1
+  OPA: "1"
+  Touchkey: "-"
+  url: http://www.wch.cn/products/CH32V003.html
+  ADC: 1/6
+  Part NO.: CH32V003J4M6
+  Freq: 48MHz
+  GPIO: "6"
