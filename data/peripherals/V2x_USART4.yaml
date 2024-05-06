@@ -1,0 +1,38 @@
+# No GPIOE
+
+- name: USART4
+  address: 0x40004C00
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USART4EN
+    reset:
+      register: APB1PRSTR
+      field: USART4RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: UART4
+  remap:
+    register: PCFR2
+    field: USART4_RM
+  pins:
+    # 00:默认映射(TX/PC10，RX/PC11);
+    - pin: PC10
+      signal: TX
+      remap: 0b00
+    - pin: PC11
+      signal: RX
+      remap: 0b00
+    # 01:重映射(TX/PB0，RX/PB1);
+    - pin: PB0
+      signal: TX
+      remap: 0b01
+    - pin: PB1
+      signal: RX
+      remap: 0b01
