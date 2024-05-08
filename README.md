@@ -20,20 +20,52 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 
 ### Families
 
-- CH32V
-- CH32X
-- CH32L
-- CH643
-- CH645
-- CH641
+- CH32V0, Low price (V2A/V2C)
+- CH32V1, General purpose (V3A)
+- CH32V203/CH32V303, General purpose (V4B)
+- CH32V305/CH32V307/CH32V317, High speed interconnect (V4F)
+- CH32V208, BLE 5.3 (V4C)
+- CH32X0, PDUSB (V4C)
+- CH32L1, Low power, PDUSB (V4C)
+- CH32M, Motor control (V2C)
+- CH643, RGB driver (V4C)
+- CH645, USB HUB, SerDes (V4C)
+- CH641, USB PD, (V2A)
+- CH564/CH563, USBHS, 100M Ethernet (V4J)
 
 Families that not implemented yet(planing to implement using another crate, as they are using different peripherals and features):
 
-- CH57x/CH58x/CH59x
-- CH569/CH565
+- CH57x, BLE 4.2 (V3A)
+- CH58x, BLE 5.3 (V4A)
+- CH59x, BLE 5.4 (V4C)
+- CH569/CH565, USBSS, SerDes (V3A)
 
 For CH58X, you might want to check out my experimental project [ch58x-hal](https://github.com/ch32-rs/ch58x-hal),
 which is a HAL for CH58X series chips, with BLE support.
+
+### IP Cores
+
+The CH32 RISC-V series chips are using the Qingke(青稞) IP Core.
+
+Common features:
+
+- Hardware Push Enable (HPE)
+- Vector Table Free (VTF)
+- 2-wire or single-wire debug interface
+
+Cores:
+
+- V2 (no pmp)
+  - V2A: rv32ec, +xw
+  - V2C: rv32emc, +xw
+- V3 (no pmp)
+  - V3A: rv32imac
+- V4
+  - V4A: rv32imac
+  - V4B: rv32imac (no pmp)
+  - V4C: rv32imac, +xw
+  - V4F: rv32imafc, +xw
+  - V4J: rv32imac, I-cache, +xw
 
 ## Minimum supported Rust version(MSRV)
 
