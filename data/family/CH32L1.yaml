@@ -1,5 +1,16 @@
 # TODO
 
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv4
+    block: SYSTICK
+  # SysTick interrupt handling is moved to qingke-rt as it's a core feature
+  # interrupts:
+  #   - signal: GLOBAL
+  #    interrupt: SYSTICK
+
 - name: DMA1
   address: 1073872896 # 0x40020000
   registers:

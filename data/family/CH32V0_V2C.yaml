@@ -2,3 +2,20 @@
 # - Zmmul extension
 # - ADC has TKEY extension, 12 bit instead of 10bit
 
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv2
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv2
+    block: SYSTICK
+  # SysTick interrupt handling is moved to qingke-rt as it's a core feature
+  # interrupts:
+  #   - signal: GLOBAL
+  #    interrupt: SYSTICK
+

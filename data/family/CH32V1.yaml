@@ -10,9 +10,10 @@
     kind: systick
     version: rv3
     block: SYSTICK
-  interrupts:
-    - signal: GLOBAL
-      interrupt: SYSTICK
+  # SysTick interrupt handling is moved to qingke-rt as it's a core feature
+  # interrupts:
+  #   - signal: GLOBAL
+  #    interrupt: SYSTICK
 - name: FLASH
   address: 0x40022000
   registers:
