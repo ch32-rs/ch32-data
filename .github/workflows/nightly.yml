@@ -39,7 +39,8 @@ jobs:
         git add .
         git config user.name "ch32-data builder"
         git config user.email "action@github.com"
-        git commit -m "ch32-rs/ch32-data master $COMMIT"
+        git commit -m "ch32-rs/ch32-data master $COMMIT" --allow-empty
+        git tag -a ch32-data-$COMMIT -m "Generated from ch32-data $COMMIT"
     - name: Test
       run: |
         cd build/ch32-metapac/
@@ -47,4 +48,4 @@ jobs:
     - name: Push
       run: |
         cd build/ch32-metapac/
-        git push origin main
+        git push origin main --follow-tags
