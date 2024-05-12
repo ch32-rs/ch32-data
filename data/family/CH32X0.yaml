@@ -717,11 +717,15 @@
       register: AHBPCENR
       field: USBFSEN
     reset:
-      register: AHBPRSTR
+      register: AHBRSTR
       field: USBFSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBFS
+    - signal: WKUP
+      interrupt: USBFS_WKUP
   pins:
     - pin: PC16
       signal: DM
     - pin: PC17
       signal: DP
-
