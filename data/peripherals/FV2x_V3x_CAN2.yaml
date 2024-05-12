@@ -1,4 +1,4 @@
-- name: CAN1
+- name: CAN2
   address: 0x40006800
   registers:
     kind: can

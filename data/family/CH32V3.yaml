@@ -207,25 +207,6 @@
 # GPTM (TIM2、TIM3、TIM4 和 TIM5)
 # BCTM (TIM6 和 TIM7)
 # GPTM
-- name: CAN1
-  address: 0x40006400
-  registers:
-    kind: can
-    version: v3
-    block: CAN
-  # 00:CAN1_RX 映射到 PA11，CAN1_TX 映射到 PA12;
-  # 10:CAN1_RX 映射到 PB8，CAN1_TX 映射到 PB9;
-  # 01:保留;
-  # 11:CAN1_RX 映射到 PD0，CAN1_TX 映射到 PD1
-
-- name: CAN2
-  address: 0x40006800
-  registers:
-    kind: can
-    version: v3
-    block: CAN
-  # 0:默认映射(CAN2_RX/PB12，CAN2_TX/PB13);
-  # 1:重映射(CAN2_RX/PB5，CAN2_TX/PB6)
 
 - name: EXTEND
   address: 0x40023800
