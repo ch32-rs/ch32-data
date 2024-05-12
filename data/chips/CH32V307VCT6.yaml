@@ -71,6 +71,7 @@ cores:
       - "../peripherals/FV2x_V3x_I2C2.yaml"
       - "../peripherals/FV2x_V3x_RNG.yaml"
       - "../peripherals/FV2x_V3x_USBHS.yaml"
+      - "../peripherals/FV2x_V3x_USB_OTG_FS.yaml"
       - "../peripherals/FV2x_V3x_DAC.yaml"
       - "../peripherals/FV2x_V3x_SDIO.yaml"
 

@@ -1,0 +1,540 @@
+# The same as OTG_FS, but without OTG registers.
+# 0x50000000
+block/USB:
+  description: Universal serial bus FS register
+  items:
+    - name: CTRL
+      description: USB base control.
+      byte_offset: 0
+      bit_size: 8
+      fieldset: USB_BASE_CTRL
+    - name: INT_EN
+      description: USB interrupt enable.
+      byte_offset: 2
+      bit_size: 8
+      fieldset: USB_INT_EN
+    - name: DEV_AD
+      description: USB device address.
+      byte_offset: 3
+      bit_size: 8
+      fieldset: USB_DEV_AD
+    - name: MIS_ST
+      description: USB miscellaneous status.
+      byte_offset: 5
+      access: Read
+      bit_size: 8
+      fieldset: USB_MIS_ST
+    - name: INT_FG
+      description: USB interrupt flag.
+      byte_offset: 6
+      bit_size: 8
+      fieldset: USB_INT_FG
+    - name: INT_ST
+      description: USB interrupt status.
+      byte_offset: 7
+      access: Read
+      bit_size: 8
+      fieldset: USB_INT_ST
+    - name: RX_LEN
+      description: USB receiving length.
+      byte_offset: 8
+      access: Read
+      bit_size: 16
+      fieldset: USB_RX_LEN
+
+block/USBD:
+  description: Universal serial bus FS device register
+  extends: USB
+  items:
+    - name: UDEV_CTRL
+      description: USB device physical port control register.
+      byte_offset: 1
+      bit_size: 8
+      fieldset: UDEV_CTRL
+    - name: UEP4_1_MOD
+      description: endpoint 4/1 mode.
+      byte_offset: 12
+      bit_size: 8
+      fieldset: UEP_MOD
+    - name: UEP2_3_MOD
+      description: Endpoint 2/3 mode control register.
+      byte_offset: 13
+      bit_size: 8
+      fieldset: UEP_MOD
+    - name: UEP5_6_MOD
+      description: endpoint 5/6 mode.
+      byte_offset: 14
+      bit_size: 8
+      fieldset: UEP_MOD
+    - name: UEP7_MOD
+      description: endpoint 7 mode.
+      byte_offset: 15
+      bit_size: 8
+      fieldset: UEP7_MOD
+    - name: UEP_DMA
+      description: endpoint DMA buffer address.
+      byte_offset: 16
+      bit_size: 16
+      array:
+        len: 8
+        stride: 4
+    - name: UEP_T_LEN
+      # FIXME: UEP3_T_LEN is 10bit
+      description: endpoint transmit length.
+      byte_offset: 48 # 0x30
+      bit_size: 8
+      array:
+        len: 8
+        stride: 4
+    - name: UEP_TX_CTRL
+      description: endpoint control.
+      byte_offset: 50 # 0x32
+      bit_size: 8
+      array:
+        len: 8
+        stride: 4
+      fieldset: UEP_TX_CTRL
+    - name: UEP_RX_CTRL
+      description: endpoint control.
+      byte_offset: 51 # 0x33
+      bit_size: 8
+      array:
+        len: 8
+        stride: 4
+      fieldset: UEP_RX_CTRL
+
+block/USBH:
+  description: Universal serial bus FS host register
+  extends: USB
+  items:
+    - name: UHOST_CTRL
+      description: USB host physical port control register.
+      byte_offset: 1
+      bit_size: 8
+      fieldset: UHOST_CTRL
+    - name: EP_MOD
+      description: USB host endpoint mode control register.
+      byte_offset: 13 # 0xD
+      bit_size: 8
+      fieldset: UH_EP_MOD
+    - name: RX_DMA
+      description: USB host receiving DMA buffer address.
+      byte_offset: 24 # 0x18
+      bit_size: 16
+    - name: TX_DMA
+      description: USB host transmittal DMA buffer address.
+      byte_offset: 28 # 0x1C
+      bit_size: 16
+    - name: SETUP
+      description: USB host setup.
+      byte_offset: 54 # 0x36
+      bit_size: 8
+      fieldset: UH_SETUP
+    - name: EP_PID
+      description: USB host endpoint PID.
+      byte_offset: 56 # 0x38
+      bit_size: 8
+      fieldset: UH_EP_PID
+    - name: RX_CTRL
+      description: USB host receiving control.
+      byte_offset: 58 # 0x3A
+      bit_size: 8
+      fieldset: UH_RX_CTRL
+    - name: TX_CTRL
+      description: USB host transmittal control.
+      byte_offset: 62 # 0x3E
+      bit_size: 8
+      fieldset: UH_TX_CTRL
+
+# ------
+# fields
+
+fieldset/USB_BASE_CTRL:
+  description: USB base control.
+  bit_size: 8
+  fields:
+    - name: DMA_EN
+      description: DMA enable and DMA interrupt enable for USB.
+      bit_offset: 0
+      bit_size: 1
+    - name: CLR_ALL
+      description: force clear FIFO and count of USB.
+      bit_offset: 1
+      bit_size: 1
+    - name: RESET_SIE
+      description: force reset USB SIE, need software clear.
+      bit_offset: 2
+      bit_size: 1
+    - name: INT_BUSY
+      description: enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid.
+      bit_offset: 3
+      bit_size: 1
+    - name: SYS_CTRL
+      description: USB device enable and internal pullup resistance enable.
+      bit_offset: 4
+      bit_size: 2
+    - name: DEV_PU_EN
+      description: USB device internal pullup resistance enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: LOW_SPEED
+      description: "enable USB low speed: 0=12Mbps, 1=1.5Mbps."
+      bit_offset: 6
+      bit_size: 1
+    - name: HOST_MODE
+      description: "enable USB host mode: 0=device mode, 1=host mode."
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_INT_EN:
+  description: USB interrupt enable.
+  bit_size: 8
+  fields:
+    - name: BUS_RST
+      description: enable interrupt for USB bus reset event for USB device mode.
+      bit_offset: 0
+      bit_size: 1
+    - name: TRANSFER
+      description: enable interrupt for USB transfer completion.
+      bit_offset: 1
+      bit_size: 1
+    - name: SUSPEND
+      description: enable interrupt for USB suspend or resume event.
+      bit_offset: 2
+      bit_size: 1
+    - name: HST_SOF
+      description: enable interrupt for host SOF timer action for USB host mode.
+      bit_offset: 3
+      bit_size: 1
+    - name: FIFO_OV
+      description: enable interrupt for FIFO overflow.
+      bit_offset: 4
+      bit_size: 1
+    - name: DEV_NAK
+      description: enable interrupt for NAK responded for USB device mode.
+      bit_offset: 6
+      bit_size: 1
+    - name: DEV_SOF
+      description: enable interrupt for SOF received for USB device mode.
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_DEV_AD:
+  description: USB device address.
+  bit_size: 8
+  fields:
+    - name: MASK_USB_ADDR
+      description: bit mask for USB device address.
+      bit_offset: 0
+      bit_size: 7
+    - name: UDA_GP_BIT
+      description: general purpose bit.
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_MIS_ST:
+  description: USB miscellaneous status.
+  bit_size: 8
+  fields:
+    - name: DEV_ATTACH
+      description: RO, indicate device attached status on USB host.
+      bit_offset: 0
+      bit_size: 1
+    - name: DM_LEVEL
+      description: RO, indicate UDM level saved at device attached to USB host.
+      bit_offset: 1
+      bit_size: 1
+    - name: SUSPEND
+      description: RO, indicate USB suspend status.
+      bit_offset: 2
+      bit_size: 1
+    - name: BUS_RESET
+      description: RO, indicate USB bus reset status.
+      bit_offset: 3
+      bit_size: 1
+    - name: R_FIFO_RDY
+      description: RO, indicate USB receiving FIFO ready status (not empty).
+      bit_offset: 4
+      bit_size: 1
+    - name: SIE_FREE
+      description: RO, indicate USB SIE free status.
+      bit_offset: 5
+      bit_size: 1
+    - name: SOF_ACT
+      description: RO, indicate host SOF timer action status for USB host.
+      bit_offset: 6
+      bit_size: 1
+    - name: SOF_PRES
+      description: RO, indicate host SOF timer presage status.
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_INT_FG:
+  description: USB interrupt flag.
+  bit_size: 8
+  fields:
+    - name: BUS_RST
+      description: bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear
+      bit_offset: 0
+      bit_size: 1
+    - name: DETECT
+      description: device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear.
+      bit_offset: 0
+      bit_size: 1
+    - name: TRANSFER
+      description: USB transfer completion interrupt flag, direct bit address clear or write 1 to clear.
+      bit_offset: 1
+      bit_size: 1
+    - name: SUSPEND
+      description: USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear.
+      bit_offset: 2
+      bit_size: 1
+    - name: HST_SOF
+      description: host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear.
+      bit_offset: 3
+      bit_size: 1
+    - name: FIFO_OV
+      description: FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear.
+      bit_offset: 4
+      bit_size: 1
+    - name: SIE_FREE
+      description: RO, indicate USB SIE free status.
+      bit_offset: 5
+      bit_size: 1
+    - name: TOG_OK
+      description: RO, indicate current USB transfer toggle is OK.
+      bit_offset: 6
+      bit_size: 1
+    - name: IS_NAK
+      description: RO, indicate current USB transfer is NAK received.
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_INT_ST:
+  description: USB interrupt status.
+  bit_size: 8
+  fields:
+    - name: MASK_H_RES
+      description: "RO, bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received;RO, bit mask of current transfer endpoint number for USB device mode."
+      bit_offset: 0
+      bit_size: 4
+    - name: MASK_UIS_ENDP
+      description: "RO, bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received;RO, bit mask of current transfer endpoint number for USB device mode."
+      bit_offset: 0
+      bit_size: 4
+    - name: MASK_TOKEN
+      description: RO, bit mask of current token PID code received for USB device mode.
+      bit_offset: 4
+      bit_size: 2
+    - name: TOG_OK
+      description: RO, indicate current USB transfer toggle is OK.
+      bit_offset: 6
+      bit_size: 1
+    - name: IS_NAK
+      description: RO, indicate current USB transfer is NAK received for USB device mode.
+      bit_offset: 7
+      bit_size: 1
+fieldset/USB_RX_LEN:
+  description: USB receiving length.
+  bit_size: 16
+  fields:
+    - name: RX_LEN
+      description: receiving length.
+      bit_offset: 0
+      bit_size: 10
+
+# USB Device starts
+fieldset/UDEV_CTRL:
+  description: USB device physical port control register.
+  bit_size: 8
+  fields:
+    - name: PORT_EN
+      description: USB device port enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: GP_BIT
+      description: USB device port general purpose bit.
+      bit_offset: 1
+      bit_size: 1
+    - name: LOW_SPEED
+      description: USB device port low speed enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: DM_PIN
+      description: USB device port UD- pin status.
+      bit_offset: 4
+      bit_size: 1
+    - name: DP_PIN
+      description: USB device port UD+ pin status.
+      bit_offset: 5
+      bit_size: 1
+    - name: PD_DIS
+      description: USB device port UD+/UD- pin internal pull-down resistor control.
+      bit_offset: 7
+      bit_size: 1
+fieldset/UEP_MOD:
+  description: endpoint a/b mode. lower bits comes first
+  bit_size: 8
+  fields:
+    - name: BUF_MOD
+      description: buffer mode of USB endpoint
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 2
+        stride: 4
+    - name: TX_EN
+      description: enable USB endpoint 1 transmittal (IN).
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 2
+        stride: 4
+    - name: RX_EN
+      description: enable USB endpoint 4 receiving (OUT).
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 2
+        stride: 4
+fieldset/UEP7_MOD:
+  description: endpoint 7 mode.
+  bit_size: 8
+  fields:
+    - name: BUF_MOD
+      description: buffer mode of USB endpoint 7.
+      bit_offset: 0
+      bit_size: 1
+    - name: TX_EN
+      description: enable USB endpoint 7 transmittal (IN).
+      bit_offset: 2
+      bit_size: 1
+    - name: RX_EN
+      description: enable USB endpoint 7 receiving (OUT).
+      bit_offset: 3
+      bit_size: 1
+fieldset/UEP_TX_CTRL:
+  description: endpoint control.
+  bit_size: 8
+  fields:
+    - name: MASK_T_RES
+      description: bit mask of handshake response type for USB endpoint X transmittal (IN).
+      bit_offset: 0
+      bit_size: 2
+    - name: T_TOG
+      description: "prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1."
+      bit_offset: 2
+      bit_size: 1
+    - name: T_AUTO_TOG
+      description: "enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle."
+      bit_offset: 3
+      bit_size: 1
+fieldset/UEP_RX_CTRL:
+  description: endpoint 0 control.
+  bit_size: 8
+  fields:
+    - name: MASK_R_RES
+      description: bit mask of handshake response type for USB endpoint X receiving (OUT).
+      bit_offset: 0
+      bit_size: 2
+    - name: R_TOG
+      description: "expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1."
+      bit_offset: 2
+      bit_size: 1
+    - name: AUTO_TOG
+      description: "enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle."
+      bit_offset: 3
+      bit_size: 1
+
+# USB host
+fieldset/UHOST_CTRL:
+  description: USB host physical port control register.
+  bit_size: 8
+  fields:
+    - name: PORT_EN
+      description: USB host port enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: BUS_RST
+      description: USB host port bus reset.
+      bit_offset: 1
+      bit_size: 1
+    - name: LOW_SPEED
+      description: USB host port low speed enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: DM_PIN
+      description: Current UD- pin status.
+      bit_offset: 4
+      bit_size: 1
+    - name: DP_PIN
+      description: Current UD+ pin status.
+      bit_offset: 5
+      bit_size: 1
+    - name: PD_DIS
+      description: Internal pull-down resistor control for USB host port UD+/UD- pins.
+      bit_offset: 7
+      bit_size: 1
+fieldset/UH_EP_MOD:
+  description: USB host endpoint mode control register.
+  bit_size: 8
+  fields:
+    - name: RBUF_MOD
+      bit_offset: 0
+      bit_size: 1
+    - name: RX_EN
+      bit_offset: 3
+      bit_size: 1
+    - name: TBUF_MOD
+      bit_offset: 4
+      bit_size: 1
+    - name: TX_EN
+      bit_offset: 6
+      bit_size: 1
+fieldset/UH_SETUP:
+  description: USB host setup.
+  bit_size: 8
+  fields:
+    - name: SOF_EN
+      description: SOF packet en
+      bit_offset: 2
+      bit_size: 1
+    - name: PRE_PID_EN
+      description: pre pid en
+      bit_offset: 3
+      bit_size: 1
+fieldset/UH_EP_PID:
+  description: USB host endpoint PID.
+  bit_size: 8
+  fields:
+    - name: MASK_ENDP
+      description: endpoint PID
+      bit_offset: 0
+      bit_size: 4
+    - name: MASK_TOKEN
+      description: token PID
+      bit_offset: 4
+      bit_size: 4
+fieldset/UH_RX_CTRL:
+  description: USB host receiving control.
+  bit_size: 8
+  fields:
+    - name: R_RES
+      bit_offset: 0
+      bit_size: 1
+    - name: R_TOG
+      description: "expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1."
+      bit_offset: 2
+      bit_size: 1
+    - name: AUTO_TOG
+      description: "enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle."
+      bit_offset: 3
+      bit_size: 1
+fieldset/UH_TX_CTRL:
+  description: USB host transmittal control.
+  bit_size: 8
+  fields:
+    - name: T_RES
+      bit_offset: 0
+      bit_size: 1
+    - name: T_TOG
+      bit_offset: 2
+      bit_size: 1
+    - name: T_AUTO_TOG
+      bit_offset: 3
+      bit_size: 1

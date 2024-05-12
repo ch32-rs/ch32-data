@@ -1,0 +1,270 @@
+# USBD, in CH32V203, CH32V208
+# 0x40005C00
+block/USB:
+  description: Universal serial bus full-speed device interface.
+  items:
+    - name: EPR
+      description: endpoint register. 0 to 7.
+      byte_offset: 0
+      bit_size: 16
+      array:
+        len: 8
+        stride: 4
+      fieldset: EPR
+    - name: CNTR
+      description: control register.
+      byte_offset: 64
+      bit_size: 16
+      fieldset: CNTR
+    - name: ISTR
+      description: interrupt status register.
+      byte_offset: 68
+      bit_size: 16
+      fieldset: ISTR
+    - name: FNR
+      description: frame number register.
+      byte_offset: 72
+      access: Read
+      bit_size: 16
+      fieldset: FNR
+    - name: DADDR
+      description: device address.
+      byte_offset: 76
+      bit_size: 16
+      fieldset: DADDR
+    - name: BTABLE
+      description: Buffer table address.
+      byte_offset: 80
+      fieldset: BTABLE
+fieldset/BTABLE:
+  description: Buffer table address.
+  fields:
+    - name: BTABLE
+      description: Buffer table.
+      bit_offset: 3
+      bit_size: 13
+fieldset/CNTR:
+  description: control register.
+  bit_size: 16
+  fields:
+    - name: FRES
+      description: Force USB Reset.
+      bit_offset: 0
+      bit_size: 1
+    - name: PDWN
+      description: Power down.
+      bit_offset: 1
+      bit_size: 1
+    - name: LPMODE
+      description: Low-power mode.
+      bit_offset: 2
+      bit_size: 1
+    - name: FSUSP
+      description: Force suspend.
+      bit_offset: 3
+      bit_size: 1
+    - name: RESUME
+      description: Resume request.
+      bit_offset: 4
+      bit_size: 1
+    - name: ESOFM
+      description: Expected start of frame interrupt mask.
+      bit_offset: 8
+      bit_size: 1
+    - name: SOFM
+      description: Start of frame interrupt mask.
+      bit_offset: 9
+      bit_size: 1
+    - name: RESETM
+      description: USB reset interrupt mask.
+      bit_offset: 10
+      bit_size: 1
+    - name: SUSPM
+      description: Suspend mode interrupt mask.
+      bit_offset: 11
+      bit_size: 1
+    - name: WKUPM
+      description: Wakeup interrupt mask.
+      bit_offset: 12
+      bit_size: 1
+    - name: ERRM
+      description: Error interrupt mask.
+      bit_offset: 13
+      bit_size: 1
+    - name: PMAOVRM
+      description: Packet memory area over / underrun interrupt mask.
+      bit_offset: 14
+      bit_size: 1
+    - name: CTRM
+      description: Correct transfer interrupt mask.
+      bit_offset: 15
+      bit_size: 1
+fieldset/DADDR:
+  description: device address.
+  bit_size: 16
+  fields:
+    - name: ADD
+      description: Device address.
+      bit_offset: 0
+      bit_size: 7
+    - name: EF
+      description: Enable function.
+      bit_offset: 7
+      bit_size: 1
+fieldset/EPR:
+  description: endpoint register.
+  bit_size: 16
+  fields:
+    - name: EA
+      description: Endpoint address.
+      bit_offset: 0
+      bit_size: 4
+    - name: STAT_TX
+      description: Status bits, for transmission transfers.
+      bit_offset: 4
+      bit_size: 2
+      enum: STAT
+    - name: DTOG_TX
+      description: Data Toggle, for transmission transfers.
+      bit_offset: 6
+      bit_size: 1
+    - name: CTR_TX
+      description: Correct Transfer for transmission.
+      bit_offset: 7
+      bit_size: 1
+    - name: EP_KIND
+      description: Endpoint kind.
+      bit_offset: 8
+      bit_size: 1
+    - name: EP_TYPE
+      description: Endpoint type.
+      bit_offset: 9
+      bit_size: 2
+      enum: EP_TYPE
+    - name: SETUP
+      description: Setup transaction completed.
+      bit_offset: 11
+      bit_size: 1
+    - name: STAT_RX
+      description: Status bits, for reception transfers.
+      bit_offset: 12
+      bit_size: 2
+      enum: STAT
+    - name: DTOG_RX
+      description: Data Toggle, for reception transfers.
+      bit_offset: 14
+      bit_size: 1
+    - name: CTR_RX
+      description: Correct transfer for reception.
+      bit_offset: 15
+      bit_size: 1
+
+fieldset/FNR:
+  description: frame number register.
+  bit_size: 16
+  fields:
+    - name: FN
+      description: Frame number.
+      bit_offset: 0
+      bit_size: 11
+    - name: LSOF
+      description: Lost SOF.
+      bit_offset: 11
+      bit_size: 2
+    - name: LCK
+      description: Locked.
+      bit_offset: 13
+      bit_size: 1
+    - name: RXDM
+      description: Receive data - line status.
+      bit_offset: 14
+      bit_size: 1
+    - name: RXDP
+      description: Receive data + line status.
+      bit_offset: 15
+      bit_size: 1
+fieldset/ISTR:
+  description: interrupt status register.
+  bit_size: 16
+  fields:
+    - name: EP_ID
+      description: Endpoint Identifier.
+      bit_offset: 0
+      bit_size: 4
+    - name: DIR
+      description: Direction of transaction.
+      bit_offset: 4
+      bit_size: 1
+      enum: DIR
+    - name: ESOF
+      description: Expected start frame.
+      bit_offset: 8
+      bit_size: 1
+    - name: SOF
+      description: start of frame.
+      bit_offset: 9
+      bit_size: 1
+    - name: RESET
+      description: reset request.
+      bit_offset: 10
+      bit_size: 1
+    - name: SUSP
+      description: Suspend mode request.
+      bit_offset: 11
+      bit_size: 1
+    - name: WKUP
+      description: Wakeup.
+      bit_offset: 12
+      bit_size: 1
+    - name: ERR
+      description: Error.
+      bit_offset: 13
+      bit_size: 1
+    - name: PMAOVR
+      description: Packet memory area over / underrun.
+      bit_offset: 14
+      bit_size: 1
+    - name: CTR
+      description: Correct transfer.
+      bit_offset: 15
+      bit_size: 1
+
+enum/DIR:
+  bit_size: 1
+  variants:
+    - name: To
+      description: data transmitted by the USB peripheral to the host PC
+      value: 0
+    - name: From
+      description: data received by the USB peripheral from the host PC
+      value: 1
+enum/EP_TYPE:
+  bit_size: 2
+  variants:
+    - name: Bulk
+      description: Bulk endpoint
+      value: 0
+    - name: Control
+      description: Control endpoint
+      value: 1
+    - name: Iso
+      description: Iso endpoint
+      value: 2
+    - name: Interrupt
+      description: Interrupt endpoint
+      value: 3
+enum/STAT:
+  bit_size: 2
+  variants:
+    - name: Disabled
+      description: all requests addressed to this endpoint are ignored
+      value: 0
+    - name: Stall
+      description: the endpoint is stalled and all requests result in a STALL handshake
+      value: 1
+    - name: Nak
+      description: the endpoint is naked and all requests result in a NAK handshake
+      value: 2
+    - name: Valid
+      description: this endpoint is enabled, requests are ACKed
+      value: 3

@@ -1,0 +1,35 @@
+# USB device only
+- name: USBD
+  address: 0x40005C00
+  registers:
+    kind: usbd
+    version: v2
+    block: USB
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: USBDEN
+    reset:
+      register: APB1PRSTR
+      field: USBDRST
+  interrupts:
+    - signal: HP
+      interrupt: USB_HP_CAN1_TX
+    - signal: LP
+      interrupt: USB_LP_CAN1_RX0
+    - signal: WKUP
+      interrupt: USB_WKUP
+  pins:
+    - pin: PA11
+      signal: DM
+    - pin: PA12
+      signal: DP
+
+- name: USBRAM
+  address: 0x40006000
+  registers:
+    kind: usbram
+    version: 16x1_512
+    block: USBRAM

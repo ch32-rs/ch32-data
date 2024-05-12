@@ -1,0 +1,30 @@
+# USBFS aka. OTG_FS
+# base address: 0x50000000
+
+- name: USBFS
+  address: 0x50000000
+  registers:
+    kind: usb
+    version: v2fs
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: OTGFSEN
+    reset:
+      register: AHBRSTR
+      field: OTGFSRST
+  interrupts:
+    - signal: HP
+      interrupt: USB_HP_CAN1_TX
+    - signal: LP
+      interrupt: USB_LP_CAN1_RX0
+    - signal: WKUP
+      interrupt: USB_WKUP
+  pins:
+    - pin: PA11
+      signal: DM
+    - pin: PA12
+      signal: DP
