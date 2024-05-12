@@ -1,0 +1,39 @@
+- name: CAN1
+  address: 0x40006400
+  registers:
+    kind: can
+    version: v3
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: CAN1EN
+    reset:
+      register: APB1PRSTR
+      field: CAN1RST
+  remap:
+    register: PCFR1
+    field: CAN1_RM
+  interrupts:
+    - signal: TX
+      interrupt: USB_HP_CAN1_TX
+    - signal: RX0
+      interrupt: USB_LP_CAN1_RX0
+    - signal: RX1
+      interrupt: CAN1_RX1
+    - signal: SCE
+      interrupt: CAN1_SCE
+  pins:
+    # 00:CAN1_RX 映射到 PA11，CAN1_TX 映射到 PA12;
+    - { pin: "PA11", signal: RX, remap: 0 }
+    - { pin: "PA12", signal: TX, remap: 0 }
+    # 10:CAN1_RX 映射到 PB8，CAN1_TX 映射到 PB9;
+    - { pin: "PB8", signal: RX, remap: 1 }
+    - { pin: "PB9", signal: TX, remap: 1 }
+    # 01:保留;
+    # 11:CAN1_RX 映射到 PD0，CAN1_TX 映射到 PD1
+    - { pin: "PD0", signal: RX, remap: 1 }
+    - { pin: "PD1", signal: TX, remap: 1 }
+

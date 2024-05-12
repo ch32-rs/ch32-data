@@ -1,4 +1,4 @@
-# CAN in FV2x_V3x
+# CAN in CH32L1, with CAN FD support
 block/CAN:
   description: Controller area network.
   items:
@@ -41,6 +41,10 @@ block/CAN:
       description: CAN Time Trigger Count Value Register.
       byte_offset: 36
       bit_size: 16
+    - name: TERR_CNT
+      description: CAN offline recovery error counter.
+      byte_offset: 40
+      fieldset: TERR_CNT
     # mailbox related
     - name: TXMIR
       description: CAN TX mailbox identifier register.
@@ -123,13 +127,61 @@ block/CAN:
       byte_offset: 540
       fieldset: FWR
     - name: FR
-      description: Filter bank 0 register 1.
+      description: Filter bank 0 register 1. F0R1 to F12R2
       array:
         len: 56
         stride: 4
       byte_offset: 576
       fieldset: FR
-
+block/CANFD:
+  description: Controller area network with flexible data rate.
+  extends: CAN
+  items:
+    - name: CR
+      description: CANFD control register.
+      byte_offset: 44
+      fieldset: CR
+    - name: BTR
+      description: CANFD Sequential register.
+      byte_offset: 48
+      fieldset: BTR
+    - name: TDCT
+      description: CANFD Send delay compensation register.
+      byte_offset: 52
+      fieldset: TDCT
+    - name: PSR
+      description: CANFD Send delay compensation value register.
+      byte_offset: 56
+      access: Read
+      fieldset: PSR
+    - name: DMA_TX
+      description: CANFD DMA send mailbox 0 address register.
+      byte_offset: 60 # 0x3C
+      fieldset: DMA_TX
+      array:
+        len: 3
+        stride: 4
+    - name: DMA_RX
+      description: CANFD DMA receives mailbox 0 address register.
+      byte_offset: 72 # 0x48
+      fieldset: DMA_RX
+      array:
+        len: 2
+        stride: 4
+fieldset/DMA_TX:
+  description: CANFD DMA send mailbox 0 address register.
+  fields:
+  - name: ADDR
+    description: Send buffer.
+    bit_offset: 0
+    bit_size: 15
+fieldset/DMA_RX:
+  description: CANFD DMA receives mailbox 0 address register.
+  fields:
+  - name: ADDR_RX
+    description: Receive buffer.
+    bit_offset: 0
+    bit_size: 15
 fieldset/BTIMR:
   description: CAN bit timing register.
   fields:
@@ -518,18 +570,25 @@ fieldset/TSTATR:
 fieldset/TTCTLR:
   description: CAN time trigger control register.
   fields:
-  - name: TIMCMV
-    description: Internal counter count end value.
-    bit_offset: 0
-    bit_size: 16
-  - name: TIMRST
-    description: Internal counter reset control.
-    bit_offset: 16
-    bit_size: 1
-  - name: MODE
-    description: Time-triggered mode selection.
-    bit_offset: 17
-    bit_size: 1
+    - name: TIMCMV
+      description: Internal counter count end value.
+      bit_offset: 0
+      bit_size: 16
+    - name: TIMRST
+      description: Internal counter reset control.
+      bit_offset: 16
+      bit_size: 1
+    - name: MODE
+      description: Time-triggered mode selection.
+      bit_offset: 17
+      bit_size: 1
+fieldset/TERR_CNT:
+  description: CAN offline recovery error counter.
+  fields:
+    - name: TERRCNT
+      description: Transmit error counter.
+      bit_offset: 0
+      bit_size: 9
 fieldset/TXMDHR:
   description: CAN mailbox data high register.
   fields:
@@ -588,3 +647,71 @@ fieldset/TXMIR:
       description: Standard identifier.
       bit_offset: 21
       bit_size: 11
+fieldset/CR:
+  description: CANFD control register.
+  fields:
+  - name: TX_FD
+    description: Send the FD frame enable bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: TX_BRS_B
+    description: Channel switchover enable.
+    bit_offset: 1
+    bit_size: 3
+  - name: USER_ESI_B
+    description: ESI status.
+    bit_offset: 4
+    bit_size: 3
+  - name: RES_EXCEPT
+    description: RES Bit exceptional enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: CLAS_LONG_TS1
+    description: TS1 stage length selection.
+    bit_offset: 8
+    bit_size: 1
+  - name: RESTRICT_MODE
+    description: Mode enable.
+    bit_offset: 9
+    bit_size: 1
+fieldset/BTR:
+  description: CANFD Sequential register.
+  fields:
+  - name: SJW_FD
+    description: Resynchronization width setting.
+    bit_offset: 0
+    bit_size: 4
+  - name: TS2_FD
+    description: Time range 2 set value.
+    bit_offset: 4
+    bit_size: 4
+  - name: TS1_FD
+    description: Time range 1 set value.
+    bit_offset: 8
+    bit_size: 5
+  - name: BRP_FD
+    description: Minimum time length setting value.
+    bit_offset: 16
+    bit_size: 5
+  - name: TDCE
+    description: FD Frame sending delay compensation enable.
+    bit_offset: 23
+    bit_size: 1
+fieldset/TDCT:
+  description: CANFD Send delay compensation register.
+  fields:
+  - name: TDCO
+    description: Transmitter delay compensation offset.
+    bit_offset: 0
+    bit_size: 6
+  - name: TDC_FILTER
+    description: Transmitter delay timing filtering.
+    bit_offset: 8
+    bit_size: 6
+fieldset/PSR:
+  description: CANFD Send delay compensation value register.
+  fields:
+  - name: TDCV
+    description: FD Send delay compensation value.
+    bit_offset: 16
+    bit_size: 8

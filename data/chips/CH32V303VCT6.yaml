@@ -65,6 +65,7 @@ cores:
       - "../peripherals/FV2x_V3x_DAC.yaml"
       - "../peripherals/FV2x_V3x_SDIO.yaml"
       - "../peripherals/FV2x_V3x_USBFS.yaml"
+      - "../peripherals/FV2x_V3x_CAN1.yaml"
 
     include_interrupts: "../interrupts/CH32V3.yaml"
     include_dma_channels:

@@ -1,4 +1,4 @@
-# CAN in FV2x_V3x
+# CAN in V103 RM doc, no TTCTLR, TTCNT
 block/CAN:
   description: Controller area network.
   items:
@@ -33,14 +33,6 @@ block/CAN:
       description: CAN bit timing register.
       byte_offset: 28
       fieldset: BTIMR
-    - name: TTCTLR
-      description: CAN time trigger control register.
-      byte_offset: 32
-      fieldset: TTCTLR
-    - name: TTCNT
-      description: CAN Time Trigger Count Value Register.
-      byte_offset: 36
-      bit_size: 16
     # mailbox related
     - name: TXMIR
       description: CAN TX mailbox identifier register.
@@ -515,21 +507,6 @@ fieldset/TSTATR:
       array:
         len: 3
         stride: 1
-fieldset/TTCTLR:
-  description: CAN time trigger control register.
-  fields:
-  - name: TIMCMV
-    description: Internal counter count end value.
-    bit_offset: 0
-    bit_size: 16
-  - name: TIMRST
-    description: Internal counter reset control.
-    bit_offset: 16
-    bit_size: 1
-  - name: MODE
-    description: Time-triggered mode selection.
-    bit_offset: 17
-    bit_size: 1
 fieldset/TXMDHR:
   description: CAN mailbox data high register.
   fields:
