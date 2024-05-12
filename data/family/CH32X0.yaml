@@ -703,3 +703,25 @@
   interrupts:
     - signal: GLOBAL
       interrupt: PIOC
+
+- name: USBFS
+  address: 0x40023400
+  registers:
+    kind: usb
+    version: x0fs
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: USBFSEN
+    reset:
+      register: AHBPRSTR
+      field: USBFSRST
+  pins:
+    - pin: PC16
+      signal: DM
+    - pin: PC17
+      signal: DP
+
