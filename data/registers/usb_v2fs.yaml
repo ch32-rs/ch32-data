@@ -1,5 +1,4 @@
 # The same as OTG_FS, but without OTG registers.
-# 0x50000000
 block/USB:
   description: Universal serial bus FS register
   items:
