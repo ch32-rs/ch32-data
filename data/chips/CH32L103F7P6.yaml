@@ -6,6 +6,7 @@ device_id: 272041728
 keywords:
   - USBPD
   - Low Power
+  - CAN FD
 packages:
   - name: CH32L103F7P6
     package: TSSOP20
@@ -25,7 +26,7 @@ memory:
 docs:
   - type: homepage
     title: Homepage
-    name: ""
+    name: "CH32L103"
     url: https://www.wch.cn/products/CH32L103.html
 cores:
   - name: qingke-v4c
