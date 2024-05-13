@@ -334,7 +334,7 @@
   address: 0x40013000
   registers:
     kind: spi
-    version: x0
+    version: v0 # The same as v0
     block: SPI
   rcc:
     bus_clock: HCLK

@@ -1,0 +1,241 @@
+block/LPTIM:
+  description: Low-power timer.
+  items:
+    - name: ISR
+      description: interrupt status register.
+      byte_offset: 0
+      access: Read
+      fieldset: ISR
+    - name: ICR
+      description: interrupt clear register.
+      byte_offset: 4
+      access: Write
+      fieldset: ICR
+    - name: IER
+      description: interrupt enable register.
+      byte_offset: 8
+      fieldset: IER
+    - name: CFGR
+      description: configuration register.
+      byte_offset: 12
+      fieldset: CFGR
+    - name: CR
+      description: control register.
+      byte_offset: 16
+      fieldset: CR
+    - name: CMP
+      description: compare register.
+      byte_offset: 20
+      fieldset: CMP
+    - name: ARR
+      description: aoto-reload register.
+      byte_offset: 24
+      fieldset: ARR
+    - name: CNT
+      description: COUNT register.
+      byte_offset: 28
+      fieldset: CNT
+fieldset/ARR:
+  description: aoto-reload register.
+  fields:
+    - name: ARR
+      description: aoto-reload count value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CFGR:
+  description: configuration register.
+  fields:
+    - name: CKSEL
+      description: effective edge configuration.
+      bit_offset: 0
+      bit_size: 1
+    - name: CKPOL
+      description: configure effective edges.
+      bit_offset: 1
+      bit_size: 2
+    - name: CKFLT
+      description: digital filter for ex-clock.
+      bit_offset: 3
+      bit_size: 2
+    - name: TRGFLT
+      description: digital filter for flip-flops.
+      bit_offset: 6
+      bit_size: 2
+    - name: PRESC
+      description: prescaler configuration.
+      bit_offset: 9
+      bit_size: 3
+    - name: TRIGSEL
+      description: trigger source selection.
+      bit_offset: 13
+      bit_size: 1
+    - name: TRIGEN
+      description: trigger configuration.
+      bit_offset: 17
+      bit_size: 2
+    - name: TIMOUT
+      description: TIMEOUT control.
+      bit_offset: 19
+      bit_size: 1
+    - name: WAVE
+      description: PWM.
+      bit_offset: 20
+      bit_size: 1
+    - name: WAVPOL
+      description: PWM polarity.
+      bit_offset: 21
+      bit_size: 1
+    - name: PRELOAD
+      description: update mode control.
+      bit_offset: 22
+      bit_size: 1
+    - name: COUNTMODE
+      description: count clock selection.
+      bit_offset: 23
+      bit_size: 1
+    - name: ENC
+      description: coder mode.
+      bit_offset: 24
+      bit_size: 1
+    - name: CLKMX_SEL
+      description: clock selection.
+      bit_offset: 25
+      bit_size: 2
+    - name: FORCE_PWM
+      description: Forcing pwm output.
+      bit_offset: 27
+      bit_size: 1
+fieldset/CMP:
+  description: compare register.
+  fields:
+    - name: CMP
+      description: compare value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CNT:
+  description: COUNT register.
+  fields:
+    - name: COUNT
+      description: Timer count value.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CR:
+  description: control register.
+  fields:
+    - name: ENABLE
+      description: timer enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: SNGSTRT
+      description: start in one trigger mode.
+      bit_offset: 1
+      bit_size: 1
+    - name: CNTSTRT
+      description: start in continuous mode.
+      bit_offset: 2
+      bit_size: 1
+    - name: OUTEN
+      description: pwm output enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: DIR_EXTEN
+      description: externally trigger count direction enable.
+      bit_offset: 4
+      bit_size: 1
+fieldset/ICR:
+  description: interrupt clear register.
+  fields:
+    - name: CMPMCF
+      description: clear compare register match flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: ARRMCF
+      description: clear Aoto-reload register match flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: EXTTRIGCF
+      description: clear Edge event are triggerd externally flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: CMPOKCF
+      description: clear compare register data update flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: ARROKCF
+      description: clear Aoto-reload register data update flag.
+      bit_offset: 4
+      bit_size: 1
+    - name: UPCF
+      description: clear up flag.
+      bit_offset: 5
+      bit_size: 1
+    - name: DOWNCF
+      description: clear down flag.
+      bit_offset: 6
+      bit_size: 1
+fieldset/IER:
+  description: interrupt enable register.
+  fields:
+    - name: CMPMIE
+      description: compare register match successfully interrupts enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: ARRMIE
+      description: Aoto-reload register match successfully interrupts enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: EXTTRIGIE
+      description: Edge event are triggerd externally successfully interrupts enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: CMPOKIE
+      description: compare register data update successfully interrupts enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: ARROKIE
+      description: Aoto-reload register data update successfully interrupts enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: UPIE
+      description: UP interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: DOWNIE
+      description: Down interrupt enable.
+      bit_offset: 6
+      bit_size: 1
+fieldset/ISR:
+  description: interrupt status register.
+  fields:
+    - name: CMPM
+      description: DATA of compare register and LPTIM_CNT match.
+      bit_offset: 0
+      bit_size: 1
+    - name: ARRM
+      description: DATA of Aoto-reload register and LPTIM_CNT match.
+      bit_offset: 1
+      bit_size: 1
+    - name: EXTTRIG
+      description: Edge event are triggerd externally.
+      bit_offset: 2
+      bit_size: 1
+    - name: CMPOK
+      description: compare register data update successfully.
+      bit_offset: 3
+      bit_size: 1
+    - name: ARROK
+      description: Aoto-reload register data update successfully.
+      bit_offset: 4
+      bit_size: 1
+    - name: UP
+      description: count-up.
+      bit_offset: 5
+      bit_size: 1
+    - name: DOWN
+      description: count down.
+      bit_offset: 6
+      bit_size: 1
+    - name: DIR_SYNC
+      description: direction of count.
+      bit_offset: 7
+      bit_size: 1

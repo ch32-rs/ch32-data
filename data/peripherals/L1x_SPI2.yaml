@@ -1,0 +1,40 @@
+- name: SPI2
+  address: 0x40003800
+  registers:
+    kind: spi
+    version: v0
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: SPI2EN
+    reset:
+      register: APB1PRSTR
+      field: SPI2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI2
+  pins:
+    # 00:默认映射(NSS/PA4，SCK/PA5，MISO/PA6， MOSI/PA7)
+    - { pin: "PA4", signal: "NSS", remap: 0 }
+    - { pin: "PA5", signal: "SCK", remap: 0 }
+    - { pin: "PA6", signal: "MISO", remap: 0 }
+    - { pin: "PA7", signal: "MOSI", remap: 0 }
+    # 01:完全映射(NSS/PA15，SCK/PB3，MISO/PB4， MOSI/PB5)
+    - { pin: "PA15", signal: "NSS", remap: 1 }
+    - { pin: "PB3", signal: "SCK", remap: 1 }
+    - { pin: "PB4", signal: "MISO", remap: 1 }
+    - { pin: "PB5", signal: "MOSI", remap: 1 }
+    # 10:完全映射(NSS/PA12，SCK/PB6，MISO/PB8， MOSI/PB7)
+    - { pin: "PA12", signal: "NSS", remap: 2 }
+    - { pin: "PB6", signal: "SCK", remap: 2 }
+    - { pin: "PB8", signal: "MISO", remap: 2 }
+    - { pin: "PB7", signal: "MOSI", remap: 2 }
+    # 11:完全映射(NSS/PB12，SCK/PB6，MISO/PB8， MOSI/PB7)
+    - { pin: "PB12", signal: "NSS", remap: 3 }
+    - { pin: "PB13", signal: "SCK", remap: 3 }
+    - { pin: "PB14", signal: "MISO", remap: 3 }
+    - { pin: "PB15", signal: "MOSI", remap: 3 }
+
