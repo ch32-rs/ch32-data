@@ -110,8 +110,8 @@ fieldset/APB1PCENR:
       description: USART 3 clock enable.
       bit_offset: 18
       bit_size: 1
-    - name: UART4EN
-      description: UART 4 clock enable.
+    - name: USART4EN
+      description: USART 4 clock enable.
       bit_offset: 19
       bit_size: 1
     - name: I2C1EN

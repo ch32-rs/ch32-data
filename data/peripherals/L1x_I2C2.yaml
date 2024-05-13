@@ -1,0 +1,26 @@
+- name: I2C2
+  address: 0x40005800
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: I2C2EN
+    reset:
+      register: APB1PRSTR
+      field: I2C2RST
+  interrupts:
+    - { "signal": "ER", "interrupt": "I2C2_ER" }
+    - { "signal": "EV", "interrupt": "I2C2_EV" }
+  # No remap
+  pins:
+    - pin: PB10
+      signal: SCL
+    - pin: PB11
+      signal: SDA
+    - pin: PB12
+      signal: SMBA
