@@ -62,7 +62,7 @@ impl Gen {
             .peripherals
             .iter()
             .find(|p| p.name == "GPIOA")
-            .unwrap()
+            .expect("GPIOA must exist")
             .address as u32;
         let gpio_stride = 0x400;
 
@@ -360,7 +360,10 @@ impl Gen {
                 .join("registers")
                 .join(&format!("{}_{}.json", module, version));
 
-            let mut ir: ir::IR = serde_json::from_reader(File::open(regs_path).unwrap()).unwrap();
+            let mut ir: ir::IR = serde_json::from_reader(
+                File::open(&regs_path).expect(&format!("open {}", regs_path.display())),
+            )
+            .unwrap();
 
             transform::expand_extends::ExpandExtends {}
                 .run(&mut ir)
