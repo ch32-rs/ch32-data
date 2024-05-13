@@ -12,10 +12,7 @@
     kernel_clock: HCLK
     enable:
       register: AHBPCENR
-      field: OTGFSEN
-    reset:
-      register: AHBRSTR
-      field: OTGFSRST
+      field: OTG_EN
   interrupts:
     - signal: HP
       interrupt: USB_HP_CAN1_TX

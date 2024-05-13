@@ -1,5 +1,10 @@
 # TODO
-
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv3
+    block: PFIC
 - name: SYSTICK
   address: 0xE000F000
   registers:
@@ -10,6 +15,22 @@
   # interrupts:
   #   - signal: GLOBAL
   #    interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: l1
+    block: FLASH
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: l1
+    block: RCC
+  pins:
+    - pin: PA8
+      signal: MCO
 
 - name: DMA1
   address: 1073872896 # 0x40020000
@@ -40,6 +61,289 @@
       interrupt: DMA1_Channel7
     - signal: CH8
       interrupt: DMA1_Channel8
+
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI0
+    - signal: EXTI1
+      interrupt: EXTI1
+    - signal: EXTI2
+      interrupt: EXTI2
+    - signal: EXTI3
+      interrupt: EXTI3
+    - signal: EXTI4
+      interrupt: EXTI4
+    - signal: EXTI5
+      interrupt: EXTI9_5
+    - signal: EXTI10
+      interrupt: EXTI15_10
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPDEN
+    reset:
+      register: APB2PRSTR
+      field: IOPDRST
+
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: l1
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST
+
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: l1
+    block: EXTEND
+
+# 4 USART
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: USART1EN
+    reset:
+      register: APB2PRSTR
+      field: USART1RST
+  # complex remap, use patch
+  # remap:
+  #   register: PCFR1
+  #   field: USART1_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+  pins:
+    # 000:默认映射(TX/PA9，RX/PA10，CK/PA8， CTS/PA11，RTS/PA12)
+    - { pin: "PA9", signal: "TX", remap: 0 }
+    - { pin: "PA10", signal: "RX", remap: 0 }
+    - { pin: "PA8", signal: "CK", remap: 0 }
+    - { pin: "PA11", signal: "CTS", remap: 0 }
+    - { pin: "PA12", signal: "RTS", remap: 0 }
+    # 001:部分映射(TX/PB6，RX/PB7，CK/PA8， CTS/PA11，RTS/PA12)
+    - { pin: "PB6", signal: "TX", remap: 1 }
+    - { pin: "PB7", signal: "RX", remap: 1 }
+    - { pin: "PA8", signal: "CK", remap: 1 }
+    - { pin: "PA11", signal: "CTS", remap: 1 }
+    - { pin: "PA12", signal: "RTS", remap: 1 }
+    # 010:完全映射(TX/PA4，RX/PA5，CK/PA3， CTS/PA2，RTS/PA13)
+    - { pin: "PA4", signal: "TX", remap: 2 }
+    - { pin: "PA5", signal: "RX", remap: 2 }
+    - { pin: "PA3", signal: "CK", remap: 2 }
+    - { pin: "PA2", signal: "CTS", remap: 2 }
+    - { pin: "PA13", signal: "RTS", remap: 2 }
+    # 011:完全映射(TX/PA5，RX/PA4，CK/PA6， CTS/PB7，RTS/PB8)
+    - { pin: "PA5", signal: "TX", remap: 3 }
+    - { pin: "PA4", signal: "RX", remap: 3 }
+    - { pin: "PA6", signal: "CK", remap: 3 }
+    - { pin: "PB7", signal: "CTS", remap: 3 }
+    - { pin: "PB8", signal: "RTS", remap: 3 }
+    # 100:完全映射(TX/PB11，RX/PB9，CK/PA6， CTS/PA14，RTS/PA13)
+    - { pin: "PB11", signal: "TX", remap: 4 }
+    - { pin: "PB9", signal: "RX", remap: 4 }
+    - { pin: "PA6", signal: "CK", remap: 4 }
+    - { pin: "PA14", signal: "CTS", remap: 4 }
+    - { pin: "PA13", signal: "RTS", remap: 4 }
+    # 101:完全映射(TX/PB12，RX/PA12，CK/PB6， CTS/PB7，RTS/PB8)
+    - { pin: "PB12", signal: "TX", remap: 5 }
+    - { pin: "PA12", signal: "RX", remap: 5 }
+    - { pin: "PB6", signal: "CK", remap: 5 }
+    - { pin: "PB7", signal: "CTS", remap: 5 }
+    - { pin: "PB8", signal: "RTS", remap: 5 }
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: USART2EN
+    reset:
+      register: APB2PRSTR
+      field: USART2RST
+  # complex remap, use patch
+  # remap:
+  #   register: PCFR1
+  #   field: USART2_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART2
+  pins:
+    # 00:默认映射(TX/PA2，RX/PA3，CK/PA4， CTS/PA0，RTS/PA1)
+    - { pin: "PA2", signal: "TX", remap: 0 }
+    - { pin: "PA3", signal: "RX", remap: 0 }
+    - { pin: "PA4", signal: "CK", remap: 0 }
+    - { pin: "PA0", signal: "CTS", remap: 0 }
+    - { pin: "PA1", signal: "RTS", remap: 0 }
+    # 01:保留
+    # 10:部分映射(TX/PA11，RX/PA12，CK/PA4， CTS/PA0，RTS/PA1)
+    - { pin: "PA11", signal: "TX", remap: 2 }
+    - { pin: "PA12", signal: "RX", remap: 2 }
+    - { pin: "PA4", signal: "CK", remap: 2 }
+    - { pin: "PA0", signal: "CTS", remap: 2 }
+    - { pin: "PA1", signal: "RTS", remap: 2 }
+    # 11:部分映射(TX/PA12，RX/PA11，CK/PA4， CTS/PA0，RTS/PA1)
+    - { pin: "PA12", signal: "TX", remap: 3 }
+    - { pin: "PA11", signal: "RX", remap: 3 }
+    - { pin: "PA4", signal: "CK", remap: 3 }
+    - { pin: "PA0", signal: "CTS", remap: 3 }
+    - { pin: "PA1", signal: "RTS", remap: 3 }
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: USART3EN
+    reset:
+      register: APB2PRSTR
+      field: USART3RST
+  remap:
+    register: PCFR1
+    field: USART3_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART3
+  pins:
+    # 00:默认映射(TX/PB10，RX/PB11，CK/PB12， CTS/PB13，RTS/PB14)
+    - { pin: "PB10", signal: "TX", remap: 0 }
+    - { pin: "PB11", signal: "RX", remap: 0 }
+    - { pin: "PB12", signal: "CK", remap: 0 }
+    - { pin: "PB13", signal: "CTS", remap: 0 }
+    - { pin: "PB14", signal: "RTS", remap: 0 }
+    # 10:部分重映射(TX/PD1，RX/PD0，CK/PB12， CTS/PB13，RTS/PB14)
+    - { pin: "PD1", signal: "TX", remap: 2 }
+    - { pin: "PD0", signal: "RX", remap: 2 }
+    - { pin: "PB12", signal: "CK", remap: 2 }
+    - { pin: "PB13", signal: "CTS", remap: 2 }
+    - { pin: "PB14", signal: "RTS", remap: 2 }
+    # 11:部分重映射(TX/PD0，RX/PD1，CK/PB12， CTS/PB13，RTS/PB14)
+    - { pin: "PD0", signal: "TX", remap: 3 }
+    - { pin: "PD1", signal: "RX", remap: 3 }
+    - { pin: "PB12", signal: "CK", remap: 3 }
+    - { pin: "PB13", signal: "CTS", remap: 3 }
+    - { pin: "PB14", signal: "RTS", remap: 3 }
+- name: USART4
+  address: 0x40004C00
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: USART4EN
+    reset:
+      register: APB2PRSTR
+      field: USART4RST
+  remap:
+    register: PCFR2
+    field: USART4_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART4
+  pins:
+    # 0:默认映射(TX/PB0，RX/PB1，CK/PB2，CTS/PB3， RTS/PB4)
+    - { pin: "PB0", signal: "TX", remap: 0 }
+    - { pin: "PB1", signal: "RX", remap: 0 }
+    - { pin: "PB2", signal: "CK", remap: 0 }
+    - { pin: "PB3", signal: "CTS", remap: 0 }
+    - { pin: "PB4", signal: "RTS", remap: 0 }
+    # 1:完全映射(TX/PA5，RX/PB5，CK/PA6，CTS/PA7， RTS/PA15)
+    - { pin: "PA5", signal: "TX", remap: 1 }
+    - { pin: "PB5", signal: "RX", remap: 1 }
+    - { pin: "PA6", signal: "CK", remap: 1 }
+    - { pin: "PA7", signal: "CTS", remap: 1 }
+    - { pin: "PA15", signal: "RTS", remap: 1 }
 
 - name: CAN1
   address: 0x40006400
