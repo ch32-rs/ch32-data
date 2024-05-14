@@ -1,3 +1,4 @@
+# USB2
 - name: USBHS
   address: 0x40023400
   registers:

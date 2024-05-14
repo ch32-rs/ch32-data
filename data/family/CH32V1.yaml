@@ -382,10 +382,10 @@
     kernel_clock: HCLK
     enable:
       register: AHBPCENR
-      field: USBFSEN
+      field: USBHDEN
     reset:
-      register: AHBPRSTR
-      field: USBFSRST
+      register: AHBRSTR
+      field: USBHDRST
   pins:
     - pin: PA11
       signal: DM
