@@ -349,6 +349,7 @@ fieldset/CFGR0:
       description: USB prescaler.
       bit_offset: 22
       bit_size: 1
+      enum: USBPRE
     - name: MCO
       description: Microcontroller clock output.
       bit_offset: 24
@@ -645,3 +646,13 @@ enum/PLL_MUL:
     - name: MUL16_ALT
       description: PLL input clock x 16.
       value: 0b1111
+enum/USBPRE:
+  description: USB prescaler.
+  bit_size: 1
+  variants:
+    - name: DIV1
+      description: PLL clock divided by 1(PLLCLK=48MHz).
+      value: 0b1
+    - name: DIV1_5
+      description: PLL clock divided by 1.5(PLLCLK=72MHz).
+      value: 0b0
