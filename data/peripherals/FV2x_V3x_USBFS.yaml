@@ -1,6 +1,4 @@
-# USBFS aka. OTG_FS
-# base address: 0x50000000
-
+# USBFS, without OTG cfg registers
 - name: USBFS
   address: 0x50000000
   registers:
