@@ -729,3 +729,13 @@
       signal: DM
     - pin: PC17
       signal: DP
+
+- name: AWU
+  address: 0x40026400
+  registers:
+    kind: awu
+    version: x0
+    block: AWU
+  interrupts:
+    - signal: GLOBAL
+      interrupt: AWU

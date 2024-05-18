@@ -853,9 +853,6 @@ enum/SW:
     - name: PLL
       description: PLL selected as system clock.
       value: 0b10
-    - name: RESERVED
-      description: Reserved.
-      value: 0b11
 enum/HPRE:
   description: AHB prescaler.
   bit_size: 4

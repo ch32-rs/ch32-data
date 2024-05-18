@@ -3,7 +3,7 @@
   registers:
     kind: usbpd
     version: x0
-    block: USB_PD
+    block: USBPD
   rcc:
     bus_clock: HCLK
     kernel_clock: HCLK
@@ -21,3 +21,5 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USBPD
+    - signal: WKUP
+      interrupt: USBPD_WKUP
