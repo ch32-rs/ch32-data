@@ -695,8 +695,6 @@ enum/CKD:
     - name: Div_4
       description: Tdts=4*Tck_int
       value: 0b10
-    - name: Reserved
-      value: 0b11
 enum/FilterValue:
   bit_size: 4
   variants:

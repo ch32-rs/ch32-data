@@ -1,0 +1,91 @@
+block/AWU:
+  description: AWU configuration.
+  items:
+  - name: CSR
+    description: Status Control register.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: CSR
+  - name: WR
+    description: AWU Window register.
+    byte_offset: 4
+    bit_size: 16
+    fieldset: WR
+  - name: PSC
+    description: PSC.
+    byte_offset: 8
+    bit_size: 16
+    fieldset: PSC
+fieldset/CSR:
+  description: Status Control register.
+  bit_size: 16
+  fields:
+  - name: EN
+    description: AWU Enable.
+    bit_offset: 1
+    bit_size: 1
+fieldset/PSC:
+  description: PSC.
+  bit_size: 16
+  fields:
+  - name: TBR
+    description: AWU_TBR value.
+    bit_offset: 0
+    bit_size: 4
+    enum: PRESCALER
+fieldset/WR:
+  description: AWU Window register.
+  bit_size: 16
+  fields:
+  - name: APR
+    description: AWU_APR value.
+    bit_offset: 0
+    bit_size: 6
+enum/PRESCALER:
+  bit_size: 4
+  variants:
+  - name: DIV1
+    description: DIV1.
+    value: 0b000
+  - name: DIV2
+    description: DIV2.
+    value: 0b0010
+  - name: DIV4
+    description: DIV4.
+    value: 0b0011
+  - name: DIV8
+    description: DIV8.
+    value: 0b0100
+  - name: DIV16
+    description: DIV16.
+    value: 0b0101
+  - name: DIV32
+    description: DIV32.
+    value: 0b0110
+  - name: DIV64
+    description: DIV64.
+    value: 0b0111
+  - name: DIV128
+    description: DIV128.
+    value: 0b1000
+  - name: DIV256
+    description: DIV256.
+    value: 0b1001
+  - name: DIV512
+    description: DIV512.
+    value: 0b1010
+  - name: DIV1024
+    description: DIV1024.
+    value: 0b1011
+  - name: DIV2048
+    description: DIV2048.
+    value: 0b1100
+  - name: DIV4096
+    description: DIV4096.
+    value: 0b1101
+  - name: DIV10240
+    description: DIV10240.
+    value: 0b1110
+  - name: DIV61440
+    description: DIV61440.
+    value: 0b1111

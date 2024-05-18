@@ -744,3 +744,27 @@
     # 11:CAN_RX 映射到 PD0，CAN_TX 映射到 PD1;
     - { pin: "PD0", signal: "RX", remap: 3 }
     - { pin: "PD1", signal: "TX", remap: 3 }
+
+- name: USBPD
+  address: 0x40027000
+  registers:
+    kind: usbpd
+    version: l1
+    block: USBPD
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: USBPDEN
+    reset:
+      register: AHBRSTR
+      field: USBPDRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBPD
+    - signal: WKUP
+      interrupt: USBPD_WKUP
+  pins:
+    - { pin: "PB6", signal: "CC1" }
+    - { pin: "PB7", signal: "CC2" }

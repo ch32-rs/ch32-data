@@ -82,10 +82,6 @@ fieldset/CONFIG:
   description: PD interrupt enable register.
   bit_size: 16
   fields:
-  - name: PD_FILT_EN
-    description: PD Filter Enable.
-    bit_offset: 0
-    bit_size: 1
   - name: PD_ALL_CLR
     description: PD ITClear.
     bit_offset: 1
@@ -106,6 +102,15 @@ fieldset/CONFIG:
   - name: WAKE_POLAR
     description: wakeup polarity.
     bit_offset: 5
+    bit_size: 1
+  # new in usbpd_l1.yaml
+  - name: MULTI_0
+    description: Multiple 0 received.
+    bit_offset: 8
+    bit_size: 1
+  - name: RTX_BIT0
+    description: Value of RX/TX shift register, bit 0.
+    bit_offset: 9
     bit_size: 1
   - name: IE_PD_IO
     description: IO Enable.
@@ -147,12 +152,12 @@ fieldset/CONTROL:
     description: DATA_FLAG value.
     bit_offset: 5
     bit_size: 1
-  - name: TX_BIT_BACK
-    description: TX_BIT_BACK value.
+  - name: RX_ST_L
+    description: RX_ST_L value.
     bit_offset: 6
     bit_size: 1
-  - name: BMC_BYTE_HI
-    description: BMC_BYTE_HI value.
+  - name: RX_ST_H
+    description: RX_ST_H value.
     bit_offset: 7
     bit_size: 1
 fieldset/PORT_CC:
@@ -162,6 +167,11 @@ fieldset/PORT_CC:
   - name: PA_CC_AI
     description: CC port comparator analog input.
     bit_offset: 0
+    bit_size: 1
+  # new in usbpd_l1.yaml
+  - name: CC_PD
+    description: CC port pull-down current.
+    bit_offset: 1
     bit_size: 1
   - name: CC_PU
     description: CC port pull-up current.
