@@ -768,3 +768,27 @@
   pins:
     - { pin: "PB6", signal: "CC1" }
     - { pin: "PB7", signal: "CC2" }
+
+- name: USBFS
+  address: 0x50000000
+  registers:
+    kind: usb
+    version: l1fs
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: USBFSEN
+    reset:
+      register: AHBRSTR
+      field: USBFSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBFS
+    - signal: WKUP
+      interrupt: USBFS_WKUP
+  pins:
+    - { pin: "PA11", signal: "DM" }
+    - { pin: "PA12", signal: "DP" }
