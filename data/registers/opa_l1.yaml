@@ -1,0 +1,236 @@
+block/OPA:
+  description: OPA configuration.
+  items:
+  - name: CFGR1
+    description: OPA configuration 1.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: CFGR1
+  - name: CFGR2
+    description: OPA configuration 2.
+    byte_offset: 2
+    bit_size: 16
+    fieldset: CFGR2
+  - name: CTLR1
+    description: OPA control register 1.
+    byte_offset: 4
+    fieldset: CTLR1
+  - name: CTLR2
+    description: OPA control register 2.
+    byte_offset: 8
+    fieldset: CTLR2
+  - name: OPA_KEY
+    description: OPA unlockkey.
+    byte_offset: 12
+    fieldset: OPA_KEY
+  - name: CMP_KEY
+    description: CMP unlockkey.
+    byte_offset: 16
+    fieldset: CMP_KEY
+  - name: POLL_KEY
+    description: polling unlockkey.
+    byte_offset: 20
+    fieldset: POLL_KEY
+fieldset/CFGR1:
+  description: OPA configuration 1.
+  bit_size: 16
+  fields:
+  - name: POLL_EN
+    description: OPA1 enable positive polling.
+    bit_offset: 0
+    bit_size: 1
+  - name: BKIN_EN
+    description: OPA1 break function enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: RST_EN
+    description: OPA1 reset enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: POLL_LOCK
+    description: POLL LOCK.
+    bit_offset: 7
+    bit_size: 1
+  - name: IE_OUT
+    description: OPA1 interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: IE_CNT
+    description: OPA interrupt enable at the end of polling interval.
+    bit_offset: 10
+    bit_size: 1
+  - name: NMI_EN
+    description: OPA connection NMI interrupt enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: IF_OUT
+    description: OPA1 output interrupt.
+    bit_offset: 12
+    bit_size: 1
+  - name: IF_CNT
+    description: OPA interrupt flag at the end of polling interval.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR2:
+  description: OPA configuration 2.
+  bit_size: 16
+  fields:
+  - name: POLL_VLU
+    description: OPA1 polling interval.
+    bit_offset: 0
+    bit_size: 9
+  - name: POLL1_NUM
+    description: OPA1 polling the number of positive ends.
+    bit_offset: 9
+    bit_size: 3
+fieldset/CMP_KEY:
+  description: CMP unlockkey.
+  fields:
+  - name: CMP_KEY
+    description: CMP unlockkey.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CTLR1:
+  description: OPA control register 1.
+  fields:
+  - name: EN1
+    description: OPA1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: OPA1 output channel selection.
+    bit_offset: 1
+    bit_size: 3
+  - name: PSEL1
+    description: OPA1 forward input selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: FB_EN1
+    description: OPA1 internal feedback resistance enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: NSEL1
+    description: OPA1 negative end channel selection with PGA gain selection.
+    bit_offset: 8
+    bit_size: 4
+  - name: LP1
+    description: OPA1 low-power mode selection.
+    bit_offset: 12
+    bit_size: 1
+  - name: INTRIMP
+    description: OPA1 high-level offset voltage value polarity selection.
+    bit_offset: 16
+    bit_size: 1
+  - name: ITRIMP
+    description: OPA1 high-level offset voltage value selection.
+    bit_offset: 17
+    bit_size: 5
+  - name: INTRIMN
+    description: OPA1 low-level offset voltage value polarity selection.
+    bit_offset: 24
+    bit_size: 1
+  - name: ITRIMN
+    description: OPA1 low-level offset voltage value selection.
+    bit_offset: 25
+    bit_size: 5
+  - name: OPA_LOCK
+    description: OPA lock.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR2:
+  description: OPA control register 2.
+  fields:
+  - name: EN1
+    description: CMP1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: CMP1 Output channel selection.
+    bit_offset: 1
+    bit_size: 2
+  - name: NSEL1
+    description: CMP1 negative input selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: PSEL1
+    description: CMP1 forward input selection.
+    bit_offset: 4
+    bit_size: 1
+  - name: HYEN1
+    description: CMP1 hysteresis function selection.
+    bit_offset: 5
+    bit_size: 1
+  - name: LP1
+    description: CMP1 low-power switch.
+    bit_offset: 6
+    bit_size: 1
+  - name: EN2
+    description: CMP2 enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: MODE2
+    description: CMP2 Output channel selection.
+    bit_offset: 9
+    bit_size: 2
+  - name: NSE2L
+    description: CMP2 negative input selection.
+    bit_offset: 11
+    bit_size: 1
+  - name: PSEL2
+    description: CMP2 forward input selection.
+    bit_offset: 12
+    bit_size: 1
+  - name: HYEN2
+    description: CMP2 hysteresis function selection.
+    bit_offset: 13
+    bit_size: 1
+  - name: LP2
+    description: CMP2 low-power switch.
+    bit_offset: 14
+    bit_size: 1
+  - name: EN3
+    description: CMP3 enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: MODE3
+    description: CMP3 Output channel selection.
+    bit_offset: 17
+    bit_size: 2
+  - name: NSEL3
+    description: CMP3 negative input selection.
+    bit_offset: 19
+    bit_size: 1
+  - name: PSEL3
+    description: CMP3 forward input selection.
+    bit_offset: 20
+    bit_size: 1
+  - name: HYEN3
+    description: CMP3 hysteresis function selection.
+    bit_offset: 21
+    bit_size: 1
+  - name: LP3
+    description: CMP3 low-power switch.
+    bit_offset: 22
+    bit_size: 1
+  - name: WKUP_MD
+    description: CMP wake-up signal mode selection.
+    bit_offset: 24
+    bit_size: 2
+  - name: CMP_LOCK
+    description: CMP lock.
+    bit_offset: 31
+    bit_size: 1
+fieldset/OPA_KEY:
+  description: OPA unlockkey.
+  fields:
+  - name: OPA_KEY
+    description: OPA unlockkey.
+    bit_offset: 0
+    bit_size: 32
+fieldset/POLL_KEY:
+  description: polling unlockkey.
+  fields:
+  - name: POLL_KEY
+    description: polling unlockkey.
+    bit_offset: 0
+    bit_size: 32

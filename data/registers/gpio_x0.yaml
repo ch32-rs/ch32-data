@@ -1,5 +1,5 @@
 block/GPIO:
-  description: General purpose I/O.
+  description: General purpose I/O. 24 lines per port.
   items:
     - name: CFGLR
       description: Port configuration register low (GPIOn_CFGLR).
