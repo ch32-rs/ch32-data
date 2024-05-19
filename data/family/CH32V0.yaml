@@ -373,8 +373,8 @@
     version: common
     block: USART
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2
+    bus_clock: HCLK
+    kernel_clock: HCLK
     enable:
       register: APB2PCENR
       field: USART1EN
@@ -504,8 +504,8 @@
     version: v0
     block: SPI
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2
+    bus_clock: HCLK
+    kernel_clock: HCLK
     enable:
       register: APB2PCENR
       field: SPI1EN
