@@ -29,12 +29,12 @@ fn main() {
 
     let chip_core_name = match env::vars()
         .map(|(a, _)| a)
-        .filter(|x| x.starts_with("CARGO_FEATURE_CH32"))
+        .filter(|x| x.starts_with("CARGO_FEATURE_CH32") || x.starts_with("CARGO_FEATURE_CH6"))
         .get_one()
     {
         Ok(x) => x,
-        Err(GetOneError::None) => panic!("No ch32xx Cargo feature enabled"),
-        Err(GetOneError::Multiple) => panic!("Multiple ch32xx Cargo features enabled"),
+        Err(GetOneError::None) => panic!("No ch32xx/ch6xx Cargo feature enabled"),
+        Err(GetOneError::Multiple) => panic!("Multiple ch32xx/ch6xx Cargo features enabled"),
     }
     .strip_prefix("CARGO_FEATURE_")
     .unwrap()
