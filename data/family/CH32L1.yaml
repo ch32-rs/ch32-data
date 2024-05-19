@@ -792,3 +792,14 @@
   pins:
     - { pin: "PA11", signal: "DM" }
     - { pin: "PA12", signal: "DP" }
+
+- name: OPA
+  address: 0x40026000
+  registers:
+    kind: opa
+    version: l1
+    block: OPA
+  interrupts:
+    - signal: GLOBAL
+      interrupt: OPA
+  pins:

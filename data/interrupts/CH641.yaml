@@ -35,13 +35,13 @@ USART1: 32
 # 33 - EXTI Line\[15:8\] interrupt
 EXTI15_8: 33
 # 34 - TIM1 Break interrupt
-TIM1BRK: 34
+TIM1_BRK: 34
 # 35 - TIM1 Update interrupt
-TIM1UP: 35
+TIM1_UP: 35
 # 36 - TIM1 Trigger and Commutation interrupts
-TIM1TRG: 36
+TIM1_TRG_COM: 36
 # 37 - TIM1 Capture Compare interrupt
-TIM1CC: 37
+TIM1_CC: 37
 # 38 - TIM2 global interrupt
 TIM2: 38
 # 39 - USBPD global interrupt

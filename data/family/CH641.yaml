@@ -1,0 +1,286 @@
+# CH641 is almost the same as CH32V003
+
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv2
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv2
+    block: SYSTICK
+  # SysTick interrupt handling is moved to qingke-rt as it's a core feature
+  # interrupts:
+  #   - signal: GLOBAL
+  #    interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v0
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI7_0
+    - signal: EXTI8
+      interrupt: EXTI15_8
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: ch641
+    block: RCC
+  pins:
+    - pin: PB7
+      signal: MCO
+
+- name: DMA1
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA1EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: ch641
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+
+# TIM use hclk as bus clock
+
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: v3
+    block: ADTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: TIM1EN
+    reset:
+      register: APB2PRSTR
+      field: TIM1RST
+  remap:
+    register: PCFR1
+    field: TIM1_RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: CC
+      interrupt: TIM1_CC
+    - signal: COM
+      interrupt: TIM1_TRG_COM
+    - signal: TRG
+      interrupt: TIM1_TRG_COM
+    - signal: BRK
+      interrupt: TIM1_BRK
+  pins:
+
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: v3
+    block: GPTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: TIM2EN
+    reset:
+      register: APB1PRSTR
+      field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM2
+    - signal: CC
+      interrupt: TIM2
+    - signal: TRG
+      interrupt: TIM2
+  pins:
+
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB2PCENR
+      field: USART1EN
+    reset:
+      register: APB2PRSTR
+      field: USART1RST
+  remap:
+    register: PCFR1
+    field: USART1_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+  pins:
+
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    # No SMBUS registers, others are the same as v3
+    # No idea if RTR is available
+    version: v0
+    block: I2C
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: I2C1EN
+    reset:
+      register: APB1PRSTR
+      field: I2C1RST
+  remap:
+    register: PCFR1
+    field: I2C1_RM
+  interrupts:
+    - signal: EV
+      interrupt: I2C1_EV
+    - signal: ER
+      interrupt: I2C1_ER
+  pins:
+
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v0
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: ADC1EN
+    reset:
+      register: APB2PRSTR
+      field: ADC1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC
+  pins:
+    - pin: PA6
+      signal: IN0
+    - pin: PA7
+      signal: IN1
+    - pin: PA8
+      signal: IN2
+    - pin: PA10
+      signal: IN3
+    - pin: PA11
+      signal: IN4
+    - pin: PA12
+      signal: IN5
+    - pin: PA13
+      signal: IN6
+    - pin: PB7
+      signal: IN7
+    # TODO: ISP pin, IN8
+    - pin: PB8
+      signal: IN9
+    - pin: PB0
+      signal: IN10
+    - pin: PB1
+      signal: IN11
+    - pin: PA0
+      signal: IN12
+    - pin: PA1
+      signal: IN13
+    - pin: PB9
+      signal: IN14
+    - pin: PA15
+      signal: ETR
+      remap: 1
+    - pin: PA4
+      signal: ETR
+      remap: 0
+
