@@ -151,13 +151,31 @@
     - signal: BRK
       interrupt: TIM1_BRK
   pins:
+    # 0:默认映射(ETR/PB9，CH1/PB2，CH2/PB3， CH3/PB4，BKIN/PA15，CH1N/PA2，CH2N/PA3， CH3N/PA4);
+    - { pin: PB9, signal: ETR, remap: 0 }
+    - { pin: PB2, signal: CH1, remap: 0 }
+    - { pin: PB3, signal: CH2, remap: 0 }
+    - { pin: PB4, signal: CH3, remap: 0 }
+    - { pin: PA15, signal: BKIN, remap: 0 }
+    - { pin: PA2, signal: CH1N, remap: 0 }
+    - { pin: PA3, signal: CH2N, remap: 0 }
+    - { pin: PA4, signal: CH3N, remap: 0 }
+    # 1:重映射(ETR/PB9，CH1/PB2，CH2/PB3， CH3/PA2，BKIN/PA15，CH1N/PB4，CH2N/PB5， CH3N/PA4)
+    - { pin: PB9, signal: ETR, remap: 1 }
+    - { pin: PB2, signal: CH1, remap: 1 }
+    - { pin: PB3, signal: CH2, remap: 1 }
+    - { pin: PA2, signal: CH3, remap: 1 }
+    - { pin: PA15, signal: BKIN, remap: 1 }
+    - { pin: PB4, signal: CH1N, remap: 1 }
+    - { pin: PB5, signal: CH2N, remap: 1 }
+    - { pin: PA4, signal: CH3N, remap: 1 }
 
 - name: TIM2
   address: 0x40000000
   registers:
     kind: timer
     version: v3
-    block: GPTM
+    block: ADTM # FIXME: it's actually GPTM with 2ch
   rcc:
     bus_clock: HCLK
     kernel_clock: HCLK
@@ -177,7 +195,32 @@
       interrupt: TIM2
     - signal: TRG
       interrupt: TIM2
+    # FIXME: TIM2 has no BRK, COM signal
+    - signal: BRK
+      interrupt: TIM2
+    - signal: COM
+      interrupt: TIM2
   pins:
+    # 00:默认映射(CH1/PA5，CH2/PA9，CH1N/PA7， CH2N/PA8);
+    - { pin: PA5, signal: CH1, remap: 0 }
+    - { pin: PA9, signal: CH2, remap: 0 }
+    - { pin: PA7, signal: CH1N, remap: 0 }
+    - { pin: PA8, signal: CH2N, remap: 0 }
+    # 01:部分映射(CH1/PA5，CH2/PA4，CH1N/PA7， CH2N/PA8);
+    - { pin: PA5, signal: CH1, remap: 1 }
+    - { pin: PA4, signal: CH2, remap: 1 }
+    - { pin: PA7, signal: CH1N, remap: 1 }
+    - { pin: PA8, signal: CH2N, remap: 1 }
+    # 10:部分映射(CH1/PA5，CH2/PA9，CH1N/PB5， CH2N/PB4);
+    - { pin: PA5, signal: CH1, remap: 2 }
+    - { pin: PA9, signal: CH2, remap: 2 }
+    - { pin: PB5, signal: CH1N, remap: 2 }
+    - { pin: PB4, signal: CH2N, remap: 2 }
+    # 11:完全映射(CH1/PA5，CH2/PA4，CH1N/PB5， CH2N/PB4)。
+    - { pin: PA5, signal: CH1, remap: 3 }
+    - { pin: PA4, signal: CH2, remap: 3 }
+    - { pin: PB5, signal: CH1N, remap: 3 }
+    - { pin: PB4, signal: CH2N, remap: 3 }
 
 - name: USART1
   address: 0x40013800
@@ -201,6 +244,31 @@
     - signal: GLOBAL
       interrupt: USART1
   pins:
+    # 000:默认映射(TX/PA11，RX/PA12，CTS/PA13，RTS/PA14);
+    - { pin: PA11, signal: TX, remap: 0 }
+    - { pin: PA12, signal: RX, remap: 0 }
+    - { pin: PA13, signal: CTS, remap: 0 }
+    - { pin: PA14, signal: RTS, remap: 0 }
+    # 001:重映射(TX/PB1，RX/PB0，CTS/PA13， RTS/PA14);
+    - { pin: PB1, signal: TX, remap: 1 }
+    - { pin: PB0, signal: RX, remap: 1 }
+    - { pin: PA13, signal: CTS, remap: 1 }
+    - { pin: PA14, signal: RTS, remap: 1 }
+    # 010:重映射(TX/PAO，RX/PA1，CTS/PA13， RTS/PA14);
+    - { pin: PA0, signal: TX, remap: 2 }
+    - { pin: PA1, signal: RX, remap: 2 }
+    - { pin: PA13, signal: CTS, remap: 2 }
+    - { pin: PA14, signal: RTS, remap: 2 }
+    # 011:重映射(TX/PA1，RX/PA0，CTS/PA13， RTS/PA14)。
+    - { pin: PA1, signal: TX, remap: 3 }
+    - { pin: PA0, signal: RX, remap: 3 }
+    - { pin: PA13, signal: CTS, remap: 3 }
+    - { pin: PA14, signal: RTS, remap: 3 }
+    # 100:重映射(TX/PA2，RX/PA3，CTS/PA13， RTS/PA14)。
+    - { pin: PA2, signal: TX, remap: 4 }
+    - { pin: PA3, signal: RX, remap: 4 }
+    - { pin: PA13, signal: CTS, remap: 4 }
+    - { pin: PA14, signal: RTS, remap: 4 }
 
 - name: I2C1
   address: 0x40005400
@@ -228,6 +296,15 @@
     - signal: ER
       interrupt: I2C1_ER
   pins:
+    # 00:默认映射(SCL/PA13，SDA/PA14);
+    - { pin: PA13, signal: SCL, remap: 0 }
+    - { pin: PA14, signal: SDA, remap: 0 }
+    # 01:重映射(SCL/PA2，SDA/PA3);
+    - { pin: PA2, signal: SCL, remap: 1 }
+    - { pin: PA3, signal: SDA, remap: 1 }
+    # 1X:重映射(SCL/PA11，SDA/PA12)。
+    - { pin: PA11, signal: SCL, remap: 2 }
+    - { pin: PA12, signal: SDA, remap: 2 }
 
 - name: ADC1
   address: 0x40012400
