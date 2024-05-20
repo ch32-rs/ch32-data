@@ -1,0 +1,144 @@
+block/EXTEND:
+  description: Extend configuration.
+  items:
+    - name: CTLR0
+      description: Configure the extended control register 0.
+      byte_offset: 0
+      fieldset: CTLR0
+    - name: CTLR1
+      description: Configure the extended control register 1.
+      byte_offset: 8
+      fieldset: CTLR1
+    - name: CTLR2
+      description: Configure the extended control register 2.
+      byte_offset: 12
+      fieldset: CTLR2
+fieldset/CTLR0:
+  description: Configure the extended control register 0.
+  fields:
+    - name: LKUPEN
+      description: LOCKUP_Enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LKUPRST
+      description: LOCKUP RESET.
+      bit_offset: 7
+      bit_size: 1
+fieldset/CTLR1:
+  description: Configure the extended control register 1.
+  fields:
+    - name: UDP_BUFOE
+      description: UDP pin DAC_BUF output enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDP_PCS
+      description: Select pull-up current or pull-down current.  built into the UDP pin.
+      bit_offset: 1
+      bit_size: 2
+    - name: UDP_PUE
+      description: UPD port DAC and programmable pull-down.  and pull-up mode selection.
+      bit_offset: 3
+      bit_size: 1
+    - name: UDP_PDE
+      description: UPD port DAC and programmable pull-down.  and pull-up mode selection.
+      bit_offset: 4
+      bit_size: 1
+    - name: UDP_DAC
+      description: UPD port DAC data/programmable pull-down.  resistor and pull-up resistor data.
+      bit_offset: 5
+      bit_size: 6
+    - name: UDP_AE
+      description: Enable of the UDP pin buffer/comparator DAC_BUF.
+      bit_offset: 11
+      bit_size: 1
+    - name: UDP_AI
+      description: Output of the UDP pin comparator DAC_BUF.
+      bit_offset: 12
+      bit_size: 1
+    - name: UDM_BUFOE
+      description: UDM pin DAC_BUF output enable.
+      bit_offset: 16
+      bit_size: 1
+    - name: UDM_PCS
+      description: Select pull-up current or pull-down current.  built into the UDM pin.
+      bit_offset: 17
+      bit_size: 2
+    - name: UDM_PUE
+      description: UPM port DAC and programmable pull-down.  and pull-up mode selection.
+      bit_offset: 19
+      bit_size: 1
+    - name: UDM_PDE
+      description: UPM port DAC and programmable pull-down.  and pull-up mode selection.
+      bit_offset: 20
+      bit_size: 1
+    - name: UDM_DAC
+      description: UPM port DAC data/programmable pull-down.  resistor and pull-up resistor data.
+      bit_offset: 21
+      bit_size: 6
+    - name: UDM_AE
+      description: Enable of the UDM pin buffer/comparator DAC_BUF.
+      bit_offset: 27
+      bit_size: 1
+    - name: UDM_AI
+      description: Output of the UDM pin comparator DAC_BUF.
+      bit_offset: 28
+      bit_size: 1
+fieldset/CTLR2:
+  description: Configure the extended control register 2.
+  fields:
+    - name: QII_AE
+      description: QII_OP and QII_CMP enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: QII_PS
+      description: QII_OP channel selection at the input.
+      bit_offset: 1
+      bit_size: 1
+    - name: QII_AV
+      description: QII_OP gain select.
+      bit_offset: 2
+      bit_size: 1
+    - name: QII_HYP
+      description: QII_CMP hysteresis voltage selection.
+      bit_offset: 3
+      bit_size: 1
+    - name: QII_FILT
+      description: QII digital filtering enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: ISP_AE
+      description: ISP_OP enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: ISP_PS
+      description: ISP_OP channel selection at the positive input.
+      bit_offset: 9
+      bit_size: 1
+    - name: ISP_BE
+      description: ISP_OP bias enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: ISP_NS
+      description: ISP_OP channel selection at the negative input.
+      bit_offset: 12
+      bit_size: 1
+    - name: CC1_REF
+      description: CC1 pin emulation reference enable.
+      bit_offset: 16
+      bit_size: 1
+    - name: CC2_REF
+      description: CC2 pin emulation reference enable.
+      bit_offset: 17
+      bit_size: 1
+    - name: CC3_REF
+      description: CC3 pin emulation reference enable.
+      bit_offset: 18
+      bit_size: 1
+    - name: CC_HVT
+      description: CC pin high threshold input mode enabled.
+      bit_offset: 19
+      bit_size: 1
+    - name: IREF_INC
+      description: Reference current state selection.  for pins PD PHY and bc.
+      bit_offset: 20
+      bit_size: 1
