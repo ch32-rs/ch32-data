@@ -1,5 +1,5 @@
 block/ADC:
-  description: Analog to digital converter for V003. No TKEY, 10bit.
+  description: Analog to digital converter for CH641. No TKEY, 10bit.
   items:
     - name: STATR
       description: status register.
@@ -326,28 +326,16 @@ enum/SAMPLE_TIME:
   variants:
     - name: Cycles3
       description: 3 cycles
-      value: 0
-    - name: Cycles9
-      description: 9 cycles
-      value: 1
-    - name: Cycles15
-      description: 15 cycles
-      value: 2
-    - name: Cycles30
-      description: 30 cycles
-      value: 3
-    - name: Cycles43
-      description: 43 cycles
-      value: 4
-    - name: Cycles57
-      description: 57 cycles
-      value: 5
-    - name: Cycles73
-      description: 73 cycles
-      value: 6
-    - name: Cycles241
-      description: 241 cycles
-      value: 7
+      value: 0b000
+    - name: Cycles13
+      description: 13 cycles
+      value: 0b001
+    - name: Cycles37
+      description: 37 cycles
+      value: 0b010
+    - name: Cycles49
+      description: 49 cycles
+      value: 0b011
 enum/EXTSEL:
   bit_size: 3
   description: External event select for regular group.
@@ -361,8 +349,8 @@ enum/EXTSEL:
     - name: TIM1_CC2
       description: Timer 1 capture compare 2.
       value: 0b010
-    - name: TIM2_TRGO
-      description: Timer 2 TRGO event.
+    - name: TIM1_CC3
+      description: Timer 1 capture compare 3.
       value: 0b011
     - name: TIM2_CC1
       description: Timer 2 capture compare 1.
@@ -370,8 +358,8 @@ enum/EXTSEL:
     - name: TIM2_CC2
       description: Timer 2 capture compare 2.
       value: 0b101
-    - name: PD3_PC2
-      description: PD3/PC2 pin.
+    - name: PA4_PA15
+      description: PA4/PA15 pin.
       value: 0b110
     - name: SWSTART
       description: Software start.
@@ -380,20 +368,23 @@ enum/JEXTSEL:
   bit_size: 3
   description: External event select for injected group.
   variants:
+    - name: TIM1_CC1
+      description: Timer 1 capture compare 1,
+      value: 0b001
+    - name: TIM1_CC2
+      description: Timer 1 capture compare 2.
+      value: 0b010
     - name: TIM1_CC3
       description: Timer 1 capture compare 3.
-      value: 0b000
-    - name: TIM1_CC4
-      description: Timer 1 capture compare 4.
-      value: 0b001
-    - name: TIM2_CC3
-      description: Timer 2 capture compare 3.
-      value: 0b010
-    - name: TIM2_CC4
-      description: Timer 2 capture compare 4.
       value: 0b011
-    - name: PD1_PA2
-      description: PD1/PA2 pin.
+    - name: TIM2_CC1
+      description: Timer 2 capture compare 1.
+      value: 0b100
+    - name: TIM2_CC2
+      description: Timer 2 capture compare 2.
+      value: 0b101
+    - name: PA4_PA15
+      description: PA4/PA15 pin.
       value: 0b110
     - name: JSWSTART
       description: Software start.
