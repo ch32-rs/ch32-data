@@ -380,9 +380,6 @@
     enable:
       register: AHBPCENR
       field: USBPDEN
-    reset:
-      register: AHBRSTR
-      field: USBPDRST
   interrupts:
     - signal: GLOBAL
       interrupt: USBPD
