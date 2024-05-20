@@ -1,4 +1,4 @@
-block/USB_PD:
+block/USBPD:
   description: USBPD configuration.
   items:
   - name: CONFIG
@@ -99,6 +99,7 @@ fieldset/CONFIG:
     description: PD Commutation port.
     bit_offset: 2
     bit_size: 2
+    enum: CC_SEL
   - name: PD_DMA_EN
     description: PD DMA Enable.
     bit_offset: 4
@@ -167,7 +168,7 @@ fieldset/PORT_CC:
   description: CC port control register.
   bit_size: 8
   fields:
-  - name: CC_CMP0
+  - name: PA_CC_AI
     description: CC1 output of the voltage comparator.
     bit_offset: 0
     bit_size: 1
@@ -184,15 +185,11 @@ fieldset/PORT_CC:
     description: CC1 port output of the low voltage.
     bit_offset: 4
     bit_size: 1
-  - name: CC_CVS
-    description: CC1 voltage comparator reference voltage.
-    bit_offset: 5
-    bit_size: 2
-    enum: PORT_CC_CVS
   - name: CC_CE
-    description: CC1 voltage comparator enable.
-    bit_offset: 7
-    bit_size: 1
+    description: CC1 voltage comparator enable and voltage comparator reference voltage. (CC_CE and CC_CVS)
+    bit_offset: 5
+    bit_size: 3
+    enum: PORT_CC_CE
 fieldset/STATUS:
   description: PD interrupt flag register.
   bit_size: 8
@@ -246,22 +243,37 @@ fieldset/TX_SEL:
     description: K-CODE4 type selection.
     bit_offset: 6
     bit_size: 2
-enum/PORT_CC_CVS:
-  descrption: CC voltage comparator reference voltage.
+enum/CC_SEL:
   bit_size: 2
   variants:
+  - name: CC1
+    description: Select CC1.
+    value: 0b00
+  - name: CC2
+    description: Select CC2.
+    value: 0b01
+  - name: CC3
+    description: Select CC3.
+    value: 0b10
+enum/PORT_CC_CE:
+  descrption: CC voltage comparator reference voltage.
+  bit_size: 3
+  variants:
+  - name: Closed
+    description: No pull up current.
+    value: 0b000
   - name: V0_55
     description: 0.55V
-    value: 0b00
+    value: 0b100
   - name: V0_22
     description: 0.22V
-    value: 0b01
+    value: 0b101
   - name: V0_66
     description: 0.66V
-    value: 0b10
+    value: 0b110
   - name: V1_23
     description: 1.23V
-    value: 0b11
+    value: 0b111
 enum/PORT_CC_PU:
   bit_size: 2
   variants:
