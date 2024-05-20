@@ -34,6 +34,13 @@
     - signal: EXTI8
       interrupt: EXTI15_8
 
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: ch641
+    block: EXTEND
+
 - name: RCC
   address: 0x40021000
   registers:
@@ -310,7 +317,7 @@
   address: 0x40012400
   registers:
     kind: adc
-    version: v0
+    version: ch641
     block: ADC
   rcc:
     bus_clock: PCLK2
@@ -341,7 +348,7 @@
       signal: IN6
     - pin: PB7
       signal: IN7
-    # TODO: ISP pin, IN8
+    # ISP pin is binded to IN8
     - pin: PB8
       signal: IN9
     - pin: PB0
@@ -361,3 +368,27 @@
       signal: ETR
       remap: 0
 
+- name: USBPD
+  address: 0x40027000
+  registers:
+    kind: usbpd
+    version: ch641
+    block: USBPD
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: USBPDEN
+    reset:
+      register: AHBRSTR
+      field: USBPDRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBPD
+    - signal: WKUP
+      interrupt: USBPD_WKUP
+  pins:
+    - { pin: "PB0", signal: "CC1" }
+    - { pin: "PB1", signal: "CC2" } # No Rd
+    - { pin: "PB9", signal: "CC3" }
