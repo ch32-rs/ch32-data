@@ -87,7 +87,7 @@ block/USBD:
     - name: UEP_CTRL
       description: endpoint control.
       byte_offset: 50 # 0x32
-      bit_size: 8
+      bit_size: 16
       array:
         len: 8
         stride: 4
@@ -428,7 +428,7 @@ fieldset/UEP_T_LEN:
       bit_size: 10
 fieldset/UEP_CTRL:
   description: endpoint control.
-  bit_size: 8
+  bit_size: 16
   fields:
     - name: MASK_T_RES
       description: bit mask of handshake response type for USB endpoint X transmittal (IN).
