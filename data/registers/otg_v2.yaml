@@ -82,7 +82,7 @@ block/USBD:
     - name: UEP_DMA
       description: endpoint DMA buffer address.
       byte_offset: 16
-      bit_size: 16
+      bit_size: 32
       array:
         len: 8
         stride: 4
