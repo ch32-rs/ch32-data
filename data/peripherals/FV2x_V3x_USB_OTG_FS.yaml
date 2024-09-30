@@ -14,9 +14,6 @@
   interrupts:
     - signal: GLOBAL
       interrupt: OTG_FS
-    # Note: Pretty sure this does not belong here, this is for USBD
-    - signal: WKUP
-      interrupt: USB_WKUP
   pins:
     - pin: PA11
       signal: DM
