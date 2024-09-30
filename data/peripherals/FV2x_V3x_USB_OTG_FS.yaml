@@ -12,10 +12,9 @@
       register: AHBPCENR
       field: OTG_EN
   interrupts:
-    - signal: HP
-      interrupt: USB_HP_CAN1_TX
-    - signal: LP
-      interrupt: USB_LP_CAN1_RX0
+    - signal: GLOBAL
+      interrupt: OTG_FS
+    # Note: Pretty sure this does not belong here, this is for USBD
     - signal: WKUP
       interrupt: USB_WKUP
   pins:
