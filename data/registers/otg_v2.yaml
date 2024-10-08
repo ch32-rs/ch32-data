@@ -329,6 +329,7 @@ fieldset/USB_INT_ST:
       description: RO, bit mask of current token PID code received for USB device mode.
       bit_offset: 4
       bit_size: 2
+      enum: USB_TOKEN
     - name: TOG_OK
       description: RO, indicate current USB transfer toggle is OK.
       bit_offset: 6
@@ -470,6 +471,7 @@ fieldset/UEP_TX_CTRL:
       description: bit mask of handshake response type for USB endpoint X transmittal (IN).
       bit_offset: 0
       bit_size: 2
+      enum: EP_TX_RESPONSE
     - name: T_TOG
       description: "prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1."
       bit_offset: 2
@@ -486,6 +488,7 @@ fieldset/UEP_RX_CTRL:
       description: bit mask of handshake response type for USB endpoint X receiving (OUT).
       bit_offset: 0
       bit_size: 2
+      enum: EP_RX_RESPONSE
     - name: R_TOG
       description: "expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1."
       bit_offset: 2
@@ -592,3 +595,51 @@ fieldset/UH_TX_CTRL:
     - name: T_AUTO_TOG
       bit_offset: 3
       bit_size: 1
+
+enum/EP_TX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with DATA0/DATA1 and expect ACK
+      value: 0
+    - name: None
+      description: Respond with DATA0/DATA1 and not expect ACK
+      value: 1
+    - name: NAK
+      description: Respond with NAK or Busy
+      value: 2
+    - name: STALL
+      description: Respond with STALL or Error
+      value: 3
+
+enum/EP_RX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with ACK
+      value: 0
+    - name: None 
+      description: Timeout / No Response, used for non-EP0 iso/sync transfer
+      value: 1
+    - name: NAK
+      description: Respond with NAK or Busy
+      value: 2
+    - name: STALL
+      description: Respond with STALL or Error
+      value: 3
+
+enum/USB_TOKEN:
+  bit_size: 2
+  variants:
+    - name: OUT
+      description: OUT Packet
+      value: 0
+    - name: Rsvd 
+      description: Reserved
+      value: 1
+    - name: IN
+      description: IN Packet
+      value: 2
+    - name: SETUP
+      description: Setup Packet
+      value: 3
