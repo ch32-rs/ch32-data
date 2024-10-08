@@ -15,8 +15,10 @@
       register: AHBRSTR
       field: USBHSRST
   interrupts:
-    - { "signal": "GLOBAL", "interrupt": "USBHS" }
-    - { "signal": "WAKEUP", "interrupt": "USBHS_WKUP" }
+    - signal: GLOBAL
+      interrupt: USBHS
+    - signal: WAKEUP
+      interrupt: USBHS_WKUP
   pins:
     - pin: PB6
       signal: DM

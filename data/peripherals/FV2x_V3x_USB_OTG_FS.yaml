@@ -12,12 +12,8 @@
       register: AHBPCENR
       field: OTG_EN
   interrupts:
-    - signal: HP
-      interrupt: USB_HP_CAN1_TX
-    - signal: LP
-      interrupt: USB_LP_CAN1_RX0
-    - signal: WKUP
-      interrupt: USB_WKUP
+    - signal: GLOBAL
+      interrupt: OTG_FS
   pins:
     - pin: PA11
       signal: DM
