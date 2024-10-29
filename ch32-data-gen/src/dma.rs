@@ -1,5 +1,5 @@
 use std::{
-    collections::{HashMap, HashSet},
+    collections::{BTreeSet, HashMap},
     path::Path,
 };
 
@@ -12,7 +12,7 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
     for core in &mut chip.cores {
         // DMA, Signal, Channel
         // e.g. DMA1, ADC1, 1
-        let mut all_dma_signals: HashSet<(String, String, u8)> = HashSet::new();
+        let mut all_dma_signals: BTreeSet<(String, String, u8)> = BTreeSet::new();
 
         if let Some(dma_channels_inc) = core.include_dma_channels.take() {
             for (dma, inc_path) in dma_channels_inc {
