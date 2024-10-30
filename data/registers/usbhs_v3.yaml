@@ -78,7 +78,6 @@ block/USBD:
       description: endpoint 0 DMA buffer address.
       byte_offset: 0x1C
       bit_size: 32
-      fieldset: EP_DMA
     - name: EP_RX_DMA
       description: endpoint n (n=1-15) DMA RX buffer address.
       byte_offset: 0x20
@@ -86,7 +85,6 @@ block/USBD:
       array:
         len: 15
         stride: 4
-      fieldset: EP_DMA
     - name: EP_TX_DMA
       description: endpoint n (n=1-15) DMA TX buffer address.
       byte_offset: 0x5C
@@ -94,7 +92,6 @@ block/USBD:
       array:
         len: 15
         stride: 4
-      fieldset: EP_DMA
     - name: EP_MAX_LEN
       description: endpoint n (n=0-15) max acceptable length.
       byte_offset: 0x98
@@ -109,7 +106,7 @@ block/USBD:
       bit_size: 16
       array:
         len: 16
-        stride: 12
+        stride: 4
       fieldset: EP_LEN
     - name: EP_TX_CTRL
       description: endpoint n (n=0-15) send control.
@@ -117,7 +114,7 @@ block/USBD:
       bit_size: 8
       array:
         len: 16
-        stride: 12
+        stride: 4
       fieldset: EP_TX_CTRL
     - name: EP_RX_CTRL
       description: endpoint n (n=0-15) receive control.
@@ -125,7 +122,7 @@ block/USBD:
       bit_size: 8
       array:
         len: 16
-        stride: 12
+        stride: 4
       fieldset: EP_RX_CTRL
 
 block/USBH:
@@ -149,12 +146,10 @@ block/USBH:
       description: USB host receive buffer start address
       byte_offset: 0x24
       bit_size: 32
-      fieldset: EP_DMA
     - name: TX_DMA
       description: USB host transmit buffer start address
       byte_offset: 0x28
       bit_size: 32
-      fieldset: EP_DMA
     - name: RX_MAX_LEN
       description: USB host receive maximum length packet register
       byte_offset: 0xA0
@@ -215,6 +210,7 @@ fieldset/CTRL:
       description: "enable USB low speed: 00=full speed, 01=high speed, 10 =low speed."
       bit_offset: 5
       bit_size: 2
+      enum: SPEED_TYPE
     - name: HOST_MODE
       description: "enable USB host mode: 0=device mode, 1=host mode."
       bit_offset: 7
@@ -331,6 +327,7 @@ fieldset/INT_ST:
       description: RO, bit mask of current token PID code received for USB device mode.
       bit_offset: 4
       bit_size: 2
+      enum: USB_TOKEN
     - name: TOG_OK
       description: RO, indicate current USB transfer toggle is OK.
       bit_offset: 6
@@ -383,6 +380,7 @@ fieldset/SPEED_TYPE:
       description: in host mode, it indicates the speed type of the currently connected device; in device mode, it indicates the speed type of the current device.
       bit_offset: 0
       bit_size: 2
+      enum: SPEED_TYPE
 fieldset/SUSPEND:
   description: indicate USB suspend status.
   bit_size: 8
@@ -428,6 +426,7 @@ fieldset/EP_TYPE:
       description: Endpoint 1 to 15 receive type, 1 means synchronous transmission
       bit_offset: 17
       bit_size: 1
+      enum: ENDPOINT_TYPE
       array:
         len: 15
         stride: 1
@@ -435,6 +434,7 @@ fieldset/EP_TYPE:
       description: Endpoint 1 to 15 transmit type, 1 means synchronous transmission
       bit_offset: 1
       bit_size: 1
+      enum: ENDPOINT_TYPE
       array:
         len: 15
         stride: 1
@@ -468,10 +468,12 @@ fieldset/EP_TX_CTRL:
       description: MASK_UEP_T_TOG
       bit_offset: 3
       bit_size: 2
+      enum: EP_TOG
     - name: MASK_UEP_T_RES
       description: MASK_UEP_T_RES
       bit_offset: 0
       bit_size: 2
+      enum: EP_TX_RESPONSE
 fieldset/EP_RX_CTRL:
   description: endpoint n receive control.
   bit_size: 8
@@ -484,10 +486,12 @@ fieldset/EP_RX_CTRL:
       description: MASK_UEP_R_TOG
       bit_offset: 3
       bit_size: 2
+      enum: EP_TOG
     - name: MASK_UEP_R_RES
       description: MASK_UEP_R_RES
       bit_offset: 0
       bit_size: 2
+      enum: EP_RX_RESPONSE
 
 # --------
 # UH
@@ -617,14 +621,6 @@ fieldset/UH_SPLIT_DATA:
       bit_size: 12
 
 # shared
-fieldset/EP_DMA:
-  description: USB endpoint DMA buffer address.
-  bit_size: 32
-  fields:
-    - name: ADDR
-      description: USB endpoint DMA buffer address. 4byte aligned.
-      bit_offset: 0
-      bit_size: 17
 fieldset/EP_LEN:
   description: endpoint n acceptable length.
   bit_size: 16
@@ -633,3 +629,83 @@ fieldset/EP_LEN:
       description: endpoint n acceptable length.
       bit_offset: 0
       bit_size: 11
+
+enum/SPEED_TYPE:
+  bit_size: 2
+  variants:
+    - name: FullSpeed 
+      description: USB Full Speed (12Mbps)
+      value: 0
+    - name: HighSpeed
+      description: USB High Speed (480Mbps)
+      value: 1
+    - name: LowSpeed
+      description: USB Low Speed (1.5Mbps)
+      value: 2
+
+enum/USB_TOKEN:
+  bit_size: 2
+  variants:
+    - name: OUT
+      description: OUT Packet
+      value: 0
+    - name: SOF 
+      description: Start of Frame
+      value: 1
+    - name: IN
+      description: IN Packet
+      value: 2
+    - name: SETUP
+      description: SETUP Packet
+      value: 3
+
+enum/ENDPOINT_TYPE:
+  bit_size: 1
+  variants:
+    - name: NISO
+      description: Non Isochronous (Interrupt/Bulk)
+      value: 0
+    - name: ISO
+      description: Isochronous Transfer
+      value: 1
+
+enum/EP_TOG:
+  bit_size: 2
+  variants:
+    - name: DATA0
+      value: 0
+    - name: DATA1
+      value: 1
+    - name: DATA2
+      value: 2
+    - name: MDATA 
+      value: 3
+
+enum/EP_TX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with DATA0/DATA1 and expect ACK
+      value: 0
+    - name: NAK
+      description: Respond with NAK or Busy
+      value: 2
+    - name: STALL
+      description: Respond with STALL or Error
+      value: 3
+
+enum/EP_RX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with ACK
+      value: 0
+    - name: NYET
+      description: Respond NYET
+      value: 1
+    - name: NAK
+      description: Respond with NAK(Busy)
+      value: 2
+    - name: STALL
+      description: Respond with STALL(Error)
+      value: 3
