@@ -2,8 +2,8 @@
 - name: USBHS
   address: 0x40023400
   registers:
-    kind: usb
-    version: v3hs
+    kind: usbhs
+    version: v3
     block: USB
   rcc:
     bus_clock: HCLK
