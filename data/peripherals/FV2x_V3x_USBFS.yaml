@@ -13,9 +13,7 @@
       field: OTG_EN
   interrupts:
     - signal: GLOBAL
-      interrupt: USBHD
-    - signal: WAKEUP
-      interrupt: USBHD_WKUP
+      interrupt: OTG_FS
   pins:
     - pin: PA11
       signal: DM
