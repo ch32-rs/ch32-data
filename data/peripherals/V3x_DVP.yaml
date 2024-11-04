@@ -1,0 +1,49 @@
+- name: DVP
+  address: 50050000
+  registers:
+    kind: dvp
+    version: v3
+    block: DVP
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DVP_EN
+    reset:
+      register: AHBRSTR
+      field: DVPRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: DVP
+  pins:
+    - pin: PA4
+      signal: HSYNC
+    - pin: PA5
+      signal: VSYNC
+    - pin: PA6
+      signal: PCLK
+    - pin: PA9
+      signal: D0
+    - pin: PA10
+      signal: D1
+    - pin: PC8
+      signal: D2
+    - pin: PC9
+      signal: D3
+    - pin: PC11
+      signal: D4
+    - pin: PB3
+      signal: D5
+    - pin: PB8
+      signal: D6
+    - pin: PB9
+      signal: D7
+    - pin: PC10
+      signal: D8
+    - pin: PC12
+      signal: D9
+    - pin: PD6
+      signal: D10
+    - pin: PD2
+      signal: D11
