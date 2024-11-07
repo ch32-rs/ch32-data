@@ -1,5 +1,5 @@
 - name: DVP
-  address: 50050000
+  address: 0x50050000
   registers:
     kind: dvp
     version: v3
@@ -33,7 +33,7 @@
       signal: D3
     - pin: PC11
       signal: D4
-    - pin: PB3
+    - pin: PB6
       signal: D5
     - pin: PB8
       signal: D6
