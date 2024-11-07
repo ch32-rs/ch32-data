@@ -359,4 +359,3 @@ enum/VSYNC_POLARITY:
     - name: VSYNC_POLARITY_HIGH
       description: VSYNC active high.
       value: 0b1
- 
