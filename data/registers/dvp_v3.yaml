@@ -80,7 +80,7 @@ fieldset/CAPCNT:
   description: Digital Video Capture count register. (DVP_CAPCNT).
   bit_size: 16
   fields:
-  - name: RB_DVP_CAPCNT
+  - name: CAPCNT
     description: Number of PCLK cycles captured by clipping window.
     bit_offset: 0
     bit_size: 16
@@ -88,7 +88,7 @@ fieldset/COL_NUM:
   description: Image column number configuration register. (DVP_COL_NUM).
   bit_size: 16
   fields:
-  - name: RB_DVP_COL_NUM
+  - name: COL_NUM
     description: Number of PCLK cycles for row data.
     bit_offset: 0
     bit_size: 16
@@ -96,31 +96,31 @@ fieldset/CR0:
   description: Digital Video control register. (DVP_CR0).
   bit_size: 8
   fields:
-  - name: RB_DVP_ENABLE
+  - name: ENABLE
     description: DVP enable.
     bit_offset: 0
     bit_size: 1
-  - name: RB_DVP_V_POLAR
+  - name: V_POLAR
     description: DVP VSYNC polarity control.
     bit_offset: 1
     bit_size: 1
     enum: VSYNC_POLARITY
-  - name: RB_DVP_H_POLAR
+  - name: H_POLAR
     description: DVP HSYNC polarity control.
     bit_offset: 2
     bit_size: 1
     enum: HSYNC_POLARITY
-  - name: RB_DVP_P_POLAR
+  - name: P_POLAR
     description: DVP PCLK polarity control.
     bit_offset: 3
     bit_size: 1
     enum: PCLK_POLARITY
-  - name: RB_DVP_MSK_DAT_MOD
+  - name: MSK_DAT_MOD
     description: DVP data mode.
     bit_offset: 4
     bit_size: 2
     enum: DATA_MODE
-  - name: RB_DVP_JPEG
+  - name: JPEG
     description: DVP JPEG mode.
     bit_offset: 6
     bit_size: 1
@@ -129,31 +129,31 @@ fieldset/CR1:
   description: Digital Video control register. (DVP_CR1).
   bit_size: 8
   fields:
-  - name: RB_DVP_DMA_EN
+  - name: DMA_EN
     description: DVP dma enable.
     bit_offset: 0
     bit_size: 1
-  - name: RB_DVP_ALL_CLR
+  - name: ALL_CLR
     description: DVP all clear.
     bit_offset: 1
     bit_size: 1
-  - name: RB_DVP_RCV_CLR
+  - name: RCV_CLR
     description: DVP receive logic clear.
     bit_offset: 2
     bit_size: 1
-  - name: RB_DVP_BUF_TOG
+  - name: BUF_TOG
     description: DVP bug toggle by software.
     bit_offset: 3
     bit_size: 1
-  - name: RB_DVP_CM
+  - name: CM
     description: DVP capture mode.
     bit_offset: 4
     bit_size: 1
-  - name: RB_DVP_CROP
+  - name: CROP
     description: DVP Crop feature enable.
     bit_offset: 5
     bit_size: 1
-  - name: RB_DVP_FCRC
+  - name: FCRC
     description: DVP frame capture rate control.
     bit_offset: 6
     bit_size: 2
@@ -161,21 +161,21 @@ fieldset/CR1:
 fieldset/DMA_BUF0:
   description: Digital Video DMA address register. (DVP_DMA_BUF0).
   fields:
-  - name: RB_DVP_DMA_BUF0
+  - name: DMA_BUF0
     description: DMA receive address 0.
     bit_offset: 0
     bit_size: 17
 fieldset/DMA_BUF1:
   description: Digital Video DMA address register. (DVP_DMA_BUF1).
   fields:
-  - name: RB_DVP_DMA_BUF1
+  - name: DMA_BUF1
     description: DMA receive address 1.
     bit_offset: 0
     bit_size: 17
 fieldset/DR:
   description: Digital Video Data register. (DVP_DR).
   fields:
-  - name: RB_DVP_DR
+  - name: DR
     description: Prevent DMA overflow.
     bit_offset: 0
     bit_size: 32
@@ -183,7 +183,7 @@ fieldset/HOFFCNT:
   description: Digital Video horizontal displacement register. (DVP_HOFFCNT).
   bit_size: 16
   fields:
-  - name: RB_DVP_HOFFCNT
+  - name: HOFFCNT
     description: Number of PCLK cycles for row data.
     bit_offset: 0
     bit_size: 16
@@ -191,23 +191,23 @@ fieldset/IER:
   description: Digital Video Interrupt register. (DVP_IER).
   bit_size: 8
   fields:
-  - name: RB_DVP_IE_STR_FRM
+  - name: IE_STR_FRM
     description: DVP frame start interrupt enable.
     bit_offset: 0
     bit_size: 1
-  - name: RB_DVP_IE_ROW_DONE
+  - name: IE_ROW_DONE
     description: DVP row received done interrupt enable.
     bit_offset: 1
     bit_size: 1
-  - name: RB_DVP_IE_FRM_DONE
+  - name: IE_FRM_DONE
     description: DVP frame received done interrupt enable.
     bit_offset: 2
     bit_size: 1
-  - name: RB_DVP_IE_FIFO_OV
+  - name: IE_FIFO_OV
     description: DVP receive fifo overflow interrupt enable.
     bit_offset: 3
     bit_size: 1
-  - name: RB_DVP_IE_STP_FRM
+  - name: IE_STP_FRM
     description: DVP frame stop interrupt enable.
     bit_offset: 4
     bit_size: 1
@@ -215,23 +215,23 @@ fieldset/IFR:
   description: Digital Video Flag register. (DVP_IFR).
   bit_size: 8
   fields:
-  - name: RB_DVP_IF_STR_FRM
+  - name: IF_STR_FRM
     description: DVP frame start interrupt enable.
     bit_offset: 0
     bit_size: 1
-  - name: RB_DVP_IF_ROW_DONE
+  - name: IF_ROW_DONE
     description: DVP row received done interrupt enable.
     bit_offset: 1
     bit_size: 1
-  - name: RB_DVP_IF_FRM_DONE
+  - name: IF_FRM_DONE
     description: DVP frame received done interrupt enable.
     bit_offset: 2
     bit_size: 1
-  - name: RB_DVP_IF_FIFO_OV
+  - name: IF_FIFO_OV
     description: DVP receive fifo overflow interrupt enable.
     bit_offset: 3
     bit_size: 1
-  - name: RB_DVP_IF_STP_FRM
+  - name: IF_STP_FRM
     description: DVP frame stop interrupt enable.
     bit_offset: 4
     bit_size: 1
@@ -239,7 +239,7 @@ fieldset/ROW_CNT:
   description: Digital Video line counter register. (DVP_ROW_CNT).
   bit_size: 16
   fields:
-  - name: RB_DVP_ROW_CNT
+  - name: ROW_CNT
     description: The number of rows of frame image data.
     bit_offset: 0
     bit_size: 16
@@ -247,7 +247,7 @@ fieldset/ROW_NUM:
   description: Image line count configuration register. (DVP_ROW_NUM).
   bit_size: 16
   fields:
-  - name: RB_DVP_ROW_NUM
+  - name: ROW_NUM
     description: The number of rows of frame image data.
     bit_offset: 0
     bit_size: 16
@@ -255,19 +255,19 @@ fieldset/STATUS:
   description: Digital Video STATUS register. (DVP_STATUS).
   bit_size: 8
   fields:
-  - name: RB_DVP_FIFO_RDY
+  - name: FIFO_RDY
     description: DVP frame start interrupt enable.
     bit_offset: 0
     bit_size: 1
-  - name: RB_DVP_FIFO_FULL
+  - name: FIFO_FULL
     description: DVP row received done interrupt enable.
     bit_offset: 1
     bit_size: 1
-  - name: RB_DVP_FIFO_OV
+  - name: FIFO_OV
     description: DVP frame received done interrupt enable.
     bit_offset: 2
     bit_size: 1
-  - name: RB_DVP_MSK_FIFO_CNT
+  - name: MSK_FIFO_CNT
     description: DVP receive fifo overflow interrupt enable.
     bit_offset: 4
     bit_size: 3
@@ -275,7 +275,7 @@ fieldset/VLINE:
   description: Digital Video Vertical line count register. (DVP_VLINE).
   bit_size: 16
   fields:
-  - name: RB_DVP_VLINE
+  - name: VLINE
     description: Crop the number of rows captured by window.
     bit_offset: 0
     bit_size: 16
@@ -283,7 +283,7 @@ fieldset/VST:
   description: Digital Video line number register. (DVP_VST).
   bit_size: 16
   fields:
-  - name: RB_DVP_VST
+  - name: VST
     description: The number of lines captured by the image.
     bit_offset: 0
     bit_size: 16
