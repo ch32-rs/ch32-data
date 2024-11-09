@@ -127,6 +127,8 @@ OTG_FS: 83
 USBHS_WKUP: 84
 # 85 - USBHS
 USBHS: 85
+# 86 - DVP global interrupt
+DVP: 86
 # 87 - USART6 global interrupt
 USART6: 87
 # 88 - USART7 global interrupt
