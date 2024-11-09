@@ -306,10 +306,10 @@ enum/CAPTURE_MODE:
   bit_size: 1
   description: Capture mode.
   variants:
-    - name: CAPTURE_MODE_RAW
+    - name: RAW
       description: Raw data capture mode.
       value: 0b0
-    - name: CAPTURE_MODE_JPEG
+    - name: JPEG
       description: JPEG data capture mode.
       value: 0b1
 
@@ -317,13 +317,13 @@ enum/DATA_MODE:
   bit_size: 2
   description: Data mode.
   variants:
-    - name: DATA_MODE_8BIT
+    - name: _8BIT
       description: 8-bit data mode.
       value: 0b00
-    - name: DATA_MODE_10BIT
+    - name: _10BIT
       description: 10-bit data mode.
       value: 0b01
-    - name: DATA_MODE_12BIT
+    - name: _12BIT
       description: 12-bit data mode.
       value: 0b10
 
@@ -331,10 +331,10 @@ enum/PCLK_POLARITY:
   bit_size: 1
   description: PCLK polarity control.
   variants:
-    - name: PCLK_POLARITY_FALLING_EDGE
+    - name: FALLING_EDGE
       description: PCLK falling edge.
       value: 0b1
-    - name: PCLK_POLARITY_RISING_EDGE
+    - name: RISING_EDGE
       description: PCLK rising edge.
       value: 0b0
 
@@ -342,10 +342,10 @@ enum/HSYNC_POLARITY:
   bit_size: 1
   description: HSYNC polarity control.
   variants:
-    - name: HSYNC_POLARITY_LOW
+    - name: ACTIVE_LOW
       description: HSYNC active low.
       value: 0b1
-    - name: HSYNC_POLARITY_HIGH
+    - name: ACTIVE_HIGH
       description: HSYNC active high.
       value: 0b0
 
@@ -353,9 +353,9 @@ enum/VSYNC_POLARITY:
   bit_size: 1
   description: VSYNC polarity control.
   variants:
-    - name: VSYNC_POLARITY_LOW
+    - name: ACTIVE_LOW
       description: VSYNC active low.
       value: 0b0
-    - name: VSYNC_POLARITY_HIGH
+    - name: ACTIVE_HIGH
       description: VSYNC active high.
       value: 0b1
