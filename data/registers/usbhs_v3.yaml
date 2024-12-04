@@ -148,7 +148,7 @@ block/USBH:
       bit_size: 32
     - name: TX_DMA
       description: USB host transmit buffer start address
-      byte_offset: 0x28
+      byte_offset: 0x64
       bit_size: 32
     - name: RX_MAX_LEN
       description: USB host receive maximum length packet register
