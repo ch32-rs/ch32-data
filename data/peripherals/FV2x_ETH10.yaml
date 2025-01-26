@@ -1,0 +1,30 @@
+# Ethernet MAC-10M + PHY
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: eth
+    version: 10m
+    block: ETH
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: HCLK
+    enable:
+      # FIXME! definitively incorrect, but ch32-data currently needs these fields.
+      # Since the ETHMACEN field is reserved to the 10/100/1G MAC, which is mutually exclusive
+      # with the MAC-10M, it's probably safest to give this field.
+      register: AHBPCENR
+      field: ETHMACEN
+  exten:
+    # Contrary to other peripherals, the Ethernet MAC is enabled from register EXTEN_CTR
+    enable:
+      register: EXTEN_CTR
+      field: ETH10M
+  pins:
+    - pin: PC6
+      signal: ETH_RXP
+    - pin: PC7
+      signal: ETH_RXN
+    - pin: PC8
+      signal: ETH_TXP
+    - pin: PC9
+      signal: ETH_TXN

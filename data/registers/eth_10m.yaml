@@ -1,0 +1,501 @@
+block/ETH:
+  description: Ethernet MAC-10M+PHY
+  items:
+    - name: EIE
+      description: Interrupt enable register
+      byte_offset: 0x03
+      fieldset: EIE
+    - name: EIR
+      description: Interrupt flag register
+      byte_offset: 0x04
+      fieldset: EIR
+    - name: ESTAT
+      description: Status register
+      byte_offset: 0x05
+      fieldset: ESTAT
+    - name: ECON2
+      description: PHY analog parameter setting register
+      byte_offset: 0x06
+      fieldset: ECON2
+    - name: ECON1
+      description: Receive/transmit control register
+      byte_offset: 0x07
+      fieldset: ECON1
+    # - name: TX
+    #   description: Transmit DMA control register
+    #   byte_offset: 0x08
+    #   fieldset: TX
+    - name: ETXST
+      description: Transmit DMA buffer start address register
+      byte_offset: 0x08
+      fieldset: ETXST
+    - name: ETXLN
+      description: Transmission length register
+      byte_offset: 0x0A
+      fieldset: ETXLN
+    # - name: RX
+    #   description: Receive DMA control register
+    #   byte_offset: 0x0C
+    #   fieldset: RX
+    - name: ERXST
+      description: Receive DMA buffer start address register
+      byte_offset: 0x0C
+      fieldset: ERXST
+    - name: ERXLN
+      description: Reception length register
+      byte_offset: 0x0E
+      fieldset: ERXLN
+    - name: HTL
+      description: Hash table low register
+      byte_offset: 0x10
+      fieldset: HTL
+    - name: HTH
+      description: Hash table high register
+      byte_offset: 0x14
+      fieldset: HTH
+    # - name: MACON
+    #   description: Receive filter control register
+    #   byte_offset: 0x18
+    #   fieldset: MACON
+    - name: ERXFCON
+      description: Receive packet filter control register
+      byte_offset: 0x18
+      fieldset: ERXFCON
+    - name: MACON1
+      description: Mac layer flow control register
+      byte_offset: 0x19
+      fieldset: MACON1
+    - name: MACON2
+      description: Mac layer packet control register
+      byte_offset: 0x1A
+      fieldset: MACON2
+    - name: MABBIPG
+      description: Minimum packet interval register
+      byte_offset: 0x1B
+      fieldset: MABBIPG
+    # - name: TIM
+    #   description: Flow control pause frame time register
+    #   byte_offset: 0x1C
+    #   fieldset: TIM
+    - name: EPAUS
+      description: Flow control pause frame time register
+      byte_offset: 0x1C
+      fieldset: EPAUS
+    - name: MAMXFL
+      description: Maximum receive packet length register
+      byte_offset: 0x1E
+      fieldset: MAMXFL
+    - name: MIRD
+      description: MII read register
+      byte_offset: 0x20
+      fieldset: MIRD
+    - name: MIREGADR
+      description: MII read register address
+      byte_offset: 0x24
+      fieldset: MIREGADR
+    - name: MIWR
+      description: MII write register
+      byte_offset: 0x24
+      fieldset: MIWR
+    - name: MAADR0
+      description: MAC address low register
+      byte_offset: 0x28
+      fieldset: MAADR0
+    - name: MAADR1
+      description: MAC address byte 1
+      byte_offset: 0x29
+      fieldset: MAADR1
+    - name: MAADR2
+      description: MAC address byte 2
+      byte_offset: 0x2A
+      fieldset: MAADR2
+    - name: MAADR3
+      description: MAC address byte 3
+      byte_offset: 0x2B
+      fieldset: MAADR3
+    - name: MAADR4
+      description: MAC address byte 4
+      byte_offset: 0x2C
+      fieldset: MAADR4
+    - name: MAADR5
+      description: MAC address high register
+      byte_offset: 0x2D
+      fieldset: MAADR5
+
+fieldset/EIE:
+  description:
+  bit_size: 8
+  fields:
+    - name: RXERIE
+      description: Receive error interrupt enable
+      bit_offset: 0
+      bit_size: 1
+    - name: TXERIE
+      description: Transmit error interrupt enable
+      bit_offset: 1
+      bit_size: 1
+    - name: R_EN50
+      description: Built-in 50ohm impedance matching resistor enable
+      bit_offset: 2
+      bit_size: 1
+    - name: TXIE
+      description: Transmit completed interrupt enable
+      bit_offset: 3
+      bit_size: 1
+    - name: LINKIE
+      description: Link change interrupt enable
+      bit_offset: 4
+      bit_size: 1
+    - name: RXIE
+      description: Receive completed interrupt enable
+      bit_offset: 6
+      bit_size: 1
+    - name: INTIE
+      description: Ethernet interrupt enable
+      bit_offset: 7
+      bit_size: 1
+fieldset/EIR:
+  description:
+  bit_size: 8
+  fields:
+    - name: RXERIF
+      description: Receive error flag
+      bit_offset: 0
+      bit_size: 1
+    - name: TXERIF
+      description: Transmit error flag
+      bit_offset: 1
+      bit_size: 1
+    - name: TXIF
+      description: Transmit completed flag
+      bit_offset: 3
+      bit_size: 1
+    - name: LINKIF
+      description: Link change flag
+      bit_offset: 4
+      bit_size: 1
+    - name: RXIF
+      description: Receive completed flag
+      bit_offset: 6
+      bit_size: 1
+fieldset/ESTAT:
+  description:
+  bit_size: 8
+  fields:
+    - name: TXABRT
+      description: Transmission interrupted by MCU
+      bit_offset: 1
+      bit_size: 1
+    - name: RXBUSY
+      description: Packets receive in progress
+      bit_offset: 2
+      bit_size: 1
+    - name: RXMORE
+      description: Receive more than the set maximum packets
+      bit_offset: 3
+      bit_size: 1
+    - name: RXNIBBLE
+      description: Receive nibble error / Receive more than the set maximum
+      bit_offset: 4
+      bit_size: 1
+    - name: RXCRCER
+      description: Receive CRC error
+      bit_offset: 5
+      bit_size: 1
+    - name: BUFER
+      description: Buffer error
+      bit_offset: 6
+      bit_size: 1
+    - name: INT
+      description: Interrupt
+      bit_offset: 7
+      bit_size: 1
+fieldset/ECON2:
+  description:
+  bit_size: 8
+  fields:
+    - name: TX
+      description: Transmitter energy-saving driver control
+      bit_offset: 0
+      bit_size: 1
+    - name: RX_MUST
+      description: Reserved. Must write 110b.
+      bit_offset: 1
+      bit_size: 3
+fieldset/ECON1:
+  description:
+  bit_size: 8
+  fields:
+    - name: RX_EN
+      description: Receive enable
+      bit_offset: 2
+      bit_size: 1
+    - name: TX_RTS
+      description: Transmit start. Cleared automatically after the transmission is completed
+      bit_offset: 3
+      bit_size: 1
+    - name: RX_RST
+      description: Receive module reset
+      bit_offset: 6
+      bit_size: 1
+    - name: TX_RST
+      description: Transmit module reset
+      bit_offset: 7
+      bit_size: 1
+fieldset/ETXST:
+  description:
+  bit_size: 16
+  fields:
+    - name: ETXST
+      description: Transmit DMA buffer start address
+      bit_offset: 0
+      bit_size: 16
+fieldset/ETXLN:
+  description:
+  bit_size: 16
+  fields:
+    - name: ETXLN
+      description: Transmission length
+      bit_offset: 0
+      bit_size: 16
+fieldset/ERXST:
+  description:
+  bit_size: 16
+  fields:
+    - name: ERXST
+      description: Receive DMA buffer start address
+      bit_offset: 0
+      bit_size: 16
+fieldset/ERXLN:
+  description:
+  bit_size: 16
+  fields:
+    - name: ERXLN
+      description: Reception length
+      bit_offset: 0
+      bit_size: 16
+fieldset/HTL:
+  description:
+  bit_size: 32
+  fields:
+    - name: B0
+      description: Hash Table byte 0
+      bit_offset: 0
+      bit_size: 8
+    - name: B1
+      description: Hash Table byte 1
+      bit_offset: 8
+      bit_size: 8
+    - name: B2
+      description: Hash Table byte 2
+      bit_offset: 16
+      bit_size: 8
+    - name: B3
+      description: Hash Table byte 3
+      bit_offset: 24
+      bit_size: 8
+fieldset/HTH:
+  description:
+  bit_size: 32
+  fields:
+    - name: B4
+      description: Hash Table byte 4
+      bit_offset: 0
+      bit_size: 8
+    - name: B5
+      description: Hash Table byte 5
+      bit_offset: 8
+      bit_size: 8
+    - name: B6
+      description: Hash Table byte 6
+      bit_offset: 16
+      bit_size: 8
+    - name: B7
+      description: Hash Table byte 7
+      bit_offset: 24
+      bit_size: 8
+fieldset/ERXFCON:
+  description:
+  bit_size: 8
+  fields:
+    - name: BCEN
+      description: Broadcast packet matching filter settings
+      bit_offset: 0
+      bit_size: 1
+    - name: MCEN
+      description: Multicast packet matching filter settings
+      bit_offset: 1
+      bit_size: 1
+    - name: HTEN
+      description: Hash table matching filter settings
+      bit_offset: 2
+      bit_size: 1
+    - name: MPEN
+      description: Magic packet filter settings
+      bit_offset: 3
+      bit_size: 1
+    - name: EN
+      description: Receive filtering enable
+      bit_offset: 4
+      bit_size: 1
+    - name: CRCEN
+      description: CRC checksum filter settings
+      bit_offset: 5
+      bit_size: 1
+    - name: UCEN
+      description: Unicast match filter settings
+      bit_offset: 7
+      bit_size: 1
+fieldset/MACON1:
+  description:
+  bit_size: 8
+  fields:
+    - name: MARXEN
+      description: MAC layer receive enable
+      bit_offset: 0
+      bit_size: 1
+    - name: PASSALL
+      description: Control frame setting
+      bit_offset: 1
+      bit_size: 1
+    - name: RXPAUS
+      description: Receive pause frame enable
+      bit_offset: 2
+      bit_size: 1
+    - name: TXPAUS
+      description: Transmit pause frame enable control
+      bit_offset: 3
+      bit_size: 1
+    - name: FCEN
+      description: Pause frame setting. Active at full-duplex
+      bit_offset: 4
+      bit_size: 2
+fieldset/MACON2:
+  description:
+  bit_size: 8
+  fields:
+    - name: FULDPX
+      description: Ethernet communication mode
+      bit_offset: 0
+      bit_size: 1
+    - name: HFRMEN
+      description: Jumbo frame received enable
+      bit_offset: 2
+      bit_size: 1
+    - name: PHDREN
+      description: Special 4 bytes are not involved in CRC.
+      bit_offset: 3
+      bit_size: 1
+    - name: TXCRCEN
+      description: Transmit add CRC control
+      bit_offset: 4
+      bit_size: 1
+    - name: PADCFG
+      description: Short packet fill setting
+      bit_offset: 5
+      bit_size: 3
+fieldset/MABBIPG:
+  description:
+  bit_size: 8
+  fields:
+    - name: MABBIPG
+      description: Minimum number of packet interval bytes
+      bit_offset: 0
+      bit_size: 7
+fieldset/EPAUS:
+  description:
+  bit_size: 16
+  fields:
+    - name: EPAUS
+      description: Flow control pause frame time
+      bit_offset: 0
+      bit_size: 16
+fieldset/MAMXFL:
+  description:
+  bit_size: 16
+  fields:
+    - name: MAMXFL
+      description: Maximum receive packet length
+      bit_offset: 0
+      bit_size: 16
+fieldset/MIRD:
+  description:
+  bit_size: 16
+  fields:
+    - name: RD
+      description: MII Read register
+      bit_offset: 0
+      bit_size: 16
+fieldset/MIREGADR:
+  description:
+  bit_size: 8
+  fields:
+    - name: MIREGADR
+      description: MII Read register address
+      bit_offset: 0
+      bit_size: 8
+fieldset/MIWR:
+  description:
+  bit_size: 32
+  fields:
+    - name: MIRDL
+      description: PHY register address
+      bit_offset: 0
+      bit_size: 5
+    - name: WRITE
+      description: Write to MII register
+      bit_offset: 8
+      bit_size: 1
+    - name: WR
+      description: MII write register
+      bit_offset: 16
+      bit_size: 16
+fieldset/MAADR0:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 0
+      bit_offset: 0
+      bit_size: 8
+fieldset/MAADR1:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 1
+      bit_offset: 0
+      bit_size: 8
+
+fieldset/MAADR2:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 2
+      bit_offset: 0
+      bit_size: 8
+fieldset/MAADR3:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 3
+      bit_offset: 0
+      bit_size: 8
+fieldset/MAADR4:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 4
+      bit_offset: 0
+      bit_size: 8
+fieldset/MAADR5:
+  description:
+  bit_size: 8
+  fields:
+    - name: MAADR
+      description: MAC Address byte 5
+      bit_offset: 0
+      bit_size: 8
