@@ -9,12 +9,13 @@
     bus_clock: PCLK1
     kernel_clock: HCLK
     enable:
-      register: AHBPCENR
-      field: ETHMACEN
-    reset:
-      register: AHBRSTR
-      field: ETHMACRST
-      # probably incorrect, seems to be for 1G MAC only
+      register: _
+      field: _
+  exten:
+    # Contrary to other peripherals, the Ethernet MAC is enabled from register EXTEN_CTR
+    enable:
+      register: EXTEN_CTR
+      field: ETH10M
   pins:
     - pin: PC6
       signal: ETH_RXP
