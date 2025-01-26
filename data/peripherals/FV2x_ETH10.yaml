@@ -1,0 +1,26 @@
+# Ethernet MAC-10M + PHY
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: eth
+    version: 10m
+    block: ETH
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: ETHMACEN
+    reset:
+      register: AHBRSTR
+      field: ETHMACRST
+      # probably incorrect, seems to be for 1G MAC only
+  pins:
+    - pin: PC6
+      signal: ETH_RXP
+    - pin: PC7
+      signal: ETH_RXN
+    - pin: PC8
+      signal: ETH_TXP
+    - pin: PC9
+      signal: ETH_TXN
