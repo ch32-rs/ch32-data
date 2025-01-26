@@ -10,6 +10,7 @@
   - CH32V305*, CH32V307*
   - CH32F205RB, CH32F207VC
 - x0: CH32X0
+- 10m: ethernet 10M MAC + PHY
 
 ## Peripherals
 

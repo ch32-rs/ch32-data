@@ -523,6 +523,11 @@ fieldset/CFGR0:
       bit_offset: 24
       bit_size: 4
       enum: MCO
+    - name: ETHPRE
+      description: Ethernet clock source prescaler control.
+      bit_offset: 28
+      bit_size: 1
+      enum: ETHPRE
     - name: ADC_CLK_ADJ
       description: ADC clock ADJ.
       bit_offset: 31
@@ -1070,6 +1075,16 @@ enum/MCO:
     - name: PLL3
       description: PLL3 clock selected.
       value: 0b1011
+enum/ETHPRE:
+  description: Ethernet clock source prescaler control
+  bit_size: 1
+  variants:
+    - name: DIV1
+      description: Divided by 1
+      value: 0b0
+    - name: DIV2
+      description: Divided by 2
+      value: 0b1
 enum/USBPRE:
   description: USB prescaler.
   bit_size: 2
