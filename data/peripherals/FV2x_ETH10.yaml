@@ -9,8 +9,11 @@
     bus_clock: PCLK1
     kernel_clock: HCLK
     enable:
-      register: _
-      field: _
+      # FIXME! definitively incorrect, but ch32-data currently needs these fields.
+      # Since the ETHMACEN field is reserved to the 10/100/1G MAC, which is mutually exclusive
+      # with the MAC-10M, it's probably safest to give this field.
+      register: AHBPCENR
+      field: ETHMACEN
   exten:
     # Contrary to other peripherals, the Ethernet MAC is enabled from register EXTEN_CTR
     enable:
