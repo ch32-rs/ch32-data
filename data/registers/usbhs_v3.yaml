@@ -571,6 +571,7 @@ fieldset/UH_RX_CTRL:
       description: host control of the accept response to IN transactions.
       bit_offset: 0
       bit_size: 2
+      enum: HOST_RX_RESPONSE
     - name: R_RES_NO
       description: H_R_RES_NO
       bit_offset: 2
@@ -579,6 +580,7 @@ fieldset/UH_RX_CTRL:
       description: host synchronous trigger bit for the accept to prepare.
       bit_offset: 3
       bit_size: 2
+      enum: TOG
     - name: R_AUTO_TOG
       description: host synchronization trigger bit auto toggle enable.
       bit_offset: 5
@@ -595,6 +597,7 @@ fieldset/UH_TX_CTRL:
       description: USB host transmitter response control bits to SETUP/OUT transactions
       bit_offset: 0
       bit_size: 2
+      enum: HOST_TX_RESPONSE
     - name: T_RES_NO
       description: expect a response after sending data successfully.
       bit_offset: 2
@@ -603,6 +606,7 @@ fieldset/UH_TX_CTRL:
       description: sync trigger bit prepared by USB host transmitter (handling SETUP/OUT transactions)
       bit_offset: 3
       bit_size: 2
+      enum: TOG
     - name: T_AUTO_TOG
       description: host synchronization trigger bit auto toggle enable.
       bit_offset: 5
@@ -708,4 +712,39 @@ enum/EP_RX_RESPONSE:
       value: 2
     - name: STALL
       description: Respond with STALL(Error)
+      value: 3
+
+enum/HOST_RX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with ACK
+      value: 0
+
+enum/HOST_TX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Expect ACK
+      value: 0
+    - name: NYET
+      description: Expect NYET
+      value: 1
+    - name: NAK
+      description: Expect NAK(Busy)
+      value: 2
+    - name: STALL
+      description: Expect STALL(Error)
+      value: 3
+
+enum/TOG:
+  bit_size: 2
+  variants:
+    - name: DATA0
+      value: 0
+    - name: DATA1
+      value: 1
+    - name: DATA2
+      value: 2
+    - name: MDATA
       value: 3
