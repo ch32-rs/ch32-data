@@ -621,11 +621,27 @@
       interrupt: SPI1
   pins:
     # 00:默认映射(NSS/PA4，SCK/PA5，MISO/PA6， MOSI/PA7)
+    - { pin: "PA4", signal: "NSS", remap: 0 }
+    - { pin: "PA5", signal: "SCK", remap: 0 }
+    - { pin: "PA6", signal: "MISO", remap: 0 }
+    - { pin: "PA7", signal: "MOSI", remap: 0 }
     # 01:完全映射(NSS/PA15，SCK/PB3，MISO/PB4， MOSI/PB5)
+    - { pin: "PA15", signal: "NSS", remap: 1 }
+    - { pin: "PB3", signal: "SCK", remap: 1 }
+    - { pin: "PB4", signal: "MISO", remap: 1 }
+    - { pin: "PB5", signal: "MOSI", remap: 1 }
     # 10:完全映射(NSS/PA12，SCK/PB6，MISO/PB8， MOSI/PB7)
+    - { pin: "PA12", signal: "NSS", remap: 2 }
+    - { pin: "PB6", signal: "SCK", remap: 2 }
+    - { pin: "PB8", signal: "MISO", remap: 2 }
+    - { pin: "PB7", signal: "MOSI", remap: 2 }
     # 11:完全映射(NSS/PB12，SCK/PB6，MISO/PB8， MOSI/PB7)
+    - { pin: "PB12", signal: "NSS", remap: 3 }
+    - { pin: "PB6", signal: "SCK", remap: 3 }
+    - { pin: "PB8", signal: "MISO", remap: 3 }
+    - { pin: "PB7", signal: "MOSI", remap: 3 }
 
-# SPI2 is optional
+# SPI2 is optional for some packages
 
 - name: I2C1
   address: 0x40005400
@@ -653,10 +669,10 @@
     - { pin: "PB5", signal: "SMBA", remap: 0 }
     - { pin: "PB6", signal: "SCL", remap: 0 }
     - { pin: "PB7", signal: "SDA", remap: 0 }
-    # 0:完全映射(SCL/PA13，SDA/PA12)
-    - { pin: "PB5", signal: "SMBA", remap: 1 }
-    - { pin: "PA13", signal: "SCL", remap: 1 }
-    - { pin: "PA12", signal: "SDA", remap: 1 }
+    # 10:完全映射(SCL/PA13，SDA/PA12)
+    - { pin: "PB5", signal: "SMBA", remap: 2 }
+    - { pin: "PA13", signal: "SCL", remap: 2 }
+    - { pin: "PA12", signal: "SDA", remap: 2 }
     # 11:完全映射(SCL/PB9，SDA/PB11)
     - { pin: "PB5", signal: "SMBA", remap: 3 }
     - { pin: "PB9", signal: "SCL", remap: 3 }
