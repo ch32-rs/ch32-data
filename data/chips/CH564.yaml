@@ -1,0 +1,46 @@
+name: CH564
+family: QingKe RISC-V-based MCU
+subfamily: 480Mbps Hi-Speed USB and 100M Ethernet MCUs
+product_type: QingKe V4J core
+device_id: 1761607680
+packages:
+  - name: CH564L
+    package: LQFP128
+  - name: CH564Q
+    package: LQFP64M
+  - name: CH564D
+    package: QFN26C3
+memory:
+  - name: BANK_1
+    kind: flash
+    address: 0
+    size: 196608 # 192K
+    settings:
+      erase_size: 1024
+      write_size: 256
+      erase_value: 255
+  - name: RAMS
+    kind: ram
+    address: 536870912
+    size: 32768
+  - name: RAMX
+    kind: ram
+    address: 537001984
+    size: 65536
+docs:
+  - type: homepage
+    title: 480Mbps高速USB和百兆以太网MCU CH564
+    name: Homepage
+    url: https://www.wch.cn/products/CH564.html
+cores:
+  - name: qingke-v4j
+    peripherals:
+
+    interrupts:
+      - name: WWDG
+        number: 1
+    dma_channels:
+      - name: DMA1_CH1
+        dma: DMA1
+        channel: 0
+_raw:
