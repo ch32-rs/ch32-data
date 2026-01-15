@@ -60,6 +60,8 @@ DMA1_CHANNEL8: 44
 USBFS: 45
 # 46 - USBFS_WKUP
 USBFS_WKUP: 46
+# 47 - PIOC
+PIOC: 47
 # 49 - USBPD global interrupt
 USBPD: 49
 # 50 - USBPD_WKUP global interrupt
