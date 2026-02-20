@@ -31,7 +31,7 @@ cores:
       - "../family/CH32V0_V2C.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V0.yaml"
-    include_interrupts: "../interrupts/CH32V0.yaml"
+    include_interrupts: "../interrupts/CH32V00X.yaml"
 
 _raw:
   WDOG: "2"
