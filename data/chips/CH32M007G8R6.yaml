@@ -28,7 +28,7 @@ cores:
   - name: qingke-v2c
     peripherals: []
     include_peripherals:
-      - "../family/CH32V0_V2C.yaml"
+      - "../family/CH32V00X.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V00X.yaml"
     include_interrupts: "../interrupts/CH32V00X.yaml"
