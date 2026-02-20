@@ -273,29 +273,55 @@
     - { signal: "GLOBAL", interrupt: "USART1" }
   pins:
     # 0
-    - { pin: "PD4", signal: "CK", remap: 0 }
     - { pin: "PD5", signal: "TX", remap: 0 }
     - { pin: "PD6", signal: "RX", remap: 0 }
     - { pin: "PD3", signal: "CTS", remap: 0 }
     - { pin: "PC2", signal: "RTS", remap: 0 }
     # 1
-    - { pin: "PD7", signal: "CK", remap: 1 }
-    - { pin: "PD0", signal: "TX", remap: 1 }
-    - { pin: "PD1", signal: "RX", remap: 1 }
-    - { pin: "PC3", signal: "CTS", remap: 1 }
-    - { pin: "PC2", signal: "RTS", remap: 1 }
+    - { pin: "PD6", signal: "TX", remap: 1 }
+    - { pin: "PD5", signal: "RX", remap: 1 }
+    - { pin: "PC6", signal: "CTS", remap: 1 }
+    - { pin: "PC7", signal: "RTS", remap: 1 }
     # 2
-    - { pin: "PD7", signal: "CK", remap: 2 }
-    - { pin: "PD6", signal: "TX", remap: 2 }
-    - { pin: "PD5", signal: "RX", remap: 2 }
-    - { pin: "PC6", signal: "CTS", remap: 2 }
-    - { pin: "PC7", signal: "RTS", remap: 2 }
+    - { pin: "PD0", signal: "TX", remap: 2 }
+    - { pin: "PD1", signal: "RX", remap: 2 }
+    - { pin: "PC3", signal: "CTS", remap: 2 }
+    - { pin: "PC2", signal: "RTS", remap: 2 }
     # 3
-    - { pin: "PC5", signal: "CK", remap: 3 }
     - { pin: "PC0", signal: "TX", remap: 3 }
     - { pin: "PC1", signal: "RX", remap: 3 }
     - { pin: "PC6", signal: "CTS", remap: 3 }
     - { pin: "PC7", signal: "RTS", remap: 3 }
+    # 4
+    - { pin: "PD1", signal: "TX", remap: 4 }
+    - { pin: "PB3", signal: "RX", remap: 4 }
+    - { pin: "PD7", signal: "CTS", remap: 4 }
+    - { pin: "PA5", signal: "RTS", remap: 4 }
+    # 5
+    - { pin: "PB3", signal: "TX", remap: 5 }
+    - { pin: "PD1", signal: "RX", remap: 5 }
+    - { pin: "PD7", signal: "CTS", remap: 5 }
+    - { pin: "PA5", signal: "RTS", remap: 5 }
+    # 6
+    - { pin: "PC5", signal: "TX", remap: 6 }
+    - { pin: "PC6", signal: "RX", remap: 6 }
+    - { pin: "PC7", signal: "CTS", remap: 6 }
+    - { pin: "PB4", signal: "RTS", remap: 6 }
+    # 7
+    - { pin: "PB5", signal: "TX", remap: 7 }
+    - { pin: "PB6", signal: "RX", remap: 7 }
+    - { pin: "PC7", signal: "CTS", remap: 7 }
+    - { pin: "PB4", signal: "RTS", remap: 7 }
+    # 8
+    - { pin: "PA0", signal: "TX", remap: 8 }
+    - { pin: "PA1", signal: "RX", remap: 8 }
+    - { pin: "PD2", signal: "CTS", remap: 8 }
+    - { pin: "PD3", signal: "RTS", remap: 8 }
+    # 9
+    - { pin: "PA0", signal: "TX", remap: 9 }
+    - { pin: "PC4", signal: "RX", remap: 9 }
+    - { pin: "PD5", signal: "CTS", remap: 9 }
+    - { pin: "PD4", signal: "RTS", remap: 9 }
 
 - name: I2C1
   address: 0x40005400
