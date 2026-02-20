@@ -45,7 +45,7 @@
       signal: MCO
 
 - name: DMA1
-  address: 0x40020000
+  address: 1073872896 # 0x40020000
   registers:
     kind: dma
     version: v1
@@ -103,6 +103,21 @@
     reset:
       register: PB2PRSTR
       field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPBEN
+    reset:
+      register: PB2PRSTR
+      field: IOPBRST
 - name: GPIOC
   address: 0x40011000
   registers:
