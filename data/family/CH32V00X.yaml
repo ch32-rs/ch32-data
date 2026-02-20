@@ -323,6 +323,60 @@
     - { pin: "PD5", signal: "CTS", remap: 9 }
     - { pin: "PD4", signal: "RTS", remap: 9 }
 
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB2PCENR
+      field: USART2EN
+    reset:
+      register: PB2PRSTR
+      field: USART2RST
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "USART2" }
+  pins:
+    # 0
+    - { pin: "PA7", signal: "TX", remap: 0 }
+    - { pin: "PB3", signal: "RX", remap: 0 }
+    - { pin: "PA4", signal: "CTS", remap: 0 }
+    - { pin: "PA5", signal: "RTS", remap: 0 }
+    # 1
+    - { pin: "PA4", signal: "TX", remap: 1 }
+    - { pin: "PA5", signal: "RX", remap: 1 }
+    - { pin: "PA7", signal: "CTS", remap: 1 }
+    - { pin: "PB3", signal: "RTS", remap: 1 }
+    # 2
+    - { pin: "PA2", signal: "TX", remap: 2 }
+    - { pin: "PA3", signal: "RX", remap: 2 }
+    - { pin: "PA0", signal: "CTS", remap: 2 }
+    - { pin: "PA1", signal: "RTS", remap: 2 }
+    # 3
+    - { pin: "PD2", signal: "TX", remap: 3 }
+    - { pin: "PD3", signal: "RX", remap: 3 }
+    - { pin: "PA0", signal: "CTS", remap: 3 }
+    - { pin: "PA1", signal: "RTS", remap: 3 }
+    # 4
+    - { pin: "PB0", signal: "TX", remap: 4 }
+    - { pin: "PB1", signal: "RX", remap: 4 }
+    - { pin: "PB6", signal: "CTS", remap: 4 }
+    - { pin: "PA1", signal: "RTS", remap: 4 }
+    # 5
+    - { pin: "PC4", signal: "TX", remap: 5 }
+    - { pin: "PD1", signal: "RX", remap: 5 }
+    - { pin: "PA4", signal: "CTS", remap: 5 }
+    - { pin: "PA1", signal: "RTS", remap: 5 }
+    # 6
+    - { pin: "PA6", signal: "TX", remap: 6 }
+    - { pin: "PA5", signal: "RX", remap: 6 }
+    - { pin: "PA7", signal: "CTS", remap: 6 }
+    - { pin: "PB3", signal: "RTS", remap: 6 }
+
 - name: I2C1
   address: 0x40005400
   registers:
