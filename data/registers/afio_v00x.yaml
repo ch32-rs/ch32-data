@@ -1,0 +1,64 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+    - name: EXTICR
+      description: External interrupt configuration register (AFIO_EXTICR).
+      byte_offset: 8
+      fieldset: EXTICR
+    - name: PCFR1
+      description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+      byte_offset: 12
+      fieldset: PCFR1
+fieldset/EXTICR:
+  description: External interrupt configuration register (AFIO_EXTICR).
+  fields:
+    - name: EXTI
+      description: EXTI configuration.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 8
+        stride: 2
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+  fields:
+    - name: SPI1_RM
+      description: SPI1 remapping.
+      bit_offset: 0
+      bit_size: 3
+    - name: I2C1_RM
+      description: I2C1 remapping.
+      bit_offset: 3
+      bit_size: 3
+    - name: USART1_RM
+      description: USART1 remapping.
+      bit_offset: 6
+      bit_size: 4
+    - name: TIM1_RM
+      description: TIM1 remapping.
+      bit_offset: 10
+      bit_size: 4
+    - name: TIM2_RM
+      description: TIM2 remapping.
+      bit_offset: 14
+      bit_size: 3
+    - name: PA1PA2_RM
+      description: Port A1/Port A2 mapping on OSCIN/OSCOUT.
+      bit_offset: 17
+      bit_size: 1
+    - name: ADC_ETRGINJ_RM
+      description: ADC 1 External trigger injected conversion remapping.
+      bit_offset: 18
+      bit_size: 1
+    - name: ADC_ETRGREG_RM
+      description: ADC 1 external trigger regular conversion remapping.
+      bit_offset: 19
+      bit_size: 1
+    - name: USART2_RM
+      description: USART2 remapping.
+      bit_offset: 20
+      bit_size: 3
+    - name: SWCFG
+      description: configure the I/O port with the SW function and tracing function.
+      bit_offset: 24
+      bit_size: 3

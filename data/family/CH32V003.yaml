@@ -72,7 +72,7 @@
   address: 0x40010000
   registers:
     kind: afio
-    version: v0
+    version: v003
     block: AFIO
   rcc:
     bus_clock: PCLK2
