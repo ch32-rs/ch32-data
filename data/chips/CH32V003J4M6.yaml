@@ -30,7 +30,7 @@ cores:
     include_peripherals:
       - "../family/CH32V0.yaml"
     include_dma_channels:
-      DMA1: "../dma/CH32V0.yaml"
+      DMA1: "../dma/CH32V003.yaml"
     include_interrupts: "../interrupts/CH32V003.yaml"
 
 _raw:
