@@ -34,7 +34,7 @@
   address: 0x40021000
   registers:
     kind: rcc
-    version: v0
+    version: v003
     block: RCC
   pins:
     - pin: PC4

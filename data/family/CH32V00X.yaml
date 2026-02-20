@@ -38,14 +38,14 @@
   address: 0x40021000
   registers:
     kind: rcc
-    version: v0
+    version: v00x
     block: RCC
   pins:
     - pin: PC4
       signal: MCO
 
 - name: DMA1
-  address: 1073872896 # 0x40020000
+  address: 0x40020000
   registers:
     kind: dma
     version: v1
@@ -54,7 +54,7 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: AHBPCENR
+      register: HBPCENR
       field: DMA1EN
   interrupts:
     - signal: CH1
@@ -82,10 +82,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: AFIOEN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: AFIORST
 
 - name: GPIOA
@@ -98,10 +98,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: IOPAEN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: IOPARST
 - name: GPIOC
   address: 0x40011000
@@ -113,10 +113,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: IOPCEN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: IOPCRST
 - name: GPIOD
   address: 0x40011400
@@ -128,10 +128,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: IOPDEN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: IOPDRST
 
 # TIM use hclk as bus clock
@@ -146,10 +146,10 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: TIM1EN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: TIM1RST
   remap:
     register: PCFR1
@@ -289,10 +289,10 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: APB1PCENR
+      register: PB1PCENR
       field: TIM2EN
     reset:
-      register: APB1PRSTR
+      register: PB1PRSTR
       field: TIM2RST
   remap:
     register: PCFR1
@@ -380,10 +380,10 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: USART1EN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: USART1RST
   # remap field split into two registers, handled manually
   interrupts:
@@ -467,10 +467,10 @@
     bus_clock: PCLK1
     kernel_clock: PCLK1
     enable:
-      register: APB1PCENR
+      register: PB1PCENR
       field: I2C1EN
     reset:
-      register: APB1PRSTR
+      register: PB1PRSTR
       field: I2C1RST
   # complex remap, handled manually
   pins:
@@ -511,10 +511,10 @@
     bus_clock: HCLK
     kernel_clock: HCLK
     enable:
-      register: APB2PCENR
+      register: PB2PCENR
       field: SPI1EN
     reset:
-      register: APB2PRSTR
+      register: PB2PRSTR
       field: SPI1RST
   remap:
     register: PCFR1
@@ -560,11 +560,11 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
-      field: ADC1EN
+      register: PB2PCENR
+      field: ADCEN
     reset:
-      register: APB2PRSTR
-      field: ADC1RST
+      register: PB2PRSTR
+      field: ADCRST
   pins:
     - pin: PA2
       signal: IN0
