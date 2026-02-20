@@ -31,8 +31,7 @@
     version: common
     block: EXTI
   interrupts:
-    - signal: EXTI0
-      interrupt: EXTI7_0
+    - { signal: "EXTI0", interrupt: "EXTI7_0" }
 
 - name: RCC
   address: 0x40021000
@@ -41,11 +40,10 @@
     version: v00x
     block: RCC
   pins:
-    - pin: PC4
-      signal: MCO
+    - { pin: "PC4", signal: "MCO" }
 
 - name: DMA1
-  address: 1073872896 # 0x40020000
+  address: 0x40020000
   registers:
     kind: dma
     version: v1
@@ -57,20 +55,13 @@
       register: HBPCENR
       field: DMA1EN
   interrupts:
-    - signal: CH1
-      interrupt: DMA1_Channel1
-    - signal: CH2
-      interrupt: DMA1_Channel2
-    - signal: CH3
-      interrupt: DMA1_Channel3
-    - signal: CH4
-      interrupt: DMA1_Channel4
-    - signal: CH5
-      interrupt: DMA1_Channel5
-    - signal: CH6
-      interrupt: DMA1_Channel6
-    - signal: CH7
-      interrupt: DMA1_Channel7
+    - { signal: "CH1", interrupt: "DMA1_Channel1" }
+    - { signal: "CH2", interrupt: "DMA1_Channel2" }
+    - { signal: "CH3", interrupt: "DMA1_Channel3" }
+    - { signal: "CH4", interrupt: "DMA1_Channel4" }
+    - { signal: "CH5", interrupt: "DMA1_Channel5" }
+    - { signal: "CH6", interrupt: "DMA1_Channel6" }
+    - { signal: "CH7", interrupt: "DMA1_Channel7" }
 
 - name: AFIO
   address: 0x40010000
@@ -149,8 +140,6 @@
       register: PB2PRSTR
       field: IOPDRST
 
-# TIM use hclk as bus clock
-
 - name: TIM1
   address: 0x40012C00
   registers:
@@ -170,129 +159,52 @@
     register: PCFR1
     field: TIM1_RM
   interrupts:
-    - signal: UP
-      interrupt: TIM1_UP
-    - signal: CC
-      interrupt: TIM1_CC
-    - signal: COM
-      interrupt: TIM1_TRG_COM
-    - signal: TRG
-      interrupt: TIM1_TRG_COM
-    - signal: BRK
-      interrupt: TIM1_BRK
+    - { signal: "UP", interrupt: "TIM1_UP" }
+    - { signal: "CC", interrupt: "TIM1_CC" }
+    - { signal: "COM", interrupt: "TIM1_TRG_COM" }
+    - { signal: "TRG", interrupt: "TIM1_TRG_COM" }
+    - { signal: "BRK", interrupt: "TIM1_BRK" }
   pins:
-    # 00：默认映射(ETR/PC5，CH1/PD2，CH2/PA1， CH3/PC3 ， CH4/PC4 ， BKIN/PC2 ， CH1N/PD0 ， CH2N/PA2，CH3N/PD1)；
-    - pin: PC5
-      signal: ETR
-      remap: 0b00
-    - pin: PD2
-      signal: CH1
-      remap: 0b00
-    - pin: PA1
-      signal: CH2
-      remap: 0b00
-    - pin: PC3
-      signal: CH3
-      remap: 0b00
-    - pin: PC4
-      signal: CH4
-      remap: 0b00
-    - pin: PC2
-      signal: BKIN
-      remap: 0b00
-    - pin: PD0
-      signal: CH1N
-      remap: 0b00
-    - pin: PA2
-      signal: CH2N
-      remap: 0b00
-    - pin: PD1
-      signal: CH3N
-      remap: 0b00
-    # 01：部分映射(ETR/PC5，CH1/PC6，CH2/PC7， CH3/PC0 ， CH4/PD3 ， BKIN/PC1 ， CH1N/PC3 ， CH2N/PC4，CH3N/PD1)；
-    - pin: PC5
-      signal: ETR
-      remap: 0b01
-    - pin: PC6
-      signal: CH1
-      remap: 0b01
-    - pin: PC7
-      signal: CH2
-      remap: 0b01
-    - pin: PC0
-      signal: CH3
-      remap: 0b01
-    - pin: PD3
-      signal: CH4
-      remap: 0b01
-    - pin: PC1
-      signal: BKIN
-      remap: 0b01
-    - pin: PC3
-      signal: CH1N
-      remap: 0b01
-    - pin: PC4
-      signal: CH2N
-      remap: 0b01
-    - pin: PD1
-      signal: CH3N
-      remap: 0b01
-    # 10：部分映射(ETR/PD4，CH1/PD2，CH2/PA1， CH3/PC3 ， CH4/PC4 ， BKIN/PC2 ， CH1N/PD0 ， CH2N/PA2，CH3N/PD1)；
-    - pin: PD4
-      signal: ETR
-      remap: 0b10
-    - pin: PD2
-      signal: CH1
-      remap: 0b10
-    - pin: PA1
-      signal: CH2
-      remap: 0b10
-    - pin: PC3
-      signal: CH3
-      remap: 0b10
-    - pin: PC4
-      signal: CH4
-      remap: 0b10
-    - pin: PC2
-      signal: BKIN
-      remap: 0b10
-    - pin: PD0
-      signal: CH1N
-      remap: 0b10
-    - pin: PA2
-      signal: CH2N
-      remap: 0b10
-    - pin: PD1
-      signal: CH3N
-      remap: 0b10
-    # 11：完全映射(ETR/PC2，CH1/PC4，CH2/PC7， CH3/PC5 ， CH4/PD4 ， BKIN/PC1 ， CH1N/PC3 ， CH2N/PD2，CH3N/PC6)。
-    - pin: PC2
-      signal: ETR
-      remap: 0b11
-    - pin: PC4
-      signal: CH1
-      remap: 0b11
-    - pin: PC7
-      signal: CH2
-      remap: 0b11
-    - pin: PC5
-      signal: CH3
-      remap: 0b11
-    - pin: PD4
-      signal: CH4
-      remap: 0b11
-    - pin: PC1
-      signal: BKIN
-      remap: 0b11
-    - pin: PC3
-      signal: CH1N
-      remap: 0b11
-    - pin: PD2
-      signal: CH2N
-      remap: 0b11
-    - pin: PC6
-      signal: CH3N
-      remap: 0b11
+    # 0
+    - { pin: "PC5", signal: "ETR", remap: 0 }
+    - { pin: "PD2", signal: "CH1", remap: 0 }
+    - { pin: "PA1", signal: "CH2", remap: 0 }
+    - { pin: "PC3", signal: "CH3", remap: 0 }
+    - { pin: "PC4", signal: "CH4", remap: 0 }
+    - { pin: "PC2", signal: "BKIN", remap: 0 }
+    - { pin: "PD0", signal: "CH1N", remap: 0 }
+    - { pin: "PA2", signal: "CH2N", remap: 0 }
+    - { pin: "PD1", signal: "CH3N", remap: 0 }
+    # 1
+    - { pin: "PC5", signal: "ETR", remap: 1 }
+    - { pin: "PC6", signal: "CH1", remap: 1 }
+    - { pin: "PC7", signal: "CH2", remap: 1 }
+    - { pin: "PC0", signal: "CH3", remap: 1 }
+    - { pin: "PD3", signal: "CH4", remap: 1 }
+    - { pin: "PC1", signal: "BKIN", remap: 1 }
+    - { pin: "PC3", signal: "CH1N", remap: 1 }
+    - { pin: "PC4", signal: "CH2N", remap: 1 }
+    - { pin: "PD1", signal: "CH3N", remap: 1 }
+    # 2
+    - { pin: "PD4", signal: "ETR", remap: 2 }
+    - { pin: "PD2", signal: "CH1", remap: 2 }
+    - { pin: "PA1", signal: "CH2", remap: 2 }
+    - { pin: "PC3", signal: "CH3", remap: 2 }
+    - { pin: "PC4", signal: "CH4", remap: 2 }
+    - { pin: "PC2", signal: "BKIN", remap: 2 }
+    - { pin: "PD0", signal: "CH1N", remap: 2 }
+    - { pin: "PA2", signal: "CH2N", remap: 2 }
+    - { pin: "PD1", signal: "CH3N", remap: 2 }
+    # 3
+    - { pin: "PC2", signal: "ETR", remap: 3 }
+    - { pin: "PC4", signal: "CH1", remap: 3 }
+    - { pin: "PC7", signal: "CH2", remap: 3 }
+    - { pin: "PC5", signal: "CH3", remap: 3 }
+    - { pin: "PD4", signal: "CH4", remap: 3 }
+    - { pin: "PC1", signal: "BKIN", remap: 3 }
+    - { pin: "PC3", signal: "CH1N", remap: 3 }
+    - { pin: "PD2", signal: "CH2N", remap: 3 }
+    - { pin: "PC6", signal: "CH3N", remap: 3 }
 
 - name: TIM2
   address: 0x40000000
@@ -313,77 +225,34 @@
     register: PCFR1
     field: TIM2_RM
   interrupts:
-    - signal: UP
-      interrupt: TIM2
-    - signal: CC
-      interrupt: TIM2
-    - signal: TRG
-      interrupt: TIM2
+    - { signal: "UP", interrupt: "TIM2" }
+    - { signal: "CC", interrupt: "TIM2" }
+    - { signal: "TRG", interrupt: "TIM2" }
   pins:
-    # 00 ： 默 认 映 射 (CH1/ETR/PD4 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
-    - pin: PD4
-      signal: ETR
-      remap: 0b00
-    - pin: PD4
-      signal: CH1
-      remap: 0b00
-    - pin: PD3
-      signal: CH2
-      remap: 0b00
-    - pin: PC0
-      signal: CH3
-      remap: 0b00
-    - pin: PD7
-      signal: CH4
-      remap: 0b00
-    # 01 ： 部 分 映 射 (CH1/ETR/PC5 ， CH2/PC2 ， CH3/PD2，CH4/PC1)；
-    - pin: PC5
-      signal: ETR
-      remap: 0b01
-    - pin: PC5
-      signal: CH1
-      remap: 0b01
-    - pin: PC2
-      signal: CH2
-      remap: 0b01
-    - pin: PD2
-      signal: CH3
-      remap: 0b01
-    - pin: PC1
-      signal: CH4
-      remap: 0b01
-    # 10 ： 部 分 映 射 (CH1/ETR/PC1 ， CH2/PD3 ， CH3/PC0，CH4/PD7)；
-    - pin: PC1
-      signal: ETR
-      remap: 0b10
-    - pin: PC1
-      signal: CH1
-      remap: 0b10
-    - pin: PD3
-      signal: CH2
-      remap: 0b10
-    - pin: PC0
-      signal: CH3
-      remap: 0b10
-    - pin: PD7
-      signal: CH4
-      remap: 0b10
-    # 11 ： 完 全 映 射 (CH1/ETR/PC1 ， CH2/PC7 ， CH3/PD6，CH4/PD5)。
-    - pin: PC1
-      signal: ETR
-      remap: 0b11
-    - pin: PC1
-      signal: CH1
-      remap: 0b11
-    - pin: PC7
-      signal: CH2
-      remap: 0b11
-    - pin: PD6
-      signal: CH3
-      remap: 0b11
-    - pin: PD5
-      signal: CH4
-      remap: 0b11
+    # 0
+    - { pin: "PD4", signal: "ETR", remap: 0 }
+    - { pin: "PD4", signal: "CH1", remap: 0 }
+    - { pin: "PD3", signal: "CH2", remap: 0 }
+    - { pin: "PC0", signal: "CH3", remap: 0 }
+    - { pin: "PD7", signal: "CH4", remap: 0 }
+    # 1
+    - { pin: "PC5", signal: "ETR", remap: 1 }
+    - { pin: "PC5", signal: "CH1", remap: 1 }
+    - { pin: "PC2", signal: "CH2", remap: 1 }
+    - { pin: "PD2", signal: "CH3", remap: 1 }
+    - { pin: "PC1", signal: "CH4", remap: 1 }
+    # 2
+    - { pin: "PC1", signal: "ETR", remap: 2 }
+    - { pin: "PC1", signal: "CH1", remap: 2 }
+    - { pin: "PD3", signal: "CH2", remap: 2 }
+    - { pin: "PC0", signal: "CH3", remap: 2 }
+    - { pin: "PD7", signal: "CH4", remap: 2 }
+    # 3
+    - { pin: "PC1", signal: "ETR", remap: 3 }
+    - { pin: "PC1", signal: "CH1", remap: 3 }
+    - { pin: "PC7", signal: "CH2", remap: 3 }
+    - { pin: "PD6", signal: "CH3", remap: 3 }
+    - { pin: "PD5", signal: "CH4", remap: 3 }
 
 - name: USART1
   address: 0x40013800
@@ -400,75 +269,33 @@
     reset:
       register: PB2PRSTR
       field: USART1RST
-  # remap field split into two registers, handled manually
   interrupts:
-    - signal: GLOBAL
-      interrupt: USART1
+    - { signal: "GLOBAL", interrupt: "USART1" }
   pins:
-    # 00 ： 默 认 映 射 (CK/PD4 ， TX/PD5 ， RX/PD6 ， CTS/PD3，RTS/PC2)
-    - pin: PD4
-      signal: CK
-      remap: 0b00
-    - pin: PD5
-      signal: TX
-      remap: 0b00
-    - pin: PD6
-      signal: RX
-      remap: 0b00
-    - pin: PD3
-      signal: CTS
-      remap: 0b00
-    - pin: PC2
-      signal: RTS
-      remap: 0b00
-    # 01：重映射(CK/PD7，TX/PD0，RX/PD1，CTS/PC3， RTS/PC2)；
-    - pin: PD7
-      signal: CK
-      remap: 0b01
-    - pin: PD0
-      signal: TX
-      remap: 0b01
-    - pin: PD1
-      signal: RX
-      remap: 0b01
-    - pin: PC3
-      signal: CTS
-      remap: 0b01
-    - pin: PC2
-      signal: RTS
-      remap: 0b01
-    # 10：重映射(CK/PD7，TX/PD6，RX/PD5，CTS/PC6， RTS/PC7)
-    - pin: PD7
-      signal: CK
-      remap: 0b10
-    - pin: PD6
-      signal: TX
-      remap: 0b10
-    - pin: PD5
-      signal: RX
-      remap: 0b10
-    - pin: PC6
-      signal: CTS
-      remap: 0b10
-    - pin: PC7
-      signal: RTS
-      remap: 0b10
-    # 11：重映射(CK/PC5，TX/PC0，RX/PC1，CTS/PC6， RTS/PC7)
-    - pin: PC5
-      signal: CK
-      remap: 0b11
-    - pin: PC0
-      signal: TX
-      remap: 0b11
-    - pin: PC1
-      signal: RX
-      remap: 0b11
-    - pin: PC6
-      signal: CTS
-      remap: 0b11
-    - pin: PC7
-      signal: RTS
-      remap: 0b11
+    # 0
+    - { pin: "PD4", signal: "CK", remap: 0 }
+    - { pin: "PD5", signal: "TX", remap: 0 }
+    - { pin: "PD6", signal: "RX", remap: 0 }
+    - { pin: "PD3", signal: "CTS", remap: 0 }
+    - { pin: "PC2", signal: "RTS", remap: 0 }
+    # 1
+    - { pin: "PD7", signal: "CK", remap: 1 }
+    - { pin: "PD0", signal: "TX", remap: 1 }
+    - { pin: "PD1", signal: "RX", remap: 1 }
+    - { pin: "PC3", signal: "CTS", remap: 1 }
+    - { pin: "PC2", signal: "RTS", remap: 1 }
+    # 2
+    - { pin: "PD7", signal: "CK", remap: 2 }
+    - { pin: "PD6", signal: "TX", remap: 2 }
+    - { pin: "PD5", signal: "RX", remap: 2 }
+    - { pin: "PC6", signal: "CTS", remap: 2 }
+    - { pin: "PC7", signal: "RTS", remap: 2 }
+    # 3
+    - { pin: "PC5", signal: "CK", remap: 3 }
+    - { pin: "PC0", signal: "TX", remap: 3 }
+    - { pin: "PC1", signal: "RX", remap: 3 }
+    - { pin: "PC6", signal: "CTS", remap: 3 }
+    - { pin: "PC7", signal: "RTS", remap: 3 }
 
 - name: I2C1
   address: 0x40005400
@@ -487,34 +314,19 @@
     reset:
       register: PB1PRSTR
       field: I2C1RST
-  # complex remap, handled manually
   pins:
-    # 00：默认映射（SCL/PC2，SDA/PC1）
-    - pin: PC2
-      signal: SCL
-      remap: 0b00
-    - pin: PC1
-      signal: SDA
-      remap: 0b00
-    # 01：重映射（SCL/PD1，SDA/PD0）
-    - pin: PD1
-      signal: SCL
-      remap: 0b01
-    - pin: PD0
-      signal: SDA
-      remap: 0b01
-    # 1X：重映射（SCL/PC5，SDA/PC6）
-    - pin: PC5
-      signal: SCL
-      remap: 0b10
-    - pin: PC6
-      signal: SDA
-      remap: 0b10
+    # 0
+    - { pin: "PC2", signal: "SCL", remap: 0 }
+    - { pin: "PC1", signal: "SDA", remap: 0 }
+    # 1
+    - { pin: "PD1", signal: "SCL", remap: 1 }
+    - { pin: "PD0", signal: "SDA", remap: 1 }
+    # 2
+    - { pin: "PC5", signal: "SCL", remap: 2 }
+    - { pin: "PC6", signal: "SDA", remap: 2 }
   interrupts:
-    - signal: EV
-      interrupt: I2C1_EV
-    - signal: ER
-      interrupt: I2C1_ER
+    - { signal: "EV", interrupt: "I2C1_EV" }
+    - { signal: "ER", interrupt: "I2C1_ER" }
 
 - name: SPI1
   address: 0x40013000
@@ -535,35 +347,18 @@
     register: PCFR1
     field: SPI1_RM
   pins:
-    # 0：默认映射(NSS/PC1，CK/PC5，MISO/PC7，MOSI/PC6)；
-    # 1：重 映 射 (NSS/PC0 ， CK/PC5 ， MISO/PC7 ， MOSI/PC6)。
-    - pin: PC1
-      signal: NSS
-      remap: 0b0
-    - pin: PC5
-      signal: SCK
-      remap: 0b0
-    - pin: PC7
-      signal: MISO
-      remap: 0b0
-    - pin: PC6
-      signal: MOSI
-      remap: 0b0
-    - pin: PC0
-      signal: NSS
-      remap: 0b1
-    - pin: PC5
-      signal: SCK
-      remap: 0b1
-    - pin: PC7
-      signal: MISO
-      remap: 0b1
-    - pin: PC6
-      signal: MOSI
-      remap: 0b1
+    # 0
+    - { pin: "PC1", signal: "NSS", remap: 0 }
+    - { pin: "PC5", signal: "SCK", remap: 0 }
+    - { pin: "PC7", signal: "MISO", remap: 0 }
+    - { pin: "PC6", signal: "MOSI", remap: 0 }
+    # 1
+    - { pin: "PC0", signal: "NSS", remap: 1 }
+    - { pin: "PC5", signal: "SCK", remap: 1 }
+    - { pin: "PC7", signal: "MISO", remap: 1 }
+    - { pin: "PC6", signal: "MOSI", remap: 1 }
   interrupts:
-    - signal: GLOBAL
-      interrupt: SPI1
+    - { signal: "GLOBAL", interrupt: "SPI1" }
 
 - name: ADC1
   address: 0x40012400
@@ -581,25 +376,16 @@
       register: PB2PRSTR
       field: ADCRST
   pins:
-    - pin: PA2
-      signal: IN0
-    - pin: PA1
-      signal: IN1
-    - pin: PC4
-      signal: IN2
-    - pin: PD2
-      signal: IN3
-    - pin: PD3
-      signal: IN4
-    - pin: PD5
-      signal: IN5
-    - pin: PD6
-      signal: IN6
-    - pin: PD4
-      signal: IN7
+    - { pin: "PA2", signal: "IN0" }
+    - { pin: "PA1", signal: "IN1" }
+    - { pin: "PC4", signal: "IN2" }
+    - { pin: "PD2", signal: "IN3" }
+    - { pin: "PD3", signal: "IN4" }
+    - { pin: "PD5", signal: "IN5" }
+    - { pin: "PD6", signal: "IN6" }
+    - { pin: "PD4", signal: "IN7" }
   interrupts:
-    - signal: GLOBAL
-      interrupt: ADC
+    - { signal: "GLOBAL", interrupt: "ADC" }
 
 # Fake peripheral
 - name: OPA
@@ -609,17 +395,8 @@
     version: v0
     block: EXTEND
   pins:
-    - pin: PA1
-      signal: NEG
-      remap: 0
-    - pin: PA2
-      signal: POS
-      remap: 0
-    - pin: PD0
-      signal: NEG
-      remap: 1
-    - pin: PD7
-      signal: POS
-      remap: 1
-    - pin: PD4
-      signal: OUT
+    - { pin: "PA1", signal: "NEG", remap: 0 }
+    - { pin: "PA2", signal: "POS", remap: 0 }
+    - { pin: "PD0", signal: "NEG", remap: 1 }
+    - { pin: "PD7", signal: "POS", remap: 1 }
+    - { pin: "PD4", signal: "OUT" }
