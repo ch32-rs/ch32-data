@@ -440,11 +440,11 @@
   interrupts:
     - { signal: "GLOBAL", interrupt: "SPI1" }
 
-- name: ADC1
+- name: ADC
   address: 0x40012400
   registers:
     kind: adc
-    version: v0
+    version: v00x
     block: ADC
   rcc:
     bus_clock: PCLK2

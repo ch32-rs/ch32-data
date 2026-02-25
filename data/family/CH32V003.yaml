@@ -550,7 +550,7 @@
   address: 0x40012400
   registers:
     kind: adc
-    version: v0
+    version: v003
     block: ADC
   rcc:
     bus_clock: PCLK2
