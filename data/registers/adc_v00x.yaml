@@ -257,7 +257,6 @@ fieldset/CTLR3:
         stride: 1
       bit_offset: 16
       bit_size: 1
-      fieldset: IOFR
 fieldset/IDATAR:
   description: injected data register x.
   fields:
