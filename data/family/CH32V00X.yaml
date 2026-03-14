@@ -1,0 +1,482 @@
+# Difference between CH32V0_V2C and CH32V0_V2A:
+# - Zmmul extension
+# - ADC has TKEY extension, 12 bit instead of 10bit
+
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: rv2
+    block: PFIC
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: rv2
+    block: SYSTICK
+  # SysTick interrupt handling is moved to qingke-rt as it's a core feature
+  # interrupts:
+  #   - signal: GLOBAL
+  #    interrupt: SYSTICK
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v0
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - { signal: "EXTI0", interrupt: "EXTI7_0" }
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: v00x
+    block: RCC
+  pins:
+    - { pin: "PC4", signal: "MCO" }
+
+- name: DMA1
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA1EN
+  interrupts:
+    - { signal: "CH1", interrupt: "DMA1_Channel1" }
+    - { signal: "CH2", interrupt: "DMA1_Channel2" }
+    - { signal: "CH3", interrupt: "DMA1_Channel3" }
+    - { signal: "CH4", interrupt: "DMA1_Channel4" }
+    - { signal: "CH5", interrupt: "DMA1_Channel5" }
+    - { signal: "CH6", interrupt: "DMA1_Channel6" }
+    - { signal: "CH7", interrupt: "DMA1_Channel7" }
+
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: v00x
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: AFIOEN
+    reset:
+      register: PB2PRSTR
+      field: AFIORST
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPAEN
+    reset:
+      register: PB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPBEN
+    reset:
+      register: PB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPCEN
+    reset:
+      register: PB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v0
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPDEN
+    reset:
+      register: PB2PRSTR
+      field: IOPDRST
+
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: v3
+    block: ADTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB2PCENR
+      field: TIM1EN
+    reset:
+      register: PB2PRSTR
+      field: TIM1RST
+  remap:
+    register: PCFR1
+    field: TIM1_RM
+  interrupts:
+    - { signal: "UP", interrupt: "TIM1_UP" }
+    - { signal: "CC", interrupt: "TIM1_CC" }
+    - { signal: "COM", interrupt: "TIM1_TRG_COM" }
+    - { signal: "TRG", interrupt: "TIM1_TRG_COM" }
+    - { signal: "BRK", interrupt: "TIM1_BRK" }
+  pins:
+    # 0
+    - { pin: "PC5", signal: "ETR", remap: 0 }
+    - { pin: "PD2", signal: "CH1", remap: 0 }
+    - { pin: "PA1", signal: "CH2", remap: 0 }
+    - { pin: "PC3", signal: "CH3", remap: 0 }
+    - { pin: "PC4", signal: "CH4", remap: 0 }
+    - { pin: "PC2", signal: "BKIN", remap: 0 }
+    - { pin: "PD0", signal: "CH1N", remap: 0 }
+    - { pin: "PA2", signal: "CH2N", remap: 0 }
+    - { pin: "PD1", signal: "CH3N", remap: 0 }
+    # 1
+    - { pin: "PC5", signal: "ETR", remap: 1 }
+    - { pin: "PC6", signal: "CH1", remap: 1 }
+    - { pin: "PC7", signal: "CH2", remap: 1 }
+    - { pin: "PC0", signal: "CH3", remap: 1 }
+    - { pin: "PD3", signal: "CH4", remap: 1 }
+    - { pin: "PC1", signal: "BKIN", remap: 1 }
+    - { pin: "PC3", signal: "CH1N", remap: 1 }
+    - { pin: "PC4", signal: "CH2N", remap: 1 }
+    - { pin: "PD1", signal: "CH3N", remap: 1 }
+    # 2
+    - { pin: "PD4", signal: "ETR", remap: 2 }
+    - { pin: "PD2", signal: "CH1", remap: 2 }
+    - { pin: "PA1", signal: "CH2", remap: 2 }
+    - { pin: "PC3", signal: "CH3", remap: 2 }
+    - { pin: "PC4", signal: "CH4", remap: 2 }
+    - { pin: "PC2", signal: "BKIN", remap: 2 }
+    - { pin: "PD0", signal: "CH1N", remap: 2 }
+    - { pin: "PA2", signal: "CH2N", remap: 2 }
+    - { pin: "PD1", signal: "CH3N", remap: 2 }
+    # 3
+    - { pin: "PC2", signal: "ETR", remap: 3 }
+    - { pin: "PC4", signal: "CH1", remap: 3 }
+    - { pin: "PC7", signal: "CH2", remap: 3 }
+    - { pin: "PC5", signal: "CH3", remap: 3 }
+    - { pin: "PD4", signal: "CH4", remap: 3 }
+    - { pin: "PC1", signal: "BKIN", remap: 3 }
+    - { pin: "PC3", signal: "CH1N", remap: 3 }
+    - { pin: "PD2", signal: "CH2N", remap: 3 }
+    - { pin: "PC6", signal: "CH3N", remap: 3 }
+
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: v3
+    block: GPTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB1PCENR
+      field: TIM2EN
+    reset:
+      register: PB1PRSTR
+      field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
+  interrupts:
+    - { signal: "UP", interrupt: "TIM2" }
+    - { signal: "CC", interrupt: "TIM2" }
+    - { signal: "TRG", interrupt: "TIM2" }
+  pins:
+    # 0
+    - { pin: "PD4", signal: "ETR", remap: 0 }
+    - { pin: "PD4", signal: "CH1", remap: 0 }
+    - { pin: "PD3", signal: "CH2", remap: 0 }
+    - { pin: "PC0", signal: "CH3", remap: 0 }
+    - { pin: "PD7", signal: "CH4", remap: 0 }
+    # 1
+    - { pin: "PC5", signal: "ETR", remap: 1 }
+    - { pin: "PC5", signal: "CH1", remap: 1 }
+    - { pin: "PC2", signal: "CH2", remap: 1 }
+    - { pin: "PD2", signal: "CH3", remap: 1 }
+    - { pin: "PC1", signal: "CH4", remap: 1 }
+    # 2
+    - { pin: "PC1", signal: "ETR", remap: 2 }
+    - { pin: "PC1", signal: "CH1", remap: 2 }
+    - { pin: "PD3", signal: "CH2", remap: 2 }
+    - { pin: "PC0", signal: "CH3", remap: 2 }
+    - { pin: "PD7", signal: "CH4", remap: 2 }
+    # 3
+    - { pin: "PC1", signal: "ETR", remap: 3 }
+    - { pin: "PC1", signal: "CH1", remap: 3 }
+    - { pin: "PC7", signal: "CH2", remap: 3 }
+    - { pin: "PD6", signal: "CH3", remap: 3 }
+    - { pin: "PD5", signal: "CH4", remap: 3 }
+
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB2PCENR
+      field: USART1EN
+    reset:
+      register: PB2PRSTR
+      field: USART1RST
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "USART1" }
+  pins:
+    # 0
+    - { pin: "PD5", signal: "TX", remap: 0 }
+    - { pin: "PD6", signal: "RX", remap: 0 }
+    - { pin: "PD3", signal: "CTS", remap: 0 }
+    - { pin: "PC2", signal: "RTS", remap: 0 }
+    # 1
+    - { pin: "PD6", signal: "TX", remap: 1 }
+    - { pin: "PD5", signal: "RX", remap: 1 }
+    - { pin: "PC6", signal: "CTS", remap: 1 }
+    - { pin: "PC7", signal: "RTS", remap: 1 }
+    # 2
+    - { pin: "PD0", signal: "TX", remap: 2 }
+    - { pin: "PD1", signal: "RX", remap: 2 }
+    - { pin: "PC3", signal: "CTS", remap: 2 }
+    - { pin: "PC2", signal: "RTS", remap: 2 }
+    # 3
+    - { pin: "PC0", signal: "TX", remap: 3 }
+    - { pin: "PC1", signal: "RX", remap: 3 }
+    - { pin: "PC6", signal: "CTS", remap: 3 }
+    - { pin: "PC7", signal: "RTS", remap: 3 }
+    # 4
+    - { pin: "PD1", signal: "TX", remap: 4 }
+    - { pin: "PB3", signal: "RX", remap: 4 }
+    - { pin: "PD7", signal: "CTS", remap: 4 }
+    - { pin: "PA5", signal: "RTS", remap: 4 }
+    # 5
+    - { pin: "PB3", signal: "TX", remap: 5 }
+    - { pin: "PD1", signal: "RX", remap: 5 }
+    - { pin: "PD7", signal: "CTS", remap: 5 }
+    - { pin: "PA5", signal: "RTS", remap: 5 }
+    # 6
+    - { pin: "PC5", signal: "TX", remap: 6 }
+    - { pin: "PC6", signal: "RX", remap: 6 }
+    - { pin: "PC7", signal: "CTS", remap: 6 }
+    - { pin: "PB4", signal: "RTS", remap: 6 }
+    # 7
+    - { pin: "PB5", signal: "TX", remap: 7 }
+    - { pin: "PB6", signal: "RX", remap: 7 }
+    - { pin: "PC7", signal: "CTS", remap: 7 }
+    - { pin: "PB4", signal: "RTS", remap: 7 }
+    # 8
+    - { pin: "PA0", signal: "TX", remap: 8 }
+    - { pin: "PA1", signal: "RX", remap: 8 }
+    - { pin: "PD2", signal: "CTS", remap: 8 }
+    - { pin: "PD3", signal: "RTS", remap: 8 }
+    # 9
+    - { pin: "PA0", signal: "TX", remap: 9 }
+    - { pin: "PC4", signal: "RX", remap: 9 }
+    - { pin: "PD5", signal: "CTS", remap: 9 }
+    - { pin: "PD4", signal: "RTS", remap: 9 }
+
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB2PCENR
+      field: USART2EN
+    reset:
+      register: PB2PRSTR
+      field: USART2RST
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "USART2" }
+  pins:
+    # 0
+    - { pin: "PA7", signal: "TX", remap: 0 }
+    - { pin: "PB3", signal: "RX", remap: 0 }
+    - { pin: "PA4", signal: "CTS", remap: 0 }
+    - { pin: "PA5", signal: "RTS", remap: 0 }
+    # 1
+    - { pin: "PA4", signal: "TX", remap: 1 }
+    - { pin: "PA5", signal: "RX", remap: 1 }
+    - { pin: "PA7", signal: "CTS", remap: 1 }
+    - { pin: "PB3", signal: "RTS", remap: 1 }
+    # 2
+    - { pin: "PA2", signal: "TX", remap: 2 }
+    - { pin: "PA3", signal: "RX", remap: 2 }
+    - { pin: "PA0", signal: "CTS", remap: 2 }
+    - { pin: "PA1", signal: "RTS", remap: 2 }
+    # 3
+    - { pin: "PD2", signal: "TX", remap: 3 }
+    - { pin: "PD3", signal: "RX", remap: 3 }
+    - { pin: "PA0", signal: "CTS", remap: 3 }
+    - { pin: "PA1", signal: "RTS", remap: 3 }
+    # 4
+    - { pin: "PB0", signal: "TX", remap: 4 }
+    - { pin: "PB1", signal: "RX", remap: 4 }
+    - { pin: "PB6", signal: "CTS", remap: 4 }
+    - { pin: "PA1", signal: "RTS", remap: 4 }
+    # 5
+    - { pin: "PC4", signal: "TX", remap: 5 }
+    - { pin: "PD1", signal: "RX", remap: 5 }
+    - { pin: "PA4", signal: "CTS", remap: 5 }
+    - { pin: "PA1", signal: "RTS", remap: 5 }
+    # 6
+    - { pin: "PA6", signal: "TX", remap: 6 }
+    - { pin: "PA5", signal: "RX", remap: 6 }
+    - { pin: "PA7", signal: "CTS", remap: 6 }
+    - { pin: "PB3", signal: "RTS", remap: 6 }
+
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    # No SMBUS registers, others are the same as v3
+    # No idea if RTR is available
+    version: v0
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: I2C1EN
+    reset:
+      register: PB1PRSTR
+      field: I2C1RST
+  pins:
+    # 0
+    - { pin: "PC2", signal: "SCL", remap: 0 }
+    - { pin: "PC1", signal: "SDA", remap: 0 }
+    # 1
+    - { pin: "PD1", signal: "SCL", remap: 1 }
+    - { pin: "PD0", signal: "SDA", remap: 1 }
+    # 2
+    - { pin: "PC5", signal: "SCL", remap: 2 }
+    - { pin: "PC6", signal: "SDA", remap: 2 }
+  interrupts:
+    - { signal: "EV", interrupt: "I2C1_EV" }
+    - { signal: "ER", interrupt: "I2C1_ER" }
+
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: v0
+    block: SPI
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB2PCENR
+      field: SPI1EN
+    reset:
+      register: PB2PRSTR
+      field: SPI1RST
+  remap:
+    register: PCFR1
+    field: SPI1_RM
+  pins:
+    # 0
+    - { pin: "PC1", signal: "NSS", remap: 0 }
+    - { pin: "PC5", signal: "SCK", remap: 0 }
+    - { pin: "PC7", signal: "MISO", remap: 0 }
+    - { pin: "PC6", signal: "MOSI", remap: 0 }
+    # 1
+    - { pin: "PC0", signal: "NSS", remap: 1 }
+    - { pin: "PC5", signal: "SCK", remap: 1 }
+    - { pin: "PC7", signal: "MISO", remap: 1 }
+    - { pin: "PC6", signal: "MOSI", remap: 1 }
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "SPI1" }
+
+- name: ADC
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v00x
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: ADCEN
+    reset:
+      register: PB2PRSTR
+      field: ADCRST
+  pins:
+    - { pin: "PA2", signal: "IN0" }
+    - { pin: "PA1", signal: "IN1" }
+    - { pin: "PC4", signal: "IN2" }
+    - { pin: "PD2", signal: "IN3" }
+    - { pin: "PD3", signal: "IN4" }
+    - { pin: "PD5", signal: "IN5" }
+    - { pin: "PD6", signal: "IN6" }
+    - { pin: "PD4", signal: "IN7" }
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "ADC" }
+
+# Fake peripheral
+- name: OPA
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v0
+    block: EXTEND
+  pins:
+    - { pin: "PA1", signal: "NEG", remap: 0 }
+    - { pin: "PA2", signal: "POS", remap: 0 }
+    - { pin: "PD0", signal: "NEG", remap: 1 }
+    - { pin: "PD7", signal: "POS", remap: 1 }
+    - { pin: "PD4", signal: "OUT" }

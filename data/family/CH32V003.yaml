@@ -34,7 +34,7 @@
   address: 0x40021000
   registers:
     kind: rcc
-    version: v0
+    version: v003
     block: RCC
   pins:
     - pin: PC4
@@ -72,7 +72,7 @@
   address: 0x40010000
   registers:
     kind: afio
-    version: v0
+    version: v003
     block: AFIO
   rcc:
     bus_clock: PCLK2
@@ -550,7 +550,7 @@
   address: 0x40012400
   registers:
     kind: adc
-    version: v0
+    version: v003
     block: ADC
   rcc:
     bus_clock: PCLK2
