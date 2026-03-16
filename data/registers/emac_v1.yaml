@@ -1,0 +1,900 @@
+# Synopsys DWC Ethernet MAC for CH32V307 (10/100M EMAC + 10M PHY)
+#
+# This is a combined register block covering both the MAC and DMA sub-blocks:
+#   MAC registers: base + 0x000
+#   DMA registers: base + 0x1000
+#
+# The register layout is compatible with STM32's ETH v1a (Synopsys DesignWare Cores).
+# WCH additions: TCES, TCF, IRE, PDI, TCD bits in MACCR for 10M PHY control.
+
+block/ETH:
+  description: Ethernet MAC (Synopsys DWC 10/100M + 10M PHY)
+  items:
+  # ---- MAC registers (base + 0x000) ----
+  - name: MACCR
+    description: Ethernet MAC configuration register
+    byte_offset: 0x00
+    fieldset: MACCR
+  - name: MACFFR
+    description: Ethernet MAC frame filter register
+    byte_offset: 0x04
+    fieldset: MACFFR
+  - name: MACHTHR
+    description: Ethernet MAC hash table high register
+    byte_offset: 0x08
+    fieldset: MACHTHR
+  - name: MACHTLR
+    description: Ethernet MAC hash table low register
+    byte_offset: 0x0C
+    fieldset: MACHTLR
+  - name: MACMIIAR
+    description: Ethernet MAC MII address register
+    byte_offset: 0x10
+    fieldset: MACMIIAR
+  - name: MACMIIDR
+    description: Ethernet MAC MII data register
+    byte_offset: 0x14
+    fieldset: MACMIIDR
+  - name: MACFCR
+    description: Ethernet MAC flow control register
+    byte_offset: 0x18
+    fieldset: MACFCR
+  - name: MACVLANTR
+    description: Ethernet MAC VLAN tag register
+    byte_offset: 0x1C
+    fieldset: MACVLANTR
+  - name: MACRWUFFR
+    description: Ethernet MAC remote wakeup frame filter register
+    byte_offset: 0x28
+  - name: MACPMTCSR
+    description: Ethernet MAC PMT control and status register
+    byte_offset: 0x2C
+    fieldset: MACPMTCSR
+  - name: MACSR
+    description: Ethernet MAC interrupt status register
+    byte_offset: 0x38
+    fieldset: MACSR
+  - name: MACIMR
+    description: Ethernet MAC interrupt mask register
+    byte_offset: 0x3C
+    fieldset: MACIMR
+  - name: MACA0HR
+    description: Ethernet MAC address 0 high register
+    byte_offset: 0x40
+    fieldset: MACA0HR
+  - name: MACA0LR
+    description: Ethernet MAC address 0 low register
+    byte_offset: 0x44
+    fieldset: MACA0LR
+  - name: MACA1HR
+    description: Ethernet MAC address 1 high register
+    byte_offset: 0x48
+    fieldset: MACA1HR
+  - name: MACA1LR
+    description: Ethernet MAC address 1 low register
+    byte_offset: 0x4C
+    fieldset: MACA1LR
+  - name: MACA2HR
+    description: Ethernet MAC address 2 high register
+    byte_offset: 0x50
+    fieldset: MACA2HR
+  - name: MACA2LR
+    description: Ethernet MAC address 2 low register
+    byte_offset: 0x54
+    fieldset: MACA2LR
+  - name: MACA3HR
+    description: Ethernet MAC address 3 high register
+    byte_offset: 0x58
+    fieldset: MACA3HR
+  - name: MACA3LR
+    description: Ethernet MAC address 3 low register
+    byte_offset: 0x5C
+    fieldset: MACA3LR
+  # ---- DMA registers (base + 0x1000) ----
+  - name: DMABMR
+    description: Ethernet DMA bus mode register
+    byte_offset: 0x1000
+    fieldset: DMABMR
+  - name: DMATPDR
+    description: Ethernet DMA transmit poll demand register
+    byte_offset: 0x1004
+    fieldset: DMATPDR
+  - name: DMARPDR
+    description: Ethernet DMA receive poll demand register
+    byte_offset: 0x1008
+    fieldset: DMARPDR
+  - name: DMARDLAR
+    description: Ethernet DMA receive descriptor list address register
+    byte_offset: 0x100C
+    fieldset: DMARDLAR
+  - name: DMATDLAR
+    description: Ethernet DMA transmit descriptor list address register
+    byte_offset: 0x1010
+    fieldset: DMATDLAR
+  - name: DMASR
+    description: Ethernet DMA status register
+    byte_offset: 0x1014
+    fieldset: DMASR
+  - name: DMAOMR
+    description: Ethernet DMA operation mode register
+    byte_offset: 0x1018
+    fieldset: DMAOMR
+  - name: DMAIER
+    description: Ethernet DMA interrupt enable register
+    byte_offset: 0x101C
+    fieldset: DMAIER
+  - name: DMAMFBOCR
+    description: Ethernet DMA missed frame and buffer overflow counter register
+    byte_offset: 0x1020
+    access: Read
+    fieldset: DMAMFBOCR
+  - name: DMACHTDR
+    description: Ethernet DMA current host transmit descriptor register
+    byte_offset: 0x1048
+    access: Read
+    fieldset: DMACHTDR
+  - name: DMACHRDR
+    description: Ethernet DMA current host receive descriptor register
+    byte_offset: 0x104C
+    access: Read
+    fieldset: DMACHRDR
+  - name: DMACHTBAR
+    description: Ethernet DMA current host transmit buffer address register
+    byte_offset: 0x1050
+    access: Read
+    fieldset: DMACHTBAR
+  - name: DMACHRBAR
+    description: Ethernet DMA current host receive buffer address register
+    byte_offset: 0x1054
+    access: Read
+    fieldset: DMACHRBAR
+
+# ============================================================================
+# MAC fieldsets
+# ============================================================================
+
+fieldset/MACCR:
+  description: Ethernet MAC configuration register
+  fields:
+  - name: TCES
+    description: Send clock selection bit (10M PHY)
+    bit_offset: 0
+    bit_size: 1
+  - name: TCF
+    description: Send clock reversal (10M PHY)
+    bit_offset: 1
+    bit_size: 1
+  - name: RE
+    description: Receiver enable
+    bit_offset: 2
+    bit_size: 1
+  - name: TE
+    description: Transmitter enable
+    bit_offset: 3
+    bit_size: 1
+  - name: DC
+    description: Deferral check
+    bit_offset: 4
+    bit_size: 1
+  - name: BL
+    description: Back-off limit
+    bit_offset: 5
+    bit_size: 2
+  - name: APCS
+    description: Automatic pad/CRC stripping
+    bit_offset: 7
+    bit_size: 1
+  - name: RD
+    description: Retry disable
+    bit_offset: 9
+    bit_size: 1
+  - name: IPCO
+    description: IPv4 checksum offload
+    bit_offset: 10
+    bit_size: 1
+  - name: DM
+    description: Duplex mode
+    bit_offset: 11
+    bit_size: 1
+  - name: LM
+    description: Loopback mode
+    bit_offset: 12
+    bit_size: 1
+  - name: ROD
+    description: Receive own disable
+    bit_offset: 13
+    bit_size: 1
+  - name: FES
+    description: "Ethernet speed: 00=10M, 01=100M, 10=1G, 11=reserved"
+    bit_offset: 14
+    bit_size: 2
+  - name: CSD
+    description: Carrier sense disable
+    bit_offset: 16
+    bit_size: 1
+  - name: IFG
+    description: Interframe gap
+    bit_offset: 17
+    bit_size: 3
+  - name: IRE
+    description: 10M PHY 50 ohm set
+    bit_offset: 20
+    bit_size: 1
+  - name: PDI
+    description: 10M PHY TX driver bias current
+    bit_offset: 21
+    bit_size: 1
+  - name: JD
+    description: Jabber disable
+    bit_offset: 22
+    bit_size: 1
+  - name: WD
+    description: Watchdog disable
+    bit_offset: 23
+    bit_size: 1
+  - name: TCD
+    description: Send clock delay (10M PHY)
+    bit_offset: 29
+    bit_size: 3
+
+fieldset/MACFFR:
+  description: Ethernet MAC frame filter register
+  fields:
+  - name: PM
+    description: Promiscuous mode
+    bit_offset: 0
+    bit_size: 1
+  - name: HU
+    description: Hash unicast
+    bit_offset: 1
+    bit_size: 1
+  - name: HM
+    description: Hash multicast
+    bit_offset: 2
+    bit_size: 1
+  - name: DAIF
+    description: Destination address inverse filtering
+    bit_offset: 3
+    bit_size: 1
+  - name: PAM
+    description: Pass all multicast
+    bit_offset: 4
+    bit_size: 1
+  - name: BFD
+    description: Broadcast frames disable
+    bit_offset: 5
+    bit_size: 1
+  - name: PCF
+    description: Pass control frames
+    bit_offset: 6
+    bit_size: 2
+  - name: SAIF
+    description: Source address inverse filtering
+    bit_offset: 8
+    bit_size: 1
+  - name: SAF
+    description: Source address filter
+    bit_offset: 9
+    bit_size: 1
+  - name: HPF
+    description: Hash or perfect filter
+    bit_offset: 10
+    bit_size: 1
+  - name: RA
+    description: Receive all
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACHTHR:
+  description: Ethernet MAC hash table high register
+  fields:
+  - name: HTH
+    description: Hash table high
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/MACHTLR:
+  description: Ethernet MAC hash table low register
+  fields:
+  - name: HTL
+    description: Hash table low
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/MACMIIAR:
+  description: Ethernet MAC MII address register
+  fields:
+  - name: MB
+    description: MII busy
+    bit_offset: 0
+    bit_size: 1
+  - name: MW
+    description: MII write
+    bit_offset: 1
+    bit_size: 1
+  - name: CR
+    description: Clock range
+    bit_offset: 2
+    bit_size: 3
+  - name: MR
+    description: MII register
+    bit_offset: 6
+    bit_size: 5
+  - name: PA
+    description: PHY address
+    bit_offset: 11
+    bit_size: 5
+
+fieldset/MACMIIDR:
+  description: Ethernet MAC MII data register
+  fields:
+  - name: MD
+    description: MII data
+    bit_offset: 0
+    bit_size: 16
+
+fieldset/MACFCR:
+  description: Ethernet MAC flow control register
+  fields:
+  - name: FCB_BPA
+    description: Flow control busy/back pressure activate
+    bit_offset: 0
+    bit_size: 1
+  - name: TFCE
+    description: Transmit flow control enable
+    bit_offset: 1
+    bit_size: 1
+  - name: RFCE
+    description: Receive flow control enable
+    bit_offset: 2
+    bit_size: 1
+  - name: UPFD
+    description: Unicast pause frame detect
+    bit_offset: 3
+    bit_size: 1
+  - name: PLT
+    description: Pause low threshold
+    bit_offset: 4
+    bit_size: 2
+  - name: ZQPD
+    description: Zero-quanta pause disable
+    bit_offset: 7
+    bit_size: 1
+  - name: PT
+    description: Pause time
+    bit_offset: 16
+    bit_size: 16
+
+fieldset/MACVLANTR:
+  description: Ethernet MAC VLAN tag register
+  fields:
+  - name: VLANTI
+    description: VLAN tag identifier (for receive frames)
+    bit_offset: 0
+    bit_size: 16
+  - name: VLANTC
+    description: 12-bit VLAN tag comparison
+    bit_offset: 16
+    bit_size: 1
+
+fieldset/MACPMTCSR:
+  description: Ethernet MAC PMT control and status register
+  fields:
+  - name: PD
+    description: Power down
+    bit_offset: 0
+    bit_size: 1
+  - name: MPE
+    description: Magic packet enable
+    bit_offset: 1
+    bit_size: 1
+  - name: WFE
+    description: Wakeup frame enable
+    bit_offset: 2
+    bit_size: 1
+  - name: MPR
+    description: Magic packet received
+    bit_offset: 5
+    bit_size: 1
+  - name: WFR
+    description: Wakeup frame received
+    bit_offset: 6
+    bit_size: 1
+  - name: GU
+    description: Global unicast
+    bit_offset: 9
+    bit_size: 1
+  - name: WFFRPR
+    description: Wakeup frame filter register pointer reset
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACSR:
+  description: Ethernet MAC interrupt status register
+  fields:
+  - name: PMTS
+    description: PMT status
+    bit_offset: 3
+    bit_size: 1
+  - name: MMCS
+    description: MMC status
+    bit_offset: 4
+    bit_size: 1
+  - name: MMCRS
+    description: MMC receive status
+    bit_offset: 5
+    bit_size: 1
+  - name: MMCTS
+    description: MMC transmit status
+    bit_offset: 6
+    bit_size: 1
+  - name: TSTS
+    description: Time stamp trigger status
+    bit_offset: 9
+    bit_size: 1
+
+fieldset/MACIMR:
+  description: Ethernet MAC interrupt mask register
+  fields:
+  - name: PMTIM
+    description: PMT interrupt mask
+    bit_offset: 3
+    bit_size: 1
+  - name: TSTIM
+    description: Time stamp trigger interrupt mask
+    bit_offset: 9
+    bit_size: 1
+
+fieldset/MACA0HR:
+  description: Ethernet MAC address 0 high register
+  fields:
+  - name: MACA0H
+    description: MAC address0 high
+    bit_offset: 0
+    bit_size: 16
+  - name: MO
+    description: Always 1
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACA0LR:
+  description: Ethernet MAC address 0 low register
+  fields:
+  - name: MACA0L
+    description: MAC address0 low
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/MACA1HR:
+  description: Ethernet MAC address 1 high register
+  fields:
+  - name: MACA1H
+    description: MAC address1 high
+    bit_offset: 0
+    bit_size: 16
+  - name: MBC
+    description: Mask byte control
+    bit_offset: 24
+    bit_size: 6
+  - name: SA
+    description: Source address
+    bit_offset: 30
+    bit_size: 1
+  - name: AE
+    description: Address enable
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACA1LR:
+  description: Ethernet MAC address 1 low register
+  fields:
+  - name: MACA1L
+    description: MAC address1 low
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/MACA2HR:
+  description: Ethernet MAC address 2 high register
+  fields:
+  - name: MACA2H
+    description: MAC address2 high
+    bit_offset: 0
+    bit_size: 16
+  - name: MBC
+    description: Mask byte control
+    bit_offset: 24
+    bit_size: 6
+  - name: SA
+    description: Source address
+    bit_offset: 30
+    bit_size: 1
+  - name: AE
+    description: Address enable
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACA2LR:
+  description: Ethernet MAC address 2 low register
+  fields:
+  - name: MACA2L
+    description: MAC address2 low
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/MACA3HR:
+  description: Ethernet MAC address 3 high register
+  fields:
+  - name: MACA3H
+    description: MAC address3 high
+    bit_offset: 0
+    bit_size: 16
+  - name: MBC
+    description: Mask byte control
+    bit_offset: 24
+    bit_size: 6
+  - name: SA
+    description: Source address
+    bit_offset: 30
+    bit_size: 1
+  - name: AE
+    description: Address enable
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/MACA3LR:
+  description: Ethernet MAC address 3 low register
+  fields:
+  - name: MACA3L
+    description: MAC address3 low
+    bit_offset: 0
+    bit_size: 32
+
+# ============================================================================
+# DMA fieldsets
+# ============================================================================
+
+fieldset/DMABMR:
+  description: Ethernet DMA bus mode register
+  fields:
+  - name: SR
+    description: Software reset
+    bit_offset: 0
+    bit_size: 1
+  - name: DA
+    description: DMA arbitration
+    bit_offset: 1
+    bit_size: 1
+  - name: DSL
+    description: Descriptor skip length
+    bit_offset: 2
+    bit_size: 5
+  - name: PBL
+    description: Programmable burst length
+    bit_offset: 8
+    bit_size: 6
+  - name: RTPR
+    description: Rx Tx priority ratio
+    bit_offset: 14
+    bit_size: 2
+  - name: FB
+    description: Fixed burst
+    bit_offset: 16
+    bit_size: 1
+  - name: RDP
+    description: Rx DMA PBL
+    bit_offset: 17
+    bit_size: 6
+  - name: USP
+    description: Use separate PBL
+    bit_offset: 23
+    bit_size: 1
+  - name: FPM
+    description: 4xPBL mode
+    bit_offset: 24
+    bit_size: 1
+  - name: AAB
+    description: Address-aligned beats
+    bit_offset: 25
+    bit_size: 1
+
+fieldset/DMATPDR:
+  description: Ethernet DMA transmit poll demand register
+  fields:
+  - name: TPD
+    description: Transmit poll demand
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMARPDR:
+  description: Ethernet DMA receive poll demand register
+  fields:
+  - name: RPD
+    description: Receive poll demand
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMARDLAR:
+  description: Ethernet DMA receive descriptor list address register
+  fields:
+  - name: SRL
+    description: Start of receive list
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMATDLAR:
+  description: Ethernet DMA transmit descriptor list address register
+  fields:
+  - name: STL
+    description: Start of transmit list
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMASR:
+  description: Ethernet DMA status register
+  fields:
+  - name: TS
+    description: Transmit status
+    bit_offset: 0
+    bit_size: 1
+  - name: TPSS
+    description: Transmit process stopped status
+    bit_offset: 1
+    bit_size: 1
+  - name: TBUS
+    description: Transmit buffer unavailable status
+    bit_offset: 2
+    bit_size: 1
+  - name: TJTS
+    description: Transmit jabber timeout status
+    bit_offset: 3
+    bit_size: 1
+  - name: ROS
+    description: Receive overflow status
+    bit_offset: 4
+    bit_size: 1
+  - name: TUS
+    description: Transmit underflow status
+    bit_offset: 5
+    bit_size: 1
+  - name: RS
+    description: Receive status
+    bit_offset: 6
+    bit_size: 1
+  - name: RBUS
+    description: Receive buffer unavailable status
+    bit_offset: 7
+    bit_size: 1
+  - name: RPSS
+    description: Receive process stopped status
+    bit_offset: 8
+    bit_size: 1
+  - name: RWTS
+    description: Receive watchdog timeout status
+    bit_offset: 9
+    bit_size: 1
+  - name: ETS
+    description: Early transmit status
+    bit_offset: 10
+    bit_size: 1
+  - name: FBES
+    description: Fatal bus error status
+    bit_offset: 13
+    bit_size: 1
+  - name: ERS
+    description: Early receive status
+    bit_offset: 14
+    bit_size: 1
+  - name: AIS
+    description: Abnormal interrupt summary
+    bit_offset: 15
+    bit_size: 1
+  - name: NIS
+    description: Normal interrupt summary
+    bit_offset: 16
+    bit_size: 1
+  - name: RPS
+    description: Receive process state
+    bit_offset: 17
+    bit_size: 3
+    access: Read
+  - name: TPS
+    description: Transmit process state
+    bit_offset: 20
+    bit_size: 3
+    access: Read
+  - name: EBS
+    description: Error bits status
+    bit_offset: 23
+    bit_size: 3
+    access: Read
+  - name: MMCS
+    description: MMC status
+    bit_offset: 27
+    bit_size: 1
+    access: Read
+  - name: PMTS
+    description: PMT status
+    bit_offset: 28
+    bit_size: 1
+    access: Read
+  - name: TSTS
+    description: Time stamp trigger status
+    bit_offset: 29
+    bit_size: 1
+    access: Read
+  - name: IPLS
+    description: 10M PHY physical layer status (write 1 to clear)
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/DMAOMR:
+  description: Ethernet DMA operation mode register
+  fields:
+  - name: SR
+    description: Start/stop receive
+    bit_offset: 1
+    bit_size: 1
+  - name: OSF
+    description: Operate on second frame
+    bit_offset: 2
+    bit_size: 1
+  - name: RTC
+    description: Receive threshold control
+    bit_offset: 3
+    bit_size: 2
+  - name: FUGF
+    description: Forward undersized good frames
+    bit_offset: 6
+    bit_size: 1
+  - name: FEF
+    description: Forward error frames
+    bit_offset: 7
+    bit_size: 1
+  - name: ST
+    description: Start/stop transmission
+    bit_offset: 13
+    bit_size: 1
+  - name: TTC
+    description: Transmit threshold control
+    bit_offset: 14
+    bit_size: 3
+  - name: FTF
+    description: Flush transmit FIFO
+    bit_offset: 20
+    bit_size: 1
+  - name: TSF
+    description: Transmit store and forward
+    bit_offset: 21
+    bit_size: 1
+  - name: DFRF
+    description: Disable flushing of received frames
+    bit_offset: 24
+    bit_size: 1
+  - name: RSF
+    description: Receive store and forward
+    bit_offset: 25
+    bit_size: 1
+  - name: DTCEFD
+    description: Dropping of TCP/IP checksum error frames disable
+    bit_offset: 26
+    bit_size: 1
+
+fieldset/DMAIER:
+  description: Ethernet DMA interrupt enable register
+  fields:
+  - name: TIE
+    description: Transmit interrupt enable
+    bit_offset: 0
+    bit_size: 1
+  - name: TPSIE
+    description: Transmit process stopped interrupt enable
+    bit_offset: 1
+    bit_size: 1
+  - name: TBUIE
+    description: Transmit buffer unavailable interrupt enable
+    bit_offset: 2
+    bit_size: 1
+  - name: TJTIE
+    description: Transmit jabber timeout interrupt enable
+    bit_offset: 3
+    bit_size: 1
+  - name: ROIE
+    description: Overflow interrupt enable
+    bit_offset: 4
+    bit_size: 1
+  - name: TUIE
+    description: Underflow interrupt enable
+    bit_offset: 5
+    bit_size: 1
+  - name: RIE
+    description: Receive interrupt enable
+    bit_offset: 6
+    bit_size: 1
+  - name: RBUIE
+    description: Receive buffer unavailable interrupt enable
+    bit_offset: 7
+    bit_size: 1
+  - name: RPSIE
+    description: Receive process stopped interrupt enable
+    bit_offset: 8
+    bit_size: 1
+  - name: RWTIE
+    description: Receive watchdog timeout interrupt enable
+    bit_offset: 9
+    bit_size: 1
+  - name: ETIE
+    description: Early transmit interrupt enable
+    bit_offset: 10
+    bit_size: 1
+  - name: FBEIE
+    description: Fatal bus error interrupt enable
+    bit_offset: 13
+    bit_size: 1
+  - name: ERIE
+    description: Early receive interrupt enable
+    bit_offset: 14
+    bit_size: 1
+  - name: AISE
+    description: Abnormal interrupt summary enable
+    bit_offset: 15
+    bit_size: 1
+  - name: NISE
+    description: Normal interrupt summary enable
+    bit_offset: 16
+    bit_size: 1
+  - name: IPLE
+    description: 10M PHY link status change interrupt enable
+    bit_offset: 31
+    bit_size: 1
+
+fieldset/DMAMFBOCR:
+  description: Ethernet DMA missed frame and buffer overflow counter register
+  fields:
+  - name: MFC
+    description: Missed frames by the controller
+    bit_offset: 0
+    bit_size: 16
+  - name: OMFC
+    description: Overflow bit for missed frame counter
+    bit_offset: 16
+    bit_size: 1
+  - name: MFA
+    description: Missed frames by the application
+    bit_offset: 17
+    bit_size: 11
+  - name: OFOC
+    description: Overflow bit for FIFO overflow counter
+    bit_offset: 28
+    bit_size: 1
+
+fieldset/DMACHTDR:
+  description: Ethernet DMA current host transmit descriptor register
+  fields:
+  - name: HTDAP
+    description: Host transmit descriptor address pointer
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMACHRDR:
+  description: Ethernet DMA current host receive descriptor register
+  fields:
+  - name: HRDAP
+    description: Host receive descriptor address pointer
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMACHTBAR:
+  description: Ethernet DMA current host transmit buffer address register
+  fields:
+  - name: HTBAP
+    description: Host transmit buffer address pointer
+    bit_offset: 0
+    bit_size: 32
+
+fieldset/DMACHRBAR:
+  description: Ethernet DMA current host receive buffer address register
+  fields:
+  - name: HRBAP
+    description: Host receive buffer address pointer
+    bit_offset: 0
+    bit_size: 32
