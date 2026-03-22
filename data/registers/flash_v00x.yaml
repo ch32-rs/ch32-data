@@ -180,6 +180,10 @@ fieldset/OBR:
     description: Config reset delay time.
     bit_offset: 5
     bit_size: 2
+  - name: STATR_MODE
+    description: "Power-on startup mode: 1: Startup from BOOT area; 0: Startup from user area."
+    bit_offset: 7
+    bit_size: 1
   - name: DATA0
     description: DATA0.
     bit_offset: 10
