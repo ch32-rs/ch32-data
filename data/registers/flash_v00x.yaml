@@ -1,0 +1,240 @@
+block/FLASH:
+  description: FLASH.
+  items:
+  - name: ACTLR
+    description: Flash ACTL register.
+    byte_offset: 0
+    fieldset: ACTLR
+  - name: KEYR
+    description: Flash key register.
+    byte_offset: 4
+    access: Write
+    fieldset: KEYR
+  - name: OBKEYR
+    description: Flash option key register.
+    byte_offset: 8
+    access: Write
+    fieldset: OBKEYR
+  - name: STATR
+    description: Status register.
+    byte_offset: 12
+    fieldset: STATR
+  - name: CTLR
+    description: Control register.
+    byte_offset: 16
+    fieldset: CTLR
+  - name: ADDR
+    description: Flash address register.
+    byte_offset: 20
+    access: Write
+    fieldset: ADDR
+  - name: OBR
+    description: Option byte register.
+    byte_offset: 28
+    access: Read
+    fieldset: OBR
+  - name: WPR
+    description: Write protection register.
+    byte_offset: 32
+    access: Read
+    fieldset: WPR
+  - name: MODEKEYR
+    description: Mode select register.
+    byte_offset: 36
+    access: Write
+    fieldset: MODEKEYR
+  - name: BOOT_MODEKEYP
+    description: BOOT Mode select register.
+    byte_offset: 40
+    access: Write
+    fieldset: BOOT_MODEKEYP
+fieldset/ACTLR:
+  description: Flash ACTL register.
+  fields:
+  - name: LATENCY
+    description: LATENCY.
+    bit_offset: 0
+    bit_size: 2
+fieldset/ADDR:
+  description: Flash address register.
+  fields:
+  - name: FAR
+    description: Flash Address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/BOOT_MODEKEYP:
+  description: BOOT Mode select register.
+  fields:
+  - name: MODEKEYR
+    description: Mode select.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CTLR:
+  description: Control register.
+  fields:
+  - name: PER
+    description: Page Erase.
+    bit_offset: 1
+    bit_size: 1
+  - name: MER
+    description: Mass Erase.
+    bit_offset: 2
+    bit_size: 1
+  - name: OBPG
+    description: Option byte programming.
+    bit_offset: 4
+    bit_size: 1
+  - name: OBER
+    description: Option byte erase.
+    bit_offset: 5
+    bit_size: 1
+  - name: STRT
+    description: Start.
+    bit_offset: 6
+    bit_size: 1
+  - name: LOCK
+    description: Lock.
+    bit_offset: 7
+    bit_size: 1
+  - name: OBWRE
+    description: Option bytes write enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: EOPIE
+    description: End of operation interrupt enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: FWAKEIE
+    description: Wakeup enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: FLOCK
+    description: Fast programmable lock.
+    bit_offset: 15
+    bit_size: 1
+  - name: FTPG
+    description: Fast programming.
+    bit_offset: 16
+    bit_size: 1
+  - name: FTER
+    description: Fast erase.
+    bit_offset: 17
+    bit_size: 1
+  - name: BUFLOAD
+    description: BUFLOAD.
+    bit_offset: 18
+    bit_size: 1
+  - name: BUFRST
+    description: BUFRST.
+    bit_offset: 19
+    bit_size: 1
+  - name: BER32
+    description: BER32.
+    bit_offset: 23
+    bit_size: 1
+fieldset/KEYR:
+  description: Flash key register.
+  fields:
+  - name: KEYR
+    description: FPEC key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MODEKEYR:
+  description: Mode select register.
+  fields:
+  - name: MODEKEYR
+    description: Mode select.
+    bit_offset: 0
+    bit_size: 32
+fieldset/OBKEYR:
+  description: Flash option key register.
+  fields:
+  - name: OPTKEY
+    description: Option byte key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/OBR:
+  description: Option byte register.
+  fields:
+  - name: OBERR
+    description: Option byte error.
+    bit_offset: 0
+    bit_size: 1
+  - name: RDPRT
+    description: Read protection.
+    bit_offset: 1
+    bit_size: 1
+  - name: IWDG_SW
+    description: IWDG_SW.
+    bit_offset: 2
+    bit_size: 1
+  - name: STOP_RST
+    description: STOP_RST.
+    bit_offset: 3
+    bit_size: 1
+  - name: STANDY_RST
+    description: STANDY_RST.
+    bit_offset: 4
+    bit_size: 1
+  - name: CFGRSTT
+    description: Config reset delay time.
+    bit_offset: 5
+    bit_size: 2
+  - name: DATA0
+    description: DATA0.
+    bit_offset: 10
+    bit_size: 8
+  - name: DATA1
+    description: DATA1.
+    bit_offset: 18
+    bit_size: 8
+fieldset/STATR:
+  description: Status register.
+  fields:
+  - name: BSY
+    description: Busy.
+    bit_offset: 0
+    bit_size: 1
+  - name: WRPRTERR
+    description: Write protection error.
+    bit_offset: 4
+    bit_size: 1
+  - name: EOP
+    description: End of operation.
+    bit_offset: 5
+    bit_size: 1
+  - name: FWAKE_FLAG
+    description: FWAKE_FLAG mode start.
+    bit_offset: 6
+    bit_size: 1
+  - name: TURBO
+    description: TURBO mode start.
+    bit_offset: 7
+    bit_size: 1
+  - name: BOOT_AVA
+    description: BOOT_AVA.
+    bit_offset: 12
+    bit_size: 1
+  - name: BOOT_STATUS
+    description: BOOT_STATUS.
+    bit_offset: 13
+    bit_size: 1
+  - name: BOOT_MODE
+    description: BOOT_MODE.
+    bit_offset: 14
+    bit_size: 1
+  - name: BOOT_LOCK
+    description: BOOT_LOCK.
+    bit_offset: 15
+    bit_size: 1
+fieldset/WPR:
+  description: Write protection register.
+  fields:
+  - name: WRP
+    description: Write protect.
+    bit_offset: 0
+    bit_size: 32
