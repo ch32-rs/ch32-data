@@ -80,10 +80,6 @@ fieldset/CTLR:
     description: Mass Erase.
     bit_offset: 2
     bit_size: 1
-  - name: OBPG
-    description: Option byte programming.
-    bit_offset: 4
-    bit_size: 1
   - name: OBER
     description: Option byte erase.
     bit_offset: 5
