@@ -172,10 +172,6 @@ fieldset/OBR:
     description: IWDG_SW.
     bit_offset: 2
     bit_size: 1
-  - name: STOP_RST
-    description: STOP_RST.
-    bit_offset: 3
-    bit_size: 1
   - name: STANDY_RST
     description: STANDY_RST.
     bit_offset: 4
