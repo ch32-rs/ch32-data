@@ -22,7 +22,7 @@
   address: 0x40022000
   registers:
     kind: flash
-    version: v0
+    version: v00x
     block: FLASH
 - name: EXTI
   address: 0x40010400
