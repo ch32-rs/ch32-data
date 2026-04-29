@@ -4,16 +4,14 @@ block/LLE:
     - name: CTRL
       description: Control register.
       byte_offset: 0
-    - name: STATUS
-      description: Status register.
+    - name: CRC_INIT
+      description: "CRC init value. Advertising channel: 0x555555. Hardware-confirmed: read 0x00555555 on live board at +0x04."
       byte_offset: 4
-      access: Read
-    - name: IRQ_STATUS
-      description: Interrupt status register. Write 1 to clear (W1C).
+    - name: ACCESS_ADDR
+      description: "Access address. Advertising channel: 0x8E89BED6. Hardware-confirmed: read 0x8E89BED6 on live board at +0x08. Reverse-doc incorrectly labeled this as IRQ_STATUS."
       byte_offset: 8
-      fieldset: IRQ_STATUS
     - name: IRQ_MASK
-      description: Interrupt mask register. Default 0xF00F enables bits [15:12] and [3:0].
+      description: "Interrupt mask register. Default 0xF00F enables bits [15:12] and [3:0]. Hardware read 0x00000000 (all masked) when BLE was idle/halted."
       byte_offset: 12
       fieldset: IRQ_MASK
     - name: TIMING0
@@ -51,42 +49,6 @@ block/LLE:
     - name: CONFIG
       description: Configuration register.
       byte_offset: 116
-
-fieldset/IRQ_STATUS:
-  description: Interrupt status register (W1C).
-  fields:
-    - name: IRQ_RX_START
-      description: RX start / frame header match.
-      bit_offset: 0
-      bit_size: 1
-    - name: IRQ_RX_DONE
-      description: RX complete.
-      bit_offset: 1
-      bit_size: 1
-    - name: IRQ_TX_DONE
-      description: TX complete.
-      bit_offset: 2
-      bit_size: 1
-    - name: IRQ_RF_SEQ_END
-      description: RF sequence end.
-      bit_offset: 3
-      bit_size: 1
-    - name: IRQ_CONN_EVENT_END
-      description: Connection event end.
-      bit_offset: 12
-      bit_size: 1
-    - name: IRQ_TIMER1_EXP
-      description: Timer 1 expiry.
-      bit_offset: 13
-      bit_size: 1
-    - name: IRQ_SEQ_ERROR
-      description: Sequence error / FIFO overflow.
-      bit_offset: 14
-      bit_size: 1
-    - name: IRQ_TIMER2_EXP
-      description: Timer 2 expiry.
-      bit_offset: 15
-      bit_size: 1
 
 fieldset/IRQ_MASK:
   description: Interrupt mask register.
