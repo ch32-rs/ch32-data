@@ -1,0 +1,37 @@
+# BLE Link Layer Engine
+- name: BLE_LLE
+  address: 0x40024100
+  registers:
+    kind: ble_lle
+    version: v208
+    block: LLE
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LLE
+
+# BLE Baseband Controller
+- name: BLE_BB
+  address: 0x40024200
+  registers:
+    kind: ble_bb
+    version: v208
+    block: BB
+  interrupts:
+    - signal: GLOBAL
+      interrupt: BB
+
+# BLE RF Frontend
+- name: BLE_RFEND
+  address: 0x40024300
+  registers:
+    kind: ble_rfend
+    version: v208
+    block: RFEND
+
+# BLE AES Crypto Engine
+- name: BLE_AES
+  address: 0x40025000
+  registers:
+    kind: ble_aes
+    version: v208
+    block: AES

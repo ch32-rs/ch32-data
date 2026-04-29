@@ -1,0 +1,141 @@
+block/LLE:
+  description: Link Layer Engine for BLE.
+  items:
+    - name: CTRL
+      description: Control register.
+      byte_offset: 0
+    - name: STATUS
+      description: Status register.
+      byte_offset: 4
+      access: Read
+    - name: IRQ_STATUS
+      description: Interrupt status register. Write 1 to clear (W1C).
+      byte_offset: 8
+      fieldset: IRQ_STATUS
+    - name: IRQ_MASK
+      description: Interrupt mask register. Default 0xF00F enables bits [15:12] and [3:0].
+      byte_offset: 12
+      fieldset: IRQ_MASK
+    - name: TIMING0
+      description: Timing parameter 0. Default 140.
+      byte_offset: 20
+    - name: STATE_MACHINE
+      description: State machine control. Default 108 (SLEEP).
+      byte_offset: 28
+      fieldset: STATE_MACHINE
+    - name: TIMING2
+      description: Timing parameter 2. Default 140.
+      byte_offset: 36
+    - name: TIMING3
+      description: Timing parameter 3. Default 60.
+      byte_offset: 44
+    - name: TIMING4
+      description: Timing parameter 4. Default 140.
+      byte_offset: 52
+    - name: TIMING5
+      description: Timing parameter 5. Default 60.
+      byte_offset: 60
+    - name: TIMING6
+      description: Timing parameter 6. Default 140.
+      byte_offset: 68
+    - name: TIMING7
+      description: Timing parameter 7. Default 108.
+      byte_offset: 76
+    - name: TX_CTRL
+      description: TX control register.
+      byte_offset: 80
+      fieldset: TX_CTRL
+    - name: ERROR_STATUS
+      description: Error status register.
+      byte_offset: 104
+    - name: CONFIG
+      description: Configuration register.
+      byte_offset: 116
+
+fieldset/IRQ_STATUS:
+  description: Interrupt status register (W1C).
+  fields:
+    - name: IRQ_RX_START
+      description: RX start / frame header match.
+      bit_offset: 0
+      bit_size: 1
+    - name: IRQ_RX_DONE
+      description: RX complete.
+      bit_offset: 1
+      bit_size: 1
+    - name: IRQ_TX_DONE
+      description: TX complete.
+      bit_offset: 2
+      bit_size: 1
+    - name: IRQ_RF_SEQ_END
+      description: RF sequence end.
+      bit_offset: 3
+      bit_size: 1
+    - name: IRQ_CONN_EVENT_END
+      description: Connection event end.
+      bit_offset: 12
+      bit_size: 1
+    - name: IRQ_TIMER1_EXP
+      description: Timer 1 expiry.
+      bit_offset: 13
+      bit_size: 1
+    - name: IRQ_SEQ_ERROR
+      description: Sequence error / FIFO overflow.
+      bit_offset: 14
+      bit_size: 1
+    - name: IRQ_TIMER2_EXP
+      description: Timer 2 expiry.
+      bit_offset: 15
+      bit_size: 1
+
+fieldset/IRQ_MASK:
+  description: Interrupt mask register.
+  fields:
+    - name: IRQ_RX_START
+      description: Enable RX start interrupt.
+      bit_offset: 0
+      bit_size: 1
+    - name: IRQ_RX_DONE
+      description: Enable RX done interrupt.
+      bit_offset: 1
+      bit_size: 1
+    - name: IRQ_TX_DONE
+      description: Enable TX done interrupt.
+      bit_offset: 2
+      bit_size: 1
+    - name: IRQ_RF_SEQ_END
+      description: Enable RF sequence end interrupt.
+      bit_offset: 3
+      bit_size: 1
+    - name: IRQ_CONN_EVENT_END
+      description: Enable connection event end interrupt.
+      bit_offset: 12
+      bit_size: 1
+    - name: IRQ_TIMER1_EXP
+      description: Enable timer 1 expiry interrupt.
+      bit_offset: 13
+      bit_size: 1
+    - name: IRQ_SEQ_ERROR
+      description: Enable sequence error interrupt.
+      bit_offset: 14
+      bit_size: 1
+    - name: IRQ_TIMER2_EXP
+      description: Enable timer 2 expiry interrupt.
+      bit_offset: 15
+      bit_size: 1
+
+fieldset/STATE_MACHINE:
+  description: State machine control register.
+  fields:
+    - name: STATE
+      description: "State value. 93=CONN_RX_WAIT, 97=CONN_TX_PREP, 101=CONN_ACK_WAIT, 105=CONN_EVENT_CLOSING, 107=SLEEP_PREP, 108=SLEEP."
+      bit_offset: 0
+      bit_size: 8
+
+fieldset/TX_CTRL:
+  description: TX control register.
+  fields:
+    - name: TX_EN
+      description: TX enable flag.
+      bit_offset: 5
+      bit_size: 1

@@ -1,0 +1,81 @@
+block/RFEND:
+  description: RF frontend for BLE.
+  items:
+    - name: RF_ANA_CTRL
+      description: RF analog control register (PA bias, LDO config).
+      byte_offset: 8
+      fieldset: RF_ANA_CTRL
+    - name: CTRL
+      description: "Control/reset register. Reset sequence: write 0x1101, delay, write 0x0000, delay, write 0x1101."
+      byte_offset: 12
+      fieldset: CTRL
+    - name: CFG0
+      description: Configuration register 0. Default 0x480.
+      byte_offset: 40
+    - name: CFG1
+      description: Configuration register 1.
+      byte_offset: 44
+    - name: CFG2
+      description: Configuration register 2.
+      byte_offset: 48
+    - name: CFG3
+      description: Configuration register 3.
+      byte_offset: 52
+    - name: CFG4
+      description: Configuration register 4.
+      byte_offset: 56
+    - name: CFG5
+      description: Configuration register 5.
+      byte_offset: 60
+    - name: PLL
+      description: PLL frequency control register.
+      byte_offset: 68
+      fieldset: PLL
+    - name: RF0
+      description: RF parameter register 0.
+      byte_offset: 72
+    - name: RF1
+      description: RF parameter register 1.
+      byte_offset: 76
+    - name: RF2
+      description: RF parameter register 2.
+      byte_offset: 80
+    - name: RF3
+      description: RF parameter register 3.
+      byte_offset: 84
+
+fieldset/RF_ANA_CTRL:
+  description: RF analog control register.
+  fields:
+    - name: PA_BIAS
+      description: PA bias control. Write 0x3 (from 0x330000 mask) to configure PA.
+      bit_offset: 20
+      bit_size: 4
+
+fieldset/CTRL:
+  description: RF frontend control/reset register.
+  fields:
+    - name: ENABLE
+      description: Reset enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: RESET0
+      description: Reset control bit 0.
+      bit_offset: 8
+      bit_size: 1
+    - name: RESET1
+      description: Reset control bit 1.
+      bit_offset: 12
+      bit_size: 1
+
+fieldset/PLL:
+  description: "PLL frequency control. Freq offset from 2400 MHz: int_div = offset/64000, frac = (rem<<10)/250."
+  fields:
+    - name: FRAC_DIV
+      description: Fractional divider (14 bits).
+      bit_offset: 0
+      bit_size: 14
+    - name: INT_DIV
+      description: Integer divider (5 bits).
+      bit_offset: 20
+      bit_size: 5

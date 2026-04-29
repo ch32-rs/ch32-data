@@ -1,0 +1,100 @@
+block/BB:
+  description: Baseband controller for BLE.
+  items:
+    - name: MAIN_CTRL
+      description: Baseband main control register.
+      byte_offset: 0
+      fieldset: MAIN_CTRL
+    - name: STATUS
+      description: Status register.
+      byte_offset: 4
+    - name: LLE_WR_ADDR
+      description: LLE write address register.
+      byte_offset: 8
+    - name: CRITICAL
+      description: "Critical section lock. Write 0 to lock, restore saved value to unlock."
+      byte_offset: 12
+    - name: RF_CONFIG
+      description: RF configuration register. Default 0x90083.
+      byte_offset: 32
+    - name: MODE_CTRL
+      description: Mode control register (TX/RX selection).
+      byte_offset: 44
+      fieldset: MODE_CTRL
+    - name: RSSI
+      description: RSSI value register.
+      byte_offset: 48
+      access: Read
+    - name: TIMING
+      description: Timing control register. Default 464.
+      byte_offset: 52
+    - name: IRQ_STATUS
+      description: Interrupt status register (W1C).
+      byte_offset: 56
+      fieldset: IRQ_STATUS
+    - name: TX_PRE_DELAY
+      description: "TX pre-delay register. TX mode=90, RX mode=89, init=93."
+      byte_offset: 80
+    - name: TX_SCHED_DELAY
+      description: TX schedule delay. Advertising TX=160 (0xa0).
+      byte_offset: 100
+    - name: LLE_HOP_DATA
+      description: Frequency hopping data register.
+      byte_offset: 108
+      access: Write
+
+fieldset/MAIN_CTRL:
+  description: Baseband main control register.
+  fields:
+    - name: PKT_LEN
+      description: TX/RX packet length (bits [6:0]).
+      bit_offset: 0
+      bit_size: 7
+    - name: MODE
+      description: Mode bit.
+      bit_offset: 7
+      bit_size: 1
+    - name: TX_PATH_EN
+      description: Transmit path enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: BB_EN
+      description: Baseband enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: PKT_TYPE
+      description: Packet type.
+      bit_offset: 12
+      bit_size: 2
+    - name: CORE_EN
+      description: Core function enable.
+      bit_offset: 16
+      bit_size: 1
+
+fieldset/MODE_CTRL:
+  description: Mode control register.
+  fields:
+    - name: MODE
+      description: "Mode selection: 0=Idle, 1=TX, 2=RX."
+      bit_offset: 0
+      bit_size: 2
+
+fieldset/IRQ_STATUS:
+  description: Interrupt status register (W1C).
+  fields:
+    - name: IRQ_RF_DONE
+      description: RF receive complete.
+      bit_offset: 4
+      bit_size: 1
+    - name: IRQ_HOP
+      description: Frequency hop event.
+      bit_offset: 5
+      bit_size: 1
+    - name: IRQ_SYNC
+      description: Sync success (Access Address matched).
+      bit_offset: 6
+      bit_size: 1
+    - name: IRQ_RF_EVENT
+      description: RF related event.
+      bit_offset: 7
+      bit_size: 1

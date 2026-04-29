@@ -1,0 +1,75 @@
+block/AES:
+  description: AES crypto engine for BLE link layer encryption.
+  items:
+    - name: CTRL
+      description: "Control register. Write bit8=1 to reset, write bit0=1 to start."
+      byte_offset: 0
+      fieldset: CTRL
+    - name: STATUS
+      description: Status register.
+      byte_offset: 4
+      fieldset: STATUS
+    - name: DATA0
+      description: "Data register 0, bits [31:0]. Input and output share same registers (+0x18-+0x24). Write plaintext, read ciphertext."
+      byte_offset: 24
+    - name: DATA1
+      description: Data register 1, bits [63:32].
+      byte_offset: 28
+    - name: DATA2
+      description: Data register 2, bits [95:64].
+      byte_offset: 32
+    - name: DATA3
+      description: Data register 3, bits [127:96].
+      byte_offset: 36
+    - name: KEY0
+      description: Key register 0, bits [31:0].
+      byte_offset: 40
+      access: Write
+    - name: KEY1
+      description: Key register 1, bits [63:32].
+      byte_offset: 44
+      access: Write
+    - name: KEY2
+      description: Key register 2, bits [95:64].
+      byte_offset: 48
+      access: Write
+    - name: KEY3
+      description: Key register 3, bits [127:96].
+      byte_offset: 52
+      access: Write
+    - name: LL_CTRL
+      description: LL layer encryption control.
+      byte_offset: 80
+      fieldset: LL_CTRL
+
+fieldset/CTRL:
+  description: AES control register.
+  fields:
+    - name: START
+      description: Start encryption (write 1 to start).
+      bit_offset: 0
+      bit_size: 1
+    - name: RESET
+      description: Reset AES engine (write 1 to reset).
+      bit_offset: 8
+      bit_size: 1
+
+fieldset/STATUS:
+  description: AES status register.
+  fields:
+    - name: BUSY
+      description: 1=operation in progress, 0=complete.
+      bit_offset: 0
+      bit_size: 1
+    - name: DIR
+      description: Encryption direction.
+      bit_offset: 1
+      bit_size: 1
+
+fieldset/LL_CTRL:
+  description: LL layer encryption control.
+  fields:
+    - name: LL_ENC_EN
+      description: LL layer encryption enable.
+      bit_offset: 7
+      bit_size: 1
