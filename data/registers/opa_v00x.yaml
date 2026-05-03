@@ -1,0 +1,272 @@
+block/OPA:
+  description: OPA and CMP configuration.
+  items:
+  - name: CFGR1
+    description: OPA Configuration register 1.
+    byte_offset: 0
+    fieldset: CFGR1
+  - name: CTLR1
+    description: OPA Control register 1.
+    byte_offset: 4
+    fieldset: CTLR1
+  - name: CFGR2
+    description: OPA Configuration register 2.
+    byte_offset: 8
+    fieldset: CFGR2
+  - name: CTLR2
+    description: OPA Control register 2.
+    byte_offset: 12
+    fieldset: CTLR2
+  - name: OPA_KEY
+    description: OPA unlock key register.
+    byte_offset: 16
+    fieldset: OPA_KEY
+  - name: CMP_KEY
+    description: CMP unlock key register.
+    byte_offset: 20
+    fieldset: CMP_KEY
+  - name: POLL_KEY
+    description: POLL lock key register.
+    byte_offset: 24
+    fieldset: POLL_KEY
+fieldset/CFGR1:
+  description: OPA Configuration register 1.
+  fields:
+  - name: POLL_EN
+    description: OPA1 front-end polling enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: POLL1_NUM
+    description: Number of OPA1 polling positive ends. 00 = 1 channel, 01 = 2 channels, 10 = 3 channels.
+    bit_offset: 2
+    bit_size: 2
+  - name: RST_EN1
+    description: OPA1 reset system enable. When set, an OPA1 polling result of high will reset the system.
+    bit_offset: 4
+    bit_size: 1
+  - name: SETUP_CFG
+    description: OPA establishment time configuration. 00/10 = 0.5us, 01 = 0.312us, 11 = 0.77us.
+    bit_offset: 5
+    bit_size: 2
+  - name: AUTO_ADC_CFG
+    description: OPA polling automatic ADC trigger configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: IE_OUT1
+    description: OPA1 output interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: NMI_EN
+    description: OPA NMI interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: IF_OUT_POLL_CH1
+    description: 1st polling channel OPA1 output high interrupt flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: IF_OUT_POLL_CH2
+    description: 2nd polling channel OPA1 output high interrupt flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: IF_OUT_POLL_CH3
+    description: 3rd polling channel OPA1 output high interrupt flag.
+    bit_offset: 14
+    bit_size: 1
+  - name: POLL_CH1
+    description: OPA polling order, 1st polling channel.
+    bit_offset: 16
+    bit_size: 2
+  - name: POLL_CH2
+    description: OPA polling order, 2nd polling channel.
+    bit_offset: 18
+    bit_size: 2
+  - name: POLL_CH3
+    description: OPA polling order, 3rd polling channel.
+    bit_offset: 20
+    bit_size: 2
+  - name: POLL_SWSTRT
+    description: OPA polling software trigger. Set by software, cleared by hardware once polling starts.
+    bit_offset: 24
+    bit_size: 1
+  - name: POLL_SEL
+    description: OPA polling trigger event selection. 000 = software, 001 = TIM1_CH4, 010 = TIM2_CH4, 011 = TIM3_CH1, 100 = TIM3_CH2.
+    bit_offset: 25
+    bit_size: 3
+  - name: POLL_LOCK
+    description: POLL lock status. Cleared only by module reset.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR1:
+  description: OPA Control register 1.
+  fields:
+  - name: OPA_EN1
+    description: OPA1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: OPA1 output channel selection. 00 = PD4 plus internal CMP2 input, 01 = PA5 plus internal CMP2 input, 1x = internal CMP2 input only.
+    bit_offset: 1
+    bit_size: 2
+  - name: PSEL1
+    description: OPA1 positive (P) input channel selection. 00 = PA2, 01 = PD7, 10 = PD3, 11 = PD1.
+    bit_offset: 4
+    bit_size: 2
+  - name: NSEL1
+    description: OPA1 negative input channel and PGA gain selection. 000 = PA1, 001 = PD0, 011 = PGA gain 4, 100 = PGA gain 8, 101 = PGA gain 16, 110 = PGA gain 32.
+    bit_offset: 8
+    bit_size: 3
+  - name: FB_EN1
+    description: OPA1 internal feedback resistor enable. Must be set when NSEL1 is in PGA mode.
+    bit_offset: 11
+    bit_size: 1
+  - name: PGADIF
+    description: Differential input PGA mode enable. The negative end is connected to OPA_CHN2 (PA4).
+    bit_offset: 12
+    bit_size: 1
+  - name: VBEN
+    description: PGA mode positive reference voltage enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: VBSEL
+    description: PGA mode positive reference voltage selection. 0 = VDD/2, 1 = VDD/4.
+    bit_offset: 17
+    bit_size: 1
+  - name: VBCMPSEL
+    description: CMP2 negative reference voltage selection. Only valid when VBEN = 1. 11 = off.
+    bit_offset: 18
+    bit_size: 2
+  - name: OPA_HS1
+    description: OPA1 high-speed mode enable. Increases the slew rate to 40V/us.
+    bit_offset: 20
+    bit_size: 1
+  - name: OPA_LOCK
+    description: OPA lock. Write 1 to lock, write 0 has no effect.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CFGR2:
+  description: OPA Configuration register 2.
+  fields:
+  - name: POLL_EN1
+    description: CMP1 front-end polling enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: POLL1_NUM
+    description: Number of CMP1 polling positive ends. 00 = 1, 01 = 2, 10 = 3.
+    bit_offset: 2
+    bit_size: 2
+  - name: RST_EN1
+    description: CMP1 reset system enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: RST_EN2
+    description: CMP2 reset system enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: IE_OUT1
+    description: CMP1 interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: IE_CNT
+    description: CMP1 polling interval end interrupt enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: IF_OUT_POLL_CH1
+    description: 1st CMP1 polling channel output-high flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: IF_OUT_POLL_CH2
+    description: 2nd CMP1 polling channel output-high flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: IF_OUT_POLL_CH3
+    description: 3rd CMP1 polling channel output-high flag.
+    bit_offset: 14
+    bit_size: 1
+  - name: IF_CNT
+    description: CMP1 polling interval end flag.
+    bit_offset: 15
+    bit_size: 1
+  - name: POLL_VLU
+    description: CMP1 front-end polling interval. Polling interval = (POLL_VLU + 1) * 1us.
+    bit_offset: 16
+    bit_size: 9
+  - name: POLL_CH1
+    description: CMP1 polling order, 1st polling channel.
+    bit_offset: 25
+    bit_size: 2
+  - name: POLL_CH2
+    description: CMP1 polling order, 2nd polling channel.
+    bit_offset: 27
+    bit_size: 2
+  - name: POLL_CH3
+    description: CMP1 polling order, 3rd polling channel.
+    bit_offset: 29
+    bit_size: 2
+fieldset/CTLR2:
+  description: OPA Control register 2.
+  fields:
+  - name: CMP_EN1
+    description: CMP1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: CMP1 output mode selection. 00 = output to PC0, 01 = TIM1_CH4 internal, 10 = TIM2_CH4 internal.
+    bit_offset: 1
+    bit_size: 2
+  - name: NSEL1
+    description: CMP1 negative input channel selection. 00 = PC2, 01 = PD5, 10 = PA6, 11 = invalid.
+    bit_offset: 3
+    bit_size: 2
+  - name: PSEL1
+    description: CMP1 positive input channel selection. 00 = PC5, 01 = PB3, 10 = PD2, 11 = invalid.
+    bit_offset: 5
+    bit_size: 2
+  - name: HYEN1
+    description: CMP1 hysteresis function enable (+/- 24mV).
+    bit_offset: 7
+    bit_size: 1
+  - name: RMID1
+    description: CMP1 positive input channel virtual center point enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: CMP_EN2
+    description: CMP2 enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: FILT_EN
+    description: CMP digital filter enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: FILT_SEL
+    description: CMP output digital filter length selection. 0 = 0.33us, 1 = 0.5us.
+    bit_offset: 25
+    bit_size: 1
+  - name: BKIN_CFG
+    description: TIM1 brake source configuration. 00 = IO, 01 = CMP1, 10 = CMP2, 11 = OPA.
+    bit_offset: 26
+    bit_size: 2
+  - name: CMP_LOCK
+    description: CMP lock. Write 1 to lock, write 0 has no effect.
+    bit_offset: 31
+    bit_size: 1
+fieldset/OPA_KEY:
+  description: OPA unlock key register. Write KEY1 = 0x45670123, then KEY2 = 0xCDEF89AB to unlock.
+  fields:
+  - name: OPA_KEY
+    description: OPA unlock key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CMP_KEY:
+  description: CMP unlock key register. Write KEY1 = 0x45670123, then KEY2 = 0xCDEF89AB to unlock.
+  fields:
+  - name: CMP_KEY
+    description: CMP unlock key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/POLL_KEY:
+  description: POLL lock key register. Write KEY1 = 0x45670123, then KEY2 = 0xCDEF89AB; once locked the module must be reset to unlock.
+  fields:
+  - name: POLL_KEY
+    description: POLL lock key.
+    bit_offset: 0
+    bit_size: 32

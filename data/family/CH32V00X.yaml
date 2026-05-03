@@ -466,17 +466,3 @@
     - { pin: "PD4", signal: "IN7" }
   interrupts:
     - { signal: "GLOBAL", interrupt: "ADC" }
-
-# Fake peripheral
-- name: OPA
-  address: 0x40023800
-  registers:
-    kind: extend
-    version: v0
-    block: EXTEND
-  pins:
-    - { pin: "PA1", signal: "NEG", remap: 0 }
-    - { pin: "PA2", signal: "POS", remap: 0 }
-    - { pin: "PD0", signal: "NEG", remap: 1 }
-    - { pin: "PD7", signal: "POS", remap: 1 }
-    - { pin: "PD4", signal: "OUT" }

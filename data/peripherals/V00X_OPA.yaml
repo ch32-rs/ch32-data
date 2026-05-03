@@ -1,0 +1,31 @@
+- name: OPA
+  address: 0x40024000
+  registers:
+    kind: opa
+    version: v00x
+    block: OPA
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "OPCM" }
+  pins:
+    # OPA1 positive inputs (PSEL1)
+    - { pin: "PA2", signal: "CHP0" }
+    - { pin: "PD7", signal: "CHP1" }
+    - { pin: "PD3", signal: "CHP2" }
+    - { pin: "PD1", signal: "CHP3" }
+    # OPA1 negative inputs (NSEL1)
+    - { pin: "PA1", signal: "CHN0" }
+    - { pin: "PD0", signal: "CHN1" }
+    - { pin: "PA4", signal: "CHN2" }
+    # OPA1 outputs (MODE1)
+    - { pin: "PD4", signal: "OUT0" }
+    - { pin: "PA5", signal: "OUT1" }
+    # CMP1 positive inputs (PSEL1)
+    - { pin: "PC5", signal: "CMP1_CHP0" }
+    - { pin: "PB3", signal: "CMP1_CHP1" }
+    - { pin: "PD2", signal: "CMP1_CHP2" }
+    # CMP1 negative inputs (NSEL1)
+    - { pin: "PC2", signal: "CMP1_CHN0" }
+    - { pin: "PD5", signal: "CMP1_CHN1" }
+    - { pin: "PA6", signal: "CMP1_CHN2" }
+    # CMP1 output
+    - { pin: "PC0", signal: "CMP1_OUT" }
