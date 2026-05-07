@@ -1,0 +1,78 @@
+# Ethernet 10/100M MAC (Synopsys DWC) + integrated 10M PHY for CH32V307
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: emac
+    version: v1
+    block: ETH
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: ETHMACEN
+  interrupts:
+    - { "signal": "GLOBAL", "interrupt": "ETH" }
+  pins:
+    # 10M PHY differential pairs
+    - pin: PC6
+      signal: ETH_RXP
+    - pin: PC7
+      signal: ETH_RXN
+    - pin: PC8
+      signal: ETH_TXP
+    - pin: PC9
+      signal: ETH_TXN
+    # RMII mode pins (default mapping, remap 0)
+    - pin: PA1
+      signal: RMII_REF_CLK
+      remap: 0
+    - pin: PA2
+      signal: MDIO
+      remap: 0
+    - pin: PA7
+      signal: RMII_CRS_DV
+      remap: 0
+    - pin: PC1
+      signal: MDC
+      remap: 0
+    - pin: PC4
+      signal: RMII_RXD0
+      remap: 0
+    - pin: PC5
+      signal: RMII_RXD1
+      remap: 0
+    - pin: PB11
+      signal: RMII_TX_EN
+      remap: 0
+    - pin: PB12
+      signal: RMII_TXD0
+      remap: 0
+    - pin: PB13
+      signal: RMII_TXD1
+      remap: 0
+    # MII mode pins (default mapping, remap 0)
+    - pin: PA0
+      signal: MII_CRS
+      remap: 0
+    - pin: PA3
+      signal: MII_COL
+      remap: 0
+    - pin: PB10
+      signal: MII_RX_ER
+      remap: 0
+    - pin: PC3
+      signal: MII_TX_CLK
+      remap: 0
+    - pin: PB8
+      signal: MII_TXD3
+      remap: 0
+    - pin: PA1
+      signal: MII_RX_CLK
+      remap: 0
+    - pin: PB1
+      signal: MII_RXD3
+      remap: 0
+    - pin: PB0
+      signal: MII_RXD2
+      remap: 0
