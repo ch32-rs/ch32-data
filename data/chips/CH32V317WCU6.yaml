@@ -1,0 +1,84 @@
+name: CH32V317WCU6
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: Interconnectivity (USB high-speed, CAN, Ethernet, DVP, SDIO, FSMC)
+product_type: QingKe V4F floating-point core, main frequency <= 144M
+device_id: 0x3173B508
+keywords:
+  - USBHS
+  - CAN
+  - SDIO
+  - ETH
+  - I2S
+packages:
+  - name: CH32V317WCU6
+    package: QFN68
+memory:
+  # FIXME: This can be configured as one of
+  # 192K FLASH+128K SRAM
+  # 224K FLASH+96K SRAM
+  # 256K FLASH+64K SRAM
+  # 288K FLASH+32K SRAM
+  - name: BANK_1
+    kind: flash
+    address: 0
+    size: 262144
+    settings:
+      erase_size: 1024
+      write_size: 256
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 0x20000000
+    size: 65536
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32V317.html
+cores:
+  - name: qingke-v4f
+    peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v3_d8c
+          block: RCC
+        pins:
+          - pin: PA8
+            signal: MCO
+    include_peripherals:
+      - "../family/CH32V3.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
+      - "../peripherals/FV2x_V3x_USART3.yaml"
+      - "../peripherals/FV2x_V3x_USART4.yaml"
+      - "../peripherals/FV2x_V3x_USART5.yaml"
+      - "../peripherals/FV2x_V3x_USART678.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM5.yaml"
+      - "../peripherals/FV2x_V3x_BASIC_TIM67.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM8910.yaml"
+      - "../peripherals/FV2x_V3x_ADC1.yaml"
+      - "../peripherals/FV2x_V3x_ADC2.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_SPI2.yaml"
+      - "../peripherals/FV2x_V3x_SPI3.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
+      - "../peripherals/FV2x_V3x_I2C2.yaml"
+      - "../peripherals/FV2x_V3x_RNG.yaml"
+      - "../peripherals/FV2x_V3x_USBHS.yaml"
+      - "../peripherals/FV2x_V3x_USB_OTG_FS.yaml"
+      - "../peripherals/FV2x_V3x_DAC.yaml"
+      - "../peripherals/FV2x_V3x_SDIO.yaml"
+      - "../peripherals/FV2x_V3x_CAN1.yaml"
+      - "../peripherals/FV2x_V3x_CAN2.yaml"
+
+    include_interrupts: "../interrupts/CH32V3.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+
+_raw:
+  url: http://www.wch.cn/products/CH32V317.html
