@@ -1,0 +1,86 @@
+# CH32V208 BLE Baseband (gptrBBReg) — link-layer CTRL/GO/MODE/CFG + IRQ STATUS.
+#
+# Scope: only the items exercised by the working ch32-hal BLE examples
+# (advertising TX + scan RX) are decoded; remaining offsets are left as raw u32
+# placeholders so the block layout stays addressable.
+#
+# Register naming caveat: WCH calls this block "gptrBBReg" but its role is
+# link-layer CTRL/GO/IRQ. The companion block at 0x40024200 ("gptrLLEReg")
+# carries timing/state/DMA. We follow the WCH header naming here.
+block/BLE_BB:
+  description: BLE Baseband — link-layer CTRL/GO/MODE/CFG, IRQ STATUS.
+  items:
+    - name: CTRL
+      description: Baseband control + GO strobes (bit23/bit28 enables, bits[8:7] analog gate).
+      byte_offset: 0
+      fieldset: CTRL
+    - name: MODE
+      description: Baseband mode register (default 0x00090083).
+      byte_offset: 32
+    - name: CFG
+      description: Baseband CFG (bits[30:25] PHY mode = rf_flag, base 0x80010EC8).
+      byte_offset: 44
+      fieldset: CFG
+    - name: TIMING
+      description: Baseband timing (default 0x000001D0 = 464).
+      byte_offset: 52
+    - name: STATR
+      description: IRQ status register (W1C). Read=live status; write 1 to clear.
+      byte_offset: 56
+      fieldset: STATR
+
+fieldset/CTRL:
+  description: BLE_BB CTRL — baseband enable + analog gate.
+  fields:
+    - name: ANALOG_GATE
+      description: Analog gate (BLE_RegInit pre-init clears bit13 sets bit12).
+      bit_offset: 12
+      bit_size: 1
+    - name: ANALOG_CLEAR
+      description: Analog clear bits[8:7] cleared pre-init, bit7 set post-init.
+      bit_offset: 7
+      bit_size: 2
+    - name: BB_EN
+      description: Baseband enable (permanent, set in bb_dev_init).
+      bit_offset: 23
+      bit_size: 1
+    - name: HW_EN
+      description: Hardware enable (permanent, set in bb_dev_init).
+      bit_offset: 28
+      bit_size: 1
+
+fieldset/CFG:
+  description: BLE_BB CFG — PHY mode + base configuration.
+  fields:
+    - name: BASE
+      description: Base config bits[24:0] (default 0x010EC8).
+      bit_offset: 0
+      bit_size: 25
+    - name: RF_FLAG
+      description: PHY mode flag (BB_RF_FLAG_1M = 0x09; bit0=1M PHY enable).
+      bit_offset: 25
+      bit_size: 6
+    - name: HW_RESERVED
+      description: Hardware reserved bit (always set, base=0x80010EC8).
+      bit_offset: 31
+      bit_size: 1
+
+fieldset/STATR:
+  description: BLE_BB IRQ status (W1C — write 1 to clear).
+  fields:
+    - name: BIT4
+      description: IRQ status bit4 — `.L4` cleanup; sets gBleIPPara[4]=1 (re-arm).
+      bit_offset: 4
+      bit_size: 1
+    - name: BIT5
+      description: IRQ status bit5 — paired with bit6 in W1C mask 0x60 (PLL-related).
+      bit_offset: 5
+      bit_size: 1
+    - name: PLL_READY
+      description: PLL-ready (triggers `.L6` TX advance path; W1C with bit5 via 0x60).
+      bit_offset: 6
+      bit_size: 1
+    - name: BIT7
+      description: IRQ status bit7 — `.L8` cleanup; sets gBleIPPara[4]=1 (re-arm).
+      bit_offset: 7
+      bit_size: 1

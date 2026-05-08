@@ -1,0 +1,17 @@
+# CH32V208 BLE Baseband (gptrBBReg) — link-layer CTRL/GO + IRQ STATUS.
+#
+# RCC clocks: AHBPCENR bits 6 (CRC) + 16 (BLEC) + 17 (BLES) must all be enabled
+# before BB register writes. Currently NOT modeled in rcc_v3.yaml because bit 16
+# is BLEC on V208 but ETHMACRXEN on V307 (shared rcc version). Users set these
+# bits manually via raw register access (see ch32-hal::ble::ble_hw_preamble).
+#
+# IRQ: BB at PFIC vector 63 (defined in interrupts/CH32V2_D8.yaml).
+- name: BLE_BB
+  address: 0x40024100
+  registers:
+    kind: blebb
+    version: v208
+    block: BLE_BB
+  interrupts:
+    - signal: GLOBAL
+      interrupt: BB

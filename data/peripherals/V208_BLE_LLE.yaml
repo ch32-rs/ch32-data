@@ -1,0 +1,13 @@
+# CH32V208 BLE Link-Layer Engine (gptrLLEReg) — TIMING / STATE / TIMER / DMA.
+#
+# RCC clocks: AHBPCENR bits 6/16/17 — see V208_BLE_BB.yaml note.
+# IRQ: LLE at PFIC vector 64 (defined in interrupts/CH32V2_D8.yaml).
+- name: BLE_LLE
+  address: 0x40024200
+  registers:
+    kind: blelle
+    version: v208
+    block: BLE_LLE
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LLE
