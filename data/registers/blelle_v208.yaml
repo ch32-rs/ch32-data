@@ -1,0 +1,97 @@
+# CH32V208 BLE Link-Layer Engine (gptrLLEReg) — TIMING / STATE / TIMER / DMA.
+#
+# Scope: only items touched by the working ch32-hal BLE adv-TX + scan-RX paths
+# are decoded; the rest are filler u32 placeholders so the block layout stays
+# addressable.
+#
+# Naming caveat: WCH header calls this block "gptrLLEReg" but the BB IRQ path
+# also writes CTRL/GO and IRQ at base 0x40024200. Treat the label as
+# informational; physical address is canonical.
+block/BLE_LLE:
+  description: BLE Link-Layer Engine — timing, state machine, IRQ, DMA buffer ptr.
+  items:
+    - name: CTRL
+      description: Link-layer CTRL — channel field bits[5:0], whitening bit6, mode bits[8:7], rate bits[13:12], BLE GO bit23.
+      byte_offset: 0
+      fieldset: CTRL
+    - name: CRC_INIT
+      description: CRC seed (BLE adv default 0x555555).
+      byte_offset: 4
+    - name: ACCESS_ADDR
+      description: Access address / IRQ status (W1C). Read=live status; write 1 to clear, or write ADV AA 0x8E89BED6 for advertising.
+      byte_offset: 8
+    - name: IRQ_MASK
+      description: IRQ mask (default 0xF00F = bits[15:12] + bits[3:0]).
+      byte_offset: 12
+    - name: TIMING0
+      description: Timing slot 0 (default 140).
+      byte_offset: 20
+    - name: STATE_MACHINE
+      description: Link-layer state machine (108=Sleep, 93=ConnRxWait, 97=ConnTxPrep, 101=ConnAckWait, 105=ConnEventClosing, 107=SleepPrep).
+      byte_offset: 28
+      fieldset: STATE_MACHINE
+    - name: TIMING2
+      description: Timing slot 2 (default 140).
+      byte_offset: 36
+    - name: TIMING3
+      description: Timing slot 3 (default 60).
+      byte_offset: 44
+    - name: TIMING4
+      description: Timing slot 4 (default 140).
+      byte_offset: 52
+    - name: TIMING5
+      description: Timing slot 5 (default 60).
+      byte_offset: 60
+    - name: TIMING6
+      description: Timing slot 6 (default 140).
+      byte_offset: 68
+    - name: TIMING7
+      description: Timing slot 7 (default 108).
+      byte_offset: 76
+    - name: SETTLE
+      description: Settle timer used during BLE_RegInit (93 during cal, 0 post).
+      byte_offset: 80
+    - name: TIMER
+      description: Countdown timer for RFEND_WaitTune; written from gBleIPPara[16..19] (=776 for ADV TX).
+      byte_offset: 100
+    - name: SCAN_OFFSET
+      description: Active-scan offset (= gBleIPPara[20..23] << 1, set in `.L6` bit5 path).
+      byte_offset: 108
+    - name: TX_BUF_PTR
+      description: TX buffer base (BB+0x70 in adv.rs; written before ADV GO).
+      byte_offset: 112
+    - name: DMA_BUF
+      description: DMA buffer base address (= gBleIPPara[36] MEMAddr; required non-zero for LLE state machine to fire).
+      byte_offset: 116
+
+fieldset/CTRL:
+  description: BLE_LLE CTRL — channel, whitening, mode, rate, GO.
+  fields:
+    - name: CHANNEL
+      description: BLE logical channel bits[5:0] (37/38/39 for ADV, 0..36 for data).
+      bit_offset: 0
+      bit_size: 6
+    - name: WHITEN
+      description: Whitening enable bit6 (DTM uses 0; ADV may use 1).
+      bit_offset: 6
+      bit_size: 1
+    - name: MODE
+      description: TX/RX mode select bits[8:7] (TX path sets bit8; RX sets bit8+other).
+      bit_offset: 7
+      bit_size: 2
+    - name: RATE
+      description: PHY rate select bits[13:12] (00=1Mbps; non-zero=2M/Coded).
+      bit_offset: 12
+      bit_size: 2
+    - name: BLE_GO
+      description: BLE GO strobe bit23 (lui 0x800; set to fire TX/RX).
+      bit_offset: 23
+      bit_size: 1
+
+fieldset/STATE_MACHINE:
+  description: BLE_LLE state machine value.
+  fields:
+    - name: STATE
+      description: 8-bit state (108=Sleep default; see register description).
+      bit_offset: 0
+      bit_size: 8

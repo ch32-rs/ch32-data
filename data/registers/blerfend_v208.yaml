@@ -1,0 +1,172 @@
+# CH32V208 BLE RF Frontend (gptrRFENDReg) — RF analog (PLL/VCO/filter/bias) + calibration.
+#
+# Scope: only items exercised by the working ch32-hal BLE adv-TX + scan-RX
+# paths are decoded; remaining offsets are filler u32 placeholders so the
+# block layout stays addressable.
+#
+# Canonical base address: 0x40025000.
+block/BLE_RFEND:
+  description: BLE RF Frontend — analog config (PLL/VCO/filter/bias) + calibration tables.
+  items:
+    - name: CAL_TRIG
+      description: Calibration trigger/path bits (TX_tune_trigger bit0, TX_cal_mode bit4, TXF_enable bit8, RX_filter_mode bit12, RX_ADC_config bit16).
+      byte_offset: 4
+      fieldset: CAL_TRIG
+    - name: PATH_EN
+      description: TX/RX path enable (RX_ADC bit16, TX cal bit17, TX/RX PLL pre-enable bits[20:21]).
+      byte_offset: 8
+      fieldset: PATH_EN
+    - name: CTRL
+      description: RFEND control + reset (reset sequence writes 0x1101 → 0 → 0x1101; RX_filter_strobe bit4, ADC_ref_strobe bit8).
+      byte_offset: 12
+    - name: CFG0
+      description: RFEND CFG0 (default 0x480, hw-confirmed).
+      byte_offset: 40
+    - name: PLL_VCO
+      description: PLL/VCO config (post_cal_enable bit4, channel-lock release bit1).
+      byte_offset: 44
+    - name: LOOP_FILTER
+      description: PLL loop filter config (bits[3:0]/[7:4]/[10:8]/[22:20]/[30:28]).
+      byte_offset: 48
+    - name: CFG4
+      description: PLL enable (bits[25:19] cleared, bit20 set, bit31 set).
+      byte_offset: 56
+    - name: CFG5_FREQ
+      description: CFG5 + frequency code (bits[15:12]=8, bits[26:24], bits[31:30]; freq_code at bits[15:8] BF00=2401MHz, D300=2440MHz, E700=2480MHz; nCO2440 bits[5:0], nGA2440 bits[30:24]).
+      byte_offset: 60
+      fieldset: CFG5_FREQ
+    - name: PLL_DIV
+      description: PLL integer/frac divider (int_div bits[24:20], frac_div bits[13:0]).
+      byte_offset: 68
+      fieldset: PLL_DIV
+    - name: RF0
+      description: Analog RF0 config (RF analog enable bit31, bits[3:0]=9, bits[26:24]=0b100, bit29).
+      byte_offset: 72
+    - name: RF1
+      description: Analog RF1 bias (bits[2:0]=3, bits[6:4]=3, bits[10:8]=3, bit24=0, bit25=1).
+      byte_offset: 76
+    - name: RF2
+      description: Analog RF2 (bit14 = 1).
+      byte_offset: 80
+    - name: RF2B
+      description: Analog RF2b (bits[3:0]=12, bit7=1, bit12=0).
+      byte_offset: 84
+    - name: ADC_REF
+      description: RX ADC reference enable (bit16).
+      byte_offset: 88
+    - name: TUNE_RESULT
+      description: PLL tune result (CO bits[5:0], tune_done bit25, tune_active bit26). Reading also latches GA into CO_RESULT2.
+      byte_offset: 144
+      fieldset: TUNE_RESULT
+    - name: GA_RESULT
+      description: GA result (bits[16:10], latched by TUNE_RESULT read).
+      byte_offset: 148
+    - name: RX_FILTER_RESULT
+      description: RX filter calibration result (bits[4:0]) + done bit8.
+      byte_offset: 156
+    - name: CO_TABLE1
+      description: CO calibration table 1 — nibble-packed `delta_low * (39-ch)/39` for ch0..ch39 (5×u32).
+      array:
+        len: 5
+        stride: 4
+      byte_offset: 160
+    - name: CO_TABLE2
+      description: CO calibration table 2 — nibble-packed `delta_high * (ch+1)/40` for ch0..ch39 (5×u32).
+      array:
+        len: 5
+        stride: 4
+      byte_offset: 180
+    - name: GA_TABLE
+      description: GA calibration table + CO2 overflow guard (3×u32 covering nibbles for ch40..41 + GA1[0..9] + GA2[0..9]).
+      array:
+        len: 3
+        stride: 4
+      byte_offset: 200
+
+fieldset/CAL_TRIG:
+  description: RFEND calibration trigger/path bits.
+  fields:
+    - name: TX_TUNE_TRIGGER
+      description: TX tune trigger pulse for PLL measurement.
+      bit_offset: 0
+      bit_size: 1
+    - name: TX_CAL_MODE
+      description: TX calibration mode (set during cal, cleared post).
+      bit_offset: 4
+      bit_size: 1
+    - name: TXF_ENABLE
+      description: TX filter enable (set in RFEND_TXFtune; cleared post-cal Bug #3).
+      bit_offset: 8
+      bit_size: 1
+    - name: RX_FILTER_MODE
+      description: RX filter calibration mode (cleared post Bug #3).
+      bit_offset: 12
+      bit_size: 1
+    - name: RX_ADC_CONFIG
+      description: RX ADC config (cleared then set in RFEND_RXAdc).
+      bit_offset: 16
+      bit_size: 1
+
+fieldset/PATH_EN:
+  description: RFEND TX/RX path enable mask (pre-init = 0x00330000 enables bits 16/17/20/21).
+  fields:
+    - name: RX_ADC_PATH
+      description: RX ADC path enable.
+      bit_offset: 16
+      bit_size: 1
+    - name: TX_CAL_PATH
+      description: TX calibration path enable.
+      bit_offset: 17
+      bit_size: 1
+    - name: TX_PLL_PRE
+      description: TX PLL pre-enable.
+      bit_offset: 20
+      bit_size: 1
+    - name: RX_FILTER_PATH
+      description: RX filter path enable.
+      bit_offset: 21
+      bit_size: 1
+
+fieldset/CFG5_FREQ:
+  description: CFG5 + frequency-code register.
+  fields:
+    - name: NCO2440
+      description: Stored CO anchor for default-channel comp (bits[5:0]).
+      bit_offset: 0
+      bit_size: 6
+    - name: FREQ_CODE
+      description: Frequency code bits[15:8] (BF=2401MHz, D3=2440MHz, E7=2480MHz).
+      bit_offset: 8
+      bit_size: 8
+    - name: NGA2440
+      description: Stored GA anchor for default-channel comp (bits[30:24]).
+      bit_offset: 24
+      bit_size: 7
+
+fieldset/PLL_DIV:
+  description: PLL channel divider (programmed by listener.set_channel_freq).
+  fields:
+    - name: FRAC_DIV
+      description: Fractional divider (`((freq_khz % 64000) << 10) / 250` masked to 14 bits).
+      bit_offset: 0
+      bit_size: 14
+    - name: INT_DIV
+      description: Integer divider (`freq_khz / 64000` masked to 5 bits).
+      bit_offset: 20
+      bit_size: 5
+
+fieldset/TUNE_RESULT:
+  description: PLL tune result (CO, tune_done, tune_active).
+  fields:
+    - name: CO
+      description: CO calibration result (read after PLL lock).
+      bit_offset: 0
+      bit_size: 6
+    - name: TUNE_DONE
+      description: Tune done flag — second-check by RFEND_WaitTune.
+      bit_offset: 25
+      bit_size: 1
+    - name: TUNE_ACTIVE
+      description: Tune active flag — set first; double-check semantic.
+      bit_offset: 26
+      bit_size: 1

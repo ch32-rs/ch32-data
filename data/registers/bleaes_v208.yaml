@@ -1,0 +1,24 @@
+# CH32V208 BLE AES Engine (gptrAESReg) — only +0x04 cleanup decoded.
+#
+# Scope: only the cleanup-bit pair touched by the BB IRQ path on the ADV TX
+# example is decoded. Full register map TBD; only matters once AES-CCM lands
+# for connection mode.
+block/BLE_AES:
+  description: BLE AES engine — only +0x04 cleanup-bit pair decoded for ADV TX path.
+  items:
+    - name: STATR
+      description: AES op status (bit0 + bit1; cleared sequentially from the BB IRQ path).
+      byte_offset: 4
+      fieldset: STATR
+
+fieldset/STATR:
+  description: BLE_AES status — phase 1 / phase 2 cleanup bits.
+  fields:
+    - name: PHASE2
+      description: AES op cleanup phase 2 (cleared after PHASE1).
+      bit_offset: 0
+      bit_size: 1
+    - name: PHASE1
+      description: AES op cleanup phase 1 (cleared first if set).
+      bit_offset: 1
+      bit_size: 1

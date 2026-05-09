@@ -1,0 +1,10 @@
+# CH32V208 BLE AES Engine (gptrAESReg) — only +0x04 cleanup decoded.
+#
+# RCC clocks: AHBPCENR bits 6/16/17 — see V208_BLE_BB.yaml note.
+# Note: full register map TBD; only matters when AES-CCM landed for connection mode.
+- name: BLE_AES
+  address: 0x40024300
+  registers:
+    kind: bleaes
+    version: v208
+    block: BLE_AES
