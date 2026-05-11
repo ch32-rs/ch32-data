@@ -40,16 +40,3 @@ cores:
     include_dma_channels:
       DMA1: "../dma/CH32V00X.yaml"
     include_interrupts: "../interrupts/CH32V00X.yaml"
-
-_raw:
-  WDOG: "2"
-  IIC: "1"
-  SPI: "1"
-  UART: "2"
-  VDD: 3.3/5.0
-  Advanced TM: 1/1
-  OPA: "1"
-  Touchkey: "8"
-  ADC: 2/7
-  Freq: 24MHz
-  GPIO: "31"
