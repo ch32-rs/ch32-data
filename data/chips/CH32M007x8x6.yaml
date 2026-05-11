@@ -29,7 +29,7 @@ docs:
   - type: homepage
     title: Homepage
     name: "CH32M007"
-    url: http://www.wch.cn/products/CH32M007.html
+    url: https://www.wch-ic.com/products/CH32M007.html
 cores:
   - name: qingke-v2c
     peripherals: []
