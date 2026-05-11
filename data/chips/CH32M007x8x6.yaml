@@ -1,11 +1,17 @@
-name: CH32M007G8R6
+name: CH32M007
 family: Low price, motor control MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
 device_id: 0x0
 packages:
+  - name: CH32M007E8R6
+    package: QSOP24
+  - name: CH32M007E8U7
+    package: QFN26C3
   - name: CH32M007G8R6
     package: QSOP28
+  - name: CH32M007K8U7
+    package: QFN32
 memory:
   - name: BANK_1
     kind: flash
@@ -22,8 +28,8 @@ memory:
 docs:
   - type: homepage
     title: Homepage
-    name: ""
-    url: http://www.wch.cn/products/CH32V007.html
+    name: "CH32M007"
+    url: https://www.wch-ic.com/products/CH32M007.html
 cores:
   - name: qingke-v2c
     peripherals: []
@@ -34,17 +40,3 @@ cores:
     include_dma_channels:
       DMA1: "../dma/CH32V00X.yaml"
     include_interrupts: "../interrupts/CH32V00X.yaml"
-
-_raw:
-  WDOG: "2"
-  IIC: "1"
-  Package: SOP8
-  SPI: "1"
-  UART: "2"
-  VDD: 3.3/5.0
-  Advanced TM: 1/1
-  OPA: "1"
-  Touchkey: "7"
-  ADC: 1/6
-  Freq: 48MHz
-  GPIO: "12"
