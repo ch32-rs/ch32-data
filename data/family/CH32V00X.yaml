@@ -176,24 +176,24 @@
     - { pin: "PA2", signal: "CH2N", remap: 0 }
     - { pin: "PD1", signal: "CH3N", remap: 0 }
     # 1
-    - { pin: "PC5", signal: "ETR", remap: 1 }
-    - { pin: "PC6", signal: "CH1", remap: 1 }
-    - { pin: "PC7", signal: "CH2", remap: 1 }
-    - { pin: "PC0", signal: "CH3", remap: 1 }
-    - { pin: "PD3", signal: "CH4", remap: 1 }
-    - { pin: "PC1", signal: "BKIN", remap: 1 }
-    - { pin: "PC3", signal: "CH1N", remap: 1 }
-    - { pin: "PC4", signal: "CH2N", remap: 1 }
+    - { pin: "PD4", signal: "ETR", remap: 1 }
+    - { pin: "PD2", signal: "CH1", remap: 1 }
+    - { pin: "PA1", signal: "CH2", remap: 1 }
+    - { pin: "PC3", signal: "CH3", remap: 1 }
+    - { pin: "PC4", signal: "CH4", remap: 1 }
+    - { pin: "PC2", signal: "BKIN", remap: 1 }
+    - { pin: "PD0", signal: "CH1N", remap: 1 }
+    - { pin: "PA2", signal: "CH2N", remap: 1 }
     - { pin: "PD1", signal: "CH3N", remap: 1 }
     # 2
-    - { pin: "PD4", signal: "ETR", remap: 2 }
-    - { pin: "PD2", signal: "CH1", remap: 2 }
-    - { pin: "PA1", signal: "CH2", remap: 2 }
-    - { pin: "PC3", signal: "CH3", remap: 2 }
-    - { pin: "PC4", signal: "CH4", remap: 2 }
-    - { pin: "PC2", signal: "BKIN", remap: 2 }
-    - { pin: "PD0", signal: "CH1N", remap: 2 }
-    - { pin: "PA2", signal: "CH2N", remap: 2 }
+    - { pin: "PC5", signal: "ETR", remap: 2 }
+    - { pin: "PC6", signal: "CH1", remap: 2 }
+    - { pin: "PC7", signal: "CH2", remap: 2 }
+    - { pin: "PC0", signal: "CH3", remap: 2 }
+    - { pin: "PD3", signal: "CH4", remap: 2 }
+    - { pin: "PC1", signal: "BKIN", remap: 2 }
+    - { pin: "PC3", signal: "CH1N", remap: 2 }
+    - { pin: "PC4", signal: "CH2N", remap: 2 }
     - { pin: "PD1", signal: "CH3N", remap: 2 }
     # 3
     - { pin: "PC2", signal: "ETR", remap: 3 }
@@ -205,54 +205,67 @@
     - { pin: "PC3", signal: "CH1N", remap: 3 }
     - { pin: "PD2", signal: "CH2N", remap: 3 }
     - { pin: "PC6", signal: "CH3N", remap: 3 }
-
-- name: TIM2
-  address: 0x40000000
-  registers:
-    kind: timer
-    version: v3
-    block: GPTM
-  rcc:
-    bus_clock: HCLK
-    kernel_clock: HCLK
-    enable:
-      register: PB1PCENR
-      field: TIM2EN
-    reset:
-      register: PB1PRSTR
-      field: TIM2RST
-  remap:
-    register: PCFR1
-    field: TIM2_RM
-  interrupts:
-    - { signal: "UP", interrupt: "TIM2" }
-    - { signal: "CC", interrupt: "TIM2" }
-    - { signal: "TRG", interrupt: "TIM2" }
-  pins:
-    # 0
-    - { pin: "PD4", signal: "ETR", remap: 0 }
-    - { pin: "PD4", signal: "CH1", remap: 0 }
-    - { pin: "PD3", signal: "CH2", remap: 0 }
-    - { pin: "PC0", signal: "CH3", remap: 0 }
-    - { pin: "PD7", signal: "CH4", remap: 0 }
-    # 1
-    - { pin: "PC5", signal: "ETR", remap: 1 }
-    - { pin: "PC5", signal: "CH1", remap: 1 }
-    - { pin: "PC2", signal: "CH2", remap: 1 }
-    - { pin: "PD2", signal: "CH3", remap: 1 }
-    - { pin: "PC1", signal: "CH4", remap: 1 }
-    # 2
-    - { pin: "PC1", signal: "ETR", remap: 2 }
-    - { pin: "PC1", signal: "CH1", remap: 2 }
-    - { pin: "PD3", signal: "CH2", remap: 2 }
-    - { pin: "PC0", signal: "CH3", remap: 2 }
-    - { pin: "PD7", signal: "CH4", remap: 2 }
-    # 3
-    - { pin: "PC1", signal: "ETR", remap: 3 }
-    - { pin: "PC1", signal: "CH1", remap: 3 }
-    - { pin: "PC7", signal: "CH2", remap: 3 }
-    - { pin: "PD6", signal: "CH3", remap: 3 }
-    - { pin: "PD5", signal: "CH4", remap: 3 }
+    # 4
+    - { pin: "PD4", signal: "ETR", remap: 4 }
+    - { pin: "PA3", signal: "CH1", remap: 4 }
+    - { pin: "PB0", signal: "CH2", remap: 4 }
+    - { pin: "PB1", signal: "CH3", remap: 4 }
+    - { pin: "PD1", signal: "CH4", remap: 4 }
+    - { pin: "PB3", signal: "BKIN", remap: 4 }
+    - { pin: "PA0", signal: "CH1N", remap: 4 }
+    - { pin: "PA2", signal: "CH2N", remap: 4 }
+    - { pin: "PD0", signal: "CH3N", remap: 4 }
+    # 5
+    - { pin: "PD4", signal: "ETR", remap: 5 }
+    - { pin: "PA3", signal: "CH1", remap: 5 }
+    - { pin: "PB0", signal: "CH2", remap: 5 }
+    - { pin: "PC3", signal: "CH3", remap: 5 }
+    - { pin: "PD1", signal: "CH4", remap: 5 }
+    - { pin: "PB3", signal: "BKIN", remap: 5 }
+    - { pin: "PA0", signal: "CH1N", remap: 5 }
+    - { pin: "PA2", signal: "CH2N", remap: 5 }
+    - { pin: "PD0", signal: "CH3N", remap: 5 }
+    # 6
+    - { pin: "PD4", signal: "ETR", remap: 6 }
+    - { pin: "PA3", signal: "CH1", remap: 6 }
+    - { pin: "PB0", signal: "CH2", remap: 6 }
+    - { pin: "PB1", signal: "CH3", remap: 6 }
+    - { pin: "PB2", signal: "CH4", remap: 6 }
+    - { pin: "PA7", signal: "BKIN", remap: 6 }
+    - { pin: "PA0", signal: "CH1N", remap: 6 }
+    - { pin: "PA2", signal: "CH2N", remap: 6 }
+    - { pin: "PD0", signal: "CH3N", remap: 6 }
+    # 7
+    - { pin: "PB4", signal: "ETR", remap: 7 }
+    - { pin: "PC4", signal: "CH1", remap: 7 }
+    - { pin: "PC5", signal: "CH2", remap: 7 }
+    - { pin: "PC6", signal: "CH3", remap: 7 }
+    - { pin: "PC7", signal: "CH4", remap: 7 }
+    - { pin: "PB2", signal: "BKIN", remap: 7 }
+    - { pin: "PC0", signal: "CH1N", remap: 7 }
+    - { pin: "PC1", signal: "CH2N", remap: 7 }
+    - { pin: "PC2", signal: "CH3N", remap: 7 }
+    # 8
+    - { pin: "PB4", signal: "ETR", remap: 8 }
+    - { pin: "PC4", signal: "CH1", remap: 8 }
+    - { pin: "PC5", signal: "CH2", remap: 8 }
+    - { pin: "PC6", signal: "CH3", remap: 8 }
+    - { pin: "PC7", signal: "CH4", remap: 8 }
+    - { pin: "PB2", signal: "BKIN", remap: 8 }
+    - { pin: "PA3", signal: "CH1N", remap: 8 }
+    - { pin: "PB0", signal: "CH2N", remap: 8 }
+    - { pin: "PB1", signal: "CH3N", remap: 8 }
+    # 9
+    - { pin: "PB4", signal: "ETR", remap: 9 }
+    - { pin: "PA0", signal: "CH1", remap: 9 }
+    - { pin: "PA1", signal: "CH2", remap: 9 }
+    - { pin: "PA2", signal: "CH3", remap: 9 }
+    - { pin: "PA3", signal: "CH4", remap: 9 }
+    - { pin: "PB2", signal: "BKIN", remap: 9 }
+    - { pin: "PC0", signal: "CH1N", remap: 9 }
+    - { pin: "PC1", signal: "CH2N", remap: 9 }
+    - { pin: "PC2", signal: "CH3N", remap: 9 }
+    # TIM1_RM=11xx routes CH1 to the internal LSI clock (no GPIO pin).
 
 - name: USART1
   address: 0x40013800
