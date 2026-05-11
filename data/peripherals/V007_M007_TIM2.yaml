@@ -1,0 +1,73 @@
+# TIM2 pin mapping for CH32V007/CH32M007 (Table 7-9-2).
+# Differs from V002/V004/V005/V006 only at TIM2_RM=010, where CH2 routes to PB3 instead of PC2.
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: v3
+    block: GPTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB1PCENR
+      field: TIM2EN
+    reset:
+      register: PB1PRSTR
+      field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
+  interrupts:
+    - { signal: "UP", interrupt: "TIM2" }
+    - { signal: "CC", interrupt: "TIM2" }
+    - { signal: "TRG", interrupt: "TIM2" }
+  pins:
+    # 0
+    - { pin: "PD4", signal: "ETR", remap: 0 }
+    - { pin: "PD4", signal: "CH1", remap: 0 }
+    - { pin: "PD3", signal: "CH2", remap: 0 }
+    - { pin: "PC0", signal: "CH3", remap: 0 }
+    - { pin: "PD7", signal: "CH4", remap: 0 }
+    # 1
+    - { pin: "PC1", signal: "ETR", remap: 1 }
+    - { pin: "PC1", signal: "CH1", remap: 1 }
+    - { pin: "PD3", signal: "CH2", remap: 1 }
+    - { pin: "PC0", signal: "CH3", remap: 1 }
+    - { pin: "PD7", signal: "CH4", remap: 1 }
+    # 2
+    - { pin: "PC5", signal: "ETR", remap: 2 }
+    - { pin: "PC5", signal: "CH1", remap: 2 }
+    - { pin: "PB3", signal: "CH2", remap: 2 }
+    - { pin: "PD2", signal: "CH3", remap: 2 }
+    - { pin: "PC1", signal: "CH4", remap: 2 }
+    # 3
+    - { pin: "PC1", signal: "ETR", remap: 3 }
+    - { pin: "PC1", signal: "CH1", remap: 3 }
+    - { pin: "PC7", signal: "CH2", remap: 3 }
+    - { pin: "PD6", signal: "CH3", remap: 3 }
+    - { pin: "PD5", signal: "CH4", remap: 3 }
+    # 4
+    - { pin: "PC0", signal: "ETR", remap: 4 }
+    - { pin: "PC0", signal: "CH1", remap: 4 }
+    - { pin: "PC1", signal: "CH2", remap: 4 }
+    - { pin: "PC3", signal: "CH3", remap: 4 }
+    - { pin: "PB6", signal: "CH4", remap: 4 }
+    # 5
+    - { pin: "PA0", signal: "ETR", remap: 5 }
+    - { pin: "PA0", signal: "CH1", remap: 5 }
+    - { pin: "PA1", signal: "CH2", remap: 5 }
+    - { pin: "PA2", signal: "CH3", remap: 5 }
+    - { pin: "PA3", signal: "CH4", remap: 5 }
+    # 6
+    - { pin: "PB1", signal: "ETR", remap: 6 }
+    - { pin: "PB1", signal: "CH1", remap: 6 }
+    - { pin: "PA1", signal: "CH2", remap: 6 }
+    - { pin: "PA2", signal: "CH3", remap: 6 }
+    - { pin: "PA3", signal: "CH4", remap: 6 }
+    # 7
+    - { pin: "PD3", signal: "ETR", remap: 7 }
+    - { pin: "PD3", signal: "CH1", remap: 7 }
+    - { pin: "PD4", signal: "CH2", remap: 7 }
+    - { pin: "PA2", signal: "CH3", remap: 7 }
+    - { pin: "PA3", signal: "CH4", remap: 7 }
