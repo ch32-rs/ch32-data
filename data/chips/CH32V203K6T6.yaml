@@ -6,7 +6,7 @@ device_id: 540345600
 packages:
   - name: CH32V203K6T6
     package: LQFP32
-include_memory: ../memory/CH32V2.yaml
+include_memory: ../memory/CH32V203_x6.yaml
 memory_options:
   default: { USR_1: 32K, RAM: 10K }
 docs:

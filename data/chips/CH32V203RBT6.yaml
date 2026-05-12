@@ -8,13 +8,8 @@ keywords:
 packages:
   - name: CH32V203RBT6
     package: LQFP64M
-include_memory: ../memory/CH32V2.yaml
-# CODE/RAM split selected by OB SRAM_CODE_MODE (V20x_D8/D8W RM):
-#   00x -> 128K code / 64K ram   (power-on default)
-#   01x -> 144K code / 48K ram
-#   1xx -> 160K code / 32K ram
-# Option names are layout-descriptive (c<code>_r<ram>) so the cargo feature
-# axis is uniform across chips — same name always means the same layout.
+include_memory: ../memory/CH32V203_xB.yaml
+# OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
 memory_options:
   c128_r64:
     USR_1: 128K

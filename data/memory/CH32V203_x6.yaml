@@ -1,9 +1,21 @@
-# Base memory layout for the CH32V2 family (flash_v3).
-# Chip YAMLs supply USR_1/RAM sizes via `memory_options`.
-# Bank-suffixed names (USR_1, SYS_1) leave room for multi-bank parts.
 - name: USR_1
   kind: flash
   address: 0x08000000
+  modes:
+    - type: fast
+      page_size: 256
+      load_size: 4
+    - type: standard
+      erase_size: 4K
+      write_size: 2
+  access:
+    read: true
+    write: true
+    execute: true
+- name: USR_2
+  kind: flash
+  address: 0x08008000
+  size: 192K
   modes:
     - type: fast
       page_size: 256

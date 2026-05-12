@@ -6,7 +6,7 @@ device_id: 540935424
 packages:
   - name: CH32V203F8U6
     package: QFN20
-include_memory: ../memory/CH32V2.yaml
+include_memory: ../memory/CH32V203_x8.yaml
 memory_options:
   default: { USR_1: 64K, RAM: 20K }
 docs:
