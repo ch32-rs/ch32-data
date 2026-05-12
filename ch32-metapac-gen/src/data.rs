@@ -1,3 +1,5 @@
+use std::collections::BTreeMap;
+
 use ch32_data_macros::EnumDebug;
 use serde::Deserialize;
 
@@ -298,6 +300,10 @@ pub struct Chip {
     pub subfamily: String,
     pub cores: Vec<Core>,
     pub memory: Vec<MemoryRegion>,
+    #[serde(default)]
+    pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
+    #[serde(default)]
+    pub default_memory_option: Option<String>,
     pub packages: Vec<Package>,
 }
 
