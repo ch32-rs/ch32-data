@@ -12,18 +12,9 @@ use proc_macro2::TokenStream;
 use regex::Regex;
 
 mod data;
+mod memory;
 use data::*;
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-struct Metadata<'a> {
-    name: &'a str,
-    family: &'a str,
-    line: &'a str,
-    memory: &'a [MemoryRegion],
-    peripherals: &'a [Peripheral],
-    interrupts: &'a [Interrupt],
-    dma_channels: &'a [DmaChannel],
-}
+use memory::*;
 
 pub struct Options {
     pub chips: Vec<String>,
@@ -278,15 +269,18 @@ impl Gen {
             .unwrap_or("default")
             .to_string();
 
+        let memory_select_attrs =
+            memory_select_cfg_attrs(&memory_options, &default_memory_option);
+
         let data = format!(
             "include!(\"../{}\");
             use crate::metadata::PeripheralRccKernelClock::{{Clock, Mux}};
-            use crate::metadata::Mode::*;
+{}            mod memory_select;
             pub static METADATA: Metadata = Metadata {{
                 name: {:?},
                 family: {:?},
                 line: {:?},
-                memory: {},
+                memory: memory_select::MEMORY,
                 memory_options: {},
                 default_memory_option: {:?},
                 peripherals: PERIPHERALS,
@@ -295,10 +289,10 @@ impl Gen {
                 dma_channels: DMA_CHANNELS,
             }};",
             deduped_file,
+            memory_select_attrs,
             &chip.name,
             &chip.family,
             &chip.subfamily,
-            stringify(&chip.memory),
             stringify(&memory_options),
             &default_memory_option,
             //&core.nvic_priority_bits,
@@ -316,8 +310,8 @@ impl Gen {
             .unwrap();
 
         // ==============================
-        // generate default memory.x
-        gen_memory_x(&chip_dir, chip);
+        // per-option memory.x + memory.rs under memory_x/<option>/
+        gen_memory_files(&chip_dir, chip, &memory_options);
     }
 
     fn load_chip(&mut self, name: &str) -> Chip {
@@ -475,7 +469,7 @@ impl Gen {
     }
 }
 
-fn stringify<T: Debug>(metadata: T) -> String {
+pub(crate) fn stringify<T: Debug>(metadata: T) -> String {
     let mut metadata = format!("{:#?}", metadata);
     if metadata.starts_with('[') {
         metadata = format!("&{}", metadata);
@@ -490,148 +484,3 @@ fn gen_opts() -> generate::Options {
     }
 }
 
-fn flash_write_size(r: &MemoryRegion) -> Option<u32> {
-    if let Some(s) = &r.settings {
-        return Some(s.write_size);
-    }
-    r.modes.iter().find_map(|m| match m {
-        Mode::Fast { page_size, .. } => Some(*page_size),
-        _ => None,
-    })
-}
-
-// Primary user-flash region: `USR_*` on new YAMLs, `BANK_*` on legacy ones.
-fn primary_flash_regions(chip: &Chip) -> impl Iterator<Item = &MemoryRegion> + Clone {
-    chip.memory.iter().filter(|r| {
-        r.kind == MemoryRegionKind::Flash
-            && (r.name.starts_with("USR_") || r.name.starts_with("BANK_"))
-    })
-}
-
-fn access_attrs(access: Option<&Access>) -> String {
-    match access {
-        Some(a) => {
-            let mut s = String::new();
-            if a.read {
-                s.push('r');
-            }
-            if a.write {
-                s.push('w');
-            }
-            if a.execute {
-                s.push('x');
-            }
-            s
-        }
-        None => "rwx".to_string(),
-    }
-}
-
-fn format_length(size: u32) -> String {
-    if size >= 1024 && size.is_multiple_of(1024) {
-        format!("{:>3}K", size / 1024)
-    } else {
-        format!("{:>4}", size)
-    }
-}
-
-fn gen_memory_x(out_dir: &Path, chip: &Chip) {
-    let mut memory_x = String::new();
-    let usr_1 = chip.memory.iter().find(|r| r.name == "USR_1");
-
-    if let Some(usr) = usr_1 {
-        // New schema: real addresses verbatim, CODE alias at 0x00000000 mirroring
-        // USR_1 (the WCH boot alias), per-region (rwx) from access flags.
-        writeln!(memory_x, "MEMORY").unwrap();
-        writeln!(memory_x, "{{").unwrap();
-        writeln!(
-            memory_x,
-            "    {:<5} {:<5} : ORIGIN = 0x00000000, LENGTH = {} /* USR_1 boot alias */",
-            "CODE",
-            "(rx)",
-            format_length(usr.size),
-        )
-        .unwrap();
-        for r in &chip.memory {
-            let attrs = format!("({})", access_attrs(r.access.as_ref()));
-            writeln!(
-                memory_x,
-                "    {:<5} {:<5} : ORIGIN = 0x{:08X}, LENGTH = {}",
-                r.name,
-                attrs,
-                r.address,
-                format_length(r.size),
-            )
-            .unwrap();
-        }
-        writeln!(memory_x, "}}").unwrap();
-        writeln!(memory_x).unwrap();
-        // qingke's link.x still references FLASH; alias until it's updated.
-        writeln!(memory_x, r#"REGION_ALIAS("FLASH", CODE);"#).unwrap();
-        writeln!(memory_x).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_TEXT", CODE);"#).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_RODATA", CODE);"#).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_DATA", RAM);"#).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_BSS", RAM);"#).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_HEAP", RAM);"#).unwrap();
-        writeln!(memory_x, r#"REGION_ALIAS("REGION_STACK", RAM);"#).unwrap();
-    } else {
-        // Legacy schema (BANK_*/SRAM/OTP). Preserve the existing flat layout.
-        let flash = primary_flash_regions(chip);
-        let flash_size = flash.clone().map(|r| r.size).sum::<u32>();
-        let ram = chip
-            .memory
-            .iter()
-            .find(|r| r.kind == MemoryRegionKind::Ram)
-            .unwrap();
-        let otp = chip
-            .memory
-            .iter()
-            .find(|r| r.kind == MemoryRegionKind::Flash && r.name == "OTP");
-
-        write!(memory_x, "MEMORY\n{{\n").unwrap();
-        writeln!(
-            memory_x,
-            "    FLASH : ORIGIN = 0x00000000, LENGTH = {:>4}K /* {} */",
-            flash_size / 1024,
-            flash
-                .map(|x| x.name.as_ref())
-                .collect::<Vec<&str>>()
-                .join(" + ")
-        )
-        .unwrap();
-        writeln!(
-            memory_x,
-            "    RAM   : ORIGIN = 0x{:08x}, LENGTH = {:>4}K",
-            ram.address,
-            ram.size / 1024,
-        )
-        .unwrap();
-        if let Some(otp) = otp {
-            writeln!(
-                memory_x,
-                "    OTP   : ORIGIN = 0x{:08x}, LENGTH = {:>4}",
-                otp.address, otp.size,
-            )
-            .unwrap();
-        }
-        write!(memory_x, "}}").unwrap();
-
-        write!(
-            memory_x,
-            r#"
-REGION_ALIAS("REGION_TEXT", FLASH);
-REGION_ALIAS("REGION_RODATA", FLASH);
-REGION_ALIAS("REGION_DATA", RAM);
-REGION_ALIAS("REGION_BSS", RAM);
-REGION_ALIAS("REGION_HEAP", RAM);
-REGION_ALIAS("REGION_STACK", RAM);
-    "#
-        )
-        .unwrap();
-    }
-
-    fs::create_dir_all(out_dir.join("memory_x")).unwrap();
-    let mut file = File::create(out_dir.join("memory_x").join("memory.x")).unwrap();
-    file.write_all(memory_x.as_bytes()).unwrap();
-}
