@@ -310,6 +310,12 @@ pub struct MemoryRegion {
     pub kind: MemoryRegionKind,
     pub address: u32,
     pub size: u32,
+    #[serde(default)]
+    pub modes: Vec<Mode>,
+    #[serde(default)]
+    pub access: Option<Access>,
+    // legacy: superseded by `modes`
+    #[serde(default)]
     pub settings: Option<FlashSettings>,
 }
 
@@ -322,9 +328,26 @@ impl std::fmt::Debug for MemoryRegion {
             .field("kind", &self.kind)
             .field("address", &format_args!("{:#x}", self.address))
             .field("size", &self.size)
+            .field("modes", &self.modes)
+            .field("access", &self.access)
             .field("settings", &self.settings)
             .finish()
     }
+}
+
+// Variants imported in emitted metadata.rs via `use crate::metadata::Mode::*;`.
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+#[serde(tag = "type", rename_all = "lowercase")]
+pub enum Mode {
+    Fast { page_size: u32, buffer_size: u32 },
+    Standard { erase_size: u32, write_size: u32 },
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct Access {
+    pub read: bool,
+    pub write: bool,
+    pub execute: bool,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]

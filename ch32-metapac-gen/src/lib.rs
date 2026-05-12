@@ -153,7 +153,7 @@ impl Gen {
 
         let write_sizes: HashSet<_> = flash_regions
             .iter()
-            .map(|r| r.settings.as_ref().unwrap().write_size)
+            .map(|r| flash_write_size(r).expect("flash region needs a write size"))
             .collect();
         assert_eq!(1, write_sizes.len());
         writeln!(
@@ -269,6 +269,7 @@ impl Gen {
         let data = format!(
             "include!(\"../{}\");
             use crate::metadata::PeripheralRccKernelClock::{{Clock, Mux}};
+            use crate::metadata::Mode::*;
             pub static METADATA: Metadata = Metadata {{
                 name: {:?},
                 family: {:?},
@@ -471,6 +472,16 @@ fn gen_opts() -> generate::Options {
     generate::Options {
         common_module: CommonModule::External(TokenStream::from_str("crate::common").unwrap()),
     }
+}
+
+fn flash_write_size(r: &MemoryRegion) -> Option<u32> {
+    if let Some(s) = &r.settings {
+        return Some(s.write_size);
+    }
+    r.modes.iter().find_map(|m| match m {
+        Mode::Standard { write_size, .. } => Some(*write_size),
+        Mode::Fast { buffer_size, .. } => Some(*buffer_size),
+    })
 }
 
 fn gen_memory_x(out_dir: &Path, chip: &Chip) {

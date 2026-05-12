@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 mod size;
-pub use size::parse_size_with_suffix;
+pub use size::{deserialize_opt_size_with_suffix, parse_size_with_suffix};
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Chip {
@@ -33,11 +33,28 @@ pub mod chip {
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Memory {
         pub name: String,
-        pub kind: memory::Kind,
-        pub address: u32,
-        #[serde(deserialize_with = "crate::parse_size_with_suffix")]
-        pub size: u32,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub kind: Option<memory::Kind>,
+        #[serde(
+            default,
+            deserialize_with = "crate::deserialize_opt_size_with_suffix",
+            skip_serializing_if = "Option::is_none"
+        )]
+        pub address: Option<u32>,
+        #[serde(
+            default,
+            deserialize_with = "crate::deserialize_opt_size_with_suffix",
+            skip_serializing_if = "Option::is_none"
+        )]
+        pub size: Option<u32>,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub modes: Vec<memory::Mode>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub access: Option<memory::Access>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub cores: Option<Vec<String>>,
+        // legacy: pre-`modes` chip YAMLs ship a single fast-mode triple here
+        #[serde(default, skip_serializing_if = "Option::is_none")]
         pub settings: Option<memory::Settings>,
     }
 
@@ -52,8 +69,38 @@ pub mod chip {
         }
 
         #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+        #[serde(tag = "type", rename_all = "lowercase")]
+        pub enum Mode {
+            Fast {
+                #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+                page_size: u32,
+                #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+                buffer_size: u32,
+            },
+            Standard {
+                #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+                erase_size: u32,
+                #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+                write_size: u32,
+            },
+        }
+
+        #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+        pub struct Access {
+            #[serde(default = "crate::default_true")]
+            pub read: bool,
+            #[serde(default)]
+            pub write: bool,
+            #[serde(default = "crate::default_true")]
+            pub execute: bool,
+        }
+
+        // legacy, superseded by `Mode`
+        #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
         pub struct Settings {
+            #[serde(deserialize_with = "crate::parse_size_with_suffix")]
             pub erase_size: u32,
+            #[serde(deserialize_with = "crate::parse_size_with_suffix")]
             pub write_size: u32,
             pub erase_value: u8,
         }
@@ -287,6 +334,10 @@ pub mod chip {
             pub channel: u8,
         }
     }
+}
+
+fn default_true() -> bool {
+    true
 }
 
 #[cfg(test)]

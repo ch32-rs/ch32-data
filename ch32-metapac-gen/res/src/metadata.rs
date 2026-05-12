@@ -139,7 +139,23 @@ pub struct MemoryRegion {
     pub kind: MemoryRegionKind,
     pub address: u32,
     pub size: u32,
+    pub modes: &'static [Mode],
+    pub access: Option<Access>,
+    // legacy: superseded by `modes`
     pub settings: Option<FlashSettings>,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub enum Mode {
+    Fast { page_size: u32, buffer_size: u32 },
+    Standard { erase_size: u32, write_size: u32 },
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct Access {
+    pub read: bool,
+    pub write: bool,
+    pub execute: bool,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
