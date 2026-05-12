@@ -52,6 +52,15 @@ case "$CMD" in
         echo "TODO: More chips to be added"
         cargo run -p ch32-data-gen && cargo run -p ch32-metapac-gen -- "CH32X03*" "CH32V*" "CH32L*" "CH32M*" CH641 CH643
     ;;
+    dump-memory-x)
+        # Render memory.x for inspection, into build/memory-x-dump/<chip>.memory.x.
+        # No --features: dump every (option x split-subset) variant per chip.
+        # With --features: dump the single memory.x produced by that feature set.
+        # Usage:
+        #   ./d dump-memory-x [CHIP|GLOB]...
+        #   ./d dump-memory-x CH32V203RBT6 --features memory-option-c160_r32,memory-usr-split
+        cargo run -p ch32-metapac-gen --bin dump-memory-x -- "$@"
+    ;;
     ci)
         echo TODO "$CMD"
     ;;

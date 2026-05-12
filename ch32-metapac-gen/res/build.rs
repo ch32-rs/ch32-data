@@ -2,6 +2,11 @@ use std::env;
 #[cfg(any(feature = "rt", feature = "memory-x"))]
 use std::path::PathBuf;
 
+// shared with the dump-memory-x dev tool; copied next to build.rs by ch32-metapac-gen
+#[cfg(feature = "memory-x")]
+#[path = "memory_x_render.rs"]
+mod memory_x_render;
+
 enum GetOneError {
     None,
     Multiple,
@@ -50,46 +55,33 @@ fn main() {
 
     #[cfg(feature = "memory-x")]
     {
-        // Collect `memory-option-<X>` features. Cargo lowercases env-var names
-        // from feature names, so reversing is just strip-prefix + to-lowercase.
-        // This relies on option names containing no `-` (codegen uses `_`-only
-        // names).
-        let explicit: Vec<String> = env::vars()
+        let option = resolve_memory_option(&crate_dir, &chip_core_name);
+        let regions_path = crate_dir
+            .join("src/chips")
+            .join(&chip_core_name)
+            .join("memory_x")
+            .join(&option)
+            .join("regions");
+        let regions_src = std::fs::read_to_string(&regions_path)
+            .unwrap_or_else(|e| panic!("failed to read {}: {}", regions_path.display(), e));
+        let regions = memory_x_render::parse_regions(&regions_src);
+
+        let split_prefixes: std::collections::BTreeSet<String> = env::vars()
             .map(|(a, _)| a)
-            .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_OPTION_"))
-            .map(|x| {
-                x.strip_prefix("CARGO_FEATURE_MEMORY_OPTION_")
-                    .unwrap()
-                    .to_ascii_lowercase()
+            .filter_map(|x| {
+                x.strip_prefix("CARGO_FEATURE_MEMORY_")
+                    .and_then(|s| s.strip_suffix("_SPLIT"))
+                    .map(|s| s.to_ascii_lowercase())
             })
             .collect();
-        let option = match explicit.len() {
-            0 => {
-                // Bare `memory-x` only — fall back to the default option recorded
-                // by the codegen.
-                let default_path = crate_dir
-                    .join("src/chips")
-                    .join(&chip_core_name)
-                    .join("memory_x/_default");
-                std::fs::read_to_string(&default_path)
-                    .unwrap_or_else(|e| {
-                        panic!("failed to read {}: {}", default_path.display(), e)
-                    })
-                    .trim()
-                    .to_string()
-            }
-            1 => explicit.into_iter().next().unwrap(),
-            _ => panic!(
-                "Multiple `memory-option-*` features enabled: {:?}. Enable at most one.",
-                explicit
-            ),
-        };
-        println!(
-            "cargo:rustc-link-search={}/src/chips/{}/memory_x/{}",
-            crate_dir.display(),
-            chip_core_name,
-            option,
-        );
+
+        let resolved = memory_x_render::resolve_regions(&regions, &split_prefixes);
+        let memory_x = memory_x_render::render_memory_x(&resolved);
+
+        let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
+        std::fs::write(out_dir.join("memory.x"), memory_x).unwrap();
+        println!("cargo:rustc-link-search={}", out_dir.display());
+        println!("cargo:rerun-if-changed={}", regions_path.display());
     }
     println!(
         "cargo:rustc-env=CH32_METAPAC_PAC_PATH=chips/{}/pac.rs",
@@ -101,4 +93,34 @@ fn main() {
     );
 
     println!("cargo:rerun-if-changed=build.rs");
+}
+
+#[cfg(feature = "memory-x")]
+fn resolve_memory_option(crate_dir: &std::path::Path, chip_core_name: &str) -> String {
+    let explicit: Vec<String> = env::vars()
+        .map(|(a, _)| a)
+        .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_OPTION_"))
+        .map(|x| {
+            x.strip_prefix("CARGO_FEATURE_MEMORY_OPTION_")
+                .unwrap()
+                .to_ascii_lowercase()
+        })
+        .collect();
+    match explicit.len() {
+        0 => {
+            let default_path = crate_dir
+                .join("src/chips")
+                .join(chip_core_name)
+                .join("memory_x/_default");
+            std::fs::read_to_string(&default_path)
+                .unwrap_or_else(|e| panic!("failed to read {}: {}", default_path.display(), e))
+                .trim()
+                .to_string()
+        }
+        1 => explicit.into_iter().next().unwrap(),
+        _ => panic!(
+            "Multiple `memory-option-*` features enabled: {:?}. Enable at most one.",
+            explicit
+        ),
+    }
 }

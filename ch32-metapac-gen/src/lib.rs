@@ -11,7 +11,9 @@ use proc_macro2::TokenStream;
 
 mod chip;
 mod data;
+pub mod dump;
 mod memory;
+pub mod memory_x_render;
 mod peripheral;
 
 use data::Chip;
@@ -27,6 +29,7 @@ pub struct Gen {
     pub(crate) all_peripheral_versions: HashSet<(String, String)>,
     pub(crate) metadata_dedup: HashMap<String, String>,
     pub(crate) memory_option_features: BTreeSet<String>,
+    pub(crate) memory_split_prefixes: BTreeSet<String>,
 }
 
 impl Gen {
@@ -36,6 +39,7 @@ impl Gen {
             all_peripheral_versions: HashSet::new(),
             metadata_dedup: HashMap::new(),
             memory_option_features: BTreeSet::new(),
+            memory_split_prefixes: BTreeSet::new(),
         }
     }
 
@@ -100,13 +104,14 @@ impl Gen {
         }
         if !self.memory_option_features.is_empty() {
             writeln!(&mut contents).unwrap();
-            writeln!(
-                &mut contents,
-                "# Memory layout option features (set at most one; selects which memory.x layout to use)"
-            )
-            .unwrap();
             for name in &self.memory_option_features {
                 writeln!(&mut contents, "memory-option-{} = [\"memory-x\"]", name).unwrap();
+            }
+        }
+        if !self.memory_split_prefixes.is_empty() {
+            writeln!(&mut contents).unwrap();
+            for prefix in &self.memory_split_prefixes {
+                writeln!(&mut contents, "memory-{}-split = [\"memory-x\"]", prefix).unwrap();
             }
         }
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();
@@ -115,6 +120,11 @@ impl Gen {
         fs::write(
             self.opts.out_dir.join("build.rs"),
             include_bytes!("../res/build.rs"),
+        )
+        .unwrap();
+        fs::write(
+            self.opts.out_dir.join("memory_x_render.rs"),
+            include_bytes!("../res/memory_x_render.rs"),
         )
         .unwrap();
         fs::write(

@@ -12,6 +12,7 @@ use crate::data::{Chip, Core, MemoryOption};
 use crate::memory::{
     flash_write_size, gen_memory_files, memory_select_cfg_attrs, primary_flash_regions,
 };
+use crate::dump::split_prefixes_from_names;
 use crate::{Gen, gen_opts, stringify};
 
 fn build_chiptool_ir(
@@ -166,7 +167,7 @@ fn postprocess_pac_rs(s: String) -> String {
 }
 
 // chips without `memory_options` get a synthesized "default" so consumers always have one to iterate
-fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
+pub(crate) fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
     if chip.memory_options.is_empty() {
         vec![MemoryOption {
             name: "default".to_string(),
@@ -308,6 +309,9 @@ impl Gen {
             for opt in &memory_options {
                 self.memory_option_features.insert(opt.name.clone());
             }
+        }
+        for prefix in split_prefixes_from_names(chip.memory.iter().map(|r| r.name.as_str())) {
+            self.memory_split_prefixes.insert(prefix);
         }
         let out_dir = self.opts.out_dir.clone();
         let metadata = render_metadata_rs(
