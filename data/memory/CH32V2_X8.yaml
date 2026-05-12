@@ -1,0 +1,17 @@
+include_memory: CH32V2_COMMON.yaml
+memory:
+  - name: USR_2
+    kind: flash
+    address: 0x08010000
+    size: 160K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true

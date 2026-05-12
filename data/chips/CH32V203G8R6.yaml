@@ -6,7 +6,7 @@ device_id: 540738816
 packages:
   - name: CH32V203G8R6
     package: QSOP28
-include_memory: ../memory/CH32V203_x8.yaml
+include_memory: ../memory/CH32V2_X8.yaml
 memory_options:
   default: { USR_1: 64K, RAM: 20K }
 docs:

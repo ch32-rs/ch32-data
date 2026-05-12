@@ -8,7 +8,7 @@ keywords:
 packages:
   - name: CH32V203RBT6
     package: LQFP64M
-include_memory: ../memory/CH32V203_xB.yaml
+include_memory: ../memory/CH32V2_XB.yaml
 # OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
 memory_options:
   c128_r64:
