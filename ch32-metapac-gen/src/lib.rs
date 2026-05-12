@@ -469,15 +469,16 @@ fn flash_write_size(r: &MemoryRegion) -> Option<u32> {
         return Some(s.write_size);
     }
     r.modes.iter().find_map(|m| match m {
-        Mode::Standard { write_size, .. } => Some(*write_size),
-        Mode::Fast { buffer_size, .. } => Some(*buffer_size),
+        Mode::Fast { page_size, .. } => Some(*page_size),
+        _ => None,
     })
 }
 
-// Primary user-flash region: `USR` on new YAMLs, `BANK_*` on legacy ones.
+// Primary user-flash region: `USR_*` on new YAMLs, `BANK_*` on legacy ones.
 fn primary_flash_regions(chip: &Chip) -> impl Iterator<Item = &MemoryRegion> + Clone {
     chip.memory.iter().filter(|r| {
-        r.kind == MemoryRegionKind::Flash && (r.name == "USR" || r.name.starts_with("BANK_"))
+        r.kind == MemoryRegionKind::Flash
+            && (r.name.starts_with("USR_") || r.name.starts_with("BANK_"))
     })
 }
 

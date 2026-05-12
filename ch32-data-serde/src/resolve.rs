@@ -17,6 +17,7 @@ impl Chip {
         E: fmt::Display,
     {
         let include = self.include_memory.take();
+        let uses_new_schema = include.is_some() || !self.memory_options.is_empty();
 
         if let Some(inc_path) = include {
             let content = load_family(&inc_path)
@@ -33,14 +34,10 @@ impl Chip {
                 }
                 self.memory.push(region);
             }
+        }
 
-            if self.default_memory_option.is_none() {
-                return Err(format!(
-                    "chip {:?} sets include_memory but no default_memory_option; \
-                     family files omit per-SKU sizes and rely on memory_options to fill them in",
-                    self.name
-                ));
-            }
+        if self.default_memory_option.is_none() && self.memory_options.contains_key("default") {
+            self.default_memory_option = Some("default".to_string());
         }
 
         if let Some(opt_name) = &self.default_memory_option {
@@ -72,6 +69,14 @@ impl Chip {
                     r.name, self.name
                 ));
             }
+        }
+
+        if uses_new_schema && !self.memory.iter().any(|r| r.name == "USR_1") {
+            return Err(format!(
+                "chip {:?} has no USR_1 memory region; USR_1 is the primary user flash and must be defined \
+                 (additional banks use USR_2, USR_3, ...; system flash banks use SYS_1, SYS_2, ...)",
+                self.name
+            ));
         }
 
         Ok(())
