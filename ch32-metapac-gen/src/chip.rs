@@ -321,6 +321,15 @@ impl Gen {
             .default_memory_option
             .as_deref()
             .unwrap_or("default");
+        // Multi-option chips export a `memory-x-<name>` feature for every option
+        // (including the default), so users can pin the layout explicitly. The
+        // default option's feature is just an alias — enabling it lands on the
+        // implicit-default cfg_attr arm. Build.rs enforces mutual exclusion.
+        if memory_options.len() > 1 {
+            for opt in &memory_options {
+                self.memory_option_features.insert(opt.name.clone());
+            }
+        }
         let out_dir = self.opts.out_dir.clone();
         let metadata = render_metadata_rs(
             chip,

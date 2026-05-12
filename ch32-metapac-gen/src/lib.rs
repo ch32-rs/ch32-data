@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeSet, HashMap, HashSet};
 use std::fmt::Debug;
 use std::fs;
 use std::io::Write;
@@ -26,6 +26,9 @@ pub struct Gen {
     pub(crate) opts: Options,
     pub(crate) all_peripheral_versions: HashSet<(String, String)>,
     pub(crate) metadata_dedup: HashMap<String, String>,
+    /// Non-default memory-option names seen across all chips. Each becomes a
+    /// `memory-x-<name> = []` feature in the generated Cargo.toml.
+    pub(crate) memory_option_features: BTreeSet<String>,
 }
 
 impl Gen {
@@ -34,6 +37,7 @@ impl Gen {
             opts,
             all_peripheral_versions: HashSet::new(),
             metadata_dedup: HashMap::new(),
+            memory_option_features: BTreeSet::new(),
         }
     }
 
@@ -95,6 +99,17 @@ impl Gen {
         let mut contents = include_bytes!("../res/Cargo.toml").to_vec();
         for name in &chip_core_names {
             writeln!(&mut contents, "{} = []", name.to_ascii_lowercase()).unwrap();
+        }
+        if !self.memory_option_features.is_empty() {
+            writeln!(&mut contents).unwrap();
+            writeln!(
+                &mut contents,
+                "# Memory layout option features (set at most one; selects which memory.x layout to use)"
+            )
+            .unwrap();
+            for name in &self.memory_option_features {
+                writeln!(&mut contents, "memory-x-{} = []", name).unwrap();
+            }
         }
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();
 
