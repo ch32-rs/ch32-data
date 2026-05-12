@@ -147,7 +147,7 @@ pub struct MemoryRegion {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Mode {
-    Fast { page_size: u32, buffer_size: u32 },
+    Fast { page_size: u32, load_size: u32 },
     Standard { erase_size: u32, write_size: u32 },
 }
 

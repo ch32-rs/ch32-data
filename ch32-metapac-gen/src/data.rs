@@ -339,7 +339,7 @@ impl std::fmt::Debug for MemoryRegion {
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 #[serde(tag = "type", rename_all = "lowercase")]
 pub enum Mode {
-    Fast { page_size: u32, buffer_size: u32 },
+    Fast { page_size: u32, load_size: u32 },
     Standard { erase_size: u32, write_size: u32 },
 }
 

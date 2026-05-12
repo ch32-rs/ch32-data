@@ -90,7 +90,7 @@ pub mod chip {
                 #[serde(deserialize_with = "crate::parse_size_with_suffix")]
                 page_size: u32,
                 #[serde(deserialize_with = "crate::parse_size_with_suffix")]
-                buffer_size: u32,
+                load_size: u32,
             },
             Standard {
                 #[serde(deserialize_with = "crate::parse_size_with_suffix")]
