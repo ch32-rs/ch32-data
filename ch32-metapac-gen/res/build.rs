@@ -49,11 +49,48 @@ fn main() {
     );
 
     #[cfg(feature = "memory-x")]
-    println!(
-        "cargo:rustc-link-search={}/src/chips/{}/memory_x/",
-        crate_dir.display(),
-        chip_core_name
-    );
+    {
+        // Collect explicit `memory-x-<X>` features (trailing `_` excludes the
+        // bare `memory-x`). Cargo lowercases env-var names from feature names,
+        // so reversing is just strip-prefix + to-lowercase. This relies on
+        // option names containing no `-` (codegen uses `_`-only names).
+        let explicit: Vec<String> = env::vars()
+            .map(|(a, _)| a)
+            .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_X_"))
+            .map(|x| {
+                x.strip_prefix("CARGO_FEATURE_MEMORY_X_")
+                    .unwrap()
+                    .to_ascii_lowercase()
+            })
+            .collect();
+        let option = match explicit.len() {
+            0 => {
+                // Bare `memory-x` only — fall back to the default option recorded
+                // by the codegen.
+                let default_path = crate_dir
+                    .join("src/chips")
+                    .join(&chip_core_name)
+                    .join("memory_x/_default");
+                std::fs::read_to_string(&default_path)
+                    .unwrap_or_else(|e| {
+                        panic!("failed to read {}: {}", default_path.display(), e)
+                    })
+                    .trim()
+                    .to_string()
+            }
+            1 => explicit.into_iter().next().unwrap(),
+            _ => panic!(
+                "Multiple `memory-x-*` features enabled: {:?}. Enable at most one.",
+                explicit
+            ),
+        };
+        println!(
+            "cargo:rustc-link-search={}/src/chips/{}/memory_x/{}",
+            crate_dir.display(),
+            chip_core_name,
+            option,
+        );
+    }
     println!(
         "cargo:rustc-env=CH32_METAPAC_PAC_PATH=chips/{}/pac.rs",
         chip_core_name

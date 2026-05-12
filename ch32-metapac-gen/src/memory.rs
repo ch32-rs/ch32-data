@@ -67,7 +67,12 @@ fn memory_for_option(chip: &Chip, opt: &MemoryOption) -> Vec<MemoryRegion> {
     memory
 }
 
-pub(crate) fn gen_memory_files(out_dir: &Path, chip: &Chip, options: &[MemoryOption]) {
+pub(crate) fn gen_memory_files(
+    out_dir: &Path,
+    chip: &Chip,
+    options: &[MemoryOption],
+    default: &str,
+) {
     // Wipe any pre-existing memory_x/ tree so renamed/removed options don't leave
     // stale files behind.
     let mem_root = out_dir.join("memory_x");
@@ -81,6 +86,9 @@ pub(crate) fn gen_memory_files(out_dir: &Path, chip: &Chip, options: &[MemoryOpt
         write_memory_x(&opt_dir.join("memory.x"), &memory);
         write_memory_rs(&opt_dir.join("memory.rs"), &memory);
     }
+    // Record the default option name so build.rs can resolve bare `memory-x`
+    // (no specific `memory-x-<X>` feature) to the right subdir.
+    fs::write(mem_root.join("_default"), default).unwrap();
 }
 
 fn write_memory_x(path: &Path, memory: &[MemoryRegion]) {

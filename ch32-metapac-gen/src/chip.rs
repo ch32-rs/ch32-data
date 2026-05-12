@@ -344,6 +344,6 @@ impl Gen {
         file.write_all(metadata.as_bytes()).unwrap();
 
         // per-option memory.x + memory.rs under memory_x/<option>/
-        gen_memory_files(&chip_dir, chip, &memory_options);
+        gen_memory_files(&chip_dir, chip, &memory_options, default_memory_option);
     }
 }
