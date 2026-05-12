@@ -26,8 +26,9 @@ pub struct Gen {
     pub(crate) opts: Options,
     pub(crate) all_peripheral_versions: HashSet<(String, String)>,
     pub(crate) metadata_dedup: HashMap<String, String>,
-    /// Non-default memory-option names seen across all chips. Each becomes a
-    /// `memory-x-<name> = []` feature in the generated Cargo.toml.
+    /// Memory-option names seen across all multi-option chips. Each becomes a
+    /// `memory-option-<name> = ["memory-x"]` feature in the generated Cargo.toml
+    /// (so enabling a specific option also turns the linker script on).
     pub(crate) memory_option_features: BTreeSet<String>,
 }
 
@@ -108,7 +109,7 @@ impl Gen {
             )
             .unwrap();
             for name in &self.memory_option_features {
-                writeln!(&mut contents, "memory-x-{} = []", name).unwrap();
+                writeln!(&mut contents, "memory-option-{} = [\"memory-x\"]", name).unwrap();
             }
         }
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();

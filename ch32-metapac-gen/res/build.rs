@@ -50,15 +50,15 @@ fn main() {
 
     #[cfg(feature = "memory-x")]
     {
-        // Collect explicit `memory-x-<X>` features (trailing `_` excludes the
-        // bare `memory-x`). Cargo lowercases env-var names from feature names,
-        // so reversing is just strip-prefix + to-lowercase. This relies on
-        // option names containing no `-` (codegen uses `_`-only names).
+        // Collect `memory-option-<X>` features. Cargo lowercases env-var names
+        // from feature names, so reversing is just strip-prefix + to-lowercase.
+        // This relies on option names containing no `-` (codegen uses `_`-only
+        // names).
         let explicit: Vec<String> = env::vars()
             .map(|(a, _)| a)
-            .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_X_"))
+            .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_OPTION_"))
             .map(|x| {
-                x.strip_prefix("CARGO_FEATURE_MEMORY_X_")
+                x.strip_prefix("CARGO_FEATURE_MEMORY_OPTION_")
                     .unwrap()
                     .to_ascii_lowercase()
             })
@@ -80,7 +80,7 @@ fn main() {
             }
             1 => explicit.into_iter().next().unwrap(),
             _ => panic!(
-                "Multiple `memory-x-*` features enabled: {:?}. Enable at most one.",
+                "Multiple `memory-option-*` features enabled: {:?}. Enable at most one.",
                 explicit
             ),
         };

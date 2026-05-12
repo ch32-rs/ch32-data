@@ -208,8 +208,8 @@ pub static MEMORY: &[MemoryRegion] = {};
 
 /// Build the `#[cfg_attr(..., path = "...")]` lines preceding `mod memory_select`
 /// in the chip's `metadata.rs`. Single-option chips emit a bare `#[path = ...]`;
-/// multi-option chips get a default arm (`all(not(memory-x-X1), ...)`) plus one
-/// arm per non-default option.
+/// multi-option chips get a default arm (`all(not(memory-option-X1), ...)`) plus
+/// one arm per non-default option.
 pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -> String {
     let indent = "            ";
     if options.len() == 1 {
@@ -225,7 +225,7 @@ pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -
         .collect();
     let all_not = non_default
         .iter()
-        .map(|n| format!("not(feature = \"memory-x-{}\")", n))
+        .map(|n| format!("not(feature = \"memory-option-{}\")", n))
         .collect::<Vec<_>>()
         .join(", ");
     let mut s = format!(
@@ -234,7 +234,7 @@ pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -
     );
     for n in &non_default {
         s.push_str(&format!(
-            "{}#[cfg_attr(feature = \"memory-x-{}\", path = \"memory_x/{}/memory.rs\")]\n",
+            "{}#[cfg_attr(feature = \"memory-option-{}\", path = \"memory_x/{}/memory.rs\")]\n",
             indent, n, n
         ));
     }
