@@ -9,19 +9,22 @@ keywords:
 packages:
   - name: CH32V208CBU6
     package: QFN48
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 131072
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 65536
+include_memory: ../memory/CH32V2.yaml
+# CODE/RAM split selected by OB SRAM_CODE_MODE (V20x_D8W RM):
+#   00x -> 128K code / 64K ram   (power-on default)
+#   01x -> 144K code / 48K ram
+#   1xx -> 160K code / 32K ram
+memory_options:
+  c128_r64:
+    USR_1: 128K
+    RAM: 64K
+  c144_r48:
+    USR_1: 144K
+    RAM: 48K
+  c160_r32:
+    USR_1: 160K
+    RAM: 32K
+default_memory_option: c128_r64
 docs:
   - type: homepage
     title: Homepage
