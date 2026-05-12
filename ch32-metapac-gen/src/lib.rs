@@ -256,6 +256,28 @@ impl Gen {
             file
         });
 
+        let memory_options: Vec<MemoryOption> = if chip.memory_options.is_empty() {
+            // unmigrated chips: synthesize a single placeholder option so consumers
+            // can always iterate at least one entry.
+            vec![MemoryOption {
+                name: "default".to_string(),
+                region_sizes: Vec::new(),
+            }]
+        } else {
+            chip.memory_options
+                .iter()
+                .map(|(name, sizes)| MemoryOption {
+                    name: name.clone(),
+                    region_sizes: sizes.iter().map(|(k, v)| (k.clone(), *v)).collect(),
+                })
+                .collect()
+        };
+        let default_memory_option = chip
+            .default_memory_option
+            .as_deref()
+            .unwrap_or("default")
+            .to_string();
+
         let data = format!(
             "include!(\"../{}\");
             use crate::metadata::PeripheralRccKernelClock::{{Clock, Mux}};
@@ -265,6 +287,8 @@ impl Gen {
                 family: {:?},
                 line: {:?},
                 memory: {},
+                memory_options: {},
+                default_memory_option: {:?},
                 peripherals: PERIPHERALS,
                 // nvic_priority_bits: 0,
                 interrupts: INTERRUPTS,
@@ -275,6 +299,8 @@ impl Gen {
             &chip.family,
             &chip.subfamily,
             stringify(&chip.memory),
+            stringify(&memory_options),
+            &default_memory_option,
             //&core.nvic_priority_bits,
         );
 

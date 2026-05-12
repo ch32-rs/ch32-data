@@ -349,6 +349,23 @@ pub enum Mode {
     Standard { erase_size: u32, write_size: u32 },
 }
 
+// Mirror of runtime MemoryOption used only for Debug-based stringification.
+// Custom Debug emits valid Rust literal syntax matching the runtime struct.
+#[derive(Eq, PartialEq, Clone)]
+pub struct MemoryOption {
+    pub name: String,
+    pub region_sizes: Vec<(String, u32)>,
+}
+
+impl std::fmt::Debug for MemoryOption {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MemoryOption")
+            .field("name", &self.name)
+            .field("region_sizes", &self.region_sizes)
+            .finish()
+    }
+}
+
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 pub struct Access {
     pub read: bool,

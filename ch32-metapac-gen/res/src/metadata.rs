@@ -127,10 +127,18 @@ pub struct Metadata {
     pub family: &'static str,
     pub line: &'static str,
     pub memory: &'static [MemoryRegion],
+    pub memory_options: &'static [MemoryOption],
+    pub default_memory_option: &'static str,
     pub peripherals: &'static [Peripheral],
     // pub nvic_priority_bits: Option<u8>,
     pub interrupts: &'static [Interrupt],
     pub dma_channels: &'static [DmaChannel],
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct MemoryOption {
+    pub name: &'static str,
+    pub region_sizes: &'static [(&'static str, u32)],
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
