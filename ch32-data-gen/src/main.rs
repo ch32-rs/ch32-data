@@ -168,7 +168,7 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn resolve_memory(meta_yaml_path: &Path, chip: &mut ch32_data_serde::Chip) -> anyhow::Result<()> {
-    let base_dir = meta_yaml_path.parent().unwrap().to_path_buf();
-    chip.resolve_memory(|inc_path| std::fs::read_to_string(base_dir.join(inc_path)))
+    let base_dir = meta_yaml_path.parent().unwrap();
+    chip.resolve_memory(base_dir, |abs_path| std::fs::read_to_string(abs_path))
         .map_err(|msg| anyhow::anyhow!("{}", msg))
 }

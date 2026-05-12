@@ -1,71 +1,72 @@
-- name: USR_1
-  kind: flash
-  address: 0x08000000
-  modes:
-    - type: fast
-      page_size: 256
-      load_size: 4
-    - type: standard
-      erase_size: 4K
-      write_size: 2
-  access:
-    read: true
-    write: true
-    execute: true
-- name: USR_2
-  kind: flash
-  address: 0x08008000
-  size: 192K
-  modes:
-    - type: fast
-      page_size: 256
-      load_size: 4
-    - type: standard
-      erase_size: 4K
-      write_size: 2
-  access:
-    read: true
-    write: true
-    execute: true
-- name: SYS_1
-  kind: flash
-  address: 0x1FFF8000
-  size: 28K
-  modes:
-    - type: fast
-      page_size: 256
-      load_size: 4
-    - type: standard
-      erase_size: 4K
-      write_size: 2
-  access:
-    read: true
-    write: true
-    execute: true
-- name: OPT
-  kind: flash
-  address: 0x1FFFF800
-  size: 128
-  modes:
-    - type: standard
-      erase_size: 128
-      write_size: 2
-  access:
-    read: true
-    write: true
-    execute: false
-- name: VND
-  kind: flash
-  address: 0x1FFFF700
-  size: 256
-  access:
-    read: true
-    write: false
-    execute: false
-- name: RAM
-  kind: ram
-  address: 0x20000000
-  access:
-    read: true
-    write: true
-    execute: true
+memory:
+  - name: USR_1
+    kind: flash
+    address: 0x08000000
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: USR_2
+    kind: flash
+    address: 0x08008000
+    size: 192K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: SYS_1
+    kind: flash
+    address: 0x1FFF8000
+    size: 28K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: OPT
+    kind: flash
+    address: 0x1FFFF800
+    size: 128
+    modes:
+      - type: standard
+        erase_size: 128
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: false
+  - name: VND
+    kind: flash
+    address: 0x1FFFF700
+    size: 256
+    access:
+      read: true
+      write: false
+      execute: false
+  - name: RAM
+    kind: ram
+    address: 0x20000000
+    access:
+      read: true
+      write: true
+      execute: true

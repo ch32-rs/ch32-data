@@ -1,30 +1,84 @@
 use std::fmt;
+use std::path::{Path, PathBuf};
 
 use serde::Deserialize;
 
 use crate::{chip, Chip};
 
 #[derive(Clone, Debug, Eq, PartialEq, Deserialize)]
-#[serde(transparent)]
 pub(crate) struct FamilyMemory {
-    pub regions: Vec<chip::Memory>,
+    #[serde(default)]
+    pub include_memory: Option<String>,
+    #[serde(default)]
+    pub memory: Vec<chip::Memory>,
+}
+
+fn load_recursive<F, E>(
+    path: &Path,
+    load_family: &mut F,
+    visited: &mut Vec<PathBuf>,
+) -> Result<Vec<chip::Memory>, String>
+where
+    F: FnMut(&Path) -> Result<String, E>,
+    E: fmt::Display,
+{
+    let key = path.canonicalize().unwrap_or_else(|_| path.to_path_buf());
+    if visited.contains(&key) {
+        let chain = visited
+            .iter()
+            .map(|p| p.display().to_string())
+            .collect::<Vec<_>>()
+            .join(" -> ");
+        return Err(format!(
+            "cycle in include_memory chain: {chain} -> {}",
+            path.display()
+        ));
+    }
+    visited.push(key);
+
+    let content = load_family(path)
+        .map_err(|e| format!("read memory include {:?}: {e}", path.display()))?;
+    let family: FamilyMemory = serde_yaml::from_str(&content)
+        .map_err(|e| format!("parse memory include {:?}: {e}", path.display()))?;
+
+    let mut combined = if let Some(parent) = family.include_memory {
+        let parent_dir = path.parent().unwrap_or_else(|| Path::new("."));
+        let parent_path = parent_dir.join(&parent);
+        load_recursive(&parent_path, load_family, visited)?
+    } else {
+        Vec::new()
+    };
+
+    for region in family.memory {
+        if combined.iter().any(|r| r.name == region.name) {
+            return Err(format!(
+                "memory region {:?} from {:?} collides with a region from a parent include \
+                 (include_memory appends; each region must be declared exactly once in a chain)",
+                region.name,
+                path.display()
+            ));
+        }
+        combined.push(region);
+    }
+
+    visited.pop();
+    Ok(combined)
 }
 
 impl Chip {
-    pub fn resolve_memory<F, E>(&mut self, mut load_family: F) -> Result<(), String>
+    pub fn resolve_memory<F, E>(&mut self, chip_dir: &Path, mut load_family: F) -> Result<(), String>
     where
-        F: FnMut(&str) -> Result<String, E>,
+        F: FnMut(&Path) -> Result<String, E>,
         E: fmt::Display,
     {
         let include = self.include_memory.take();
         let uses_new_schema = include.is_some() || !self.memory_options.is_empty();
 
         if let Some(inc_path) = include {
-            let content = load_family(&inc_path)
-                .map_err(|e| format!("read memory include {inc_path:?}: {e}"))?;
-            let family: FamilyMemory = serde_yaml::from_str(&content)
-                .map_err(|e| format!("parse memory include {inc_path:?}: {e}"))?;
-            for region in family.regions {
+            let absolute = chip_dir.join(&inc_path);
+            let mut visited = Vec::new();
+            let regions = load_recursive(&absolute, &mut load_family, &mut visited)?;
+            for region in regions {
                 if self.memory.iter().any(|r| r.name == region.name) {
                     return Err(format!(
                         "memory region {:?} on chip {:?} collides with a region from {inc_path:?} \
