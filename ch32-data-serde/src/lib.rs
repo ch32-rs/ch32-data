@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 
+mod size;
+pub use size::parse_size_with_suffix;
+
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Chip {
     pub name: String,
@@ -32,7 +35,7 @@ pub mod chip {
         pub name: String,
         pub kind: memory::Kind,
         pub address: u32,
-        #[serde(deserialize_with = "crate::parse_size_with_surfix")]
+        #[serde(deserialize_with = "crate::parse_size_with_suffix")]
         pub size: u32,
         #[serde(skip_serializing_if = "Option::is_none")]
         pub settings: Option<memory::Settings>,
@@ -283,31 +286,6 @@ pub mod chip {
             pub dma: String,
             pub channel: u8,
         }
-    }
-}
-
-fn parse_size_with_surfix<'de, D>(deserializer: D) -> std::result::Result<u32, D::Error>
-where
-    D: serde::Deserializer<'de>,
-{
-    let s: String = serde::Deserialize::deserialize(deserializer)?;
-    if s.starts_with("0x") || s.starts_with("0X") {
-        Ok(u32::from_str_radix(&s[2..], 16).expect(&format!("error while parsering {:?}", s)))
-    } else if s.ends_with("K") {
-        Ok(1024
-            * u32::from_str_radix(&s[..s.len() - 1], 10)
-                .expect(&format!("error while parsering {:?}", s)))
-    } else if s.ends_with("KiB") {
-        Ok(1024
-            * u32::from_str_radix(&s[..s.len() - 3], 10)
-                .expect(&format!("error while parsering {:?}", s)))
-    } else if s.ends_with("KB") {
-        Ok(1024
-            * u32::from_str_radix(&s[..s.len() - 2], 10)
-                .expect(&format!("error while parsering {:?}", s)))
-    } else {
-        // parse pure digits here
-        Ok(s.parse().unwrap())
     }
 }
 
