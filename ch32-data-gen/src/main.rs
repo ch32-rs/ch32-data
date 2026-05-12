@@ -85,6 +85,8 @@ fn main() -> anyhow::Result<()> {
         let content = std::fs::read_to_string(&meta_yaml_path)?;
         let mut chip: ch32_data_serde::Chip = serde_yaml::from_str(&content)?;
 
+        resolve_memory(&meta_yaml_path, &mut chip)?;
+
         // handle include_x
         for core in &mut chip.cores {
             if let Some(inc_path) = core.include_interrupts.take() {
@@ -163,4 +165,10 @@ fn main() -> anyhow::Result<()> {
     stopwatch.stop();
 
     Ok(())
+}
+
+fn resolve_memory(meta_yaml_path: &Path, chip: &mut ch32_data_serde::Chip) -> anyhow::Result<()> {
+    let base_dir = meta_yaml_path.parent().unwrap().to_path_buf();
+    chip.resolve_memory(|inc_path| std::fs::read_to_string(base_dir.join(inc_path)))
+        .map_err(|msg| anyhow::anyhow!("{}", msg))
 }

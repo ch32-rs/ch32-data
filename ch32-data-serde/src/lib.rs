@@ -1,5 +1,8 @@
+use std::collections::BTreeMap;
+
 use serde::{Deserialize, Serialize};
 
+mod resolve;
 mod size;
 pub use size::{deserialize_opt_size_with_suffix, parse_size_with_suffix};
 
@@ -13,10 +16,22 @@ pub struct Chip {
     #[serde(default)]
     pub keywords: Vec<String>,
     pub packages: Vec<chip::Package>,
+
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub include_memory: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub memory: Vec<chip::Memory>,
+    #[serde(
+        default,
+        deserialize_with = "deserialize_memory_options",
+        skip_serializing_if = "BTreeMap::is_empty"
+    )]
+    pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub default_memory_option: Option<String>,
+
     pub docs: Vec<chip::Doc>,
     pub cores: Vec<chip::Core>,
-    // pub _raw: HashMap<String, String>,
 }
 
 pub mod chip {
@@ -338,6 +353,31 @@ pub mod chip {
 
 fn default_true() -> bool {
     true
+}
+
+fn deserialize_memory_options<'de, D>(
+    deserializer: D,
+) -> Result<BTreeMap<String, BTreeMap<String, u32>>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    #[derive(Deserialize)]
+    #[serde(transparent)]
+    struct WrappedSize(#[serde(deserialize_with = "parse_size_with_suffix")] u32);
+
+    let raw: BTreeMap<String, BTreeMap<String, WrappedSize>> = BTreeMap::deserialize(deserializer)?;
+    Ok(raw
+        .into_iter()
+        .map(|(k, inner)| {
+            (
+                k,
+                inner
+                    .into_iter()
+                    .map(|(rk, WrappedSize(v))| (rk, v))
+                    .collect(),
+            )
+        })
+        .collect())
 }
 
 #[cfg(test)]
