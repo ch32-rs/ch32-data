@@ -1,6 +1,3 @@
-//! Per-chip code generation: `pac.rs`, `metadata.rs`, `device.x`, and the
-//! per-option `memory.x` / `memory.rs` files via `gen_memory_files`.
-
 use std::collections::{BTreeMap, HashMap};
 use std::fmt::Write as _;
 use std::fs;
@@ -17,10 +14,6 @@ use crate::memory::{
 };
 use crate::{Gen, gen_opts, stringify};
 
-/// Build the chiptool IR from the chip's peripherals + interrupts. Returns
-/// `(ir, peripheral_versions, extra_consts)` where `extra_consts` is the
-/// generated source appended to `pac.rs` (GPIO helper, module imports,
-/// `CORE_INDEX`/`FLASH_*`/`WRITE_SIZE` constants).
 fn build_chiptool_ir(
     chip: &Chip,
     core: &Core,
@@ -133,9 +126,6 @@ fn build_chiptool_ir(
     (ir, peripheral_versions, extra)
 }
 
-/// Post-process the chiptool-rendered pac.rs string: RISC-V-specific interrupt
-/// vector renames, cortex-m → riscv path rewrites, trim system vectors 0..16,
-/// strip inner attributes.
 fn postprocess_pac_rs(s: String) -> String {
     let data = s.replace("] ", "]\n");
     // FIXME: conversion
@@ -175,14 +165,7 @@ fn postprocess_pac_rs(s: String) -> String {
         .to_string()
 }
 
-/// Build the per-chip `metadata.rs` text. Reuses the shared peripherals /
-/// interrupts / DMA tables across chips via `metadata_dedup`, emitting a new
-/// `metadata_NNNN.rs` sibling only when this chip's tables differ from every
-/// previously-seen chip's.
-/// Build the per-chip `memory_options` slice for METADATA. Migrated chips
-/// pass through the YAML's named options verbatim; unmigrated chips get a
-/// single synthesized `"default"` entry with no per-region overrides so
-/// consumers always have at least one entry to iterate.
+// chips without `memory_options` get a synthesized "default" so consumers always have one to iterate
 fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
     if chip.memory_options.is_empty() {
         vec![MemoryOption {
@@ -321,10 +304,6 @@ impl Gen {
             .default_memory_option
             .as_deref()
             .unwrap_or("default");
-        // Multi-option chips export a `memory-x-<name>` feature for every option
-        // (including the default), so users can pin the layout explicitly. The
-        // default option's feature is just an alias — enabling it lands on the
-        // implicit-default cfg_attr arm. Build.rs enforces mutual exclusion.
         if memory_options.len() > 1 {
             for opt in &memory_options {
                 self.memory_option_features.insert(opt.name.clone());

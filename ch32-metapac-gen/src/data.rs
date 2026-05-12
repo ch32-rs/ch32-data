@@ -341,7 +341,6 @@ impl std::fmt::Debug for MemoryRegion {
     }
 }
 
-// Variants imported in emitted metadata.rs via `use crate::metadata::Mode::*;`.
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 #[serde(tag = "type", rename_all = "lowercase")]
 pub enum Mode {
@@ -349,8 +348,8 @@ pub enum Mode {
     Standard { erase_size: u32, write_size: u32 },
 }
 
-// Mirror of runtime MemoryOption used only for Debug-based stringification.
-// Custom Debug emits valid Rust literal syntax matching the runtime struct.
+// Notice:
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution
 #[derive(Eq, PartialEq, Clone)]
 pub struct MemoryOption {
     pub name: String,

@@ -1,7 +1,3 @@
-//! Per-peripheral code generation: renders one `peripherals/<module>_<version>.rs`
-//! (chiptool output, lightly post-processed) and one
-//! `registers/<module>_<version>.rs` (the stringified register IR).
-
 use std::fmt::Write as _;
 use std::fs::File;
 use std::io::Write;

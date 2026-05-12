@@ -1,7 +1,6 @@
 use std::fmt;
 
-// Accepts an integer (incl. bare `0x...` — YAML decodes those as ints) or
-// a string with a K/KB/KiB suffix.
+// accepts an integer or a string with a K/KB/KiB suffix
 pub fn parse_size_with_suffix<'de, D>(deserializer: D) -> Result<u32, D::Error>
 where
     D: serde::Deserializer<'de>,

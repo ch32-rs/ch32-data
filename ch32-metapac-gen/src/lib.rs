@@ -26,9 +26,6 @@ pub struct Gen {
     pub(crate) opts: Options,
     pub(crate) all_peripheral_versions: HashSet<(String, String)>,
     pub(crate) metadata_dedup: HashMap<String, String>,
-    /// Memory-option names seen across all multi-option chips. Each becomes a
-    /// `memory-option-<name> = ["memory-x"]` feature in the generated Cargo.toml
-    /// (so enabling a specific option also turns the linker script on).
     pub(crate) memory_option_features: BTreeSet<String>,
 }
 

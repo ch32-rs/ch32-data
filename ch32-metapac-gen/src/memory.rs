@@ -1,7 +1,3 @@
-//! Memory-region codegen: per-option `memory.x` / `memory.rs`, the
-//! `cfg_attr`-gated `mod memory_select;` block in chip `metadata.rs`, and the
-//! supporting helpers shared with `gen_chip`.
-
 use std::fmt::Write as _;
 use std::fs;
 use std::path::Path;
@@ -73,8 +69,6 @@ pub(crate) fn gen_memory_files(
     options: &[MemoryOption],
     default: &str,
 ) {
-    // Wipe any pre-existing memory_x/ tree so renamed/removed options don't leave
-    // stale files behind.
     let mem_root = out_dir.join("memory_x");
     if mem_root.exists() {
         fs::remove_dir_all(&mem_root).unwrap();
@@ -86,8 +80,6 @@ pub(crate) fn gen_memory_files(
         write_memory_x(&opt_dir.join("memory.x"), &memory);
         write_memory_rs(&opt_dir.join("memory.rs"), &memory);
     }
-    // Record the default option name so build.rs can resolve bare `memory-x`
-    // (no specific `memory-x-<X>` feature) to the right subdir.
     fs::write(mem_root.join("_default"), default).unwrap();
 }
 
@@ -206,10 +198,6 @@ pub static MEMORY: &[MemoryRegion] = {};
     fs::write(path, body).unwrap();
 }
 
-/// Build the `#[cfg_attr(..., path = "...")]` lines preceding `mod memory_select`
-/// in the chip's `metadata.rs`. Single-option chips emit a bare `#[path = ...]`;
-/// multi-option chips get a default arm (`all(not(memory-option-X1), ...)`) plus
-/// one arm per non-default option.
 pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -> String {
     let indent = "            ";
     if options.len() == 1 {

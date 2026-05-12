@@ -68,7 +68,7 @@ pub mod chip {
         pub access: Option<memory::Access>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub cores: Option<Vec<String>>,
-        // legacy: pre-`modes` chip YAMLs ship a single fast-mode triple here
+        // legacy: superseded by `modes`
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub settings: Option<memory::Settings>,
     }
