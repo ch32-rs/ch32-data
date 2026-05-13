@@ -65,6 +65,10 @@ fn main() -> anyhow::Result<()> {
     let registers = registers::Registers::parse()?;
     registers.write()?;
 
+    stopwatch.section("Parsing NV descriptors");
+    let nv_descriptors = nv_descriptors::NvDescriptors::parse()?;
+    nv_descriptors.write()?;
+
     stopwatch.section("Parsing chips");
 
     let data_dir = Path::new("./data");
