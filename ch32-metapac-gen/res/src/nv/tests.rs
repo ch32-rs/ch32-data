@@ -391,6 +391,38 @@ fn reset_writes_each_declared_default() {
 }
 
 #[test]
+fn reset_fills_undeclared_writable_entries_with_ff() {
+    for d in Descriptor::iter() {
+        if d.nv.defaults.is_empty() {
+            continue;
+        }
+        let mut buf = [0u8; BUF];
+        d.reset(&mut buf).unwrap();
+        for item in block_of(&d).items {
+            let Some(reg) = writable(item) else { continue };
+            if d.nv.defaults.iter().any(|(n, _)| *n == item.name) {
+                continue;
+            }
+            let start = item.byte_offset as usize;
+            let end = start + ((reg.bit_size + 7) / 8) as usize;
+            for i in start..end {
+                assert_eq!(buf[i], 0xFF, "{}.{} byte {}", d.kind(), item.name, i);
+            }
+        }
+    }
+}
+
+#[test]
+fn reset_buffer_too_short_when_defaults_present() {
+    for d in Descriptor::iter() {
+        if d.nv.defaults.is_empty() {
+            continue;
+        }
+        assert_eq!(d.reset(&mut []), Err(EncodeError::BufferTooShort), "{}", d.kind());
+    }
+}
+
+#[test]
 fn reset_is_noop_when_defaults_empty() {
     for d in Descriptor::iter() {
         if !d.nv.defaults.is_empty() {

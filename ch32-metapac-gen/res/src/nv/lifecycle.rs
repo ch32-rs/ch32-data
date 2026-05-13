@@ -35,15 +35,28 @@ impl Descriptor {
         Ok(())
     }
 
-    /// Apply every default value from `NvStruct.defaults` then re-sync every
-    /// `N`-complement so the buffer is internally consistent. Read-only entries
-    /// in `defaults` (e.g. the `N`-complement bytes the YAML carries through)
-    /// are skipped — their value is recomputed from their source entry. No-op
-    /// on descriptors with an empty `defaults` list (e.g. ESIG).
+    /// Restore the buffer to factory state: fill every block item with 0xFF
+    /// (erased-flash state), apply each value from `NvStruct.defaults` on top,
+    /// then re-sync every `N`-complement so the buffer is internally
+    /// consistent. Read-only entries in `defaults` are skipped — their value
+    /// is recomputed from their source by the complement sync. No-op on
+    /// descriptors with an empty `defaults` list (e.g. ESIG).
     pub fn reset(&self, buf: &mut [u8]) -> Result<(), EncodeError> {
         if self.nv.defaults.is_empty() {
             return Ok(());
         }
+        let Some(block) = self.block() else { return Ok(()) };
+
+        for item in block.items {
+            let Some(reg) = Self::register_of(item) else { continue };
+            let start = item.byte_offset as usize;
+            let end = start + ((reg.bit_size + 7) / 8) as usize;
+            if end > buf.len() {
+                return Err(EncodeError::BufferTooShort);
+            }
+            buf[start..end].fill(0xFF);
+        }
+
         for (entry_name, value) in self.nv.defaults {
             let Some(item) = self.item(entry_name) else { continue };
             let Some(reg) = Self::register_of(item) else { continue };
@@ -52,7 +65,7 @@ impl Descriptor {
             }
             self.encode(buf, entry_name, EncodeInput::Literal(*value as u64))?;
         }
-        let Some(block) = self.block() else { return Ok(()) };
+
         for item in block.items {
             self.apply_complement(buf, item)?;
         }
