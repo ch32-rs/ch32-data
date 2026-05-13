@@ -156,6 +156,11 @@ impl Gen {
             include_bytes!("../res/src/metadata.rs"),
         )
         .unwrap();
+        fs::write(
+            self.opts.out_dir.join("src/nv.rs"),
+            include_bytes!("../res/src/nv.rs"),
+        )
+        .unwrap();
     }
 }
 
