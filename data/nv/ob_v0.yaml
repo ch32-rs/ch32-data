@@ -10,6 +10,7 @@ block/OB:
       description: Integrity complement of RDPR (auto-computed on write).
       byte_offset: 1
       bit_size: 8
+      access: Read
     - name: USER
       description: User configuration (watchdog, standby reset, NRST pin, boot source).
       byte_offset: 2
@@ -19,6 +20,7 @@ block/OB:
       description: Integrity complement of USER (auto-computed on write).
       byte_offset: 3
       bit_size: 8
+      access: Read
     - name: DATA0
       description: Free user data byte 0 (8 bits available for application use).
       byte_offset: 4
@@ -27,6 +29,7 @@ block/OB:
       description: Integrity complement of DATA0 (auto-computed on write).
       byte_offset: 5
       bit_size: 8
+      access: Read
     - name: DATA1
       description: Free user data byte 1 (8 bits available for application use).
       byte_offset: 6
@@ -35,6 +38,7 @@ block/OB:
       description: Integrity complement of DATA1 (auto-computed on write).
       byte_offset: 7
       bit_size: 8
+      access: Read
     - name: WRPR0
       description: Write protection mask for sectors 0-7 (1 bit per 1K sector; 1 = writable, 0 = protected).
       byte_offset: 8
@@ -43,6 +47,7 @@ block/OB:
       description: Integrity complement of WRPR0 (auto-computed on write).
       byte_offset: 9
       bit_size: 8
+      access: Read
     - name: WRPR1
       description: Write protection mask for sectors 8-15 (1 bit per 1K sector; 1 = writable, 0 = protected).
       byte_offset: 10
@@ -51,6 +56,7 @@ block/OB:
       description: Integrity complement of WRPR1 (auto-computed on write).
       byte_offset: 11
       bit_size: 8
+      access: Read
 
 fieldset/RDPR:
   description: Read protection byte.

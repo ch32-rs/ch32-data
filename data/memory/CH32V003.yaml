@@ -46,6 +46,19 @@ memory:
         kind: ob
         version: v0
         block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0xF7
+          NUSER: 0x08
+          DATA0: 0xFF
+          NDATA0: 0x00
+          DATA1: 0xFF
+          NDATA1: 0x00
+          WRPR0: 0xFF
+          NWRPR0: 0x00
+          WRPR1: 0xFF
+          NWRPR1: 0x00
   - name: VND
     kind: flash
     address: 0x1FFFF7C0
