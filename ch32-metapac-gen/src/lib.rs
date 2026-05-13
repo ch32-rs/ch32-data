@@ -156,11 +156,25 @@ impl Gen {
             include_bytes!("../res/src/metadata.rs"),
         )
         .unwrap();
+        // Drop any stale single-file template from an earlier layout so it
+        // doesn't collide with `src/nv/mod.rs` below.
+        let _ = fs::remove_file(self.opts.out_dir.join("src/nv.rs"));
+        let nv_dir = self.opts.out_dir.join("src/nv");
+        fs::create_dir_all(&nv_dir).unwrap();
+        fs::write(nv_dir.join("mod.rs"), include_bytes!("../res/src/nv/mod.rs")).unwrap();
+        fs::write(nv_dir.join("types.rs"), include_bytes!("../res/src/nv/types.rs")).unwrap();
         fs::write(
-            self.opts.out_dir.join("src/nv.rs"),
-            include_bytes!("../res/src/nv.rs"),
+            nv_dir.join("descriptor.rs"),
+            include_bytes!("../res/src/nv/descriptor.rs"),
         )
         .unwrap();
+        fs::write(nv_dir.join("codec.rs"), include_bytes!("../res/src/nv/codec.rs")).unwrap();
+        fs::write(
+            nv_dir.join("lifecycle.rs"),
+            include_bytes!("../res/src/nv/lifecycle.rs"),
+        )
+        .unwrap();
+        fs::write(nv_dir.join("tests.rs"), include_bytes!("../res/src/nv/tests.rs")).unwrap();
     }
 }
 
