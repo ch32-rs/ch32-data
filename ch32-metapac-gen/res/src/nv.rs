@@ -315,8 +315,28 @@ impl Descriptor {
         Ok(())
     }
 
-    pub fn reset_to_defaults(&self, _buf: &mut [u8]) {
-        unimplemented!()
+    /// Apply every default value from `NvStruct.defaults` then re-sync every
+    /// `N`-complement so the buffer is internally consistent. Read-only entries
+    /// in `defaults` (e.g. the `N`-complement bytes the YAML carries through)
+    /// are skipped — their value is recomputed from their source entry. No-op
+    /// on descriptors with an empty `defaults` list (e.g. ESIG).
+    pub fn reset(&self, buf: &mut [u8]) -> Result<(), EncodeError> {
+        if self.nv.defaults.is_empty() {
+            return Ok(());
+        }
+        for (entry_name, value) in self.nv.defaults {
+            let Some(item) = self.item(entry_name) else { continue };
+            let Some(reg) = Self::register_of(item) else { continue };
+            if matches!(reg.access, Access::Read) {
+                continue;
+            }
+            self.encode(buf, entry_name, EncodeInput::Literal(*value as u64))?;
+        }
+        let Some(block) = self.block() else { return Ok(()) };
+        for item in block.items {
+            self.apply_complement(buf, item)?;
+        }
+        Ok(())
     }
 }
 
@@ -775,6 +795,90 @@ mod tests {
         for d in Descriptor::iter() {
             if let Some(item) = block_of(&d).items.first() {
                 assert!(d.decode(&[], item.name).is_none());
+            }
+        }
+    }
+
+    #[test]
+    fn reset_produces_buffer_that_validates() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            d.reset(&mut buf).unwrap();
+            assert_eq!(d.validate(&buf), Ok(()), "{}", d.kind());
+        }
+    }
+
+    #[test]
+    fn reset_writes_each_declared_default() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            d.reset(&mut buf).unwrap();
+            for (entry, value) in d.nv.defaults {
+                let v = d.decode(&buf, entry).unwrap();
+                assert_eq!(
+                    decoded_to_u64(&d, entry, v),
+                    *value as u64,
+                    "{}.{}",
+                    d.kind(),
+                    entry
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn reset_is_noop_when_defaults_empty() {
+        for d in Descriptor::iter() {
+            if !d.nv.defaults.is_empty() {
+                continue;
+            }
+            let mut buf = [0xa5u8; BUF];
+            let before = buf;
+            d.reset(&mut buf).unwrap();
+            assert_eq!(buf, before, "{}", d.kind());
+        }
+    }
+
+    #[test]
+    fn lifecycle_find_list_default_encode_validate() {
+        for d in Descriptor::iter() {
+            let found = Descriptor::find(d.kind()).unwrap();
+            let entries: Vec<_> = found.entries().collect();
+            assert!(!entries.is_empty(), "{}", d.kind());
+
+            let mut buf = [0u8; BUF];
+            found.reset(&mut buf).unwrap();
+
+            // Phase 1: every declared default is visible after reset.
+            for entry in &entries {
+                let info = found.describe(entry).unwrap();
+                let Some(def) = info.default else { continue };
+                let v = found.decode(&buf, entry).unwrap();
+                assert_eq!(
+                    decoded_to_u64(&found, entry, v),
+                    def,
+                    "{}.{} default after reset",
+                    found.kind(),
+                    entry
+                );
+            }
+
+            // Phase 2: rewrite each writable entry to default+1 and confirm
+            // the buffer still validates after every step.
+            for entry in &entries {
+                let info = found.describe(entry).unwrap();
+                if matches!(info.access, Access::Read) {
+                    continue;
+                }
+                let Some(def) = info.default else { continue };
+                let max = bit_mask(info.bit_size);
+                let new_val = if def == max { 0 } else { def + 1 } & max;
+                found
+                    .encode(&mut buf, entry, EncodeInput::Literal(new_val))
+                    .unwrap();
+                let got = found.decode(&buf, entry).unwrap();
+                assert_eq!(decoded_to_u64(&found, entry, got), new_val);
+                assert_eq!(found.validate(&buf), Ok(()));
             }
         }
     }
