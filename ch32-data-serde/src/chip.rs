@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 
 pub mod core;
 pub mod memory;
+pub mod nv_struct;
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 pub struct Package {
@@ -34,6 +35,8 @@ pub struct Memory {
     pub access: Option<memory::Access>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cores: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub structs: Vec<nv_struct::NvStruct>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
