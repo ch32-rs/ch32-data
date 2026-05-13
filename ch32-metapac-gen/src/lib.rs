@@ -27,6 +27,7 @@ pub struct Options {
 pub struct Gen {
     pub(crate) opts: Options,
     pub(crate) all_peripheral_versions: HashSet<(String, String)>,
+    pub(crate) all_nv_versions: HashSet<(String, String)>,
     pub(crate) metadata_dedup: HashMap<String, String>,
     pub(crate) memory_option_features: BTreeSet<String>,
     pub(crate) memory_split_prefixes: BTreeSet<String>,
@@ -37,6 +38,7 @@ impl Gen {
         Self {
             opts,
             all_peripheral_versions: HashSet::new(),
+            all_nv_versions: HashSet::new(),
             metadata_dedup: HashMap::new(),
             memory_option_features: BTreeSet::new(),
             memory_split_prefixes: BTreeSet::new(),
@@ -81,6 +83,14 @@ impl Gen {
                 }
             }
 
+            for region in &mut chip.memory {
+                for s in &mut region.structs {
+                    s.ir = format!(":ir_for:{}:", s.kind);
+                    self.all_nv_versions
+                        .insert((s.kind.clone(), s.version.clone()));
+                }
+            }
+
             // Generate
             for (core_index, core) in chip.cores.iter().enumerate() {
                 let chip_core_name = match chip.cores.len() {
@@ -95,6 +105,10 @@ impl Gen {
 
         for (module, version) in &self.all_peripheral_versions {
             peripheral::gen_peripheral(&self.opts.out_dir, &self.opts.data_dir, module, version);
+        }
+
+        for (module, version) in &self.all_nv_versions {
+            peripheral::gen_nv(&self.opts.out_dir, &self.opts.data_dir, module, version);
         }
 
         // Generate Cargo.toml

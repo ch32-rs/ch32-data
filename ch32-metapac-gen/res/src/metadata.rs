@@ -149,6 +149,18 @@ pub struct MemoryRegion {
     pub size: u32,
     pub modes: &'static [Mode],
     pub access: Option<Access>,
+    pub structs: &'static [NvStruct],
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct NvStruct {
+    pub name: &'static str,
+    pub offset: u32,
+    pub kind: &'static str,
+    pub version: &'static str,
+    pub block: &'static str,
+    pub defaults: &'static [(&'static str, u32)],
+    pub ir: &'static ir::IR,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
