@@ -1,5 +1,6 @@
 use std::{collections::HashMap, path::Path};
 
+mod nv_descriptors;
 mod dma;
 mod registers;
 
