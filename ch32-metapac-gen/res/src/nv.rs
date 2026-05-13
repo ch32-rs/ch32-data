@@ -209,19 +209,198 @@ impl Descriptor {
 
     pub fn encode(
         &self,
-        _buf: &mut [u8],
-        _path: &str,
-        _input: EncodeInput,
+        buf: &mut [u8],
+        path: &str,
+        input: EncodeInput,
     ) -> Result<(), EncodeError> {
-        unimplemented!()
+        let (entry_name, field_name) = match path.split_once('.') {
+            Some((e, f)) => (e, Some(f)),
+            None => (path, None),
+        };
+        let item = self.item(entry_name).ok_or(EncodeError::NoSuchEntry)?;
+        let reg = Self::register_of(item).ok_or(EncodeError::NoSuchEntry)?;
+        if matches!(reg.access, Access::Read) {
+            return Err(EncodeError::ReadOnly);
+        }
+
+        let entry_start = item.byte_offset as usize;
+        let entry_size = ((reg.bit_size + 7) / 8) as usize;
+        if entry_start + entry_size > buf.len() {
+            return Err(EncodeError::BufferTooShort);
+        }
+
+        match field_name {
+            None => write_entry(&mut buf[entry_start..entry_start + entry_size], reg.bit_size, input)?,
+            Some(fname) => {
+                let fs = self.fieldset_of(item).ok_or(EncodeError::NoSuchField)?;
+                let field = Self::field_in(fs, fname).ok_or(EncodeError::NoSuchField)?;
+                let bit_offset = match &field.bit_offset {
+                    ir::BitOffset::Regular(r) => r.offset,
+                    ir::BitOffset::Cursed(_) => return Err(EncodeError::NoSuchField),
+                };
+                let value = resolve_field_value(field, self, input)?;
+                write_field_bits(
+                    &mut buf[entry_start..entry_start + entry_size],
+                    bit_offset,
+                    field.bit_size,
+                    value,
+                );
+            }
+        }
+
+        self.apply_complement(buf, item)
     }
 
-    pub fn validate(&self, _buf: &[u8]) -> Result<(), ValidationError> {
-        unimplemented!()
+    fn apply_complement(&self, buf: &mut [u8], item: &ir::BlockItem) -> Result<(), EncodeError> {
+        let block = match self.block() {
+            Some(b) => b,
+            None => return Ok(()),
+        };
+        for sibling in block.items {
+            if !is_n_complement(sibling.name, item.name) {
+                continue;
+            }
+            let sib_reg = match Self::register_of(sibling) {
+                Some(r) => r,
+                None => continue,
+            };
+            let src_size = match Self::register_of(item) {
+                Some(r) => ((r.bit_size + 7) / 8) as usize,
+                None => continue,
+            };
+            let dst_size = ((sib_reg.bit_size + 7) / 8) as usize;
+            if src_size != dst_size {
+                continue;
+            }
+            let src = item.byte_offset as usize;
+            let dst = sibling.byte_offset as usize;
+            if dst + dst_size > buf.len() {
+                return Err(EncodeError::BufferTooShort);
+            }
+            for i in 0..src_size {
+                buf[dst + i] = !buf[src + i];
+            }
+            return Ok(());
+        }
+        Ok(())
+    }
+
+    pub fn validate(&self, buf: &[u8]) -> Result<(), ValidationError> {
+        let block = match self.block() {
+            Some(b) => b,
+            None => return Ok(()),
+        };
+        for item in block.items {
+            let reg = match Self::register_of(item) {
+                Some(r) => r,
+                None => continue,
+            };
+            let entry_size = ((reg.bit_size + 7) / 8) as usize;
+            let sibling = block
+                .items
+                .iter()
+                .find(|s| is_n_complement(s.name, item.name));
+            let Some(sibling) = sibling else { continue };
+            let src = item.byte_offset as usize;
+            let dst = sibling.byte_offset as usize;
+            if src + entry_size > buf.len() || dst + entry_size > buf.len() {
+                return Err(ValidationError::BufferTooShort);
+            }
+            for i in 0..entry_size {
+                if buf[dst + i] != !buf[src + i] {
+                    return Err(ValidationError::ComplementMismatch { entry: item.name });
+                }
+            }
+        }
+        Ok(())
     }
 
     pub fn reset_to_defaults(&self, _buf: &mut [u8]) {
         unimplemented!()
+    }
+}
+
+fn is_n_complement(sibling: &str, source: &str) -> bool {
+    let s = sibling.as_bytes();
+    let src = source.as_bytes();
+    s.len() == src.len() + 1
+        && s[0].eq_ignore_ascii_case(&b'N')
+        && s[1..].eq_ignore_ascii_case(src)
+}
+
+fn bit_mask(bit_size: u32) -> u64 {
+    if bit_size >= 64 {
+        u64::MAX
+    } else {
+        (1u64 << bit_size) - 1
+    }
+}
+
+fn write_entry(dst: &mut [u8], bit_size: u32, input: EncodeInput) -> Result<(), EncodeError> {
+    match input {
+        EncodeInput::Bytes(bytes) => {
+            if bytes.len() != dst.len() {
+                return Err(EncodeError::OutOfRange);
+            }
+            dst.copy_from_slice(bytes);
+            Ok(())
+        }
+        EncodeInput::Literal(val) => {
+            if bit_size < 64 && val > bit_mask(bit_size) {
+                return Err(EncodeError::OutOfRange);
+            }
+            for i in 0..dst.len() {
+                dst[i] = ((val >> (8 * i)) & 0xff) as u8;
+            }
+            Ok(())
+        }
+        // Entries themselves have no enum; variants only resolve at field level.
+        EncodeInput::Variant(_) => Err(EncodeError::NoSuchVariant),
+    }
+}
+
+fn resolve_field_value(
+    field: &ir::Field,
+    desc: &Descriptor,
+    input: EncodeInput,
+) -> Result<u64, EncodeError> {
+    let max = bit_mask(field.bit_size);
+    match input {
+        EncodeInput::Variant(name) => {
+            let enumm = field
+                .enumm
+                .and_then(|n| desc.enumm_named(n))
+                .ok_or(EncodeError::NoSuchVariant)?;
+            enumm
+                .variants
+                .iter()
+                .find(|v| v.name.eq_ignore_ascii_case(name))
+                .map(|v| v.value)
+                .ok_or(EncodeError::NoSuchVariant)
+        }
+        EncodeInput::Literal(v) => {
+            if v > max {
+                Err(EncodeError::OutOfRange)
+            } else {
+                Ok(v)
+            }
+        }
+        // Raw byte writes only make sense at entry level.
+        EncodeInput::Bytes(_) => Err(EncodeError::OutOfRange),
+    }
+}
+
+fn write_field_bits(dst: &mut [u8], bit_offset: u32, bit_size: u32, value: u64) {
+    let bit_end = bit_offset + bit_size;
+    let bytes_touched = ((bit_end + 7) / 8) as usize;
+    let mut raw: u64 = 0;
+    for i in 0..bytes_touched {
+        raw |= (dst[i] as u64) << (8 * i);
+    }
+    let mask = bit_mask(bit_size) << bit_offset;
+    raw = (raw & !mask) | ((value << bit_offset) & mask);
+    for i in 0..bytes_touched {
+        dst[i] = ((raw >> (8 * i)) & 0xff) as u8;
     }
 }
 
@@ -230,108 +409,373 @@ pub fn decode<'a>(path: &str, buf: &'a [u8]) -> Option<Value<'a>> {
     Descriptor::find(descriptor)?.decode(buf, rest)
 }
 
-pub fn encode(_path: &str, _buf: &mut [u8], _input: EncodeInput) -> Result<(), EncodeError> {
-    unimplemented!()
+pub fn encode(path: &str, buf: &mut [u8], input: EncodeInput) -> Result<(), EncodeError> {
+    let (descriptor, rest) = path.split_once('.').ok_or(EncodeError::NoSuchEntry)?;
+    Descriptor::find(descriptor)
+        .ok_or(EncodeError::NoSuchEntry)?
+        .encode(buf, rest, input)
 }
 
 #[cfg(test)]
 mod tests {
+    extern crate alloc;
     use super::*;
+    use crate::metadata::ir;
+    use alloc::format;
+    use alloc::vec::Vec;
 
-    fn has(it: impl Iterator<Item = &'static str>, needle: &str) -> bool {
-        it.into_iter().any(|s| s == needle)
+    const BUF: usize = 256;
+
+    fn block_of(d: &Descriptor) -> &'static ir::Block {
+        d.block().expect("descriptor has block")
+    }
+
+    fn writable(item: &'static ir::BlockItem) -> Option<&'static ir::Register> {
+        match Descriptor::register_of(item) {
+            Some(r) if !matches!(r.access, Access::Read) => Some(r),
+            _ => None,
+        }
+    }
+
+    fn decoded_to_u64(d: &Descriptor, path: &str, v: Value) -> u64 {
+        match v {
+            Value::Literal(x) => x,
+            Value::Variant(name) => {
+                let info = d.describe(path).unwrap();
+                let enumm = info.enumm.expect("Value::Variant requires an enum");
+                enumm
+                    .variants
+                    .iter()
+                    .find(|v| v.name == name)
+                    .unwrap()
+                    .value
+            }
+            Value::Bytes(_) => panic!("unexpected Value::Bytes for {}", path),
+        }
+    }
+
+    /// Pre-fill `buf` so every writable entry has been encoded once; this leaves
+    /// all N-complement pairs aligned and `validate` clean.
+    fn flush_writable_entries(d: &Descriptor, buf: &mut [u8]) {
+        for item in block_of(d).items {
+            let Some(reg) = writable(item) else { continue };
+            if reg.bit_size > 64 {
+                continue;
+            }
+            d.encode(buf, item.name, EncodeInput::Literal(0)).unwrap();
+        }
     }
 
     #[test]
-    fn discovery_finds_ob_and_esig() {
-        assert!(has(Descriptor::iter().map(|d| d.kind()), "ob"));
-        assert!(has(Descriptor::iter().map(|d| d.kind()), "esig"));
-        assert!(Descriptor::find("OB").is_some());
-        assert!(Descriptor::find("esig").is_some());
-        assert!(Descriptor::find("nope").is_none());
+    fn find_round_trips_for_every_kind() {
+        for d in Descriptor::iter() {
+            let found = Descriptor::find(d.kind()).expect("find by own kind");
+            assert_eq!(found.kind(), d.kind());
+            assert_eq!(found.name(), d.name());
+        }
+        assert!(Descriptor::find("__no_such_kind__").is_none());
     }
 
     #[test]
-    fn ob_entries_and_fields() {
-        let ob = Descriptor::find("ob").unwrap();
-        assert!(has(ob.entries(), "RDPR"));
-        assert!(has(ob.entries(), "USER"));
-        assert!(has(ob.entries(), "NRDPR"));
-
-        let user_fields = ob.fields("user").unwrap();
-        assert!(has(user_fields, "IWDGSW"));
-        let user_fields = ob.fields("user").unwrap();
-        assert!(has(user_fields, "START_MODE"));
-
-        // Entries without a fieldset (e.g. NRDPR complement) have no fields.
-        assert!(ob.fields("NRDPR").is_none());
+    fn find_is_case_insensitive() {
+        for d in Descriptor::iter() {
+            let upper: alloc::string::String =
+                d.kind().chars().map(|c| c.to_ascii_uppercase()).collect();
+            assert!(Descriptor::find(&upper).is_some());
+        }
     }
 
     #[test]
-    fn describe_entry_and_field() {
-        let ob = Descriptor::find("ob").unwrap();
-
-        let user = ob.describe("user").unwrap();
-        assert_eq!(user.byte_offset, 2);
-        assert_eq!(user.bit_offset, 0);
-        assert_eq!(user.bit_size, 8);
-        assert!(user.enumm.is_none());
-        assert_eq!(user.default, Some(247));
-
-        let iwdg = ob.describe("user.iwdgsw").unwrap();
-        assert_eq!(iwdg.byte_offset, 2);
-        assert_eq!(iwdg.bit_offset, 0);
-        assert_eq!(iwdg.bit_size, 1);
-        assert_eq!(iwdg.enumm.unwrap().name, "IwdgMode");
-        assert!(iwdg.default.is_none());
-
-        // Read-only complement.
-        let nrdpr = ob.describe("nrdpr").unwrap();
-        assert!(matches!(nrdpr.access, Access::Read));
+    fn entries_match_block_items() {
+        for d in Descriptor::iter() {
+            let api: Vec<_> = d.entries().collect();
+            let meta: Vec<_> = block_of(&d).items.iter().map(|i| i.name).collect();
+            assert_eq!(api, meta, "{} entries", d.kind());
+        }
     }
 
     #[test]
-    fn decode_literal_and_variant_from_ob_defaults() {
-        // OB default layout (from NvStruct.defaults), byte order RDPR=0xa5 NRDPR=0x5a USER=0xf7 NUSER=0x08 ...
-        let buf = [
-            0xa5, 0x5a, 0xf7, 0x08, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00,
-        ];
-
-        // Whole USER byte literal.
-        assert!(matches!(
-            decode("ob.user", &buf),
-            Some(Value::Literal(0xf7))
-        ));
-
-        // IWDGSW is bit 0 of USER → 1 → SOFTWARE.
-        assert!(matches!(
-            decode("ob.user.iwdgsw", &buf),
-            Some(Value::Variant("SOFTWARE"))
-        ));
-
-        // RDPR=0xa5 → UNPROTECTED variant.
-        assert!(matches!(
-            decode("ob.rdpr.rdpr", &buf),
-            Some(Value::Variant("UNPROTECTED"))
-        ));
+    fn fields_match_fieldset_when_present() {
+        for d in Descriptor::iter() {
+            for item in block_of(&d).items {
+                match d.fieldset_of(item) {
+                    Some(fs) => {
+                        let api: Vec<_> = d.fields(item.name).unwrap().collect();
+                        let meta: Vec<_> = fs.fields.iter().map(|f| f.name).collect();
+                        assert_eq!(api, meta, "{}.{} fields", d.kind(), item.name);
+                    }
+                    None => assert!(d.fields(item.name).is_none()),
+                }
+            }
+        }
     }
 
     #[test]
-    fn decode_esig_uniid() {
-        let esig = Descriptor::find("esig").unwrap();
-        let mut buf = [0u8; 32];
-        // UNIID1 at byte_offset 8, 32 bits LE.
-        buf[8..12].copy_from_slice(&0xdead_beef_u32.to_le_bytes());
-        let v = esig.decode(&buf, "uniid1").unwrap();
-        assert!(matches!(v, Value::Literal(0xdead_beef)));
+    fn describe_entry_matches_metadata() {
+        for d in Descriptor::iter() {
+            for item in block_of(&d).items {
+                let reg = Descriptor::register_of(item).unwrap();
+                let info = d.describe(item.name).unwrap();
+                assert_eq!(info.byte_offset, item.byte_offset);
+                assert_eq!(info.bit_offset, 0);
+                assert_eq!(info.bit_size, reg.bit_size);
+                assert_eq!(info.access, reg.access);
+                assert!(info.enumm.is_none());
+                assert_eq!(info.description, item.description);
+            }
+        }
     }
 
     #[test]
-    fn decode_out_of_range_returns_none() {
-        assert!(decode("ob.nope", &[0; 12]).is_none());
-        assert!(decode("ob.user.nope", &[0; 12]).is_none());
-        assert!(decode("nope.user", &[0; 12]).is_none());
-        // Short buffer.
-        assert!(decode("ob.user", &[]).is_none());
+    fn describe_field_matches_metadata() {
+        for d in Descriptor::iter() {
+            for item in block_of(&d).items {
+                let Some(fs) = d.fieldset_of(item) else {
+                    continue;
+                };
+                for field in fs.fields {
+                    let ir::BitOffset::Regular(off) = &field.bit_offset else {
+                        continue;
+                    };
+                    let path = format!("{}.{}", item.name, field.name);
+                    let info = d.describe(&path).unwrap();
+                    assert_eq!(info.byte_offset, item.byte_offset);
+                    assert_eq!(info.bit_offset, off.offset);
+                    assert_eq!(info.bit_size, field.bit_size);
+                    assert_eq!(info.enumm.is_some(), field.enumm.is_some());
+                    assert_eq!(info.description, field.description);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn entry_literal_roundtrip_for_every_writable_entry() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                let Some(reg) = writable(item) else { continue };
+                if reg.bit_size > 64 {
+                    continue;
+                }
+                for &val in &[0u64, bit_mask(reg.bit_size)] {
+                    d.encode(&mut buf, item.name, EncodeInput::Literal(val))
+                        .unwrap();
+                    let v = d.decode(&buf, item.name).unwrap();
+                    assert_eq!(
+                        decoded_to_u64(&d, item.name, v),
+                        val,
+                        "{}.{} literal {}",
+                        d.kind(),
+                        item.name,
+                        val
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn field_literal_roundtrip_for_every_writable_field() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                if writable(item).is_none() {
+                    continue;
+                }
+                let Some(fs) = d.fieldset_of(item) else {
+                    continue;
+                };
+                for field in fs.fields {
+                    if !matches!(field.bit_offset, ir::BitOffset::Regular(_)) {
+                        continue;
+                    }
+                    let path = format!("{}.{}", item.name, field.name);
+                    for &val in &[0u64, bit_mask(field.bit_size)] {
+                        d.encode(&mut buf, &path, EncodeInput::Literal(val)).unwrap();
+                        let v = d.decode(&buf, &path).unwrap();
+                        assert_eq!(decoded_to_u64(&d, &path, v), val, "{} = {}", path, val);
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn variant_roundtrip_for_every_enum_field() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                if writable(item).is_none() {
+                    continue;
+                }
+                let Some(fs) = d.fieldset_of(item) else {
+                    continue;
+                };
+                for field in fs.fields {
+                    let Some(enumm) = field.enumm.and_then(|n| d.enumm_named(n)) else {
+                        continue;
+                    };
+                    let path = format!("{}.{}", item.name, field.name);
+                    for v in enumm.variants {
+                        d.encode(&mut buf, &path, EncodeInput::Variant(v.name))
+                            .unwrap();
+                        let got = d.decode(&buf, &path).unwrap();
+                        assert_eq!(
+                            decoded_to_u64(&d, &path, got),
+                            v.value,
+                            "{} := {}",
+                            path,
+                            v.name
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn read_only_entries_reject_writes() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                let reg = Descriptor::register_of(item).unwrap();
+                if !matches!(reg.access, Access::Read) {
+                    continue;
+                }
+                assert_eq!(
+                    d.encode(&mut buf, item.name, EncodeInput::Literal(0)),
+                    Err(EncodeError::ReadOnly),
+                    "{}.{}",
+                    d.kind(),
+                    item.name
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn out_of_range_literals_rejected() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                let Some(reg) = writable(item) else { continue };
+                if reg.bit_size >= 64 {
+                    continue;
+                }
+                let too_big = 1u64 << reg.bit_size;
+                assert_eq!(
+                    d.encode(&mut buf, item.name, EncodeInput::Literal(too_big)),
+                    Err(EncodeError::OutOfRange),
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn unknown_paths_and_variants_rejected() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            assert_eq!(
+                d.encode(&mut buf, "__no_entry__", EncodeInput::Literal(0)),
+                Err(EncodeError::NoSuchEntry)
+            );
+            for item in block_of(&d).items {
+                if writable(item).is_none() {
+                    continue;
+                }
+                let Some(fs) = d.fieldset_of(item) else {
+                    continue;
+                };
+                let bad_field = format!("{}.__no_field__", item.name);
+                assert_eq!(
+                    d.encode(&mut buf, &bad_field, EncodeInput::Literal(0)),
+                    Err(EncodeError::NoSuchField)
+                );
+                if let Some(field) = fs.fields.iter().find(|f| f.enumm.is_some()) {
+                    let path = format!("{}.{}", item.name, field.name);
+                    assert_eq!(
+                        d.encode(&mut buf, &path, EncodeInput::Variant("__no_variant__")),
+                        Err(EncodeError::NoSuchVariant)
+                    );
+                }
+                break;
+            }
+        }
+    }
+
+    #[test]
+    fn validate_passes_after_flushing_every_entry() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            flush_writable_entries(&d, &mut buf);
+            assert_eq!(d.validate(&buf), Ok(()), "{}", d.kind());
+        }
+    }
+
+    #[test]
+    fn validate_reports_corrupted_complement_entry() {
+        for d in Descriptor::iter() {
+            let block = block_of(&d);
+            let pair = block.items.iter().find_map(|item| {
+                writable(item)?;
+                let sib = block.items.iter().find(|s| is_n_complement(s.name, item.name))?;
+                Some((item, sib))
+            });
+            let Some((item, sibling)) = pair else { continue };
+            let mut buf = [0u8; BUF];
+            flush_writable_entries(&d, &mut buf);
+            buf[sibling.byte_offset as usize] ^= 0xff;
+            assert_eq!(
+                d.validate(&buf),
+                Err(ValidationError::ComplementMismatch { entry: item.name })
+            );
+        }
+    }
+
+    #[test]
+    fn validate_buffer_too_short_when_pairs_exist() {
+        for d in Descriptor::iter() {
+            let block = block_of(&d);
+            let has_pair = block.items.iter().any(|item| {
+                block.items.iter().any(|s| is_n_complement(s.name, item.name))
+            });
+            if !has_pair {
+                continue;
+            }
+            assert_eq!(d.validate(&[]), Err(ValidationError::BufferTooShort));
+        }
+    }
+
+    #[test]
+    fn top_level_decode_and_encode_dispatch_by_kind() {
+        for d in Descriptor::iter() {
+            let mut buf = [0u8; BUF];
+            for item in block_of(&d).items {
+                let Some(reg) = writable(item) else { continue };
+                if reg.bit_size > 64 {
+                    continue;
+                }
+                let path = format!("{}.{}", d.kind(), item.name);
+                encode(&path, &mut buf, EncodeInput::Literal(0)).unwrap();
+                let v = decode(&path, &buf).unwrap();
+                assert_eq!(decoded_to_u64(&d, item.name, v), 0);
+            }
+        }
+        assert!(decode("__nokind__.x", &[0; BUF]).is_none());
+        let mut buf = [0u8; BUF];
+        assert_eq!(
+            encode("__nokind__.x", &mut buf, EncodeInput::Literal(0)),
+            Err(EncodeError::NoSuchEntry)
+        );
+    }
+
+    #[test]
+    fn decode_returns_none_on_short_buffer() {
+        for d in Descriptor::iter() {
+            if let Some(item) = block_of(&d).items.first() {
+                assert!(d.decode(&[], item.name).is_none());
+            }
+        }
     }
 }
