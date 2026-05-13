@@ -40,6 +40,12 @@ memory:
       read: true
       write: true
       execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: v0
+        block: OB
   - name: VND
     kind: flash
     address: 0x1FFFF7C0
