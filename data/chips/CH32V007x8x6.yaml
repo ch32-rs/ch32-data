@@ -10,19 +10,9 @@ packages:
     package: QSOP24
   - name: CH32V007F8U6
     package: QFN20
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 63488 # 62K
-    settings:
-      erase_size: 1024
-      write_size: 64
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 8192 # 8K
+include_memory: ../memory/CH32V00X.yaml
+memory_options:
+  default: { USR_1: 62K, RAM: 8K }
 docs:
   - type: homepage
     title: Homepage
