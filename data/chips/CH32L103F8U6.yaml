@@ -10,19 +10,9 @@ keywords:
 packages:
   - name: CH32L103F8U6
     package: QFN20
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 65536
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 20480
+include_memory: ../memory/CH32L1.yaml
+memory_options:
+  default: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
