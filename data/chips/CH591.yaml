@@ -10,6 +10,7 @@ packages:
     package: QFN20
   - name: CH591R
     package: TSSOP16
+# TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1
     kind: flash
