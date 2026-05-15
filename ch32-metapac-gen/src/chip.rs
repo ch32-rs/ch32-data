@@ -9,11 +9,11 @@ use chiptool::{generate, ir, transform};
 use regex::Regex;
 
 use crate::data::{Chip, Core, MemoryOption};
+use crate::dump::split_prefixes_from_names;
 use crate::memory::{
     flash_write_size, gen_memory_files, memory_select_cfg_attrs, primary_flash_regions,
 };
-use crate::dump::split_prefixes_from_names;
-use crate::{Gen, gen_opts, stringify};
+use crate::{gen_opts, stringify, Gen};
 
 fn build_chiptool_ir(
     chip: &Chip,
@@ -104,23 +104,34 @@ fn build_chiptool_ir(
         .reduce(|acc, item| acc + item)
         .unwrap();
 
-    writeln!(&mut extra, "pub const FLASH_BASE: usize = 0;").unwrap();
-    writeln!(
-        &mut extra,
-        "pub const FLASH_SIZE: usize = {};",
-        total_flash_size
-    )
-    .unwrap();
-
     let write_sizes: std::collections::HashSet<_> = flash_regions
         .iter()
         .map(|r| flash_write_size(r).expect("flash region needs a write size"))
         .collect();
     assert_eq!(1, write_sizes.len());
+    let write_size = *write_sizes.iter().next().unwrap();
+
+    let deprecation_note =
+        "use ch32_metapac::metadata::METADATA.memory (enable the `metadata` feature) instead";
     writeln!(
         &mut extra,
-        "pub const WRITE_SIZE: usize = {};",
-        write_sizes.iter().next().unwrap()
+        "#[deprecated(note = \"{}\")]\n\
+         pub const FLASH_BASE: usize = 0;",
+        deprecation_note,
+    )
+    .unwrap();
+    writeln!(
+        &mut extra,
+        "#[deprecated(note = \"{}\")]\n\
+         pub const FLASH_SIZE: usize = {};",
+        deprecation_note, total_flash_size,
+    )
+    .unwrap();
+    writeln!(
+        &mut extra,
+        "#[deprecated(note = \"{}\")]\n\
+         pub const WRITE_SIZE: usize = {};",
+        deprecation_note, write_size,
     )
     .unwrap();
 
