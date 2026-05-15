@@ -44,7 +44,7 @@ memory:
       - name: OB
         offset: 0
         kind: ob
-        version: v0
+        version: v003
         block: OB
         defaults:
           RDPR: 0xA5
