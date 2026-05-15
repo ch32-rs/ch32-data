@@ -1,4 +1,4 @@
-include_memory: CH32V2.yaml
+include_memory: CH32V2_V3.yaml
 memory:
   - name: USR_2
     kind: flash
