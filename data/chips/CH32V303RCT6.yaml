@@ -10,7 +10,7 @@ keywords:
 packages:
   - name: CH32V303RCT6
     package: LQFP64M
-include_memory: ../memory/CH32V2_V3.yaml
+include_memory: ../memory/CH32V3_RC.yaml
 memory_ram_code_config:
   total_flash: 480K
   default: c256_r64

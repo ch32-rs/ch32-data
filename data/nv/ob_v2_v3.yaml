@@ -1,5 +1,5 @@
 block/OB:
-  description: Option Bytes — persistent flash configuration shared across the CH32V20x family (read protection, watchdog mode, low-power reset behavior, user data, four 1-byte write-protection masks, optional RAM/CODE allocation).
+  description: Option Bytes — persistent flash configuration shared across CH32V2 and CH32V3 chips that do not expose the SRAM/CODE allocation feature (read protection, watchdog mode, low-power reset behavior, user data, four 1-byte write-protection masks). USER bits 3-7 are reserved on these parts; chips that decode RAM_CODE use ob_v2_ram_code or ob_v3_ram_code instead.
   items:
     - name: RDPR
       description: Read protection level.
@@ -12,7 +12,7 @@ block/OB:
       bit_size: 8
       access: Read
     - name: USER
-      description: User configuration (watchdog, stop/standby reset, RAM/CODE allocation on D8/D8W parts).
+      description: User configuration (watchdog, stop/standby reset).
       byte_offset: 2
       bit_size: 8
       fieldset: USER
@@ -87,7 +87,7 @@ fieldset/RDPR:
       enum: ReadProtection
 
 fieldset/USER:
-  description: User configuration byte. Bits 3-4 are reserved and must remain set. Bits 5-7 (RAM_CODE) are only decoded on CH32V20x_D8 / CH32V20x_D8W parts; on D6 parts they are reserved.
+  description: User configuration byte. Bits 3-7 are reserved and must remain set on chips that do not decode the SRAM/CODE allocation field.
   bit_size: 8
   fields:
     - name: IWDGSW
@@ -105,11 +105,6 @@ fieldset/USER:
       bit_offset: 2
       bit_size: 1
       enum: PowerModeReset
-    - name: RAM_CODE
-      description: SRAM/CODE memory allocation for CH32V20x_D8 / CH32V20x_D8W parts. The hardware decodes only bits 6-7; bit 5 is don't-care. Reserved on D6 parts.
-      bit_offset: 5
-      bit_size: 3
-      enum: RamCodeMode
 
 enum/ReadProtection:
   description: Whether flash contents are readable through the debug interface.
@@ -140,17 +135,3 @@ enum/PowerModeReset:
     - name: NO_RESET
       description: Keep running on entering the mode.
       value: 1
-
-enum/RamCodeMode:
-  description: SRAM/CODE memory allocation on CH32V20x_D8 / CH32V20x_D8W parts. Only the canonical bit patterns are listed; the hardware treats bit 5 as don't-care, so any value sharing the high two bits with a listed variant selects that allocation.
-  bit_size: 3
-  variants:
-    - name: C128_R64
-      description: 128 KB code + 64 KB RAM (factory default on D8/D8W parts; canonical pattern 0b00x).
-      value: 0b000
-    - name: C144_R48
-      description: 144 KB code + 48 KB RAM (canonical pattern 0b01x).
-      value: 0b010
-    - name: C160_R32
-      description: 160 KB code + 32 KB RAM (canonical pattern 0b1xx).
-      value: 0b100
