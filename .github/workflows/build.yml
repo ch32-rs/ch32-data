@@ -26,3 +26,7 @@ jobs:
         cd build/ch32-metapac/
         cargo build --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
         cargo doc --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
+    - name: Unit tests (host)
+      run: |
+        cd build/ch32-metapac/
+        cargo test --features metadata,ch32v003f4u6

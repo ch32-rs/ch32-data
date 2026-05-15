@@ -28,6 +28,12 @@ memory:
       read: true
       write: true
       execute: true
+    structs:
+      - name: ESIG
+        offset: 0x7E0
+        kind: esig
+        version: common
+        block: ESIG
   - name: OPT
     kind: flash
     address: 0x1FFFF800
@@ -40,6 +46,17 @@ memory:
       read: true
       write: true
       execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: v1
+        block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0xFF
+          NUSER: 0x00
   - name: VND
     kind: flash
     address: 0x1FFFF880

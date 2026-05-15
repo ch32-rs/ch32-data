@@ -1,5 +1,6 @@
 use std::{collections::HashMap, path::Path};
 
+mod nv_descriptors;
 mod dma;
 mod registers;
 
@@ -63,6 +64,10 @@ fn main() -> anyhow::Result<()> {
     stopwatch.section("Parsing registers");
     let registers = registers::Registers::parse()?;
     registers.write()?;
+
+    stopwatch.section("Parsing NV descriptors");
+    let nv_descriptors = nv_descriptors::NvDescriptors::parse()?;
+    nv_descriptors.write()?;
 
     stopwatch.section("Parsing chips");
 

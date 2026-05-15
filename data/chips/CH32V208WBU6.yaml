@@ -9,7 +9,7 @@ keywords:
 packages:
   - name: CH32V208WBU6
     package: QFN68
-include_memory: ../memory/CH32V2_V3.yaml
+include_memory: ../memory/CH32V2_RC.yaml
 # OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
 memory_ram_code_config:
   total_flash: 480K

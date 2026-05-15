@@ -1,0 +1,185 @@
+block/OB:
+  description: Persistent flash configuration — read protection, watchdog mode, low-power reset behavior, USB startup configuration, power-on reset timing, write protection, and two free user-data bytes.
+  items:
+    - name: RDPR
+      description: Read protection level.
+      byte_offset: 0
+      bit_size: 8
+      fieldset: RDPR
+    - name: NRDPR
+      description: Integrity complement of RDPR (managed automatically).
+      byte_offset: 1
+      bit_size: 8
+      access: Read
+    - name: USER
+      description: User configuration — watchdog mode, stop/standby reset, USB startup state, power-on reset timing.
+      byte_offset: 2
+      bit_size: 8
+      fieldset: USER
+    - name: NUSER
+      description: Integrity complement of USER (managed automatically).
+      byte_offset: 3
+      bit_size: 8
+      access: Read
+    - name: DATA0
+      description: Free user data byte 0.
+      byte_offset: 4
+      bit_size: 8
+    - name: NDATA0
+      description: Integrity complement of DATA0 (managed automatically).
+      byte_offset: 5
+      bit_size: 8
+      access: Read
+    - name: DATA1
+      description: Free user data byte 1.
+      byte_offset: 6
+      bit_size: 8
+    - name: NDATA1
+      description: Integrity complement of DATA1 (managed automatically).
+      byte_offset: 7
+      bit_size: 8
+      access: Read
+    - name: WRPR0
+      description: Write protection for main-flash sectors 0-7. 1 bit per 4K sector (1 = writable, 0 = protected).
+      byte_offset: 8
+      bit_size: 8
+    - name: NWRPR0
+      description: Integrity complement of WRPR0 (managed automatically).
+      byte_offset: 9
+      bit_size: 8
+      access: Read
+    - name: WRPR1
+      description: Write protection for main-flash sectors 8-15. 1 bit per 4K sector (1 = writable, 0 = protected).
+      byte_offset: 10
+      bit_size: 8
+    - name: NWRPR1
+      description: Integrity complement of WRPR1 (managed automatically).
+      byte_offset: 11
+      bit_size: 8
+      access: Read
+    - name: WRPR2
+      description: Write protection for main-flash sectors 16-23. 1 bit per 4K sector (1 = writable, 0 = protected).
+      byte_offset: 12
+      bit_size: 8
+    - name: NWRPR2
+      description: Integrity complement of WRPR2 (managed automatically).
+      byte_offset: 13
+      bit_size: 8
+      access: Read
+    - name: WRPR3
+      description: Write protection for main-flash sectors 24-31. 1 bit per 4K sector (1 = writable, 0 = protected).
+      byte_offset: 14
+      bit_size: 8
+    - name: NWRPR3
+      description: Integrity complement of WRPR3 (managed automatically).
+      byte_offset: 15
+      bit_size: 8
+      access: Read
+
+fieldset/RDPR:
+  description: Read protection level.
+  bit_size: 8
+  fields:
+    - name: RDPR
+      description: Set UNPROTECTED (0xA5) to allow debug reads. Any other value blocks the debug interface and auto-write-protects pages 0-31 (4K each).
+      bit_offset: 0
+      bit_size: 8
+      enum: ReadProtection
+
+fieldset/USER:
+  description: Watchdog mode, low-power reset, USB startup, and power-on reset timing.
+  bit_size: 8
+  fields:
+    - name: IWDGSW
+      description: How the independent watchdog starts.
+      bit_offset: 0
+      bit_size: 1
+      enum: IwdgMode
+    - name: STOPRST
+      description: Whether entering Stop mode resets the chip.
+      bit_offset: 1
+      bit_size: 1
+      enum: PowerModeReset
+    - name: STANDYRST
+      description: Whether entering Standby mode resets the chip.
+      bit_offset: 2
+      bit_size: 1
+      enum: PowerModeReset
+    - name: USBDMODE
+      description: USB bus speed selected at startup.
+      bit_offset: 3
+      bit_size: 1
+      enum: UsbdSpeed
+    - name: USBDPU
+      description: USB built-in 1.5 kΩ pull-up resistor state at startup.
+      bit_offset: 4
+      bit_size: 1
+      enum: UsbdPullup
+    - name: PORCTR
+      description: Power-on reset timing window.
+      bit_offset: 5
+      bit_size: 1
+      enum: PowerOnResetTime
+
+enum/ReadProtection:
+  description: Whether flash contents are readable through the debug interface.
+  bit_size: 8
+  variants:
+    - name: UNPROTECTED
+      description: Allow the debug interface to read flash.
+      value: 0xA5
+
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1
+
+enum/UsbdSpeed:
+  description: USB bus speed at startup.
+  bit_size: 1
+  variants:
+    - name: FULL_SPEED
+      description: USB full-speed mode (12 Mbps).
+      value: 0
+    - name: LOW_SPEED
+      description: USB low-speed mode (1.5 Mbps).
+      value: 1
+
+enum/UsbdPullup:
+  description: USB built-in 1.5 kΩ pull-up resistor state at startup.
+  bit_size: 1
+  variants:
+    - name: DISABLED
+      description: Built-in pull-up disabled — an external pull-up is required on the USB data line.
+      value: 0
+    - name: ENABLED
+      description: Built-in pull-up enabled — no external pull-up needed.
+      value: 1
+
+enum/PowerOnResetTime:
+  description: Length of the power-on reset window.
+  bit_size: 1
+  variants:
+    - name: LONG
+      description: 40.96 ms power-on reset window.
+      value: 0
+    - name: SHORT
+      description: 16.384 ms power-on reset window.
+      value: 1

@@ -146,43 +146,47 @@ fieldset/OBKEYR:
       bit_offset: 0
       bit_size: 32
 fieldset/OBR:
-  description: Option byte register.
+  description: Option byte register — read-only mirror of the Option Bytes loaded from flash at reset.
   fields:
     - name: OBERR
-      description: Option byte error.
+      description: Option byte integrity error — a value/complement pair did not match when loading.
       bit_offset: 0
       bit_size: 1
     - name: RDPRT
-      description: Read protection.
+      description: Read protection is currently active.
       bit_offset: 1
       bit_size: 1
     - name: IWDG_SW
-      description: IWDG_SW.
+      description: Independent watchdog start mode currently in effect.
       bit_offset: 2
       bit_size: 1
+      enum: IwdgMode
     - name: STOP_RST
-      description: STOP_RST.
+      description: Stop-mode reset behavior currently in effect.
       bit_offset: 3
       bit_size: 1
+      enum: PowerModeReset
     - name: STANDY_RST
-      description: STANDY_RST.
+      description: Standby-mode reset behavior currently in effect.
       bit_offset: 4
       bit_size: 1
+      enum: PowerModeReset
     - name: CFGCANM
-      description: Configure the offline recovery time.
+      description: CAN offline-to-normal recovery timing currently in effect (mirror of OB.USER.CFGCANM).
       bit_offset: 7
       bit_size: 1
+      enum: CanRecoveryMode
     - name: FIX_11
-      description: Fixed to 11.
-      bit_offset: 8
+      description: Hard-wired to 11b.
+      bit_offset: 10
       bit_size: 2
     - name: DATA0
-      description: Data byte 0.
-      bit_offset: 10
+      description: Free user data byte 0 (mirror of OB.DATA0).
+      bit_offset: 12
       bit_size: 8
     - name: DATA1
-      description: Data byte 1.
-      bit_offset: 18
+      description: Free user data byte 1 (mirror of OB.DATA1).
+      bit_offset: 20
       bit_size: 8
 fieldset/STATR:
   description: Status register.
@@ -214,3 +218,33 @@ fieldset/WPR:
       description: Write protect.
       bit_offset: 0
       bit_size: 32
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1
+enum/CanRecoveryMode:
+  description: How long the CAN controller waits before returning from bus-off to normal operation.
+  bit_size: 1
+  variants:
+    - name: CAN_PROTOCOL
+      description: Recover from bus-off in accordance with the CAN protocol.
+      value: 0
+    - name: FAST
+      description: Recover from bus-off slightly faster than the CAN protocol specifies.
+      value: 1

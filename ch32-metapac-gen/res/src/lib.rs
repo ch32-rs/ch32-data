@@ -15,6 +15,9 @@ pub mod metadata {
     include!(env!("CH32_METAPAC_METADATA_PATH"));
 }
 
+#[cfg(feature = "metadata")]
+pub mod nv;
+
 pub unsafe trait InterruptNumber: Copy {
     /// Return the interrupt number associated with this variant.
     ///

@@ -334,6 +334,8 @@ pub struct MemoryRegion {
     pub modes: Vec<Mode>,
     #[serde(default)]
     pub access: Option<Access>,
+    #[serde(default)]
+    pub structs: Vec<NvStruct>,
 }
 
 // Notice:
@@ -347,6 +349,41 @@ impl std::fmt::Debug for MemoryRegion {
             .field("size", &self.size)
             .field("modes", &self.modes)
             .field("access", &self.access)
+            .field("structs", &self.structs)
+            .finish()
+    }
+}
+
+// Notice:
+// NvStruct has custom Debug implement,
+// when modify struct, make sure Debug impl reflect the change.
+#[derive(Eq, PartialEq, Clone, Deserialize)]
+pub struct NvStruct {
+    pub name: String,
+    pub offset: u32,
+    pub kind: String,
+    pub version: String,
+    pub block: String,
+    #[serde(default)]
+    pub defaults: BTreeMap<String, u32>,
+    #[serde(default)]
+    pub ir: String,
+}
+
+// Notice:
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution
+impl std::fmt::Debug for NvStruct {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let defaults: Vec<(&str, &u32)> =
+            self.defaults.iter().map(|(k, v)| (k.as_str(), v)).collect();
+        f.debug_struct("NvStruct")
+            .field("name", &self.name)
+            .field("offset", &format_args!("{:#x}", self.offset))
+            .field("kind", &self.kind)
+            .field("version", &self.version)
+            .field("block", &self.block)
+            .field("defaults", &defaults)
+            .field("ir", &self.ir)
             .finish()
     }
 }
