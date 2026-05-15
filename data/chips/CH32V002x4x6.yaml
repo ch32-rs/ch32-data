@@ -23,8 +23,7 @@ packages:
   - name: CH32V002J4M6
     package: SOP8
 include_memory: ../memory/CH32V00X.yaml
-memory_options:
-  default: { USR_1: 16K, RAM: 4K }
+memory_sizes: { USR_1: 16K, RAM: 4K }
 docs:
   - type: homepage
     title: Homepage

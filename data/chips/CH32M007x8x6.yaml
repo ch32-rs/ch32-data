@@ -13,8 +13,7 @@ packages:
   - name: CH32M007K8U7
     package: QFN32
 include_memory: ../memory/CH32V00X.yaml
-memory_options:
-  default: { USR_1: 62K, RAM: 8K }
+memory_sizes: { USR_1: 62K, RAM: 8K }
 docs:
   - type: homepage
     title: Homepage

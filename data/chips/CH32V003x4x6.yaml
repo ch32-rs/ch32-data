@@ -15,8 +15,7 @@ packages:
   - name: CH32V003F4P6
     package: TSSOP20
 include_memory: ../memory/CH32V003.yaml
-memory_options:
-  default: { USR_1: 16K, RAM: 2K }
+memory_sizes: { USR_1: 16K, RAM: 2K }
 docs:
   - type: homepage
     title: Homepage

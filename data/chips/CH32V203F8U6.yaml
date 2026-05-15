@@ -7,8 +7,7 @@ packages:
   - name: CH32V203F8U6
     package: QFN20
 include_memory: ../memory/CH32V2_X8.yaml
-memory_options:
-  default: { USR_1: 64K, RAM: 20K }
+memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage

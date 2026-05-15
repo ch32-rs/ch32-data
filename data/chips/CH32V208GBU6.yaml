@@ -9,19 +9,15 @@ keywords:
 packages:
   - name: CH32V208GBU6
     package: QFN28
-include_memory: ../memory/CH32V2_208.yaml
+include_memory: ../memory/CH32V2.yaml
 # OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
-memory_options:
-  c128_r64:
-    USR_1: 128K
-    RAM: 64K
-  c144_r48:
-    USR_1: 144K
-    RAM: 48K
-  c160_r32:
-    USR_1: 160K
-    RAM: 32K
-default_memory_option: c128_r64
+memory_ram_code_config:
+  total_flash: 480K
+  default: c128_r64
+  configs:
+    - { name: c128_r64, code: 128K, ram: 64K }
+    - { name: c144_r48, code: 144K, ram: 48K }
+    - { name: c160_r32, code: 160K, ram: 32K }
 docs:
   - type: homepage
     title: Homepage

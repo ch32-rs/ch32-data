@@ -7,8 +7,7 @@ packages:
   - name: CH32V203K6T6
     package: LQFP32
 include_memory: ../memory/CH32V2_X6.yaml
-memory_options:
-  default: { USR_1: 32K, RAM: 10K }
+memory_sizes: { USR_1: 32K, RAM: 10K }
 docs:
   - type: homepage
     title: Homepage

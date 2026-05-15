@@ -7,8 +7,7 @@ packages:
   - name: CH32V103R8T6
     package: LQFP64M
 include_memory: ../memory/CH32V1.yaml
-memory_options:
-  default: { USR_1: 64K, RAM: 20K }
+memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage

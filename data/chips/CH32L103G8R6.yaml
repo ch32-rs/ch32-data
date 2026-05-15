@@ -10,8 +10,7 @@ packages:
   - name: CH32L103G8R6
     package: QSOP28
 include_memory: ../memory/CH32L1.yaml
-memory_options:
-  default: { USR_1: 64K, RAM: 20K }
+memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
