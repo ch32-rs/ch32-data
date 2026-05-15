@@ -3,7 +3,7 @@ use std::path::{Path, PathBuf};
 
 use serde::Deserialize;
 
-use crate::{chip, Chip};
+use crate::{chip, chip::memory, Chip};
 
 #[derive(Clone, Debug, Eq, PartialEq, Deserialize)]
 pub(crate) struct FamilyMemory {
@@ -72,7 +72,27 @@ impl Chip {
         E: fmt::Display,
     {
         let include = self.include_memory.take();
-        let uses_new_schema = include.is_some() || !self.memory_options.is_empty();
+        let uses_new_schema = include.is_some()
+            || !self.memory_options.is_empty()
+            || !self.memory_sizes.is_empty()
+            || self.memory_ram_code_config.is_some();
+
+        if !self.memory_sizes.is_empty() && self.memory_ram_code_config.is_some() {
+            return Err(format!(
+                "chip {:?}: memory_sizes and memory_ram_code_config are mutually exclusive \
+                 (memory_ram_code_config already determines all region sizes)",
+                self.name
+            ));
+        }
+        if (!self.memory_sizes.is_empty() || self.memory_ram_code_config.is_some())
+            && (!self.memory_options.is_empty() || self.default_memory_option.is_some())
+        {
+            return Err(format!(
+                "chip {:?}: cannot mix legacy memory_options/default_memory_option with \
+                 memory_sizes or memory_ram_code_config",
+                self.name
+            ));
+        }
 
         if let Some(inc_path) = include {
             let absolute = chip_dir.join(&inc_path);
@@ -82,11 +102,92 @@ impl Chip {
                 if self.memory.iter().any(|r| r.name == region.name) {
                     return Err(format!(
                         "memory region {:?} on chip {:?} collides with a region from {inc_path:?} \
-                         (include_memory appends; sizes go through memory_options)",
+                         (include_memory appends; sizes go through memory_sizes or memory_ram_code_config)",
                         region.name, self.name
                     ));
                 }
                 self.memory.push(region);
+            }
+        }
+
+        for (region_name, size) in &self.memory_sizes {
+            let region = self
+                .memory
+                .iter_mut()
+                .find(|r| &r.name == region_name)
+                .ok_or_else(|| {
+                    format!(
+                        "memory_sizes references unknown region {region_name:?} for chip {:?}",
+                        self.name
+                    )
+                })?;
+            region.size = Some(*size);
+        }
+
+        if let Some(config) = &self.memory_ram_code_config {
+            let default_opt = config
+                .configs
+                .iter()
+                .find(|c| c.name == config.default)
+                .ok_or_else(|| {
+                    format!(
+                        "memory_ram_code_config.default {:?} not in configs for chip {:?}",
+                        config.default, self.name
+                    )
+                })?
+                .clone();
+
+            let (usr1_address, usr1_modes, usr1_access, usr1_cores) = {
+                let usr1 = self
+                    .memory
+                    .iter_mut()
+                    .find(|r| r.name == "USR_1")
+                    .ok_or_else(|| {
+                        format!(
+                            "memory_ram_code_config requires a USR_1 region for chip {:?}",
+                            self.name
+                        )
+                    })?;
+                usr1.size = Some(default_opt.code);
+                let address = usr1.address.ok_or_else(|| {
+                    format!(
+                        "USR_1 region for chip {:?} has no address (memory_ram_code_config needs it to place USR_2)",
+                        self.name
+                    )
+                })?;
+                (address, usr1.modes.clone(), usr1.access.clone(), usr1.cores.clone())
+            };
+
+            let ram = self
+                .memory
+                .iter_mut()
+                .find(|r| r.name == "RAM")
+                .ok_or_else(|| {
+                    format!(
+                        "memory_ram_code_config requires a RAM region for chip {:?}",
+                        self.name
+                    )
+                })?;
+            ram.size = Some(default_opt.ram);
+
+            if config.total_flash < default_opt.code {
+                return Err(format!(
+                    "memory_ram_code_config: total_flash ({}) < default config code ({}) for chip {:?}",
+                    config.total_flash, default_opt.code, self.name
+                ));
+            }
+            let usr2_size = config.total_flash - default_opt.code;
+            if !self.memory.iter().any(|r| r.name == "USR_2") {
+                self.memory.push(chip::Memory {
+                    name: "USR_2".to_string(),
+                    kind: Some(memory::Kind::Flash),
+                    address: Some(usr1_address + default_opt.code),
+                    size: Some(usr2_size),
+                    modes: usr1_modes,
+                    access: usr1_access,
+                    cores: usr1_cores,
+                    settings: None,
+                });
             }
         }
 

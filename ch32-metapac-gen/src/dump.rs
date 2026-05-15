@@ -40,8 +40,10 @@ pub fn load_chip(data_dir: &Path, chip_name: &str) -> ChipDump {
 
     let options = build_memory_options(&chip);
     let default_option = chip
-        .default_memory_option
-        .clone()
+        .memory_ram_code_config
+        .as_ref()
+        .map(|c| c.default.clone())
+        .or_else(|| chip.default_memory_option.clone())
         .unwrap_or_else(|| "default".to_string());
 
     let options = options

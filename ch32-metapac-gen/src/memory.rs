@@ -49,6 +49,11 @@ pub(crate) fn memory_for_option(chip: &Chip, opt: &MemoryOption) -> Vec<MemoryRe
             region.size = *size;
         }
     }
+    for (region_name, address) in &opt.region_addresses {
+        if let Some(region) = memory.iter_mut().find(|r| &r.name == region_name) {
+            region.address = *address;
+        }
+    }
     memory
 }
 

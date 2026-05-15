@@ -166,22 +166,63 @@ fn postprocess_pac_rs(s: String) -> String {
         .to_string()
 }
 
-// chips without `memory_options` get a synthesized "default" so consumers always have one to iterate
+// Returns the set of memory variants exposed via feature flags. Sources in priority order:
+//   1. memory_ram_code_config — multi-config OB SRAM_CODE_MODE chips; USR_2 address+size vary per option
+//   2. memory_sizes           — single "default" with per-chip size overrides
+//   3. legacy memory_options  — kept until all chips are migrated
+//   4. neither                — synthesized "default" with no overrides
 pub(crate) fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
-    if chip.memory_options.is_empty() {
-        vec![MemoryOption {
+    if let Some(config) = &chip.memory_ram_code_config {
+        let usr1_address = chip
+            .memory
+            .iter()
+            .find(|r| r.name == "USR_1")
+            .expect("memory_ram_code_config without USR_1 should have been caught by resolver")
+            .address;
+        return config
+            .configs
+            .iter()
+            .map(|c| MemoryOption {
+                name: c.name.clone(),
+                region_sizes: vec![
+                    ("USR_1".to_string(), c.code),
+                    ("USR_2".to_string(), config.total_flash - c.code),
+                    ("RAM".to_string(), c.ram),
+                ],
+                region_addresses: vec![("USR_2".to_string(), usr1_address + c.code)],
+            })
+            .collect();
+    }
+
+    if !chip.memory_sizes.is_empty() {
+        return vec![MemoryOption {
             name: "default".to_string(),
-            region_sizes: Vec::new(),
-        }]
-    } else {
-        chip.memory_options
+            region_sizes: chip
+                .memory_sizes
+                .iter()
+                .map(|(k, v)| (k.clone(), *v))
+                .collect(),
+            region_addresses: Vec::new(),
+        }];
+    }
+
+    if !chip.memory_options.is_empty() {
+        return chip
+            .memory_options
             .iter()
             .map(|(name, sizes)| MemoryOption {
                 name: name.clone(),
                 region_sizes: sizes.iter().map(|(k, v)| (k.clone(), *v)).collect(),
+                region_addresses: Vec::new(),
             })
-            .collect()
+            .collect();
     }
+
+    vec![MemoryOption {
+        name: "default".to_string(),
+        region_sizes: Vec::new(),
+        region_addresses: Vec::new(),
+    }]
 }
 
 fn render_metadata_rs(
@@ -302,8 +343,10 @@ impl Gen {
         // metadata.rs
         let memory_options = build_memory_options(chip);
         let default_memory_option = chip
-            .default_memory_option
-            .as_deref()
+            .memory_ram_code_config
+            .as_ref()
+            .map(|c| c.default.as_str())
+            .or(chip.default_memory_option.as_deref())
             .unwrap_or("default");
         if memory_options.len() > 1 {
             for opt in &memory_options {

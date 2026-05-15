@@ -368,10 +368,13 @@ pub enum Mode {
 
 // Notice:
 // Debug implement AFFECT OUTPUT METAPAC, modify with caution
+// (only `name` and `region_sizes` are surfaced to runtime metadata; `region_addresses`
+// is codegen-internal and applied in memory_for_option)
 #[derive(Eq, PartialEq, Clone)]
 pub struct MemoryOption {
     pub name: String,
     pub region_sizes: Vec<(String, u32)>,
+    pub region_addresses: Vec<(String, u32)>,
 }
 
 impl std::fmt::Debug for MemoryOption {
