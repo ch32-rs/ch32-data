@@ -9,19 +9,8 @@ keywords:
 packages:
   - name: CH32X035G8U6
     package: QFN28
-memory:
-  - address: 0x08000000
-    kind: flash
-    name: BANK_1
-    settings:
-      erase_size: 1024
-      erase_value: 255
-      write_size: 256
-    size: 62K
-  - address: 0x20000000
-    kind: ram
-    name: SRAM
-    size: 20K
+include_memory: ../memory/CH32X0.yaml
+memory_sizes: { USR_1: 62K, RAM: 20K }
 docs:
   - name: "Homepage"
     title: "32位USB+USB PD单片机 CH32X035"

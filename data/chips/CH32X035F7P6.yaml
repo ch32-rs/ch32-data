@@ -9,19 +9,8 @@ keywords:
 packages:
   - name: CH32X035F7P6
     package: TSSOP20
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 49152
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 20480
+include_memory: ../memory/CH32X0.yaml
+memory_sizes: { USR_1: 48K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
