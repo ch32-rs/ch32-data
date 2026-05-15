@@ -304,7 +304,25 @@ pub struct Chip {
     pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
     #[serde(default)]
     pub default_memory_option: Option<String>,
+    #[serde(default)]
+    pub memory_sizes: BTreeMap<String, u32>,
+    #[serde(default)]
+    pub memory_ram_code_config: Option<MemoryRamCodeConfig>,
     pub packages: Vec<Package>,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct MemoryRamCodeConfig {
+    pub total_flash: u32,
+    pub default: String,
+    pub configs: Vec<MemoryRamCodeOption>,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct MemoryRamCodeOption {
+    pub name: String,
+    pub code: u32,
+    pub ram: u32,
 }
 
 // Notice:

@@ -29,6 +29,14 @@ pub struct Chip {
     pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default_memory_option: Option<String>,
+    #[serde(
+        default,
+        deserialize_with = "deserialize_memory_sizes",
+        skip_serializing_if = "BTreeMap::is_empty"
+    )]
+    pub memory_sizes: BTreeMap<String, u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub memory_ram_code_config: Option<chip::MemoryRamCodeConfig>,
 
     pub docs: Vec<chip::Doc>,
     pub cores: Vec<chip::Core>,
@@ -119,6 +127,23 @@ pub mod chip {
             pub write_size: u32,
             pub erase_value: u8,
         }
+    }
+
+    #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+    pub struct MemoryRamCodeConfig {
+        #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+        pub total_flash: u32,
+        pub default: String,
+        pub configs: Vec<MemoryRamCodeOption>,
+    }
+
+    #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+    pub struct MemoryRamCodeOption {
+        pub name: String,
+        #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+        pub code: u32,
+        #[serde(deserialize_with = "crate::parse_size_with_suffix")]
+        pub ram: u32,
     }
 
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -378,6 +403,18 @@ where
             )
         })
         .collect())
+}
+
+fn deserialize_memory_sizes<'de, D>(deserializer: D) -> Result<BTreeMap<String, u32>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    #[derive(Deserialize)]
+    #[serde(transparent)]
+    struct WrappedSize(#[serde(deserialize_with = "parse_size_with_suffix")] u32);
+
+    let raw: BTreeMap<String, WrappedSize> = BTreeMap::deserialize(deserializer)?;
+    Ok(raw.into_iter().map(|(k, WrappedSize(v))| (k, v)).collect())
 }
 
 #[cfg(test)]
