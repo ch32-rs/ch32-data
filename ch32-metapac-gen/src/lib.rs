@@ -105,13 +105,13 @@ impl Gen {
         if !self.memory_option_features.is_empty() {
             writeln!(&mut contents).unwrap();
             for name in &self.memory_option_features {
-                writeln!(&mut contents, "memory-option-{} = [\"memory-x\"]", name).unwrap();
+                writeln!(&mut contents, "memory-config-{} = [\"memory-x\"]", name).unwrap();
             }
         }
         if !self.memory_split_prefixes.is_empty() {
             writeln!(&mut contents).unwrap();
             for prefix in &self.memory_split_prefixes {
-                writeln!(&mut contents, "memory-{}-split = [\"memory-x\"]", prefix).unwrap();
+                writeln!(&mut contents, "memory-split-{} = [\"memory-x\"]", prefix).unwrap();
             }
         }
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();

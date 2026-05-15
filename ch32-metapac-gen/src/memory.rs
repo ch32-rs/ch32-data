@@ -121,7 +121,7 @@ pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -
         .collect();
     let all_not = non_default
         .iter()
-        .map(|n| format!("not(feature = \"memory-option-{}\")", n))
+        .map(|n| format!("not(feature = \"memory-config-{}\")", n))
         .collect::<Vec<_>>()
         .join(", ");
     let mut s = format!(
@@ -130,7 +130,7 @@ pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -
     );
     for n in &non_default {
         s.push_str(&format!(
-            "{}#[cfg_attr(feature = \"memory-option-{}\", path = \"memory_x/{}/memory.rs\")]\n",
+            "{}#[cfg_attr(feature = \"memory-config-{}\", path = \"memory_x/{}/memory.rs\")]\n",
             indent, n, n
         ));
     }

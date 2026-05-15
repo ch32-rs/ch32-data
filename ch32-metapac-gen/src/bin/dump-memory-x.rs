@@ -1,7 +1,7 @@
 // Usage:
 //   cargo run -p ch32-metapac-gen --bin dump-memory-x -- [CHIP|GLOB]... \
-//       [--features memory-option-c160_r32,memory-usr-split]
-// Without --features, emits every (memory-option-* x subset(memory-*-split)) combination.
+//       [--features memory-config-c160_r32,memory-split-usr]
+// Without --features, emits every (memory-config-* x subset(memory-split-*)) combination.
 
 use std::collections::BTreeSet;
 use std::env;
@@ -58,20 +58,16 @@ fn resolve_features(features: &[String]) -> (Option<String>, BTreeSet<String>) {
         if f == "memory-x" {
             continue;
         }
-        if let Some(name) = f.strip_prefix("memory-option-") {
+        if let Some(name) = f.strip_prefix("memory-config-") {
             if let Some(prev) = option.as_ref() {
                 panic!(
-                    "Multiple memory-option-* features given: memory-option-{}, memory-option-{}",
+                    "Multiple memory-config-* features given: memory-config-{}, memory-config-{}",
                     prev, name
                 );
             }
             option = Some(name.to_string());
-        } else if let Some(rest) = f.strip_prefix("memory-") {
-            if let Some(prefix) = rest.strip_suffix("-split") {
-                splits.insert(prefix.to_string());
-            } else {
-                panic!("Unknown feature: {}", f);
-            }
+        } else if let Some(prefix) = f.strip_prefix("memory-split-") {
+            splits.insert(prefix.to_string());
         } else {
             panic!("Unknown feature: {}", f);
         }
@@ -157,13 +153,13 @@ fn select_chips(args: &[String], all_chips: &[String]) -> Vec<String> {
 fn feature_label(option: &str, default: &str, splits: &BTreeSet<String>) -> String {
     let mut parts: Vec<String> = Vec::new();
     if option != default {
-        parts.push(format!("memory-option-{}", option));
+        parts.push(format!("memory-config-{}", option));
     }
     for p in splits {
-        parts.push(format!("memory-{}-split", p));
+        parts.push(format!("memory-split-{}", p));
     }
     if parts.is_empty() {
-        "(no memory-option / memory-*-split features — default)".to_string()
+        "(no memory-config-* / memory-split-* features — default)".to_string()
     } else {
         parts.join(", ")
     }
@@ -188,7 +184,7 @@ fn find_option<'a>(dump: &'a ChipDump, name: &str) -> &'a ChipOption {
         .unwrap_or_else(|| {
             let avail: Vec<&str> = dump.options.iter().map(|o| o.name.as_str()).collect();
             panic!(
-                "Chip {} has no memory-option-{} (available: {})",
+                "Chip {} has no memory-config-{} (available: {})",
                 dump.name,
                 name,
                 avail.join(", "),

@@ -69,8 +69,7 @@ fn main() {
         let split_prefixes: std::collections::BTreeSet<String> = env::vars()
             .map(|(a, _)| a)
             .filter_map(|x| {
-                x.strip_prefix("CARGO_FEATURE_MEMORY_")
-                    .and_then(|s| s.strip_suffix("_SPLIT"))
+                x.strip_prefix("CARGO_FEATURE_MEMORY_SPLIT_")
                     .map(|s| s.to_ascii_lowercase())
             })
             .collect();
@@ -99,11 +98,9 @@ fn main() {
 fn resolve_memory_option(crate_dir: &std::path::Path, chip_core_name: &str) -> String {
     let explicit: Vec<String> = env::vars()
         .map(|(a, _)| a)
-        .filter(|x| x.starts_with("CARGO_FEATURE_MEMORY_OPTION_"))
-        .map(|x| {
-            x.strip_prefix("CARGO_FEATURE_MEMORY_OPTION_")
-                .unwrap()
-                .to_ascii_lowercase()
+        .filter_map(|x| {
+            x.strip_prefix("CARGO_FEATURE_MEMORY_CONFIG_")
+                .map(|s| s.to_ascii_lowercase())
         })
         .collect();
     match explicit.len() {
@@ -119,7 +116,7 @@ fn resolve_memory_option(crate_dir: &std::path::Path, chip_core_name: &str) -> S
         }
         1 => explicit.into_iter().next().unwrap(),
         _ => panic!(
-            "Multiple `memory-option-*` features enabled: {:?}. Enable at most one.",
+            "Multiple `memory-config-*` features enabled: {:?}. Enable at most one.",
             explicit
         ),
     }
