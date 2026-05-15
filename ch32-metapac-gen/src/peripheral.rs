@@ -24,7 +24,7 @@ fn load_and_normalize_ir(json_path: &Path, sanitize: bool) -> ir::IR {
     });
 
     transform::sort::Sort {}.run(&mut ir).unwrap();
-    // Sanitize mangles names; NV consumers need RM names verbatim.
+    // sanitize mangles names; NV consumers need RM names verbatim
     if sanitize {
         transform::Sanitize {}.run(&mut ir).unwrap();
     }

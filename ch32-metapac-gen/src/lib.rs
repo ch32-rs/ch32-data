@@ -156,8 +156,7 @@ impl Gen {
             include_bytes!("../res/src/metadata.rs"),
         )
         .unwrap();
-        // Drop any stale single-file template from an earlier layout so it
-        // doesn't collide with `src/nv/mod.rs` below.
+        // drop stale single-file nv.rs from earlier layout
         let _ = fs::remove_file(self.opts.out_dir.join("src/nv.rs"));
         let nv_dir = self.opts.out_dir.join("src/nv");
         fs::create_dir_all(&nv_dir).unwrap();

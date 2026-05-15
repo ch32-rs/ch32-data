@@ -162,7 +162,7 @@ fn write_entry(dst: &mut [u8], bit_size: u32, input: EncodeInput) -> Result<(), 
             }
             Ok(())
         }
-        // Entries themselves have no enum; variants only resolve at field level.
+        // variants only resolve at field level
         EncodeInput::Variant(_) => Err(EncodeError::NoSuchVariant),
     }
 }
@@ -193,7 +193,7 @@ fn resolve_field_value(
                 Ok(v)
             }
         }
-        // Raw byte writes only make sense at entry level.
+        // raw byte writes only apply at entry level
         EncodeInput::Bytes(_) => Err(EncodeError::OutOfRange),
     }
 }

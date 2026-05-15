@@ -38,8 +38,7 @@ fn decoded_to_u64(d: &Descriptor, path: &str, v: Value) -> u64 {
     }
 }
 
-/// Pre-fill `buf` so every writable entry has been encoded once; this leaves
-/// all N-complement pairs aligned and `validate` clean.
+// Encode every writable entry once so N-complement pairs are aligned and `validate` is clean.
 fn flush_writable_entries(d: &Descriptor, buf: &mut [u8]) {
     for item in block_of(d).items {
         let Some(reg) = writable(item) else { continue };
@@ -445,7 +444,7 @@ fn lifecycle_find_list_default_encode_validate() {
         let mut buf = [0u8; BUF];
         found.reset(&mut buf).unwrap();
 
-        // Phase 1: every declared default is visible after reset.
+        // Phase 1: declared defaults visible after reset.
         for entry in &entries {
             let info = found.describe(entry).unwrap();
             let Some(def) = info.default else { continue };
@@ -459,8 +458,7 @@ fn lifecycle_find_list_default_encode_validate() {
             );
         }
 
-        // Phase 2: rewrite each writable entry to default+1 and confirm
-        // the buffer still validates after every step.
+        // Phase 2: rewrite each writable entry to default+1; buffer still validates.
         for entry in &entries {
             let info = found.describe(entry).unwrap();
             if matches!(info.access, Access::Read) {

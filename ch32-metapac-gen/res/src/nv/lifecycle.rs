@@ -35,12 +35,8 @@ impl Descriptor {
         Ok(())
     }
 
-    /// Restore the buffer to factory state: fill every block item with 0xFF
-    /// (erased-flash state), apply each value from `NvStruct.defaults` on top,
-    /// then re-sync every `N`-complement so the buffer is internally
-    /// consistent. Read-only entries in `defaults` are skipped — their value
-    /// is recomputed from their source by the complement sync. No-op on
-    /// descriptors with an empty `defaults` list (e.g. ESIG).
+    // Erase to 0xFF, write each `defaults` entry, then re-sync N-complements.
+    // Read-only defaults are skipped; no-op if `defaults` is empty (e.g. ESIG).
     pub fn reset(&self, buf: &mut [u8]) -> Result<(), EncodeError> {
         if self.nv.defaults.is_empty() {
             return Ok(());

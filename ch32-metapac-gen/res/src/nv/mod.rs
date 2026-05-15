@@ -1,8 +1,5 @@
-//! Runtime descriptor overlay for non-volatile flash structures (Option Bytes, ESIG, ...).
-//!
-//! Discovers `NvStruct` metadata attached to the active chip's memory regions, then exposes
-//! a path-based API (`descriptor.entry[.field]`) for reading, writing, and validating buffers
-//! laid out per those descriptors.
+//! Runtime descriptor overlay for non-volatile structures (Option Bytes, ESIG, ...).
+//! Exposes a path-based API (`descriptor.entry[.field]`) over buffers laid out per `NvStruct`.
 
 mod codec;
 mod descriptor;
