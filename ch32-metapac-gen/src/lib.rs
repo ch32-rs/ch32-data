@@ -105,7 +105,7 @@ impl Gen {
         if !self.memory_option_features.is_empty() {
             writeln!(&mut contents).unwrap();
             for name in &self.memory_option_features {
-                writeln!(&mut contents, "memory-config-{} = [\"memory-x\"]", name).unwrap();
+                writeln!(&mut contents, "memory-config-{} = []", name).unwrap();
             }
         }
         if !self.memory_split_prefixes.is_empty() {
