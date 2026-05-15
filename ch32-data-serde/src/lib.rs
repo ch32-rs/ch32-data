@@ -68,9 +68,6 @@ pub mod chip {
         pub access: Option<memory::Access>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub cores: Option<Vec<String>>,
-        // legacy: superseded by `modes`
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub settings: Option<memory::Settings>,
     }
 
     pub mod memory {
@@ -108,16 +105,6 @@ pub mod chip {
             pub write: bool,
             #[serde(default = "crate::default_true")]
             pub execute: bool,
-        }
-
-        // legacy, superseded by `Mode`
-        #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
-        pub struct Settings {
-            #[serde(deserialize_with = "crate::parse_size_with_suffix")]
-            pub erase_size: u32,
-            #[serde(deserialize_with = "crate::parse_size_with_suffix")]
-            pub write_size: u32,
-            pub erase_value: u8,
         }
     }
 

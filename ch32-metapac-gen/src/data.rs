@@ -334,9 +334,6 @@ pub struct MemoryRegion {
     pub modes: Vec<Mode>,
     #[serde(default)]
     pub access: Option<Access>,
-    // legacy: superseded by `modes`
-    #[serde(default)]
-    pub settings: Option<FlashSettings>,
 }
 
 // Notice:
@@ -350,7 +347,6 @@ impl std::fmt::Debug for MemoryRegion {
             .field("size", &self.size)
             .field("modes", &self.modes)
             .field("access", &self.access)
-            .field("settings", &self.settings)
             .finish()
     }
 }
@@ -387,13 +383,6 @@ pub struct Access {
     pub read: bool,
     pub write: bool,
     pub execute: bool,
-}
-
-#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
-pub struct FlashSettings {
-    pub erase_size: u32,
-    pub write_size: u32,
-    pub erase_value: u8,
 }
 
 #[derive(EnumDebug, Eq, PartialEq, Clone, Deserialize)]

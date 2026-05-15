@@ -149,8 +149,6 @@ pub struct MemoryRegion {
     pub size: u32,
     pub modes: &'static [Mode],
     pub access: Option<Access>,
-    // legacy: superseded by `modes`
-    pub settings: Option<FlashSettings>,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -164,13 +162,6 @@ pub struct Access {
     pub read: bool,
     pub write: bool,
     pub execute: bool,
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub struct FlashSettings {
-    pub erase_size: u32,
-    pub write_size: u32,
-    pub erase_value: u8,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]

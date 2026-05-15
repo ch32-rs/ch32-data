@@ -24,18 +24,13 @@ pub(crate) fn kind_str(kind: &MemoryRegionKind) -> &'static str {
     }
 }
 
-// `USR_*` on new YAMLs, `BANK_*` on legacy ones
 pub(crate) fn primary_flash_regions(chip: &Chip) -> impl Iterator<Item = &MemoryRegion> + Clone {
-    chip.memory.iter().filter(|r| {
-        r.kind == MemoryRegionKind::Flash
-            && (r.name.starts_with("USR_") || r.name.starts_with("BANK_"))
-    })
+    chip.memory
+        .iter()
+        .filter(|r| r.kind == MemoryRegionKind::Flash && r.name.starts_with("USR_"))
 }
 
 pub(crate) fn flash_write_size(r: &MemoryRegion) -> Option<u32> {
-    if let Some(s) = &r.settings {
-        return Some(s.write_size);
-    }
     r.modes.iter().find_map(|m| match m {
         Mode::Fast { page_size, .. } => Some(*page_size),
         _ => None,
@@ -97,7 +92,7 @@ fn write_regions(path: &Path, memory: &[MemoryRegion]) {
 
 fn write_memory_rs(path: &Path, memory: &[MemoryRegion]) {
     let body = format!(
-        "use crate::metadata::{{Access, FlashSettings, MemoryRegion, MemoryRegionKind, Mode::*}};
+        "use crate::metadata::{{Access, MemoryRegion, MemoryRegionKind, Mode::*}};
 
 pub static MEMORY: &[MemoryRegion] = {};
 ",

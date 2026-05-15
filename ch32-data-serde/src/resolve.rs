@@ -176,7 +176,6 @@ impl Chip {
                     modes: usr1_modes,
                     access: usr1_access,
                     cores: usr1_cores,
-                    settings: None,
                 });
             }
         }
