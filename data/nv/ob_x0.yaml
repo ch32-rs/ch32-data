@@ -1,5 +1,5 @@
 block/OB:
-  description: Option Bytes — persistent flash configuration for the CH32X0 family (read protection, watchdog mode, stop/standby reset behavior, NRST pin mode, user data, four 1-byte write-protection masks). Shares the 16-byte layout of ob_v00x; USER bits differ (X0 adds STOPRST and has no boot-source bit).
+  description: Persistent flash configuration — read protection, watchdog mode, stop/standby reset behavior, NRST pin function, write protection, and two free user-data bytes.
   items:
     - name: RDPR
       description: Read protection level.
@@ -7,87 +7,87 @@ block/OB:
       bit_size: 8
       fieldset: RDPR
     - name: NRDPR
-      description: Integrity complement of RDPR (auto-computed on write).
+      description: Integrity complement of RDPR (managed automatically).
       byte_offset: 1
       bit_size: 8
       access: Read
     - name: USER
-      description: User configuration (watchdog, stop/standby reset, NRST pin mode).
+      description: User configuration — watchdog mode, stop/standby reset, NRST pin function.
       byte_offset: 2
       bit_size: 8
       fieldset: USER
     - name: NUSER
-      description: Integrity complement of USER (auto-computed on write).
+      description: Integrity complement of USER (managed automatically).
       byte_offset: 3
       bit_size: 8
       access: Read
     - name: DATA0
-      description: Free user data byte 0 (8 bits available for application use).
+      description: Free user data byte 0.
       byte_offset: 4
       bit_size: 8
     - name: NDATA0
-      description: Integrity complement of DATA0 (auto-computed on write).
+      description: Integrity complement of DATA0 (managed automatically).
       byte_offset: 5
       bit_size: 8
       access: Read
     - name: DATA1
-      description: Free user data byte 1 (8 bits available for application use).
+      description: Free user data byte 1.
       byte_offset: 6
       bit_size: 8
     - name: NDATA1
-      description: Integrity complement of DATA1 (auto-computed on write).
+      description: Integrity complement of DATA1 (managed automatically).
       byte_offset: 7
       bit_size: 8
       access: Read
     - name: WRPR0
-      description: Write protection mask covering main-flash sectors 0-15 (each bit guards a 2K group of two 1K sectors; 1 = writable, 0 = protected).
+      description: Write protection for main-flash sectors 0-15. 1 bit per 2K group of two 1K sectors (1 = writable, 0 = protected).
       byte_offset: 8
       bit_size: 8
     - name: NWRPR0
-      description: Integrity complement of WRPR0 (auto-computed on write).
+      description: Integrity complement of WRPR0 (managed automatically).
       byte_offset: 9
       bit_size: 8
       access: Read
     - name: WRPR1
-      description: Write protection mask covering main-flash sectors 16-31 (1 bit per 2K group; 1 = writable, 0 = protected).
+      description: Write protection for main-flash sectors 16-31. 1 bit per 2K group (1 = writable, 0 = protected).
       byte_offset: 10
       bit_size: 8
     - name: NWRPR1
-      description: Integrity complement of WRPR1 (auto-computed on write).
+      description: Integrity complement of WRPR1 (managed automatically).
       byte_offset: 11
       bit_size: 8
       access: Read
     - name: WRPR2
-      description: Write protection mask covering main-flash sectors 32-47 (1 bit per 2K group; 1 = writable, 0 = protected).
+      description: Write protection for main-flash sectors 32-47. 1 bit per 2K group (1 = writable, 0 = protected).
       byte_offset: 12
       bit_size: 8
     - name: NWRPR2
-      description: Integrity complement of WRPR2 (auto-computed on write).
+      description: Integrity complement of WRPR2 (managed automatically).
       byte_offset: 13
       bit_size: 8
       access: Read
     - name: WRPR3
-      description: Write protection mask. Bits 0-6 cover main-flash sectors 48-61 (1 bit per 2K group); bit 7 guards the 3328-byte startup-code region in system flash. 1 = writable, 0 = protected.
+      description: Write protection — bits 0-6 cover main-flash sectors 48-61 (1 bit per 2K group); bit 7 guards the 3328-byte startup-code region in system flash. 1 = writable, 0 = protected.
       byte_offset: 14
       bit_size: 8
     - name: NWRPR3
-      description: Integrity complement of WRPR3 (auto-computed on write).
+      description: Integrity complement of WRPR3 (managed automatically).
       byte_offset: 15
       bit_size: 8
       access: Read
 
 fieldset/RDPR:
-  description: Read protection byte.
+  description: Read protection level.
   bit_size: 8
   fields:
     - name: RDPR
-      description: Read protection level. Set UNPROTECTED (0xA5) to allow debug reads; any other value blocks the debug interface and auto-write-protects pages 0-7 (2K each).
+      description: Set UNPROTECTED (0xA5) to allow debug reads. Any other value blocks the debug interface and auto-write-protects pages 0-7 (2K each).
       bit_offset: 0
       bit_size: 8
       enum: ReadProtection
 
 fieldset/USER:
-  description: User configuration byte. Bits 5-7 are reserved.
+  description: Watchdog mode, low-power reset behavior, and NRST pin function.
   bit_size: 8
   fields:
     - name: IWDGSW
@@ -106,7 +106,7 @@ fieldset/USER:
       bit_size: 1
       enum: PowerModeReset
     - name: RST_MODE
-      description: NRST pin behavior at power-on. Factory default is GPIO — the external reset pin (PA21/PC3/PB7 depending on package) ships configured as a general-purpose I/O.
+      description: NRST pin function at power-on.
       bit_offset: 3
       bit_size: 2
       enum: RstPinMode
@@ -142,12 +142,12 @@ enum/PowerModeReset:
       value: 1
 
 enum/RstPinMode:
-  description: NRST pin behavior at power-on. Only the two encodings below are defined; other values are reserved.
+  description: NRST pin function. Only NRST (0b00) and GPIO (0b11) are defined; other values are reserved.
   bit_size: 2
   variants:
     - name: NRST
-      description: Enable the external reset pin in its NRST function.
+      description: Use the pin as the external reset input.
       value: 0b00
     - name: GPIO
-      description: Disable NRST and use the pin as a general-purpose I/O (PA21/PC3/PB7 depending on package).
+      description: Use the pin as a general-purpose I/O (PA21/PC3/PB7, package-dependent). Factory default.
       value: 0b11

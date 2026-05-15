@@ -1,5 +1,5 @@
 block/OB:
-  description: Option Bytes — persistent flash configuration for the CH32L1 family (read protection, watchdog mode, stop/standby reset behavior, CAN offline-recovery timing, user data, two 1-byte write-protection masks). 12 defined bytes laid out as source/complement pairs.
+  description: Persistent flash configuration — read protection, watchdog mode, stop/standby reset, CAN offline-recovery timing, write protection, and two free user-data bytes.
   items:
     - name: RDPR
       description: Read protection level.
@@ -7,69 +7,69 @@ block/OB:
       bit_size: 8
       fieldset: RDPR
     - name: NRDPR
-      description: Integrity complement of RDPR (auto-computed on write).
+      description: Integrity complement of RDPR (managed automatically).
       byte_offset: 1
       bit_size: 8
       access: Read
     - name: USER
-      description: User configuration (watchdog, stop/standby reset, CAN offline-recovery timing).
+      description: User configuration — watchdog mode, stop/standby reset, CAN offline-recovery timing.
       byte_offset: 2
       bit_size: 8
       fieldset: USER
     - name: NUSER
-      description: Integrity complement of USER (auto-computed on write).
+      description: Integrity complement of USER (managed automatically).
       byte_offset: 3
       bit_size: 8
       access: Read
     - name: DATA0
-      description: Free user data byte 0 (8 bits available for application use).
+      description: Free user data byte 0.
       byte_offset: 4
       bit_size: 8
     - name: NDATA0
-      description: Integrity complement of DATA0 (auto-computed on write).
+      description: Integrity complement of DATA0 (managed automatically).
       byte_offset: 5
       bit_size: 8
       access: Read
     - name: DATA1
-      description: Free user data byte 1 (8 bits available for application use).
+      description: Free user data byte 1.
       byte_offset: 6
       bit_size: 8
     - name: NDATA1
-      description: Integrity complement of DATA1 (auto-computed on write).
+      description: Integrity complement of DATA1 (managed automatically).
       byte_offset: 7
       bit_size: 8
       access: Read
     - name: WRPR0
-      description: Write protection mask covering main-flash sectors 0-15 (each bit guards a 2K group of two 1K sectors; 1 = writable, 0 = protected).
+      description: Write protection for main-flash sectors 0-15. 1 bit per 2K group of two 1K sectors (1 = writable, 0 = protected).
       byte_offset: 8
       bit_size: 8
     - name: NWRPR0
-      description: Integrity complement of WRPR0 (auto-computed on write).
+      description: Integrity complement of WRPR0 (managed automatically).
       byte_offset: 9
       bit_size: 8
       access: Read
     - name: WRPR1
-      description: Write protection mask covering main-flash sectors 16-31 (1 bit per 2K group; 1 = writable, 0 = protected).
+      description: Write protection for main-flash sectors 16-31. 1 bit per 2K group (1 = writable, 0 = protected).
       byte_offset: 10
       bit_size: 8
     - name: NWRPR1
-      description: Integrity complement of WRPR1 (auto-computed on write).
+      description: Integrity complement of WRPR1 (managed automatically).
       byte_offset: 11
       bit_size: 8
       access: Read
 
 fieldset/RDPR:
-  description: Read protection byte.
+  description: Read protection level.
   bit_size: 8
   fields:
     - name: RDPR
-      description: Read protection level. Set UNPROTECTED (0xA5) to allow debug reads; any other value blocks the debug interface and auto-write-protects pages 0-31 (4K each).
+      description: Set UNPROTECTED (0xA5) to allow debug reads. Any other value blocks the debug interface and auto-write-protects pages 0-31 (4K each).
       bit_offset: 0
       bit_size: 8
       enum: ReadProtection
 
 fieldset/USER:
-  description: User configuration byte. Bits 3-4 and 6-7 are reserved.
+  description: Watchdog mode, low-power reset behavior, and CAN offline-recovery timing.
   bit_size: 8
   fields:
     - name: IWDGSW
