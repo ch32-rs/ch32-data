@@ -150,46 +150,52 @@ fieldset/OBKEYR:
       bit_offset: 0
       bit_size: 32
 fieldset/OBR:
-  description: Option byte register.
+  description: Option byte register — read-only mirror of the Option Bytes loaded from flash at reset.
   fields:
     - name: OPTERR
-      description: Option byte error.
+      description: Option byte integrity error — a value/complement pair did not match when loading.
       bit_offset: 0
       bit_size: 1
     - name: RDPRT
-      description: Read protection.
+      description: Read protection is currently active.
       bit_offset: 1
       bit_size: 1
     - name: IWDG_SW
-      description: IWDG_SW.
+      description: Independent watchdog start mode currently in effect.
       bit_offset: 2
       bit_size: 1
+      enum: IwdgMode
     - name: nRST_STOP
-      description: nRST_STOP.
+      description: Stop-mode reset behavior currently in effect.
       bit_offset: 3
       bit_size: 1
+      enum: PowerModeReset
     - name: nRST_STDBY
-      description: nRST_STDBY.
+      description: Standby-mode reset behavior currently in effect.
       bit_offset: 4
       bit_size: 1
+      enum: PowerModeReset
     - name: USBD_MODE
-      description: USBD compatible speed mode configure.
+      description: USBD bus speed mode currently in effect.
       bit_offset: 5
       bit_size: 1
+      enum: UsbdSpeed
     - name: USBD_PU
-      description: USBD compatible inner pull up resistance configure.
+      description: USBD built-in 1.5 kΩ pull-up resistor state currently in effect.
       bit_offset: 6
       bit_size: 1
+      enum: UsbdPullup
     - name: POR_CTR
-      description: Power on reset time.
+      description: Power-on reset timing window currently in effect.
       bit_offset: 7
       bit_size: 1
+      enum: PowerOnResetTime
     - name: Data0
-      description: Data0.
+      description: Free user data byte 0 (mirror of OB.DATA0).
       bit_offset: 10
       bit_size: 8
     - name: Data1
-      description: Data1.
+      description: Free user data byte 1 (mirror of OB.DATA1).
       bit_offset: 18
       bit_size: 8
 fieldset/STATR:
@@ -218,3 +224,53 @@ fieldset/WPR:
       description: Write protect.
       bit_offset: 0
       bit_size: 32
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1
+enum/UsbdSpeed:
+  description: USBD bus speed mode loaded from Option Bytes at startup.
+  bit_size: 1
+  variants:
+    - name: FULL_SPEED
+      description: USB full-speed mode (12 Mbps).
+      value: 0
+    - name: LOW_SPEED
+      description: USB low-speed mode (1.5 Mbps).
+      value: 1
+enum/UsbdPullup:
+  description: USBD built-in 1.5 kΩ pull-up resistor state loaded from Option Bytes at startup.
+  bit_size: 1
+  variants:
+    - name: DISABLED
+      description: Built-in pull-up disabled — an external pull-up is required on the USB data line.
+      value: 0
+    - name: ENABLED
+      description: Built-in pull-up enabled — no external pull-up needed.
+      value: 1
+enum/PowerOnResetTime:
+  description: Length of the power-on reset window.
+  bit_size: 1
+  variants:
+    - name: LONG
+      description: 40.96 ms power-on reset window.
+      value: 0
+    - name: SHORT
+      description: 16.384 ms power-on reset window.
+      value: 1
