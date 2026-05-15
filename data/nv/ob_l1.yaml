@@ -1,0 +1,135 @@
+block/OB:
+  description: Option Bytes — persistent flash configuration for the CH32L1 family (read protection, watchdog mode, stop/standby reset behavior, CAN offline-recovery timing, user data, two 1-byte write-protection masks). 12 defined bytes laid out as source/complement pairs.
+  items:
+    - name: RDPR
+      description: Read protection level.
+      byte_offset: 0
+      bit_size: 8
+      fieldset: RDPR
+    - name: NRDPR
+      description: Integrity complement of RDPR (auto-computed on write).
+      byte_offset: 1
+      bit_size: 8
+      access: Read
+    - name: USER
+      description: User configuration (watchdog, stop/standby reset, CAN offline-recovery timing).
+      byte_offset: 2
+      bit_size: 8
+      fieldset: USER
+    - name: NUSER
+      description: Integrity complement of USER (auto-computed on write).
+      byte_offset: 3
+      bit_size: 8
+      access: Read
+    - name: DATA0
+      description: Free user data byte 0 (8 bits available for application use).
+      byte_offset: 4
+      bit_size: 8
+    - name: NDATA0
+      description: Integrity complement of DATA0 (auto-computed on write).
+      byte_offset: 5
+      bit_size: 8
+      access: Read
+    - name: DATA1
+      description: Free user data byte 1 (8 bits available for application use).
+      byte_offset: 6
+      bit_size: 8
+    - name: NDATA1
+      description: Integrity complement of DATA1 (auto-computed on write).
+      byte_offset: 7
+      bit_size: 8
+      access: Read
+    - name: WRPR0
+      description: Write protection mask covering main-flash sectors 0-15 (each bit guards a 2K group of two 1K sectors; 1 = writable, 0 = protected).
+      byte_offset: 8
+      bit_size: 8
+    - name: NWRPR0
+      description: Integrity complement of WRPR0 (auto-computed on write).
+      byte_offset: 9
+      bit_size: 8
+      access: Read
+    - name: WRPR1
+      description: Write protection mask covering main-flash sectors 16-31 (1 bit per 2K group; 1 = writable, 0 = protected).
+      byte_offset: 10
+      bit_size: 8
+    - name: NWRPR1
+      description: Integrity complement of WRPR1 (auto-computed on write).
+      byte_offset: 11
+      bit_size: 8
+      access: Read
+
+fieldset/RDPR:
+  description: Read protection byte.
+  bit_size: 8
+  fields:
+    - name: RDPR
+      description: Read protection level. Set UNPROTECTED (0xA5) to allow debug reads; any other value blocks the debug interface and auto-write-protects pages 0-31 (4K each).
+      bit_offset: 0
+      bit_size: 8
+      enum: ReadProtection
+
+fieldset/USER:
+  description: User configuration byte. Bits 3-4 and 6-7 are reserved.
+  bit_size: 8
+  fields:
+    - name: IWDGSW
+      description: How the independent watchdog starts.
+      bit_offset: 0
+      bit_size: 1
+      enum: IwdgMode
+    - name: STOPRST
+      description: Whether entering Stop mode resets the chip.
+      bit_offset: 1
+      bit_size: 1
+      enum: PowerModeReset
+    - name: STANDYRST
+      description: Whether entering Standby mode resets the chip.
+      bit_offset: 2
+      bit_size: 1
+      enum: PowerModeReset
+    - name: CFGCANM
+      description: CAN offline-to-normal recovery timing.
+      bit_offset: 5
+      bit_size: 1
+      enum: CanRecoveryMode
+
+enum/ReadProtection:
+  description: Whether flash contents are readable through the debug interface.
+  bit_size: 8
+  variants:
+    - name: UNPROTECTED
+      description: Allow the debug interface to read flash.
+      value: 0xA5
+
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1
+
+enum/CanRecoveryMode:
+  description: How long the CAN controller waits before returning from bus-off to normal operation.
+  bit_size: 1
+  variants:
+    - name: CAN_PROTOCOL
+      description: Recover from bus-off in accordance with the CAN protocol.
+      value: 0
+    - name: FAST
+      description: Recover from bus-off slightly faster than the CAN protocol specifies.
+      value: 1
