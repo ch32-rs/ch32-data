@@ -34,6 +34,17 @@ memory:
       read: true
       write: true
       execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: x0
+        block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0xFF
+          NUSER: 0x00
   - name: VND
     kind: flash
     address: 0x1FFFF700
@@ -42,6 +53,12 @@ memory:
       read: true
       write: false
       execute: false
+    structs:
+      - name: ESIG
+        offset: 0xE0
+        kind: esig
+        version: common
+        block: ESIG
   - name: RAM
     kind: ram
     address: 0x20000000
