@@ -10,19 +10,16 @@ keywords:
 packages:
   - name: CH32V303RCT6
     package: LQFP64M
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 262144
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 65536
+include_memory: ../memory/CH32V2_V3.yaml
+memory_ram_code_config:
+  total_flash: 480K
+  default: c256_r64
+  configs:
+    - { name: c192_r128, code: 192K, ram: 128K }
+    - { name: c224_r96, code: 224K, ram: 96K }
+    - { name: c256_r64, code: 256K, ram: 64K }
+    - { name: c128_r192, code: 128K, ram: 192K }
+    - { name: c288_r32, code: 288K, ram: 32K }
 docs:
   - type: homepage
     title: Homepage
