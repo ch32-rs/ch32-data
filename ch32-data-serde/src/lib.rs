@@ -23,14 +23,6 @@ pub struct Chip {
     pub memory: Vec<chip::Memory>,
     #[serde(
         default,
-        deserialize_with = "deserialize_memory_options",
-        skip_serializing_if = "BTreeMap::is_empty"
-    )]
-    pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_memory_option: Option<String>,
-    #[serde(
-        default,
         deserialize_with = "deserialize_memory_sizes",
         skip_serializing_if = "BTreeMap::is_empty"
     )]
@@ -378,31 +370,6 @@ pub mod chip {
 
 fn default_true() -> bool {
     true
-}
-
-fn deserialize_memory_options<'de, D>(
-    deserializer: D,
-) -> Result<BTreeMap<String, BTreeMap<String, u32>>, D::Error>
-where
-    D: serde::Deserializer<'de>,
-{
-    #[derive(Deserialize)]
-    #[serde(transparent)]
-    struct WrappedSize(#[serde(deserialize_with = "parse_size_with_suffix")] u32);
-
-    let raw: BTreeMap<String, BTreeMap<String, WrappedSize>> = BTreeMap::deserialize(deserializer)?;
-    Ok(raw
-        .into_iter()
-        .map(|(k, inner)| {
-            (
-                k,
-                inner
-                    .into_iter()
-                    .map(|(rk, WrappedSize(v))| (rk, v))
-                    .collect(),
-            )
-        })
-        .collect())
 }
 
 fn deserialize_memory_sizes<'de, D>(deserializer: D) -> Result<BTreeMap<String, u32>, D::Error>

@@ -73,7 +73,6 @@ impl Chip {
     {
         let include = self.include_memory.take();
         let uses_new_schema = include.is_some()
-            || !self.memory_options.is_empty()
             || !self.memory_sizes.is_empty()
             || self.memory_ram_code_config.is_some();
 
@@ -81,15 +80,6 @@ impl Chip {
             return Err(format!(
                 "chip {:?}: memory_sizes and memory_ram_code_config are mutually exclusive \
                  (memory_ram_code_config already determines all region sizes)",
-                self.name
-            ));
-        }
-        if (!self.memory_sizes.is_empty() || self.memory_ram_code_config.is_some())
-            && (!self.memory_options.is_empty() || self.default_memory_option.is_some())
-        {
-            return Err(format!(
-                "chip {:?}: cannot mix legacy memory_options/default_memory_option with \
-                 memory_sizes or memory_ram_code_config",
                 self.name
             ));
         }
@@ -188,32 +178,6 @@ impl Chip {
                     cores: usr1_cores,
                     settings: None,
                 });
-            }
-        }
-
-        if self.default_memory_option.is_none() && self.memory_options.contains_key("default") {
-            self.default_memory_option = Some("default".to_string());
-        }
-
-        if let Some(opt_name) = &self.default_memory_option {
-            let opt = self.memory_options.get(opt_name).ok_or_else(|| {
-                format!(
-                    "default_memory_option {opt_name:?} not in memory_options for chip {:?}",
-                    self.name
-                )
-            })?;
-            for (region_name, size) in opt {
-                let region = self
-                    .memory
-                    .iter_mut()
-                    .find(|r| &r.name == region_name)
-                    .ok_or_else(|| {
-                        format!(
-                            "memory_options[{opt_name}] references unknown region {region_name:?} for chip {:?}",
-                            self.name
-                        )
-                    })?;
-                region.size = Some(*size);
             }
         }
 

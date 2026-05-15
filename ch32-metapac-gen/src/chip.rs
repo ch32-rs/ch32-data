@@ -166,11 +166,10 @@ fn postprocess_pac_rs(s: String) -> String {
         .to_string()
 }
 
-// Returns the set of memory variants exposed via feature flags. Sources in priority order:
-//   1. memory_ram_code_config — multi-config OB SRAM_CODE_MODE chips; USR_2 address+size vary per option
-//   2. memory_sizes           — single "default" with per-chip size overrides
-//   3. legacy memory_options  — kept until all chips are migrated
-//   4. neither                — synthesized "default" with no overrides
+// Returns the set of memory variants exposed via feature flags:
+//   - memory_ram_code_config → one option per SRAM_CODE_MODE config (USR_2 address+size vary)
+//   - memory_sizes           → a single "default" with per-chip size overrides
+//   - neither                → a single "default" with no overrides
 pub(crate) fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
     if let Some(config) = &chip.memory_ram_code_config {
         let usr1_address = chip
@@ -194,33 +193,13 @@ pub(crate) fn build_memory_options(chip: &Chip) -> Vec<MemoryOption> {
             .collect();
     }
 
-    if !chip.memory_sizes.is_empty() {
-        return vec![MemoryOption {
-            name: "default".to_string(),
-            region_sizes: chip
-                .memory_sizes
-                .iter()
-                .map(|(k, v)| (k.clone(), *v))
-                .collect(),
-            region_addresses: Vec::new(),
-        }];
-    }
-
-    if !chip.memory_options.is_empty() {
-        return chip
-            .memory_options
-            .iter()
-            .map(|(name, sizes)| MemoryOption {
-                name: name.clone(),
-                region_sizes: sizes.iter().map(|(k, v)| (k.clone(), *v)).collect(),
-                region_addresses: Vec::new(),
-            })
-            .collect();
-    }
-
     vec![MemoryOption {
         name: "default".to_string(),
-        region_sizes: Vec::new(),
+        region_sizes: chip
+            .memory_sizes
+            .iter()
+            .map(|(k, v)| (k.clone(), *v))
+            .collect(),
         region_addresses: Vec::new(),
     }]
 }
@@ -346,7 +325,6 @@ impl Gen {
             .memory_ram_code_config
             .as_ref()
             .map(|c| c.default.as_str())
-            .or(chip.default_memory_option.as_deref())
             .unwrap_or("default");
         if memory_options.len() > 1 {
             for opt in &memory_options {

@@ -43,7 +43,6 @@ pub fn load_chip(data_dir: &Path, chip_name: &str) -> ChipDump {
         .memory_ram_code_config
         .as_ref()
         .map(|c| c.default.clone())
-        .or_else(|| chip.default_memory_option.clone())
         .unwrap_or_else(|| "default".to_string());
 
     let options = options

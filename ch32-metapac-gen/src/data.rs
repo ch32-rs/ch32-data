@@ -301,10 +301,6 @@ pub struct Chip {
     pub cores: Vec<Core>,
     pub memory: Vec<MemoryRegion>,
     #[serde(default)]
-    pub memory_options: BTreeMap<String, BTreeMap<String, u32>>,
-    #[serde(default)]
-    pub default_memory_option: Option<String>,
-    #[serde(default)]
     pub memory_sizes: BTreeMap<String, u32>,
     #[serde(default)]
     pub memory_ram_code_config: Option<MemoryRamCodeConfig>,
