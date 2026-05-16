@@ -993,7 +993,7 @@
   address: 0x40023C00
   registers:
     kind: rng
-    version: v3
+    version: h4
     block: RNG
   rcc:
     bus_clock: HCLK
