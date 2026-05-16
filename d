@@ -50,7 +50,7 @@ case "$CMD" in
     gen)
         rm -rf build/data
         echo "TODO: More chips to be added"
-        cargo run -p ch32-data-gen && cargo run -p ch32-metapac-gen -- "CH32X03*" "CH32V*" "CH32L*" "CH32M*" CH641 CH643
+        cargo run -p ch32-data-gen && cargo run -p ch32-metapac-gen -- "CH32X03*" "CH32V*" "CH32L*" "CH32M*" "CH32F*" CH641 CH643
     ;;
     dump-memory-x)
         # Render memory.x for inspection, into build/memory-x-dump/<chip>.memory.x.
