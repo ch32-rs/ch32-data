@@ -1,7 +1,16 @@
 # Shared peripherals for the CH32H4 family (currently only CH32H417).
 # Listed peripherals are visible to both V3F (hart 0) and V5F (hart 1).
-# Core-private aspects (PFIC views, per-hart interrupt routing) are
-# encoded in the chip yaml's per-core include_interrupts file.
+#
+# PFIC is intentionally NOT listed here. PFIC primitives (enable /
+# disable / pend / priority) are provided by the `qingke` crate
+# (qingke::pfic), shared across all WCH RISC-V cores. The H4-specific
+# dual-core extensions (HartId, wake_other_core via SCTLR.HART_ID and
+# WAKEIP0 / WAKEIP1) are gated behind the `qingke/dual-core` feature.
+# Per-hart interrupt routing is encoded in the chip yaml's per-core
+# include_interrupts file (data/interrupts/CH32H4.yaml). Any rare
+# need for typed access to PFIC fields like SCTLR.SEVONPEND should be
+# added as a helper in qingke rather than re-described here, so the
+# metapac PAC stays small and the runtime layer owns PFIC.
 
 - name: GPIOA
   address: 0x40010800
