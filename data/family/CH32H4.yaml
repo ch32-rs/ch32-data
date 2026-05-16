@@ -1,0 +1,167 @@
+# Shared peripherals for the CH32H4 family (currently only CH32H417).
+# Listed peripherals are visible to both V3F (hart 0) and V5F (hart 1).
+# Core-private aspects (PFIC views, per-hart interrupt routing) are
+# encoded in the chip yaml's per-core include_interrupts file.
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPDEN
+    reset:
+      register: APB2PRSTR
+      field: IOPDRST
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPEEN
+    reset:
+      register: APB2PRSTR
+      field: IOPERST
+- name: GPIOF
+  address: 0x40011C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPFEN
+    reset:
+      register: APB2PRSTR
+      field: IOPFRST
+
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: dual_core
+    block: SYSTICK
+  # Per-counter interrupt routing is configured at runtime via CTLR.CID;
+  # SysTick0/SysTick1 are exposed as separate interrupts (SysTick0=12,
+  # SysTick1=13). Handled in qingke-rt entry, not wired here.
+
+- name: HSEM
+  address: 0xE000C000
+  registers:
+    kind: hsem
+    version: h4
+    block: HSEM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: HSEM
+
+- name: IPC
+  address: 0xE000D000
+  registers:
+    kind: ipc
+    version: h4
+    block: IPC
+  interrupts:
+    - signal: CH0
+      interrupt: IPC_CH0
+    - signal: CH1
+      interrupt: IPC_CH1
+    - signal: CH2
+      interrupt: IPC_CH2
+    - signal: CH3
+      interrupt: IPC_CH3
+
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  # H4 has 27 EXTI lines (0..26). Lines 0-15 GPIO-routable via AFIO.
+  # Lines 16-26 are peripheral wake-up events. Aggregated interrupts:
+  #   EXTI0..EXTI4 individual, EXTI7_0 aggregates 0..7, EXTI15_8
+  #   aggregates 8..15. Higher EXTI lines route through the matching
+  #   peripheral interrupt (e.g. RTCAlarm @ 142, USARTWakeUP @ 148).
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI7_0
+    - signal: EXTI8
+      interrupt: EXTI15_8
+
+- name: WWDG
+  address: 0x40002C00
+  registers:
+    kind: wwdg
+    version: common
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: WWDGEN
+    reset:
+      register: APB1PRSTR
+      field: WWDGRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: WWDG

@@ -1,0 +1,133 @@
+# CH32H4 family interrupt table.
+# Source: CH32H417 RM V1.7 section 4.7.5 (PFIC vector table).
+# Vector index column is the second column of the RM table (subtracted by 4
+# from the absolute vector number so #16 == IPC_CH0 -> index 0 etc.).
+# The "core-private" first 16 vectors (NMI, EXC, SysTick, etc.) live in
+# qingke-rt and are not part of this map.
+
+# Vectors 0-15 are core interrupts (NMI / Exception / SysTick0 @ 12 /
+# SysTick1 @ 13 / SW @ 14) handled by qingke-rt, not listed here.
+# Note: classic Qingke layout only had a single SysTick at 12; the
+# CH32H4 dual-core SysTick adds SysTick1 at 13 — qingke-rt support
+# for that will land separately.
+
+# --- 16..28: Inter-core ---
+IPC_CH0: 16
+IPC_CH1: 17
+IPC_CH2: 18
+IPC_CH3: 19
+HSEM: 28
+
+# --- 32..148: External interrupts ---
+WWDG: 32
+EXTI15_8: 33
+FLASH: 34
+RCC: 35
+EXTI7_0: 36
+SPI1: 37
+DMA1_CH2: 38
+DMA1_CH3: 39
+DMA1_CH4: 40
+DMA1_CH5: 41
+DMA1_CH6: 42
+DMA1_CH7: 43
+DMA1_CH8: 44
+USART2: 45
+I2C1_EV: 46
+I2C1_ER: 47
+USART1: 48
+SPI2: 49
+SPI3: 50
+SPI4: 51
+I2C2_EV: 52
+I2C2_ER: 53
+USBPD: 54
+USBPDWakeUP: 55
+USBHS: 56
+DMA1_CH1: 57
+CAN1_SCE: 58
+CAN1_TX: 59
+CAN1_RX0: 60
+CAN1_RX1: 61
+USBSS: 62
+USBSS_LINK: 63
+USBHSWakeUP: 64
+USBSSWakeUP: 65
+RTCAlarm: 66
+USBFS: 67
+USBFSWakeUP: 68
+ADC1_2: 69
+TIM1_BRK: 70
+TIM1_UP: 71
+TIM1_TRG_COM: 72
+TIM1_CC: 73
+TIM2: 74
+TIM3: 75
+TIM4: 76
+TIM5: 77
+I2C3_EV: 78
+I2C3_ER: 79
+I2C4_EV: 80
+I2C4_ER: 81
+QSPI1: 82
+SERDES: 83
+USART3: 84
+USART4: 85
+TIM8_BRK: 86
+TIM8_UP: 87
+TIM8_TRG_COM: 88
+TIM8_CC: 89
+TIM9: 90
+TIM10: 91
+TIM11: 92
+TIM12: 93
+FMC: 94
+SDMMC: 95
+LPTIM1: 96
+LPTIM2: 97
+USART5: 98
+USART6: 99
+TIM6: 100
+TIM7: 101
+DMA2_CH1: 102
+DMA2_CH2: 103
+DMA2_CH3: 104
+DMA2_CH4: 105
+DMA2_CH5: 106
+DMA2_CH6: 107
+DMA2_CH7: 108
+DMA2_CH8: 109
+ETH: 110
+ETH_WKUP: 111
+CAN2_SCE: 112
+CAN2_TX: 113
+CAN2_RX0: 114
+CAN2_RX1: 115
+USART7: 116
+USART8: 117
+I3C_EV: 118
+I3C_ER: 119
+DVP: 120
+ECDC: 121
+PIOC: 122
+SAI: 123
+LTDC: 124
+GPHA: 125
+DFSDM0: 127
+DFSDM1: 128
+SWPMI: 131
+QSPI2: 134
+SWPMIWakeUP: 135
+CAN3_SCE: 136
+CAN3_TX: 137
+CAN3_RX0: 138
+CAN3_RX1: 139
+LPTIM2WakeUP: 140
+LPTIM1WakeUP: 141
+I3CWakeUP: 142
+RTC: 143
+HSADC: 144
+UHSIF: 145
+RNG: 146
+SDIO: 147
+USARTWakeUP: 148
