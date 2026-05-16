@@ -1178,14 +1178,14 @@ enum/HPRE:
     description: SYS_CLK divided by 512.
     value: 15
 enum/HSADCSRC:
-  description: HSADC clock source.
+  description: HSADC clock source. Encoding follows the WCH SDK header (RCC_HSADCSource_* in ch32h417_rcc.h) and the HSADC example which sets value 0 to obtain PLL_CLK. RM V1.7 section 3.4.13 lists the encoding for values 00 / 01 swapped (SYSCLK / PLL_CLK) — believed to be a doc typo since the SDK example is the canonical shipping code.
   bit_size: 2
   variants:
-  - name: SYSCLK
-    description: SYSCLK selected.
-    value: 0
   - name: PLL_CLK
     description: PLL_CLK selected.
+    value: 0
+  - name: SYSCLK
+    description: SYSCLK selected.
     value: 1
   - name: USBHS_PLL
     description: USBHS_PLL (480 MHz) selected.
