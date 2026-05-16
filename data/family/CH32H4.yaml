@@ -135,6 +135,9 @@
     block: RCC
   # MCO pin and per-chip clock-source variability handled at chip yaml
   # level when needed.
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RCC
 
 - name: SYSTICK
   address: 0xE000F000
@@ -264,3 +267,149 @@
     version: h4
     block: ESIG
   # System memory; no clock/reset.
+
+# USART1 sits on HB2 (PCLK2); USART2..8 sit on HB1 (PCLK1).
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: USART1EN
+    reset:
+      register: HB2PRSTR
+      field: USART1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART2EN
+    reset:
+      register: HB1PRSTR
+      field: USART2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART2
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART3EN
+    reset:
+      register: HB1PRSTR
+      field: USART3RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART3
+- name: USART4
+  address: 0x40004C00
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART4EN
+    reset:
+      register: HB1PRSTR
+      field: USART4RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART4
+- name: USART5
+  address: 0x40005000
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART5EN
+    reset:
+      register: HB1PRSTR
+      field: USART5RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART5
+- name: USART6
+  address: 0x40001800
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART6EN
+    reset:
+      register: HB1PRSTR
+      field: USART6RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART6
+- name: USART7
+  address: 0x40001C00
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART7EN
+    reset:
+      register: HB1PRSTR
+      field: USART7RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART7
+- name: USART8
+  address: 0x40002000
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART8EN
+    reset:
+      register: HB1PRSTR
+      field: USART8RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART8
