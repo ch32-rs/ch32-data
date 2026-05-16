@@ -135,19 +135,16 @@ fieldset/CFGR0:
     bit_size: 2
     enum: ADCPRE
   - name: FPRE
-    description: HCLK prescaler.
+    description: V5F core prescaler — divides SYS_CLK to produce the V5F core clock.
     bit_offset: 16
-    bit_size: 1
-  - name: PLLXTPRE
-    description: HSE divider for PLL entry.
-    bit_offset: 17
-    bit_size: 1
+    bit_size: 2
+    enum: FPRE
   - name: RGMIION
-    description: GMII clock gating enable.
+    description: 1000 Mb/s Ethernet RGMII interface and clock enable.
     bit_offset: 21
     bit_size: 1
   - name: PIPEON
-    description: USBSS_PLL clock gating enable.
+    description: PIPE clock gating enable.
     bit_offset: 22
     bit_size: 1
   - name: UTMION
@@ -155,17 +152,19 @@ fieldset/CFGR0:
     bit_offset: 23
     bit_size: 1
   - name: MCO
-    description: Microcontroller clock output.
+    description: Microcontroller clock output selection.
     bit_offset: 24
     bit_size: 4
+    enum: MCO
   - name: ADC_DUTY_SEL
-    description: ADC clock duty cycle selection.
+    description: ADC clock duty cycle. 0=50%, 1=75%. Only effective when ADCSRC=HCLK.
     bit_offset: 30
     bit_size: 1
   - name: ADCSRC
-    description: ADC intput clock source selection.
+    description: ADC input clock source selection.
     bit_offset: 31
     bit_size: 1
+    enum: ADCSRC
 fieldset/CFGR2:
   description: Clock configuration register2 (RCC_CFGR2).
   fields:
@@ -1098,6 +1097,16 @@ enum/ADCPRE:
   - name: DIV8
     description: PB2 divided by 8.
     value: 3
+enum/ADCSRC:
+  description: ADC input clock source selection.
+  bit_size: 1
+  variants:
+  - name: HCLK
+    description: HCLK feeds the ADC prescaler.
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) feeds the ADC prescaler.
+    value: 1
 enum/CLK_SRC_PLL:
   description: Single-bit clock source selecting between SYSCLK and PLL_CLK.
   bit_size: 1
@@ -1124,6 +1133,19 @@ enum/ETH1GSRC:
   - name: SERDES_PLL_DIV8
     description: SERDES_PLL divided by 8 selected.
     value: 3
+enum/FPRE:
+  description: V5F core clock prescaler. Note 1xx encodes "divide by 4" (the MSB is don't-care for that case).
+  bit_size: 2
+  variants:
+  - name: DIV1
+    description: V5F clock not divided.
+    value: 0
+  - name: DIV2
+    description: V5F clock divided by 2.
+    value: 1
+  - name: DIV4
+    description: V5F clock divided by 4.
+    value: 2
 enum/HPRE:
   description: HB (AHB) prescaler.
   bit_size: 4
@@ -1187,6 +1209,37 @@ enum/LTDCSRC:
   - name: USBHS_PLL
     description: USBHS_PLL selected.
     value: 3
+enum/MCO:
+  description: Microcontroller clock output (MCO pin) source selection.
+  bit_size: 4
+  variants:
+  - name: NO_CLK
+    description: No clock output (encoded values 0000-0011).
+    value: 0
+  - name: SYSCLK
+    description: SYSCLK output.
+    value: 4
+  - name: HSI
+    description: HSI (25 MHz internal RC) output.
+    value: 5
+  - name: HSE
+    description: HSE output.
+    value: 6
+  - name: PLL_DIV2
+    description: PLL clock divided by 2 output.
+    value: 7
+  - name: UTMI
+    description: UTMI clock output.
+    value: 8
+  - name: USBSS_PLL_DIV2
+    description: USBSS_PLL divided by 2 output.
+    value: 9
+  - name: ETH_PLL_DIV8
+    description: ETH_PLL divided by 8 output.
+    value: 10
+  - name: SERDES_PLL_DIV16
+    description: SERDES_PLL divided by 16 output.
+    value: 11
 enum/PLLMUL:
   description: Main PLL multiplication factor (writable only while PLLON=0).
   bit_size: 5
