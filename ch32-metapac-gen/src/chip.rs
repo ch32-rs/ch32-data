@@ -8,7 +8,7 @@ use std::path::Path;
 use chiptool::{generate, ir, transform};
 use regex::Regex;
 
-use crate::data::{Chip, Core, MemoryOption};
+use crate::data::{Arch, Chip, Core, MemoryOption};
 use crate::dump::split_prefixes_from_names;
 use crate::memory::{
     flash_write_size, gen_memory_files, memory_select_cfg_attrs, primary_flash_regions,
@@ -138,37 +138,44 @@ fn build_chiptool_ir(
     (ir, peripheral_versions, extra)
 }
 
-fn postprocess_pac_rs(s: String) -> String {
+fn postprocess_pac_rs(s: String, arch: Arch) -> String {
     let data = s.replace("] ", "]\n");
-    // FIXME: conversion
+    // Both arches drop the cortex-m-rt re-export; bins bring their own runtime.
     let data = data.replace("pub use cortex_m_rt :: interrupt ;", "");
-    let data = data.replace("cortex_m :: interrupt ", "crate ");
-    let data = data.replace("cortex_m", "riscv"); // FIXME
 
-    // match riscv-rt interrupt name
-    let data = data.replace(
-        ".vector_table.interrupts",
-        ".vector_table.external_interrupts",
-    );
-    let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
-    // trim system vector, 0 to 15
-    let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
-        .unwrap()
-        .replace_all(&data, "[")
-        .to_string();
-    if data.contains("[Vector { _reserved : 0 }") {
-        panic!("Unexpected Vector 16 {{ _reserved : 0 }}");
-    }
-    // Fix vector size: : [Vector; (\d+)] =
-    let data = Regex::new(r#": \[Vector ; (\d+)\]"#)
-        .unwrap()
-        .replace_all(&data, |caps: &regex::Captures| {
-            format!(
-                ": [Vector ; {}]",
-                caps.get(1).unwrap().as_str().parse::<usize>().unwrap() - 16
-            )
-        })
-        .to_string();
+    let data = match arch {
+        Arch::Riscv => {
+            // No RISC-V InterruptNumber standard; redirect to our local trait.
+            let data = data.replace("cortex_m :: interrupt ", "crate ");
+
+            // match riscv-rt interrupt name
+            let data = data.replace(
+                ".vector_table.interrupts",
+                ".vector_table.external_interrupts",
+            );
+            let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
+            // trim system vector, 0 to 15
+            let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
+                .unwrap()
+                .replace_all(&data, "[")
+                .to_string();
+            if data.contains("[Vector { _reserved : 0 }") {
+                panic!("Unexpected Vector 16 {{ _reserved : 0 }}");
+            }
+            // Fix vector size: : [Vector; (\d+)] =
+            Regex::new(r#": \[Vector ; (\d+)\]"#)
+                .unwrap()
+                .replace_all(&data, |caps: &regex::Captures| {
+                    format!(
+                        ": [Vector ; {}]",
+                        caps.get(1).unwrap().as_str().parse::<usize>().unwrap() - 16
+                    )
+                })
+                .to_string()
+        }
+        // ARM keeps chiptool's native cortex_m output for NVIC interop.
+        Arch::Arm => data,
+    };
 
     // Remove inner attributes like #![no_std]
     Regex::new("# *! *\\[.*\\]")
@@ -315,7 +322,7 @@ impl Gen {
 
         // pac.rs
         let rendered = generate::render(&ir, &gen_opts()).unwrap().to_string();
-        let pac = postprocess_pac_rs(rendered);
+        let pac = postprocess_pac_rs(rendered, core.arch);
         let mut file = File::create(chip_dir.join("pac.rs")).unwrap();
         file.write_all(pac.as_bytes()).unwrap();
         file.write_all(extra.as_bytes()).unwrap();
