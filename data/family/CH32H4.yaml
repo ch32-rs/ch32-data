@@ -1722,7 +1722,7 @@
   address: 0x40013000
   registers:
     kind: spi
-    version: v3
+    version: h4
     block: SPI
   rcc:
     bus_clock: PCLK2
@@ -1789,7 +1789,7 @@
   address: 0x40003800
   registers:
     kind: spi
-    version: v3
+    version: h4
     block: SPI
   rcc:
     bus_clock: PCLK1
@@ -1850,7 +1850,7 @@
   address: 0x40003C00
   registers:
     kind: spi
-    version: v3
+    version: h4
     block: SPI
   rcc:
     bus_clock: PCLK1
@@ -1908,7 +1908,7 @@
   address: 0x40004000
   registers:
     kind: spi
-    version: v3
+    version: h4
     block: SPI
   rcc:
     bus_clock: PCLK1
