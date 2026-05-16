@@ -170,49 +170,58 @@ fieldset/CFGR2:
   description: Clock configuration register2 (RCC_CFGR2).
   fields:
   - name: UHSIFDIV
-    description: UHSIF division factor.
+    description: UHSIF prescaler (1..64).
     bit_offset: 0
     bit_size: 6
   - name: UHSIFSRC
-    description: UHSIF clock source selection.
+    description: UHSIF clock source.
     bit_offset: 6
     bit_size: 2
+    enum: UHSIFSRC
   - name: LTDCDIV
-    description: LTDC division factor.
+    description: LTDC prescaler (1..64).
     bit_offset: 8
     bit_size: 6
   - name: LTDCSRC
-    description: LTDC clock source selection.
+    description: LTDC clock source.
     bit_offset: 14
     bit_size: 2
+    enum: LTDCSRC
   - name: USBFSDIV
-    description: USBFS 48M division factor.
+    description: USBFS 48 MHz prescaler.
     bit_offset: 16
     bit_size: 4
+    enum: USBFSDIV
   - name: USBFSSRC
-    description: USBFS 48M clock source selection.
+    description: USBFS 48 MHz clock source.
     bit_offset: 20
     bit_size: 1
+    enum: USBFSSRC
   - name: RNGSRC
-    description: RNG clock source selection.
+    description: RNG clock source.
     bit_offset: 23
     bit_size: 1
+    enum: CLK_SRC_PLL
   - name: I2S2SRC
-    description: I2S2 clock source selection.
+    description: I2S2 clock source.
     bit_offset: 24
     bit_size: 1
+    enum: CLK_SRC_PLL
   - name: I2S3SRC
-    description: I2S3 clock source selection.
+    description: I2S3 clock source.
     bit_offset: 25
     bit_size: 1
+    enum: CLK_SRC_PLL
   - name: HSADCSRC
-    description: HSADC clock source selection.
+    description: HSADC clock source.
     bit_offset: 28
     bit_size: 2
+    enum: HSADCSRC
   - name: ETH1GSRC
-    description: ETH1G clock source selection.
+    description: Gigabit Ethernet 125 MHz clock source.
     bit_offset: 30
     bit_size: 2
+    enum: ETH1GSRC
 fieldset/CTLR:
   description: Clock control register.
   fields:
@@ -985,48 +994,55 @@ fieldset/PLLCFGR:
   description: PLL clock configuration register (RCC_PLLCFGR).
   fields:
   - name: PLLMUL
-    description: PLL clock multiplication factor.
+    description: Main PLL multiplication factor. Writable only while PLLON=0.
     bit_offset: 0
     bit_size: 5
+    enum: PLLMUL
   - name: PLLSRC
-    description: PLL intput clock source selection.
+    description: PLL input clock source. Writable only while PLLON=0.
     bit_offset: 5
     bit_size: 3
+    enum: PLLSRC
   - name: PLL_SRC_DIV
-    description: PLL intput clock source prescaler.
+    description: PLL input prescaler (1..64). Writable only while PLLON=0.
     bit_offset: 8
     bit_size: 6
   - name: SYSPLL_SEL
-    description: Switch the System clock to PLL selection.
+    description: System-clock-to-PLL selection. Writable only while SYSPLL_GATE=0.
     bit_offset: 28
     bit_size: 3
+    enum: SYSPLL_SEL
   - name: SYSPLL_GATE
-    description: Switch the System clock to PLL gate.
+    description: System-clock-to-PLL gate. Must be set before switching SYSCLK to PLL output.
     bit_offset: 31
     bit_size: 1
 fieldset/PLLCFGR2:
   description: PLL Clock configuration register2 (RCC_PLLCFGR2).
   fields:
   - name: USBHSPLLSRC
-    description: USBHS clock source selection.
+    description: USBHS PLL input clock source.
     bit_offset: 0
     bit_size: 2
+    enum: USBHSPLLSRC
   - name: USBHSPLL_REFSEL
-    description: USBHS_PLL reference clock frequency selection.
+    description: USBHS_PLL reference clock frequency. Writable only while USBHS_PLLON=0.
     bit_offset: 2
     bit_size: 2
+    enum: USBHSPLL_REFSEL
   - name: USBSSPLL_REFSEL
-    description: USBSS_PLL reference clock frequency selection.
+    description: USBSS_PLL reference clock frequency. Writable only while USBSS_PLLON=0.
     bit_offset: 4
-    bit_size: 2
+    bit_size: 3
+    enum: USBSSPLL_REFSEL
   - name: USBHSPLL_IN_DIV
-    description: USBHS_PLL intput clock source SYS_PLL division setting.
+    description: USBHS_PLL input prescaler from SYS_PLL (1..32). Writable only while USBHS_PLLON=0.
     bit_offset: 8
     bit_size: 5
   - name: SERDESPLL_MUL
-    description: SERDESPLL clock multiplication factor.
+    description: SERDES_PLL multiplication factor. Writable only while SERDES_PLLON=0.
     bit_offset: 16
     bit_size: 4
+    enum: SERDESPLL_MUL
 fieldset/RSTSCKR:
   description: Control/status register (RCC_RSTSCKR).
   fields:
@@ -1082,6 +1098,32 @@ enum/ADCPRE:
   - name: DIV8
     description: PB2 divided by 8.
     value: 3
+enum/CLK_SRC_PLL:
+  description: Single-bit clock source selecting between SYSCLK and PLL_CLK.
+  bit_size: 1
+  variants:
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 0
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 1
+enum/ETH1GSRC:
+  description: Gigabit Ethernet 125 MHz clock source.
+  bit_size: 2
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 0
+  - name: USBSS_PLL
+    description: USBSS_PLL selected.
+    value: 1
+  - name: ETH_PLL_DIV4
+    description: ETH_PLL divided by 4 selected.
+    value: 2
+  - name: SERDES_PLL_DIV8
+    description: SERDES_PLL divided by 8 selected.
+    value: 3
 enum/HPRE:
   description: HB (AHB) prescaler.
   bit_size: 4
@@ -1113,6 +1155,160 @@ enum/HPRE:
   - name: DIV512
     description: SYS_CLK divided by 512.
     value: 15
+enum/HSADCSRC:
+  description: HSADC clock source.
+  bit_size: 2
+  variants:
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 0
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected.
+    value: 2
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected.
+    value: 3
+enum/LTDCSRC:
+  description: LTDC clock source.
+  bit_size: 2
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 0
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2 selected.
+    value: 1
+  - name: ETH_PLL
+    description: ETH_PLL selected.
+    value: 2
+  - name: USBHS_PLL
+    description: USBHS_PLL selected.
+    value: 3
+enum/PLLMUL:
+  description: Main PLL multiplication factor (writable only while PLLON=0).
+  bit_size: 5
+  variants:
+  - name: MUL4
+    description: PLL x 4.
+    value: 0
+  - name: MUL6
+    description: PLL x 6.
+    value: 1
+  - name: MUL7
+    description: PLL x 7.
+    value: 2
+  - name: MUL8
+    description: PLL x 8.
+    value: 3
+  - name: MUL8_5
+    description: PLL x 8.5.
+    value: 4
+  - name: MUL9
+    description: PLL x 9.
+    value: 5
+  - name: MUL9_5
+    description: PLL x 9.5.
+    value: 6
+  - name: MUL10
+    description: PLL x 10.
+    value: 7
+  - name: MUL10_5
+    description: PLL x 10.5.
+    value: 8
+  - name: MUL11
+    description: PLL x 11.
+    value: 9
+  - name: MUL11_5
+    description: PLL x 11.5.
+    value: 10
+  - name: MUL12
+    description: PLL x 12.
+    value: 11
+  - name: MUL12_5
+    description: PLL x 12.5.
+    value: 12
+  - name: MUL13
+    description: PLL x 13.
+    value: 13
+  - name: MUL14
+    description: PLL x 14.
+    value: 14
+  - name: MUL15
+    description: PLL x 15.
+    value: 15
+  - name: MUL16
+    description: PLL x 16.
+    value: 16
+  - name: MUL17
+    description: PLL x 17.
+    value: 17
+  - name: MUL18
+    description: PLL x 18.
+    value: 18
+  - name: MUL19
+    description: PLL x 19.
+    value: 19
+  - name: MUL20
+    description: PLL x 20.
+    value: 20
+  - name: MUL22
+    description: PLL x 22.
+    value: 21
+  - name: MUL24
+    description: PLL x 24.
+    value: 22
+  - name: MUL26
+    description: PLL x 26.
+    value: 23
+  - name: MUL28
+    description: PLL x 28.
+    value: 24
+  - name: MUL30
+    description: PLL x 30.
+    value: 25
+  - name: MUL32
+    description: PLL x 32.
+    value: 26
+  - name: MUL34
+    description: PLL x 34.
+    value: 27
+  - name: MUL36
+    description: PLL x 36.
+    value: 28
+  - name: MUL38
+    description: PLL x 38.
+    value: 29
+  - name: MUL40
+    description: PLL x 40.
+    value: 30
+  - name: MUL59
+    description: PLL x 59.
+    value: 31
+enum/PLLSRC:
+  description: Main PLL input clock source.
+  bit_size: 3
+  variants:
+  - name: HSI
+    description: HSI selected as PLL input.
+    value: 0
+  - name: HSE
+    description: HSE selected as PLL input.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected as PLL input.
+    value: 4
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected as PLL input.
+    value: 5
+  - name: USBSS_PLL
+    description: USBSS_PLL (125 MHz) selected as PLL input.
+    value: 6
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2 selected as PLL input.
+    value: 7
 enum/PPRE:
   description: PB (APB) prescaler.
   bit_size: 3
@@ -1148,6 +1344,58 @@ enum/RTCSEL:
   - name: HSE_DIV512
     description: HSE oscillator divided by 512 selected as RTC clock.
     value: 3
+enum/SERDESPLL_MUL:
+  description: SERDES_PLL multiplication factor.
+  bit_size: 4
+  variants:
+  - name: MUL25
+    description: SERDES_PLL x 25.
+    value: 0
+  - name: MUL28
+    description: SERDES_PLL x 28.
+    value: 1
+  - name: MUL30
+    description: SERDES_PLL x 30.
+    value: 2
+  - name: MUL32
+    description: SERDES_PLL x 32.
+    value: 3
+  - name: MUL35
+    description: SERDES_PLL x 35.
+    value: 4
+  - name: MUL38
+    description: SERDES_PLL x 38.
+    value: 5
+  - name: MUL40
+    description: SERDES_PLL x 40.
+    value: 6
+  - name: MUL45
+    description: SERDES_PLL x 45.
+    value: 7
+  - name: MUL50
+    description: SERDES_PLL x 50.
+    value: 8
+  - name: MUL56
+    description: SERDES_PLL x 56.
+    value: 9
+  - name: MUL60
+    description: SERDES_PLL x 60.
+    value: 10
+  - name: MUL64
+    description: SERDES_PLL x 64.
+    value: 11
+  - name: MUL70
+    description: SERDES_PLL x 70.
+    value: 12
+  - name: MUL76
+    description: SERDES_PLL x 76.
+    value: 13
+  - name: MUL80
+    description: SERDES_PLL x 80.
+    value: 14
+  - name: MUL90
+    description: SERDES_PLL x 90.
+    value: 15
 enum/SW:
   description: System clock source.
   bit_size: 2
@@ -1161,3 +1409,160 @@ enum/SW:
   - name: PLL
     description: PLL selected as system clock.
     value: 2
+enum/SYSPLL_SEL:
+  description: System-clock-to-PLL output selection (writable only while SYSPLL_GATE=0).
+  bit_size: 3
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK (covers any encoding 0xx).
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz).
+    value: 4
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz).
+    value: 5
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2.
+    value: 6
+  - name: USBSS_PLL
+    description: USBSS_PLL (125 MHz).
+    value: 7
+enum/UHSIFSRC:
+  description: UHSIF clock source.
+  bit_size: 2
+  variants:
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 0
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected.
+    value: 2
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected.
+    value: 3
+enum/USBFSDIV:
+  description: USBFS 48 MHz prescaler. Selects integer or half-integer divisors of the source clock.
+  bit_size: 4
+  variants:
+  - name: DIV1
+    description: Divide by 1.
+    value: 0
+  - name: DIV2
+    description: Divide by 2.
+    value: 1
+  - name: DIV3
+    description: Divide by 3.
+    value: 2
+  - name: DIV4
+    description: Divide by 4.
+    value: 3
+  - name: DIV5
+    description: Divide by 5.
+    value: 4
+  - name: DIV6
+    description: Divide by 6.
+    value: 5
+  - name: DIV8
+    description: Divide by 8.
+    value: 6
+  - name: DIV10
+    description: Divide by 10.
+    value: 7
+  - name: DIV1_5
+    description: Divide by 1.5.
+    value: 8
+  - name: DIV2_5
+    description: Divide by 2.5.
+    value: 9
+  - name: DIV3_5
+    description: Divide by 3.5.
+    value: 10
+  - name: DIV4_5
+    description: Divide by 4.5.
+    value: 11
+  - name: DIV5_5
+    description: Divide by 5.5.
+    value: 12
+  - name: DIV6_5
+    description: Divide by 6.5.
+    value: 13
+  - name: DIV7_5
+    description: Divide by 7.5.
+    value: 14
+  - name: DIV9_5
+    description: Divide by 9.5.
+    value: 15
+enum/USBFSSRC:
+  description: USBFS 48 MHz clock source.
+  bit_size: 1
+  variants:
+  - name: PLL
+    description: PLL clock selected.
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL clock selected.
+    value: 1
+enum/USBHSPLLSRC:
+  description: USBHS_PLL input clock source.
+  bit_size: 2
+  variants:
+  - name: HSE
+    description: HSE selected as USBHS_PLL input.
+    value: 0
+  - name: HSI
+    description: HSI selected as USBHS_PLL input.
+    value: 1
+  - name: ETHCLK_20M
+    description: ETHCLK_20M selected as USBHS_PLL input.
+    value: 2
+  - name: SYS_PLL_DIV
+    description: SYS_PLL_CLK divided by USBHSPLL_IN_DIV selected as USBHS_PLL input.
+    value: 3
+enum/USBHSPLL_REFSEL:
+  description: USBHS_PLL reference clock frequency.
+  bit_size: 2
+  variants:
+  - name: F25MHZ
+    description: 25 MHz.
+    value: 0
+  - name: F20MHZ
+    description: 20 MHz.
+    value: 1
+  - name: F24MHZ
+    description: 24 MHz.
+    value: 2
+  - name: F32MHZ
+    description: 32 MHz.
+    value: 3
+enum/USBSSPLL_REFSEL:
+  description: USBSS_PLL reference clock frequency.
+  bit_size: 3
+  variants:
+  - name: F20MHZ
+    description: 20 MHz.
+    value: 0
+  - name: F24MHZ
+    description: 24 MHz.
+    value: 1
+  - name: F25MHZ
+    description: 25 MHz.
+    value: 2
+  - name: F30MHZ
+    description: 30 MHz.
+    value: 3
+  - name: F32MHZ
+    description: 32 MHz.
+    value: 4
+  - name: F40MHZ
+    description: 40 MHz.
+    value: 5
+  - name: F60MHZ
+    description: 60 MHz.
+    value: 6
+  - name: F80MHZ
+    description: 80 MHz.
+    value: 7
