@@ -1,0 +1,113 @@
+block/HSEM:
+  description: Hardware semaphore (HSEM). 32 lock channels with PID/CID-keyed write-lock and read-lock acquisition, batch unlock by key, and per-channel interrupt on remote unlock.
+  items:
+  - name: RX
+    description: Lock channel register (write-lock / 2-step acquisition).
+    array:
+      len: 32
+      stride: 4
+    byte_offset: 0
+    fieldset: LOCK
+  - name: RLRX
+    description: Read-lock channel register (read-lock / 1-step acquisition). Same field layout as RX but read-only.
+    array:
+      len: 32
+      stride: 4
+    byte_offset: 256
+    access: Read
+    fieldset: LOCK
+  - name: LSE
+    description: Lock status register. Bit n indicates whether channel n is currently locked.
+    byte_offset: 512
+    access: Read
+    fieldset: CHBITS
+  - name: CLR
+    description: Batch unlock register. Writing the unlock key together with match PID/CID and masks unlocks all channels matching the rule.
+    byte_offset: 520
+    access: Write
+    fieldset: CLR
+  - name: KEY
+    description: Unlock key and auto-clear control register.
+    byte_offset: 524
+    fieldset: KEY
+  - name: IER
+    description: Per-channel interrupt enable register (hart-private). Bit n enables interrupt when channel n is unlocked by the other hart.
+    byte_offset: 768
+    fieldset: CHBITS
+  - name: ISR
+    description: Per-channel interrupt status register (hart-private). Bit n is set when channel n is unlocked by the other hart. Write 1 to clear.
+    byte_offset: 776
+    fieldset: CHBITS
+  - name: ISM
+    description: Per-channel interrupt mask status register (hart-private). Read-only AND of IER and ISR — bit n set means channel n is currently raising an interrupt.
+    byte_offset: 784
+    access: Read
+    fieldset: CHBITS
+  - name: LSM
+    description: Lock status mask register (hart-private). Bit n indicates channel n is locked by THIS hart.
+    byte_offset: 792
+    access: Read
+    fieldset: CHBITS
+fieldset/CHBITS:
+  description: 32-bit per-channel bitmap (used by LSE / IER / ISR / ISM / LSM). Bit n maps to HSEM channel n.
+  fields:
+  - name: CH
+    description: Per-channel flag.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 32
+      stride: 1
+fieldset/CLR:
+  description: Batch unlock register.
+  fields:
+  - name: match_PID
+    description: PID value to match against each locked channel's PID for batch unlock.
+    bit_offset: 0
+    bit_size: 8
+  - name: match_CID
+    description: CID value to match against each locked channel's CID for batch unlock.
+    bit_offset: 8
+    bit_size: 2
+  - name: PID_MASK
+    description: 1=mask PID match (unlock regardless of PID); 0=require PID equality.
+    bit_offset: 12
+    bit_size: 1
+  - name: CID_MASK
+    description: 1=mask CID match (unlock regardless of CID); 0=require CID equality.
+    bit_offset: 13
+    bit_size: 1
+  - name: CLR_KEY
+    description: Unlock key. Must equal HSEM_KEY.KEY_VALUE (default 0x5AA5) for the write to take effect.
+    bit_offset: 16
+    bit_size: 16
+fieldset/KEY:
+  description: Unlock key and auto-clear control register.
+  fields:
+  - name: auto_1step_clr
+    description: When set, a 1-step lock failure auto-clears the corresponding interrupt status bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: auto_2step_clr
+    description: When set, a 2-step lock failure auto-clears the corresponding interrupt status bit.
+    bit_offset: 1
+    bit_size: 1
+  - name: KEY_VALUE
+    description: Unlock key value used for batch-unlock matching (read-only, default 0x5AA5).
+    bit_offset: 16
+    bit_size: 16
+fieldset/LOCK:
+  description: Lock channel register layout used by RX (RW) and RLRX (RO).
+  fields:
+  - name: PID
+    description: Process ID. Reset/release value is 0; on write-lock takes the bus write data.
+    bit_offset: 0
+    bit_size: 8
+  - name: CID
+    description: Core ID of the hart that locked the channel. 0=hart 0 (V3F), 1=hart 1 (V5F).
+    bit_offset: 8
+    bit_size: 2
+  - name: LOCK
+    description: Channel lock state. 1=locked, 0=idle.
+    bit_offset: 31
+    bit_size: 1
