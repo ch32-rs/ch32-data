@@ -64,9 +64,17 @@ pub struct Doc {
     pub url: String,
 }
 
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Arch {
+    Riscv,
+    Arm,
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 pub struct Core {
     pub name: String,
+    pub arch: Arch,
     #[serde(default)]
     pub peripherals: Vec<core::Peripheral>,
     #[serde(default)]

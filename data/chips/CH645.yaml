@@ -34,6 +34,7 @@ docs:
     url: https://www.wch.cn/products/CH645.html
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals:
 
     interrupts:

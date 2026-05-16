@@ -23,6 +23,7 @@ docs:
     url: http://www.wch.cn/products/CH643.html
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals:
     include_peripherals:
       - "../family/CH643.yaml"

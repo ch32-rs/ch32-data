@@ -8,7 +8,7 @@ use std::path::Path;
 use chiptool::{generate, ir, transform};
 use regex::Regex;
 
-use crate::data::{Chip, Core, MemoryOption};
+use crate::data::{Arch, Chip, Core, MemoryOption};
 use crate::dump::split_prefixes_from_names;
 use crate::memory::{
     flash_write_size, gen_memory_files, memory_select_cfg_attrs, primary_flash_regions,
@@ -138,19 +138,42 @@ fn build_chiptool_ir(
     (ir, peripheral_versions, extra)
 }
 
-fn postprocess_pac_rs(s: String) -> String {
+fn postprocess_pac_rs(s: String, arch: Arch) -> String {
     let data = s.replace("] ", "]\n");
-    // FIXME: conversion
+    // Both arches drop the cortex-m-rt re-export; bins bring their own runtime.
     let data = data.replace("pub use cortex_m_rt :: interrupt ;", "");
-    let data = data.replace("cortex_m :: interrupt ", "crate ");
-    let data = data.replace("cortex_m", "riscv"); // FIXME
 
-    // match riscv-rt interrupt name
-    let data = data.replace(
-        ".vector_table.interrupts",
-        ".vector_table.external_interrupts",
-    );
-    let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
+    let data = match arch {
+        Arch::Riscv => {
+            // No RISC-V InterruptNumber standard; redirect to our local trait.
+            let data = data.replace("cortex_m :: interrupt ", "crate ");
+
+            // match riscv-rt interrupt name
+            let data = data.replace(
+                ".vector_table.interrupts",
+                ".vector_table.external_interrupts",
+            );
+            data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS")
+        }
+        // Cortex-M NVIC uses CMSIS IRQ numbers (WWDG = 0); shift discriminants.
+        Arch::Arm => {
+            let data = Regex::new(r#"([A-Z][A-Z0-9_]*) = (\d+) ,"#)
+                .unwrap()
+                .replace_all(&data, |caps: &regex::Captures| {
+                    let n: i32 = caps[2].parse().unwrap();
+                    format!("{} = {} ,", &caps[1], n - 16)
+                })
+                .to_string();
+            Regex::new(r#"# \[doc = "(\d+) - "#)
+                .unwrap()
+                .replace_all(&data, |caps: &regex::Captures| {
+                    let n: i32 = caps[1].parse().unwrap();
+                    format!(r#"# [doc = "{} - "#, n - 16)
+                })
+                .to_string()
+        }
+    };
+
     // trim system vector, 0 to 15
     let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
         .unwrap()
@@ -315,7 +338,7 @@ impl Gen {
 
         // pac.rs
         let rendered = generate::render(&ir, &gen_opts()).unwrap().to_string();
-        let pac = postprocess_pac_rs(rendered);
+        let pac = postprocess_pac_rs(rendered, core.arch);
         let mut file = File::create(chip_dir.join("pac.rs")).unwrap();
         file.write_all(pac.as_bytes()).unwrap();
         file.write_all(extra.as_bytes()).unwrap();

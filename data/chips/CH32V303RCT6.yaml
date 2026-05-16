@@ -27,6 +27,7 @@ docs:
     url: http://www.wch.cn/products/CH32V303.html
 cores:
   - name: qingke-v4f
+    arch: riscv
     peripherals:
       - name: RCC
         address: 0x40021000

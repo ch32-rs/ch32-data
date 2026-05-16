@@ -430,9 +430,17 @@ pub enum MemoryRegionKind {
     Ram,
 }
 
+#[derive(Copy, Debug, Eq, PartialEq, Clone, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Arch {
+    Riscv,
+    Arm,
+}
+
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 pub struct Core {
     pub name: String,
+    pub arch: Arch,
     pub peripherals: Vec<Peripheral>,
     #[serde(default)]
     //pub nvic_priority_bits: Option<u8>,
