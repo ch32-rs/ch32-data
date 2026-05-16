@@ -287,6 +287,49 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART1
+  pins:
+    - pin: PA9
+      signal: TX
+      af: 7
+    - pin: PB6
+      signal: TX
+      af: 7
+    - pin: PB14
+      signal: TX
+      af: 4
+    - pin: PD13
+      signal: TX
+      af: 14
+    - pin: PA10
+      signal: RX
+      af: 7
+    - pin: PB7
+      signal: RX
+      af: 7
+    - pin: PB15
+      signal: RX
+      af: 4
+    - pin: PD12
+      signal: RX
+      af: 14
+    - pin: PA8
+      signal: CK
+      af: 7
+    - pin: PD11
+      signal: CK
+      af: 14
+    - pin: PA11
+      signal: CTS
+      af: 7
+    - pin: PD15
+      signal: CTS
+      af: 14
+    - pin: PA12
+      signal: RTS
+      af: 7
+    - pin: PD14
+      signal: RTS
+      af: 14
 - name: USART2
   address: 0x40004400
   registers:
@@ -305,6 +348,37 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART2
+  pins:
+    - pin: PA2
+      signal: TX
+      af: 7
+    - pin: PD5
+      signal: TX
+      af: 7
+    - pin: PA3
+      signal: RX
+      af: 7
+    - pin: PD6
+      signal: RX
+      af: 7
+    - pin: PA4
+      signal: CK
+      af: 7
+    - pin: PD7
+      signal: CK
+      af: 7
+    - pin: PA0
+      signal: CTS
+      af: 7
+    - pin: PD3
+      signal: CTS
+      af: 7
+    - pin: PA1
+      signal: RTS
+      af: 7
+    - pin: PD4
+      signal: RTS
+      af: 7
 - name: USART3
   address: 0x40004800
   registers:
@@ -323,6 +397,58 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART3
+  pins:
+    - pin: PB10
+      signal: TX
+      af: 7
+    - pin: PC10
+      signal: TX
+      af: 7
+    - pin: PD8
+      signal: TX
+      af: 7
+    - pin: PA14
+      signal: RX
+      af: 4
+    - pin: PB11
+      signal: RX
+      af: 7
+    - pin: PC11
+      signal: RX
+      af: 7
+    - pin: PD9
+      signal: RX
+      af: 7
+    - pin: PA11
+      signal: CK
+      af: 4
+    - pin: PB12
+      signal: CK
+      af: 7
+    - pin: PC12
+      signal: CK
+      af: 7
+    - pin: PD10
+      signal: CK
+      af: 7
+    - pin: PA15
+      signal: CTS
+      af: 4
+    - pin: PB13
+      signal: CTS
+      af: 7
+    - pin: PD11
+      signal: CTS
+      af: 7
+    - pin: PA12
+      signal: RTS
+      af: 4
+    - pin: PB14
+      signal: RTS
+      af: 7
+    - pin: PD12
+      signal: RTS
+      af: 7
 - name: USART4
   address: 0x40004C00
   registers:
@@ -341,6 +467,37 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART4
+  pins:
+    - pin: PC6
+      signal: TX
+      af: 7
+    - pin: PF4
+      signal: TX
+      af: 7
+    - pin: PC7
+      signal: RX
+      af: 7
+    - pin: PF3
+      signal: RX
+      af: 7
+    - pin: PC8
+      signal: CK
+      af: 7
+    - pin: PF1
+      signal: CK
+      af: 7
+    - pin: PE1
+      signal: CTS
+      af: 7
+    - pin: PF0
+      signal: CTS
+      af: 7
+    - pin: PE0
+      signal: RTS
+      af: 7
+    - pin: PF2
+      signal: RTS
+      af: 7
 - name: USART5
   address: 0x40005000
   registers:
@@ -359,6 +516,31 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART5
+  pins:
+    - pin: PE0
+      signal: TX
+      af: 4
+    - pin: PE3
+      signal: TX
+      af: 11
+    - pin: PE2
+      signal: RX
+      af: 4
+    - pin: PF5
+      signal: RX
+      af: 4
+    - pin: PD6
+      signal: CK
+      af: 11
+    - pin: PE15
+      signal: CK
+      af: 11
+    - pin: PE1
+      signal: CTS
+      af: 4
+    - pin: PD7
+      signal: RTS
+      af: 4
 - name: USART6
   address: 0x40001800
   registers:
@@ -377,6 +559,64 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART6
+  pins:
+    - pin: PA0
+      signal: TX
+      af: 8
+    - pin: PA12
+      signal: TX
+      af: 6
+    - pin: PB9
+      signal: TX
+      af: 8
+    - pin: PC10
+      signal: TX
+      af: 8
+    - pin: PD1
+      signal: TX
+      af: 8
+    - pin: PA1
+      signal: RX
+      af: 8
+    - pin: PA11
+      signal: RX
+      af: 6
+    - pin: PB8
+      signal: RX
+      af: 8
+    - pin: PC11
+      signal: RX
+      af: 8
+    - pin: PD0
+      signal: RX
+      af: 8
+    - pin: PA2
+      signal: CK
+      af: 3
+    - pin: PA10
+      signal: CK
+      af: 6
+    - pin: PB10
+      signal: CK
+      af: 9
+    - pin: PD3
+      signal: CK
+      af: 8
+    - pin: PE2
+      signal: CK
+      af: 8
+    - pin: PB0
+      signal: CTS
+      af: 8
+    - pin: PB15
+      signal: CTS
+      af: 8
+    - pin: PA15
+      signal: RTS
+      af: 8
+    - pin: PB14
+      signal: RTS
+      af: 8
 - name: USART7
   address: 0x40001C00
   registers:
@@ -395,6 +635,40 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART7
+  pins:
+    - pin: PB6
+      signal: TX
+      af: 14
+    - pin: PB13
+      signal: TX
+      af: 14
+    - pin: PC12
+      signal: TX
+      af: 8
+    - pin: PB5
+      signal: RX
+      af: 14
+    - pin: PB12
+      signal: RX
+      af: 14
+    - pin: PD2
+      signal: RX
+      af: 8
+    - pin: PB4
+      signal: CK
+      af: 14
+    - pin: PB14
+      signal: CK
+      af: 13
+    - pin: PD4
+      signal: CK
+      af: 8
+    - pin: PC9
+      signal: CTS
+      af: 8
+    - pin: PC8
+      signal: RTS
+      af: 8
 - name: USART8
   address: 0x40002000
   registers:
@@ -413,3 +687,52 @@
   interrupts:
     - signal: GLOBAL
       interrupt: USART8
+  pins:
+    - pin: PA15
+      signal: TX
+      af: 11
+    - pin: PB4
+      signal: TX
+      af: 11
+    - pin: PE8
+      signal: TX
+      af: 7
+    - pin: PF7
+      signal: TX
+      af: 7
+    - pin: PA8
+      signal: RX
+      af: 11
+    - pin: PB3
+      signal: RX
+      af: 11
+    - pin: PE7
+      signal: RX
+      af: 7
+    - pin: PF6
+      signal: RX
+      af: 7
+    - pin: PA14
+      signal: CK
+      af: 11
+    - pin: PB7
+      signal: CK
+      af: 10
+    - pin: PE6
+      signal: CK
+      af: 8
+    - pin: PF10
+      signal: CK
+      af: 7
+    - pin: PF9
+      signal: CTS
+      af: 7
+    - pin: PF10
+      signal: CTS
+      af: 11
+    - pin: PF8
+      signal: RTS
+      af: 7
+    - pin: PF9
+      signal: RTS
+      af: 11
