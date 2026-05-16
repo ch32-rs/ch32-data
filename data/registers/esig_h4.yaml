@@ -1,0 +1,49 @@
+block/ESIG:
+  description: ESIG configuration.
+  items:
+  - name: FLACAP
+    description: Flash capecity register.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: FLACAP
+  - name: UNIID1
+    description: UID register.
+    byte_offset: 8
+    fieldset: UNIID1
+  - name: UNIID2
+    description: UID register.
+    byte_offset: 12
+    fieldset: UNIID2
+  - name: UNIID3
+    description: Div register.
+    byte_offset: 16
+    fieldset: UNIID3
+fieldset/FLACAP:
+  description: Flash capecity register.
+  bit_size: 16
+  fields:
+  - name: F_SIZE
+    description: F_SIZE/kByte.
+    bit_offset: 0
+    bit_size: 16
+fieldset/UNIID1:
+  description: UID register.
+  fields:
+  - name: U_ID
+    description: U_ID value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/UNIID2:
+  description: UID register.
+  fields:
+  - name: U_ID
+    description: U_ID value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/UNIID3:
+  description: Div register.
+  fields:
+  - name: U_ID
+    description: U_ID value.
+    bit_offset: 0
+    bit_size: 32

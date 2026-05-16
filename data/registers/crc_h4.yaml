@@ -1,0 +1,39 @@
+block/CRC:
+  description: CRC calculation unit.
+  items:
+  - name: DATAR
+    description: Data register.
+    byte_offset: 0
+    fieldset: DATAR
+  - name: IDATAR
+    description: Independent Data register.
+    byte_offset: 4
+    bit_size: 8
+    fieldset: IDATAR
+  - name: CTLR
+    description: Control register.
+    byte_offset: 8
+    access: Write
+    fieldset: CTLR
+fieldset/CTLR:
+  description: Control register.
+  fields:
+  - name: RESET
+    description: Reset bit.
+    bit_offset: 0
+    bit_size: 1
+fieldset/DATAR:
+  description: Data register.
+  fields:
+  - name: DR
+    description: Data Register.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IDATAR:
+  description: Independent Data register.
+  bit_size: 8
+  fields:
+  - name: IDR
+    description: Independent Data register.
+    bit_offset: 0
+    bit_size: 8

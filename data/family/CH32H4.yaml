@@ -207,3 +207,60 @@
   interrupts:
     - signal: GLOBAL
       interrupt: WWDG
+
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: h4
+    block: IWDG
+  # No clock enable/reset; IWDG is driven by LSI and is always available.
+
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: h4
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: PWREN
+    reset:
+      register: HB1PRSTR
+      field: PWRRST
+
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: h4
+    block: FLASH
+  # No clock enable/reset; FLASH interface clock is always on.
+  interrupts:
+    - signal: GLOBAL
+      interrupt: FLASH
+
+- name: CRC
+  address: 0x40023000
+  registers:
+    kind: crc
+    version: h4
+    block: CRC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: CRCEN
+  # H4 RCC does not expose a CRC reset bit.
+
+- name: ESIG
+  address: 0x1FFFF7E0
+  registers:
+    kind: esig
+    version: h4
+    block: ESIG
+  # System memory; no clock/reset.
