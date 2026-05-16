@@ -33,6 +33,7 @@ docs:
     version: latest
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32X0.yaml"

@@ -25,6 +25,7 @@ docs:
     url: http://www.wch.cn/products/CH32V208.html
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals:
     include_peripherals:
       - "../family/CH32V2.yaml"
