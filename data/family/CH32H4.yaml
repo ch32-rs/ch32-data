@@ -736,3 +736,274 @@
     - pin: PF9
       signal: RTS
       af: 11
+
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: I2C1EN
+    reset:
+      register: HB1PRSTR
+      field: I2C1RST
+  interrupts:
+    - signal: EV
+      interrupt: I2C1_EV
+    - signal: ER
+      interrupt: I2C1_ER
+  pins:
+    - pin: PB7
+      signal: SDA
+      af: 4
+    - pin: PB9
+      signal: SDA
+      af: 4
+    - pin: PB6
+      signal: SCL
+      af: 4
+    - pin: PB8
+      signal: SCL
+      af: 4
+    - pin: PB5
+      signal: SMBA
+      af: 4
+- name: I2C2
+  address: 0x40005800
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: I2C2EN
+    reset:
+      register: HB1PRSTR
+      field: I2C2RST
+  interrupts:
+    - signal: EV
+      interrupt: I2C2_EV
+    - signal: ER
+      interrupt: I2C2_ER
+  pins:
+    - pin: PB11
+      signal: SDA
+      af: 4
+    - pin: PC1
+      signal: SDA
+      af: 9
+    - pin: PB10
+      signal: SCL
+      af: 4
+    - pin: PC0
+      signal: SCL
+      af: 9
+    - pin: PB12
+      signal: SMBA
+      af: 4
+    - pin: PC2
+      signal: SMBA
+      af: 9
+- name: I2C3
+  address: 0x40005C00
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: I2C3EN
+    reset:
+      register: HB1PRSTR
+      field: I2C3RST
+  interrupts:
+    - signal: EV
+      interrupt: I2C3_EV
+    - signal: ER
+      interrupt: I2C3_ER
+  pins:
+    - pin: PA13
+      signal: SDA
+      af: 7
+    - pin: PC9
+      signal: SDA
+      af: 4
+    - pin: PA8
+      signal: SCL
+      af: 4
+    - pin: PA14
+      signal: SCL
+      af: 7
+    - pin: PA9
+      signal: SMBA
+      af: 4
+    - pin: PA15
+      signal: SMBA
+      af: 7
+- name: I2C4
+  address: 0x40014000
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: I2C4EN
+    reset:
+      register: HB2PRSTR
+      field: I2C4RST
+  interrupts:
+    - signal: EV
+      interrupt: I2C4_EV
+    - signal: ER
+      interrupt: I2C4_ER
+  pins:
+    - pin: PB7
+      signal: SDA
+      af: 6
+    - pin: PD13
+      signal: SDA
+      af: 4
+    - pin: PF13
+      signal: SDA
+      af: 2
+    - pin: PB6
+      signal: SCL
+      af: 6
+    - pin: PB8
+      signal: SCL
+      af: 6
+    - pin: PD12
+      signal: SCL
+      af: 4
+    - pin: PF12
+      signal: SCL
+      af: 2
+    - pin: PB5
+      signal: SMBA
+      af: 6
+    - pin: PB9
+      signal: SMBA
+      af: 11
+    - pin: PD11
+      signal: SMBA
+      af: 4
+    - pin: PF11
+      signal: SMBA
+      af: 2
+- name: LPTIM1
+  address: 0x40002400
+  registers:
+    kind: lptim
+    version: l1
+    block: LPTIM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: LPTIM1EN
+    reset:
+      register: HB1PRSTR
+      field: LPTIM1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LPTIM1
+    - signal: WAKEUP
+      interrupt: LPTIM1WakeUP
+  pins:
+    - pin: PD12
+      signal: CH1
+      af: 1
+    - pin: PE0
+      signal: CH1
+      af: 1
+    - pin: PD14
+      signal: CH2
+      af: 1
+    - pin: PF5
+      signal: CH2
+      af: 1
+    - pin: PD11
+      signal: ETR
+      af: 1
+    - pin: PF4
+      signal: ETR
+      af: 1
+    - pin: PD13
+      signal: OC
+      af: 1
+    - pin: PE1
+      signal: OC
+      af: 1
+- name: LPTIM2
+  address: 0x40003400
+  registers:
+    kind: lptim
+    version: l1
+    block: LPTIM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: LPTIM2EN
+    reset:
+      register: HB1PRSTR
+      field: LPTIM2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LPTIM2
+    - signal: WAKEUP
+      interrupt: LPTIM2WakeUP
+  pins:
+    - pin: PB10
+      signal: CH1
+      af: 3
+    - pin: PD12
+      signal: CH1
+      af: 3
+    - pin: PD11
+      signal: CH2
+      af: 3
+    - pin: PB11
+      signal: ETR
+      af: 3
+    - pin: PD10
+      signal: ETR
+      af: 4
+    - pin: PB13
+      signal: OC
+      af: 3
+- name: RNG
+  address: 0x40023C00
+  registers:
+    kind: rng
+    version: v3
+    block: RNG
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: RNGEN
+    reset:
+      register: HBRSTR
+      field: RNGRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RNG
