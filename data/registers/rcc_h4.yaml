@@ -236,6 +236,10 @@ fieldset/CTLR:
     description: Internal High Speed clock trimming.
     bit_offset: 3
     bit_size: 5
+  - name: HSICAL
+    description: Internal High Speed clock calibration (hardware-set, read-only).
+    bit_offset: 8
+    bit_size: 8
   - name: HSEON
     description: External High Speed clock enable.
     bit_offset: 16
@@ -831,8 +835,8 @@ fieldset/HBPCENR:
     description: SERDES clock enable.
     bit_offset: 20
     bit_size: 1
-  - name: POICEN
-    description: POIC clock enable.
+  - name: PIOCEN
+    description: PIOC clock enable.
     bit_offset: 22
     bit_size: 1
 fieldset/HBRSTR:
@@ -890,8 +894,8 @@ fieldset/HBRSTR:
     description: SERDES reset.
     bit_offset: 20
     bit_size: 1
-  - name: POICRST
-    description: POIC reset.
+  - name: PIOCRST
+    description: PIOC reset.
     bit_offset: 22
     bit_size: 1
 fieldset/INTR:
