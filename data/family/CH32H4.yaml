@@ -1947,3 +1947,77 @@
     - pin: PE11
       signal: NSS
       af: 5
+
+# DMA + DMAMUX: 16-channel multiplexed DMA system (DMA1 ch 1-8 + DMA2 ch 1-8).
+# H4's DMA adds double-buffer mode (CH.M1ADDR) and request routing via DMAMUX.
+- name: DMA1
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: h4
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA1EN
+    reset:
+      register: HBRSTR
+      field: DMA1RST
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_CH1
+    - signal: CH2
+      interrupt: DMA1_CH2
+    - signal: CH3
+      interrupt: DMA1_CH3
+    - signal: CH4
+      interrupt: DMA1_CH4
+    - signal: CH5
+      interrupt: DMA1_CH5
+    - signal: CH6
+      interrupt: DMA1_CH6
+    - signal: CH7
+      interrupt: DMA1_CH7
+    - signal: CH8
+      interrupt: DMA1_CH8
+- name: DMA2
+  address: 0x40020400
+  registers:
+    kind: dma
+    version: h4
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA2EN
+    reset:
+      register: HBRSTR
+      field: DMA2RST
+  interrupts:
+    - signal: CH1
+      interrupt: DMA2_CH1
+    - signal: CH2
+      interrupt: DMA2_CH2
+    - signal: CH3
+      interrupt: DMA2_CH3
+    - signal: CH4
+      interrupt: DMA2_CH4
+    - signal: CH5
+      interrupt: DMA2_CH5
+    - signal: CH6
+      interrupt: DMA2_CH6
+    - signal: CH7
+      interrupt: DMA2_CH7
+    - signal: CH8
+      interrupt: DMA2_CH8
+- name: DMAMUX
+  address: 0x40020800
+  registers:
+    kind: dmamux
+    version: h4
+    block: DMAMUX
+  # No independent RCC enable; DMAMUX clock is gated together with DMA1/DMA2 (HBPCENR.DMA1EN / DMA2EN).
