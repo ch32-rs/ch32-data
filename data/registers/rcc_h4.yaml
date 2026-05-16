@@ -88,6 +88,7 @@ fieldset/BDCTLR:
     description: RTC clock source selection.
     bit_offset: 6
     bit_size: 2
+    enum: RTCSEL
   - name: RTCEN
     description: RTC clock enable.
     bit_offset: 8
@@ -104,29 +105,35 @@ fieldset/CFGR0:
   description: Clock configuration register (RCC_CFGR0).
   fields:
   - name: SW
-    description: System clock Switch.
+    description: System clock switch.
     bit_offset: 0
     bit_size: 2
+    enum: SW
   - name: SWS
-    description: System Clock Switch Status.
+    description: System clock switch status.
     bit_offset: 2
     bit_size: 2
+    enum: SW
   - name: HPRE
-    description: HB prescaler.
+    description: HB (AHB) prescaler — divides SYS_CLK to produce HCLK.
     bit_offset: 4
     bit_size: 4
+    enum: HPRE
   - name: PPRE1
-    description: Timer prescaler (PB1).
+    description: PB1 (low-speed APB) prescaler.
     bit_offset: 8
     bit_size: 3
+    enum: PPRE
   - name: PPRE2
-    description: TIMER or ADC clock prescaler (PB2).
+    description: PB2 (high-speed APB) prescaler, also feeds ADC prescaler.
     bit_offset: 11
     bit_size: 3
+    enum: PPRE
   - name: ADCPRE
-    description: ADC prescaler.
+    description: ADC prescaler (divides PB2 clock).
     bit_offset: 14
     bit_size: 2
+    enum: ADCPRE
   - name: FPRE
     description: HCLK prescaler.
     bit_offset: 16
@@ -1059,3 +1066,98 @@ fieldset/RSTSCKR:
     description: LOCKUP reset flag.
     bit_offset: 31
     bit_size: 1
+enum/ADCPRE:
+  description: ADC prescaler (divides PB2 clock).
+  bit_size: 2
+  variants:
+  - name: DIV2
+    description: PB2 divided by 2.
+    value: 0
+  - name: DIV4
+    description: PB2 divided by 4.
+    value: 1
+  - name: DIV6
+    description: PB2 divided by 6.
+    value: 2
+  - name: DIV8
+    description: PB2 divided by 8.
+    value: 3
+enum/HPRE:
+  description: HB (AHB) prescaler.
+  bit_size: 4
+  variants:
+  - name: DIV1
+    description: SYS_CLK not divided.
+    value: 0
+  - name: DIV2
+    description: SYS_CLK divided by 2.
+    value: 8
+  - name: DIV4
+    description: SYS_CLK divided by 4.
+    value: 9
+  - name: DIV8
+    description: SYS_CLK divided by 8.
+    value: 10
+  - name: DIV16
+    description: SYS_CLK divided by 16.
+    value: 11
+  - name: DIV64
+    description: SYS_CLK divided by 64.
+    value: 12
+  - name: DIV128
+    description: SYS_CLK divided by 128.
+    value: 13
+  - name: DIV256
+    description: SYS_CLK divided by 256.
+    value: 14
+  - name: DIV512
+    description: SYS_CLK divided by 512.
+    value: 15
+enum/PPRE:
+  description: PB (APB) prescaler.
+  bit_size: 3
+  variants:
+  - name: DIV1
+    description: HCLK not divided.
+    value: 0
+  - name: DIV2
+    description: HCLK divided by 2.
+    value: 4
+  - name: DIV4
+    description: HCLK divided by 4.
+    value: 5
+  - name: DIV8
+    description: HCLK divided by 8.
+    value: 6
+  - name: DIV16
+    description: HCLK divided by 16.
+    value: 7
+enum/RTCSEL:
+  description: RTC clock source selection.
+  bit_size: 2
+  variants:
+  - name: NO_CLK
+    description: No clock.
+    value: 0
+  - name: LSE
+    description: LSE oscillator selected as RTC clock.
+    value: 1
+  - name: LSI
+    description: LSI oscillator selected as RTC clock.
+    value: 2
+  - name: HSE_DIV512
+    description: HSE oscillator divided by 512 selected as RTC clock.
+    value: 3
+enum/SW:
+  description: System clock source.
+  bit_size: 2
+  variants:
+  - name: HSI
+    description: HSI selected as system clock.
+    value: 0
+  - name: HSE
+    description: HSE selected as system clock.
+    value: 1
+  - name: PLL
+    description: PLL selected as system clock.
+    value: 2
