@@ -46,10 +46,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPAEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPARST
 - name: GPIOB
   address: 0x40010C00
@@ -61,10 +61,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPBEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPBRST
 - name: GPIOC
   address: 0x40011000
@@ -76,10 +76,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPCEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPCRST
 - name: GPIOD
   address: 0x40011400
@@ -91,10 +91,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPDEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPDRST
 - name: GPIOE
   address: 0x40011800
@@ -106,10 +106,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPEEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPERST
 - name: GPIOF
   address: 0x40011C00
@@ -121,10 +121,10 @@
     bus_clock: PCLK2
     kernel_clock: PCLK2
     enable:
-      register: APB2PCENR
+      register: HB2PCENR
       field: IOPFEN
     reset:
-      register: APB2PRSTR
+      register: HB2PRSTR
       field: IOPFRST
 
 - name: RCC
@@ -199,10 +199,10 @@
     bus_clock: PCLK1
     kernel_clock: PCLK1
     enable:
-      register: APB1PCENR
+      register: HB1PCENR
       field: WWDGEN
     reset:
-      register: APB1PRSTR
+      register: HB1PRSTR
       field: WWDGRST
   interrupts:
     - signal: GLOBAL
