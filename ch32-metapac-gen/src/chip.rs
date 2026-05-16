@@ -153,29 +153,45 @@ fn postprocess_pac_rs(s: String, arch: Arch) -> String {
                 ".vector_table.interrupts",
                 ".vector_table.external_interrupts",
             );
-            let data = data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS");
-            // trim system vector, 0 to 15
-            let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
-                .unwrap()
-                .replace_all(&data, "[")
-                .to_string();
-            if data.contains("[Vector { _reserved : 0 }") {
-                panic!("Unexpected Vector 16 {{ _reserved : 0 }}");
-            }
-            // Fix vector size: : [Vector; (\d+)] =
-            Regex::new(r#": \[Vector ; (\d+)\]"#)
+            data.replace("__INTERRUPTS", "__EXTERNAL_INTERRUPTS")
+        }
+        // Cortex-M NVIC uses CMSIS IRQ numbers (WWDG = 0); shift discriminants.
+        Arch::Arm => {
+            let data = Regex::new(r#"([A-Z][A-Z0-9_]*) = (\d+) ,"#)
                 .unwrap()
                 .replace_all(&data, |caps: &regex::Captures| {
-                    format!(
-                        ": [Vector ; {}]",
-                        caps.get(1).unwrap().as_str().parse::<usize>().unwrap() - 16
-                    )
+                    let n: i32 = caps[2].parse().unwrap();
+                    format!("{} = {} ,", &caps[1], n - 16)
+                })
+                .to_string();
+            Regex::new(r#"# \[doc = "(\d+) - "#)
+                .unwrap()
+                .replace_all(&data, |caps: &regex::Captures| {
+                    let n: i32 = caps[1].parse().unwrap();
+                    format!(r#"# [doc = "{} - "#, n - 16)
                 })
                 .to_string()
         }
-        // ARM keeps chiptool's native cortex_m output for NVIC interop.
-        Arch::Arm => data,
     };
+
+    // trim system vector, 0 to 15
+    let data = Regex::new(r#"\[(Vector \{ _reserved : 0 \} , ){16}"#)
+        .unwrap()
+        .replace_all(&data, "[")
+        .to_string();
+    if data.contains("[Vector { _reserved : 0 }") {
+        panic!("Unexpected Vector 16 {{ _reserved : 0 }}");
+    }
+    // Fix vector size: : [Vector; (\d+)] =
+    let data = Regex::new(r#": \[Vector ; (\d+)\]"#)
+        .unwrap()
+        .replace_all(&data, |caps: &regex::Captures| {
+            format!(
+                ": [Vector ; {}]",
+                caps.get(1).unwrap().as_str().parse::<usize>().unwrap() - 16
+            )
+        })
+        .to_string();
 
     // Remove inner attributes like #![no_std]
     Regex::new("# *! *\\[.*\\]")
