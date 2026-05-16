@@ -1,0 +1,30 @@
+name: CH32F103C8T6
+family: ARM Cortex-M-based, general-purpose MCU
+subfamily: General-purpose
+product_type: Cortex-M3 core, basic version, main frequency <= 72M
+device_id: 0x20004102
+packages:
+  - name: CH32F103C8T6
+    package: LQFP48
+include_memory: ../memory/CH32V1.yaml
+memory_sizes: { USR_1: 64K, RAM: 20K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32F103.html
+cores:
+  - name: cortex-m3
+    arch: arm
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32F1.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
+      - "../peripherals/FV2x_V3x_I2C2.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_SPI2.yaml"
+      - "../peripherals/V1x_V2x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+    include_interrupts: "../interrupts/CH32V1.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V103.yaml"
