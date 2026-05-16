@@ -1712,3 +1712,238 @@
     - pin: PF13
       signal: CH4
       af: 13
+
+# SPI: reuse spi_v3 register block (CTLR1/2 + STATR + I2S regs).
+# SPI1 on HB2 (PCLK2); SPI2-4 on HB1 (PCLK1).
+# v3 single-block design exposes I2S_CFGR/I2SPR on all SPI instances;
+# on H4 only SPI2/SPI3 actually implement I2S — accessing those regs on
+# SPI1/SPI4 has no hardware effect (same as how v3 family handles it).
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: SPI1EN
+    reset:
+      register: HB2PRSTR
+      field: SPI1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI1
+  pins:
+    - pin: PA5
+      signal: SCK
+      af: 5
+    - pin: PB3
+      signal: SCK
+      af: 5
+    - pin: PF5
+      signal: SCK
+      af: 5
+    - pin: PF7
+      signal: SCK
+      af: 3
+    - pin: PA7
+      signal: MOSI
+      af: 5
+    - pin: PB5
+      signal: MOSI
+      af: 5
+    - pin: PD7
+      signal: MOSI
+      af: 5
+    - pin: PF8
+      signal: MOSI
+      af: 3
+    - pin: PA6
+      signal: MISO
+      af: 5
+    - pin: PB4
+      signal: MISO
+      af: 5
+    - pin: PF3
+      signal: MISO
+      af: 5
+    - pin: PF9
+      signal: MISO
+      af: 3
+    - pin: PA4
+      signal: NSS
+      af: 5
+    - pin: PA15
+      signal: NSS
+      af: 5
+    - pin: PF4
+      signal: NSS
+      af: 5
+    - pin: PF6
+      signal: NSS
+      af: 3
+- name: SPI2
+  address: 0x40003800
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: SPI2EN
+    reset:
+      register: HB1PRSTR
+      field: SPI2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI2
+  pins:
+    - pin: PA9
+      signal: SCK
+      af: 5
+    - pin: PA12
+      signal: SCK
+      af: 5
+    - pin: PB10
+      signal: SCK
+      af: 5
+    - pin: PB13
+      signal: SCK
+      af: 5
+    - pin: PD3
+      signal: SCK
+      af: 4
+    - pin: PB15
+      signal: MOSI
+      af: 5
+    - pin: PC1
+      signal: MOSI
+      af: 5
+    - pin: PC3
+      signal: MOSI
+      af: 5
+    - pin: PB14
+      signal: MISO
+      af: 5
+    - pin: PC2
+      signal: MISO
+      af: 5
+    - pin: PA11
+      signal: NSS
+      af: 5
+    - pin: PB4
+      signal: NSS
+      af: 7
+    - pin: PB9
+      signal: NSS
+      af: 5
+    - pin: PB12
+      signal: NSS
+      af: 5
+- name: SPI3
+  address: 0x40003C00
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: SPI3EN
+    reset:
+      register: HB1PRSTR
+      field: SPI3RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI3
+  pins:
+    - pin: PA14
+      signal: SCK
+      af: 1
+    - pin: PB3
+      signal: SCK
+      af: 6
+    - pin: PC10
+      signal: SCK
+      af: 6
+    - pin: PA13
+      signal: MOSI
+      af: 1
+    - pin: PB2
+      signal: MOSI
+      af: 7
+    - pin: PB5
+      signal: MOSI
+      af: 7
+    - pin: PC12
+      signal: MOSI
+      af: 6
+    - pin: PD6
+      signal: MOSI
+      af: 5
+    - pin: PB4
+      signal: MISO
+      af: 6
+    - pin: PC9
+      signal: MISO
+      af: 5
+    - pin: PC11
+      signal: MISO
+      af: 6
+    - pin: PA4
+      signal: NSS
+      af: 6
+    - pin: PA15
+      signal: NSS
+      af: 6
+- name: SPI4
+  address: 0x40004000
+  registers:
+    kind: spi
+    version: v3
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: SPI4EN
+    reset:
+      register: HB1PRSTR
+      field: SPI4RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI4
+  pins:
+    - pin: PE2
+      signal: SCK
+      af: 5
+    - pin: PE12
+      signal: SCK
+      af: 5
+    - pin: PE6
+      signal: MOSI
+      af: 5
+    - pin: PE14
+      signal: MOSI
+      af: 5
+    - pin: PE5
+      signal: MISO
+      af: 5
+    - pin: PE13
+      signal: MISO
+      af: 5
+    - pin: PE4
+      signal: NSS
+      af: 5
+    - pin: PE11
+      signal: NSS
+      af: 5
