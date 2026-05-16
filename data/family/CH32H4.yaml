@@ -20,6 +20,22 @@
     version: h4
     block: PFIC
 
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: h4
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: AFIOEN
+    reset:
+      register: HB2PRSTR
+      field: AFIORST
+
 - name: GPIOA
   address: 0x40010800
   registers:

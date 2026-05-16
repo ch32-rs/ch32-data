@@ -1,0 +1,650 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+  - name: PCFR1
+    description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+    byte_offset: 0
+    fieldset: PCFR1
+  - name: GPIOA_AFLR
+    description: PA port multiplexing function register.
+    byte_offset: 4
+    fieldset: GPIOA_AFLR
+  - name: GPIOA_AFHR
+    description: PA port multiplexing function register.
+    byte_offset: 8
+    fieldset: GPIOA_AFHR
+  - name: GPIOB_AFLR
+    description: PB port multiplexing function register.
+    byte_offset: 12
+    fieldset: GPIOB_AFLR
+  - name: GPIOB_AFHR
+    description: PB port multiplexing function register.
+    byte_offset: 16
+    fieldset: GPIOB_AFHR
+  - name: GPIOC_AFLR
+    description: PC port multiplexing function register.
+    byte_offset: 20
+    fieldset: GPIOC_AFLR
+  - name: GPIOC_AFHR
+    description: PC port multiplexing function register.
+    byte_offset: 24
+    fieldset: GPIOC_AFHR
+  - name: GPIOD_AFLR
+    description: PD port multiplexing function register.
+    byte_offset: 28
+    fieldset: GPIOD_AFLR
+  - name: GPIOD_AFHR
+    description: PD port multiplexing function register.
+    byte_offset: 32
+    fieldset: GPIOD_AFHR
+  - name: GPIOE_AFLR
+    description: PE port multiplexing function register.
+    byte_offset: 36
+    fieldset: GPIOE_AFLR
+  - name: GPIOE_AFHR
+    description: PE port multiplexing function register.
+    byte_offset: 40
+    fieldset: GPIOE_AFHR
+  - name: GPIOF_AFLR
+    description: PF port multiplexing function register.
+    byte_offset: 44
+    fieldset: GPIOF_AFLR
+  - name: GPIOF_AFHR
+    description: PF port multiplexing function register.
+    byte_offset: 48
+    fieldset: GPIOF_AFHR
+  - name: EXTICR1
+    description: External interrupt configuration register 1.
+    byte_offset: 60
+    fieldset: EXTICR1
+  - name: EXTICR2
+    description: External interrupt configuration register 2.
+    byte_offset: 64
+    fieldset: EXTICR2
+fieldset/EXTICR1:
+  description: External interrupt configuration register 1 (lines 0..7).
+  fields:
+  - name: EXTI0
+    description: GPIO port that drives EXTI line 0.
+    bit_offset: 0
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI1
+    description: GPIO port that drives EXTI line 1.
+    bit_offset: 4
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI2
+    description: GPIO port that drives EXTI line 2.
+    bit_offset: 8
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI3
+    description: GPIO port that drives EXTI line 3.
+    bit_offset: 12
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI4
+    description: GPIO port that drives EXTI line 4.
+    bit_offset: 16
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI5
+    description: GPIO port that drives EXTI line 5.
+    bit_offset: 20
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI6
+    description: GPIO port that drives EXTI line 6.
+    bit_offset: 24
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI7
+    description: GPIO port that drives EXTI line 7.
+    bit_offset: 28
+    bit_size: 4
+    enum: EXTI_PORT
+fieldset/EXTICR2:
+  description: External interrupt configuration register 2 (lines 8..15).
+  fields:
+  - name: EXTI8
+    description: GPIO port that drives EXTI line 8.
+    bit_offset: 0
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI9
+    description: GPIO port that drives EXTI line 9.
+    bit_offset: 4
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI10
+    description: GPIO port that drives EXTI line 10.
+    bit_offset: 8
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI11
+    description: GPIO port that drives EXTI line 11.
+    bit_offset: 12
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI12
+    description: GPIO port that drives EXTI line 12.
+    bit_offset: 16
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI13
+    description: GPIO port that drives EXTI line 13.
+    bit_offset: 20
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI14
+    description: GPIO port that drives EXTI line 14.
+    bit_offset: 24
+    bit_size: 4
+    enum: EXTI_PORT
+  - name: EXTI15
+    description: GPIO port that drives EXTI line 15.
+    bit_offset: 28
+    bit_size: 4
+    enum: EXTI_PORT
+fieldset/GPIOA_AFHR:
+  description: PA port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PA port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PA port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PA port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PA port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PA port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PA port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PA port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PA port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOA_AFLR:
+  description: PA port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PA port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PA port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PA port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PA port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PA port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PA port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PA port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PA port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOB_AFHR:
+  description: PB port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PB port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PB port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PB port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PB port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PB port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PB port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PB port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PB port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOB_AFLR:
+  description: PB port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PB port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PB port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PB port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PB port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PB port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PB port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PB port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PB port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOC_AFHR:
+  description: PC port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PC port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PC port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PC port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PC port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PC port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PC port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PC port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PC port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOC_AFLR:
+  description: PC port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PC port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PC port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PC port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PC port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PC port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PC port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PC port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PC port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOD_AFHR:
+  description: PD port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PD port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PD port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PD port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PD port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PD port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PD port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PD port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PD port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOD_AFLR:
+  description: PD port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PD port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PD port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PD port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PD port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PD port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PD port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PD port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PD port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOE_AFHR:
+  description: PE port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PE port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PE port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PE port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PE port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PE port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PE port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PE port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PE port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOE_AFLR:
+  description: PE port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PE port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PE port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PE port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PE port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PE port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PE port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PE port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PE port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOF_AFHR:
+  description: PF port multiplexing function register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PF port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PF port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PF port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PF port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PF port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PF port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PF port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PF port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/GPIOF_AFLR:
+  description: PF port multiplexing function register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PF port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PF port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PF port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PF port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PF port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PF port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PF port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PF port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+  fields:
+  - name: PD0PD1_RM
+    description: PD0PD1 remapping.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADC1_ETRGREG_RM
+    description: ADC1_ETRGREG remapping.
+    bit_offset: 1
+    bit_size: 1
+  - name: ADC1_ETRGINJ_RM
+    description: ADC1_ETRGINJ remapping.
+    bit_offset: 2
+    bit_size: 1
+  - name: ADC2_ETRGREG_RM
+    description: ADC2_ETRGREG remapping.
+    bit_offset: 3
+    bit_size: 1
+  - name: ADC2_ETRGINJ_RM
+    description: ADC2_ETRGINJ remapping.
+    bit_offset: 4
+    bit_size: 1
+  - name: UHSIF_CLK_RM
+    description: UHSIF_CLK remapping.
+    bit_offset: 6
+    bit_size: 2
+  - name: UHSIF_PORT_RM
+    description: UHSIF_PORT remapping.
+    bit_offset: 8
+    bit_size: 2
+  - name: SDMMC_RM
+    description: SDMMC remapping.
+    bit_offset: 10
+    bit_size: 2
+  - name: TIM2ITR1_RM
+    description: TIM2ITR1 remapping.
+    bit_offset: 12
+    bit_size: 1
+  - name: VIO18_IO_HSLV
+    description: VIO18 IO speed configuration at low voltage.
+    bit_offset: 16
+    bit_size: 1
+  - name: VIO33_IO_HSLV
+    description: VIO33 IO speed configuration at low voltage.
+    bit_offset: 17
+    bit_size: 1
+  - name: VDD33_IO_HSLV
+    description: VDD33 IO speed configuration at low voltage.
+    bit_offset: 18
+    bit_size: 1
+  - name: USBPD_CC_HVT
+    description: CC pin intput channel threshold adjustment.
+    bit_offset: 20
+    bit_size: 1
+  - name: SW_CFG
+    description: Serial wire JTAG configuration.
+    bit_offset: 24
+    bit_size: 3
+enum/EXTI_PORT:
+  description: GPIO port selection for an EXTI line (encoding matches SDK GPIO_PortSourceGPIO*). Only EXTI lines 0..15 are GPIO-routable; lines 16..26 are peripheral wake events.
+  bit_size: 4
+  variants:
+  - name: PA
+    description: GPIOA pin selected.
+    value: 0
+  - name: PB
+    description: GPIOB pin selected.
+    value: 1
+  - name: PC
+    description: GPIOC pin selected.
+    value: 2
+  - name: PD
+    description: GPIOD pin selected.
+    value: 3
+  - name: PE
+    description: GPIOE pin selected.
+    value: 4
+  - name: PF
+    description: GPIOF pin selected (CH32H4 family only).
+    value: 5
