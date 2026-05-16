@@ -1007,3 +1007,708 @@
   interrupts:
     - signal: GLOBAL
       interrupt: RNG
+
+# Advanced (TIM1/8), 16-bit GP (TIM2-5), 32-bit GP (TIM9-12), Basic (TIM6/7).
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: h4
+    block: ADTM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM1EN
+    reset:
+      register: HB2PRSTR
+      field: TIM1RST
+  interrupts:
+    - signal: BRK
+      interrupt: TIM1_BRK
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: TRG_COM
+      interrupt: TIM1_TRG_COM
+    - signal: CC
+      interrupt: TIM1_CC
+  pins:
+    - pin: PA12
+      signal: ETR
+      af: 1
+    - pin: PE7
+      signal: ETR
+      af: 1
+    - pin: PA8
+      signal: CH1
+      af: 1
+    - pin: PC1
+      signal: CH1
+      af: 2
+    - pin: PE9
+      signal: CH1
+      af: 1
+    - pin: PA9
+      signal: CH2
+      af: 1
+    - pin: PE11
+      signal: CH2
+      af: 1
+    - pin: PA10
+      signal: CH3
+      af: 1
+    - pin: PE13
+      signal: CH3
+      af: 1
+    - pin: PA11
+      signal: CH4
+      af: 1
+    - pin: PE14
+      signal: CH4
+      af: 1
+    - pin: PA5
+      signal: BKIN
+      af: 2
+    - pin: PA6
+      signal: BKIN
+      af: 1
+    - pin: PB12
+      signal: BKIN
+      af: 1
+    - pin: PE15
+      signal: BKIN
+      af: 1
+    - pin: PA12
+      signal: BKIN2
+      af: 12
+    - pin: PE6
+      signal: BKIN2
+      af: 1
+    - pin: PA7
+      signal: CH1N
+      af: 1
+    - pin: PB13
+      signal: CH1N
+      af: 1
+    - pin: PE8
+      signal: CH1N
+      af: 1
+    - pin: PB0
+      signal: CH2N
+      af: 1
+    - pin: PB14
+      signal: CH2N
+      af: 1
+    - pin: PE10
+      signal: CH2N
+      af: 1
+    - pin: PB1
+      signal: CH3N
+      af: 1
+    - pin: PB15
+      signal: CH3N
+      af: 1
+    - pin: PE12
+      signal: CH3N
+      af: 1
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM2EN
+    reset:
+      register: HB1PRSTR
+      field: TIM2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM2
+  pins:
+    - pin: PA1
+      signal: CH2
+      af: 1
+    - pin: PB3
+      signal: CH2
+      af: 1
+    - pin: PA2
+      signal: CH3
+      af: 1
+    - pin: PB10
+      signal: CH3
+      af: 1
+    - pin: PA3
+      signal: CH4
+      af: 1
+    - pin: PB11
+      signal: CH4
+      af: 1
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM3EN
+    reset:
+      register: HB1PRSTR
+      field: TIM3RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM3
+  pins:
+    - pin: PD2
+      signal: ETR
+      af: 2
+    - pin: PA6
+      signal: CH1
+      af: 2
+    - pin: PB4
+      signal: CH1
+      af: 2
+    - pin: PC6
+      signal: CH1
+      af: 2
+    - pin: PD3
+      signal: CH1
+      af: 9
+    - pin: PA7
+      signal: CH2
+      af: 2
+    - pin: PB5
+      signal: CH2
+      af: 2
+    - pin: PC7
+      signal: CH2
+      af: 2
+    - pin: PD4
+      signal: CH2
+      af: 9
+    - pin: PB0
+      signal: CH3
+      af: 2
+    - pin: PC8
+      signal: CH3
+      af: 2
+    - pin: PD5
+      signal: CH3
+      af: 9
+    - pin: PB1
+      signal: CH4
+      af: 2
+    - pin: PC9
+      signal: CH4
+      af: 2
+    - pin: PD6
+      signal: CH4
+      af: 9
+- name: TIM4
+  address: 0x40000800
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM4EN
+    reset:
+      register: HB1PRSTR
+      field: TIM4RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM4
+  pins:
+    - pin: PB4
+      signal: ETR
+      af: 10
+    - pin: PB6
+      signal: CH1
+      af: 2
+    - pin: PD12
+      signal: CH1
+      af: 2
+    - pin: PE3
+      signal: CH1
+      af: 2
+    - pin: PB7
+      signal: CH2
+      af: 2
+    - pin: PD13
+      signal: CH2
+      af: 2
+    - pin: PE4
+      signal: CH2
+      af: 2
+    - pin: PB8
+      signal: CH3
+      af: 2
+    - pin: PD14
+      signal: CH3
+      af: 2
+    - pin: PE5
+      signal: CH3
+      af: 2
+    - pin: PB9
+      signal: CH4
+      af: 2
+    - pin: PD15
+      signal: CH4
+      af: 2
+    - pin: PE6
+      signal: CH4
+      af: 2
+- name: TIM5
+  address: 0x40000C00
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM5EN
+    reset:
+      register: HB1PRSTR
+      field: TIM5RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM5
+  pins:
+    - pin: PA4
+      signal: ETR
+      af: 2
+    - pin: PD11
+      signal: ETR
+      af: 6
+    - pin: PA0
+      signal: CH1
+      af: 2
+    - pin: PD12
+      signal: CH1
+      af: 6
+    - pin: PA1
+      signal: CH2
+      af: 2
+    - pin: PC2
+      signal: CH2
+      af: 2
+    - pin: PD13
+      signal: CH2
+      af: 6
+    - pin: PA2
+      signal: CH3
+      af: 2
+    - pin: PC3
+      signal: CH3
+      af: 2
+    - pin: PD14
+      signal: CH3
+      af: 6
+    - pin: PA3
+      signal: CH4
+      af: 2
+    - pin: PB0
+      signal: CH4
+      af: 4
+    - pin: PD15
+      signal: CH4
+      af: 6
+- name: TIM6
+  address: 0x40001000
+  registers:
+    kind: timer
+    version: h4
+    block: BCTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM6EN
+    reset:
+      register: HB1PRSTR
+      field: TIM6RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM6
+- name: TIM7
+  address: 0x40001400
+  registers:
+    kind: timer
+    version: h4
+    block: BCTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: TIM7EN
+    reset:
+      register: HB1PRSTR
+      field: TIM7RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM7
+- name: TIM8
+  address: 0x40013400
+  registers:
+    kind: timer
+    version: h4
+    block: ADTM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM8EN
+    reset:
+      register: HB2PRSTR
+      field: TIM8RST
+  interrupts:
+    - signal: BRK
+      interrupt: TIM8_BRK
+    - signal: UP
+      interrupt: TIM8_UP
+    - signal: TRG_COM
+      interrupt: TIM8_TRG_COM
+    - signal: CC
+      interrupt: TIM8_CC
+  pins:
+    - pin: PA0
+      signal: ETR
+      af: 3
+    - pin: PF2
+      signal: ETR
+      af: 3
+    - pin: PC6
+      signal: CH1
+      af: 3
+    - pin: PE3
+      signal: CH1
+      af: 0
+    - pin: PC7
+      signal: CH2
+      af: 3
+    - pin: PE4
+      signal: CH2
+      af: 0
+    - pin: PC8
+      signal: CH3
+      af: 3
+    - pin: PE5
+      signal: CH3
+      af: 0
+    - pin: PC9
+      signal: CH4
+      af: 3
+    - pin: PE6
+      signal: CH4
+      af: 0
+    - pin: PA6
+      signal: BKIN
+      af: 3
+    - pin: PB12
+      signal: BKIN
+      af: 2
+    - pin: PC0
+      signal: BKIN
+      af: 0
+    - pin: PA8
+      signal: BKIN2
+      af: 3
+    - pin: PB13
+      signal: BKIN2
+      af: 2
+    - pin: PA5
+      signal: CH1N
+      af: 3
+    - pin: PA7
+      signal: CH1N
+      af: 3
+    - pin: PC1
+      signal: CH1N
+      af: 0
+    - pin: PB0
+      signal: CH2N
+      af: 3
+    - pin: PB14
+      signal: CH2N
+      af: 3
+    - pin: PC2
+      signal: CH2N
+      af: 0
+    - pin: PB1
+      signal: CH3N
+      af: 3
+    - pin: PB15
+      signal: CH3N
+      af: 3
+    - pin: PC3
+      signal: CH3N
+      af: 0
+- name: TIM9
+  address: 0x40014C00
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM32
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM9EN
+    reset:
+      register: HB2PRSTR
+      field: TIM9RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM9
+  pins:
+    - pin: PA4
+      signal: ETR
+      af: 4
+    - pin: PB13
+      signal: ETR
+      af: 4
+    - pin: PC8
+      signal: ETR
+      af: 6
+    - pin: PA0
+      signal: CH1
+      af: 6
+    - pin: PB14
+      signal: CH1
+      af: 2
+    - pin: PC9
+      signal: CH1
+      af: 6
+    - pin: PA1
+      signal: CH2
+      af: 6
+    - pin: PB10
+      signal: CH2
+      af: 2
+    - pin: PB15
+      signal: CH2
+      af: 2
+    - pin: PC10
+      signal: CH2
+      af: 2
+    - pin: PA2
+      signal: CH3
+      af: 4
+    - pin: PB12
+      signal: CH3
+      af: 8
+    - pin: PC12
+      signal: CH3
+      af: 2
+    - pin: PE5
+      signal: CH3
+      af: 4
+    - pin: PB11
+      signal: CH4
+      af: 9
+    - pin: PC11
+      signal: CH4
+      af: 2
+    - pin: PE6
+      signal: CH4
+      af: 4
+- name: TIM10
+  address: 0x40015000
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM32
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM10EN
+    reset:
+      register: HB2PRSTR
+      field: TIM10RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM10
+  pins:
+    - pin: PA5
+      signal: ETR
+      af: 9
+    - pin: PB5
+      signal: ETR
+      af: 0
+    - pin: PF10
+      signal: ETR
+      af: 8
+    - pin: PA6
+      signal: CH1
+      af: 9
+    - pin: PB6
+      signal: CH1
+      af: 0
+    - pin: PF8
+      signal: CH1
+      af: 9
+    - pin: PA7
+      signal: CH2
+      af: 9
+    - pin: PB7
+      signal: CH2
+      af: 0
+    - pin: PF9
+      signal: CH2
+      af: 9
+    - pin: PA3
+      signal: CH3
+      af: 8
+    - pin: PB8
+      signal: CH3
+      af: 1
+    - pin: PF6
+      signal: CH3
+      af: 9
+    - pin: PA4
+      signal: CH4
+      af: 9
+    - pin: PB9
+      signal: CH4
+      af: 1
+    - pin: PF7
+      signal: CH4
+      af: 9
+- name: TIM11
+  address: 0x40015400
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM32
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM11EN
+    reset:
+      register: HB2PRSTR
+      field: TIM11RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM11
+  pins:
+    - pin: PB2
+      signal: ETR
+      af: 13
+    - pin: PD5
+      signal: ETR
+      af: 13
+    - pin: PD3
+      signal: CH1
+      af: 2
+    - pin: PE0
+      signal: CH1
+      af: 13
+    - pin: PF6
+      signal: CH1
+      af: 13
+    - pin: PD4
+      signal: CH2
+      af: 2
+    - pin: PE1
+      signal: CH2
+      af: 13
+    - pin: PF7
+      signal: CH2
+      af: 13
+    - pin: PD5
+      signal: CH3
+      af: 2
+    - pin: PD7
+      signal: CH3
+      af: 13
+    - pin: PF8
+      signal: CH3
+      af: 13
+    - pin: PD6
+      signal: CH4
+      af: 2
+    - pin: PF9
+      signal: CH4
+      af: 13
+- name: TIM12
+  address: 0x40013C00
+  registers:
+    kind: timer
+    version: h4
+    block: GPTM32
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM12EN
+    reset:
+      register: HB2PRSTR
+      field: TIM12RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: TIM12
+  pins:
+    - pin: PB0
+      signal: ETR
+      af: 13
+    - pin: PB3
+      signal: ETR
+      af: 14
+    - pin: PB1
+      signal: CH1
+      af: 5
+    - pin: PE3
+      signal: CH1
+      af: 3
+    - pin: PB2
+      signal: CH2
+      af: 5
+    - pin: PE4
+      signal: CH2
+      af: 3
+    - pin: PE13
+      signal: CH2
+      af: 2
+    - pin: PE5
+      signal: CH3
+      af: 3
+    - pin: PE14
+      signal: CH3
+      af: 2
+    - pin: PF12
+      signal: CH3
+      af: 13
+    - pin: PE6
+      signal: CH4
+      af: 3
+    - pin: PE15
+      signal: CH4
+      af: 2
+    - pin: PF13
+      signal: CH4
+      af: 13
