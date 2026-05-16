@@ -98,7 +98,7 @@
   address: 0xE000F000
   registers:
     kind: systick
-    version: dual_core
+    version: v3f_v5f
     block: SYSTICK
   # Per-counter interrupt routing is configured at runtime via CTLR.CID;
   # SysTick0/SysTick1 are exposed as separate interrupts (SysTick0=12,

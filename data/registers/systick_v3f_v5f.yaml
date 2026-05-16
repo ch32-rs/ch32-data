@@ -1,5 +1,5 @@
 block/SYSTICK:
-  description: Systick registers, dual 32-bit up/down counters shared by V3F + V5F cores with per-counter core ID (CID) routing. Currently only used by CH32H417; the name reflects the topology rather than a specific Qingke core version.
+  description: Systick registers for V3F + V5F dual-core (currently CH32H417). Two independent 32-bit up/down counters with per-counter core ID (CID) routing for interrupts.
   items:
   - name: CTLR_0
     description: System count control register for counter 0.
