@@ -1,0 +1,162 @@
+block/OPA:
+  description: OPA configuration.
+  items:
+  - name: OPA_CTLR1
+    description: OPA Control Register 1.
+    byte_offset: 0
+    fieldset: OPA_CTLR1
+  - name: OPA_CTLR2
+    description: OPA Control Register 2.
+    byte_offset: 4
+    fieldset: OPA_CTLR2
+  - name: OPA_CTLR3
+    description: OPA Control Register 3.
+    byte_offset: 8
+    fieldset: OPA_CTLR3
+  - name: CMP_CTLR
+    description: CMP Control Registers.
+    byte_offset: 12
+    fieldset: CMP_CTLR
+  - name: CMP_STATR
+    description: CMP Status Registers.
+    byte_offset: 16
+    fieldset: CMP_STATR
+fieldset/CMP_CTLR:
+  description: CMP Control Registers.
+  fields:
+  - name: PSEL
+    description: CMP Positive Channel Selection Bits.
+    bit_offset: 0
+    bit_size: 2
+  - name: NSEL
+    description: CMP Negative End Channel Selection Bits.
+    bit_offset: 2
+    bit_size: 2
+  - name: MODE
+    description: CMP Output Channel Selection.
+    bit_offset: 4
+    bit_size: 4
+  - name: EN
+    description: CMP enables.
+    bit_offset: 8
+    bit_size: 1
+  - name: HYPSEL
+    description: CMP hysteresis voltage selector.
+    bit_offset: 9
+    bit_size: 2
+  - name: VREF
+    description: CMP Internal Bias Voltage Selector.
+    bit_offset: 11
+    bit_size: 2
+  - name: FILT_EN
+    description: CMP Digital Filtering Enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: FILT_CFG
+    description: CMP filter sampling interval configuration.
+    bit_offset: 16
+    bit_size: 9
+  - name: FILT_BASE
+    description: CMP filtering sampling time base configuration.
+    bit_offset: 28
+    bit_size: 3
+fieldset/CMP_STATR:
+  description: CMP Status Registers.
+  fields:
+  - name: OUT_FILT
+    description: CMP Output.
+    bit_offset: 0
+    bit_size: 1
+fieldset/OPA_CTLR1:
+  description: OPA Control Register 1.
+  fields:
+  - name: EN1
+    description: OPA1 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: OPA1 Output Channel Selection.
+    bit_offset: 1
+    bit_size: 2
+  - name: PSEL1
+    description: OPA1 Positive Channel Selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: NSEL1
+    description: OPA1 Negative Channel Selection vs. PGA Gain Selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: FB_EN1
+    description: OPA1's PGA mode feedback enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: PGADIF1
+    description: OPA1 is used with NSEL1 as PGA and the N-terminal is connected to OPA1_CHN1 (PA7).
+    bit_offset: 9
+    bit_size: 1
+  - name: HS1
+    description: OPA1 high-speed mode enables.
+    bit_offset: 10
+    bit_size: 1
+fieldset/OPA_CTLR2:
+  description: OPA Control Register 2.
+  fields:
+  - name: EN2
+    description: OPA2 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE2
+    description: OPA2 Output Channel Selection.
+    bit_offset: 1
+    bit_size: 2
+  - name: PSEL2
+    description: OPA2 Positive Channel Selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: NSEL2
+    description: OPA2 Negative Channel Selection vs. PGA Gain Selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: FB_EN2
+    description: OPA2's PGA mode feedback enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: PGADIF1
+    description: OPA2 is used with NSEL1 as PGA and the N-terminal is connected to OPA2_CHN1 (PA7).
+    bit_offset: 9
+    bit_size: 1
+  - name: HS2
+    description: OPA2 high-speed mode enables.
+    bit_offset: 10
+    bit_size: 1
+fieldset/OPA_CTLR3:
+  description: OPA Control Register 3.
+  fields:
+  - name: EN3
+    description: OPA3 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE3
+    description: OPA3 Output Channel Selection.
+    bit_offset: 1
+    bit_size: 2
+  - name: PSEL3
+    description: OPA3 Positive Channel Selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: NSEL3
+    description: OPA3 Negative Channel Selection vs. PGA Gain Selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: FB_EN3
+    description: OPA3's PGA mode feedback enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: PGADIF3
+    description: OPA3 is used with NSEL1 as PGA and the N-terminal is connected to OPA3_CHN1 (PA7).
+    bit_offset: 9
+    bit_size: 1
+  - name: HS3
+    description: OPA3 high-speed mode enables.
+    bit_offset: 10
+    bit_size: 1

@@ -2126,3 +2126,95 @@
       signal: IN14
     - pin: PC5
       signal: IN15
+
+# Analog block: RTC, DAC, HSADC (RM ch12), OPA, DFSDM.
+# RTC uses LSE/LSI as kernel clock so no HBxPCENR enable bit; it's gated by RCC.BDCTLR.RTCEN.
+# OPA and CMP share a single RCC enable bit (OPCMEN); OPA peripheral is exposed here, CMP TBD.
+- name: RTC
+  address: 0x40002800
+  registers:
+    kind: rtc
+    version: common
+    block: RTC
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RTC
+    - signal: ALARM
+      interrupt: RTCAlarm
+
+- name: DAC
+  address: 0x40007400
+  registers:
+    kind: dac
+    version: h4
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: DACEN
+    reset:
+      register: HB1PRSTR
+      field: DACRST
+  pins:
+    - pin: PA4
+      signal: OUT1
+    - pin: PA5
+      signal: OUT2
+
+- name: HSADC
+  address: 0x40017400
+  registers:
+    kind: hsadc
+    version: h4
+    block: HSADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: HSADC
+    enable:
+      register: HB2PCENR
+      field: HSADCEN
+    reset:
+      register: HB2PRSTR
+      field: HSADCRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: HSADC
+
+- name: OPA
+  address: 0x40017800
+  registers:
+    kind: opa
+    version: h4
+    block: OPA
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: OPCMEN
+    reset:
+      register: HB2PRSTR
+      field: OPCMRST
+
+- name: DFSDM
+  address: 0x40017000
+  registers:
+    kind: dfsdm
+    version: h4
+    block: DFSDM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: DFSDMEN
+    reset:
+      register: HB2PRSTR
+      field: DFSDMRST
+  interrupts:
+    - signal: FLT0
+      interrupt: DFSDM0
+    - signal: FLT1
+      interrupt: DFSDM1
