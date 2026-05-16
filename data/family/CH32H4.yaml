@@ -2021,3 +2021,108 @@
     version: h4
     block: DMAMUX
   # No independent RCC enable; DMAMUX clock is gated together with DMA1/DMA2 (HBPCENR.DMA1EN / DMA2EN).
+
+# ADC1 + ADC2: 2x 12-bit ADC, 16 channels each (shared analog pin map).
+# ADC1/ADC2 share the ADC1_2 global IRQ (#69) — dual-mode operations route through ADC1.
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: h4
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: HB2PCENR
+      field: ADC1EN
+    reset:
+      register: HB2PRSTR
+      field: ADC1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC1_2
+  pins:
+    - pin: PA0
+      signal: IN0
+    - pin: PA1
+      signal: IN1
+    - pin: PA2
+      signal: IN2
+    - pin: PA3
+      signal: IN3
+    - pin: PA4
+      signal: IN4
+    - pin: PA5
+      signal: IN5
+    - pin: PA6
+      signal: IN6
+    - pin: PA7
+      signal: IN7
+    - pin: PB0
+      signal: IN8
+    - pin: PB1
+      signal: IN9
+    - pin: PC0
+      signal: IN10
+    - pin: PC1
+      signal: IN11
+    - pin: PC2
+      signal: IN12
+    - pin: PC3
+      signal: IN13
+    - pin: PC4
+      signal: IN14
+    - pin: PC5
+      signal: IN15
+- name: ADC2
+  address: 0x40012800
+  registers:
+    kind: adc
+    version: h4
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: HB2PCENR
+      field: ADC2EN
+    reset:
+      register: HB2PRSTR
+      field: ADC2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC1_2
+  pins:
+    - pin: PA0
+      signal: IN0
+    - pin: PA1
+      signal: IN1
+    - pin: PA2
+      signal: IN2
+    - pin: PA3
+      signal: IN3
+    - pin: PA4
+      signal: IN4
+    - pin: PA5
+      signal: IN5
+    - pin: PA6
+      signal: IN6
+    - pin: PA7
+      signal: IN7
+    - pin: PB0
+      signal: IN8
+    - pin: PB1
+      signal: IN9
+    - pin: PC0
+      signal: IN10
+    - pin: PC1
+      signal: IN11
+    - pin: PC2
+      signal: IN12
+    - pin: PC3
+      signal: IN13
+    - pin: PC4
+      signal: IN14
+    - pin: PC5
+      signal: IN15
