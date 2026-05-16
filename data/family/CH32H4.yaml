@@ -94,6 +94,15 @@
       register: APB2PRSTR
       field: IOPFRST
 
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: h4
+    block: RCC
+  # MCO pin and per-chip clock-source variability handled at chip yaml
+  # level when needed.
+
 - name: SYSTICK
   address: 0xE000F000
   registers:
