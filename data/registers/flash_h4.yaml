@@ -43,8 +43,13 @@ block/FLASH:
     byte_offset: 36
     access: Write
     fieldset: MODEKEYR
+  - name: BOOT_MODEKEYR
+    description: Boot mode key register (RM 46.4.10). Write KEY1=0x45670123 then KEY2=0xCDEF89AB to unlock boot mode switch.
+    byte_offset: 40
+    access: Write
+    fieldset: BOOT_MODEKEYR
   - name: CFGR0
-    description: FLASH configuration register.
+    description: FLASH configuration register (RM 46.4.11).
     byte_offset: 44
     access: Read
     fieldset: CFGR0
@@ -80,6 +85,13 @@ fieldset/ADDR:
   fields:
   - name: FAR
     description: Flash Address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/BOOT_MODEKEYR:
+  description: Boot mode key register. Write KEY1=0x45670123, then KEY2=0xCDEF89AB to unlock the boot mode switch (RM 46.4.10).
+  fields:
+  - name: BOOTKEYR
+    description: BOOT unlock key.
     bit_offset: 0
     bit_size: 32
 fieldset/CFGR0:

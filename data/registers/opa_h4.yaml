@@ -1,18 +1,18 @@
 block/OPA:
   description: OPA configuration.
   items:
-  - name: OPA_CTLR1
+  - name: CTLR1
     description: OPA Control Register 1.
     byte_offset: 0
-    fieldset: OPA_CTLR1
-  - name: OPA_CTLR2
+    fieldset: CTLR1
+  - name: CTLR2
     description: OPA Control Register 2.
     byte_offset: 4
-    fieldset: OPA_CTLR2
-  - name: OPA_CTLR3
+    fieldset: CTLR2
+  - name: CTLR3
     description: OPA Control Register 3.
     byte_offset: 8
-    fieldset: OPA_CTLR3
+    fieldset: CTLR3
   - name: CMP_CTLR
     description: CMP Control Registers.
     byte_offset: 12
@@ -67,7 +67,7 @@ fieldset/CMP_STATR:
     description: CMP Output.
     bit_offset: 0
     bit_size: 1
-fieldset/OPA_CTLR1:
+fieldset/CTLR1:
   description: OPA Control Register 1.
   fields:
   - name: EN1
@@ -98,7 +98,7 @@ fieldset/OPA_CTLR1:
     description: OPA1 high-speed mode enables.
     bit_offset: 10
     bit_size: 1
-fieldset/OPA_CTLR2:
+fieldset/CTLR2:
   description: OPA Control Register 2.
   fields:
   - name: EN2
@@ -129,7 +129,7 @@ fieldset/OPA_CTLR2:
     description: OPA2 high-speed mode enables.
     bit_offset: 10
     bit_size: 1
-fieldset/OPA_CTLR3:
+fieldset/CTLR3:
   description: OPA Control Register 3.
   fields:
   - name: EN3
