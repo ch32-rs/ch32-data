@@ -2,12 +2,12 @@ name: CH32V203RBT6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
-device_id: 540280076
 keywords:
   - GPTM32
 packages:
   - name: CH32V203RBT6
     package: LQFP64M
+    device_id: 0x2034050C
 include_memory: ../memory/CH32V2_RC.yaml
 # OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
 memory_ram_code_config:

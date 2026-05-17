@@ -2,7 +2,6 @@ name: CH32V307VCT6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Interconnectivity (USB high-speed, CAN, Ethernet, DVP, SDIO, FSMC)
 product_type: QingKe V4F floating-point core, main frequency <= 144M
-device_id: 812647688
 keywords:
   - USBHS
   - CAN
@@ -14,6 +13,7 @@ keywords:
 packages:
   - name: CH32V307VCT6
     package: LQFP100
+    device_id: 0x30700508
 include_memory: ../memory/CH32V3_RC.yaml
 memory_ram_code_config:
   total_flash: 480K

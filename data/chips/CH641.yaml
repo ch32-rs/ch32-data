@@ -2,18 +2,22 @@ name: CH641
 family: QingKe RISC-V-based MCU
 subfamily: Wireless Charging Dedicated MCU
 product_type: QingKe V2A core
-device_id: 1678770176
 packages:
   - name: CH641F
     package: QFN28
+    device_id: 0x64100500
   - name: CH641U
     package: QSOP24
+    device_id: 0x64150500
   - name: CH641D
     package: QFN20
+    device_id: 0x64110500
   - name: CH641X
     package: QFN20
+    device_id: 0x00000000
   - name: CH641P
     package: QFN16
+    device_id: 0x64160500
 include_memory: ../memory/CH32V003.yaml
 memory_sizes: { USR_1: 16K, RAM: 2K }
 docs:

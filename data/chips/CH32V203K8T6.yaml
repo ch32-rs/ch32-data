@@ -2,10 +2,10 @@ name: CH32V203K8T6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
-device_id: 540148992
 packages:
   - name: CH32V203K8T6
     package: LQFP32
+    device_id: 0x20320500
 include_memory: ../memory/CH32V2_X8.yaml
 memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:

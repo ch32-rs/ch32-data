@@ -2,7 +2,6 @@ name: CH32L103F7P6
 family: QingKe RISC-V-based, low power MCU
 subfamily: General-purpose
 product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
-device_id: 272041728
 keywords:
   - USBPD
   - Low Power
@@ -10,6 +9,7 @@ keywords:
 packages:
   - name: CH32L103F7P6
     package: TSSOP20
+    device_id: 0x10370700
 include_memory: ../memory/CH32L1.yaml
 memory_sizes: { USR_1: 48K, RAM: 20K }
 docs:

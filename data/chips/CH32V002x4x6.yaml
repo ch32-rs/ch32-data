@@ -8,20 +8,24 @@ name: CH32V002
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3343616
 packages:
   - name: CH32V002F4P6
     package: TSSOP20
+    device_id: 0x00200600
   - name: CH32V002F4U6
     package: QFN20
+    device_id: 0x00210600
   - name: CH32V002A4M6
     package: SOP16
+    device_id: 0x00220600
   # no SPI
   - name: CH32V002D4U6
     package: QFN12
+    device_id: 0x00230600
   # no SPI
   - name: CH32V002J4M6
     package: SOP8
+    device_id: 0x00240600
 include_memory: ../memory/CH32V00X.yaml
 memory_sizes: { USR_1: 16K, RAM: 4K }
 docs:

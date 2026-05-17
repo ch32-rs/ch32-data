@@ -10,6 +10,7 @@ pub mod nv_struct;
 pub struct Package {
     pub name: String,
     pub package: String,
+    pub device_id: u32,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]

@@ -2,10 +2,10 @@ name: CH32V103R8T6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
-device_id: 536887567
 packages:
   - name: CH32V103R8T6
     package: LQFP64M
+    device_id: 0x2000410F
 include_memory: ../memory/CH32V1.yaml
 memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:

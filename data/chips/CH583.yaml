@@ -2,10 +2,10 @@ name: CH583
 family: QingKe RISC-V-based, BLE MCU
 subfamily: RISC-V Core BLE5.3 Wireless MCU
 product_type: QingKe V4A core, BLE
-device_id: 2181038080
 packages:
   - name: CH583M
     package: QFN48
+    device_id: 0x83000000
 # TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1

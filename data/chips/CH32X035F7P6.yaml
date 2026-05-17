@@ -2,13 +2,13 @@ name: CH32X035F7P6
 family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: Connectivity (USB, USB PD/Type C)
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 56034817
 keywords:
   - USBPD
   - PIOC
 packages:
   - name: CH32X035F7P6
     package: TSSOP20
+    device_id: 0x03570601
 include_memory: ../memory/CH32X0.yaml
 memory_sizes: { USR_1: 48K, RAM: 20K }
 docs:

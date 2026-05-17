@@ -2,14 +2,16 @@ name: CH569
 family: QingKe RISC-V-based MCU
 subfamily: USB3.0 Super-Speed Interface MCU
 product_type: QingKe V3A core
-device_id: 1761607680
 packages:
   - name: CH569W
     package: QFN68
+    device_id: 0x69000000
   - name: CH565W
     package: QFN68
+    device_id: 0x65000000
   - name: CH565M
     package: QFN40
+    device_id: 0x65000000
 # TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1

@@ -2,10 +2,10 @@ name: CH32V003F4U6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3212544
 packages:
   - name: CH32V003F4U6
     package: QFN20
+    device_id: 0x00310500
 include_memory: ../memory/CH32V003.yaml
 memory_sizes: { USR_1: 16K, RAM: 2K }
 docs:

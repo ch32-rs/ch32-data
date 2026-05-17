@@ -2,7 +2,6 @@ name: CH32V305RBT6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Connectivity (USB high-speed, SDIO, CAN)
 product_type: QingKe V4F floating-point core, main frequency <= 144M
-device_id: 810550536
 keywords:
   - USBHS
   - CAN
@@ -11,6 +10,7 @@ keywords:
 packages:
   - name: CH32V305RBT6
     package: LQFP64M
+    device_id: 0x30500508
 include_memory: ../memory/CH32V3_XB.yaml
 memory_sizes: { USR_1: 128K, RAM: 32K }
 docs:

@@ -2,14 +2,16 @@ name: CH571
 family: QingKe RISC-V-based, BLE MCU
 subfamily: RISC-V Core BLE Wireless MCU
 product_type: QingKe V3A core, BLE
-device_id: 1895825408
 packages:
   - name: CH571F
     package: QFN28
+    device_id: 0x71000000
   - name: CH571D
     package: QFN20
+    device_id: 0x71000000
   - name: CH571K
     package: ESSOP10
+    device_id: 0x71000000
 # TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1

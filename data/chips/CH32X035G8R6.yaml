@@ -2,13 +2,13 @@ name: CH32X035G8R6
 family: QingKe RISC-V-based, dedicated architecture or special IO
 subfamily: Connectivity (USB, USB PD/Type C)
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 56296961
 keywords:
   - USBPD
   - PIOC
 packages:
   - name: CH32X035G8R6
     package: QSOP28
+    device_id: 0x035B0601
 include_memory: ../memory/CH32X0.yaml
 memory_sizes: { USR_1: 62K, RAM: 20K }
 docs:

@@ -2,12 +2,13 @@ name: CH592
 family: QingKe RISC-V-based, BLE MCU
 subfamily: BLE 5.4 MCU
 product_type: QingKe V4C core, BLE
-device_id: 2449473536
 packages:
   - name: CH592X
     package: QFN32
+    device_id: 0x92000000
   - name: CH592F
     package: QFN28
+    device_id: 0x92000000
 # TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1
