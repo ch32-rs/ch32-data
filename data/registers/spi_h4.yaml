@@ -31,14 +31,14 @@ block/SPI:
     byte_offset: 24
     access: Read
     fieldset: TCRCR
-  - name: SPI_I2S_CFGR
+  - name: I2SCFGR
     description: SPI_I2S configure register.
     byte_offset: 28
-    fieldset: SPI_I2S_CFGR
-  - name: SPI_I2SPR
+    fieldset: I2SCFGR
+  - name: I2SPR
     description: SPI_I2S prescaler register.
     byte_offset: 32
-    fieldset: SPI_I2SPR
+    fieldset: I2SPR
   - name: HSCR
     description: high speed control register.
     byte_offset: 36
@@ -140,7 +140,7 @@ fieldset/CTLR2:
 fieldset/DATAR:
   description: data register.
   fields:
-  - name: DR
+  - name: DATAR
     description: Data register.
     bit_offset: 0
     bit_size: 16
@@ -155,29 +155,7 @@ fieldset/HSCR:
     description: High-speed receive enable 2 (CH32H4 only).
     bit_offset: 2
     bit_size: 1
-fieldset/RCRCR:
-  description: RX CRC register.
-  fields:
-  - name: RXCRC
-    description: Rx CRC register.
-    bit_offset: 0
-    bit_size: 16
-fieldset/SPI_I2SPR:
-  description: SPI_I2S prescaler register.
-  fields:
-  - name: I2SDIV
-    description: I2SDIV[7:0] bits (I2S Linear prescaler).
-    bit_offset: 0
-    bit_size: 8
-  - name: ODD
-    description: Odd factor for the prescaler.
-    bit_offset: 8
-    bit_size: 1
-  - name: MCKOE
-    description: Master clock output enable.
-    bit_offset: 9
-    bit_size: 1
-fieldset/SPI_I2S_CFGR:
+fieldset/I2SCFGR:
   description: SPI_I2S configure register.
   fields:
   - name: CHLEN
@@ -216,6 +194,28 @@ fieldset/SPI_I2S_CFGR:
     description: I2S mode selection.
     bit_offset: 11
     bit_size: 1
+fieldset/I2SPR:
+  description: SPI_I2S prescaler register.
+  fields:
+  - name: I2SDIV
+    description: I2SDIV[7:0] bits (I2S Linear prescaler).
+    bit_offset: 0
+    bit_size: 8
+  - name: ODD
+    description: Odd factor for the prescaler.
+    bit_offset: 8
+    bit_size: 1
+  - name: MCKOE
+    description: Master clock output enable.
+    bit_offset: 9
+    bit_size: 1
+fieldset/RCRCR:
+  description: RX CRC register.
+  fields:
+  - name: RXCRC
+    description: Rx CRC register.
+    bit_offset: 0
+    bit_size: 16
 fieldset/STATR:
   description: status register.
   fields:
