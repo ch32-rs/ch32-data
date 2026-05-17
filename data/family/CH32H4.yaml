@@ -2218,3 +2218,119 @@
       interrupt: DFSDM0
     - signal: FLT1
       interrupt: DFSDM1
+
+# USB subsystem: 4 controllers
+# - USBFS (USB1.1 FS host/device/OTG) - chiptool extract block: USB_OTG_FS
+# - USBHS (USB2.0 HS host/device)
+# - USBSS (USB3.0 SuperSpeed host/device) - H4-exclusive (also CH32H416)
+# - USBPD (USB Power Delivery + Type-C controller)
+# All four sit on HB bus (HCLK).
+- name: USBFS
+  address: 0x50000000
+  registers:
+    kind: usbfs
+    version: h4
+    block: USB_OTG_FS
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: OTGFSEN
+    reset:
+      register: HBRSTR
+      field: OTGFSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBFS
+    - signal: WAKEUP
+      interrupt: USBFSWakeUP
+  # OTG_FS pins (PA9..PA12 dedicated, no AF — USB analog mode)
+  pins:
+    - pin: PA9
+      signal: VBUS
+    - pin: PA10
+      signal: ID
+    - pin: PA11
+      signal: DM
+    - pin: PA12
+      signal: DP
+
+- name: USBHS
+  address: 0x40030000
+  registers:
+    kind: usbhs
+    version: h4
+    block: USBHS
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBHSEN
+    reset:
+      register: HBRSTR
+      field: USBHSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBHS
+    - signal: WAKEUP
+      interrupt: USBHSWakeUP
+  pins:
+    - pin: PB8
+      signal: DP
+    - pin: PB9
+      signal: DM
+
+- name: USBSS
+  address: 0x40034000
+  registers:
+    kind: usbss
+    version: h4
+    block: USBSS
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBSSEN
+    reset:
+      register: HBRSTR
+      field: USBSSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBSS
+    - signal: LINK
+      interrupt: USBSS_LINK
+    - signal: WAKEUP
+      interrupt: USBSSWakeUP
+  # USB 3.0 SuperSpeed uses dedicated differential pairs SSRXA/SSRXB/SSTXA/SSTXB
+  # (not routable via GPIO AF mux). Pin map omitted - HAL hardcodes for QFN128.
+
+- name: USBPD
+  address: 0x40024400
+  registers:
+    kind: usbpd
+    version: h4
+    block: USBPD
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBPDEN
+    reset:
+      register: HBRSTR
+      field: USBPDRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBPD
+    - signal: WAKEUP
+      interrupt: USBPDWakeUP
+  pins:
+    - pin: PB3
+      signal: CC1
+      af: 4
+    - pin: PB4
+      signal: CC2
+      af: 4
