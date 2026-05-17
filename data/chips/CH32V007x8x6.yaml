@@ -1,5 +1,5 @@
 # CH32V007E8R6 62K 8K 22 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QSOP24
-# CH32V007F8U6 62K 8K 19 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QFN20
+# CH32V007K8U6 62K 8K 19 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QFN20
 name: CH32V007
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
@@ -9,7 +9,10 @@ packages:
   - name: CH32V007E8R6
     package: QSOP24
     device_id: 0x00710600
-  - name: CH32V007F8U6
+  # Package name corrected from F8U6 to K8U6 per openwch/ch32v002_004_005_006_007
+  # EVT: ch32v00X_dbgmcu.c comment and ch32v00X_gpio.c runtime switch both
+  # confirm 0x00720600 is CH32V007K8U6.
+  - name: CH32V007K8U6
     package: QFN20
     device_id: 0x00720600
 include_memory: ../memory/CH32V00X.yaml

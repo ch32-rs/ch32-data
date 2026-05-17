@@ -2,15 +2,19 @@ name: CH32M007
 family: Low price, motor control MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-# Note: the 0x007 family is shared with CH32V007. Only G8R6 is currently known
-# to wlink; E8R6/E8U7/K8U7 per-package device IDs are not yet documented upstream.
+# Note: the 0x007 family is shared with CH32V007.
+# TODO: wlink only lists G8R6. E8R6 and E8U6 device IDs verified against
+# openwch/ch32v002_004_005_006_007 EVT (ch32v00X_dbgmcu.c + ch32v00X_gpio.c);
+# update wlink. K8U7 is not in openwch's list — device_id remains unknown.
 packages:
   - name: CH32M007E8R6
     package: QSOP24
-    device_id: 0x0
-  - name: CH32M007E8U7
+    device_id: 0x00730800
+  # Package name corrected from E8U7 to E8U6 per openwch (both dbgmcu.c comment
+  # and gpio.c runtime switch confirm 0x00740800 is CH32M007E8U6).
+  - name: CH32M007E8U6
     package: QFN26C3
-    device_id: 0x0
+    device_id: 0x00740800
   - name: CH32M007G8R6
     package: QSOP28
     device_id: 0x00700800

@@ -5,7 +5,10 @@ product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
 packages:
   - name: CH32V103C8T6
     package: LQFP48
-    device_id: 0x20004102
+    # TODO: wlink is wrong (lists 0x20004102 as F103C8T6), update wlink.
+    # Verified against openwch/ch32v103 EVT: ch32v10x_dbgmcu.c comment and
+    # runtime switch in ch32v10x_gpio.c both confirm 0x25004102.
+    device_id: 0x25004102
 include_memory: ../memory/CH32V1.yaml
 memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:

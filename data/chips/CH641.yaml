@@ -14,7 +14,9 @@ packages:
     device_id: 0x64110500
   - name: CH641X
     package: QFN20
-    device_id: 0x00000000
+    # Verified against openwch/ch641 EVT: ch641_dbgmcu.c comment and runtime
+    # switch in ch641_gpio.c both confirm 0x64120500.
+    device_id: 0x64120500
   - name: CH641P
     package: QFN16
     device_id: 0x64160500
