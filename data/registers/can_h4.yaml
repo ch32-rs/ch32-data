@@ -1,0 +1,1608 @@
+block/CAN:
+  description: Controller area network (bxCAN-compatible). 3 TX mailboxes + 2 RX FIFOs + 42 filter banks shared across CAN1/CAN2/CAN3 instances.
+  items:
+  - name: CTLR
+    description: CAN master control register.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: STATR
+    description: CAN master status register.
+    byte_offset: 4
+    fieldset: STATR
+  - name: TSTATR
+    description: CAN transmit status register.
+    byte_offset: 8
+    fieldset: TSTATR
+  - name: RFIFO
+    description: CAN receive FIFO register (RX FIFO 0 / 1).
+    array:
+      len: 2
+      stride: 4
+    byte_offset: 12
+    fieldset: RFIFO
+  - name: INTENR
+    description: CAN interrupt enable register.
+    byte_offset: 20
+    fieldset: INTENR
+  - name: ERRSR
+    description: CAN error status register.
+    byte_offset: 24
+    fieldset: ERRSR
+  - name: BTIMR
+    description: CAN bit timing register.
+    byte_offset: 28
+    fieldset: BTIMR
+  - name: TTCTLR
+    description: CAN time-trigger control register.
+    byte_offset: 32
+    fieldset: TTCTLR
+  - name: TTCNT
+    description: CAN time-trigger counter value.
+    byte_offset: 36
+    bit_size: 16
+  - name: TERR_CNT
+    description: CAN error counter register.
+    byte_offset: 40
+    fieldset: TERR_CNT
+  - name: TX
+    description: 'CAN TX mailbox cluster: TXMIR/TXMDTR/TXMDLR/TXMDHR per mailbox, 3 mailboxes.'
+    array:
+      len: 3
+      stride: 16
+    byte_offset: 384
+    block: TX
+  - name: RX
+    description: 'CAN RX FIFO mailbox cluster: RXMIR/RXMDTR/RXMDLR/RXMDHR per FIFO, 2 FIFOs.'
+    array:
+      len: 2
+      stride: 16
+    byte_offset: 432
+    block: RX
+  - name: FCTLR
+    description: Filter master register.
+    byte_offset: 512
+    fieldset: FCTLR
+  - name: FMCFGR
+    description: Filter mode configuration (banks owned by CAN1/CAN2).
+    byte_offset: 516
+    fieldset: FMCFGR
+  - name: FMCFGR_CAN3
+    description: Filter mode configuration (banks owned by CAN3).
+    byte_offset: 520
+    fieldset: FMCFGR_CAN3
+  - name: FSCFGR
+    description: Filter scale configuration (banks owned by CAN1/CAN2).
+    byte_offset: 524
+    fieldset: FSCFGR
+  - name: FSCFGR_CAN3
+    description: Filter scale configuration (banks owned by CAN3).
+    byte_offset: 528
+    fieldset: FSCFGR_CAN3
+  - name: FAFIFOR
+    description: Filter assignment to FIFO (banks owned by CAN1/CAN2).
+    byte_offset: 532
+    fieldset: FAFIFOR
+  - name: FAFIFOR_CAN3
+    description: Filter assignment to FIFO (banks owned by CAN3).
+    byte_offset: 536
+    fieldset: FAFIFOR_CAN3
+  - name: FWR
+    description: Filter activation (banks owned by CAN1/CAN2).
+    byte_offset: 540
+    fieldset: FWR
+  - name: FWR_CAN3
+    description: Filter activation (banks owned by CAN3).
+    byte_offset: 544
+    fieldset: FWR_CAN3
+  - name: FB
+    description: 'Filter bank: FR1 + FR2 per bank, 42 banks shared by CAN1/CAN2/CAN3.'
+    array:
+      len: 42
+      stride: 8
+    byte_offset: 576
+    block: FB
+block/FB:
+  description: Filter bank (two 32-bit registers; layout depends on FSCFGR.FSC bit for this bank).
+  items:
+  - name: FR1
+    description: Filter bank register 1.
+    byte_offset: 0
+    fieldset: FR1
+  - name: FR2
+    description: Filter bank register 2.
+    byte_offset: 4
+    fieldset: FR2
+block/RX:
+  description: CAN RX FIFO mailbox (read-only; identifier / data length+timestamp / data low / data high).
+  items:
+  - name: RXMIR
+    description: RX FIFO mailbox identifier register.
+    byte_offset: 0
+    access: Read
+    fieldset: RXMIR
+  - name: RXMDTR
+    description: RX FIFO mailbox data length control and timestamp register.
+    byte_offset: 4
+    access: Read
+    fieldset: RXMDTR
+  - name: RXMDLR
+    description: RX FIFO mailbox data low register.
+    byte_offset: 8
+    access: Read
+    fieldset: RXMDLR
+  - name: RXMDHR
+    description: RX FIFO mailbox data high register.
+    byte_offset: 12
+    access: Read
+    fieldset: RXMDHR
+block/TX:
+  description: CAN TX mailbox (identifier / data length+timestamp / data low / data high).
+  items:
+  - name: TXMIR
+    description: TX mailbox identifier register.
+    byte_offset: 0
+    fieldset: TXMIR
+  - name: TXMDTR
+    description: TX mailbox data length control and timestamp register.
+    byte_offset: 4
+    fieldset: TXMDTR
+  - name: TXMDLR
+    description: TX mailbox data low register.
+    byte_offset: 8
+    fieldset: TXMDLR
+  - name: TXMDHR
+    description: TX mailbox data high register.
+    byte_offset: 12
+    fieldset: TXMDHR
+fieldset/BTIMR:
+  description: CAN bit timing register.
+  fields:
+  - name: BRP
+    description: minimum time unit length setting value.
+    bit_offset: 0
+    bit_size: 10
+  - name: BTR_TS1_T
+    description: CLAS_LONG_TS1=0;TS1 is TS[3:0](4bit);CLAS_LONG_TS1=1,TS1 is.  TS[1:0]+BTR_TS1_T[15:12](6bit).
+    bit_offset: 12
+    bit_size: 4
+  - name: TS1
+    description: Time segment 1.
+    bit_offset: 16
+    bit_size: 4
+  - name: TS2
+    description: Time segment 2.
+    bit_offset: 20
+    bit_size: 4
+  - name: SJW
+    description: Resynchronization jump width.
+    bit_offset: 24
+    bit_size: 4
+  - name: LBKM
+    description: Loop back mode (debug).
+    bit_offset: 30
+    bit_size: 1
+  - name: SILM
+    description: Silent mode (debug).
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR:
+  description: CAN Master control register.
+  fields:
+  - name: INRQ
+    description: Initialization request.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLEEP
+    description: Sleep mode request bit.
+    bit_offset: 1
+    bit_size: 1
+  - name: TXFP
+    description: Transmit FIFO priority.
+    bit_offset: 2
+    bit_size: 1
+  - name: RFLM
+    description: Receive FIFO locked mode.
+    bit_offset: 3
+    bit_size: 1
+  - name: NART
+    description: No automatic retransmission.
+    bit_offset: 4
+    bit_size: 1
+  - name: AWUM
+    description: Automatic wakeup mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: ABOM
+    description: Automatic bus-off management.
+    bit_offset: 6
+    bit_size: 1
+  - name: TTCM
+    description: Time triggered communication mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: RST
+    description: Software master reset.
+    bit_offset: 15
+    bit_size: 1
+  - name: DBF
+    description: Debug freeze.
+    bit_offset: 16
+    bit_size: 1
+  - name: CFGCANM
+    description: Configure CAN offline recovery time.
+    bit_offset: 17
+    bit_size: 1
+fieldset/ERRSR:
+  description: CAN error status register.
+  fields:
+  - name: EWGF
+    description: Error warning flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: EPVF
+    description: Error passive flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: BOFF
+    description: Bus-off flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: LEC
+    description: Last error code.
+    bit_offset: 4
+    bit_size: 3
+  - name: TEC
+    description: Least significant byte of the 9-bit transmit error counter.
+    bit_offset: 16
+    bit_size: 8
+  - name: REC
+    description: Receive error counter.
+    bit_offset: 24
+    bit_size: 8
+fieldset/FAFIFOR:
+  description: CAN filter FIFO assignment register.
+  fields:
+  - name: FFA0
+    description: Filter FIFO assignment for filter 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: FFA1
+    description: Filter FIFO assignment for filter 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: FFA2
+    description: Filter FIFO assignment for filter 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: FFA3
+    description: Filter FIFO assignment for filter 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: FFA4
+    description: Filter FIFO assignment for filter 4.
+    bit_offset: 4
+    bit_size: 1
+  - name: FFA5
+    description: Filter FIFO assignment for filter 5.
+    bit_offset: 5
+    bit_size: 1
+  - name: FFA6
+    description: Filter FIFO assignment for filter 6.
+    bit_offset: 6
+    bit_size: 1
+  - name: FFA7
+    description: Filter FIFO assignment for filter 7.
+    bit_offset: 7
+    bit_size: 1
+  - name: FFA8
+    description: Filter FIFO assignment for filter 8.
+    bit_offset: 8
+    bit_size: 1
+  - name: FFA9
+    description: Filter FIFO assignment for filter 9.
+    bit_offset: 9
+    bit_size: 1
+  - name: FFA10
+    description: Filter FIFO assignment for filter 10.
+    bit_offset: 10
+    bit_size: 1
+  - name: FFA11
+    description: Filter FIFO assignment for filter 11.
+    bit_offset: 11
+    bit_size: 1
+  - name: FFA12
+    description: Filter FIFO assignment for filter 12.
+    bit_offset: 12
+    bit_size: 1
+  - name: FFA13
+    description: Filter FIFO assignment for filter 13.
+    bit_offset: 13
+    bit_size: 1
+  - name: FFA14
+    description: Filter FIFO assignment for filter 14.
+    bit_offset: 14
+    bit_size: 1
+  - name: FFA15
+    description: Filter FIFO assignment for filter 15.
+    bit_offset: 15
+    bit_size: 1
+  - name: FFA16
+    description: Filter FIFO assignment for filter 16.
+    bit_offset: 16
+    bit_size: 1
+  - name: FFA17
+    description: Filter FIFO assignment for filter 17.
+    bit_offset: 17
+    bit_size: 1
+  - name: FFA18
+    description: Filter FIFO assignment for filter 18.
+    bit_offset: 18
+    bit_size: 1
+  - name: FFA19
+    description: Filter FIFO assignment for filter 19.
+    bit_offset: 19
+    bit_size: 1
+  - name: FFA20
+    description: Filter FIFO assignment for filter 20.
+    bit_offset: 20
+    bit_size: 1
+  - name: FFA21
+    description: Filter FIFO assignment for filter 21.
+    bit_offset: 21
+    bit_size: 1
+  - name: FFA22
+    description: Filter FIFO assignment for filter 22.
+    bit_offset: 22
+    bit_size: 1
+  - name: FFA23
+    description: Filter FIFO assignment for filter 23.
+    bit_offset: 23
+    bit_size: 1
+fieldset/FAFIFOR_CAN3:
+  description: CAN filter FIFO assignment register 1.
+  fields:
+  - name: FFA28
+    description: Filter FIFO assignment for filter 28.
+    bit_offset: 0
+    bit_size: 1
+  - name: FFA29
+    description: Filter FIFO assignment for filter 29.
+    bit_offset: 1
+    bit_size: 1
+  - name: FFA30
+    description: Filter FIFO assignment for filter 30.
+    bit_offset: 2
+    bit_size: 1
+  - name: FFA31
+    description: Filter FIFO assignment for filter 31.
+    bit_offset: 3
+    bit_size: 1
+  - name: FFA32
+    description: Filter FIFO assignment for filter 32.
+    bit_offset: 4
+    bit_size: 1
+  - name: FFA33
+    description: Filter FIFO assignment for filter 33.
+    bit_offset: 5
+    bit_size: 1
+  - name: FFA34
+    description: Filter FIFO assignment for filter 34.
+    bit_offset: 6
+    bit_size: 1
+  - name: FFA35
+    description: Filter FIFO assignment for filter 35.
+    bit_offset: 7
+    bit_size: 1
+  - name: FFA36
+    description: Filter FIFO assignment for filter 36.
+    bit_offset: 8
+    bit_size: 1
+  - name: FFA37
+    description: Filter FIFO assignment for filter 37.
+    bit_offset: 9
+    bit_size: 1
+  - name: FFA38
+    description: Filter FIFO assignment for filter 38.
+    bit_offset: 10
+    bit_size: 1
+  - name: FFA39
+    description: Filter FIFO assignment for filter 39.
+    bit_offset: 11
+    bit_size: 1
+  - name: FFA40
+    description: Filter FIFO assignment for filter 40.
+    bit_offset: 12
+    bit_size: 1
+  - name: FFA41
+    description: Filter FIFO assignment for filter 41.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FCTLR:
+  description: CAN filter master register.
+  fields:
+  - name: FINIT
+    description: Filter init mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: CAN2SB
+    description: CAN2 start bank.
+    bit_offset: 8
+    bit_size: 5
+  - name: CAN3SB
+    description: CAN3 start bank.
+    bit_offset: 16
+    bit_size: 6
+fieldset/FMCFGR:
+  description: CAN filter mode register.
+  fields:
+  - name: FBM0
+    description: Filter mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: FBM1
+    description: Filter mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: FBM2
+    description: Filter mode.
+    bit_offset: 2
+    bit_size: 1
+  - name: FBM3
+    description: Filter mode.
+    bit_offset: 3
+    bit_size: 1
+  - name: FBM4
+    description: Filter mode.
+    bit_offset: 4
+    bit_size: 1
+  - name: FBM5
+    description: Filter mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: FBM6
+    description: Filter mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: FBM7
+    description: Filter mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: FBM8
+    description: Filter mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: FBM9
+    description: Filter mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: FBM10
+    description: Filter mode.
+    bit_offset: 10
+    bit_size: 1
+  - name: FBM11
+    description: Filter mode.
+    bit_offset: 11
+    bit_size: 1
+  - name: FBM12
+    description: Filter mode.
+    bit_offset: 12
+    bit_size: 1
+  - name: FBM13
+    description: Filter mode.
+    bit_offset: 13
+    bit_size: 1
+  - name: FBM14
+    description: Filter mode.
+    bit_offset: 14
+    bit_size: 1
+  - name: FBM15
+    description: Filter mode.
+    bit_offset: 15
+    bit_size: 1
+  - name: FBM16
+    description: Filter mode.
+    bit_offset: 16
+    bit_size: 1
+  - name: FBM17
+    description: Filter mode.
+    bit_offset: 17
+    bit_size: 1
+  - name: FBM18
+    description: Filter mode.
+    bit_offset: 18
+    bit_size: 1
+  - name: FBM19
+    description: Filter mode.
+    bit_offset: 19
+    bit_size: 1
+  - name: FBM20
+    description: Filter mode.
+    bit_offset: 20
+    bit_size: 1
+  - name: FBM21
+    description: Filter mode.
+    bit_offset: 21
+    bit_size: 1
+  - name: FBM22
+    description: Filter mode.
+    bit_offset: 22
+    bit_size: 1
+  - name: FBM23
+    description: Filter mode.
+    bit_offset: 23
+    bit_size: 1
+  - name: FBM24
+    description: Filter mode.
+    bit_offset: 24
+    bit_size: 1
+  - name: FBM25
+    description: Filter mode.
+    bit_offset: 25
+    bit_size: 1
+  - name: FBM26
+    description: Filter mode.
+    bit_offset: 26
+    bit_size: 1
+  - name: FBM27
+    description: Filter mode.
+    bit_offset: 27
+    bit_size: 1
+fieldset/FMCFGR_CAN3:
+  description: CAN filter mode register 1.
+  fields:
+  - name: FBM28
+    description: Filter mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: FBM29
+    description: Filter mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: FBM30
+    description: Filter mode.
+    bit_offset: 2
+    bit_size: 1
+  - name: FBM31
+    description: Filter mode.
+    bit_offset: 3
+    bit_size: 1
+  - name: FBM32
+    description: Filter mode.
+    bit_offset: 4
+    bit_size: 1
+  - name: FBM33
+    description: Filter mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: FBM34
+    description: Filter mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: FBM35
+    description: Filter mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: FBM36
+    description: Filter mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: FBM37
+    description: Filter mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: FBM38
+    description: Filter mode.
+    bit_offset: 10
+    bit_size: 1
+  - name: FBM39
+    description: Filter mode.
+    bit_offset: 11
+    bit_size: 1
+  - name: FBM40
+    description: Filter mode.
+    bit_offset: 12
+    bit_size: 1
+  - name: FBM41
+    description: Filter mode.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FR1:
+  description: Filter bank 0 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/FR2:
+  description: Filter bank 0 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/FSCFGR:
+  description: CAN filter scale register.
+  fields:
+  - name: FSC0
+    description: Filter scale configuration.
+    bit_offset: 0
+    bit_size: 1
+  - name: FSC1
+    description: Filter scale configuration.
+    bit_offset: 1
+    bit_size: 1
+  - name: FSC2
+    description: Filter scale configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: FSC3
+    description: Filter scale configuration.
+    bit_offset: 3
+    bit_size: 1
+  - name: FSC4
+    description: Filter scale configuration.
+    bit_offset: 4
+    bit_size: 1
+  - name: FSC5
+    description: Filter scale configuration.
+    bit_offset: 5
+    bit_size: 1
+  - name: FSC6
+    description: Filter scale configuration.
+    bit_offset: 6
+    bit_size: 1
+  - name: FSC7
+    description: Filter scale configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: FSC8
+    description: Filter scale configuration.
+    bit_offset: 8
+    bit_size: 1
+  - name: FSC9
+    description: Filter scale configuration.
+    bit_offset: 9
+    bit_size: 1
+  - name: FSC10
+    description: Filter scale configuration.
+    bit_offset: 10
+    bit_size: 1
+  - name: FSC11
+    description: Filter scale configuration.
+    bit_offset: 11
+    bit_size: 1
+  - name: FSC12
+    description: Filter scale configuration.
+    bit_offset: 12
+    bit_size: 1
+  - name: FSC13
+    description: Filter scale configuration.
+    bit_offset: 13
+    bit_size: 1
+  - name: FSC14
+    description: Filter scale configuration.
+    bit_offset: 14
+    bit_size: 1
+  - name: FSC15
+    description: Filter scale configuration.
+    bit_offset: 15
+    bit_size: 1
+  - name: FSC16
+    description: Filter scale configuration.
+    bit_offset: 16
+    bit_size: 1
+  - name: FSC17
+    description: Filter scale configuration.
+    bit_offset: 17
+    bit_size: 1
+  - name: FSC18
+    description: Filter scale configuration.
+    bit_offset: 18
+    bit_size: 1
+  - name: FSC19
+    description: Filter scale configuration.
+    bit_offset: 19
+    bit_size: 1
+  - name: FSC20
+    description: Filter scale configuration.
+    bit_offset: 20
+    bit_size: 1
+  - name: FSC21
+    description: Filter scale configuration.
+    bit_offset: 21
+    bit_size: 1
+  - name: FSC22
+    description: Filter scale configuration.
+    bit_offset: 22
+    bit_size: 1
+  - name: FSC23
+    description: Filter scale configuration.
+    bit_offset: 23
+    bit_size: 1
+  - name: FSC24
+    description: Filter scale configuration.
+    bit_offset: 24
+    bit_size: 1
+  - name: FSC25
+    description: Filter scale configuration.
+    bit_offset: 25
+    bit_size: 1
+  - name: FSC26
+    description: Filter scale configuration.
+    bit_offset: 26
+    bit_size: 1
+  - name: FSC27
+    description: Filter scale configuration.
+    bit_offset: 27
+    bit_size: 1
+fieldset/FSCFGR_CAN3:
+  description: CAN filter scale register 1.
+  fields:
+  - name: FSC28
+    description: Filter scale configuration.
+    bit_offset: 0
+    bit_size: 1
+  - name: FSC29
+    description: Filter scale configuration.
+    bit_offset: 1
+    bit_size: 1
+  - name: FSC30
+    description: Filter scale configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: FSC31
+    description: Filter scale configuration.
+    bit_offset: 3
+    bit_size: 1
+  - name: FSC32
+    description: Filter scale configuration.
+    bit_offset: 4
+    bit_size: 1
+  - name: FSC33
+    description: Filter scale configuration.
+    bit_offset: 5
+    bit_size: 1
+  - name: FSC34
+    description: Filter scale configuration.
+    bit_offset: 6
+    bit_size: 1
+  - name: FSC35
+    description: Filter scale configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: FSC36
+    description: Filter scale configuration.
+    bit_offset: 8
+    bit_size: 1
+  - name: FSC37
+    description: Filter scale configuration.
+    bit_offset: 9
+    bit_size: 1
+  - name: FSC38
+    description: Filter scale configuration.
+    bit_offset: 10
+    bit_size: 1
+  - name: FSC39
+    description: Filter scale configuration.
+    bit_offset: 11
+    bit_size: 1
+  - name: FSC40
+    description: Filter scale configuration.
+    bit_offset: 12
+    bit_size: 1
+  - name: FSC41
+    description: Filter scale configuration.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FWR:
+  description: CAN filter activation register.
+  fields:
+  - name: FACT0
+    description: Filter active.
+    bit_offset: 0
+    bit_size: 1
+  - name: FACT1
+    description: Filter active.
+    bit_offset: 1
+    bit_size: 1
+  - name: FACT2
+    description: Filter active.
+    bit_offset: 2
+    bit_size: 1
+  - name: FACT3
+    description: Filter active.
+    bit_offset: 3
+    bit_size: 1
+  - name: FACT4
+    description: Filter active.
+    bit_offset: 4
+    bit_size: 1
+  - name: FACT5
+    description: Filter active.
+    bit_offset: 5
+    bit_size: 1
+  - name: FACT6
+    description: Filter active.
+    bit_offset: 6
+    bit_size: 1
+  - name: FACT7
+    description: Filter active.
+    bit_offset: 7
+    bit_size: 1
+  - name: FACT8
+    description: Filter active.
+    bit_offset: 8
+    bit_size: 1
+  - name: FACT9
+    description: Filter active.
+    bit_offset: 9
+    bit_size: 1
+  - name: FACT10
+    description: Filter active.
+    bit_offset: 10
+    bit_size: 1
+  - name: FACT11
+    description: Filter active.
+    bit_offset: 11
+    bit_size: 1
+  - name: FACT12
+    description: Filter active.
+    bit_offset: 12
+    bit_size: 1
+  - name: FACT13
+    description: Filter active.
+    bit_offset: 13
+    bit_size: 1
+  - name: FACT14
+    description: Filter active.
+    bit_offset: 14
+    bit_size: 1
+  - name: FACT15
+    description: Filter active.
+    bit_offset: 15
+    bit_size: 1
+  - name: FACT16
+    description: Filter active.
+    bit_offset: 16
+    bit_size: 1
+  - name: FACT17
+    description: Filter active.
+    bit_offset: 17
+    bit_size: 1
+  - name: FACT18
+    description: Filter active.
+    bit_offset: 18
+    bit_size: 1
+  - name: FACT19
+    description: Filter active.
+    bit_offset: 19
+    bit_size: 1
+  - name: FACT20
+    description: Filter active.
+    bit_offset: 20
+    bit_size: 1
+  - name: FACT21
+    description: Filter active.
+    bit_offset: 21
+    bit_size: 1
+  - name: FACT22
+    description: Filter active.
+    bit_offset: 22
+    bit_size: 1
+  - name: FACT23
+    description: Filter active.
+    bit_offset: 23
+    bit_size: 1
+  - name: FACT24
+    description: Filter active.
+    bit_offset: 24
+    bit_size: 1
+  - name: FACT25
+    description: Filter active.
+    bit_offset: 25
+    bit_size: 1
+  - name: FACT26
+    description: Filter active.
+    bit_offset: 26
+    bit_size: 1
+  - name: FACT27
+    description: Filter active.
+    bit_offset: 27
+    bit_size: 1
+fieldset/FWR_CAN3:
+  description: CAN filter activation register 1.
+  fields:
+  - name: FACT28
+    description: Filter active.
+    bit_offset: 0
+    bit_size: 1
+  - name: FACT29
+    description: Filter active.
+    bit_offset: 1
+    bit_size: 1
+  - name: FACT30
+    description: Filter active.
+    bit_offset: 2
+    bit_size: 1
+  - name: FACT31
+    description: Filter active.
+    bit_offset: 3
+    bit_size: 1
+  - name: FACT32
+    description: Filter active.
+    bit_offset: 4
+    bit_size: 1
+  - name: FACT33
+    description: Filter active.
+    bit_offset: 5
+    bit_size: 1
+  - name: FACT34
+    description: Filter active.
+    bit_offset: 6
+    bit_size: 1
+  - name: FACT35
+    description: Filter active.
+    bit_offset: 7
+    bit_size: 1
+  - name: FACT36
+    description: Filter active.
+    bit_offset: 8
+    bit_size: 1
+  - name: FACT37
+    description: Filter active.
+    bit_offset: 9
+    bit_size: 1
+  - name: FACT38
+    description: Filter active.
+    bit_offset: 10
+    bit_size: 1
+  - name: FACT39
+    description: Filter active.
+    bit_offset: 11
+    bit_size: 1
+  - name: FACT40
+    description: Filter active.
+    bit_offset: 12
+    bit_size: 1
+  - name: FACT41
+    description: Filter active.
+    bit_offset: 13
+    bit_size: 1
+fieldset/INTENR:
+  description: CAN interrupt enable register.
+  fields:
+  - name: TMEIE
+    description: Transmit mailbox empty interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: FMPIE0
+    description: FIFO message pending interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: FFIE0
+    description: FIFO full interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: FOVIE0
+    description: FIFO overrun interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: FMPIE1
+    description: FIFO message pending interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: FFIE1
+    description: FIFO full interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: FOVIE1
+    description: FIFO overrun interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: EWGIE
+    description: Error warning interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: EPVIE
+    description: Error passive interrupt enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: BOFIE
+    description: Bus-off interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: LECIE
+    description: Last error code interrupt enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: WKUIE
+    description: Wakeup interrupt enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: SLKIE
+    description: Sleep interrupt enable.
+    bit_offset: 17
+    bit_size: 1
+fieldset/RFIFO:
+  description: CAN receive FIFO 0 register.
+  fields:
+  - name: FMP0
+    description: FIFO 0 message pending.
+    bit_offset: 0
+    bit_size: 2
+  - name: FULL0
+    description: FIFO 0 full.
+    bit_offset: 3
+    bit_size: 1
+  - name: FOVR0
+    description: FIFO 0 overrun.
+    bit_offset: 4
+    bit_size: 1
+  - name: RFOM0
+    description: Release FIFO 0 output mailbox.
+    bit_offset: 5
+    bit_size: 1
+fieldset/RXMDHR:
+  description: CAN receive FIFO mailbox data high register.
+  fields:
+  - name: DATA4
+    description: DATA4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: DATA5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: DATA6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: DATA7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDLR:
+  description: CAN receive FIFO mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data Byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data Byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data Byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data Byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDTR:
+  description: CAN receive FIFO mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: BRS
+    description: BRS bit of the received frame.
+    bit_offset: 4
+    bit_size: 1
+  - name: ESI
+    description: ESI bit of the received frame.
+    bit_offset: 5
+    bit_size: 1
+  - name: RES
+    description: RES bit of the received frame.
+    bit_offset: 6
+    bit_size: 1
+  - name: FMI
+    description: Filter match index.
+    bit_offset: 8
+    bit_size: 8
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/RXMIR:
+  description: CAN receive FIFO mailbox identifier register.
+  fields:
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/STATR:
+  description: CAN master status register.
+  fields:
+  - name: INAK
+    description: Initialization acknowledge.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLAK
+    description: Sleep acknowledge.
+    bit_offset: 1
+    bit_size: 1
+  - name: ERRI
+    description: Error interrupt.
+    bit_offset: 2
+    bit_size: 1
+  - name: WKUI
+    description: Wakeup interrupt.
+    bit_offset: 3
+    bit_size: 1
+  - name: SLAKI
+    description: Sleep acknowledge interrupt.
+    bit_offset: 4
+    bit_size: 1
+  - name: TXM
+    description: Transmit mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: RXM
+    description: Receive mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: SAMP
+    description: Last sample point.
+    bit_offset: 10
+    bit_size: 1
+  - name: RX
+    description: Rx signal.
+    bit_offset: 11
+    bit_size: 1
+fieldset/TERR_CNT:
+  description: CAN offline recovery error counter.
+  fields:
+  - name: TX_ERR_CNT
+    description: Offline recovery error count values.
+    bit_offset: 0
+    bit_size: 9
+fieldset/TSTATR:
+  description: CAN transmit status register.
+  fields:
+  - name: RQCP0
+    description: Request completed mailbox0.
+    bit_offset: 0
+    bit_size: 1
+  - name: TXOK0
+    description: Transmission OK of mailbox0.
+    bit_offset: 1
+    bit_size: 1
+  - name: ALST0
+    description: Arbitration lost for mailbox0.
+    bit_offset: 2
+    bit_size: 1
+  - name: TERR0
+    description: Transmission error of mailbox0.
+    bit_offset: 3
+    bit_size: 1
+  - name: ABRQ0
+    description: Abort request for mailbox0.
+    bit_offset: 7
+    bit_size: 1
+  - name: RQCP1
+    description: Request completed mailbox1.
+    bit_offset: 8
+    bit_size: 1
+  - name: TXOK1
+    description: Transmission OK of mailbox1.
+    bit_offset: 9
+    bit_size: 1
+  - name: ALST1
+    description: Arbitration lost for mailbox1.
+    bit_offset: 10
+    bit_size: 1
+  - name: TERR1
+    description: Transmission error of mailbox1.
+    bit_offset: 11
+    bit_size: 1
+  - name: ABRQ1
+    description: Abort request for mailbox 1.
+    bit_offset: 15
+    bit_size: 1
+  - name: RQCP2
+    description: Request completed mailbox2.
+    bit_offset: 16
+    bit_size: 1
+  - name: TXOK2
+    description: Transmission OK of mailbox 2.
+    bit_offset: 17
+    bit_size: 1
+  - name: ALST2
+    description: Arbitration lost for mailbox 2.
+    bit_offset: 18
+    bit_size: 1
+  - name: TERR2
+    description: Transmission error of mailbox 2.
+    bit_offset: 19
+    bit_size: 1
+  - name: ABRQ2
+    description: Abort request for mailbox 2.
+    bit_offset: 23
+    bit_size: 1
+  - name: CODE
+    description: Mailbox code.
+    bit_offset: 24
+    bit_size: 2
+  - name: TME0
+    description: Transmit mailbox 0 empty.
+    bit_offset: 26
+    bit_size: 1
+  - name: TME1
+    description: Transmit mailbox 1 empty.
+    bit_offset: 27
+    bit_size: 1
+  - name: TME2
+    description: Transmit mailbox 2 empty.
+    bit_offset: 28
+    bit_size: 1
+  - name: LOW0
+    description: Lowest priority flag for mailbox0.
+    bit_offset: 29
+    bit_size: 1
+  - name: LOW1
+    description: Lowest priority flag for mailbox1.
+    bit_offset: 30
+    bit_size: 1
+  - name: LOW2
+    description: Lowest priority flag for mailbox2.
+    bit_offset: 31
+    bit_size: 1
+fieldset/TTCTLR:
+  description: CAN time trigger control register.
+  fields:
+  - name: TIMCMV
+    description: Internal counter count end value.
+    bit_offset: 0
+    bit_size: 16
+  - name: TIMRST
+    description: Internal counter reset control.
+    bit_offset: 16
+    bit_size: 1
+  - name: MODE
+    description: Time-triggered mode selection.
+    bit_offset: 17
+    bit_size: 1
+fieldset/TXMDHR:
+  description: CAN mailbox data high register.
+  fields:
+  - name: DATA4
+    description: Data byte 4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: Data byte 5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: Data byte 6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: Data byte 7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDLR:
+  description: CAN mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDTR:
+  description: CAN mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: TGT
+    description: Transmit global time.
+    bit_offset: 8
+    bit_size: 1
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/TXMIR:
+  description: CAN TX mailbox identifier register.
+  fields:
+  - name: TXRQ
+    description: Transmit mailbox request.
+    bit_offset: 0
+    bit_size: 1
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID_EXID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11

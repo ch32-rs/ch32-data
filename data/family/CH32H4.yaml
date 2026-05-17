@@ -2136,3 +2136,142 @@
       signal: DP
     - pin: PB9
       signal: DM
+
+# CAN1/CAN2/CAN3 - bxCAN with 42 filter banks shared across instances (all 5 H4 chips have 3 CAN).
+- name: CAN1
+  address: 0x40006400
+  registers:
+    kind: can
+    version: h4
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: CAN1EN
+    reset:
+      register: HB1PRSTR
+      field: CAN1RST
+  interrupts:
+    - signal: TX
+      interrupt: CAN1_TX
+    - signal: RX0
+      interrupt: CAN1_RX0
+    - signal: RX1
+      interrupt: CAN1_RX1
+    - signal: SCE
+      interrupt: CAN1_SCE
+  pins:
+    - pin: PA11
+      signal: RX
+      af: 9
+    - pin: PB6
+      signal: RX
+      af: 3
+    - pin: PB8
+      signal: RX
+      af: 9
+    - pin: PD0
+      signal: RX
+      af: 9
+    - pin: PA12
+      signal: TX
+      af: 9
+    - pin: PB7
+      signal: TX
+      af: 3
+    - pin: PB9
+      signal: TX
+      af: 9
+    - pin: PD1
+      signal: TX
+      af: 9
+
+- name: CAN2
+  address: 0x40006800
+  registers:
+    kind: can
+    version: h4
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: CAN2EN
+    reset:
+      register: HB1PRSTR
+      field: CAN2RST
+  interrupts:
+    - signal: TX
+      interrupt: CAN2_TX
+    - signal: RX0
+      interrupt: CAN2_RX0
+    - signal: RX1
+      interrupt: CAN2_RX1
+    - signal: SCE
+      interrupt: CAN2_SCE
+  pins:
+    - pin: PB5
+      signal: RX
+      af: 9
+    - pin: PB12
+      signal: RX
+      af: 9
+    - pin: PB6
+      signal: TX
+      af: 9
+    - pin: PB13
+      signal: TX
+      af: 9
+
+- name: CAN3
+  address: 0x40007800
+  registers:
+    kind: can
+    version: h4
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: CAN3EN
+    reset:
+      register: HB1PRSTR
+      field: CAN3RST
+  interrupts:
+    - signal: TX
+      interrupt: CAN3_TX
+    - signal: RX0
+      interrupt: CAN3_RX0
+    - signal: RX1
+      interrupt: CAN3_RX1
+    - signal: SCE
+      interrupt: CAN3_SCE
+  pins:
+    - pin: PC4
+      signal: RX
+      af: 6
+    - pin: PD12
+      signal: RX
+      af: 5
+    - pin: PF4
+      signal: RX
+      af: 2
+    - pin: PF6
+      signal: RX
+      af: 2
+    - pin: PC5
+      signal: TX
+      af: 6
+    - pin: PD13
+      signal: TX
+      af: 5
+    - pin: PF3
+      signal: TX
+      af: 2
+    - pin: PF7
+      signal: TX
+      af: 2
