@@ -1,0 +1,24 @@
+- name: USBSS
+  address: 0x40034000
+  registers:
+    kind: usbss
+    version: h4
+    block: USBSS
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBSSEN
+    reset:
+      register: HBRSTR
+      field: USBSSRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBSS
+    - signal: LINK
+      interrupt: USBSS_LINK
+    - signal: WAKEUP
+      interrupt: USBSSWakeUP
+  # USB 3.0 SuperSpeed uses dedicated differential pairs SSRXA/SSRXB/SSTXA/SSTXB
+  # (not routable via GPIO AF mux). Pin map omitted - HAL hardcodes for QFN128.

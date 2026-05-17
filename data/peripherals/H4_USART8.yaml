@@ -1,0 +1,67 @@
+- name: USART8
+  address: 0x40002000
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART8EN
+    reset:
+      register: HB1PRSTR
+      field: USART8RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART8
+  pins:
+    - pin: PA15
+      signal: TX
+      af: 11
+    - pin: PB4
+      signal: TX
+      af: 11
+    - pin: PE8
+      signal: TX
+      af: 7
+    - pin: PF7
+      signal: TX
+      af: 7
+    - pin: PA8
+      signal: RX
+      af: 11
+    - pin: PB3
+      signal: RX
+      af: 11
+    - pin: PE7
+      signal: RX
+      af: 7
+    - pin: PF6
+      signal: RX
+      af: 7
+    - pin: PA14
+      signal: CK
+      af: 11
+    - pin: PB7
+      signal: CK
+      af: 10
+    - pin: PE6
+      signal: CK
+      af: 8
+    - pin: PF10
+      signal: CK
+      af: 7
+    - pin: PF9
+      signal: CTS
+      af: 7
+    - pin: PF10
+      signal: CTS
+      af: 11
+    - pin: PF8
+      signal: RTS
+      af: 7
+    - pin: PF9
+      signal: RTS
+      af: 11
