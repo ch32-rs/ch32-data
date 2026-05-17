@@ -10,3 +10,4 @@ Cargo.lock
 /out
 /tmp
 tmp.yaml
+.trash/
