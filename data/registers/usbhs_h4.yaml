@@ -64,6 +64,10 @@ block/USBHS:
     byte_offset: 14
     bit_size: 16
     fieldset: USB_BUS
+block/USBHS_DEVICE:
+  extends: USBHS
+  description: USBHS in device mode. Endpoint configuration / TX / RX registers (UEP* family).
+  items:
   - name: UEP_TX_EN
     description: USB endpoint sends the enable register.
     byte_offset: 16
@@ -461,6 +465,10 @@ block/USBHS:
     description: The sending FIFO address of usb endpoint 7.
     byte_offset: 244
     fieldset: UEP7_TX_FIFO
+block/USBHS_HOST:
+  extends: USBHS
+  description: USBHS in host mode. UH_* host control registers; offsets overlap with UEP* device-mode pairs.
+  items:
   - name: UH_CFG
     description: USB host Configuration register.
     byte_offset: 256
