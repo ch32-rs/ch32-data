@@ -133,7 +133,7 @@ fieldset/PCFR1:
     bit_offset: 18
     bit_size: 1
   - name: USBPD_CC_HVT
-    description: CC pin intput channel threshold adjustment.
+    description: CC pin input channel threshold adjustment.
     bit_offset: 20
     bit_size: 1
   - name: SW_CFG
