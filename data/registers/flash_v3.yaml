@@ -125,6 +125,14 @@ fieldset/CTLR:
     description: Flash SCK mode.
     bit_offset: 25
     bit_size: 1
+  - name: BTPG
+    description: Undocumented; OR with PAGE_PG and PGSTART to program the BOOT region (0x1FFF8000). Guessed name.
+    bit_offset: 29
+    bit_size: 1
+  - name: BTER
+    description: Undocumented; OR with PER (not PAGE_ER) for 4 KB erase of the BOOT region (0x1FFF8000). Guessed name.
+    bit_offset: 30
+    bit_size: 1
 fieldset/KEYR:
   description: Flash key register.
   fields:
