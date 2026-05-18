@@ -5,53 +5,12 @@ block/AFIO:
     description: AF remap and debug I/O configuration register (AFIO_PCFR1).
     byte_offset: 0
     fieldset: PCFR1
-  - name: GPIOA_AFLR
-    description: PA port multiplexing function register (pins 0..7).
+  - name: GPIO_AFR
+    description: GPIO alternate-function selection. 6 ports (A..F) x 2 halves (low pins 0..7, high pins 8..15) = 12 registers. Index as `gpio_afr(port_idx * 2 + (pin / 8)).afr(pin % 8) = af_num`, where port_idx is A=0, B=1, ..., F=5.
+    array:
+      len: 12
+      stride: 4
     byte_offset: 4
-    fieldset: AFR
-  - name: GPIOA_AFHR
-    description: PA port multiplexing function register (pins 8..15).
-    byte_offset: 8
-    fieldset: AFR
-  - name: GPIOB_AFLR
-    description: PB port multiplexing function register (pins 0..7).
-    byte_offset: 12
-    fieldset: AFR
-  - name: GPIOB_AFHR
-    description: PB port multiplexing function register (pins 8..15).
-    byte_offset: 16
-    fieldset: AFR
-  - name: GPIOC_AFLR
-    description: PC port multiplexing function register (pins 0..7).
-    byte_offset: 20
-    fieldset: AFR
-  - name: GPIOC_AFHR
-    description: PC port multiplexing function register (pins 8..15).
-    byte_offset: 24
-    fieldset: AFR
-  - name: GPIOD_AFLR
-    description: PD port multiplexing function register (pins 0..7).
-    byte_offset: 28
-    fieldset: AFR
-  - name: GPIOD_AFHR
-    description: PD port multiplexing function register (pins 8..15).
-    byte_offset: 32
-    fieldset: AFR
-  - name: GPIOE_AFLR
-    description: PE port multiplexing function register (pins 0..7).
-    byte_offset: 36
-    fieldset: AFR
-  - name: GPIOE_AFHR
-    description: PE port multiplexing function register (pins 8..15).
-    byte_offset: 40
-    fieldset: AFR
-  - name: GPIOF_AFLR
-    description: PF port multiplexing function register (pins 0..7).
-    byte_offset: 44
-    fieldset: AFR
-  - name: GPIOF_AFHR
-    description: PF port multiplexing function register (pins 8..15).
-    byte_offset: 48
     fieldset: AFR
   - name: EXTICR
     description: External interrupt configuration register (AFIO_EXTICRx). EXTICR[0] holds EXTI lines 0..7, EXTICR[1] holds lines 8..15.
