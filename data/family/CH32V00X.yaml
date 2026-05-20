@@ -63,6 +63,24 @@
     - { signal: "CH6", interrupt: "DMA1_Channel6" }
     - { signal: "CH7", interrupt: "DMA1_Channel7" }
 
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: v00x
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: PWREN
+    reset:
+      register: PB1PRSTR
+      field: PWRRST
+  interrupts:
+    - { signal: "PVD", interrupt: "PVD" }
+
 - name: AFIO
   address: 0x40010000
   registers:
