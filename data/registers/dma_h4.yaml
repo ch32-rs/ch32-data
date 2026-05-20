@@ -1,0 +1,168 @@
+block/CH:
+  description: DMA channel cluster (CFGR / CNTR / PADDR / MADDR / M1ADDR). M1ADDR holds the second memory address when double-buffer mode is enabled.
+  items:
+  - name: CFGR
+    description: Channel configuration register (DMA_CFGR).
+    byte_offset: 0
+    fieldset: CFGR
+  - name: CNTR
+    description: Channel number-of-data register (DMA_CNTR).
+    byte_offset: 4
+    fieldset: CNTR
+  - name: PADDR
+    description: Channel peripheral address register (DMA_PADDR).
+    byte_offset: 8
+  - name: MADDR
+    description: Channel memory address register (DMA_MADDR, also used as memory0 in double-buffer mode).
+    byte_offset: 12
+  - name: M1ADDR
+    description: Channel second memory address (DMA_M1ADDR, double-buffer mode only).
+    byte_offset: 16
+block/DMA:
+  description: DMA controller (8 channels per instance). H4 introduces double-buffer mode via M1ADDR and routes requests via DMAMUX.
+  items:
+  - name: INTFR
+    description: Interrupt status register.
+    byte_offset: 0
+    access: Read
+    fieldset: INTFR
+  - name: INTFCR
+    description: Interrupt flag clear register.
+    byte_offset: 4
+    access: Write
+    fieldset: INTFCR
+  - name: CH
+    description: 'Channel cluster: CFGR / CNTR / PADDR / MADDR / M1ADDR. Stride 20 bytes per channel.'
+    array:
+      len: 8
+      stride: 20
+    byte_offset: 8
+    block: CH
+fieldset/CFGR:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+  - name: DOUBLE_MODE
+    description: Double buffer mode enable bit.
+    bit_offset: 15
+    bit_size: 1
+  - name: FLAG_CUR_MEM
+    description: Memory address selection setting.
+    bit_offset: 16
+    bit_size: 1
+fieldset/CNTR:
+  description: DMA channel 1 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/INTFCR:
+  description: DMA interrupt flag clear register (DMA_INTFCR). Per-channel clear bits (write 1 to clear).
+  fields:
+  - name: CGIF
+    description: Channel global interrupt clear.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: CTCIF
+    description: Channel transfer complete clear.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: CHTIF
+    description: Channel half-transfer complete clear.
+    bit_offset: 2
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: CTEIF
+    description: Channel transfer error clear.
+    bit_offset: 3
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+fieldset/INTFR:
+  description: DMA interrupt status register (DMA_INTFR). Per-channel global / TC / HT / TE flags.
+  fields:
+  - name: GIF
+    description: Channel global interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: TCIF
+    description: Channel transfer complete flag.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: HTIF
+    description: Channel half-transfer complete flag.
+    bit_offset: 2
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4
+  - name: TEIF
+    description: Channel transfer error flag.
+    bit_offset: 3
+    bit_size: 1
+    array:
+      len: 8
+      stride: 4

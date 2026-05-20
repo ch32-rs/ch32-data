@@ -1,0 +1,20 @@
+block/DMAMUX:
+  description: DMA request multiplexer. Routes peripheral DMA request lines to DMA1 channels 1-8 (DMAMUX channels 1-8) and DMA2 channels 1-8 (DMAMUX channels 9-16).
+  items:
+  - name: CFGR
+    description: DMA request multiplexer channel configuration register. Each register holds 4 channels (7-bit MUX selector per channel).
+    array:
+      len: 4
+      stride: 4
+    byte_offset: 0
+    fieldset: CFGR
+fieldset/CFGR:
+  description: DMAMUX channel configuration. Four 7-bit MUX selectors packed into a 32-bit register.
+  fields:
+  - name: CHANNEL_MUX
+    description: DMA request multiplexer input source for the channel (peripheral request ID, see RM table for assignments).
+    bit_offset: 0
+    bit_size: 7
+    array:
+      len: 4
+      stride: 8

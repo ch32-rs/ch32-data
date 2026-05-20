@@ -1,0 +1,46 @@
+- name: SPI4
+  address: 0x40004000
+  registers:
+    kind: spi
+    version: h4
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: SPI4EN
+    reset:
+      register: HB1PRSTR
+      field: SPI4RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI4
+  pins:
+    - pin: PE2
+      signal: SCK
+      af: 5
+    - pin: PE12
+      signal: SCK
+      af: 5
+    - pin: PE6
+      signal: MOSI
+      af: 5
+    - pin: PE14
+      signal: MOSI
+      af: 5
+    - pin: PE5
+      signal: MISO
+      af: 5
+    - pin: PE13
+      signal: MISO
+      af: 5
+    - pin: PE4
+      signal: NSS
+      af: 5
+    - pin: PE11
+      signal: NSS
+      af: 5
+
+# DMA + DMAMUX: 16-channel multiplexed DMA system (DMA1 ch 1-8 + DMA2 ch 1-8).
+# H4's DMA adds double-buffer mode (CH.M1ADDR) and request routing via DMAMUX.

@@ -1,0 +1,79 @@
+name: CH32H417QEU6
+family: CH32H4 (QingKe RISC-V dual-core, high-end)
+subfamily: Dual-core V3F+V5F, USB 3.0, Gigabit Ethernet, SerDes, LTDC
+product_type: QingKe V3F (control, hart 0) + V5F (compute, hart 1, FP)
+# FIXME: device_id placeholder; refresh from flash IAP doc when available.
+device_id: 0
+keywords:
+  - DUAL_CORE
+  - USBSS
+  - USBHS
+  - ETH
+  - LTDC
+  - SERDES
+  - SDIO
+  - SDMMC
+  - HSADC
+  - SAI
+  - I3C
+  - LPTIM
+packages:
+  - name: CH32H417QEU6
+    package: QFN128
+memory:
+  # CH32H417 default Flash partition (DBMODE=1): 960K user Flash + 56K boot.
+  # FIXME: erase_size / write_size placeholders, refresh from RM section 3.
+  - name: BANK_1
+    kind: flash
+    address: 0
+    size: 983040       # 960 * 1024
+    settings:
+      erase_size: 1024
+      write_size: 256
+      erase_value: 255
+  # 128KB ITCM, V5F zero-wait code region. V3F can access at 2-wait.
+  - name: ITCM
+    kind: ram
+    address: 0x200A0000
+    size: 131072
+  # 256KB DTCM, V5F zero-wait data region. V3F can access at 2-wait.
+  - name: DTCM
+    kind: ram
+    address: 0x200C0000
+    size: 262144
+  # 512KB shared SRAM, zero-wait for BOTH V3F and V5F.
+  - name: SRAM_SHARED
+    kind: ram
+    address: 0x20100000
+    size: 524288
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32H417.html
+cores:
+  # Hart 0 - V3F: lower-frequency control / boot core. No ICache.
+  - name: qingke-v3f
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32H4.yaml"
+      - "../peripherals/H4_USART8.yaml"
+      - "../peripherals/H4_SPI4.yaml"
+      - "../peripherals/H4_USBFS.yaml"
+      - "../peripherals/H4_USBSS.yaml"
+      - "../peripherals/H4_USBPD.yaml"
+    include_interrupts: "../interrupts/CH32H4.yaml"
+  # Hart 1 - V5F: high-frequency compute core with FP + 32KB ICache.
+  # Sees the same SoC peripherals as V3F; difference is interrupt routing
+  # (configured at runtime via PFIC) and hart-private CSR access (CSR
+  # views and hardware stack are managed by qingke / qingke-rt).
+  - name: qingke-v5f
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32H4.yaml"
+      - "../peripherals/H4_USART8.yaml"
+      - "../peripherals/H4_SPI4.yaml"
+      - "../peripherals/H4_USBFS.yaml"
+      - "../peripherals/H4_USBSS.yaml"
+      - "../peripherals/H4_USBPD.yaml"
+    include_interrupts: "../interrupts/CH32H4.yaml"

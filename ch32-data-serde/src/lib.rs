@@ -178,8 +178,16 @@ pub mod chip {
             pub struct Pin {
                 pub pin: pin::Pin,
                 pub signal: String,
+                /// Central PCFR remap group (V0/V1/V2/V3/X0/L1/641/643 families).
+                /// Mutually exclusive with `af` below.
                 #[serde(skip_serializing_if = "Option::is_none")]
                 pub remap: Option<u8>,
+                /// Per-pin AF number (CH32H4 family — pin signal mux lives in
+                /// `AFIO.GPIOx_AFR` rather than central PCFR). Mirrors
+                /// stm32-data's `PeripheralPin.af`. Mutually exclusive with
+                /// `remap` above.
+                #[serde(skip_serializing_if = "Option::is_none")]
+                pub af: Option<u8>,
             }
 
             pub mod pin {

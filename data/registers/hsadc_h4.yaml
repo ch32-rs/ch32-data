@@ -1,0 +1,152 @@
+block/HSADC:
+  description: High speed ADC.
+  items:
+  - name: CFGR
+    description: High-speed ADC configuration register.
+    byte_offset: 0
+    fieldset: CFGR
+  - name: CTLR1
+    description: HSADC Control Register 1.
+    byte_offset: 4
+    fieldset: CTLR1
+  - name: CTLR2
+    description: HSADC Control Register 2.
+    byte_offset: 8
+    fieldset: CTLR2
+  - name: STATR
+    description: HSADC Status Register.
+    byte_offset: 12
+    fieldset: STATR
+  - name: DATAR
+    description: HSADC Data Register.
+    byte_offset: 16
+    fieldset: DATAR
+  - name: ADDR0
+    description: HSADC DMA Receive Address Register 0.
+    byte_offset: 20
+    fieldset: ADDR0
+  - name: ADDR1
+    description: HSADC DMA Receive Address Register 1.
+    byte_offset: 24
+    fieldset: ADDR1
+fieldset/ADDR0:
+  description: HSADC DMA Receive Address Register 0.
+  fields:
+  - name: DMA_ADDR0
+    description: The DMA transmission address is configured with the 0 configuration bit.
+    bit_offset: 0
+    bit_size: 32
+fieldset/ADDR1:
+  description: HSADC DMA Receive Address Register 1.
+  fields:
+  - name: DMA_ADDR1
+    description: DMA transport address 1 configuration bit.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CFGR:
+  description: High-speed ADC configuration register.
+  fields:
+  - name: EN
+    description: High-speed ADC enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: DMAEN
+    description: Direct Storage Access (DMA) mode enable.
+    bit_offset: 2
+    bit_size: 3
+  - name: SETUP
+    description: First Transition Establishment Time Configuration Bit.
+    bit_offset: 8
+    bit_size: 6
+  - name: PPMODE
+    description: Ping Pong storage mode enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: BURST_EN
+    description: DMA transmission length configuration bit.
+    bit_offset: 15
+    bit_size: 1
+  - name: DMA_LEN
+    description: DMA transmission length configuration bit.
+    bit_offset: 16
+    bit_size: 16
+fieldset/CTLR1:
+  description: HSADC Control Register 1.
+  fields:
+  - name: START
+    description: Initiating High-Speed ADC Conversion.
+    bit_offset: 0
+    bit_size: 1
+  - name: BURST_END
+    description: Abort a burst transmission.
+    bit_offset: 1
+    bit_size: 1
+  - name: EOCIE
+    description: Transition Completion Interrupt Enables.
+    bit_offset: 8
+    bit_size: 1
+  - name: DMAIE
+    description: Transition Completion Interrupt Enables.
+    bit_offset: 9
+    bit_size: 1
+  - name: BURSTIE
+    description: Interrupt enables when the burst transmission is complete.
+    bit_offset: 10
+    bit_size: 1
+fieldset/CTLR2:
+  description: HSADC Control Register 2.
+  fields:
+  - name: BURST_DMA_LEN
+    description: The final DMA transmission length configuration bit for burst transmission..  If the number of data transmitted in the final burst is not aligned with the DMA transmission length,   the DMA transmission length is configured.
+    bit_offset: 0
+    bit_size: 16
+  - name: BURST_LEN
+    description: Burst transmission length configuration.
+    bit_offset: 16
+    bit_size: 16
+fieldset/DATAR:
+  description: HSADC Data Register.
+  fields:
+  - name: DR
+    description: Convert data register.
+    bit_offset: 0
+    bit_size: 10
+fieldset/STATR:
+  description: HSADC Status Register.
+  fields:
+  - name: EOCIF
+    description: Transition Complete Interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: DMAIF
+    description: DMA Transmission Complete Interrupt flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: BURSTIF
+    description: Burst transfer completed interrupt flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: RXNE
+    description: The data register is not empty flag, that is, the conversion is completed.  and the data is stored in the data register, which is the position bit;   A read operation on the data register clears the bit.
+    bit_offset: 3
+    bit_size: 1
+  - name: PP_ADDR
+    description: Ping-pong storage mode cache address indicator bit.
+    bit_offset: 4
+    bit_size: 1
+  - name: FIFO_RDY
+    description: Receives a FIFO non-null status flag.
+    bit_offset: 8
+    bit_size: 1
+  - name: FIFO_FULL
+    description: Receive FIFO full status flags.
+    bit_offset: 9
+    bit_size: 1
+  - name: FIFO_OV
+    description: Receives the FIFO overflow status flag.
+    bit_offset: 10
+    bit_size: 1
+  - name: FIFO_CNT
+    description: Receives the FIFO current count value.
+    bit_offset: 11
+    bit_size: 3

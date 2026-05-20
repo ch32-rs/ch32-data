@@ -1,0 +1,921 @@
+block/DFSDM:
+  description: Digital filter for sigma delta modulators.
+  items:
+  - name: CH0CFGR1
+    description: channel configuration 0 register.
+    byte_offset: 0
+    fieldset: CH0CFGR1
+  - name: CH1CFGR1
+    description: channel configuration 1 register.
+    byte_offset: 4
+    fieldset: CH1CFGR1
+  - name: CH0CFGR2
+    description: channel configuration 0 register.
+    byte_offset: 8
+    fieldset: CH0CFGR2
+  - name: CH1CFGR2
+    description: channel configuration 1 register.
+    byte_offset: 12
+    fieldset: CH1CFGR2
+  - name: CH0AWSCDR
+    description: analog watchdog and short-circuit detector register.
+    byte_offset: 16
+    fieldset: CH0AWSCDR
+  - name: CH1AWSCDR
+    description: analog watchdog and short-circuit detector register.
+    byte_offset: 20
+    fieldset: CH1AWSCDR
+  - name: CH0WDATR
+    description: channel watchdog filter data register.
+    byte_offset: 24
+    fieldset: CH0WDATR
+  - name: CH1WDATR
+    description: channel watchdog filter data register.
+    byte_offset: 28
+    fieldset: CH1WDATR
+  - name: CH0DATINR
+    description: channel data input register.
+    byte_offset: 32
+    fieldset: CH0DATINR
+  - name: CH1DATINR
+    description: channel data input register.
+    byte_offset: 36
+    fieldset: CH1DATINR
+  - name: DFSDM_FLT0CR1
+    description: control register 1.
+    byte_offset: 40
+    fieldset: DFSDM_FLT0CR1
+  - name: DFSDM_FLT1CR1
+    description: control register 1.
+    byte_offset: 44
+    fieldset: DFSDM_FLT1CR1
+  - name: DFSDM_FLT0CR2
+    description: control register 2.
+    byte_offset: 48
+    fieldset: DFSDM_FLT0CR2
+  - name: DFSDM_FLT1CR2
+    description: control register 2.
+    byte_offset: 52
+    fieldset: DFSDM_FLT1CR2
+  - name: DFSDM_FLT0ISR
+    description: interrupt and status register.
+    byte_offset: 56
+    access: Read
+    fieldset: DFSDM_FLT0ISR
+  - name: DFSDM_FLT1ISR
+    description: interrupt and status register.
+    byte_offset: 60
+    access: Read
+    fieldset: DFSDM_FLT1ISR
+  - name: DFSDM_FLT0ICR
+    description: interrupt flag clear register.
+    byte_offset: 64
+    fieldset: DFSDM_FLT0ICR
+  - name: DFSDM_FLT1ICR
+    description: interrupt flag clear register.
+    byte_offset: 68
+    fieldset: DFSDM_FLT1ICR
+  - name: DFSDM_FLT0JCHGR
+    description: injected channel group selection register.
+    byte_offset: 72
+    fieldset: DFSDM_FLT0JCHGR
+  - name: DFSDM_FLT1JCHGR
+    description: injected channel group selection register.
+    byte_offset: 76
+    fieldset: DFSDM_FLT1JCHGR
+  - name: DFSDM_FLT0FCR3
+    description: control register 3.
+    byte_offset: 80
+    fieldset: DFSDM_FLT0FCR3
+  - name: DFSDM_FLT1FCR3
+    description: control register 3.
+    byte_offset: 84
+    fieldset: DFSDM_FLT1FCR3
+  - name: DFSDM_FLT0JDATAR
+    description: data register for injected group.
+    byte_offset: 88
+    access: Read
+    fieldset: DFSDM_FLT0JDATAR
+  - name: DFSDM_FLT1JDATAR
+    description: data register for injected group.
+    byte_offset: 92
+    access: Read
+    fieldset: DFSDM_FLT1JDATAR
+  - name: DFSDM_FLT0RDATAR
+    description: data register for the regular channel.
+    byte_offset: 96
+    access: Read
+    fieldset: DFSDM_FLT0RDATAR
+  - name: DFSDM_FLT1RDATAR
+    description: data register for the regular channel.
+    byte_offset: 100
+    access: Read
+    fieldset: DFSDM_FLT1RDATAR
+  - name: DFSDM_FLT0AWHTR
+    description: analog watchdog high threshold register.
+    byte_offset: 104
+    fieldset: DFSDM_FLT0AWHTR
+  - name: DFSDM_FLT1AWHTR
+    description: analog watchdog high threshold register.
+    byte_offset: 108
+    fieldset: DFSDM_FLT1AWHTR
+  - name: DFSDM_FLT0AWLTR
+    description: analog watchdog low threshold register.
+    byte_offset: 112
+    fieldset: DFSDM_FLT0AWLTR
+  - name: DFSDM_FLT1AWLTR
+    description: analog watchdog low threshold register.
+    byte_offset: 116
+    fieldset: DFSDM_FLT1AWLTR
+  - name: DFSDM_FLT0AWSR
+    description: analog watchdog status register.
+    byte_offset: 120
+    access: Read
+    fieldset: DFSDM_FLT0AWSR
+  - name: DFSDM_FLT1AWSR
+    description: analog watchdog status register.
+    byte_offset: 124
+    access: Read
+    fieldset: DFSDM_FLT1AWSR
+  - name: DFSDM_FLT0AWCFR
+    description: analog watchdog clear flag register.
+    byte_offset: 128
+    fieldset: DFSDM_FLT0AWCFR
+  - name: DFSDM_FLT1AWCFR
+    description: analog watchdog clear flag register.
+    byte_offset: 132
+    fieldset: DFSDM_FLT1AWCFR
+  - name: DFSDM_FLT0EXMAX
+    description: Extremes detector maximum register.
+    byte_offset: 136
+    access: Read
+    fieldset: DFSDM_FLT0EXMAX
+  - name: DFSDM_FLT1EXMAX
+    description: Extremes detector maximum register.
+    byte_offset: 140
+    access: Read
+    fieldset: DFSDM_FLT1EXMAX
+  - name: DFSDM_FLT0EXMIN
+    description: Extremes detector minimum register.
+    byte_offset: 144
+    access: Read
+    fieldset: DFSDM_FLT0EXMIN
+  - name: DFSDM_FLT1EXMIN
+    description: Extremes detector minimum register.
+    byte_offset: 148
+    access: Read
+    fieldset: DFSDM_FLT1EXMIN
+  - name: DFSDM_FLT0CNVTIMR
+    description: conversion timer register.
+    byte_offset: 152
+    access: Read
+    fieldset: DFSDM_FLT0CNVTIMR
+  - name: DFSDM_FLT1CNVTIMR
+    description: conversion timer register.
+    byte_offset: 156
+    access: Read
+    fieldset: DFSDM_FLT1CNVTIMR
+fieldset/CH0AWSCDR:
+  description: analog watchdog and short-circuit detector register.
+  fields:
+  - name: SCDT
+    description: Short Circuit Detector Threshold for Channel 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: BKSCD
+    description: Channel 0 Short Circuit Detector Open Signal Distribution.
+    bit_offset: 12
+    bit_size: 4
+  - name: AWFOSR
+    description: Channel 0 analog watchdog filter oversampling rate.
+    bit_offset: 16
+    bit_size: 5
+  - name: AWFORD
+    description: Channel 0 analog watchdog Sinc filter order.
+    bit_offset: 22
+    bit_size: 2
+fieldset/CH0CFGR1:
+  description: channel configuration 0 register.
+  fields:
+  - name: SITP
+    description: Channel 0 Serial Interface Type.
+    bit_offset: 0
+    bit_size: 1
+  - name: SPICKSEL
+    description: Channel 0 SPI Clock Selection.
+    bit_offset: 2
+    bit_size: 2
+  - name: SCDEN
+    description: Channel 0 Short Circuit Detector Enables.
+    bit_offset: 5
+    bit_size: 1
+  - name: CKABEN
+    description: Channel 0 Clock Missing Detector Enables.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHEN
+    description: Channel 0 enables.
+    bit_offset: 7
+    bit_size: 1
+  - name: CHINSEL
+    description: Channel Input Selection.
+    bit_offset: 8
+    bit_size: 1
+  - name: DATMPX
+    description: Channel 0 Input Data Multiplexer.
+    bit_offset: 12
+    bit_size: 2
+  - name: DATPACK
+    description: R32_DFSDM_CHyDATINR register data encapsulation mode.
+    bit_offset: 14
+    bit_size: 2
+  - name: CKOUTDIV
+    description: Output Serial Clock Divider.
+    bit_offset: 16
+    bit_size: 8
+  - name: CKOUTSRC
+    description: Output Serial Clock Source Selection.
+    bit_offset: 30
+    bit_size: 1
+  - name: DFSDMEN
+    description: The DFSDM interface is globally enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CH0CFGR2:
+  description: channel configuration 0 register.
+  fields:
+  - name: DTRBS
+    description: Channel 0 data right shift.
+    bit_offset: 3
+    bit_size: 5
+  - name: OFFSET
+    description: Channel 0 24-bit calibration offset.
+    bit_offset: 8
+    bit_size: 24
+fieldset/CH0DATINR:
+  description: channel data input register.
+  fields:
+  - name: INDAT0
+    description: Channel Y Input Data.
+    bit_offset: 0
+    bit_size: 16
+  - name: INDAT1
+    description: Input data for channel y or channel y+1.
+    bit_offset: 16
+    bit_size: 16
+fieldset/CH0WDATR:
+  description: channel watchdog filter data register.
+  fields:
+  - name: WDATA
+    description: Enter channel 0 watchdog data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CH1AWSCDR:
+  description: analog watchdog and short-circuit detector register.
+  fields:
+  - name: SCDT
+    description: Short Circuit Detector Threshold for Channel 1.
+    bit_offset: 0
+    bit_size: 8
+  - name: BKSCD
+    description: Channel 1 Short Circuit Detector Open Signal Distribution.
+    bit_offset: 12
+    bit_size: 4
+  - name: AWFOSR
+    description: Channel 1 analog watchdog filter oversampling rate.
+    bit_offset: 16
+    bit_size: 5
+  - name: AWFORD
+    description: Channel 1 analog watchdog Sinc filter order.
+    bit_offset: 22
+    bit_size: 2
+fieldset/CH1CFGR1:
+  description: channel configuration 1 register.
+  fields:
+  - name: SITP
+    description: Channel 1 Serial Interface Type.
+    bit_offset: 0
+    bit_size: 1
+  - name: SPICKSEL
+    description: Channel 1 SPI Clock Selection.
+    bit_offset: 2
+    bit_size: 2
+  - name: SCDEN
+    description: Channel 1 Short Circuit Detector Enables.
+    bit_offset: 5
+    bit_size: 1
+  - name: CKABEN
+    description: Channel 1 Clock Missing Detector Enables.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHEN
+    description: Channel 1 enables.
+    bit_offset: 7
+    bit_size: 1
+  - name: CHINSEL
+    description: Channel Input Selection.
+    bit_offset: 8
+    bit_size: 1
+  - name: DATMPX
+    description: Channel 1 Input Data Multiplexer.
+    bit_offset: 12
+    bit_size: 2
+  - name: DATPACK
+    description: R32_DFSDM_CHyDATINR register data encapsulation mode.
+    bit_offset: 14
+    bit_size: 2
+  - name: CKOUTDIV
+    description: Output Serial Clock Divider.
+    bit_offset: 16
+    bit_size: 8
+  - name: CKOUTSRC
+    description: Output Serial Clock Source Selection.
+    bit_offset: 30
+    bit_size: 1
+  - name: DFSDMEN
+    description: The DFSDM interface is globally enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CH1CFGR2:
+  description: channel configuration 1 register.
+  fields:
+  - name: DTRBS
+    description: Channel 1 data right shift.
+    bit_offset: 3
+    bit_size: 5
+  - name: OFFSET
+    description: Channel 1 24-bit calibration offset.
+    bit_offset: 8
+    bit_size: 24
+fieldset/CH1DATINR:
+  description: channel data input register.
+  fields:
+  - name: INDAT0
+    description: Channel 1 Input Data.
+    bit_offset: 0
+    bit_size: 16
+  - name: INDAT1
+    description: Input data for channel 1 or channel 2.
+    bit_offset: 16
+    bit_size: 16
+fieldset/CH1WDATR:
+  description: channel watchdog filter data register.
+  fields:
+  - name: WDATA
+    description: Enter channel 1 watchdog data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/DFSDM_FLT0AWCFR:
+  description: analog watchdog clear flag register.
+  fields:
+  - name: CLRAWLTF
+    description: Clear the analog watchdog low threshold flag.
+    bit_offset: 0
+    bit_size: 2
+  - name: CLRAWHTF
+    description: Clear the analog watchdog high threshold flag.
+    bit_offset: 8
+    bit_size: 2
+fieldset/DFSDM_FLT0AWHTR:
+  description: analog watchdog high threshold register.
+  fields:
+  - name: BKAWH
+    description: Break signal assignment to analog watchdog high threshold event.
+    bit_offset: 0
+    bit_size: 4
+  - name: AWHT
+    description: Analog watchdog high threshold.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT0AWLTR:
+  description: analog watchdog low threshold register.
+  fields:
+  - name: BKAWL
+    description: Break signal assignment to analog watchdog low threshold event.
+    bit_offset: 0
+    bit_size: 2
+  - name: AWLT
+    description: Analog watchdog low threshold.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT0AWSR:
+  description: analog watchdog status register.
+  fields:
+  - name: AWLTF
+    description: Analog watchdog low threshold flag.
+    bit_offset: 0
+    bit_size: 8
+  - name: AWHTF
+    description: Analog watchdog high threshold flag.
+    bit_offset: 8
+    bit_size: 8
+fieldset/DFSDM_FLT0CNVTIMR:
+  description: conversion timer register.
+  fields:
+  - name: CNVCNT
+    description: 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN.
+    bit_offset: 4
+    bit_size: 28
+fieldset/DFSDM_FLT0CR1:
+  description: control register 1.
+  fields:
+  - name: DFEN
+    description: DFSDM enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: JSWSTART
+    description: Start a conversion of the injected group of channels.
+    bit_offset: 1
+    bit_size: 1
+  - name: JSYNC
+    description: Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger.
+    bit_offset: 3
+    bit_size: 1
+  - name: JSCAN
+    description: Scanning conversion mode for injected conversions.
+    bit_offset: 4
+    bit_size: 1
+  - name: JDMAEN
+    description: DMA channel enabled to read data for the injected channel group.
+    bit_offset: 5
+    bit_size: 1
+  - name: JEXTSEL
+    description: Trigger signal selection for launching injected conversions.
+    bit_offset: 8
+    bit_size: 4
+  - name: JEXTEN
+    description: Trigger enable and trigger edge selection for injected conversions.
+    bit_offset: 13
+    bit_size: 2
+  - name: RSWSTART
+    description: Software start of a conversion on the regular channel.
+    bit_offset: 17
+    bit_size: 1
+  - name: RCONT
+    description: Continuous mode selection for regular conversions.
+    bit_offset: 18
+    bit_size: 1
+  - name: RSYNC
+    description: Launch regular conversion synchronously with DFSDM0.
+    bit_offset: 19
+    bit_size: 1
+  - name: RDMAEN
+    description: DMA channel enabled to read data for the regular conversion.
+    bit_offset: 21
+    bit_size: 1
+  - name: RCH
+    description: Regular channel selection.
+    bit_offset: 24
+    bit_size: 3
+  - name: FAST
+    description: Fast conversion mode selection for regular conversions.
+    bit_offset: 29
+    bit_size: 1
+  - name: AWFSEL
+    description: Analog watchdog fast mode select.
+    bit_offset: 30
+    bit_size: 1
+fieldset/DFSDM_FLT0CR2:
+  description: control register 2.
+  fields:
+  - name: JEOCIE
+    description: Injected end of conversion interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: REOCIE
+    description: Regular end of conversion interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: JOVRIE
+    description: Injected data overrun interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: ROVRIE
+    description: Regular data overrun interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: AWDIE
+    description: Analog watchdog interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: SCDIE
+    description: Short-circuit detector interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: CKABIE
+    description: Clock absence interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: EXCH
+    description: Extremes detector channel selection.
+    bit_offset: 8
+    bit_size: 8
+  - name: AWDCH
+    description: Analog watchdog channel selection.
+    bit_offset: 16
+    bit_size: 8
+fieldset/DFSDM_FLT0EXMAX:
+  description: Extremes detector maximum register.
+  fields:
+  - name: EXMAXCH
+    description: Extremes detector maximum data channel.
+    bit_offset: 0
+    bit_size: 1
+  - name: EXMAX
+    description: Extremes detector maximum value.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT0EXMIN:
+  description: Extremes detector minimum register.
+  fields:
+  - name: EXMINCH
+    description: Extremes detector minimum data channel.
+    bit_offset: 0
+    bit_size: 1
+  - name: EXMIN
+    description: EXMIN.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT0FCR3:
+  description: control register 3.
+  fields:
+  - name: IOSR
+    description: The integrator oversampling rate is 2 to the power of IOSR.
+    bit_offset: 0
+    bit_size: 4
+  - name: FOSR
+    description: Sinc filter oversampling rate.
+    bit_offset: 16
+    bit_size: 10
+  - name: FORD
+    description: Sinc Filter Order.
+    bit_offset: 29
+    bit_size: 3
+fieldset/DFSDM_FLT0ICR:
+  description: interrupt flag clear register.
+  fields:
+  - name: CLRJOVRF
+    description: Clear the injected conversion overrun flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: CLRROVRF
+    description: Clear the regular conversion overrun flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: CLRCKABF
+    description: Clear the clock absence flag.
+    bit_offset: 16
+    bit_size: 8
+  - name: CLRSCDF
+    description: Clear the short-circuit detector flag.
+    bit_offset: 24
+    bit_size: 8
+fieldset/DFSDM_FLT0ISR:
+  description: interrupt and status register.
+  fields:
+  - name: JEOCF
+    description: End of injected conversion flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: REOCF
+    description: End of regular conversion flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: JOVRF
+    description: Injected conversion overrun flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: ROVRF
+    description: Regular conversion overrun flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: AWDF
+    description: Analog watchdog.
+    bit_offset: 4
+    bit_size: 1
+  - name: JCIP
+    description: Injected conversion in progress status.
+    bit_offset: 13
+    bit_size: 1
+  - name: RCIP
+    description: Regular conversion in progress status.
+    bit_offset: 14
+    bit_size: 1
+  - name: CKABF
+    description: Clock absence flag.
+    bit_offset: 16
+    bit_size: 8
+  - name: SCDF
+    description: short-circuit detector flag.
+    bit_offset: 24
+    bit_size: 8
+fieldset/DFSDM_FLT0JCHGR:
+  description: injected channel group selection register.
+  fields:
+  - name: JCHG
+    description: Injected channel group selection.
+    bit_offset: 0
+    bit_size: 2
+fieldset/DFSDM_FLT0JDATAR:
+  description: data register for injected group.
+  fields:
+  - name: JDATACH
+    description: Injected channel most recently converted.
+    bit_offset: 0
+    bit_size: 1
+  - name: JDATA
+    description: Injected group conversion data.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT0RDATAR:
+  description: data register for the regular channel.
+  fields:
+  - name: RDATACH
+    description: Regular channel most recently converted.
+    bit_offset: 0
+    bit_size: 1
+  - name: RPEND
+    description: Regular channel pending data.
+    bit_offset: 4
+    bit_size: 1
+  - name: RDATA
+    description: Regular channel conversion data.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1AWCFR:
+  description: analog watchdog clear flag register.
+  fields:
+  - name: CLRAWLTF
+    description: Clear the analog watchdog low threshold flag.
+    bit_offset: 0
+    bit_size: 2
+  - name: CLRAWHTF
+    description: Clear the analog watchdog high threshold flag.
+    bit_offset: 8
+    bit_size: 2
+fieldset/DFSDM_FLT1AWHTR:
+  description: analog watchdog high threshold register.
+  fields:
+  - name: BKAWH
+    description: Break signal assignment to analog watchdog high threshold event.
+    bit_offset: 0
+    bit_size: 4
+  - name: AWHT
+    description: Analog watchdog high threshold.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1AWLTR:
+  description: analog watchdog low threshold register.
+  fields:
+  - name: BKAWL
+    description: Break signal assignment to analog watchdog low threshold event.
+    bit_offset: 0
+    bit_size: 2
+  - name: AWLT
+    description: Analog watchdog low threshold.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1AWSR:
+  description: analog watchdog status register.
+  fields:
+  - name: AWLTF
+    description: Analog watchdog low threshold flag.
+    bit_offset: 0
+    bit_size: 8
+  - name: AWHTF
+    description: Analog watchdog high threshold flag.
+    bit_offset: 8
+    bit_size: 8
+fieldset/DFSDM_FLT1CNVTIMR:
+  description: conversion timer register.
+  fields:
+  - name: CNVCNT
+    description: 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN.
+    bit_offset: 4
+    bit_size: 28
+fieldset/DFSDM_FLT1CR1:
+  description: control register 1.
+  fields:
+  - name: DFEN
+    description: DFSDM enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: JSWSTART
+    description: Start a conversion of the injected group of channels.
+    bit_offset: 1
+    bit_size: 1
+  - name: JSYNC
+    description: Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger.
+    bit_offset: 3
+    bit_size: 1
+  - name: JSCAN
+    description: Scanning conversion mode for injected conversions.
+    bit_offset: 4
+    bit_size: 1
+  - name: JDMAEN
+    description: DMA channel enabled to read data for the injected channel group.
+    bit_offset: 5
+    bit_size: 1
+  - name: JEXTSEL
+    description: Trigger signal selection for launching injected conversions.
+    bit_offset: 8
+    bit_size: 4
+  - name: JEXTEN
+    description: Trigger enable and trigger edge selection for injected conversions.
+    bit_offset: 13
+    bit_size: 2
+  - name: RSWSTART
+    description: Software start of a conversion on the regular channel.
+    bit_offset: 17
+    bit_size: 1
+  - name: RCONT
+    description: Continuous mode selection for regular conversions.
+    bit_offset: 18
+    bit_size: 1
+  - name: RSYNC
+    description: Launch regular conversion synchronously with DFSDM0.
+    bit_offset: 19
+    bit_size: 1
+  - name: RDMAEN
+    description: DMA channel enabled to read data for the regular conversion.
+    bit_offset: 21
+    bit_size: 1
+  - name: RCH
+    description: Regular channel selection.
+    bit_offset: 24
+    bit_size: 3
+  - name: FAST
+    description: Fast conversion mode selection for regular conversions.
+    bit_offset: 29
+    bit_size: 1
+  - name: AWFSEL
+    description: Analog watchdog fast mode select.
+    bit_offset: 30
+    bit_size: 1
+fieldset/DFSDM_FLT1CR2:
+  description: control register 2.
+  fields:
+  - name: JEOCIE
+    description: Injected end of conversion interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: REOCIE
+    description: Regular end of conversion interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: JOVRIE
+    description: Injected data overrun interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: ROVRIE
+    description: Regular data overrun interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: AWDIE
+    description: Analog watchdog interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: SCDIE
+    description: Short-circuit detector interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: CKABIE
+    description: Clock absence interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: EXCH
+    description: Extremes detector channel selection.
+    bit_offset: 8
+    bit_size: 8
+  - name: AWDCH
+    description: Analog watchdog channel selection.
+    bit_offset: 16
+    bit_size: 8
+fieldset/DFSDM_FLT1EXMAX:
+  description: Extremes detector maximum register.
+  fields:
+  - name: EXMAXCH
+    description: Extremes detector maximum data channel.
+    bit_offset: 0
+    bit_size: 1
+  - name: EXMAX
+    description: Extremes detector maximum value.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1EXMIN:
+  description: Extremes detector minimum register.
+  fields:
+  - name: EXMINCH
+    description: Extremes detector minimum data channel.
+    bit_offset: 0
+    bit_size: 1
+  - name: EXMIN
+    description: EXMIN.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1FCR3:
+  description: control register 3.
+  fields:
+  - name: IOSR
+    description: The integrator oversampling rate is 2 to the power of IOSR.
+    bit_offset: 0
+    bit_size: 4
+  - name: FOSR
+    description: Sinc filter oversampling rate.
+    bit_offset: 16
+    bit_size: 10
+  - name: FORD
+    description: Sinc Filter Order.
+    bit_offset: 29
+    bit_size: 3
+fieldset/DFSDM_FLT1ICR:
+  description: interrupt flag clear register.
+  fields:
+  - name: CLRJOVRF
+    description: Clear the injected conversion overrun flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: CLRROVRF
+    description: Clear the regular conversion overrun flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: CLRCKABF
+    description: Clear the clock absence flag.
+    bit_offset: 16
+    bit_size: 8
+  - name: CLRSCDF
+    description: Clear the short-circuit detector flag.
+    bit_offset: 24
+    bit_size: 8
+fieldset/DFSDM_FLT1ISR:
+  description: interrupt and status register.
+  fields:
+  - name: JEOCF
+    description: End of injected conversion flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: REOCF
+    description: End of regular conversion flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: JOVRF
+    description: Injected conversion overrun flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: ROVRF
+    description: Regular conversion overrun flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: AWDF
+    description: Analog watchdog.
+    bit_offset: 4
+    bit_size: 1
+  - name: JCIP
+    description: Injected conversion in progress status.
+    bit_offset: 13
+    bit_size: 1
+  - name: RCIP
+    description: Regular conversion in progress status.
+    bit_offset: 14
+    bit_size: 1
+  - name: CKABF
+    description: Clock absence flag.
+    bit_offset: 16
+    bit_size: 8
+  - name: SCDF
+    description: short-circuit detector flag.
+    bit_offset: 24
+    bit_size: 8
+fieldset/DFSDM_FLT1JCHGR:
+  description: injected channel group selection register.
+  fields:
+  - name: JCHG
+    description: Injected channel group selection.
+    bit_offset: 0
+    bit_size: 2
+fieldset/DFSDM_FLT1JDATAR:
+  description: data register for injected group.
+  fields:
+  - name: JDATACH
+    description: Injected channel most recently converted.
+    bit_offset: 0
+    bit_size: 1
+  - name: JDATA
+    description: Injected group conversion data.
+    bit_offset: 8
+    bit_size: 24
+fieldset/DFSDM_FLT1RDATAR:
+  description: data register for the regular channel.
+  fields:
+  - name: RDATACH
+    description: Regular channel most recently converted.
+    bit_offset: 0
+    bit_size: 1
+  - name: RPEND
+    description: Regular channel pending data.
+    bit_offset: 4
+    bit_size: 1
+  - name: RDATA
+    description: Regular channel conversion data.
+    bit_offset: 8
+    bit_size: 24
