@@ -260,19 +260,19 @@ block/GPTM32:
     byte_offset: 76
     fieldset: DMAADR
 fieldset/AUX:
-  description: Double-side egde capture register.
+  description: Double-side edge capture register.
   bit_size: 16
   fields:
   - name: CAP_ED_CH2
-    description: Double-side egde capture is enable for channel2.
+    description: Double-side edge capture is enable for channel2.
     bit_offset: 0
     bit_size: 1
   - name: CAP_ED_CH3
-    description: Double-side egde capture is enable for channel3.
+    description: Double-side edge capture is enable for channel3.
     bit_offset: 1
     bit_size: 1
   - name: CAP_ED_CH4
-    description: Double-side egde capture is enable for channel4.
+    description: Double-side edge capture is enable for channel4.
     bit_offset: 2
     bit_size: 1
   - name: BK_SEL

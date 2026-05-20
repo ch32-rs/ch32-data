@@ -121,8 +121,8 @@ fieldset/CTLR2:
     description: OPA2's PGA mode feedback enable.
     bit_offset: 8
     bit_size: 1
-  - name: PGADIF1
-    description: OPA2 is used with NSEL1 as PGA and the N-terminal is connected to OPA2_CHN1 (PA7).
+  - name: PGADIF2
+    description: OPA2 is used with NSEL2 as PGA and the N-terminal is connected to OPA2_CHN1 (PF12).
     bit_offset: 9
     bit_size: 1
   - name: HS2
@@ -153,7 +153,7 @@ fieldset/CTLR3:
     bit_offset: 8
     bit_size: 1
   - name: PGADIF3
-    description: OPA3 is used with NSEL1 as PGA and the N-terminal is connected to OPA3_CHN1 (PA7).
+    description: OPA3 is used with NSEL3 as PGA and the N-terminal is connected to OPA3_CHN1 (PA3).
     bit_offset: 9
     bit_size: 1
   - name: HS3

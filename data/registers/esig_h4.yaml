@@ -2,7 +2,7 @@ block/ESIG:
   description: ESIG configuration.
   items:
   - name: FLACAP
-    description: Flash capecity register.
+    description: Flash capacity register.
     byte_offset: 0
     bit_size: 16
     fieldset: FLACAP
@@ -19,7 +19,7 @@ block/ESIG:
     byte_offset: 16
     fieldset: UNIID3
 fieldset/FLACAP:
-  description: Flash capecity register.
+  description: Flash capacity register.
   bit_size: 16
   fields:
   - name: F_SIZE

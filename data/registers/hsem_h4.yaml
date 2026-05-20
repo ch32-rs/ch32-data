@@ -61,11 +61,11 @@ fieldset/CHBITS:
 fieldset/CLR:
   description: Batch unlock register.
   fields:
-  - name: match_PID
+  - name: MATCH_PID
     description: PID value to match against each locked channel's PID for batch unlock.
     bit_offset: 0
     bit_size: 8
-  - name: match_CID
+  - name: MATCH_CID
     description: CID value to match against each locked channel's CID for batch unlock.
     bit_offset: 8
     bit_size: 2
@@ -84,11 +84,11 @@ fieldset/CLR:
 fieldset/KEY:
   description: Unlock key and auto-clear control register.
   fields:
-  - name: auto_1step_clr
+  - name: AUTO_1STEP_CLR
     description: When set, a 1-step lock failure auto-clears the corresponding interrupt status bit.
     bit_offset: 0
     bit_size: 1
-  - name: auto_2step_clr
+  - name: AUTO_2STEP_CLR
     description: When set, a 2-step lock failure auto-clears the corresponding interrupt status bit.
     bit_offset: 1
     bit_size: 1

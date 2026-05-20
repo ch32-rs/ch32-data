@@ -492,7 +492,7 @@ fieldset/UEP5_6_MOD:
     description: enable USB endpoint 6 transmittal (IN).
     bit_offset: 6
     bit_size: 1
-  - name: UEP3_RX_EN
+  - name: UEP6_RX_EN
     description: enable USB endpoint 6 receiving (OUT).
     bit_offset: 7
     bit_size: 1
