@@ -99,6 +99,13 @@
   interrupts:
     - { signal: "GLOBAL", interrupt: "WWDG" }
 
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: v00x
+    block: IWDG
+
 - name: AFIO
   address: 0x40010000
   registers:
