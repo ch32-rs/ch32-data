@@ -13,6 +13,11 @@ block/ADC:
       description: control register 2.
       byte_offset: 8
       fieldset: CTLR2
+    # SAMPTR1 / IN10 (VCAL): undocumented in RM ch.9 but shown in chip block diagrams; verified on silicon.
+    - name: SAMPTR1
+      description: sample time register 1.
+      byte_offset: 12
+      fieldset: SAMPTR1
     - name: SAMPTR2
       description: sample time register 2.
       byte_offset: 16
@@ -329,6 +334,17 @@ fieldset/RSQR3:
       array:
         len: 6
         stride: 5
+fieldset/SAMPTR1:
+  description: sample time register 1.
+  fields:
+    - name: SMP
+      description: Channel 10 sample time selection.
+      bit_offset: 0
+      bit_size: 3
+      array:
+        len: 6
+        stride: 3
+      enum: SAMPLE_TIME
 fieldset/SAMPTR2:
   description: sample time register 2.
   fields:
