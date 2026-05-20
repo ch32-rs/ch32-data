@@ -81,6 +81,24 @@
   interrupts:
     - { signal: "PVD", interrupt: "PVD" }
 
+- name: WWDG
+  address: 0x40002C00
+  registers:
+    kind: wwdg
+    version: v00x
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: WWDGEN
+    reset:
+      register: PB1PRSTR
+      field: WWDGRST
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "WWDG" }
+
 - name: AFIO
   address: 0x40010000
   registers:
