@@ -106,6 +106,13 @@
     version: v00x
     block: IWDG
 
+- name: EXTEN
+  address: 0x40023800
+  registers:
+    kind: exten
+    version: v00x
+    block: EXTEN
+
 - name: AFIO
   address: 0x40010000
   registers:
