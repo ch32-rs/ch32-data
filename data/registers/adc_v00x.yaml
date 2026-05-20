@@ -13,6 +13,11 @@ block/ADC:
       description: control register 2.
       byte_offset: 8
       fieldset: CTLR2
+    # SAMPTR1 / IN10 (VCAL): undocumented in RM ch.9 but shown in chip block diagrams; verified on silicon.
+    - name: SAMPTR1
+      description: sample time register 1.
+      byte_offset: 12
+      fieldset: SAMPTR1
     - name: SAMPTR2
       description: sample time register 2.
       byte_offset: 16
@@ -72,25 +77,6 @@ block/ADC:
         stride: 4
       byte_offset: 84
       fieldset: WDTR
-block/TKEY:
-  extends: ADC
-  description: Touch key
-  items:
-    - name: TKEY_CHG
-      description: Charge time configuration register.
-      byte_offset: 0x3c
-      access: Write
-      fieldset: TKEY_CHG
-    - name: TKEY_DISCHG
-      description: Start and discharge time register.
-      byte_offset: 0x4c
-      access: Write
-      fieldset: TKEY_DISCHG
-    - name: TKEY_DR
-      description: Data register.
-      byte_offset: 0x4c
-      access: Read
-      fieldset: TKEY_DR
 fieldset/CTLR1:
   description: control register 1/TKEY_V_CTLR.
   fields:
@@ -329,6 +315,17 @@ fieldset/RSQR3:
       array:
         len: 6
         stride: 5
+fieldset/SAMPTR1:
+  description: sample time register 1.
+  fields:
+    - name: SMP
+      description: Channel 10 sample time selection.
+      bit_offset: 0
+      bit_size: 3
+      array:
+        len: 6
+        stride: 3
+      enum: SAMPLE_TIME
 fieldset/SAMPTR2:
   description: sample time register 2.
   fields:
@@ -388,28 +385,6 @@ fieldset/WDTR:
       description: Analog watchdog higher threshold setting value.
       bit_offset: 16
       bit_size: 12
-# TKEY part
-fieldset/TKEY_CHG:
-  description: Charge time configuration register.
-  fields:
-    - name: TKCHARGE
-      description: Touch key charge data offset for injected channel x.
-      bit_offset: 0
-      bit_size: 11
-fieldset/TKEY_DISCHG:
-  description: Start and discharge time register.
-  fields:
-    - name: TKACT_DCG
-      description: Touch key start and discharge time register.
-      bit_offset: 0
-      bit_size: 11
-fieldset/TKEY_DR:
-  description: Data register.
-  fields:
-    - name: DATA
-      description: Converted data.
-      bit_offset: 0
-      bit_size: 16
 enum/SAMPLE_TIME:
   bit_size: 3
   description: Sample time selection

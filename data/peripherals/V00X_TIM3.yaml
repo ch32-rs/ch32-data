@@ -1,0 +1,15 @@
+- name: TIM3
+  address: 0x40000800
+  registers:
+    kind: sltm
+    version: v00x
+    block: SLTM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: PB1PCENR
+      field: TIM3EN
+    reset:
+      register: PB1PRSTR
+      field: TIM3RST

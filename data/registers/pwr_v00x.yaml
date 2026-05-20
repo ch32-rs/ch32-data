@@ -1,0 +1,78 @@
+block/PWR:
+  description: Power control.
+  items:
+    - name: CTLR
+      description: power control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CSR
+      description: power control/status register.
+      byte_offset: 4
+      fieldset: CSR
+    - name: AWUCSR
+      description: auto-wakeup control/status register.
+      byte_offset: 8
+      fieldset: AWUCSR
+    - name: AWUWR
+      description: auto-wakeup window comparison value register.
+      byte_offset: 12
+      fieldset: AWUWR
+    - name: AWUPSC
+      description: auto-wakeup prescaler register.
+      byte_offset: 16
+      fieldset: AWUPSC
+fieldset/CTLR:
+  description: power control register.
+  fields:
+    - name: PDDS
+      description: Power-down deep sleep selection.
+      bit_offset: 1
+      bit_size: 1
+    - name: LDO_MODE
+      description: Voltage regulator operating mode.
+      bit_offset: 2
+      bit_size: 2
+    - name: PVDE
+      description: Power voltage detector enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: PLS
+      description: PVD voltage threshold selection.
+      bit_offset: 5
+      bit_size: 2
+    - name: FLASH_LP_REG
+      description: Flash low-power mode enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: FLASH_LP
+      description: Flash low-power configuration.
+      bit_offset: 10
+      bit_size: 2
+fieldset/CSR:
+  description: power control/status register.
+  fields:
+    - name: PVDO
+      description: PVD output flag.
+      bit_offset: 2
+      bit_size: 1
+fieldset/AWUCSR:
+  description: auto-wakeup control/status register.
+  fields:
+    - name: AWUEN
+      description: Auto-wakeup enable.
+      bit_offset: 1
+      bit_size: 1
+fieldset/AWUWR:
+  description: auto-wakeup window comparison value register.
+  fields:
+    - name: AWUWR
+      description: Auto-wakeup window value.
+      bit_offset: 0
+      bit_size: 6
+fieldset/AWUPSC:
+  description: auto-wakeup prescaler register.
+  fields:
+    - name: AWUPSC
+      description: Auto-wakeup counter prescaler.
+      bit_offset: 0
+      bit_size: 4

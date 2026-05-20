@@ -1,0 +1,51 @@
+block/WWDG:
+  description: Window watchdog.
+  items:
+    - name: CTLR
+      description: control register.
+      byte_offset: 0
+      bit_size: 16
+      fieldset: CTLR
+    - name: CFGR
+      description: configuration register.
+      byte_offset: 4
+      bit_size: 16
+      fieldset: CFGR
+    - name: STATR
+      description: status register.
+      byte_offset: 8
+      bit_size: 16
+      fieldset: STATR
+fieldset/CTLR:
+  description: control register.
+  fields:
+    - name: T
+      description: 7-bit counter (MSB to LSB).
+      bit_offset: 0
+      bit_size: 7
+    - name: WDGA
+      description: Activation bit.
+      bit_offset: 7
+      bit_size: 1
+fieldset/CFGR:
+  description: configuration register.
+  fields:
+    - name: W
+      description: 7-bit window value.
+      bit_offset: 0
+      bit_size: 7
+    - name: WDGTB
+      description: Timer base.
+      bit_offset: 7
+      bit_size: 2
+    - name: EWI
+      description: Early wakeup interrupt enable.
+      bit_offset: 9
+      bit_size: 1
+fieldset/STATR:
+  description: status register.
+  fields:
+    - name: EWIF
+      description: Early wakeup interrupt flag.
+      bit_offset: 0
+      bit_size: 1
