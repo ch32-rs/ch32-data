@@ -43,6 +43,7 @@ cores:
       - "../peripherals/V002_V006_TIM2.yaml"
       - "../peripherals/V00X_TIM3.yaml"
       - "../peripherals/V005_V006_OPA.yaml"
+      - "../peripherals/V006_V007_M007_TKEY.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V00X.yaml"
     include_interrupts: "../interrupts/CH32V00X.yaml"

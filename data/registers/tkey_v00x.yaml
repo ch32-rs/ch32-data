@@ -1,0 +1,39 @@
+block/TKEY:
+  description: Touch key. Aliases ADC IDATAR1/RDATAR when ADC TKENABLE=1; enable via ADC.
+  items:
+    - name: TKEY_CHG
+      description: charge time configuration register.
+      byte_offset: 0x3c
+      access: Write
+      fieldset: TKEY_CHG
+    - name: TKEY_DISCHG
+      description: start and discharge time register.
+      byte_offset: 0x4c
+      access: Write
+      fieldset: TKEY_DISCHG
+    - name: TKEY_DR
+      description: data register.
+      byte_offset: 0x4c
+      access: Read
+      fieldset: TKEY_DR
+fieldset/TKEY_CHG:
+  description: charge time configuration register.
+  fields:
+    - name: TKCHARGE
+      description: Touch key charge time.
+      bit_offset: 0
+      bit_size: 11
+fieldset/TKEY_DISCHG:
+  description: start and discharge time register.
+  fields:
+    - name: TKACT_DCG
+      description: Touch key start and discharge time.
+      bit_offset: 0
+      bit_size: 11
+fieldset/TKEY_DR:
+  description: data register.
+  fields:
+    - name: DATA
+      description: Converted data.
+      bit_offset: 0
+      bit_size: 16
