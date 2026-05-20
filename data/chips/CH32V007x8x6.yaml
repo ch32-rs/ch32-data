@@ -33,6 +33,7 @@ cores:
     peripherals: []
     include_peripherals:
       - "../family/CH32V00X.yaml"
+      - "../peripherals/V00X_USART2.yaml"
       - "../peripherals/V007_M007_TIM2.yaml"
       - "../peripherals/V00X_TIM3.yaml"
       - "../peripherals/V00X_OPA.yaml"

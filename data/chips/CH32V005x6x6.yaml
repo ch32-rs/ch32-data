@@ -39,6 +39,7 @@ cores:
     peripherals: []
     include_peripherals:
       - "../family/CH32V00X.yaml"
+      - "../peripherals/V00X_USART2.yaml"
       - "../peripherals/V002_V006_TIM2.yaml"
       - "../peripherals/V00X_OPA.yaml"
     include_dma_channels:
