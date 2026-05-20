@@ -7,7 +7,6 @@ device_id: 0
 keywords:
   - DUAL_CORE
   - USBHS
-
   - HSADC
   - SAI
   - I3C
