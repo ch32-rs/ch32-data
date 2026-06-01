@@ -1,0 +1,65 @@
+name: CH32V205RCT6
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: General-purpose
+product_type: QingKe V3B non-floating-point core, main frequency <= 192MHz
+device_id: 6666
+packages:
+  - name: CH32V205RCT6
+    package: LQFP64
+memory:
+  - name: BANK_1
+    kind: flash
+    address: 0
+    size: 262144
+    settings:
+      erase_size: 256
+      write_size: 256
+      erase_value: 255
+  - name: SRAM
+    kind: ram
+    address: 536870912
+    size: 32768
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32V205.html
+cores:
+  - name: qingke-v3b
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32V205.yaml"
+      - "../peripherals/V2x_DMA2.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
+      - "../peripherals/FV2x_V3x_USART3.yaml"
+      - "../peripherals/FV2x_V3x_USART4.yaml"
+      - "../peripherals/FV2x_V3x_USART5.yaml"
+      - "../peripherals/FV2x_V3x_USART678.yaml"
+      - "../peripherals/V2x_GPIOE.yaml"
+
+    include_interrupts: "../interrupts/CH32V2_Dx.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V3B_DMA1.yaml"
+      DMA2: "../dma/CH32V_V3B_DMA2.yaml"
+
+_raw:
+  WDOG: "2"
+  Flash: 256K
+  Touchkey: "16"
+  GPIO: "51"
+  IIC: "2"
+  RTC: "1"
+  USB_20: D+H/D
+  Part NO.: CH32V205RCT6
+  ADC: 1/16
+  Freq: 192MHz
+  Advanced TM: 1/3
+  SRAM: 32K
+  CAN: "1"
+  UART: "8"
+  OPA: "2"
+  SPI: "2"
+  url: http://www.wch.cn/products/CH32V205.html
+  VDD: 1.8/3.3
+  Package: LQFP64
