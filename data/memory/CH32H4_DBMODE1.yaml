@@ -1,0 +1,32 @@
+include_memory: CH32H4.yaml
+memory:
+  - name: USR_1
+    kind: flash
+    address: 0x08000000
+    size: 960K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 8K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: SYS_1
+    kind: flash
+    address: 0x1FFF0000
+    size: 56K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 8K
+        write_size: 2
+    access:
+      read: true
+      write: false
+      execute: true
