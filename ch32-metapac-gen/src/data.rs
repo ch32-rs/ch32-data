@@ -1,3 +1,5 @@
+use std::collections::BTreeMap;
+
 use ch32_data_macros::EnumDebug;
 use serde::Deserialize;
 
@@ -298,7 +300,25 @@ pub struct Chip {
     pub subfamily: String,
     pub cores: Vec<Core>,
     pub memory: Vec<MemoryRegion>,
+    #[serde(default)]
+    pub memory_sizes: BTreeMap<String, u32>,
+    #[serde(default)]
+    pub memory_ram_code_config: Option<MemoryRamCodeConfig>,
     pub packages: Vec<Package>,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct MemoryRamCodeConfig {
+    pub total_flash: u32,
+    pub default: String,
+    pub configs: Vec<MemoryRamCodeOption>,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct MemoryRamCodeOption {
+    pub name: String,
+    pub code: u32,
+    pub ram: u32,
 }
 
 // Notice:
@@ -310,28 +330,134 @@ pub struct MemoryRegion {
     pub kind: MemoryRegionKind,
     pub address: u32,
     pub size: u32,
-    pub settings: Option<FlashSettings>,
+    #[serde(default)]
+    pub modes: Vec<Mode>,
+    #[serde(default)]
+    pub access: Option<Access>,
+    #[serde(default)]
+    pub structs: Vec<NvStruct>,
+}
+
+impl MemoryRegion {
+    pub fn role(&self) -> MemoryRole {
+        MemoryRole::from_name(&self.name)
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+pub enum MemoryRole {
+    Application,
+    System,
+    OptionBytes,
+    Vendor,
+    Ram,
+    Tcm,
+}
+
+impl MemoryRole {
+    pub fn from_name(name: &str) -> Self {
+        if name.starts_with("USR_") {
+            MemoryRole::Application
+        } else if name.starts_with("SYS_") {
+            MemoryRole::System
+        } else if name == "OPT" {
+            MemoryRole::OptionBytes
+        } else if name == "VND" {
+            MemoryRole::Vendor
+        } else if name == "ITCM" || name == "DTCM" {
+            MemoryRole::Tcm
+        } else if name == "RAM" || name == "SRAM_SHARED" {
+            MemoryRole::Ram
+        } else {
+            panic!("memory region {name:?} has no known role mapping — extend MemoryRole::from_name")
+        }
+    }
 }
 
 // Notice:
-// Debug implement AFFECT OUTPUT METAPAC, modify with caution
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution.
+// `structs` is intentionally omitted — emitted separately as `NvStructBinding`
+// to keep `&'static ir::IR` behind the `metadata` feature gate.
 impl std::fmt::Debug for MemoryRegion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("MemoryRegion")
             .field("name", &self.name)
             .field("kind", &self.kind)
+            .field("role", &self.role())
             .field("address", &format_args!("{:#x}", self.address))
             .field("size", &self.size)
-            .field("settings", &self.settings)
+            .field("modes", &self.modes)
+            .field("access", &self.access)
+            .finish()
+    }
+}
+
+// Notice:
+// NvStruct has custom Debug implement,
+// when modify struct, make sure Debug impl reflect the change.
+#[derive(Eq, PartialEq, Clone, Deserialize)]
+pub struct NvStruct {
+    pub name: String,
+    pub offset: u32,
+    pub kind: String,
+    pub version: String,
+    pub block: String,
+    #[serde(default)]
+    pub defaults: BTreeMap<String, u32>,
+    #[serde(default)]
+    pub ir: String,
+}
+
+// Notice:
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution
+impl std::fmt::Debug for NvStruct {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let defaults: Vec<(&str, &u32)> =
+            self.defaults.iter().map(|(k, v)| (k.as_str(), v)).collect();
+        f.debug_struct("NvStruct")
+            .field("name", &self.name)
+            .field("offset", &format_args!("{:#x}", self.offset))
+            .field("kind", &self.kind)
+            .field("version", &self.version)
+            .field("block", &self.block)
+            .field("defaults", &defaults)
+            .field("ir", &self.ir)
             .finish()
     }
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
-pub struct FlashSettings {
-    pub erase_size: u32,
-    pub write_size: u32,
-    pub erase_value: u8,
+#[serde(tag = "type", rename_all = "lowercase")]
+pub enum Mode {
+    Fast { page_size: u32, load_size: u32 },
+    Standard { erase_size: u32, write_size: u32 },
+}
+
+// Notice:
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution
+// (only `name` and `region_sizes` are surfaced to runtime metadata; `region_addresses`
+// is codegen-internal and applied in memory_for_option)
+#[derive(Eq, PartialEq, Clone)]
+pub struct MemoryOption {
+    pub name: String,
+    pub region_sizes: Vec<(String, u32)>,
+    pub region_addresses: Vec<(String, u32)>,
+}
+
+impl std::fmt::Debug for MemoryOption {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MemoryOption")
+            .field("name", &self.name)
+            .field("region_sizes", &self.region_sizes)
+            .finish()
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct Access {
+    pub read: bool,
+    pub write: bool,
+    pub execute: bool,
 }
 
 #[derive(EnumDebug, Eq, PartialEq, Clone, Deserialize)]
@@ -342,9 +468,17 @@ pub enum MemoryRegionKind {
     Ram,
 }
 
+#[derive(Copy, Debug, Eq, PartialEq, Clone, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Arch {
+    Riscv,
+    Arm,
+}
+
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 pub struct Core {
     pub name: String,
+    pub arch: Arch,
     pub peripherals: Vec<Peripheral>,
     #[serde(default)]
     //pub nvic_priority_bits: Option<u8>,

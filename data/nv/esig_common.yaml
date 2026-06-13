@@ -1,0 +1,20 @@
+block/ESIG:
+  description: Factory-programmed chip identity — flash size and 96-bit unique device ID.
+  items:
+    - name: FLACAP
+      description: Total flash size, in KiB.
+      byte_offset: 0
+      bit_size: 16
+      access: Read
+    - name: UNIID1
+      description: Unique device ID — bits 0-31 of the 96-bit identifier.
+      byte_offset: 8
+      access: Read
+    - name: UNIID2
+      description: Unique device ID — bits 32-63 of the 96-bit identifier.
+      byte_offset: 12
+      access: Read
+    - name: UNIID3
+      description: Unique device ID — bits 64-95 of the 96-bit identifier.
+      byte_offset: 16
+      access: Read

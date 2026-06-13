@@ -1,28 +1,22 @@
 # CH32V007E8R6 62K 8K 22 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QSOP24
-# CH32V007F8U6 62K 8K 19 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QFN20
+# CH32V007K8U6 62K 8K 19 1 1 1 2 8+3 8路 1 √ 2 2 1 1 QFN20
 name: CH32V007
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3343616
+# Note: the 0x007 family is shared with CH32M007.
 packages:
   - name: CH32V007E8R6
     package: QSOP24
-  - name: CH32V007F8U6
+    device_id: 0x00710600
+  # Package name corrected from F8U6 to K8U6 per openwch/ch32v002_004_005_006_007
+  # EVT: ch32v00X_dbgmcu.c comment and ch32v00X_gpio.c runtime switch both
+  # confirm 0x00720600 is CH32V007K8U6.
+  - name: CH32V007K8U6
     package: QFN20
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 63488 # 62K
-    settings:
-      erase_size: 1024
-      write_size: 64
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 8192 # 8K
+    device_id: 0x00720600
+include_memory: ../memory/CH32V00X.yaml
+memory_sizes: { USR_1: 62K, RAM: 8K }
 docs:
   - type: homepage
     title: Homepage
@@ -30,6 +24,7 @@ docs:
     url: http://www.wch.cn/products/CH32V007.html
 cores:
   - name: qingke-v2c
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32V00X.yaml"

@@ -125,6 +125,14 @@ fieldset/CTLR:
     description: Flash SCK mode.
     bit_offset: 25
     bit_size: 1
+  - name: BTPG
+    description: Undocumented; OR with PAGE_PG and PGSTART to program the BOOT region (0x1FFF8000). Guessed name.
+    bit_offset: 29
+    bit_size: 1
+  - name: BTER
+    description: Undocumented; OR with PER (not PAGE_ER) for 4 KB erase of the BOOT region (0x1FFF8000). Guessed name.
+    bit_offset: 30
+    bit_size: 1
 fieldset/KEYR:
   description: Flash key register.
   fields:
@@ -147,30 +155,33 @@ fieldset/OBKEYR:
     bit_offset: 0
     bit_size: 32
 fieldset/OBR:
-  description: Option byte register.
+  description: Option byte register — read-only mirror of the Option Bytes loaded from flash at reset.
   fields:
   - name: OBERR
-    description: Option byte error.
+    description: Option byte integrity error — a value/complement pair did not match when loading.
     bit_offset: 0
     bit_size: 1
   - name: RDPRT
-    description: Read protection.
+    description: Read protection is currently active.
     bit_offset: 1
     bit_size: 1
   - name: IWDG_SW
-    description: IWDG_SW.
+    description: Independent watchdog start mode currently in effect.
     bit_offset: 2
     bit_size: 1
+    enum: IwdgMode
   - name: STOP_RST
-    description: STOP_RST.
+    description: Stop-mode reset behavior currently in effect.
     bit_offset: 3
     bit_size: 1
+    enum: PowerModeReset
   - name: STANDY_RST
-    description: STANDY_RST.
+    description: Standby-mode reset behavior currently in effect.
     bit_offset: 4
     bit_size: 1
+    enum: PowerModeReset
   - name: SRAM_CODE_MODE
-    description: SRAM_CODE_MODE.
+    description: SRAM/CODE allocation currently in effect. Mirrors the upper two bits of OB.USER.RAM_CODE; the variant table is chip-specific (V2 D8/D8W vs V3 high-memory). On V3 parts the 110/111 OB encodings are not distinguishable here — read OB.USER.RAM_CODE directly to tell them apart.
     bit_offset: 8
     bit_size: 2
 fieldset/STATR:
@@ -203,3 +214,23 @@ fieldset/WPR:
     description: Write protect.
     bit_offset: 0
     bit_size: 32
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1

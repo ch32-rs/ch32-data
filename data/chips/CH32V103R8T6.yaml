@@ -2,23 +2,14 @@ name: CH32V103R8T6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
-device_id: 536887567
 packages:
   - name: CH32V103R8T6
     package: LQFP64M
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 65536
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 20480
+    # TODO: wlink is wrong (lists 0x2000410F as F103R8T6), update wlink.
+    # Verified against openwch/ch32v103 EVT ch32v10x_dbgmcu.c GetCHIPID comment.
+    device_id: 0x2500410F
+include_memory: ../memory/CH32V1.yaml
+memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
@@ -26,6 +17,7 @@ docs:
     url: http://www.wch.cn/products/CH32V103.html
 cores:
   - name: qingke-v3
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32V1.yaml"

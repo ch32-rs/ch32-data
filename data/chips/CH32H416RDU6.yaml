@@ -2,8 +2,6 @@ name: CH32H416RDU6
 family: CH32H4 (QingKe RISC-V dual-core, high-end)
 subfamily: Dual-core V3F+V5F, USB 3.0, 480K Flash variant, 60-pin QFN
 product_type: QingKe V3F (control, hart 0) + V5F (compute, hart 1, FP)
-# FIXME: device_id placeholder; refresh from flash IAP doc when available.
-device_id: 0
 keywords:
   - DUAL_CORE
   - USBHS
@@ -15,27 +13,8 @@ keywords:
 packages:
   - name: CH32H416RDU6
     package: QFN60
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 491520
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: ITCM
-    kind: ram
-    address: 0x200A0000
-    size: 131072
-  - name: DTCM
-    kind: ram
-    address: 0x200C0000
-    size: 262144
-  - name: SRAM_SHARED
-    kind: ram
-    address: 0x20100000
-    size: 524288
+    device_id: 0x4160050D
+include_memory: ../memory/CH32H4_DBMODE0.yaml
 docs:
   - type: homepage
     title: Homepage
@@ -43,6 +22,7 @@ docs:
     url: http://www.wch.cn/products/CH32H416.html
 cores:
   - name: qingke-v3f
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32H4.yaml"
@@ -51,6 +31,7 @@ cores:
       - "../peripherals/H4_USBPD.yaml"
     include_interrupts: "../interrupts/CH32H4.yaml"
   - name: qingke-v5f
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32H4.yaml"

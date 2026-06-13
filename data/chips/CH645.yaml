@@ -2,7 +2,6 @@ name: CH645
 family: QingKe RISC-V-based MCU
 subfamily: USB Multi-Function MCU
 product_type: QingKe V4C core
-device_id: 1680867328 # 0x65000000
 keywords:
   - SDIO
   - ETH
@@ -10,8 +9,11 @@ keywords:
 packages:
   - name: CH645W
     package: QFN68
+    device_id: 0x0
   - name: CH645F
     package: QFN32
+    device_id: 0x0
+# TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1
     kind: flash
@@ -33,6 +35,7 @@ docs:
     url: https://www.wch.cn/products/CH645.html
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals:
 
     interrupts:

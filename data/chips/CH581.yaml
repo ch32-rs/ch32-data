@@ -2,10 +2,11 @@ name: CH581
 family: QingKe RISC-V-based, BLE MCU
 subfamily: RISC-V Core BLE5.3 Wireless MCU
 product_type: QingKe V4A core, BLE
-device_id: 2164260864
 packages:
   - name: CH581F
     package: QFN28
+    device_id: 0x81000000
+# TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1
     kind: flash
@@ -26,6 +27,7 @@ docs:
     url: http://www.wch.cn/products/CH583.html
 cores:
   - name: qingke-v4
+    arch: riscv
     peripherals:
 
     interrupts:

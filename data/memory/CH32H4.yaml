@@ -1,0 +1,62 @@
+memory:
+  - name: OPT
+    kind: flash
+    address: 0x1FFFF800
+    size: 256
+    modes:
+      - type: standard
+        erase_size: 256
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: h4
+        block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0xFF
+          NUSER: 0x00
+  - name: VND
+    kind: flash
+    address: 0x1FFFF700
+    size: 256
+    access:
+      read: true
+      write: false
+      execute: false
+    structs:
+      - name: ESIG
+        offset: 0xE0
+        kind: esig
+        version: common
+        block: ESIG
+  - name: ITCM
+    kind: ram
+    address: 0x200A0000
+    size: 128K
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: DTCM
+    kind: ram
+    address: 0x200C0000
+    size: 256K
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: SRAM_SHARED
+    kind: ram
+    address: 0x20100000
+    size: 512K
+    access:
+      read: true
+      write: true
+      execute: true

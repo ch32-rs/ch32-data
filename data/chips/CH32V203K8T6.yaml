@@ -2,23 +2,12 @@ name: CH32V203K8T6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4 non-floating-point core, enhanced version, main frequency <= 144M
-device_id: 540148992
 packages:
   - name: CH32V203K8T6
     package: LQFP32
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 65536
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 20480
+    device_id: 0x20320500
+include_memory: ../memory/CH32V2_X8.yaml
+memory_sizes: { USR_1: 64K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
@@ -26,6 +15,7 @@ docs:
     url: http://www.wch.cn/products/CH32V203.html
 cores:
   - name: qingke-v4b
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32V2.yaml"

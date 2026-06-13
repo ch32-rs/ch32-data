@@ -2,14 +2,17 @@ name: CH573
 family: QingKe RISC-V-based, BLE MCU
 subfamily: RISC-V Core BLE Wireless MCU
 product_type: QingKe V3A core, BLE
-device_id: 1929379840
 packages:
   - name: CH573X
     package: QFN32
+    device_id: 0x73000000
   - name: CH573F
     package: QFN28
+    device_id: 0x73000000
   - name: CH573Q
     package: LQFP32
+    device_id: 0x73000000
+# TODO: convert to rich memory layout (include_memory + modes/access) when this chip is enabled in the build.
 memory:
   - name: BANK_1
     kind: flash
@@ -30,6 +33,7 @@ docs:
     url: http://www.wch.cn/products/CH573.html
 cores:
   - name: qingke-v4
+    arch: riscv
     peripherals:
 
     interrupts:

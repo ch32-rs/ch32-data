@@ -154,38 +154,42 @@ fieldset/OBKEYR:
     bit_offset: 0
     bit_size: 32
 fieldset/OBR:
-  description: Option byte register.
+  description: Option byte register — read-only mirror of the Option Bytes loaded from flash at reset.
   fields:
   - name: OBERR
-    description: Option byte error.
+    description: Option byte integrity error — a value/complement pair did not match when loading.
     bit_offset: 0
     bit_size: 1
   - name: RDPRT
-    description: Read protection.
+    description: Read protection is currently active.
     bit_offset: 1
     bit_size: 1
   - name: IWDG_SW
-    description: IWDG_SW.
+    description: Independent watchdog start mode currently in effect.
     bit_offset: 2
     bit_size: 1
+    enum: IwdgMode
   - name: STANDY_RST
-    description: STANDY_RST.
+    description: Standby-mode reset behavior currently in effect.
     bit_offset: 4
     bit_size: 1
-  - name: CFGRSTT
-    description: Config reset delay time.
+    enum: PowerModeReset
+  - name: RST_MODE
+    description: NRST pin mode currently in effect.
     bit_offset: 5
     bit_size: 2
+    enum: RstPinMode
   - name: STATR_MODE
-    description: "Power-on startup mode: 1: Startup from BOOT area; 0: Startup from user area."
+    description: Power-on boot source currently in effect — loaded from OB.USER.START_MODE; copied into STATR.MODE (bit 14) at reset.
     bit_offset: 7
     bit_size: 1
+    enum: BootMode
   - name: DATA0
-    description: DATA0.
+    description: Free user data byte 0, mirrored from OB.DATA0.
     bit_offset: 10
     bit_size: 8
   - name: DATA1
-    description: DATA1.
+    description: Free user data byte 1, mirrored from OB.DATA1.
     bit_offset: 18
     bit_size: 8
 fieldset/STATR:
@@ -234,3 +238,49 @@ fieldset/WPR:
     description: Write protect.
     bit_offset: 0
     bit_size: 32
+enum/IwdgMode:
+  description: When the independent watchdog turns on after reset.
+  bit_size: 1
+  variants:
+    - name: HARDWARE
+      description: Watchdog starts automatically at power-on.
+      value: 0
+    - name: SOFTWARE
+      description: Watchdog stays off until software enables it.
+      value: 1
+enum/PowerModeReset:
+  description: Whether entering a low-power mode triggers a system reset.
+  bit_size: 1
+  variants:
+    - name: RESET
+      description: Reset the chip on entering the mode.
+      value: 0
+    - name: NO_RESET
+      description: Keep running on entering the mode.
+      value: 1
+enum/RstPinMode:
+  description: NRST pin behavior at power-on.
+  bit_size: 2
+  variants:
+    - name: NRST_128US
+      description: Enable NRST with a 128us glitch-filter window at power-on.
+      value: 0b00
+    - name: NRST_1MS
+      description: Enable NRST with a 1ms glitch-filter window at power-on.
+      value: 0b01
+    - name: NRST_12MS
+      description: Enable NRST with a 12ms glitch-filter window at power-on.
+      value: 0b10
+    - name: GPIO
+      description: Disable NRST and use PD7 as a general-purpose I/O.
+      value: 0b11
+enum/BootMode:
+  description: Which flash region the chip boots from at power-on.
+  bit_size: 1
+  variants:
+    - name: USER_FLASH
+      description: Boot from user application flash.
+      value: 0
+    - name: SYSTEM_FLASH
+      description: Boot from the WCH ISP bootloader in system flash.
+      value: 1

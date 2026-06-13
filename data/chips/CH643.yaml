@@ -2,31 +2,23 @@ name: CH643
 family: QingKe RISC-V-based MCU
 subfamily: RGB Display Driver MCU
 product_type: QingKe V4C core
-device_id: 1680867328
 keywords:
   - LEDPWM
 packages:
   - name: CH643W
     package: QFN80
+    device_id: 0x64300601
   - name: CH643Q
     package: LQFP64
+    device_id: 0x64310601
   - name: CH643L
     package: LQFP48
+    device_id: 0x64330601
   - name: CH643U
     package: QSOP28
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 63488
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 20480
+    device_id: 0x64340601
+include_memory: ../memory/CH32X0.yaml
+memory_sizes: { USR_1: 62K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
@@ -34,6 +26,7 @@ docs:
     url: http://www.wch.cn/products/CH643.html
 cores:
   - name: qingke-v4c
+    arch: riscv
     peripherals:
     include_peripherals:
       - "../family/CH643.yaml"

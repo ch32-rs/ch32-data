@@ -1,5 +1,6 @@
 use std::{collections::HashMap, path::Path};
 
+mod nv_descriptors;
 mod dma;
 mod registers;
 
@@ -64,6 +65,10 @@ fn main() -> anyhow::Result<()> {
     let registers = registers::Registers::parse()?;
     registers.write()?;
 
+    stopwatch.section("Parsing NV descriptors");
+    let nv_descriptors = nv_descriptors::NvDescriptors::parse()?;
+    nv_descriptors.write()?;
+
     stopwatch.section("Parsing chips");
 
     let data_dir = Path::new("./data");
@@ -84,6 +89,8 @@ fn main() -> anyhow::Result<()> {
         let meta_yaml_path = data_dir.join(&format!("chips/{}.yaml", name));
         let content = std::fs::read_to_string(&meta_yaml_path)?;
         let mut chip: ch32_data_serde::Chip = serde_yaml::from_str(&content)?;
+
+        resolve_memory(&meta_yaml_path, &mut chip)?;
 
         // handle include_x
         for core in &mut chip.cores {
@@ -163,4 +170,10 @@ fn main() -> anyhow::Result<()> {
     stopwatch.stop();
 
     Ok(())
+}
+
+fn resolve_memory(meta_yaml_path: &Path, chip: &mut ch32_data_serde::Chip) -> anyhow::Result<()> {
+    let base_dir = meta_yaml_path.parent().unwrap();
+    chip.resolve_memory(base_dir, |abs_path| std::fs::read_to_string(abs_path))
+        .map_err(|msg| anyhow::anyhow!("{}", msg))
 }

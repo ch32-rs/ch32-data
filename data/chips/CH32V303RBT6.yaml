@@ -2,25 +2,14 @@ name: CH32V303RBT6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V4F floating-point core, main frequency <= 144M
-device_id: 808584452
 keywords:
   - CAN
 packages:
   - name: CH32V303RBT6
     package: LQFP64M
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 131072
-    settings:
-      erase_size: 1024
-      write_size: 256
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 32768
+    device_id: 0x30320504
+include_memory: ../memory/CH32V3_XB.yaml
+memory_sizes: { USR_1: 128K, RAM: 32K }
 docs:
   - type: homepage
     title: Homepage
@@ -28,6 +17,7 @@ docs:
     url: http://www.wch.cn/products/CH32V303.html
 cores:
   - name: qingke-v4f
+    arch: riscv
     peripherals:
       - name: RCC
         address: 0x40021000

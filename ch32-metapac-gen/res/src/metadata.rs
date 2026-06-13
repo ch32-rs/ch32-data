@@ -121,38 +121,47 @@ pub mod ir {
     }
 }
 
+pub use crate::mem_layout::{Access, MemoryRegion, MemoryRegionKind, MemoryRole, Mode};
+
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct Metadata {
     pub name: &'static str,
     pub family: &'static str,
     pub line: &'static str,
     pub memory: &'static [MemoryRegion],
+    pub nv_structs: &'static [NvStructBinding],
+    pub memory_options: &'static [MemoryOption],
+    pub default_memory_option: &'static str,
     pub peripherals: &'static [Peripheral],
     // pub nvic_priority_bits: Option<u8>,
     pub interrupts: &'static [Interrupt],
     pub dma_channels: &'static [DmaChannel],
 }
 
+/// Binds `NvStruct` descriptors to a memory region by name. Split from
+/// `MemoryRegion` so the always-available `mem_layout` module stays free of
+/// `&'static ir::IR` references.
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct MemoryRegion {
+pub struct NvStructBinding {
+    pub region: &'static str,
+    pub structs: &'static [NvStruct],
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct MemoryOption {
     pub name: &'static str,
-    pub kind: MemoryRegionKind,
-    pub address: u32,
-    pub size: u32,
-    pub settings: Option<FlashSettings>,
+    pub region_sizes: &'static [(&'static str, u32)],
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct FlashSettings {
-    pub erase_size: u32,
-    pub write_size: u32,
-    pub erase_value: u8,
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub enum MemoryRegionKind {
-    Flash,
-    Ram,
+pub struct NvStruct {
+    pub name: &'static str,
+    pub offset: u32,
+    pub kind: &'static str,
+    pub version: &'static str,
+    pub block: &'static str,
+    pub defaults: &'static [(&'static str, u32)],
+    pub ir: &'static ir::IR,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]

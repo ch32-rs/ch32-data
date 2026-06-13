@@ -1,0 +1,25 @@
+include_memory: CH32V2_V3.yaml
+memory:
+  - name: OPT
+    kind: flash
+    address: 0x1FFFF800
+    size: 128
+    modes:
+      - type: standard
+        erase_size: 128
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: v2_ram_code
+        block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0x1F
+          NUSER: 0xE0

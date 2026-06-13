@@ -2,31 +2,23 @@ name: CH32V003
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: General-purpose
 product_type: QingKe V2/V4 core, great value version, main frequency <= 48M
-device_id: 3343616
 packages:
   # no SPI
   - name: CH32V003J4M6
     package: SOP8
+    device_id: 0x00330500
   # no SPI
   - name: CH32V003A4M6
     package: SOP16
+    device_id: 0x00320500
   - name: CH32V003F4U6
     package: QFN20
+    device_id: 0x00310500
   - name: CH32V003F4P6
     package: TSSOP20
-memory:
-  - name: BANK_1
-    kind: flash
-    address: 0
-    size: 16384
-    settings:
-      erase_size: 1024
-      write_size: 64
-      erase_value: 255
-  - name: SRAM
-    kind: ram
-    address: 536870912
-    size: 2048
+    device_id: 0x00300500
+include_memory: ../memory/CH32V003.yaml
+memory_sizes: { USR_1: 16K, RAM: 2K }
 docs:
   - type: homepage
     title: Homepage
@@ -34,6 +26,7 @@ docs:
     url: http://www.wch.cn/products/CH32V003.html
 cores:
   - name: qingke-v2a
+    arch: riscv
     peripherals: []
     include_peripherals:
       - "../family/CH32V003.yaml"
