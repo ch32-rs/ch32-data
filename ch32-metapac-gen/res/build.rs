@@ -1,5 +1,4 @@
 use std::env;
-#[cfg(any(feature = "rt", feature = "memory-x"))]
 use std::path::PathBuf;
 
 // shared with the dump-memory-x dev tool; copied next to build.rs by ch32-metapac-gen
@@ -29,7 +28,6 @@ impl<T: Iterator> IteratorExt for T {
 }
 
 fn main() {
-    #[cfg(any(feature = "rt", feature = "memory-x"))]
     let crate_dir = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
 
     let chip_core_name = match env::vars()
@@ -46,6 +44,8 @@ fn main() {
     .to_ascii_lowercase()
     .replace('_', "-");
 
+    let option = resolve_memory_option(&crate_dir, &chip_core_name);
+
     #[cfg(feature = "rt")]
     println!(
         "cargo:rustc-link-search={}/src/chips/{}",
@@ -55,7 +55,6 @@ fn main() {
 
     #[cfg(feature = "memory-x")]
     {
-        let option = resolve_memory_option(&crate_dir, &chip_core_name);
         let regions_path = crate_dir
             .join("src/chips")
             .join(&chip_core_name)
@@ -82,6 +81,19 @@ fn main() {
         println!("cargo:rustc-link-search={}", out_dir.display());
         println!("cargo:rerun-if-changed={}", regions_path.display());
     }
+
+    let memory_rs_path = crate_dir
+        .join("src/chips")
+        .join(&chip_core_name)
+        .join("memory_x")
+        .join(&option)
+        .join("memory.rs");
+    println!(
+        "cargo:rustc-env=CH32_METAPAC_MEMORY_PATH={}",
+        memory_rs_path.display()
+    );
+    println!("cargo:rerun-if-changed={}", memory_rs_path.display());
+
     println!(
         "cargo:rustc-env=CH32_METAPAC_PAC_PATH=chips/{}/pac.rs",
         chip_core_name
@@ -94,7 +106,6 @@ fn main() {
     println!("cargo:rerun-if-changed=build.rs");
 }
 
-#[cfg(feature = "memory-x")]
 fn resolve_memory_option(crate_dir: &std::path::Path, chip_core_name: &str) -> String {
     let explicit: Vec<String> = env::vars()
         .map(|(a, _)| a)

@@ -10,9 +10,7 @@ use regex::Regex;
 
 use crate::data::{Arch, Chip, Core, MemoryOption};
 use crate::dump::split_prefixes_from_names;
-use crate::memory::{
-    flash_write_size, gen_memory_files, memory_select_cfg_attrs, primary_flash_regions,
-};
+use crate::memory::{flash_write_size, gen_memory_files, primary_flash_regions};
 use crate::{gen_opts, stringify, Gen};
 
 fn build_chiptool_ir(
@@ -111,8 +109,7 @@ fn build_chiptool_ir(
     assert_eq!(1, write_sizes.len());
     let write_size = *write_sizes.iter().next().unwrap();
 
-    let deprecation_note =
-        "use ch32_metapac::metadata::METADATA.memory (enable the `metadata` feature) instead";
+    let deprecation_note = "use ch32_metapac::MEMORY_LAYOUT instead";
     writeln!(
         &mut extra,
         "#[deprecated(note = \"{}\")]\n\
@@ -132,6 +129,13 @@ fn build_chiptool_ir(
         "#[deprecated(note = \"{}\")]\n\
          pub const WRITE_SIZE: usize = {};",
         deprecation_note, write_size,
+    )
+    .unwrap();
+
+    writeln!(
+        &mut extra,
+        "pub const MEMORY_LAYOUT: crate::mem_layout::MemoryLayout = \
+         crate::mem_layout::MemoryLayout {{ regions: crate::memory_select::MEMORY }};",
     )
     .unwrap();
 
@@ -282,17 +286,18 @@ fn render_metadata_rs(
         file
     });
 
-    let memory_select_attrs = memory_select_cfg_attrs(memory_options, default_memory_option);
+    let (nv_imports, nv_structs_literal) = render_nv_structs(chip);
 
     format!(
         "include!(\"../{}\");
             use crate::metadata::PeripheralRccKernelClock::{{Clock, Mux}};
-{}            mod memory_select;
+{}            pub static NV_STRUCTS: &[NvStructBinding] = {};
             pub static METADATA: Metadata = Metadata {{
                 name: {:?},
                 family: {:?},
                 line: {:?},
-                memory: memory_select::MEMORY,
+                memory: crate::memory_select::MEMORY,
+                nv_structs: NV_STRUCTS,
                 memory_options: {},
                 default_memory_option: {:?},
                 peripherals: PERIPHERALS,
@@ -301,13 +306,64 @@ fn render_metadata_rs(
                 dma_channels: DMA_CHANNELS,
             }};",
         deduped_file,
-        memory_select_attrs,
+        nv_imports,
+        nv_structs_literal,
         &chip.name,
         &chip.family,
         &chip.subfamily,
         stringify(memory_options),
         default_memory_option,
     )
+}
+
+// Returns (imports_block, structs_literal) for the per-chip metadata.rs.
+// Both pieces are empty / `&[]` when the chip has no NV structs.
+fn render_nv_structs(chip: &Chip) -> (String, String) {
+    let mut nv_kinds: BTreeMap<String, String> = BTreeMap::new();
+    let mut bindings = String::new();
+    for region in &chip.memory {
+        if region.structs.is_empty() {
+            continue;
+        }
+        for s in &region.structs {
+            if let Some(prev) = nv_kinds.insert(s.kind.clone(), s.version.clone()) {
+                assert_eq!(
+                    prev, s.version,
+                    "NV kind {} bound at multiple versions in one chip",
+                    s.kind
+                );
+            }
+        }
+        write!(
+            &mut bindings,
+            "            NvStructBinding {{ region: {:?}, structs: {} }},\n",
+            region.name,
+            stringify(&region.structs),
+        )
+        .unwrap();
+    }
+
+    if nv_kinds.is_empty() {
+        return (String::new(), "&[]".to_string());
+    }
+
+    let mut imports = String::new();
+    for (kind, version) in &nv_kinds {
+        writeln!(
+            &mut imports,
+            "            #[path=\"../../registers/{}_{}.rs\"] pub mod nv_{};",
+            kind, version, kind
+        )
+        .unwrap();
+    }
+
+    let literal = format!("&[\n{}        ]", bindings);
+    let ir_regex = Regex::new("\":ir_for:([a-z0-9]+):\"").unwrap();
+    let literal = ir_regex
+        .replace_all(&literal, "&nv_$1::DESCRIPTOR")
+        .into_owned();
+
+    (imports, literal)
 }
 
 impl Gen {

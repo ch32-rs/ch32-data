@@ -156,6 +156,11 @@ impl Gen {
             include_bytes!("../res/src/metadata.rs"),
         )
         .unwrap();
+        fs::write(
+            self.opts.out_dir.join("src/mem_layout.rs"),
+            include_bytes!("../res/src/mem_layout.rs"),
+        )
+        .unwrap();
         // drop stale single-file nv.rs from earlier layout
         let _ = fs::remove_file(self.opts.out_dir.join("src/nv.rs"));
         let nv_dir = self.opts.out_dir.join("src/nv");

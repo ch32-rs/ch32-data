@@ -338,18 +338,56 @@ pub struct MemoryRegion {
     pub structs: Vec<NvStruct>,
 }
 
+impl MemoryRegion {
+    pub fn role(&self) -> MemoryRole {
+        MemoryRole::from_name(&self.name)
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+pub enum MemoryRole {
+    Application,
+    System,
+    OptionBytes,
+    Vendor,
+    Ram,
+    Tcm,
+}
+
+impl MemoryRole {
+    pub fn from_name(name: &str) -> Self {
+        if name.starts_with("USR_") {
+            MemoryRole::Application
+        } else if name.starts_with("SYS_") {
+            MemoryRole::System
+        } else if name == "OPT" {
+            MemoryRole::OptionBytes
+        } else if name == "VND" {
+            MemoryRole::Vendor
+        } else if name == "ITCM" || name == "DTCM" {
+            MemoryRole::Tcm
+        } else if name == "RAM" || name == "SRAM_SHARED" {
+            MemoryRole::Ram
+        } else {
+            panic!("memory region {name:?} has no known role mapping — extend MemoryRole::from_name")
+        }
+    }
+}
+
 // Notice:
-// Debug implement AFFECT OUTPUT METAPAC, modify with caution
+// Debug implement AFFECT OUTPUT METAPAC, modify with caution.
+// `structs` is intentionally omitted — emitted separately as `NvStructBinding`
+// to keep `&'static ir::IR` behind the `metadata` feature gate.
 impl std::fmt::Debug for MemoryRegion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("MemoryRegion")
             .field("name", &self.name)
             .field("kind", &self.kind)
+            .field("role", &self.role())
             .field("address", &format_args!("{:#x}", self.address))
             .field("size", &self.size)
             .field("modes", &self.modes)
             .field("access", &self.access)
-            .field("structs", &self.structs)
             .finish()
     }
 }

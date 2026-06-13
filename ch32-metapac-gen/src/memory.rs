@@ -1,9 +1,6 @@
-use std::collections::BTreeMap;
 use std::fmt::Write as _;
 use std::fs;
 use std::path::Path;
-
-use regex::Regex;
 
 use crate::data::{Access, Chip, MemoryOption, MemoryRegion, MemoryRegionKind, Mode};
 use crate::stringify;
@@ -94,88 +91,12 @@ fn write_regions(path: &Path, memory: &[MemoryRegion]) {
 }
 
 fn write_memory_rs(path: &Path, memory: &[MemoryRegion]) {
-    let mut nv_versions: BTreeMap<String, String> = BTreeMap::new();
-    for region in memory {
-        for s in &region.structs {
-            if let Some(prev) = nv_versions.insert(s.kind.clone(), s.version.clone()) {
-                if prev != s.version {
-                    panic!(
-                        "NV kind {} bound at multiple versions in one chip: {} and {}",
-                        s.kind, prev, s.version
-                    );
-                }
-            }
-        }
-    }
-
-    let extra_imports = if nv_versions.is_empty() {
-        String::new()
-    } else {
-        let mut s = String::new();
-        for (kind, version) in &nv_versions {
-            writeln!(
-                &mut s,
-                "#[path=\"../../../../registers/{}_{}.rs\"] pub mod {};",
-                kind, version, kind
-            )
-            .unwrap();
-        }
-        s
-    };
-
-    let stringified = stringify(memory);
-    let body_inner = if nv_versions.is_empty() {
-        stringified
-    } else {
-        let ir_regex = Regex::new("\":ir_for:([a-z0-9]+):\"").unwrap();
-        ir_regex
-            .replace_all(&stringified, "&$1::DESCRIPTOR")
-            .to_string()
-    };
-
-    let nv_import = if nv_versions.is_empty() {
-        ""
-    } else {
-        ", NvStruct"
-    };
-
     let body = format!(
-        "use crate::metadata::{{Access, MemoryRegion, MemoryRegionKind, Mode::*{}}};
-{}
+        "use crate::mem_layout::{{Access, MemoryRegion, MemoryRegionKind, MemoryRole::*, Mode::*}};
+
 pub static MEMORY: &[MemoryRegion] = {};
 ",
-        nv_import, extra_imports, body_inner
+        stringify(memory),
     );
     fs::write(path, body).unwrap();
-}
-
-pub(crate) fn memory_select_cfg_attrs(options: &[MemoryOption], default: &str) -> String {
-    let indent = "            ";
-    if options.len() == 1 {
-        return format!(
-            "{}#[path = \"memory_x/{}/memory.rs\"]\n",
-            indent, options[0].name
-        );
-    }
-    let non_default: Vec<&str> = options
-        .iter()
-        .map(|o| o.name.as_str())
-        .filter(|n| *n != default)
-        .collect();
-    let all_not = non_default
-        .iter()
-        .map(|n| format!("not(feature = \"memory-config-{}\")", n))
-        .collect::<Vec<_>>()
-        .join(", ");
-    let mut s = format!(
-        "{}#[cfg_attr(all({}), path = \"memory_x/{}/memory.rs\")]\n",
-        indent, all_not, default
-    );
-    for n in &non_default {
-        s.push_str(&format!(
-            "{}#[cfg_attr(feature = \"memory-config-{}\", path = \"memory_x/{}/memory.rs\")]\n",
-            indent, n, n
-        ));
-    }
-    s
 }

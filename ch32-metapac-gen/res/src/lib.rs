@@ -5,6 +5,12 @@
 #![doc(html_no_source)]
 
 pub mod common;
+pub mod mem_layout;
+
+#[cfg(any(feature = "pac", feature = "metadata"))]
+mod memory_select {
+    include!(env!("CH32_METAPAC_MEMORY_PATH"));
+}
 
 #[cfg(feature = "pac")]
 include!(env!("CH32_METAPAC_PAC_PATH"));

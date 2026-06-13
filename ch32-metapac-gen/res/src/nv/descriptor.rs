@@ -13,8 +13,13 @@ pub struct Descriptor {
 
 impl Descriptor {
     pub fn iter() -> impl Iterator<Item = Descriptor> {
-        METADATA.memory.iter().flat_map(|region| {
-            region
+        METADATA.nv_structs.iter().flat_map(|binding| {
+            let region = METADATA
+                .memory
+                .iter()
+                .find(|r| r.name == binding.region)
+                .expect("nv_struct binding must reference an existing memory region");
+            binding
                 .structs
                 .iter()
                 .map(move |nv| Descriptor { region, nv })

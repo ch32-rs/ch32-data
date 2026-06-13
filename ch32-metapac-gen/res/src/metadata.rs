@@ -121,12 +121,15 @@ pub mod ir {
     }
 }
 
+pub use crate::mem_layout::{Access, MemoryRegion, MemoryRegionKind, MemoryRole, Mode};
+
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct Metadata {
     pub name: &'static str,
     pub family: &'static str,
     pub line: &'static str,
     pub memory: &'static [MemoryRegion],
+    pub nv_structs: &'static [NvStructBinding],
     pub memory_options: &'static [MemoryOption],
     pub default_memory_option: &'static str,
     pub peripherals: &'static [Peripheral],
@@ -135,21 +138,19 @@ pub struct Metadata {
     pub dma_channels: &'static [DmaChannel],
 }
 
+/// Binds `NvStruct` descriptors to a memory region by name. Split from
+/// `MemoryRegion` so the always-available `mem_layout` module stays free of
+/// `&'static ir::IR` references.
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct NvStructBinding {
+    pub region: &'static str,
+    pub structs: &'static [NvStruct],
+}
+
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct MemoryOption {
     pub name: &'static str,
     pub region_sizes: &'static [(&'static str, u32)],
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub struct MemoryRegion {
-    pub name: &'static str,
-    pub kind: MemoryRegionKind,
-    pub address: u32,
-    pub size: u32,
-    pub modes: &'static [Mode],
-    pub access: Option<Access>,
-    pub structs: &'static [NvStruct],
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -161,25 +162,6 @@ pub struct NvStruct {
     pub block: &'static str,
     pub defaults: &'static [(&'static str, u32)],
     pub ir: &'static ir::IR,
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub enum Mode {
-    Fast { page_size: u32, load_size: u32 },
-    Standard { erase_size: u32, write_size: u32 },
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub struct Access {
-    pub read: bool,
-    pub write: bool,
-    pub execute: bool,
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub enum MemoryRegionKind {
-    Flash,
-    Ram,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
