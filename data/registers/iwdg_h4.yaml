@@ -1,0 +1,53 @@
+block/IWDG:
+  description: Independent watchdog.
+  items:
+  - name: CTLR
+    description: Key register (IWDG_CTLR).
+    byte_offset: 0
+    access: Write
+    fieldset: CTLR
+  - name: PSCR
+    description: Prescaler register (IWDG_PSCR).
+    byte_offset: 4
+    fieldset: PSCR
+  - name: RLDR
+    description: Reload register (IWDG_RLDR).
+    byte_offset: 8
+    fieldset: RLDR
+  - name: STATR
+    description: Status register (IWDG_SR).
+    byte_offset: 12
+    access: Read
+    fieldset: STATR
+fieldset/CTLR:
+  description: Key register (IWDG_CTLR).
+  fields:
+  - name: KEY
+    description: Key value.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PSCR:
+  description: Prescaler register (IWDG_PSCR).
+  fields:
+  - name: PR
+    description: Prescaler divider.
+    bit_offset: 0
+    bit_size: 3
+fieldset/RLDR:
+  description: Reload register (IWDG_RLDR).
+  fields:
+  - name: RL
+    description: Watchdog counter reload value.
+    bit_offset: 0
+    bit_size: 12
+fieldset/STATR:
+  description: Status register (IWDG_SR).
+  fields:
+  - name: PVU
+    description: Watchdog prescaler value update.
+    bit_offset: 0
+    bit_size: 1
+  - name: RVU
+    description: Watchdog counter reload value update.
+    bit_offset: 1
+    bit_size: 1

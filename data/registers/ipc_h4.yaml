@@ -1,0 +1,104 @@
+block/IPC:
+  description: Inter-Processor Communication. Four bidirectional channels, each carrying 8 status bits with independent enable/mask/set/clear, plus four 32-bit shared message slots for short messages.
+  items:
+  - name: CTLR
+    description: IPC control register. Per-channel TX/RX core ID routing, interrupt enables, auto-update mode and configuration lock.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: ISR
+    description: Per-channel interrupt status (read-only summary; bits set when channel state matches the configured trigger).
+    byte_offset: 4
+    access: Read
+    fieldset: CHANNELS
+  - name: ISM
+    description: Per-channel interrupt mask status (read-only; bit set means channel is currently raising an interrupt request to its routed core).
+    byte_offset: 8
+    access: Read
+    fieldset: CHANNELS
+  - name: ENA
+    description: Per-channel status-bit interrupt enable. Each enabled bit produces TX or RX interrupts based on the value in STS.
+    byte_offset: 16
+    fieldset: CHANNELS
+  - name: STS
+    description: Per-channel status register. Bit value 1 may raise an RX interrupt; bit value 0 may raise a TX interrupt (subject to ENA / IER configuration).
+    byte_offset: 20
+    fieldset: CHANNELS
+  - name: SET
+    description: Per-channel status set register. Writing 1 sets the corresponding bit in STS (and in ENA when AUTOEN is on).
+    byte_offset: 24
+    access: Write
+    fieldset: CHANNELS
+  - name: CLR
+    description: Per-channel status clear register. Writing 1 clears the corresponding bit in STS.
+    byte_offset: 28
+    access: Write
+    fieldset: CHANNELS
+  - name: MSG
+    description: 32-bit inline message slot. Four slots are available to carry short messages without touching shared SRAM.
+    array:
+      len: 4
+      stride: 4
+    byte_offset: 32
+    fieldset: MSG
+fieldset/CHANNELS:
+  description: Per-channel 8-bit value (used by ISR / ISM / ENA / STS / SET / CLR). Channel n occupies bits 8n..8n+7.
+  fields:
+  - name: CH
+    description: Channel byte. Each of the 8 bits is an independent status / enable / set / clear flag.
+    bit_offset: 0
+    bit_size: 8
+    array:
+      len: 4
+      stride: 8
+fieldset/CTLR:
+  description: IPC control register. Each of the four channels occupies 8 bits (channel n at bits 8n..8n+7).
+  fields:
+  - name: TX_CID
+    description: Sender core ID. 0=route TX interrupt to hart 0 (V3F), 1=route to hart 1 (V5F).
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+  - name: RX_CID
+    description: Receiver core ID. 0=route RX interrupt to hart 0, 1=route to hart 1.
+    bit_offset: 2
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+  - name: TX_IER
+    description: TX interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+  - name: RX_IER
+    description: RX interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+  - name: AUTOEN
+    description: Status-bit auto-update. When set, writing to STS / SET also updates ENA to the same value so the interrupt fires immediately.
+    bit_offset: 6
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+  - name: LOCK
+    description: Channel configuration lock. Write 1 to freeze the channel's other control bits until reset.
+    bit_offset: 7
+    bit_size: 1
+    array:
+      len: 4
+      stride: 8
+fieldset/MSG:
+  description: 32-bit inline message register.
+  fields:
+  - name: DATA
+    description: 32-bit message value.
+    bit_offset: 0
+    bit_size: 32

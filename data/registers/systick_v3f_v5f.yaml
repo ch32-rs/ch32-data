@@ -1,0 +1,103 @@
+block/SYSTICK:
+  description: Systick registers for V3F + V5F dual-core (currently CH32H417). Two independent 32-bit up/down counters with per-counter core ID (CID) routing for interrupts.
+  items:
+  - name: CTLR_0
+    description: System count control register for counter 0.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: ISR
+    description: System counter interrupt status register (shared by both counters).
+    byte_offset: 4
+    fieldset: ISR
+  - name: CNT_0
+    description: System counter 0 count register.
+    byte_offset: 8
+    fieldset: CNT
+  - name: CMP_0
+    description: System counter 0 compare register.
+    byte_offset: 16
+    fieldset: CMP
+  - name: CTLR_1
+    description: System count control register for counter 1.
+    byte_offset: 128
+    fieldset: CTLR
+  - name: CNT_1
+    description: System counter 1 count register.
+    byte_offset: 136
+    fieldset: CNT
+  - name: CMP_1
+    description: System counter 1 compare register.
+    byte_offset: 144
+    fieldset: CMP
+fieldset/CMP:
+  description: System count compare register.
+  fields:
+  - name: CMP
+    description: 32-bit compare value (used as reload value when counting down).
+    bit_offset: 0
+    bit_size: 32
+fieldset/CNT:
+  description: System counter register.
+  fields:
+  - name: CNT
+    description: 32-bit Systick counter value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CTLR:
+  description: System count control register.
+  fields:
+  - name: EN
+    description: Counter enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: IE
+    description: Counter interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: NO_RTC
+    description: Counter clock source selection.
+    bit_offset: 2
+    bit_size: 1
+    enum: STCLK
+  - name: AUTO_RELOAD
+    description: Auto reload enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DOWN_MODE
+    description: Count mode.
+    bit_offset: 4
+    bit_size: 1
+    enum: MODE
+  - name: CID
+    description: Core ID for routing the counter interrupt to a specific hart. Auto-updated when EN is set to the operating hart's core ID.
+    bit_offset: 6
+    bit_size: 1
+fieldset/ISR:
+  description: System counter interrupt status register (shared).
+  fields:
+  - name: ISR0
+    description: Systick0 interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: ISR1
+    description: Systick1 interrupt flag.
+    bit_offset: 1
+    bit_size: 1
+enum/MODE:
+  bit_size: 1
+  variants:
+  - name: Upcount
+    description: Upcount.
+    value: 0
+  - name: Downcount
+    description: Downcount.
+    value: 1
+enum/STCLK:
+  bit_size: 1
+  variants:
+  - name: HCLK_DIV8
+    description: HCLK/8.
+    value: 0
+  - name: HCLK
+    description: HCLK.
+    value: 1

@@ -547,7 +547,11 @@ pub enum StopMode {
 pub struct PeripheralPin {
     pub pin: String,
     pub signal: String,
+    /// Central PCFR remap group (V0/V1/V2/V3/X0/L1/641/643). Mutually exclusive with `af`.
     pub remap: Option<u8>,
+    /// Per-pin AF number for AFR-style mux (CH32H4). Mutually exclusive with `remap`.
+    #[serde(default)]
+    pub af: Option<u8>,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]

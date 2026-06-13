@@ -1,0 +1,123 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+  - name: PCFR1
+    description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+    byte_offset: 0
+    fieldset: PCFR1
+  - name: GPIO_AFR
+    description: GPIO alternate-function selection. 6 ports (A..F) x 2 halves (low pins 0..7, high pins 8..15) = 12 registers. Index as `gpio_afr(port_idx * 2 + (pin / 8)).afr(pin % 8) = af_num`, where port_idx is A=0, B=1, ..., F=5.
+    array:
+      len: 12
+      stride: 4
+    byte_offset: 4
+    fieldset: AFR
+  - name: EXTICR
+    description: External interrupt configuration register (AFIO_EXTICRx). EXTICR[0] holds EXTI lines 0..7, EXTICR[1] holds lines 8..15.
+    array:
+      len: 2
+      stride: 4
+    byte_offset: 60
+    fieldset: EXTICR
+fieldset/AFR:
+  description: GPIO alternate-function selection. Each 4-bit field selects the AF for one pin (8 pins per register).
+  fields:
+  - name: AFR
+    description: AF selection for the pin.
+    bit_offset: 0
+    bit_size: 4
+    array:
+      len: 8
+      stride: 4
+fieldset/EXTICR:
+  description: External interrupt configuration register (AFIO_EXTICRx). Each 4-bit field selects which GPIO port drives the corresponding EXTI line.
+  fields:
+  - name: EXTI
+    description: GPIO port that drives the EXTI line.
+    bit_offset: 0
+    bit_size: 4
+    array:
+      len: 8
+      stride: 4
+    enum: EXTI_PORT
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+  fields:
+  - name: PD0PD1_RM
+    description: PD0PD1 remapping.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADC1_ETRGREG_RM
+    description: ADC1_ETRGREG remapping.
+    bit_offset: 1
+    bit_size: 1
+  - name: ADC1_ETRGINJ_RM
+    description: ADC1_ETRGINJ remapping.
+    bit_offset: 2
+    bit_size: 1
+  - name: ADC2_ETRGREG_RM
+    description: ADC2_ETRGREG remapping.
+    bit_offset: 3
+    bit_size: 1
+  - name: ADC2_ETRGINJ_RM
+    description: ADC2_ETRGINJ remapping.
+    bit_offset: 4
+    bit_size: 1
+  - name: UHSIF_CLK_RM
+    description: UHSIF_CLK remapping.
+    bit_offset: 6
+    bit_size: 2
+  - name: UHSIF_PORT_RM
+    description: UHSIF_PORT remapping.
+    bit_offset: 8
+    bit_size: 2
+  - name: SDMMC_RM
+    description: SDMMC remapping.
+    bit_offset: 10
+    bit_size: 2
+  - name: TIM2ITR1_RM
+    description: TIM2ITR1 remapping.
+    bit_offset: 12
+    bit_size: 1
+  - name: VIO18_IO_HSLV
+    description: VIO18 IO speed configuration at low voltage.
+    bit_offset: 16
+    bit_size: 1
+  - name: VIO33_IO_HSLV
+    description: VIO33 IO speed configuration at low voltage.
+    bit_offset: 17
+    bit_size: 1
+  - name: VDD33_IO_HSLV
+    description: VDD33 IO speed configuration at low voltage.
+    bit_offset: 18
+    bit_size: 1
+  - name: USBPD_CC_HVT
+    description: CC pin input channel threshold adjustment.
+    bit_offset: 20
+    bit_size: 1
+  - name: SW_CFG
+    description: Serial wire JTAG configuration.
+    bit_offset: 24
+    bit_size: 3
+enum/EXTI_PORT:
+  description: GPIO port selection for an EXTI line (encoding matches SDK GPIO_PortSourceGPIO*). Only EXTI lines 0..15 are GPIO-routable; lines 16..26 are peripheral wake events.
+  bit_size: 4
+  variants:
+  - name: PA
+    description: GPIOA pin selected.
+    value: 0
+  - name: PB
+    description: GPIOB pin selected.
+    value: 1
+  - name: PC
+    description: GPIOC pin selected.
+    value: 2
+  - name: PD
+    description: GPIOD pin selected.
+    value: 3
+  - name: PE
+    description: GPIOE pin selected.
+    value: 4
+  - name: PF
+    description: GPIOF pin selected (CH32H4 family only).
+    value: 5

@@ -1,0 +1,607 @@
+block/ADC:
+  description: Analog to digital converter.
+  items:
+  - name: STATR
+    description: status register.
+    byte_offset: 0
+    fieldset: STATR
+  - name: CTLR1
+    description: control register 1/TKEY_V_CTLR.
+    byte_offset: 4
+    fieldset: CTLR1
+  - name: CTLR2
+    description: control register 2.
+    byte_offset: 8
+    fieldset: CTLR2
+  - name: SAMPTR1
+    description: sample time register 1.
+    byte_offset: 12
+    fieldset: SAMPTR1
+  - name: SAMPTR2
+    description: sample time register 2.
+    byte_offset: 16
+    fieldset: SAMPTR2
+  - name: IOFR1
+    description: injected channel data offset register x.
+    byte_offset: 20
+    fieldset: IOFR1
+  - name: IOFR2
+    description: injected channel data offset register x.
+    byte_offset: 24
+    fieldset: IOFR2
+  - name: IOFR3
+    description: injected channel data offset register x.
+    byte_offset: 28
+    fieldset: IOFR3
+  - name: IOFR4
+    description: injected channel data offset register x.
+    byte_offset: 32
+    fieldset: IOFR4
+  - name: WDHTR
+    description: watchdog higher threshold register.
+    byte_offset: 36
+    fieldset: WDHTR
+  - name: WDLTR
+    description: watchdog lower threshold register.
+    byte_offset: 40
+    fieldset: WDLTR
+  - name: RSQR1
+    description: regular sequence register 1.
+    byte_offset: 44
+    fieldset: RSQR1
+  - name: RSQR2
+    description: regular sequence register 2.
+    byte_offset: 48
+    fieldset: RSQR2
+  - name: RSQR3
+    description: regular sequence register 3.
+    byte_offset: 52
+    fieldset: RSQR3
+  - name: ISQR
+    description: injected sequence register.
+    byte_offset: 56
+    fieldset: ISQR
+  - name: IDATAR1
+    description: injected data register x_Charge data offset for injected channel x.
+    byte_offset: 60
+    access: Read
+    fieldset: IDATAR1
+  - name: IDATAR2
+    description: injected data register x.
+    byte_offset: 64
+    access: Read
+    fieldset: IDATAR2
+  - name: IDATAR3
+    description: injected data register x.
+    byte_offset: 68
+    access: Read
+    fieldset: IDATAR3
+  - name: IDATAR4
+    description: injected data register x.
+    byte_offset: 72
+    access: Read
+    fieldset: IDATAR4
+  - name: RDATAR
+    description: regular data register.
+    byte_offset: 76
+    access: Read
+    fieldset: RDATAR
+  - name: AUX
+    description: ADC time register.
+    byte_offset: 84
+    fieldset: AUX
+fieldset/AUX:
+  description: ADC time register.
+  fields:
+  - name: ADC_SMP_SEL0
+    description: channel sampling time optional enable bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADC_SMP_SEL1
+    description: channel sampling time optional enable bit.
+    bit_offset: 1
+    bit_size: 1
+  - name: ADC_SMP_SEL2
+    description: channel sampling time optional enable bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: ADC_SMP_SEL3
+    description: channel sampling time optional enable bit.
+    bit_offset: 3
+    bit_size: 1
+  - name: ADC_SMP_SEL4
+    description: channel sampling time optional enable bit.
+    bit_offset: 4
+    bit_size: 1
+  - name: ADC_SMP_SEL5
+    description: channel sampling time optional enable bit.
+    bit_offset: 5
+    bit_size: 1
+  - name: ADC_SMP_SEL6
+    description: channel sampling time optional enable bit.
+    bit_offset: 6
+    bit_size: 1
+  - name: ADC_SMP_SEL7
+    description: channel sampling time optional enable bit.
+    bit_offset: 7
+    bit_size: 1
+  - name: ADC_SMP_SEL8
+    description: channel sampling time optional enable bit.
+    bit_offset: 8
+    bit_size: 1
+  - name: ADC_SMP_SEL9
+    description: channel sampling time optional enable bit.
+    bit_offset: 9
+    bit_size: 1
+  - name: ADC_SMP_SEL10
+    description: channel sampling time optional enable bit.
+    bit_offset: 10
+    bit_size: 1
+  - name: ADC_SMP_SEL11
+    description: channel sampling time optional enable bit.
+    bit_offset: 11
+    bit_size: 1
+  - name: ADC_SMP_SEL12
+    description: channel sampling time optional enable bit.
+    bit_offset: 12
+    bit_size: 1
+  - name: ADC_SMP_SEL13
+    description: channel sampling time optional enable bit.
+    bit_offset: 13
+    bit_size: 1
+  - name: ADC_SMP_SEL14
+    description: channel sampling time optional enable bit.
+    bit_offset: 14
+    bit_size: 1
+  - name: ADC_SMP_SEL15
+    description: channel sampling time optional enable bit.
+    bit_offset: 15
+    bit_size: 1
+  - name: ADC_SMP_SEL16
+    description: channel sampling time optional enable bit.
+    bit_offset: 16
+    bit_size: 1
+  - name: ADC_SMP_SEL17
+    description: channel sampling time optional enable bit.
+    bit_offset: 17
+    bit_size: 1
+  - name: ADC_TO_DFSDM
+    description: ADC module samples data to DFSDM.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR1:
+  description: control register 1/TKEY_V_CTLR.
+  fields:
+  - name: AWDCH
+    description: Analog watchdog channel select bits.
+    bit_offset: 0
+    bit_size: 5
+  - name: EOCIE
+    description: Interrupt enable for EOC.
+    bit_offset: 5
+    bit_size: 1
+  - name: AWDIE
+    description: Analog watchdog interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: JEOCIE
+    description: Interrupt enable for injected channels.
+    bit_offset: 7
+    bit_size: 1
+  - name: SCAN
+    description: Scan mode enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: AWDSGL
+    description: Enable the watchdog on a single channel in scan mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: JAUTO
+    description: Automatic injected group conversion.
+    bit_offset: 10
+    bit_size: 1
+  - name: DISCEN
+    description: Discontinuous mode on regular channels.
+    bit_offset: 11
+    bit_size: 1
+  - name: JDISCEN
+    description: Discontinuous mode on injected channels.
+    bit_offset: 12
+    bit_size: 1
+  - name: DISCNUM
+    description: Discontinuous mode channel count.
+    bit_offset: 13
+    bit_size: 3
+  - name: DUALMOD
+    description: Dual mode selection.
+    bit_offset: 16
+    bit_size: 4
+  - name: JAWDEN
+    description: Analog watchdog enable on injected channels.
+    bit_offset: 22
+    bit_size: 1
+  - name: AWDEN
+    description: Analog watchdog enable on regular channels.
+    bit_offset: 23
+    bit_size: 1
+  - name: TKENABLE
+    description: TKEY enable, including TKEY_F and TKEY_V.
+    bit_offset: 24
+    bit_size: 1
+  - name: TKITUNE
+    description: TKEY_I enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: BUFEN
+    description: TKEY_BUF_Enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: PGA
+    description: ADC_PGA.
+    bit_offset: 27
+    bit_size: 2
+  - name: ANA_RST
+    description: simulation module reset enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: SW_PRE
+    description: Channel pre-handoff is closed.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR2:
+  description: control register 2.
+  fields:
+  - name: ADON
+    description: A/D converter ON / OFF.
+    bit_offset: 0
+    bit_size: 1
+  - name: CONT
+    description: Continuous conversion.
+    bit_offset: 1
+    bit_size: 1
+  - name: CAL
+    description: A/D calibration.
+    bit_offset: 2
+    bit_size: 1
+  - name: RSTCAL
+    description: Reset calibration.
+    bit_offset: 3
+    bit_size: 1
+  - name: CAL_VOL
+    description: calibration voltage configuration.
+    bit_offset: 4
+    bit_size: 2
+  - name: CAL_AUTO
+    description: the hardware automatic calibration.
+    bit_offset: 6
+    bit_size: 1
+  - name: ADC_LP
+    description: ADC low power mode control.
+    bit_offset: 7
+    bit_size: 1
+  - name: DMA
+    description: Direct memory access mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: ALIGN
+    description: Data alignment.
+    bit_offset: 11
+    bit_size: 1
+  - name: JEXTSEL
+    description: External event select for injected group.
+    bit_offset: 12
+    bit_size: 3
+  - name: JEXTTRIG
+    description: External trigger conversion mode for injected channels.
+    bit_offset: 15
+    bit_size: 1
+  - name: EXTSEL
+    description: External event select for regular group.
+    bit_offset: 17
+    bit_size: 3
+  - name: EXTTRIG
+    description: External trigger conversion mode for regular channels.
+    bit_offset: 20
+    bit_size: 1
+  - name: JSWSTART
+    description: Start conversion of injected channels.
+    bit_offset: 21
+    bit_size: 1
+  - name: SWSTART
+    description: Start conversion of regular channels.
+    bit_offset: 22
+    bit_size: 1
+  - name: TSVREFE
+    description: Temperature sensor and VREFINT enable.
+    bit_offset: 23
+    bit_size: 1
+fieldset/IDATAR1:
+  description: injected data register x_Charge data offset for injected channel x.
+  fields:
+  - name: IDATA_TKCGOFFSET
+    description: Injected data_Touch key charge data offset for injected channel x.
+    bit_offset: 0
+    bit_size: 16
+fieldset/IDATAR2:
+  description: injected data register x.
+  fields:
+  - name: JDATA
+    description: Injected data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/IDATAR3:
+  description: injected data register x.
+  fields:
+  - name: JDATA
+    description: Injected data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/IDATAR4:
+  description: injected data register x.
+  fields:
+  - name: JDATA
+    description: Injected data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/IOFR1:
+  description: injected channel data offset register x.
+  fields:
+  - name: JOFFSET1
+    description: Data offset for injected channel x.
+    bit_offset: 0
+    bit_size: 12
+fieldset/IOFR2:
+  description: injected channel data offset register x.
+  fields:
+  - name: JOFFSET2
+    description: Data offset for injected channel x.
+    bit_offset: 0
+    bit_size: 12
+fieldset/IOFR3:
+  description: injected channel data offset register x.
+  fields:
+  - name: JOFFSET3
+    description: Data offset for injected channel x.
+    bit_offset: 0
+    bit_size: 12
+fieldset/IOFR4:
+  description: injected channel data offset register x.
+  fields:
+  - name: JOFFSET4
+    description: Data offset for injected channel x.
+    bit_offset: 0
+    bit_size: 12
+fieldset/ISQR:
+  description: injected sequence register.
+  fields:
+  - name: JSQ1
+    description: 1st conversion in injected sequence.
+    bit_offset: 0
+    bit_size: 5
+  - name: JSQ2
+    description: 2nd conversion in injected sequence.
+    bit_offset: 5
+    bit_size: 5
+  - name: JSQ3
+    description: 3rd conversion in injected sequence.
+    bit_offset: 10
+    bit_size: 5
+  - name: JSQ4
+    description: 4th conversion in injected sequence.
+    bit_offset: 15
+    bit_size: 5
+  - name: JL
+    description: Injected sequence length.
+    bit_offset: 20
+    bit_size: 2
+fieldset/RDATAR:
+  description: regular data register.
+  fields:
+  - name: DATA0_7
+    description: Regular data.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA8_15
+    description: Regular data.
+    bit_offset: 8
+    bit_size: 8
+  - name: ADC2DATA
+    description: converter data.
+    bit_offset: 16
+    bit_size: 16
+fieldset/RSQR1:
+  description: regular sequence register 1.
+  fields:
+  - name: SQ13
+    description: 13th conversion in regular sequence.
+    bit_offset: 0
+    bit_size: 5
+  - name: SQ14
+    description: 14th conversion in regular sequence.
+    bit_offset: 5
+    bit_size: 5
+  - name: SQ15
+    description: 15th conversion in regular sequence.
+    bit_offset: 10
+    bit_size: 5
+  - name: SQ16
+    description: 16th conversion in regular sequence.
+    bit_offset: 15
+    bit_size: 5
+  - name: L
+    description: Regular channel sequence length.
+    bit_offset: 20
+    bit_size: 4
+fieldset/RSQR2:
+  description: regular sequence register 2.
+  fields:
+  - name: SQ7
+    description: 7th conversion in regular sequence.
+    bit_offset: 0
+    bit_size: 5
+  - name: SQ8
+    description: 8th conversion in regular sequence.
+    bit_offset: 5
+    bit_size: 5
+  - name: SQ9
+    description: 9th conversion in regular sequence.
+    bit_offset: 10
+    bit_size: 5
+  - name: SQ10
+    description: 10th conversion in regular sequence.
+    bit_offset: 15
+    bit_size: 5
+  - name: SQ11
+    description: 11th conversion in regular sequence.
+    bit_offset: 20
+    bit_size: 5
+  - name: SQ12
+    description: 12th conversion in regular sequence.
+    bit_offset: 25
+    bit_size: 5
+fieldset/RSQR3:
+  description: regular sequence register 3.
+  fields:
+  - name: SQ1
+    description: 1st conversion in regular sequence.
+    bit_offset: 0
+    bit_size: 5
+  - name: SQ2
+    description: 2nd conversion in regular sequence.
+    bit_offset: 5
+    bit_size: 5
+  - name: SQ3
+    description: 3rd conversion in regular sequence.
+    bit_offset: 10
+    bit_size: 5
+  - name: SQ4
+    description: 4th conversion in regular sequence.
+    bit_offset: 15
+    bit_size: 5
+  - name: SQ5
+    description: 5th conversion in regular sequence.
+    bit_offset: 20
+    bit_size: 5
+  - name: SQ6
+    description: 6th conversion in regular sequence.
+    bit_offset: 25
+    bit_size: 5
+fieldset/SAMPTR1:
+  description: sample time register 1.
+  fields:
+  - name: SMP10_TKCG10
+    description: Channel 10 sample time selection.
+    bit_offset: 0
+    bit_size: 3
+  - name: SMP11_TKCG11
+    description: Channel 11 sample time selection.
+    bit_offset: 3
+    bit_size: 3
+  - name: SMP12_TKCG12
+    description: Channel 12 sample time selection.
+    bit_offset: 6
+    bit_size: 3
+  - name: SMP13_TKCG13
+    description: Channel 13 sample time selection.
+    bit_offset: 9
+    bit_size: 3
+  - name: SMP14_TKCG14
+    description: Channel 14 sample time selection.
+    bit_offset: 12
+    bit_size: 3
+  - name: SMP15_TKCG15
+    description: Channel 15 sample time selection.
+    bit_offset: 15
+    bit_size: 3
+  - name: SMP16
+    description: Channel 16 sample time selection.
+    bit_offset: 18
+    bit_size: 3
+  - name: SMP17
+    description: Channel 17 sample time selection.
+    bit_offset: 21
+    bit_size: 3
+fieldset/SAMPTR2:
+  description: sample time register 2.
+  fields:
+  - name: SMP0_TKCG0
+    description: Channel 0 sample time selection.
+    bit_offset: 0
+    bit_size: 3
+  - name: SMP1_TKCG1
+    description: Channel 1 sample time selection.
+    bit_offset: 3
+    bit_size: 3
+  - name: SMP2_TKCG2
+    description: Channel 2 sample time selection.
+    bit_offset: 6
+    bit_size: 3
+  - name: SMP3_TKCG3
+    description: Channel 3 sample time selection.
+    bit_offset: 9
+    bit_size: 3
+  - name: SMP4_TKCG4
+    description: Channel 4 sample time selection.
+    bit_offset: 12
+    bit_size: 3
+  - name: SMP5_TKCG5
+    description: Channel 5 sample time selection.
+    bit_offset: 15
+    bit_size: 3
+  - name: SMP6_TKCG6
+    description: Channel 6 sample time selection.
+    bit_offset: 18
+    bit_size: 3
+  - name: SMP7_TKCG7
+    description: Channel 7 sample time selection.
+    bit_offset: 21
+    bit_size: 3
+  - name: SMP8_TKCG8
+    description: Channel 8 sample time selection.
+    bit_offset: 24
+    bit_size: 3
+  - name: SMP9_TKCG9
+    description: Channel 9 sample time selection.
+    bit_offset: 27
+    bit_size: 3
+fieldset/STATR:
+  description: status register.
+  fields:
+  - name: AWD
+    description: Analog watchdog flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: EOC
+    description: Regular channel end of conversion.
+    bit_offset: 1
+    bit_size: 1
+  - name: JEOC
+    description: Injected channel end of conversion.
+    bit_offset: 2
+    bit_size: 1
+  - name: JSTRT
+    description: Injected channel start flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: STRT
+    description: Regular channel start flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: ADCRSTF
+    description: ADC reset flag.
+    bit_offset: 15
+    bit_size: 1
+fieldset/WDHTR:
+  description: watchdog higher threshold register.
+  fields:
+  - name: HT
+    description: Analog watchdog higher threshold.
+    bit_offset: 0
+    bit_size: 12
+fieldset/WDLTR:
+  description: watchdog lower threshold register.
+  fields:
+  - name: LT
+    description: Analog watchdog lower threshold.
+    bit_offset: 0
+    bit_size: 12

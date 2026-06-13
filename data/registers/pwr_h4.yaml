@@ -1,0 +1,49 @@
+block/PWR:
+  description: Power control.
+  items:
+  - name: CTLR
+    description: Power control register (PWR_CTRL).
+    byte_offset: 0
+    fieldset: CTLR
+  - name: CSR
+    description: Power control register (PWR_CSR).
+    byte_offset: 4
+    fieldset: CSR
+fieldset/CSR:
+  description: Power control register (PWR_CSR).
+  fields:
+  - name: PVDO
+    description: PVD Output.
+    bit_offset: 0
+    bit_size: 1
+  - name: VIO18_SR
+    description: VIO18 power supply initial status indicator.
+    bit_offset: 8
+    bit_size: 2
+fieldset/CTLR:
+  description: Power control register (PWR_CTRL).
+  fields:
+  - name: LPDS
+    description: Low Power Deep Sleep.
+    bit_offset: 0
+    bit_size: 1
+  - name: PVDE
+    description: Power Voltage Detector Enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: PLS
+    description: PVD Level Selection.
+    bit_offset: 5
+    bit_size: 3
+  - name: DBP
+    description: Disable Backup Domain write protection.
+    bit_offset: 8
+    bit_size: 1
+  - name: VIO_SW_CR
+    description: VIO18 power regulation mode selection.
+    bit_offset: 9
+    bit_size: 1
+  - name: VSEL_VIO18
+    description: VIO18 power supply adjustment position.
+    bit_offset: 10
+    bit_size: 3

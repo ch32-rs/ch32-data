@@ -28,8 +28,11 @@ cores:
     peripherals: []
     include_peripherals:
       - "../family/CH32V00X.yaml"
+      - "../peripherals/V00X_USART2.yaml"
       - "../peripherals/V007_M007_TIM2.yaml"
-      - "../peripherals/V00X_OPA.yaml"
+      - "../peripherals/V00X_TIM3.yaml"
+      - "../peripherals/V007_M007_OPA.yaml"
+      - "../peripherals/V006_V007_M007_TKEY.yaml"
     include_dma_channels:
       DMA1: "../dma/CH32V00X.yaml"
     include_interrupts: "../interrupts/CH32V00X.yaml"

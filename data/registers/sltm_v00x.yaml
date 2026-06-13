@@ -1,0 +1,71 @@
+block/SLTM:
+  description: Streamlined timer (TIM3).
+  items:
+    - name: CTLR
+      description: control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: DMAINTENR
+      description: DMA/compare preload enable register.
+      byte_offset: 4
+      fieldset: DMAINTENR
+    - name: CNT
+      description: counter.
+      byte_offset: 8
+      bit_size: 16
+    - name: ATRLR
+      description: auto-reload register.
+      byte_offset: 12
+      bit_size: 16
+    - name: CHCVR
+      description: compare register 1.
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 16
+      bit_size: 16
+fieldset/CTLR:
+  description: control register.
+  fields:
+    - name: CEN
+      description: Counter enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: UDIS
+      description: Update disable.
+      bit_offset: 1
+      bit_size: 1
+    - name: DIR
+      description: Direction.
+      bit_offset: 4
+      bit_size: 1
+    - name: CMS
+      description: Center-aligned mode selection.
+      bit_offset: 5
+      bit_size: 2
+    - name: ARPE
+      description: Auto-reload preload enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: SMS
+      description: Slave mode selection.
+      bit_offset: 8
+      bit_size: 3
+fieldset/DMAINTENR:
+  description: DMA/compare preload enable register.
+  fields:
+    - name: OCPE
+      description: Output compare x preload enable.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 4
+        stride: 1
+    - name: CC3DE
+      description: Capture/compare 3 DMA request enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: CC4DE
+      description: Capture/compare 4 DMA request enable.
+      bit_offset: 12
+      bit_size: 1

@@ -1,0 +1,1625 @@
+block/RCC:
+  description: Reset and clock control.
+  items:
+  - name: CTLR
+    description: Clock control register.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: CFGR0
+    description: Clock configuration register (RCC_CFGR0).
+    byte_offset: 4
+    fieldset: CFGR0
+  - name: PLLCFGR
+    description: PLL clock configuration register (RCC_PLLCFGR).
+    byte_offset: 8
+    fieldset: PLLCFGR
+  - name: INTR
+    description: Clock interrupt register (RCC_INTR).
+    byte_offset: 12
+    fieldset: INTR
+  - name: HB2PRSTR
+    description: HB2 peripheral reset register (RCC_HB2PRSTR).
+    byte_offset: 16
+    fieldset: HB2PRSTR
+  - name: HB1PRSTR
+    description: HB1 peripheral reset register (RCC_HB1PRSTR).
+    byte_offset: 20
+    fieldset: HB1PRSTR
+  - name: HBPCENR
+    description: HB Peripheral Clock enable register (RCC_HBPCENR).
+    byte_offset: 24
+    fieldset: HBPCENR
+  - name: HB2PCENR
+    description: HB2 peripheral clock enable register (RCC_HB2PCENR).
+    byte_offset: 28
+    fieldset: HB2PCENR
+  - name: HB1PCENR
+    description: HB1 peripheral clock enable register (RCC_HB1PCENR).
+    byte_offset: 32
+    fieldset: HB1PCENR
+  - name: BDCTLR
+    description: Backup domain control register (RCC_BDCTLR).
+    byte_offset: 36
+    fieldset: BDCTLR
+  - name: RSTSCKR
+    description: Control/status register (RCC_RSTSCKR).
+    byte_offset: 40
+    fieldset: RSTSCKR
+  - name: HBRSTR
+    description: HB reset register (RCC_PHBRSTR).
+    byte_offset: 44
+    fieldset: HBRSTR
+  - name: CFGR2
+    description: Clock configuration register2 (RCC_CFGR2).
+    byte_offset: 48
+    fieldset: CFGR2
+  - name: PLLCFGR2
+    description: PLL Clock configuration register2 (RCC_PLLCFGR2).
+    byte_offset: 52
+    fieldset: PLLCFGR2
+fieldset/BDCTLR:
+  description: Backup domain control register (RCC_BDCTLR).
+  fields:
+  - name: LSEON
+    description: External Low Speed oscillator enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDY
+    description: External Low Speed oscillator ready.
+    bit_offset: 1
+    bit_size: 1
+  - name: LSEBYP
+    description: External Low Speed oscillator bypass.
+    bit_offset: 2
+    bit_size: 1
+  - name: CCO
+    description: calibrate the clock output selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: ASOE
+    description: TAMPER pin enables pulse output.
+    bit_offset: 4
+    bit_size: 1
+  - name: ASOS
+    description: TAMPER pin alarm/second pulse output.
+    bit_offset: 5
+    bit_size: 1
+  - name: RTCSEL
+    description: RTC clock source selection.
+    bit_offset: 6
+    bit_size: 2
+    enum: RTCSEL
+  - name: RTCEN
+    description: RTC clock enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: RTCCAL
+    description: RTC calibration value.
+    bit_offset: 9
+    bit_size: 7
+  - name: BDRST
+    description: Backup domain software reset.
+    bit_offset: 16
+    bit_size: 1
+fieldset/CFGR0:
+  description: Clock configuration register (RCC_CFGR0).
+  fields:
+  - name: SW
+    description: System clock switch.
+    bit_offset: 0
+    bit_size: 2
+    enum: SW
+  - name: SWS
+    description: System clock switch status.
+    bit_offset: 2
+    bit_size: 2
+    enum: SW
+  - name: HPRE
+    description: HB (AHB) prescaler — divides SYS_CLK to produce HCLK.
+    bit_offset: 4
+    bit_size: 4
+    enum: HPRE
+  - name: PPRE1
+    description: PB1 (low-speed APB) prescaler.
+    bit_offset: 8
+    bit_size: 3
+    enum: PPRE
+  - name: PPRE2
+    description: PB2 (high-speed APB) prescaler, also feeds ADC prescaler.
+    bit_offset: 11
+    bit_size: 3
+    enum: PPRE
+  - name: ADCPRE
+    description: ADC prescaler (divides PB2 clock).
+    bit_offset: 14
+    bit_size: 2
+    enum: ADCPRE
+  - name: FPRE
+    description: V5F core prescaler — divides SYS_CLK to produce the V5F core clock.
+    bit_offset: 16
+    bit_size: 2
+    enum: FPRE
+  - name: RGMIION
+    description: 1000 Mb/s Ethernet RGMII interface and clock enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: PIPEON
+    description: PIPE clock gating enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: UTMION
+    description: UTMI clock gating enable.
+    bit_offset: 23
+    bit_size: 1
+  - name: MCO
+    description: Microcontroller clock output selection.
+    bit_offset: 24
+    bit_size: 4
+    enum: MCO
+  - name: ADC_DUTY_SEL
+    description: ADC clock duty cycle. 0=50%, 1=75%. Only effective when ADCSRC=HCLK.
+    bit_offset: 30
+    bit_size: 1
+  - name: ADCSRC
+    description: ADC input clock source selection.
+    bit_offset: 31
+    bit_size: 1
+    enum: ADCSRC
+fieldset/CFGR2:
+  description: Clock configuration register2 (RCC_CFGR2).
+  fields:
+  - name: UHSIFDIV
+    description: UHSIF prescaler (1..64).
+    bit_offset: 0
+    bit_size: 6
+  - name: UHSIFSRC
+    description: UHSIF clock source.
+    bit_offset: 6
+    bit_size: 2
+    enum: UHSIFSRC
+  - name: LTDCDIV
+    description: LTDC prescaler (1..64).
+    bit_offset: 8
+    bit_size: 6
+  - name: LTDCSRC
+    description: LTDC clock source.
+    bit_offset: 14
+    bit_size: 2
+    enum: LTDCSRC
+  - name: USBFSDIV
+    description: USBFS 48 MHz prescaler.
+    bit_offset: 16
+    bit_size: 4
+    enum: USBFSDIV
+  - name: USBFSSRC
+    description: USBFS 48 MHz clock source.
+    bit_offset: 20
+    bit_size: 1
+    enum: USBFSSRC
+  - name: RNGSRC
+    description: RNG clock source.
+    bit_offset: 23
+    bit_size: 1
+    enum: CLK_SRC_PLL
+  - name: I2S2SRC
+    description: I2S2 clock source.
+    bit_offset: 24
+    bit_size: 1
+    enum: CLK_SRC_PLL
+  - name: I2S3SRC
+    description: I2S3 clock source.
+    bit_offset: 25
+    bit_size: 1
+    enum: CLK_SRC_PLL
+  - name: HSADCSRC
+    description: HSADC clock source.
+    bit_offset: 28
+    bit_size: 2
+    enum: HSADCSRC
+  - name: ETH1GSRC
+    description: Gigabit Ethernet 125 MHz clock source.
+    bit_offset: 30
+    bit_size: 2
+    enum: ETH1GSRC
+fieldset/CTLR:
+  description: Clock control register.
+  fields:
+  - name: HSION
+    description: Internal High Speed clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: HSIRDY
+    description: Internal High Speed clock ready flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: HSITRIM
+    description: Internal High Speed clock trimming.
+    bit_offset: 3
+    bit_size: 5
+  - name: HSICAL
+    description: Internal High Speed clock calibration (hardware-set, read-only).
+    bit_offset: 8
+    bit_size: 8
+  - name: HSEON
+    description: External High Speed clock enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: HSERDY
+    description: External High Speed clock ready flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: HSEBYP
+    description: External High Speed clock Bypass.
+    bit_offset: 18
+    bit_size: 1
+  - name: CSSON
+    description: Clock Security System enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: USBHS_PLLON
+    description: USBHS PLL clock enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: USBHS_PLLRDY
+    description: USBHS PLL clock ready flag.
+    bit_offset: 21
+    bit_size: 1
+  - name: USBSS_PLLON
+    description: USBSS PLL clock enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: USBSS_PLLRDY
+    description: USBSS PLL clock ready flag.
+    bit_offset: 23
+    bit_size: 1
+  - name: PLLON
+    description: PLL clock enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: PLLRDY
+    description: PLL clock ready flag.
+    bit_offset: 25
+    bit_size: 1
+  - name: ETH_PLLON
+    description: ETH PLL clock enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: ETH_PLLRDY
+    description: ETH PLL clock ready flag.
+    bit_offset: 27
+    bit_size: 1
+  - name: SERDES_PLLON
+    description: SERDES PLL clock enable.
+    bit_offset: 28
+    bit_size: 1
+  - name: SERDES_PLLRDY
+    description: SERDES PLL clock ready flag.
+    bit_offset: 29
+    bit_size: 1
+  - name: CSS_HSE_DIS
+    description: Upon the occurrence of an HSE failure event with CSSON enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/HB1PCENR:
+  description: HB1 peripheral clock enable register (RCC_HB1PCENR).
+  fields:
+  - name: TIM2EN
+    description: Timer 2 clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TIM3EN
+    description: Timer 3 clock enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: TIM4EN
+    description: Timer 4 clock enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TIM5EN
+    description: Timer 5 clock enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: TIM6EN
+    description: Timer 6 clock enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: TIM7EN
+    description: Timer 7 clock enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: USART6EN
+    description: USART 6 clock enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: USART7EN
+    description: USART 7 clock enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: USART8EN
+    description: USART 8 clock enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: LPTIM1EN
+    description: LPTIM1 clock enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: LPTIM2EN
+    description: LPTIM2 clock enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: WWDGEN
+    description: Window watchdog clock enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: QSPI1EN
+    description: QSPI1 clock enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: QSPI2EN
+    description: QSPI2 clock enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: SPI2EN
+    description: SPI2 clock enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: SPI3EN
+    description: SPI3 clock enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: SPI4EN
+    description: SPI4 clock enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: USART2EN
+    description: USART2 clock enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: USART3EN
+    description: USART3 clock enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: USART4EN
+    description: USART4 clock enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: USART5EN
+    description: USART5 clock enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: I2C1EN
+    description: I2C1 clock enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: I2C2EN
+    description: I2C2 clock enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: CAN3EN
+    description: CAN3 clock enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: CAN1EN
+    description: CAN1 clock enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: CAN2EN
+    description: CAN2 clock enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: BKPEN
+    description: Backup interface clock enable.
+    bit_offset: 27
+    bit_size: 1
+  - name: PWREN
+    description: Power interface clock enable.
+    bit_offset: 28
+    bit_size: 1
+  - name: DACEN
+    description: DAC interface clock enable.
+    bit_offset: 29
+    bit_size: 1
+  - name: I2C3EN
+    description: I2C3 clock enable.
+    bit_offset: 30
+    bit_size: 1
+  - name: SWPMIEN
+    description: SWPMI clock enable.
+    bit_offset: 31
+    bit_size: 1
+fieldset/HB1PRSTR:
+  description: HB1 peripheral reset register (RCC_HB1PRSTR).
+  fields:
+  - name: TIM2RST
+    description: Timer 2 reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: TIM3RST
+    description: Timer 3 reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: TIM4RST
+    description: Timer 4 reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: TIM5RST
+    description: Timer 5 reset.
+    bit_offset: 3
+    bit_size: 1
+  - name: TIM6RST
+    description: Timer 6 reset.
+    bit_offset: 4
+    bit_size: 1
+  - name: TIM7RST
+    description: Timer 7 reset.
+    bit_offset: 5
+    bit_size: 1
+  - name: USART6RST
+    description: USART 6 reset.
+    bit_offset: 6
+    bit_size: 1
+  - name: USART7RST
+    description: USART 7 reset.
+    bit_offset: 7
+    bit_size: 1
+  - name: USART8RST
+    description: USART 8 reset.
+    bit_offset: 8
+    bit_size: 1
+  - name: LPTIM1RST
+    description: LPTIM1 reset.
+    bit_offset: 9
+    bit_size: 1
+  - name: LPTIM2RST
+    description: LPTIM2 reset.
+    bit_offset: 10
+    bit_size: 1
+  - name: WWDGRST
+    description: Window watchdog reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: QSPI1RST
+    description: QSPI1 reset.
+    bit_offset: 12
+    bit_size: 1
+  - name: QSPI2RST
+    description: QSPI2 reset.
+    bit_offset: 13
+    bit_size: 1
+  - name: SPI2RST
+    description: SPI2 reset.
+    bit_offset: 14
+    bit_size: 1
+  - name: SPI3RST
+    description: SPI3 reset.
+    bit_offset: 15
+    bit_size: 1
+  - name: SPI4RST
+    description: SPI4 reset.
+    bit_offset: 16
+    bit_size: 1
+  - name: USART2RST
+    description: USART 2 reset.
+    bit_offset: 17
+    bit_size: 1
+  - name: USART3RST
+    description: USART 3 reset.
+    bit_offset: 18
+    bit_size: 1
+  - name: USART4RST
+    description: USART 4 reset.
+    bit_offset: 19
+    bit_size: 1
+  - name: USART5RST
+    description: USART 5 reset.
+    bit_offset: 20
+    bit_size: 1
+  - name: I2C1RST
+    description: I2C1 reset.
+    bit_offset: 21
+    bit_size: 1
+  - name: I2C2RST
+    description: I2C2 reset.
+    bit_offset: 22
+    bit_size: 1
+  - name: CAN3RST
+    description: CAN3 reset.
+    bit_offset: 24
+    bit_size: 1
+  - name: CAN1RST
+    description: CAN1 reset.
+    bit_offset: 25
+    bit_size: 1
+  - name: CAN2RST
+    description: CAN2 reset.
+    bit_offset: 26
+    bit_size: 1
+  - name: BKPRST
+    description: Backup interface reset.
+    bit_offset: 27
+    bit_size: 1
+  - name: PWRRST
+    description: Power interface reset.
+    bit_offset: 28
+    bit_size: 1
+  - name: DACRST
+    description: DAC interface reset.
+    bit_offset: 29
+    bit_size: 1
+  - name: I2C3RST
+    description: I2C3 reset.
+    bit_offset: 30
+    bit_size: 1
+  - name: SWPMIRST
+    description: SWPMI reset.
+    bit_offset: 31
+    bit_size: 1
+fieldset/HB2PCENR:
+  description: HB2 peripheral clock enable register (RCC_HB2PCENR).
+  fields:
+  - name: AFIOEN
+    description: Alternate function I/O clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: HSADCEN
+    description: HSADC clock enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: IOPAEN
+    description: I/O port A clock enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: IOPBEN
+    description: I/O port B clock enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: IOPCEN
+    description: I/O port C clock enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: IOPDEN
+    description: I/O port D clock enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: IOPEEN
+    description: I/O port E clock enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: IOPFEN
+    description: I/O port F clock enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: ADC1EN
+    description: ADC1 interface clock enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: ADC2EN
+    description: ADC 2 interface clock enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: TIM1EN
+    description: TIM1 Timer clock enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI1EN
+    description: SPI 1 clock enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: TIM8EN
+    description: TIM8 Timer clock enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: USART1EN
+    description: USART1 clock enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: I2C4EN
+    description: I2C4 clock enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: SAIEN
+    description: SAI clock enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: SDIOEN
+    description: SDIO clock enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: TIM9EN
+    description: TIM9 Timer clock enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: TIM10EN
+    description: TIM10 Timer clock enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: TIM11EN
+    description: TIM11 Timer clock enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: TIM12EN
+    description: TIM12 Timer clock enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: OPCMEN
+    description: OPA and CMP clock enable.
+    bit_offset: 23
+    bit_size: 1
+  - name: DFSDMEN
+    description: DFSDM clock enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: ECDCEN
+    description: ECDC clock enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: GPHAEN
+    description: GPHA clock enable.
+    bit_offset: 27
+    bit_size: 1
+  - name: LTDCEN
+    description: LTDC clock enable.
+    bit_offset: 30
+    bit_size: 1
+  - name: I3CEN
+    description: I3C clock enable.
+    bit_offset: 31
+    bit_size: 1
+fieldset/HB2PRSTR:
+  description: HB2 peripheral reset register (RCC_HB2PRSTR).
+  fields:
+  - name: AFIORST
+    description: Alternate function I/O reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: HSADCRST
+    description: HSADC reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: IOPARST
+    description: IO port A reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: IOPBRST
+    description: IO port B reset.
+    bit_offset: 3
+    bit_size: 1
+  - name: IOPCRST
+    description: IO port C reset.
+    bit_offset: 4
+    bit_size: 1
+  - name: IOPDRST
+    description: IO port D reset.
+    bit_offset: 5
+    bit_size: 1
+  - name: IOPERST
+    description: IO port E reset.
+    bit_offset: 6
+    bit_size: 1
+  - name: IOPFRST
+    description: IO port F reset.
+    bit_offset: 7
+    bit_size: 1
+  - name: ADC1RST
+    description: ADC 1 interface reset.
+    bit_offset: 9
+    bit_size: 1
+  - name: ADC2RST
+    description: ADC 2 interface reset.
+    bit_offset: 10
+    bit_size: 1
+  - name: TIM1RST
+    description: TIM1 timer reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI1RST
+    description: SPI 1 reset.
+    bit_offset: 12
+    bit_size: 1
+  - name: TIM8RST
+    description: TIM8 timer reset.
+    bit_offset: 13
+    bit_size: 1
+  - name: USART1RST
+    description: USART1 reset.
+    bit_offset: 14
+    bit_size: 1
+  - name: I2C4RST
+    description: I2C4 reset.
+    bit_offset: 15
+    bit_size: 1
+  - name: SAIRST
+    description: SAI reset.
+    bit_offset: 16
+    bit_size: 1
+  - name: SDIORST
+    description: SDIO reset.
+    bit_offset: 18
+    bit_size: 1
+  - name: TIM9RST
+    description: TIM9 timer reset.
+    bit_offset: 19
+    bit_size: 1
+  - name: TIM10RST
+    description: TIM10 timer reset.
+    bit_offset: 20
+    bit_size: 1
+  - name: TIM11RST
+    description: TIM11 timer reset.
+    bit_offset: 21
+    bit_size: 1
+  - name: TIM12RST
+    description: TIM12 timer reset.
+    bit_offset: 22
+    bit_size: 1
+  - name: OPCMRST
+    description: OPA and CMP reset.
+    bit_offset: 23
+    bit_size: 1
+  - name: DFSDMRST
+    description: DFSDM reset.
+    bit_offset: 25
+    bit_size: 1
+  - name: ECDCRST
+    description: ECDC reset.
+    bit_offset: 26
+    bit_size: 1
+  - name: GPHARST
+    description: GPHA reset.
+    bit_offset: 27
+    bit_size: 1
+  - name: LTDCRST
+    description: LTDC reset.
+    bit_offset: 30
+    bit_size: 1
+  - name: I3CRST
+    description: I3C reset.
+    bit_offset: 31
+    bit_size: 1
+fieldset/HBPCENR:
+  description: HB Peripheral Clock enable register (RCC_HBPCENR).
+  fields:
+  - name: DMA1EN
+    description: DMA clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: DMA2EN
+    description: DMA2 clock enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: CRCEN
+    description: CRC clock enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: FMCEN
+    description: FMC clock enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: RNGEN
+    description: RNG clock enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: SDMMCEN
+    description: SDMMC clock enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: USBHSEN
+    description: USBHS clock enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: USBSSEN
+    description: USBSS clock enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: DVPEN
+    description: DVP clock enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: ETHMACEN
+    description: Ethernet MAC clock enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: OTGFSEN
+    description: USBFS_OTG_FS clock enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: UHSIFEN
+    description: UHSIF clock enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: USBPDEN
+    description: USBPD clock enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: SERDESEN
+    description: SERDES clock enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: PIOCEN
+    description: PIOC clock enable.
+    bit_offset: 22
+    bit_size: 1
+fieldset/HBRSTR:
+  description: HB reset register (RCC_PHBRSTR).
+  fields:
+  - name: DMA1RST
+    description: DMA1 reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: DMA2RST
+    description: DMA2 reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: FMCRST
+    description: FMC reset.
+    bit_offset: 8
+    bit_size: 1
+  - name: RNGRST
+    description: RNG reset.
+    bit_offset: 9
+    bit_size: 1
+  - name: SDMMCRST
+    description: SDMMC reset.
+    bit_offset: 10
+    bit_size: 1
+  - name: USBHSRST
+    description: USBHS reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: USBSSRST
+    description: USBSS reset.
+    bit_offset: 12
+    bit_size: 1
+  - name: DVPRST
+    description: DVP reset.
+    bit_offset: 13
+    bit_size: 1
+  - name: ETHMACRST
+    description: Ethernet MAC reset.
+    bit_offset: 14
+    bit_size: 1
+  - name: OTGFSRST
+    description: USBFS_OTG_FS eset.
+    bit_offset: 17
+    bit_size: 1
+  - name: UHSIFRST
+    description: UHSIF reset.
+    bit_offset: 18
+    bit_size: 1
+  - name: USBPDRST
+    description: USBPD reset.
+    bit_offset: 19
+    bit_size: 1
+  - name: SERDESRST
+    description: SERDES reset.
+    bit_offset: 20
+    bit_size: 1
+  - name: PIOCRST
+    description: PIOC reset.
+    bit_offset: 22
+    bit_size: 1
+fieldset/INTR:
+  description: Clock interrupt register (RCC_INTR).
+  fields:
+  - name: LSIRDYF
+    description: LSI Ready Interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYF
+    description: LSE Ready Interrupt flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYF
+    description: HSI Ready Interrupt flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: HSERDYF
+    description: HSE Ready Interrupt flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: PLLRDYF
+    description: PLL Ready Interrupt flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: ETHPLLRDYF
+    description: ETH Ready Interrupt flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: SERDESPLLRDYF
+    description: SERDES_PLL Ready Interrupt flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: CSSF
+    description: Clock Security System Interrupt flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: LSIRDYIE
+    description: LSI Ready Interrupt Enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: LSERDYIE
+    description: LSE Ready Interrupt Enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: HSIRDYIE
+    description: HSI Ready Interrupt Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: HSERDYIE
+    description: HSE Ready Interrupt Enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: PLLRDYIE
+    description: PLL Ready Interrupt Enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: ETHPLLRDYIE
+    description: ETHPLL Ready Interrupt Enable.
+    bit_offset: 13
+    bit_size: 1
+  - name: SERDESPLLRDYIE
+    description: SERDESPLL Ready Interrupt Enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: LSIRDYC
+    description: LSI Ready Interrupt Clear.
+    bit_offset: 16
+    bit_size: 1
+  - name: LSERDYC
+    description: LSE Ready Interrupt Clear.
+    bit_offset: 17
+    bit_size: 1
+  - name: HSIRDYC
+    description: HSI Ready Interrupt Clear.
+    bit_offset: 18
+    bit_size: 1
+  - name: HSERDYC
+    description: HSE Ready Interrupt Clear.
+    bit_offset: 19
+    bit_size: 1
+  - name: PLLRDYC
+    description: PLL Ready Interrupt Clear.
+    bit_offset: 20
+    bit_size: 1
+  - name: ETHPLLRDYC
+    description: ETH PLL Ready Interrupt Clear.
+    bit_offset: 21
+    bit_size: 1
+  - name: SERDESPLLRDYC
+    description: SERDES Ready Interrupt Clear.
+    bit_offset: 22
+    bit_size: 1
+  - name: CSSC
+    description: Clock security system interrupt clear.
+    bit_offset: 23
+    bit_size: 1
+fieldset/PLLCFGR:
+  description: PLL clock configuration register (RCC_PLLCFGR).
+  fields:
+  - name: PLLMUL
+    description: Main PLL multiplication factor. Writable only while PLLON=0.
+    bit_offset: 0
+    bit_size: 5
+    enum: PLLMUL
+  - name: PLLSRC
+    description: PLL input clock source. Writable only while PLLON=0.
+    bit_offset: 5
+    bit_size: 3
+    enum: PLLSRC
+  - name: PLL_SRC_DIV
+    description: PLL input prescaler (1..64). Writable only while PLLON=0.
+    bit_offset: 8
+    bit_size: 6
+  - name: SYSPLL_SEL
+    description: System-clock-to-PLL selection. Writable only while SYSPLL_GATE=0.
+    bit_offset: 28
+    bit_size: 3
+    enum: SYSPLL_SEL
+  - name: SYSPLL_GATE
+    description: System-clock-to-PLL gate. Must be set before switching SYSCLK to PLL output.
+    bit_offset: 31
+    bit_size: 1
+fieldset/PLLCFGR2:
+  description: PLL Clock configuration register2 (RCC_PLLCFGR2).
+  fields:
+  - name: USBHSPLLSRC
+    description: USBHS PLL input clock source.
+    bit_offset: 0
+    bit_size: 2
+    enum: USBHSPLLSRC
+  - name: USBHSPLL_REFSEL
+    description: USBHS_PLL reference clock frequency. Writable only while USBHS_PLLON=0.
+    bit_offset: 2
+    bit_size: 2
+    enum: USBHSPLL_REFSEL
+  - name: USBSSPLL_REFSEL
+    description: USBSS_PLL reference clock frequency. Writable only while USBSS_PLLON=0.
+    bit_offset: 4
+    bit_size: 3
+    enum: USBSSPLL_REFSEL
+  - name: USBHSPLL_IN_DIV
+    description: USBHS_PLL input prescaler from SYS_PLL (1..32). Writable only while USBHS_PLLON=0.
+    bit_offset: 8
+    bit_size: 5
+  - name: SERDESPLL_MUL
+    description: SERDES_PLL multiplication factor. Writable only while SERDES_PLLON=0.
+    bit_offset: 16
+    bit_size: 4
+    enum: SERDESPLL_MUL
+fieldset/RSTSCKR:
+  description: Control/status register (RCC_RSTSCKR).
+  fields:
+  - name: LSION
+    description: Internal low speed oscillator enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSIRDY
+    description: Internal low speed oscillator ready.
+    bit_offset: 1
+    bit_size: 1
+  - name: RMVF
+    description: Remove reset flag.
+    bit_offset: 24
+    bit_size: 1
+  - name: PINRSTF
+    description: PIN reset flag.
+    bit_offset: 26
+    bit_size: 1
+  - name: PORRSTF
+    description: POR/PDR reset flag.
+    bit_offset: 27
+    bit_size: 1
+  - name: SFTRSTF
+    description: Software reset flag.
+    bit_offset: 28
+    bit_size: 1
+  - name: IWDGRSTF
+    description: Independent watchdog reset flag.
+    bit_offset: 29
+    bit_size: 1
+  - name: WWDGRSTF
+    description: Window watchdog reset flag.
+    bit_offset: 30
+    bit_size: 1
+  - name: LKUPRSTF
+    description: LOCKUP reset flag.
+    bit_offset: 31
+    bit_size: 1
+enum/ADCPRE:
+  description: ADC prescaler (divides PB2 clock).
+  bit_size: 2
+  variants:
+  - name: DIV2
+    description: PB2 divided by 2.
+    value: 0
+  - name: DIV4
+    description: PB2 divided by 4.
+    value: 1
+  - name: DIV6
+    description: PB2 divided by 6.
+    value: 2
+  - name: DIV8
+    description: PB2 divided by 8.
+    value: 3
+enum/ADCSRC:
+  description: ADC input clock source selection.
+  bit_size: 1
+  variants:
+  - name: HCLK
+    description: HCLK feeds the ADC prescaler.
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) feeds the ADC prescaler.
+    value: 1
+enum/CLK_SRC_PLL:
+  description: Single-bit clock source selecting between SYSCLK and PLL_CLK.
+  bit_size: 1
+  variants:
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 0
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 1
+enum/ETH1GSRC:
+  description: Gigabit Ethernet 125 MHz clock source.
+  bit_size: 2
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 0
+  - name: USBSS_PLL
+    description: USBSS_PLL selected.
+    value: 1
+  - name: ETH_PLL_DIV4
+    description: ETH_PLL divided by 4 selected.
+    value: 2
+  - name: SERDES_PLL_DIV8
+    description: SERDES_PLL divided by 8 selected.
+    value: 3
+enum/FPRE:
+  description: V5F core clock prescaler. Note 1xx encodes "divide by 4" (the MSB is don't-care for that case).
+  bit_size: 2
+  variants:
+  - name: DIV1
+    description: V5F clock not divided.
+    value: 0
+  - name: DIV2
+    description: V5F clock divided by 2.
+    value: 1
+  - name: DIV4
+    description: V5F clock divided by 4.
+    value: 2
+enum/HPRE:
+  description: HB (AHB) prescaler.
+  bit_size: 4
+  variants:
+  - name: DIV1
+    description: SYS_CLK not divided.
+    value: 0
+  - name: DIV2
+    description: SYS_CLK divided by 2.
+    value: 8
+  - name: DIV4
+    description: SYS_CLK divided by 4.
+    value: 9
+  - name: DIV8
+    description: SYS_CLK divided by 8.
+    value: 10
+  - name: DIV16
+    description: SYS_CLK divided by 16.
+    value: 11
+  - name: DIV64
+    description: SYS_CLK divided by 64.
+    value: 12
+  - name: DIV128
+    description: SYS_CLK divided by 128.
+    value: 13
+  - name: DIV256
+    description: SYS_CLK divided by 256.
+    value: 14
+  - name: DIV512
+    description: SYS_CLK divided by 512.
+    value: 15
+enum/HSADCSRC:
+  description: HSADC clock source. Encoding follows the WCH SDK header (RCC_HSADCSource_* in ch32h417_rcc.h) and the HSADC example which sets value 0 to obtain PLL_CLK. RM V1.7 section 3.4.13 lists the encoding for values 00 / 01 swapped (SYSCLK / PLL_CLK) — believed to be a doc typo since the SDK example is the canonical shipping code.
+  bit_size: 2
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 0
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected.
+    value: 2
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected.
+    value: 3
+enum/LTDCSRC:
+  description: LTDC clock source.
+  bit_size: 2
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 0
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2 selected.
+    value: 1
+  - name: ETH_PLL
+    description: ETH_PLL selected.
+    value: 2
+  - name: USBHS_PLL
+    description: USBHS_PLL selected.
+    value: 3
+enum/MCO:
+  description: Microcontroller clock output (MCO pin) source selection.
+  bit_size: 4
+  variants:
+  - name: NO_CLK
+    description: No clock output (encoded values 0000-0011).
+    value: 0
+  - name: SYSCLK
+    description: SYSCLK output.
+    value: 4
+  - name: HSI
+    description: HSI (25 MHz internal RC) output.
+    value: 5
+  - name: HSE
+    description: HSE output.
+    value: 6
+  - name: PLL_DIV2
+    description: PLL clock divided by 2 output.
+    value: 7
+  - name: UTMI
+    description: UTMI clock output.
+    value: 8
+  - name: USBSS_PLL_DIV2
+    description: USBSS_PLL divided by 2 output.
+    value: 9
+  - name: ETH_PLL_DIV8
+    description: ETH_PLL divided by 8 output.
+    value: 10
+  - name: SERDES_PLL_DIV16
+    description: SERDES_PLL divided by 16 output.
+    value: 11
+enum/PLLMUL:
+  description: Main PLL multiplication factor (writable only while PLLON=0).
+  bit_size: 5
+  variants:
+  - name: MUL4
+    description: PLL x 4.
+    value: 0
+  - name: MUL6
+    description: PLL x 6.
+    value: 1
+  - name: MUL7
+    description: PLL x 7.
+    value: 2
+  - name: MUL8
+    description: PLL x 8.
+    value: 3
+  - name: MUL8_5
+    description: PLL x 8.5.
+    value: 4
+  - name: MUL9
+    description: PLL x 9.
+    value: 5
+  - name: MUL9_5
+    description: PLL x 9.5.
+    value: 6
+  - name: MUL10
+    description: PLL x 10.
+    value: 7
+  - name: MUL10_5
+    description: PLL x 10.5.
+    value: 8
+  - name: MUL11
+    description: PLL x 11.
+    value: 9
+  - name: MUL11_5
+    description: PLL x 11.5.
+    value: 10
+  - name: MUL12
+    description: PLL x 12.
+    value: 11
+  - name: MUL12_5
+    description: PLL x 12.5.
+    value: 12
+  - name: MUL13
+    description: PLL x 13.
+    value: 13
+  - name: MUL14
+    description: PLL x 14.
+    value: 14
+  - name: MUL15
+    description: PLL x 15.
+    value: 15
+  - name: MUL16
+    description: PLL x 16.
+    value: 16
+  - name: MUL17
+    description: PLL x 17.
+    value: 17
+  - name: MUL18
+    description: PLL x 18.
+    value: 18
+  - name: MUL19
+    description: PLL x 19.
+    value: 19
+  - name: MUL20
+    description: PLL x 20.
+    value: 20
+  - name: MUL22
+    description: PLL x 22.
+    value: 21
+  - name: MUL24
+    description: PLL x 24.
+    value: 22
+  - name: MUL26
+    description: PLL x 26.
+    value: 23
+  - name: MUL28
+    description: PLL x 28.
+    value: 24
+  - name: MUL30
+    description: PLL x 30.
+    value: 25
+  - name: MUL32
+    description: PLL x 32.
+    value: 26
+  - name: MUL34
+    description: PLL x 34.
+    value: 27
+  - name: MUL36
+    description: PLL x 36.
+    value: 28
+  - name: MUL38
+    description: PLL x 38.
+    value: 29
+  - name: MUL40
+    description: PLL x 40.
+    value: 30
+  - name: MUL59
+    description: PLL x 59.
+    value: 31
+enum/PLLSRC:
+  description: Main PLL input clock source.
+  bit_size: 3
+  variants:
+  - name: HSI
+    description: HSI selected as PLL input.
+    value: 0
+  - name: HSE
+    description: HSE selected as PLL input.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected as PLL input.
+    value: 4
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected as PLL input.
+    value: 5
+  - name: USBSS_PLL
+    description: USBSS_PLL (125 MHz) selected as PLL input.
+    value: 6
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2 selected as PLL input.
+    value: 7
+enum/PPRE:
+  description: PB (APB) prescaler.
+  bit_size: 3
+  variants:
+  - name: DIV1
+    description: HCLK not divided.
+    value: 0
+  - name: DIV2
+    description: HCLK divided by 2.
+    value: 4
+  - name: DIV4
+    description: HCLK divided by 4.
+    value: 5
+  - name: DIV8
+    description: HCLK divided by 8.
+    value: 6
+  - name: DIV16
+    description: HCLK divided by 16.
+    value: 7
+enum/RTCSEL:
+  description: RTC clock source selection.
+  bit_size: 2
+  variants:
+  - name: NO_CLK
+    description: No clock.
+    value: 0
+  - name: LSE
+    description: LSE oscillator selected as RTC clock.
+    value: 1
+  - name: LSI
+    description: LSI oscillator selected as RTC clock.
+    value: 2
+  - name: HSE_DIV512
+    description: HSE oscillator divided by 512 selected as RTC clock.
+    value: 3
+enum/SERDESPLL_MUL:
+  description: SERDES_PLL multiplication factor.
+  bit_size: 4
+  variants:
+  - name: MUL25
+    description: SERDES_PLL x 25.
+    value: 0
+  - name: MUL28
+    description: SERDES_PLL x 28.
+    value: 1
+  - name: MUL30
+    description: SERDES_PLL x 30.
+    value: 2
+  - name: MUL32
+    description: SERDES_PLL x 32.
+    value: 3
+  - name: MUL35
+    description: SERDES_PLL x 35.
+    value: 4
+  - name: MUL38
+    description: SERDES_PLL x 38.
+    value: 5
+  - name: MUL40
+    description: SERDES_PLL x 40.
+    value: 6
+  - name: MUL45
+    description: SERDES_PLL x 45.
+    value: 7
+  - name: MUL50
+    description: SERDES_PLL x 50.
+    value: 8
+  - name: MUL56
+    description: SERDES_PLL x 56.
+    value: 9
+  - name: MUL60
+    description: SERDES_PLL x 60.
+    value: 10
+  - name: MUL64
+    description: SERDES_PLL x 64.
+    value: 11
+  - name: MUL70
+    description: SERDES_PLL x 70.
+    value: 12
+  - name: MUL76
+    description: SERDES_PLL x 76.
+    value: 13
+  - name: MUL80
+    description: SERDES_PLL x 80.
+    value: 14
+  - name: MUL90
+    description: SERDES_PLL x 90.
+    value: 15
+enum/SW:
+  description: System clock source.
+  bit_size: 2
+  variants:
+  - name: HSI
+    description: HSI selected as system clock.
+    value: 0
+  - name: HSE
+    description: HSE selected as system clock.
+    value: 1
+  - name: PLL
+    description: PLL selected as system clock.
+    value: 2
+enum/SYSPLL_SEL:
+  description: System-clock-to-PLL output selection (writable only while SYSPLL_GATE=0).
+  bit_size: 3
+  variants:
+  - name: PLL_CLK
+    description: PLL_CLK (covers any encoding 0xx).
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz).
+    value: 4
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz).
+    value: 5
+  - name: SERDES_PLL_DIV2
+    description: SERDES_PLL divided by 2.
+    value: 6
+  - name: USBSS_PLL
+    description: USBSS_PLL (125 MHz).
+    value: 7
+enum/UHSIFSRC:
+  description: UHSIF clock source.
+  bit_size: 2
+  variants:
+  - name: SYSCLK
+    description: SYSCLK selected.
+    value: 0
+  - name: PLL_CLK
+    description: PLL_CLK selected.
+    value: 1
+  - name: USBHS_PLL
+    description: USBHS_PLL (480 MHz) selected.
+    value: 2
+  - name: ETH_PLL
+    description: ETH_PLL (500 MHz) selected.
+    value: 3
+enum/USBFSDIV:
+  description: USBFS 48 MHz prescaler. Selects integer or half-integer divisors of the source clock.
+  bit_size: 4
+  variants:
+  - name: DIV1
+    description: Divide by 1.
+    value: 0
+  - name: DIV2
+    description: Divide by 2.
+    value: 1
+  - name: DIV3
+    description: Divide by 3.
+    value: 2
+  - name: DIV4
+    description: Divide by 4.
+    value: 3
+  - name: DIV5
+    description: Divide by 5.
+    value: 4
+  - name: DIV6
+    description: Divide by 6.
+    value: 5
+  - name: DIV8
+    description: Divide by 8.
+    value: 6
+  - name: DIV10
+    description: Divide by 10.
+    value: 7
+  - name: DIV1_5
+    description: Divide by 1.5.
+    value: 8
+  - name: DIV2_5
+    description: Divide by 2.5.
+    value: 9
+  - name: DIV3_5
+    description: Divide by 3.5.
+    value: 10
+  - name: DIV4_5
+    description: Divide by 4.5.
+    value: 11
+  - name: DIV5_5
+    description: Divide by 5.5.
+    value: 12
+  - name: DIV6_5
+    description: Divide by 6.5.
+    value: 13
+  - name: DIV7_5
+    description: Divide by 7.5.
+    value: 14
+  - name: DIV9_5
+    description: Divide by 9.5.
+    value: 15
+enum/USBFSSRC:
+  description: USBFS 48 MHz clock source.
+  bit_size: 1
+  variants:
+  - name: PLL
+    description: PLL clock selected.
+    value: 0
+  - name: USBHS_PLL
+    description: USBHS_PLL clock selected.
+    value: 1
+enum/USBHSPLLSRC:
+  description: USBHS_PLL input clock source.
+  bit_size: 2
+  variants:
+  - name: HSE
+    description: HSE selected as USBHS_PLL input.
+    value: 0
+  - name: HSI
+    description: HSI selected as USBHS_PLL input.
+    value: 1
+  - name: ETHCLK_20M
+    description: ETHCLK_20M selected as USBHS_PLL input.
+    value: 2
+  - name: SYS_PLL_DIV
+    description: SYS_PLL_CLK divided by USBHSPLL_IN_DIV selected as USBHS_PLL input.
+    value: 3
+enum/USBHSPLL_REFSEL:
+  description: USBHS_PLL reference clock frequency.
+  bit_size: 2
+  variants:
+  - name: F25MHZ
+    description: 25 MHz.
+    value: 0
+  - name: F20MHZ
+    description: 20 MHz.
+    value: 1
+  - name: F24MHZ
+    description: 24 MHz.
+    value: 2
+  - name: F32MHZ
+    description: 32 MHz.
+    value: 3
+enum/USBSSPLL_REFSEL:
+  description: USBSS_PLL reference clock frequency.
+  bit_size: 3
+  variants:
+  - name: F20MHZ
+    description: 20 MHz.
+    value: 0
+  - name: F24MHZ
+    description: 24 MHz.
+    value: 1
+  - name: F25MHZ
+    description: 25 MHz.
+    value: 2
+  - name: F30MHZ
+    description: 30 MHz.
+    value: 3
+  - name: F32MHZ
+    description: 32 MHz.
+    value: 4
+  - name: F40MHZ
+    description: 40 MHz.
+    value: 5
+  - name: F60MHZ
+    description: 60 MHz.
+    value: 6
+  - name: F80MHZ
+    description: 80 MHz.
+    value: 7

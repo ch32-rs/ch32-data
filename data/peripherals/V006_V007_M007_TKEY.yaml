@@ -1,0 +1,17 @@
+- name: TKEY
+  address: 0x40012400
+  registers:
+    kind: tkey
+    version: v00x
+    block: TKEY
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: ADCEN
+    reset:
+      register: PB2PRSTR
+      field: ADCRST
+  interrupts:
+    - { signal: "GLOBAL", interrupt: "ADC" }

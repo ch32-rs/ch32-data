@@ -1,0 +1,22 @@
+block/EXTEN:
+  description: Extended configuration.
+  items:
+    - name: CTR
+      description: extended control register.
+      byte_offset: 0
+      fieldset: CTR
+fieldset/CTR:
+  description: extended control register.
+  fields:
+    - name: LKUPEN
+      description: LOCKUP monitor enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LKUPRST
+      description: LOCKUP reset flag.
+      bit_offset: 7
+      bit_size: 1
+    - name: TIM2_DMA_REMAP
+      description: TIM2 channel 4 DMA remap.
+      bit_offset: 16
+      bit_size: 1
