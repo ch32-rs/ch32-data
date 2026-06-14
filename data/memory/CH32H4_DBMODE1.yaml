@@ -28,5 +28,5 @@ memory:
         write_size: 2
     access:
       read: true
-      write: false
+      write: true
       execute: true
