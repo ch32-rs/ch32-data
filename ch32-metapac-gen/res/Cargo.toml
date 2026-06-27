@@ -13,7 +13,14 @@ keywords = ["wch", "ch32", "svd2rust", "no_std", "embedded"]
 readme = "README.md"
 
 # `cargo publish` is unable to figure out which .rs files are needed due to the include! magic.
-include = ["**/*.rs", "**/*.x", "Cargo.toml"]
+include = [
+    "**/*.rs",
+    "**/*.x",
+    "src/chips/**/memory_x/**",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE-*",
+]
 
 [package.metadata.docs.rs]
 features = ["ch32v307vct6", "pac", "metadata"]
