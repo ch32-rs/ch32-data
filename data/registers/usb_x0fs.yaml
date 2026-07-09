@@ -336,6 +336,7 @@ fieldset/USB_INT_ST:
       description: RO, bit mask of current token PID code received for USB device mode.
       bit_offset: 4
       bit_size: 2
+      enum: USB_TOKEN
     - name: TOG_OK
       description: RO, indicate current USB transfer toggle is OK.
       bit_offset: 6
@@ -397,9 +398,11 @@ fieldset/UEP_CTRL:
     - name: T_RES
       bit_offset: 0
       bit_size: 2
+      enum: EP_TX_RESPONSE
     - name: R_RES
       bit_offset: 2
       bit_size: 2
+      enum: EP_RX_RESPONSE
     - name: T_TOG
       description: "prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1."
       bit_offset: 6
@@ -581,3 +584,51 @@ fieldset/UH_TX_CTRL:
     - name: T_TOG
       bit_offset: 6
       bit_size: 1
+
+enum/EP_TX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Expect an ACK response.
+      value: 0
+    - name: None
+      description: No response expected.
+      value: 1
+    - name: NAK
+      description: Expect a NAK or busy response.
+      value: 2
+    - name: STALL
+      description: Expect a STALL or error response.
+      value: 3
+
+enum/EP_RX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Data ready and respond with ACK.
+      value: 0
+    - name: NYET
+      description: Respond with NYET.
+      value: 1
+    - name: NAK
+      description: Respond with NAK or busy.
+      value: 2
+    - name: STALL
+      description: Respond with STALL or error.
+      value: 3
+
+enum/USB_TOKEN:
+  bit_size: 2
+  variants:
+    - name: OUT
+      description: OUT packet.
+      value: 0
+    - name: Rsvd
+      description: Reserved.
+      value: 1
+    - name: IN
+      description: IN packet.
+      value: 2
+    - name: SETUP
+      description: SETUP packet.
+      value: 3
