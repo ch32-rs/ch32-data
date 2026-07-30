@@ -1,0 +1,99 @@
+block/OPA:
+  description: OPA configuration register block. 4 independent operational amplifiers (OPA1..OPA4) on CH32F20x/CH32V20x/CH32V30x/CH32V31x.
+  items:
+  - name: CTLR
+    description: OPA control register.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: CTR2
+    description: OPA control register 2 (Configuration Extended Control Register 2 / EXTEN_CTR2). Per-OPA high-speed mode enable.
+    byte_offset: 4
+    fieldset: CTR2
+
+fieldset/CTLR:
+  description: OPA control register. Each OPA has 4 control bits (EN, MODE, NSEL, PSEL) at a 4-bit stride.
+  fields:
+  - name: EN1
+    description: OPA1 enable. 0=disable, 1=enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: MODE1
+    description: OPA1 output channel selection. 0=OPA1_OUT0, 1=OPA1_OUT1.
+    bit_offset: 1
+    bit_size: 1
+  - name: NSEL1
+    description: OPA1 negative input selection. 0=CHN0, 1=CHN1.
+    bit_offset: 2
+    bit_size: 1
+  - name: PSEL1
+    description: OPA1 positive input selection. 0=CHP0, 1=CHP1.
+    bit_offset: 3
+    bit_size: 1
+  - name: EN2
+    description: OPA2 enable. 0=disable, 1=enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: MODE2
+    description: OPA2 output channel selection. 0=OPA2_OUT0, 1=OPA2_OUT1.
+    bit_offset: 5
+    bit_size: 1
+  - name: NSEL2
+    description: OPA2 negative input selection. 0=CHN0, 1=CHN1.
+    bit_offset: 6
+    bit_size: 1
+  - name: PSEL2
+    description: OPA2 positive input selection. 0=CHP0, 1=CHP1.
+    bit_offset: 7
+    bit_size: 1
+  - name: EN3
+    description: OPA3 enable. Only present on D8/D8C variants. 0=disable, 1=enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: MODE3
+    description: OPA3 output channel selection. Only present on D8/D8C variants. 0=OPA3_OUT0, 1=OPA3_OUT1.
+    bit_offset: 9
+    bit_size: 1
+  - name: NSEL3
+    description: OPA3 negative input selection. Only present on D8/D8C variants. 0=CHN0, 1=CHN1.
+    bit_offset: 10
+    bit_size: 1
+  - name: PSEL3
+    description: OPA3 positive input selection. Only present on D8/D8C variants. 0=CHP0, 1=CHP1.
+    bit_offset: 11
+    bit_size: 1
+  - name: EN4
+    description: OPA4 enable. Only present on D8/D8C variants. 0=disable, 1=enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: MODE4
+    description: OPA4 output channel selection. Only present on D8/D8C variants. 0=OPA4_OUT0, 1=OPA4_OUT1.
+    bit_offset: 13
+    bit_size: 1
+  - name: NSEL4
+    description: OPA4 negative input selection. Only present on D8/D8C variants. 0=CHN0, 1=CHN1.
+    bit_offset: 14
+    bit_size: 1
+  - name: PSEL4
+    description: OPA4 positive input selection. Only present on D8/D8C variants. 0=CHP0, 1=CHP1.
+    bit_offset: 15
+    bit_size: 1
+
+fieldset/CTR2:
+  description: OPA control register 2 (Configuration Extended Control Register 2 / EXTEN_CTR2). Each OPA has a 1-bit high-speed mode enable.
+  fields:
+  - name: HSMD1
+    description: OPA1 high-speed mode enable. 0=disable (low-power mode), 1=enable (high-speed mode, higher bandwidth/slew rate).
+    bit_offset: 0
+    bit_size: 1
+  - name: HSMD2
+    description: OPA2 high-speed mode enable. 0=disable (low-power mode), 1=enable (high-speed mode, higher bandwidth/slew rate).
+    bit_offset: 1
+    bit_size: 1
+  - name: HSMD3
+    description: OPA3 high-speed mode enable. Only present on D8/D8C variants. 0=disable (low-power mode), 1=enable (high-speed mode, higher bandwidth/slew rate).
+    bit_offset: 2
+    bit_size: 1
+  - name: HSMD4
+    description: OPA4 high-speed mode enable. Only present on D8/D8C variants. 0=disable (low-power mode), 1=enable (high-speed mode, higher bandwidth/slew rate).
+    bit_offset: 3
+    bit_size: 1

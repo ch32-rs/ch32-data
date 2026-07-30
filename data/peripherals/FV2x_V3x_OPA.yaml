@@ -1,0 +1,52 @@
+# OPA on CH32F20x/CH32V20x/CH32V30x/CH32V31x.
+# 4 independent op-amps (OPA1..OPA4). OPA3/OPA4 are only present on D8/D8C variants
+# (CH32F20x_D8, CH32F20x_D8C, CH32V30x_D8, CH32V30x_D8C, CH32V31x_D8C).
+# CH32V307 (V/W/R-CT6, WCU6) is a D8C variant, so all 4 OPAs are populated on this part.
+# No RCC clock gate: the OPA block is powered from the analog rail and has no APB enable bit.
+# No dedicated interrupt vector on this family.
+- name: OPA
+  address: 0x40023804
+  registers:
+    kind: opa
+    version: v3
+    block: OPA
+  pins:
+    # OPA1 positive inputs (PSEL1)
+    - { pin: "PB15", signal: "OPA1_CH0P" }
+    - { pin: "PB0",  signal: "OPA1_CH1P" }
+    # OPA1 negative inputs (NSEL1)
+    - { pin: "PB11", signal: "OPA1_CH0N" }
+    - { pin: "PA6",  signal: "OPA1_CH1N" }
+    # OPA1 outputs (MODE1)
+    - { pin: "PA3",  signal: "OPA1_OUT0" }
+    - { pin: "PE15", signal: "OPA1_OUT1" }
+
+    # OPA2 positive inputs (PSEL2)
+    - { pin: "PB14", signal: "OPA2_CH0P" }
+    - { pin: "PA7",  signal: "OPA2_CH1P" }
+    # OPA2 negative inputs (NSEL2)
+    - { pin: "PB10", signal: "OPA2_CH0N" }
+    - { pin: "PA5",  signal: "OPA2_CH1N" }
+    # OPA2 outputs (MODE2)
+    - { pin: "PA2",  signal: "OPA2_OUT0" }
+    - { pin: "PE14", signal: "OPA2_OUT1" }
+
+    # OPA3 positive inputs (PSEL3) — D8/D8C only
+    - { pin: "PB13", signal: "OPA3_CH0P" }
+    - { pin: "PC5",  signal: "OPA3_CH1P" }
+    # OPA3 negative inputs (NSEL3) — D8/D8C only
+    - { pin: "PB2",  signal: "OPA3_CH0N" }
+    - { pin: "PC2",  signal: "OPA3_CH1N" }
+    # OPA3 outputs (MODE3) — D8/D8C only
+    - { pin: "PA1",  signal: "OPA3_OUT0" }
+    - { pin: "PE7",  signal: "OPA3_OUT1" }
+
+    # OPA4 positive inputs (PSEL4) — D8/D8C only
+    - { pin: "PB12", signal: "OPA4_CH0P" }
+    - { pin: "PC4",  signal: "OPA4_CH1P" }
+    # OPA4 negative inputs (NSEL4) — D8/D8C only
+    - { pin: "PB1",  signal: "OPA4_CH0N" }
+    - { pin: "PC3",  signal: "OPA4_CH1N" }
+    # OPA4 outputs (MODE4) — D8/D8C only
+    - { pin: "PA0",  signal: "OPA4_OUT0" }
+    - { pin: "PE8",  signal: "OPA4_OUT1" }
