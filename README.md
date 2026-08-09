@@ -22,6 +22,7 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 
 - CH32V0, Low price (V2A/V2C)
 - CH32V1, General purpose (V3A)
+- CH32V205, General purpose (V3B)
 - CH32V203/CH32V303, General purpose (V4B)
 - CH32V305/CH32V307/CH32V317, High speed interconnect (V4F)
 - CH32V208, BLE 5.3 (V4C)
@@ -96,4 +97,3 @@ All kinds of contributions are welcome.
 ## License
 
 This project is licensed under the MIT or Apache-2.0 license, at your option.
-
