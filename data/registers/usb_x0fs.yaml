@@ -591,8 +591,8 @@ enum/EP_TX_RESPONSE:
     - name: ACK
       description: Expect an ACK response.
       value: 0
-    - name: None
-      description: No response expected.
+    - name: NYET
+      description: Expect a NYET response.
       value: 1
     - name: NAK
       description: Expect a NAK or busy response.
