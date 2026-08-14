@@ -386,6 +386,11 @@
     reset:
       register: AHBRSTR
       field: USBHDRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBHD
+    - signal: WKUP
+      interrupt: USB_WKUP
   pins:
     - pin: PA11
       signal: DM
