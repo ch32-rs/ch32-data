@@ -44,6 +44,6 @@ CH32V307RCT6,144MHz,256K,64K,LQFP64M,51,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内�
 CH32V307WCU6,144MHz,256K,64K,QFN68,54,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
 CH32V307VCT6,144MHz,256K,64K,LQFP100,80,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
 CH32V208GBU6,144MHz,128K,64K,QFN28,21,2,1,-,1/-,1,1/8,8,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
-CH32V208CBU6,144MHz,128K,64K,QFN48,37,4,2,-,2/-,2,1/10,10,1/4,1,2,D+H/D,-,1,-,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
+CH32V208CBU6,144MHz,128K,64K,QFN48,35,4,2,-,2/-,2,1/10,10,1/4,1,2,D+H/D,-,1,-,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
 CH32V208RBT6,144MHz,128K,64K,LQFP64M,49,4,2,-,2/-,2,1/16,16,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
 CH32V208WBU6,144MHz,128K,64K,QFN68,53,4,2,-,2/-,2,1/16,16,1/4,1,2,D+H/D,-,1,10M,-,-,2.5/3.3,5.3,http://www.wch.cn/products/CH32V208.html
