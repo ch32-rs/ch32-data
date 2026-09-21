@@ -38,7 +38,7 @@ _raw:
   RTC: "1"
   OPA: "1"
   GPIO: "18"
-  IIC: "2"
+  IIC: "1"
   Package: TSSOP20
   SPI: 2/-
   CAN: "1"
