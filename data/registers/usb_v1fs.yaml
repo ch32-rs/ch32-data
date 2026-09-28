@@ -316,6 +316,7 @@ fieldset/USB_INT_ST:
       description: RO, bit mask of current token PID code received for USB device mode.
       bit_offset: 4
       bit_size: 2
+      enum: USB_TOKEN
     - name: TOG_OK
       description: RO, indicate current USB transfer toggle is OK.
       bit_offset: 6
@@ -411,10 +412,12 @@ fieldset/UEP_CTRL:
       description: bit mask of handshake response type for USB endpoint X transmittal (IN).
       bit_offset: 0
       bit_size: 2
+      enum: EP_TX_RESPONSE
     - name: MASK_R_RES
       description: bit mask of handshake response type for USB endpoint X receiving (OUT).
       bit_offset: 2
       bit_size: 2
+      enum: EP_RX_RESPONSE
     - name: AUTO_TOG
       bit_offset: 4
       bit_size: 1
@@ -524,3 +527,51 @@ fieldset/UH_TX_CTRL:
     - name: T_TOG
       bit_offset: 6
       bit_size: 1
+
+enum/EP_TX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: DATA0/DATA1 is ready and an ACK response is expected.
+      value: 0
+    - name: None
+      description: No response is expected; used for non-control isochronous transfers.
+      value: 1
+    - name: NAK
+      description: Respond with NAK or busy.
+      value: 2
+    - name: STALL
+      description: Respond with STALL or error.
+      value: 3
+
+enum/EP_RX_RESPONSE:
+  bit_size: 2
+  variants:
+    - name: ACK
+      description: Respond with ACK.
+      value: 0
+    - name: None
+      description: Timeout or no response; used for non-control isochronous transfers.
+      value: 1
+    - name: NAK
+      description: Respond with NAK or busy.
+      value: 2
+    - name: STALL
+      description: Respond with STALL or error.
+      value: 3
+
+enum/USB_TOKEN:
+  bit_size: 2
+  variants:
+    - name: OUT
+      description: OUT packet.
+      value: 0
+    - name: Rsvd
+      description: Reserved.
+      value: 1
+    - name: IN
+      description: IN packet.
+      value: 2
+    - name: SETUP
+      description: SETUP packet.
+      value: 3
