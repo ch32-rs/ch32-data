@@ -30,3 +30,16 @@
     - pin: PB15
       signal: MOSI
       remap: 0
+    # i2s
+    - pin: PB12
+      signal: WS
+      remap: 0
+    - pin: PB13
+      signal: CK
+      remap: 0
+    - pin: PB15
+      signal: SD
+      remap: 0
+    - pin: PC6
+      signal: MCK
+      remap: 0

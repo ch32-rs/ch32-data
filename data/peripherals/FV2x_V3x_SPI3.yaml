@@ -46,3 +46,31 @@
     - pin: PC12
       signal: MOSI
       remap: 1
+    # i2s
+    - pin: PA15
+      signal: WS
+      remap: 0
+    - pin: PB3
+      signal: CK
+      remap: 0
+    - pin: PB5
+      signal: SD
+      remap: 0
+    - pin: PA9 # remapped when using ETH
+      signal: SD
+      remap: 0
+    - pin: PC7
+      signal: MCK
+      remap: 0
+    - pin: PA8 # remapped when using ETH
+      signal: MCK
+      remap: 0
+    - pin: PA4
+      signal: WS
+      remap: 1
+    - pin: PC10
+      signal: CK
+      remap: 1
+    - pin: PC12
+      signal: SD
+      remap: 1
