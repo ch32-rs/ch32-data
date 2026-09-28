@@ -185,13 +185,9 @@ fieldset/USB_BASE_CTRL:
       bit_offset: 3
       bit_size: 1
     - name: SYS_CTRL
-      description: USB device enable and internal pullup resistance enable.
+      description: USB test mode selection in host mode.
       bit_offset: 4
       bit_size: 2
-    - name: DEV_PU_EN
-      description: USB device internal pullup resistance enable.
-      bit_offset: 5
-      bit_size: 1
     - name: LOW_SPEED
       description: "enable USB low speed: 0=12Mbps, 1=1.5Mbps."
       bit_offset: 6
