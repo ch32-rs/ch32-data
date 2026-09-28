@@ -43,6 +43,6 @@ _raw:
   VDD: "3.3"
   RTC: "1"
   url: https://www.wch.cn/products/CH32L103.html
-  IIC: "2"
+  IIC: "1"
   GPIO: "28"
   SRAM: 20K
