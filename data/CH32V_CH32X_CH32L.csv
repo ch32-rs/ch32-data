@@ -38,7 +38,7 @@ CH32V303RBT6,144MHz,128K,32K,LQFP64M,51,3,2,2,2/-,4,2/16,16,1/3,1,2,H/D,-,1,-,-,
 CH32V303RCT6,144MHz,256K,64K,LQFP64M,51,8,2,2,3/2,4,2/16,16,4/4,1,2,H/D,-,1,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
 CH32V303VCT6,144MHz,256K,64K,LQFP100,80,8,2,2,3/2,4,2/16,16,4/4,1,2,H/D,-,1,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V303.html
 CH32V305FBP6,144MHz,128K,32K,TSSOP20,17,2,2,1,1/1,-,2/1,1,4/4,1,2,-,H/D 内置PHY,1,-,1,-,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
-CH32V305GBU6,144MHz,128K,32K,QFN28,24,5,2,1,3/2,1,2/6,6,4/4,1,2,-,H/D 内置PHY,2,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
+CH32V305GBU6,144MHz,128K,32K,QFN28,24,5,2,2,3/2,1,2/6,6,4/4,1,2,-,H/D 内置PHY,1,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
 CH32V305RBT6,144MHz,128K,32K,LQFP64M,51,5,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,-,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
 CH32V307RCT6,144MHz,256K,64K,LQFP64M,51,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html
 CH32V307WCU6,144MHz,256K,64K,QFN68,54,8,2,2,3/2,4,2/16,16,4/4,1,2,OTG,H/D 内置PHY,2,1G MAC+10M PHY,1,1,2.5/3.3,-,http://www.wch.cn/products/CH32V307.html

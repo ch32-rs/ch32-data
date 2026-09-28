@@ -67,7 +67,7 @@ cores:
 _raw:
   UART: "5"
   GPIO: "24"
-  DAC: "1"
+  DAC: "2"
   OPA: "1"
   TRNG: "1"
   Touchkey: "6"
@@ -82,7 +82,7 @@ _raw:
   IIC: "2"
   Package: QFN28
   Part NO.: CH32V305GBU6
-  CAN: "2"
+  CAN: "1"
   SRAM: 32K
   RTC: "1"
   Flash: 128K
