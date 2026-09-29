@@ -1,7 +1,7 @@
 [package]
 name = "ch32-metapac"
-version = "0.1.0"
-edition = "2021"
+version = "0.1.1"
+edition = "2024"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/ch32-rs/ch32-data"
 homepage = "https://github.com/ch32-rs/ch32-data"
@@ -24,7 +24,7 @@ include = [
 
 [package.metadata.docs.rs]
 features = ["ch32v307vct6", "pac", "metadata"]
-default-target = "riscv32imac-unknown-none-eabihf"
+default-target = "riscv32imac-unknown-none-elf"
 targets = []
 
 [package.metadata.embassy_docs]

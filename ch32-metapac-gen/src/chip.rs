@@ -198,10 +198,27 @@ fn postprocess_pac_rs(s: String, arch: Arch) -> String {
         .to_string();
 
     // Remove inner attributes like #![no_std]
-    Regex::new("# *! *\\[.*\\]")
+    let data = Regex::new("# *! *\\[.*\\]")
         .unwrap()
         .replace_all(&data, "")
-        .to_string()
+        .to_string();
+
+    // edition 2024: `link_section`/`no_mangle` are unsafe attributes, and
+    // `extern` blocks must be declared `unsafe extern`.
+    let data = Regex::new(r#"#\s*\[link_section\s*=\s*("[^"]*")\s*\]"#)
+        .unwrap()
+        .replace_all(&data, "# [unsafe(link_section = $1)]")
+        .to_string();
+    let data = Regex::new(r#"#\s*\[no_mangle\s*\]"#)
+        .unwrap()
+        .replace_all(&data, "# [unsafe(no_mangle)]")
+        .to_string();
+    let data = Regex::new(r#"\bextern\s+"C"\s*\{"#)
+        .unwrap()
+        .replace_all(&data, "unsafe extern \"C\" {")
+        .to_string();
+
+    data
 }
 
 // Returns the set of memory variants exposed via feature flags:
