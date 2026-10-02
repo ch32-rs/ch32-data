@@ -1,6 +1,16 @@
 # ch32-data
 
+[![ch32-metapac on crates.io][badge-metapac-crates]][crates-metapac]
+[![ch32-metapac API docs][badge-metapac-docs]][docs-metapac]
+
+[badge-metapac-crates]: https://img.shields.io/crates/v/ch32-metapac.svg?style=for-the-badge&label=ch32-metapac
+[crates-metapac]: https://crates.io/crates/ch32-metapac
+[badge-metapac-docs]: https://img.shields.io/docsrs/ch32-metapac?style=for-the-badge
+[docs-metapac]: https://docs.rs/ch32-metapac
+
 [ch32-data](https://github.com/ch32-rs/ch32-data) is a project that aims to provide structured, machine-readable data for WCH's 32-bit microcontrollers.
+
+Generated peripheral access and chip metadata are published as the [`ch32-metapac`](https://crates.io/crates/ch32-metapac) crate (see [`ch32-metapac-gen/`](ch32-metapac-gen/)).
 
 This project is highly inspired by the [stm32-data](https://github.com/embassy-rs/stm32-data) project.
 With the following modifications:
