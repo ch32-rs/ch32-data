@@ -29,6 +29,8 @@ jobs:
           cargo doc --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
           cargo build --features pac,metadata,rt,memory-x,ch32f103c8t6 --target thumbv7m-none-eabi
           cargo doc --features pac,metadata,rt,memory-x,ch32f103c8t6 --target thumbv7m-none-eabi
+      - name: Register data tests (host)
+        run: cargo test -p ch32-data-gen
       - name: Unit tests (host)
         run: |
           cd build/ch32-metapac/
