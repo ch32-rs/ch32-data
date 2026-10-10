@@ -1,0 +1,29 @@
+- name: DMA2
+  address: 0x40020400
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA2EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA2_Channel1
+    - signal: CH2
+      interrupt: DMA2_Channel2
+    - signal: CH3
+      interrupt: DMA2_Channel3
+    - signal: CH4
+      interrupt: DMA2_Channel4
+    - signal: CH5
+      interrupt: DMA2_Channel5
+    - signal: CH6
+      interrupt: DMA2_Channel6
+    - signal: CH7
+      interrupt: DMA2_Channel7
+    - signal: CH8
+      interrupt: DMA2_Channel8
