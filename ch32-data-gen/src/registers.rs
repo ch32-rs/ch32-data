@@ -8,6 +8,46 @@ pub struct Registers {
     pub registers: HashMap<String, IR>,
 }
 
+#[cfg(test)]
+mod tests {
+    use chiptool::ir::{BitOffset, BlockItemInner, IR};
+
+    #[test]
+    fn otg_v2_host_matches_wch_sdk() {
+        // WCH ch32v30x.h USBFSH_TypeDef and ch32v30x_usb.h USBFS_UH_*.
+        // Generic IR validation cannot detect a valid but incorrect MMIO address.
+        let ir: IR = serde_yaml::from_str(include_str!("../../data/registers/otg_v2.yaml")).unwrap();
+        let host = &ir.blocks["USBH"];
+        for (name, offset, width) in [
+            ("RX_DMA", 0x18, 32),
+            ("TX_DMA", 0x1c, 32),
+            ("SETUP", 0x36, 16),
+            ("EP_PID", 0x38, 8),
+            ("RX_CTRL", 0x3b, 8),
+            ("TX_LEN", 0x3c, 16),
+            ("TX_CTRL", 0x3e, 8),
+        ] {
+            let item = host.items.iter().find(|item| item.name == name).unwrap();
+            assert_eq!(item.byte_offset, offset, "{name} offset");
+            let BlockItemInner::Register(reg) = &item.inner else {
+                panic!("{name} must be a register");
+            };
+            assert_eq!(reg.bit_size, width, "{name} access width");
+            if name == "SETUP" {
+                assert_eq!(reg.fieldset.as_deref(), Some("UH_SETUP"));
+            }
+        }
+
+        let setup = &ir.fieldsets["UH_SETUP"];
+        assert_eq!(setup.bit_size, 16);
+        for (name, offset) in [("SOF_EN", 2), ("PRE_PID_EN", 10)] {
+            let field = setup.fields.iter().find(|field| field.name == name).unwrap();
+            assert_eq!(field.bit_offset, BitOffset::Regular(offset), "{name} bit");
+            assert_eq!(field.bit_size, 1, "{name} width");
+        }
+    }
+}
+
 impl Registers {
     pub fn parse() -> Result<Self, anyhow::Error> {
         let mut registers = HashMap::new();
