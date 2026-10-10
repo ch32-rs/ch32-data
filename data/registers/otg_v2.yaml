@@ -1,5 +1,8 @@
-# USB_OTG_FS, in CH32V203, CH32V208
+# USB_OTG_FS, in CH32V203, CH32V208, CH32V30x
 # 0x50000000
+# Host register layout: WCH EVT/EXAM/SRC/Peripheral/inc/ch32v30x.h,
+# USBFSH_TypeDef; SETUP masks: ch32v30x_usb.h (USBFS_UH_*).
+# https://github.com/openwch/ch32v307/tree/080af2e52055334eaa6af0f7ad7df527b4ef5a66/EVT/EXAM/SRC/Peripheral/inc
 block/USB:
   description: Universal serial bus FS OTG register, with VBUS, ID pin
   items:
@@ -128,11 +131,11 @@ block/USBH:
     - name: RX_DMA
       description: USB host receiving DMA buffer address.
       byte_offset: 24 # 0x18
-      bit_size: 16
+      bit_size: 32
     - name: TX_DMA
       description: USB host transmittal DMA buffer address.
       byte_offset: 28 # 0x1C
-      bit_size: 16
+      bit_size: 32
     - name: SETUP
       description: USB host setup.
       byte_offset: 54 # 0x36
