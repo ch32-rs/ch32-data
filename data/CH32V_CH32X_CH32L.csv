@@ -8,7 +8,7 @@ CH32X035C8T6,48MHz,62K,20K,LQFP48,46,4,1,-,1/-,2,1/10,10,2/1,-,2,H/D,-,-,-,-,-,3
 CH32X035G8U6,48MHz,62K,20K,QFN28,27,4,1,-,1/-,2,1/10,10,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
 CH32X035G8R6,48MHz,62K,20K,QSOP28,26,4,1,-,1/-,2,1/11,11,2/1,-,2,H/D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
 CH32X035F8U6,48MHz,62K,20K,QFN20,19,3,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
-CH32X035F7P6,48MHz,48K,20K,TSSOP20,18,3,1,-,1/-,1,1/11,11,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
+CH32X035F7P6,48MHz,62K,20K,TSSOP20,18,3,1,-,1/-,1,1/11,11,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
 CH32X034F8U6,48MHz,62K,20K,QFN20,19,4,1,-,1/-,2,1/9,9,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
 CH32X034F8P6,48MHz,62K,20K,TSSOP20,18,4,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
 CH32X033F8P6,48MHz,62K,20K,TSSOP20,18,4,1,-,1/-,2,1/10,10,2/1,-,2,D,-,-,-,-,-,3.3/5.0,-,http://www.wch.cn/products/CH32X035.html
