@@ -30,6 +30,8 @@ cores:
       - "../peripherals/H4_USBFS.yaml"
       - "../peripherals/H4_USBPD.yaml"
     include_interrupts: "../interrupts/CH32H4.yaml"
+    include_dma_channels:
+      DMAMUX: "../dma/CH32H4.yaml"
   - name: qingke-v5f
     arch: riscv
     peripherals: []
@@ -40,3 +42,5 @@ cores:
       - "../peripherals/H4_USBFS.yaml"
       - "../peripherals/H4_USBPD.yaml"
     include_interrupts: "../interrupts/CH32H4.yaml"
+    include_dma_channels:
+      DMAMUX: "../dma/CH32H4.yaml"

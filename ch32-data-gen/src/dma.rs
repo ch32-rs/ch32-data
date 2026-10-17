@@ -15,10 +15,30 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
         let mut all_dma_signals: BTreeSet<(String, String, u8)> = BTreeSet::new();
 
         if let Some(dma_channels_inc) = core.include_dma_channels.take() {
+            // CH32H4 routes every request through one DMAMUX, so its include is
+            // keyed `DMAMUX` and the numbers in the yaml are request IDs, not
+            // channel numbers. The channel list is fixed (DMA1 and DMA2, 8 each)
+            // and every signal is reachable from every channel.
+            let mut mux_requests: Vec<(String, u8)> = Vec::new();
+
             for (dma, inc_path) in dma_channels_inc {
                 let dma_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
                 let content = std::fs::read_to_string(&dma_yaml_path)?;
                 let dma_map: HashMap<String, u8> = serde_yaml::from_str(&content)?;
+
+                if dma == "DMAMUX" {
+                    for (signal, &request) in &dma_map {
+                        if mux_requests.iter().any(|(s, _)| s == signal) {
+                            anyhow::bail!(
+                                "DMAMUX request for {} already exists in core {}",
+                                signal,
+                                core.name
+                            );
+                        }
+                        mux_requests.push((signal.clone(), request));
+                    }
+                    continue;
+                }
 
                 for (signal, &channel) in &dma_map {
                     let dma_signal = (dma.clone(), signal.clone(), channel);
@@ -53,15 +73,41 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
                 }
             }
 
+            if !mux_requests.is_empty() {
+                for dma in ["DMA1", "DMA2"] {
+                    for i in 0..8 {
+                        core.dma_channels
+                            .push(ch32_data_serde::chip::core::DmaChannels {
+                                name: format!("{}_CH{}", dma, i + 1),
+                                dma: dma.to_string(),
+                                channel: i, // 0 based
+                            });
+                    }
+                }
+
+                for (signal, request) in &mux_requests {
+                    let (periph, signal_name) = split_signal(signal);
+                    for p in &mut core.peripherals {
+                        if p.name == periph {
+                            p.dma_channels.push(
+                                ch32_data_serde::chip::core::peripheral::DmaChannel {
+                                    signal: signal_name.to_string(),
+                                    // Any of the 16 channels can carry it; the
+                                    // request number is what selects the source.
+                                    channel: None,
+                                    dma: None,
+                                    dmamux: Some("DMAMUX".to_string()),
+                                    request: Some(*request),
+                                },
+                            )
+                        }
+                    }
+                }
+            }
+
             // channel is 1-based number
             for (dma, signal, channel) in &all_dma_signals {
-                let periph = signal.split('_').next().unwrap();
-
-                let signal_name = if signal.contains('_') {
-                    signal.split('_').skip(1).next().unwrap()
-                } else {
-                    signal
-                };
+                let (periph, signal_name) = split_signal(signal);
                 // "signal": "M",
                 // "channel": "DMA1_CH2"
                 let channel_name = format!("{}_CH{}", dma, channel);
@@ -87,4 +133,13 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
     }
 
     Ok(())
+}
+
+/// Split `USART1_TX` into (`USART1`, `TX`). A key with no `_` (`SDIO`, `ADC1`)
+/// is both the peripheral and the signal, matching the fixed-channel tables.
+fn split_signal(signal: &str) -> (&str, &str) {
+    match signal.split_once('_') {
+        Some((periph, signal_name)) => (periph, signal_name),
+        None => (signal, signal),
+    }
 }

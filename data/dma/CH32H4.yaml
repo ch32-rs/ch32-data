@@ -1,0 +1,151 @@
+# DMAMUX request numbers for the CH32H4 family.
+#
+# Source: CH32H417RM V1.8, 表 10-2 "DMA 复用器输入到资源的分配表" (section 10.2.3).
+# The same table covers CH32H415/H416/H417, which share family/CH32H4.yaml.
+#
+# Unlike the other files in this directory, the number is a DMAMUX request ID,
+# not a DMA channel number. Every one of the 16 channels (DMA1_CH1..CH8 and
+# DMA2_CH1..CH8) can be routed to any of these requests; ch32-data-gen's
+# DMAMUX branch reads this file that way.
+#
+# Only signals the HAL grows a DMA trait for are listed (usart TX/RX, spi
+# TX/RX, i2c TX/RX, timer CH1..CH4/UP/TRIG/COM, dac CH1/CH2, adc, sdio).
+# Reserved IDs (105, 106, 109, 110, 116-119) and peripherals without a DMA
+# trait (I3C, SWPMI, QSPI, DFSDM, SAI) are omitted.
+#
+# The key is split on the first '_' and the prefix must be the peripheral's
+# name: the manual calls the two DAC triggers DAC1/DAC2, but the peripheral
+# is `DAC`, so those are DAC_CH1/DAC_CH2 here (requests 103/104).
+
+# TIM1
+TIM1_CH1: 1
+TIM1_CH2: 2
+TIM1_CH3: 3
+TIM1_CH4: 4
+TIM1_UP: 5
+TIM1_COM: 6
+TIM1_TRIG: 7
+
+# TIM2
+TIM2_CH1: 8
+TIM2_CH2: 9
+TIM2_CH3: 10
+TIM2_CH4: 11
+TIM2_UP: 12
+TIM2_TRIG: 13
+
+# TIM3
+TIM3_CH1: 14
+TIM3_CH2: 15
+TIM3_CH3: 16
+TIM3_CH4: 17
+TIM3_UP: 18
+TIM3_TRIG: 19
+
+# TIM4
+TIM4_CH1: 20
+TIM4_CH2: 21
+TIM4_CH3: 22
+TIM4_CH4: 23
+TIM4_UP: 24
+TIM4_TRIG: 25
+
+# TIM5
+TIM5_CH1: 26
+TIM5_CH2: 27
+TIM5_CH3: 28
+TIM5_CH4: 29
+TIM5_UP: 30
+TIM5_TRIG: 31
+
+# TIM8 (advanced timer: COM as well as TRIG)
+TIM8_CH1: 32
+TIM8_CH2: 33
+TIM8_CH3: 34
+TIM8_CH4: 35
+TIM8_UP: 36
+TIM8_COM: 37
+TIM8_TRIG: 38
+
+# TIM9
+TIM9_CH1: 39
+TIM9_CH2: 40
+TIM9_CH3: 41
+TIM9_CH4: 42
+TIM9_UP: 43
+TIM9_TRIG: 44
+
+# TIM10
+TIM10_CH1: 45
+TIM10_CH2: 46
+TIM10_CH3: 47
+TIM10_CH4: 48
+TIM10_UP: 49
+TIM10_TRIG: 50
+
+# TIM11
+TIM11_CH1: 51
+TIM11_CH2: 52
+TIM11_CH3: 53
+TIM11_CH4: 54
+TIM11_UP: 55
+TIM11_TRIG: 56
+
+# TIM12
+TIM12_CH1: 57
+TIM12_CH2: 58
+TIM12_CH3: 59
+TIM12_CH4: 60
+TIM12_UP: 61
+TIM12_TRIG: 62
+
+# SPI
+SPI1_TX: 63
+SPI1_RX: 64
+SPI2_TX: 65
+SPI2_RX: 66
+SPI3_TX: 67
+SPI3_RX: 68
+SPI4_TX: 69
+SPI4_RX: 70
+
+# I2C
+I2C1_TX: 73
+I2C1_RX: 74
+I2C2_TX: 75
+I2C2_RX: 76
+I2C3_TX: 77
+I2C3_RX: 78
+I2C4_TX: 79
+I2C4_RX: 80
+
+# USART
+USART1_TX: 85
+USART1_RX: 86
+USART2_TX: 87
+USART2_RX: 88
+USART3_TX: 89
+USART3_RX: 90
+USART4_TX: 91
+USART4_RX: 92
+USART5_TX: 93
+USART5_RX: 94
+USART6_TX: 95
+USART6_RX: 96
+USART7_TX: 97
+USART7_RX: 98
+USART8_TX: 99
+USART8_RX: 100
+
+# DAC (peripheral is `DAC`; manual rows are DAC1/DAC2)
+DAC_CH1: 103
+DAC_CH2: 104
+
+SDIO: 111
+
+ADC1: 120
+ADC2: 121
+
+# Basic timers: update request only
+TIM6_UP: 122
+TIM7_UP: 123
