@@ -37,6 +37,7 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32V208, BLE 5.3 (V4C)
 - CH32X0, PDUSB (V4C)
 - CH32L1, Low power, PDUSB (V4C)
+- CH32H4, Dual-core V3F+V5F, USB 3.0, Gigabit Ethernet, SerDes
 - CH643, RGB driver (V4C)
 - CH641, USB PD, (V2A)
 
