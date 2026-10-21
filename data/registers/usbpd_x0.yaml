@@ -41,13 +41,15 @@ block/USBPD:
     bit_size: 16
     fieldset: BMC_BYTE_CNT
   # CC1 at 0x0C, CC2 at 0x0E. Each is a 16-bit register; the high byte is reserved.
-  - name: PORT_CC
-    description: CCn port control register.
+  - name: PORT_CC1
+    description: CC1 port control register.
     byte_offset: 12
     bit_size: 16
-    array:
-      len: 2
-      stride: 2
+    fieldset: PORT_CC
+  - name: PORT_CC2
+    description: CC2 port control register.
+    byte_offset: 14
+    bit_size: 16
     fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.

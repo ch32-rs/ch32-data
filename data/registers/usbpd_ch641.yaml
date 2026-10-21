@@ -42,13 +42,15 @@ block/USBPD:
     fieldset: BMC_BYTE_CNT
   # CC1 at 0x0C, CC2 at 0x0E, CC3 at 0x0F. These are 8-bit registers: in the
   # R32_USBPD_PORT word they sit at [7:0], [23:16] and [31:24].
-  - name: PORT_CC
-    description: CCn port control register.
+  - name: PORT_CC1
+    description: CC1 port control register.
     byte_offset: 12
     bit_size: 8
-    array:
-      len: 2
-      stride: 2
+    fieldset: PORT_CC
+  - name: PORT_CC2
+    description: CC2 port control register.
+    byte_offset: 14
+    bit_size: 8
     fieldset: PORT_CC
   - name: PORT_CC3
     description: CC3 port control register.
