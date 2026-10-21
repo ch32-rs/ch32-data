@@ -145,7 +145,7 @@ block/USBFS_DEVICE:
   - name: UEP3_T_LEN
     description: endpoint 3 transmittal length.
     byte_offset: 60
-    bit_size: 8
+    bit_size: 16
   - name: UEP3_T_CTRL
     description: endpoint 3 control.
     byte_offset: 62
@@ -236,7 +236,7 @@ block/USBFS_HOST:
   - name: UH_SETUP
     description: USB host setup.
     byte_offset: 54
-    bit_size: 8
+    bit_size: 16
     fieldset: UH_SETUP
   - name: UH_EP_PID
     description: USB host endpoint PID.
@@ -251,7 +251,7 @@ block/USBFS_HOST:
   - name: UH_TX_LEN
     description: USB host transmittal length.
     byte_offset: 60
-    bit_size: 8
+    bit_size: 16
   - name: UH_TX_CTRL
     description: USB host transmittal control.
     byte_offset: 62
@@ -716,15 +716,15 @@ fieldset/UH_RX_CTRL:
     bit_size: 1
 fieldset/UH_SETUP:
   description: USB host setup.
-  bit_size: 8
+  bit_size: 16
   fields:
   - name: UH_SOF_EN
     description: USB host automatic SOF enable.
-    bit_offset: 6
+    bit_offset: 2
     bit_size: 1
   - name: UH_PRE_PID_EN
     description: USB host PRE PID enable for low speed device via hub.
-    bit_offset: 7
+    bit_offset: 10
     bit_size: 1
 fieldset/UH_TX_CTRL:
   description: USB host transmittal control.
