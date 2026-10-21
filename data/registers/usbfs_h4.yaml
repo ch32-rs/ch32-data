@@ -474,6 +474,10 @@ fieldset/UEP4_1_MOD:
   description: endpoint 4/1 mode.
   bit_size: 8
   fields:
+  - name: UEP4_BUF_MOD
+    description: buffer mode of USB endpoint 4.
+    bit_offset: 0
+    bit_size: 1
   - name: UEP4_TX_EN
     description: enable USB endpoint 4 transmittal (IN).
     bit_offset: 2
@@ -703,9 +707,9 @@ fieldset/UH_RX_CTRL:
   bit_size: 8
   fields:
   - name: UH_R_RES
-    description: bit mask of handshake response type for USB host receiving (OUT).
+    description: USB host receiving response control. Bit 1 is reserved.
     bit_offset: 0
-    bit_size: 2
+    bit_size: 1
   - name: UH_R_TOG
     description: 'expected data toggle flag of USB host receiving (OUT): 0=DATA0, 1=DATA1.'
     bit_offset: 2
@@ -731,9 +735,9 @@ fieldset/UH_TX_CTRL:
   bit_size: 8
   fields:
   - name: UH_T_RES
-    description: bit mask of handshake response type for USB host transmittal (IN).
+    description: USB host transmittal response control. Bit 1 is reserved.
     bit_offset: 0
-    bit_size: 2
+    bit_size: 1
   - name: UH_T_TOG
     description: 'prepared data toggle flag of USB host transmittal (IN): 0=DATA0, 1=DATA1.'
     bit_offset: 2

@@ -40,14 +40,14 @@ block/USBPD:
     byte_offset: 10
     bit_size: 16
     fieldset: BMC_BYTE_CNT
-  # CC1: offset: 12, CC2: offset: 14
+  # CC1 at 0x0C, CC2 at 0x0E. Each is a 16-bit register; the high byte is reserved.
   - name: PORT_CC
-    description: CC port control register.
+    description: CCn port control register.
     byte_offset: 12
-    bit_size: 8
-    array: #
-      len: 4
-      stride: 1
+    bit_size: 16
+    array:
+      len: 2
+      stride: 2
     fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.
@@ -155,24 +155,24 @@ fieldset/CONTROL:
     bit_offset: 7
     bit_size: 1
 fieldset/PORT_CC:
-  description: CC1 port control register.
+  description: CCn port control register.
   bit_size: 16
   fields:
   - name: PA_CC_AI
-    description: CC port comparator analog input.
+    description: CCn port comparator analog input.
     bit_offset: 0
     bit_size: 1
   - name: CC_PU
-    description: CC port pull-up current.
+    description: CCn port pull-up current.
     bit_offset: 2
     bit_size: 2
     enum: PORT_CC_PU
   - name: CC_LVE
-    description: CC port level 0 voltage.
+    description: CCn port level 0 voltage.
     bit_offset: 4
     bit_size: 1
   - name: CC_CE
-    description: CC port comparator enable.
+    description: CCn port comparator enable.
     bit_offset: 5
     bit_size: 3
     enum: PORT_CC_CE

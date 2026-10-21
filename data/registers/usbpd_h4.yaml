@@ -41,16 +41,14 @@ block/USBPD:
     byte_offset: 10
     bit_size: 16
     fieldset: BMC_BYTE_CNT
-  - name: PORT_CC1
-    description: CC1 port control register.
+  - name: PORT_CC
+    description: CCn port control register.
     byte_offset: 12
     bit_size: 16
-    fieldset: PORT_CC1
-  - name: PORT_CC2
-    description: CC2 port control register.
-    byte_offset: 14
-    bit_size: 16
-    fieldset: PORT_CC2
+    array:
+      len: 2
+      stride: 2
+    fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.
     byte_offset: 16
@@ -186,52 +184,28 @@ fieldset/DMA:
     description: USBPD_DMA_ADDR value.
     bit_offset: 0
     bit_size: 21
-fieldset/PORT_CC1:
-  description: CC1 port control register.
+fieldset/PORT_CC:
+  description: CCn port control register.
   bit_size: 16
   fields:
-  - name: PA_CC1_AI
-    description: PA_CC1_AI value.
+  - name: PA_CC_AI
+    description: CCn port comparator analog input.
     bit_offset: 0
     bit_size: 1
-  - name: CC1_PD
-    description: port pull-down resistor enable.
+  - name: CC_PD
+    description: CCn port pull-down resistor enable.
     bit_offset: 1
     bit_size: 1
-  - name: CC1_PU
-    description: CC1_PU value.
+  - name: CC_PU
+    description: CCn port pull-up current.
     bit_offset: 2
     bit_size: 2
-  - name: CC1_LVE
-    description: CC1_LVE value.
+  - name: CC_LVE
+    description: CCn port output of the low voltage.
     bit_offset: 4
     bit_size: 1
-  - name: CC1_CE
-    description: CC1_CE value.
-    bit_offset: 5
-    bit_size: 3
-fieldset/PORT_CC2:
-  description: CC2 port control register.
-  bit_size: 16
-  fields:
-  - name: PA_CC2_AI
-    description: PA_CC2_AI value.
-    bit_offset: 0
-    bit_size: 1
-  - name: CC2_PD
-    description: port pull-down resistor enable.
-    bit_offset: 1
-    bit_size: 1
-  - name: CC2_PU
-    description: CC2_PU value.
-    bit_offset: 2
-    bit_size: 2
-  - name: CC2_LVE
-    description: CC2_LVE value.
-    bit_offset: 4
-    bit_size: 1
-  - name: CC2_CE
-    description: CC2_CE value.
+  - name: CC_CE
+    description: CCn voltage comparator enable and reference voltage.
     bit_offset: 5
     bit_size: 3
 fieldset/STATUS:
