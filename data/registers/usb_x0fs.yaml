@@ -341,8 +341,8 @@ fieldset/USB_INT_ST:
       description: RO, indicate current USB transfer toggle is OK.
       bit_offset: 6
       bit_size: 1
-    - name: IS_NAK
-      description: RO, indicate current USB transfer is NAK received for USB device mode.
+    - name: SETUP_ACT
+      description: RO, indicates the current USB transfer is a completed SETUP transaction.
       bit_offset: 7
       bit_size: 1
 fieldset/USB_RX_LEN:
@@ -543,12 +543,12 @@ fieldset/UH_SETUP:
   bit_size: 8
   fields:
     - name: SOF_EN
-      description: SOF packet en
-      bit_offset: 2
+      description: enable automatic SOF packet generation by the host.
+      bit_offset: 6
       bit_size: 1
     - name: PRE_PID_EN
-      description: pre pid en
-      bit_offset: 3
+      description: enable low-speed PRE PID for devices behind a hub.
+      bit_offset: 7
       bit_size: 1
 fieldset/UH_EP_PID:
   description: USB host endpoint PID.
