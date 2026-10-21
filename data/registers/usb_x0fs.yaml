@@ -81,7 +81,7 @@ block/USBD:
       fieldset: UEP_T_LEN
     - name: UEP01234_CTRL
       description: endpoint control.
-      byte_offset: 0x22 # 0x32
+      byte_offset: 0x22
       bit_size: 8
       array:
         len: 5
@@ -104,7 +104,7 @@ block/USBD:
       fieldset: UEP_T_LEN
     - name: UEP567_CTRL
       description: endpoint control.
-      byte_offset: 0x66 # 0x76
+      byte_offset: 0x66
       bit_size: 8
       array:
         len: 3
@@ -396,13 +396,19 @@ fieldset/UEP_CTRL:
   bit_size: 8
   fields:
     - name: T_RES
+      description: response to IN transactions.
       bit_offset: 0
       bit_size: 2
       enum: EP_TX_RESPONSE
     - name: R_RES
+      description: response to OUT transactions.
       bit_offset: 2
       bit_size: 2
       enum: EP_RX_RESPONSE
+    - name: AUTO_TOG
+      description: "flip the data toggle after a successful transfer: 0=manual, 1=automatic."
+      bit_offset: 4
+      bit_size: 1
     - name: T_TOG
       description: "prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1."
       bit_offset: 6
@@ -623,8 +629,8 @@ enum/USB_TOKEN:
     - name: OUT
       description: OUT packet.
       value: 0
-    - name: Rsvd
-      description: Reserved.
+    - name: SOF
+      description: SOF packet.
       value: 1
     - name: IN
       description: IN packet.

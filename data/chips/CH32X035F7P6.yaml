@@ -10,7 +10,7 @@ packages:
     package: TSSOP20
     device_id: 0x03570601
 include_memory: ../memory/CH32X0.yaml
-memory_sizes: { USR_1: 48K, RAM: 20K }
+memory_sizes: { USR_1: 62K, RAM: 20K }
 docs:
   - type: homepage
     title: Homepage
@@ -38,7 +38,7 @@ _raw:
   Touchkey: "11"
   Advanced TM: 2/1
   Package: TSSOP20
-  Flash: 48K
+  Flash: 62K
   WDOG: "2"
   GPIO: "18"
   ADC: 1/11
