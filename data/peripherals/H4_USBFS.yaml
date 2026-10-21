@@ -3,7 +3,7 @@
   registers:
     kind: usbfs
     version: h4
-    block: USB_OTG_FS
+    block: USBFS
   rcc:
     bus_clock: HCLK
     kernel_clock: HCLK
