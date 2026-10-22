@@ -1,0 +1,34 @@
+name: CH32M103G8R6
+family: QingKe RISC-V-based, low power MCU
+subfamily: General-purpose
+product_type: QingKe V3/V4 core, basic version, main frequency <= 72M
+# CH32M103G8R6 is CH32L103 plus a CH282 3-phase P+N gate driver: same die, same
+# peripheral layout. The gate driver is analog and has no registers; it is
+# driven by TIM1 on PA8/PA9/PA10 (HO1-3) and PB13/PB14/PB15 (LO1-3) with default
+# remap. SPI2 is dropped because PB12..PB15 are not bonded out. See
+# CH32L103/M103 datasheet V2.1, table 1-1 and section 1.4.25.
+keywords:
+  - USBPD
+  - Low Power
+  - Motor Control
+packages:
+  - name: CH32M103G8R6
+    package: QSOP28
+    device_id: 0x10330700
+include_memory: ../memory/CH32L1.yaml
+memory_sizes: { USR_1: 64K, RAM: 20K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: "CH32M103"
+    url: https://www.wch.cn/products/CH32M103.html
+cores:
+  - name: qingke-v4c
+    arch: riscv
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32L1.yaml"
+      - "../peripherals/L1x_I2C2.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4C_L1.yaml"
+    include_interrupts: "../interrupts/CH32L1.yaml"
