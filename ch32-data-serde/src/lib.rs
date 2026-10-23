@@ -86,7 +86,7 @@ mod tests {
         // itertools::assert_equal(normalize(&original), normalize(&reencoded))
     }
 
-    const CHIPS_DIR: &str = "data/chips/";
+    const CHIPS_DIR: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../data/chips/");
 
     #[test]
     fn test_one() {
