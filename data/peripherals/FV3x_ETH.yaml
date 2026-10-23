@@ -10,7 +10,7 @@
     kernel_clock: HCLK
     enable:
       register: AHBPCENR
-      field: ETHMACEN
+      fields: [ETHMACEN, ETHMACTXEN, ETHMACRXEN]
   interrupts:
     - { "signal": "GLOBAL", "interrupt": "ETH" }
   pins:
