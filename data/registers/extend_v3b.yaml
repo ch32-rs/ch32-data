@@ -1,0 +1,85 @@
+block/EXTEND:
+  description: Extend configuration.
+  items:
+    - name: CTR0
+      description: Configure Extended Control Register 0.
+      byte_offset: 0
+      fieldset: CTR0
+    - name: CTR1
+      description: Configure Extended Control Register 1.
+      byte_offset: 1
+      fieldset: CTR1
+fieldset/CTR0:
+  description: Extended Control Register 0.
+  fields:
+    - name: HSIPRE
+      description: Whether HSI is divided.
+      bit_offset: 4
+      bit_size: 1
+    - name: LKUPEN
+      description: LOCKUP Enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: LKUPRST
+      description: LOCKUP Reset.
+      bit_offset: 7
+      bit_size: 1
+    - name: ULLDOTRIM
+      description: ULLDO Trim.
+      bit_offset: 8
+      bit_size: 3
+    - name: LDOTRIM
+      description: LDO Trim.
+      bit_offset: 12
+      bit_size: 2
+fieldset/CTR1:
+  description: Extended Control Register 1.
+  fields:
+    - name: DMA_ADC_RM
+      description: DMA ADC Remap.
+      bit_offset: 0
+      bit_size: 1
+    - name: DMA_SPI1_RM
+      description: DMA SPI1 Remap.
+      bit_offset: 1
+      bit_size: 1
+    - name: DMA_SPI2_RM
+      description: DMA SPI2 Remap.
+      bit_offset: 2
+      bit_size: 1
+    - name: DMA_TIM1_UP_RM
+      description: DMA TIM1 Update Remap.
+      bit_offset: 3
+      bit_size: 1
+    - name: DMA_TIM2_CH4_RM
+      description: DMA TIM2 Channel 4 Remap.
+      bit_offset: 4
+      bit_size: 1
+    - name: DMA_TIM2_UP_RM
+      description: DMA TIM2 Update Remap.
+      bit_offset: 5
+      bit_size: 1
+    - name: DMA_TIM3_CH1_RM
+      description: DMA TIM3 Channel 1 Remap.
+      bit_offset: 6
+      bit_size: 1
+    - name: DMA_TIM3_CH3_RM
+      description: DMA TIM3 Channel 3 Remap.
+      bit_offset: 7
+      bit_size: 1
+    - name: DMA_TIM3_CH4_RM
+      description: DMA TIM3 Channel 4 Remap.
+      bit_offset: 8
+      bit_size: 1
+    - name: DMA_TIM4_CH1_RM
+      description: DMA TIM4 Channel 1 Remap.
+      bit_offset: 9
+      bit_size: 1
+    - name: DMA_TIM4_CH3_RM
+      description: DMA TIM4 Channel 3 Remap.
+      bit_offset: 10
+      bit_size: 1
+    - name: DMA_TIM4_UP_RM
+      description: DMA TIM4 Update Remap.
+      bit_offset: 11
+      bit_size: 1

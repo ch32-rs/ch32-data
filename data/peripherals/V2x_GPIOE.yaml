@@ -1,0 +1,15 @@
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPEEN
+    reset:
+      register: APB2PRSTR
+      field: IOPERST
