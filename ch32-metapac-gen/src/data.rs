@@ -564,7 +564,7 @@ pub enum PeripheralRccKernelClock {
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
 pub struct PeripheralRccRegister {
     pub register: String,
-    pub field: String,
+    pub fields: Vec<String>,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]

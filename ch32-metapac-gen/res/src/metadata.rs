@@ -214,7 +214,7 @@ pub struct PeripheralRcc {
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct PeripheralRccRegister {
     pub register: &'static str,
-    pub field: &'static str,
+    pub fields: &'static [&'static str],
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]

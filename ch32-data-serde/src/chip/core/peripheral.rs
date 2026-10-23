@@ -18,11 +18,15 @@ pub struct Rcc {
 
 pub mod rcc {
     use serde::{Deserialize, Serialize};
+    use serde_with::{serde_as, OneOrMany, formats::PreferMany};
 
+    #[serde_as]
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Field {
         pub register: String,
-        pub field: String,
+        #[serde(alias = "field")]
+        #[serde_as(as = "OneOrMany<_, PreferMany>")]
+        pub fields: Vec<String>,
     }
 
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -32,16 +36,22 @@ pub mod rcc {
         Mux(Field),
     }
 
+    #[serde_as]
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Enable {
         pub register: String,
-        pub field: String,
+        #[serde(alias = "field")]
+        #[serde_as(as = "OneOrMany<_, PreferMany>")]
+        pub fields: Vec<String>,
     }
 
+    #[serde_as]
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Reset {
         pub register: String,
-        pub field: String,
+        #[serde(alias = "field")]
+        #[serde_as(as = "OneOrMany<_, PreferMany>")]
+        pub fields: Vec<String>,
     }
 }
 
