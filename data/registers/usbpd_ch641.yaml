@@ -40,14 +40,22 @@ block/USBPD:
     byte_offset: 10
     bit_size: 16
     fieldset: BMC_BYTE_CNT
-  # CC1: offset: 12, CC2: offset: 14, CC3: offset: 15
-  - name: PORT_CC
-    description: CC port control register.
+  # CC1 at 0x0C, CC2 at 0x0E, CC3 at 0x0F. These are 8-bit registers: in the
+  # R32_USBPD_PORT word they sit at [7:0], [23:16] and [31:24].
+  - name: PORT_CC1
+    description: CC1 port control register.
     byte_offset: 12
     bit_size: 8
-    array:
-      len: 4
-      stride: 1
+    fieldset: PORT_CC
+  - name: PORT_CC2
+    description: CC2 port control register.
+    byte_offset: 14
+    bit_size: 8
+    fieldset: PORT_CC
+  - name: PORT_CC3
+    description: CC3 port control register.
+    byte_offset: 15
+    bit_size: 8
     fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.
@@ -159,28 +167,28 @@ fieldset/CONTROL:
     bit_offset: 7
     bit_size: 1
 fieldset/PORT_CC:
-  description: CC port control register.
+  description: CCn port control register.
   bit_size: 8
   fields:
   - name: PA_CC_AI
-    description: CC1 output of the voltage comparator.
+    description: CCn output of the voltage comparator.
     bit_offset: 0
     bit_size: 1
   - name: CC_PD
-    description: CC1 port pull-down resistor enable.
+    description: CCn port pull-down resistor enable.
     bit_offset: 1
     bit_size: 1
   - name: CC_PU
-    description: CC1 port pull-up current selection.
+    description: CCn port pull-up current selection.
     bit_offset: 2
     bit_size: 2
     enum: PORT_CC_PU
   - name: CC_LVE
-    description: CC1 port output of the low voltage.
+    description: CCn port output of the low voltage.
     bit_offset: 4
     bit_size: 1
   - name: CC_CE
-    description: CC1 voltage comparator enable and voltage comparator reference voltage. (CC_CE and CC_CVS)
+    description: CCn voltage comparator enable and voltage comparator reference voltage. (CC_CE and CC_CVS)
     bit_offset: 5
     bit_size: 3
     enum: PORT_CC_CE

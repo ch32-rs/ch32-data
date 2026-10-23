@@ -2106,7 +2106,7 @@
       interrupt: DFSDM1
 
 # USB subsystem: 4 controllers
-# - USBFS (USB1.1 FS host/device/OTG) - chiptool extract block: USB_OTG_FS
+# - USBFS (USB1.1 FS host/device/OTG) - device/host registers split via extends
 # - USBHS (USB2.0 HS host/device)
 # - USBSS (USB3.0 SuperSpeed host/device) - H4-exclusive (also CH32H416)
 # - USBPD (USB Power Delivery + Type-C controller)
