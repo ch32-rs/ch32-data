@@ -1,0 +1,232 @@
+# Shared peripherals for the CH32V407 / CH32V467 family.
+#
+# Everything here is common to all six parts: core support blocks, the GPIO
+# ports, the two DMA controllers, FLASH, EXTI and AFIO. The analog, memory and
+# timer/USART/SPI blocks live in the peripherals/ files; of those only PSRAM,
+# FSMC and USBHS2 differ between variants, and the per-chip include lists pick
+# them.
+#
+# This is a different bus layout from the CH32V3 family: the AHB/APB enables
+# are RCC_HBPCENR / RCC_PB1PCENR / RCC_PB2PCENR, and the reset registers are
+# RCC_HBRSTR / RCC_PB1PRSTR / RCC_PB2PRSTR.
+
+- name: PFIC
+  address: 0xE000E000
+  registers:
+    kind: pfic
+    version: v4x7
+    block: PFIC
+
+- name: SYSTICK
+  address: 0xE000F000
+  registers:
+    kind: systick
+    version: v4x7
+    block: SYSTICK
+  # SysTick interrupt handling lives in qingke-rt; no peripheral interrupt.
+
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v4x7
+    block: FLASH
+  interrupts:
+    - signal: GLOBAL
+      interrupt: FLASH
+
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: v4x7
+    block: EXTI
+  # Lines 16..21 are the internal wake-up sources (PVD, RTC alarm, USBHS1,
+  # ETH, USBHS2, I3C); only the RTC one is visible as an interrupt here, the
+  # rest are event-only.
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI0
+    - signal: EXTI1
+      interrupt: EXTI1
+    - signal: EXTI2
+      interrupt: EXTI2
+    - signal: EXTI3
+      interrupt: EXTI3
+    - signal: EXTI4
+      interrupt: EXTI4
+    - signal: EXTI5
+      interrupt: EXTI9_5
+    - signal: EXTI10
+      interrupt: EXTI15_10
+
+- name: DMA1
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: v4x7
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA1EN
+  # 13 channels. CH8..CH13 sit in the second register window and have their
+  # own interrupt vectors at 90..95.
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_CHANNEL1
+    - signal: CH2
+      interrupt: DMA1_CHANNEL2
+    - signal: CH3
+      interrupt: DMA1_CHANNEL3
+    - signal: CH4
+      interrupt: DMA1_CHANNEL4
+    - signal: CH5
+      interrupt: DMA1_CHANNEL5
+    - signal: CH6
+      interrupt: DMA1_CHANNEL6
+    - signal: CH7
+      interrupt: DMA1_CHANNEL7
+    - signal: CH8
+      interrupt: DMA1_CHANNEL8
+    - signal: CH9
+      interrupt: DMA1_CHANNEL9
+    - signal: CH10
+      interrupt: DMA1_CHANNEL10
+    - signal: CH11
+      interrupt: DMA1_CHANNEL11
+    - signal: CH12
+      interrupt: DMA1_CHANNEL12
+    - signal: CH13
+      interrupt: DMA1_CHANNEL13
+
+- name: DMA2
+  address: 0x40020400
+  registers:
+    kind: dma
+    version: v4x7
+    block: DMA2
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA2EN
+  # 11 channels, all in the second register window (CH6..CH11 at 98..103).
+  interrupts:
+    - signal: CH1
+      interrupt: DMA2_CHANNEL1
+    - signal: CH2
+      interrupt: DMA2_CHANNEL2
+    - signal: CH3
+      interrupt: DMA2_CHANNEL3
+    - signal: CH4
+      interrupt: DMA2_CHANNEL4
+    - signal: CH5
+      interrupt: DMA2_CHANNEL5
+    - signal: CH6
+      interrupt: DMA2_CHANNEL6
+    - signal: CH7
+      interrupt: DMA2_CHANNEL7
+    - signal: CH8
+      interrupt: DMA2_CHANNEL8
+    - signal: CH9
+      interrupt: DMA2_CHANNEL9
+    - signal: CH10
+      interrupt: DMA2_CHANNEL10
+    - signal: CH11
+      interrupt: DMA2_CHANNEL11
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPAEN
+    reset:
+      register: PB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPBEN
+    reset:
+      register: PB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPCEN
+    reset:
+      register: PB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPDEN
+    reset:
+      register: PB2PRSTR
+      field: IOPDRST
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: IOPEEN
+    reset:
+      register: PB2PRSTR
+      field: IOPERST
+
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: v4x7
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: AFIOEN
+    reset:
+      register: PB2PRSTR
+      field: AFIORST

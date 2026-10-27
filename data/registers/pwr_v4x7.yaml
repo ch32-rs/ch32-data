@@ -1,0 +1,98 @@
+# CH32V407 / CH32V467 power control (CH32V407RM §6.4).
+#
+# Neither existing PWR file fits:
+#   * pwr_h4.yaml frames CTLR as VIO/VSEL_VIO18 bits (H4 has no PVD, no
+#     clear-wakeup bits, no backup-domain bit);
+#   * pwr_v00x.yaml adds the AWU registers, which this family does not have.
+#
+# V407 CTLR is the full STM32-style set plus the V407-only 32K RAM and VDDK /
+# VDD12A regulation fields; CSR is the standard wake-up/standby/PVD flag set.
+
+block/PWR:
+  description: Power control.
+  items:
+    - name: CTLR
+      description: Power control register (PWR_CTLR).
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CSR
+      description: Power control/status register (PWR_CSR).
+      byte_offset: 4
+      access: Read
+      fieldset: CSR
+
+fieldset/CTLR:
+  description: Power control register.
+  fields:
+    - name: LPDS
+      description: Low-power deep sleep.
+      bit_offset: 0
+      bit_size: 1
+    - name: PDDS
+      description: Power-down deep sleep.
+      bit_offset: 1
+      bit_size: 1
+    - name: CWUF
+      description: Clear wake-up flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: CSBF
+      description: Clear standby flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: PVDE
+      description: Power voltage detector enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: PLS
+      description: PVD level selection.
+      bit_offset: 5
+      bit_size: 2
+    - name: DBP
+      description: Disable backup domain write protection.
+      bit_offset: 8
+      bit_size: 1
+    - name: LDO18_EN
+      description: VDD18 enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: R32KSTY
+      description: 32K SRAM retention in standby.
+      bit_offset: 16
+      bit_size: 1
+    - name: R32KVBAT
+      description: 32K SRAM supplied from VBAT.
+      bit_offset: 18
+      bit_size: 1
+    - name: RAMLV
+      description: SRAM low-voltage mode enable.
+      bit_offset: 20
+      bit_size: 1
+    - name: LDO_VDDK
+      description: VDDK voltage regulation position.
+      bit_offset: 24
+      bit_size: 3
+    - name: LDO_VDD12A
+      description: VDD12A voltage regulation position.
+      bit_offset: 27
+      bit_size: 3
+
+fieldset/CSR:
+  description: Power control/status register.
+  fields:
+    - name: WUF
+      description: Wake-up flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: SBF
+      description: Standby flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: PVDO
+      description: PVD output.
+      bit_offset: 2
+      bit_size: 1
+    - name: EWUP
+      description: Enable WKUP pin.
+      bit_offset: 8
+      bit_size: 1

@@ -1,0 +1,49 @@
+# USART1 on CH32V407/CH32V467 (datasheet V1.3 table 2-3-4).
+#
+# USART1 has a two-bit remap split across two registers: the low bit is
+# AFIO_PCFR1 bit2, the high bit is AFIO_PCFR2 bit26. The peripheral yaml can
+# only name one remap register, so the register pair is documented here and
+# the pins carry the combined two-bit value.
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: v4x7
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: USART1EN
+    reset:
+      register: PB2PRSTR
+      field: USART1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+  pins:
+    # 00: default (CK/PA8, TX/PA9, RX/PA10, CTS/PA11, RTS/PA12)
+    - { pin: "PA8", signal: "CK", remap: 0b00 }
+    - { pin: "PA9", signal: "TX", remap: 0b00 }
+    - { pin: "PA10", signal: "RX", remap: 0b00 }
+    - { pin: "PA11", signal: "CTS", remap: 0b00 }
+    - { pin: "PA12", signal: "RTS", remap: 0b00 }
+    # 01: remapped (CK/PA8, TX/PB6, RX/PB7, CTS/PA11, RTS/PA12)
+    - { pin: "PA8", signal: "CK", remap: 0b01 }
+    - { pin: "PB6", signal: "TX", remap: 0b01 }
+    - { pin: "PB7", signal: "RX", remap: 0b01 }
+    - { pin: "PA11", signal: "CTS", remap: 0b01 }
+    - { pin: "PA12", signal: "RTS", remap: 0b01 }
+    # 10: remapped (CK/PA10, TX/PB15, RX/PA8, CTS/PA5, RTS/PA9)
+    - { pin: "PA10", signal: "CK", remap: 0b10 }
+    - { pin: "PB15", signal: "TX", remap: 0b10 }
+    - { pin: "PA8", signal: "RX", remap: 0b10 }
+    - { pin: "PA5", signal: "CTS", remap: 0b10 }
+    - { pin: "PA9", signal: "RTS", remap: 0b10 }
+    # 11: remapped (CK/PA5, TX/PA6, RX/PA7, CTS/PC4, RTS/PC5)
+    - { pin: "PA5", signal: "CK", remap: 0b11 }
+    - { pin: "PA6", signal: "TX", remap: 0b11 }
+    - { pin: "PA7", signal: "RX", remap: 0b11 }
+    - { pin: "PC4", signal: "CTS", remap: 0b11 }
+    - { pin: "PC5", signal: "RTS", remap: 0b11 }

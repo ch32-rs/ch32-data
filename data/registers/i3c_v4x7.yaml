@@ -1,0 +1,571 @@
+# I3C controller (CH32V407RM §19, table 19-4).
+#
+# New peripheral — no earlier CH32 family has one. Register naming follows the
+# chip family: the whole controller is one address block, so the register names
+# drop the redundant I3C_ prefix the vendor uses.
+#
+# CTLR is readable/writable in two shapes at 0x00: as a master message control
+# word (with RNW/ADD) and as a CCC word (with a CCC code). Both are modelled,
+# following the CHCTLR_Input/CHCTLR_Output precedent in timer_v3.yaml.
+
+block/I3C:
+  description: Improved inter-integrated circuit.
+  items:
+    - name: CTLR
+      description: Control register, master message form.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CTLR_CCC
+      description: Control register, CCC message form.
+      byte_offset: 0
+      fieldset: CTLR_CCC
+    - name: CFGR
+      description: Configuration register.
+      byte_offset: 4
+      fieldset: CFGR
+    - name: RDR
+      description: Receive data byte register.
+      byte_offset: 16
+      access: Read
+      fieldset: RDR
+    - name: TDR
+      description: Transmit data byte register.
+      byte_offset: 24
+      access: Write
+      fieldset: TDR
+    - name: IBIDR
+      description: IBI payload data register.
+      byte_offset: 32
+      fieldset: IBIDR
+    - name: RESET
+      description: Reset register.
+      byte_offset: 44
+      access: Write
+      fieldset: RESET
+    - name: STATR
+      description: Status register.
+      byte_offset: 48
+      access: Read
+      fieldset: STATR
+    - name: STATER
+      description: Status error register.
+      byte_offset: 52
+      access: Read
+      fieldset: STATER
+    - name: RMR
+      description: Received message register.
+      byte_offset: 64
+      access: Read
+      fieldset: RMR
+    - name: EVR
+      description: Event register.
+      byte_offset: 80
+      access: Read
+      fieldset: EVR
+    - name: INTENR
+      description: Interrupt enable register.
+      byte_offset: 84
+      fieldset: INTENR
+    - name: CEVR
+      description: Clear event register.
+      byte_offset: 88
+      access: Write
+      fieldset: CEVR
+    - name: OWNDEVR
+      description: Own device characteristics register.
+      byte_offset: 96
+      fieldset: OWNDEVR
+    - name: DEVR
+      description: Target device characteristics register 1. Index 0 is DEVR1.
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 100
+      fieldset: DEVR
+    - name: DEVRX
+      description: Target device characteristics register 3. Index 0 is DEVR3.
+      array:
+        len: 2
+        stride: 4
+      byte_offset: 108
+      fieldset: DEVRX
+    - name: TIMINGR0
+      description: Timing register 0.
+      byte_offset: 160
+      fieldset: TIMINGR0
+    - name: TIMINGR1
+      description: Timing register 1.
+      byte_offset: 164
+      fieldset: TIMINGR1
+    - name: TIMINGR2
+      description: Timing register 2.
+      byte_offset: 168
+      fieldset: TIMINGR2
+    - name: GETMDSR
+      description: Get maximum data speed register.
+      byte_offset: 208
+      access: Read
+      fieldset: GETMDSR
+
+fieldset/CTLR:
+  description: Control register, master message form.
+  fields:
+    - name: DCNT
+      description: Byte count of the message, linear encoding up to 64 KiB - 1.
+      bit_offset: 0
+      bit_size: 16
+    - name: RNW
+      description: Read (1) or write (0) message when acting as master.
+      bit_offset: 16
+      bit_size: 1
+    - name: ADD
+      description: 7-bit I3C dynamic or I2C static target address.
+      bit_offset: 17
+      bit_size: 7
+    - name: MTYPE
+      description: Message type.
+      bit_offset: 27
+      bit_size: 4
+    - name: MEND
+      description: Last message of the frame, terminated by a stop rather than a repeated start.
+      bit_offset: 31
+      bit_size: 1
+
+fieldset/CTLR_CCC:
+  description: Control register, CCC message form.
+  fields:
+    - name: DCNT
+      description: Byte count of the message, linear encoding up to 64 KiB - 1.
+      bit_offset: 0
+      bit_size: 16
+    - name: CCC
+      description: 8-bit common command code.
+      bit_offset: 16
+      bit_size: 8
+    - name: MTYPE
+      description: Message type.
+      bit_offset: 27
+      bit_size: 4
+    - name: MEND
+      description: Last message of the frame, terminated by a stop rather than a repeated start.
+      bit_offset: 31
+      bit_size: 1
+
+fieldset/CFGR:
+  description: Configuration register.
+  fields:
+    - name: EN
+      description: I3C enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: CRINIT
+      description: Controller initiative, set when acting as master.
+      bit_offset: 1
+      bit_size: 1
+    - name: NOARBH
+      description: Do not arbitrate, skip arbitration when starting a frame.
+      bit_offset: 2
+      bit_size: 1
+    - name: RSTPTRN
+      description: Stop pattern reset.
+      bit_offset: 3
+      bit_size: 1
+    - name: EXITPTRN
+      description: Exit pattern.
+      bit_offset: 4
+      bit_size: 1
+    - name: PULLUP_EN
+      description: Bus pull-up enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: HJACK
+      description: Hot-join request acknowledge.
+      bit_offset: 7
+      bit_size: 1
+    - name: RXDMAEN
+      description: Receive FIFO DMA enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: RXFLUSH
+      description: Receive FIFO flush.
+      bit_offset: 9
+      bit_size: 1
+    - name: RXTHRES
+      description: Receive FIFO threshold.
+      bit_offset: 10
+      bit_size: 1
+    - name: TXDMAEN
+      description: Transmit FIFO DMA enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: TXFLUSH
+      description: Transmit FIFO flush.
+      bit_offset: 13
+      bit_size: 1
+    - name: TXTHRES
+      description: Transmit FIFO threshold.
+      bit_offset: 14
+      bit_size: 1
+    - name: TMODE
+      description: Target mode enable.
+      bit_offset: 19
+      bit_size: 1
+    - name: CDMAEN
+      description: Control FIFO DMA enable.
+      bit_offset: 20
+      bit_size: 1
+    - name: CFLUSH
+      description: Control FIFO flush.
+      bit_offset: 21
+      bit_size: 1
+    - name: TSFSET
+      description: Start frame transfer. Write 1 to launch a frame.
+      bit_offset: 30
+      bit_size: 1
+
+fieldset/RDR:
+  description: Receive data byte register.
+  fields:
+    - name: RDB
+      description: Received data byte.
+      bit_offset: 0
+      bit_size: 8
+
+fieldset/TDR:
+  description: Transmit data byte register.
+  fields:
+    - name: TDB
+      description: Transmit data byte.
+      bit_offset: 0
+      bit_size: 8
+
+fieldset/IBIDR:
+  description: IBI payload data register.
+  fields:
+    - name: IBIDB
+      description: In-band interrupt payload byte 0.
+      bit_offset: 0
+      bit_size: 8
+      array:
+        len: 4
+        stride: 8
+
+fieldset/RESET:
+  description: Reset register.
+  fields:
+    - name: HST_SIE_RST
+      description: Reset the HS target interface.
+      bit_offset: 24
+      bit_size: 1
+
+fieldset/STATR:
+  description: Status register.
+  fields:
+    - name: XDCNT
+      description: Transferred byte count of the current or last frame.
+      bit_offset: 0
+      bit_size: 16
+    - name: ABT
+      description: Frame transfer aborted.
+      bit_offset: 17
+      bit_size: 1
+    - name: DIR
+      description: Direction of the current frame, 1 for read.
+      bit_offset: 18
+      bit_size: 1
+    - name: MID
+      description: Master or manufacturer identifier.
+      bit_offset: 24
+      bit_size: 8
+
+fieldset/STATER:
+  description: Status error register.
+  fields:
+    - name: CODERR
+      description: Common command code error.
+      bit_offset: 0
+      bit_size: 4
+    - name: PERR
+      description: Parity error.
+      bit_offset: 4
+      bit_size: 1
+    - name: DOVR
+      description: Data FIFO overrun.
+      bit_offset: 6
+      bit_size: 1
+    - name: COVR
+      description: Control FIFO overrun.
+      bit_offset: 7
+      bit_size: 1
+    - name: ANACK
+      description: Address phase not acknowledged.
+      bit_offset: 8
+      bit_size: 1
+    - name: DNACK
+      description: Data phase not acknowledged.
+      bit_offset: 9
+      bit_size: 1
+    - name: DERR
+      description: Data error.
+      bit_offset: 10
+      bit_size: 1
+
+fieldset/RMR:
+  description: Received message register.
+  fields:
+    - name: IBIRDCNT
+      description: IBI remaining data count.
+      bit_offset: 0
+      bit_size: 3
+    - name: RCODE
+      description: Request code or common command code of the received message.
+      bit_offset: 8
+      bit_size: 8
+    - name: RADD
+      description: Dynamic address of the initiator.
+      bit_offset: 17
+      bit_size: 7
+
+fieldset/EVR:
+  description: Event register.
+  fields:
+    - name: CFEF
+      description: Control FIFO empty flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: TXFEF
+      description: Transmit FIFO empty flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: CFNFF
+      description: Control FIFO not full flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: TXFNFF
+      description: Transmit FIFO not full flag.
+      bit_offset: 4
+      bit_size: 1
+    - name: RXFNEF
+      description: Receive FIFO not empty flag.
+      bit_offset: 5
+      bit_size: 1
+    - name: TXLASTF
+      description: Transmit FIFO last byte transmitted.
+      bit_offset: 6
+      bit_size: 1
+    - name: RXLASTF
+      description: Receive FIFO last byte received.
+      bit_offset: 7
+      bit_size: 1
+    - name: FCF
+      description: Frame complete flag.
+      bit_offset: 9
+      bit_size: 1
+    - name: RXTGTENDF
+      description: Target-initiated read ended.
+      bit_offset: 10
+      bit_size: 1
+    - name: ERRF
+      description: Error flag.
+      bit_offset: 11
+      bit_size: 1
+    - name: IBIF
+      description: In-band interrupt request flag.
+      bit_offset: 15
+      bit_size: 1
+    - name: HJF
+      description: Hot-join request flag.
+      bit_offset: 19
+      bit_size: 1
+
+fieldset/INTENR:
+  description: Interrupt enable register.
+  fields:
+    - name: CFNFIE
+      description: Control FIFO not full interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TXFNFIE
+      description: Transmit FIFO not full interrupt enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: RXFNEIE
+      description: Receive FIFO not empty interrupt enable.
+      bit_offset: 5
+      bit_size: 1
+    - name: FCIE
+      description: Frame complete interrupt enable.
+      bit_offset: 9
+      bit_size: 1
+    - name: RXTGTENDIE
+      description: Target-initiated read end interrupt enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: ERRIE
+      description: Error interrupt enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: IBIIE
+      description: In-band interrupt request enable.
+      bit_offset: 15
+      bit_size: 1
+    - name: HJIE
+      description: Hot-join request interrupt enable.
+      bit_offset: 19
+      bit_size: 1
+
+fieldset/CEVR:
+  description: Clear event register.
+  fields:
+    - name: CFCF
+      description: Clear the frame complete flag.
+      bit_offset: 9
+      bit_size: 1
+    - name: CRXTGTENDF
+      description: Clear the target-initiated read end flag.
+      bit_offset: 10
+      bit_size: 1
+    - name: CERRF
+      description: Clear the error flag.
+      bit_offset: 11
+      bit_size: 1
+    - name: CIBIF
+      description: Clear the in-band interrupt request flag.
+      bit_offset: 15
+      bit_size: 1
+    - name: CHJF
+      description: Clear the hot-join request flag.
+      bit_offset: 19
+      bit_size: 1
+
+fieldset/OWNDEVR:
+  description: Own device characteristics register.
+  fields:
+    - name: DAVAL
+      description: Dynamic address is valid, when acting as target.
+      bit_offset: 0
+      bit_size: 1
+    - name: DA
+      description: 7-bit dynamic address.
+      bit_offset: 1
+      bit_size: 7
+
+fieldset/DEVR:
+  description: Target device characteristics register.
+  fields:
+    - name: DA
+      description: Assigned 7-bit dynamic address of the target.
+      bit_offset: 1
+      bit_size: 7
+    - name: IBIACK
+      description: In-band interrupt request acknowledge.
+      bit_offset: 16
+      bit_size: 1
+    - name: IBIDEN
+      description: In-band interrupt payload enable.
+      bit_offset: 18
+      bit_size: 1
+    - name: SUSP
+      description: Suspend or stop the transfer on a received in-band interrupt.
+      bit_offset: 19
+      bit_size: 1
+    - name: DIS
+      description: Write to the dynamic address disabled.
+      bit_offset: 31
+      bit_size: 1
+
+fieldset/DEVRX:
+  description: Target device characteristics register, with controller-role acknowledge.
+  fields:
+    - name: DA
+      description: Assigned 7-bit dynamic address of the target.
+      bit_offset: 1
+      bit_size: 7
+    - name: CRACK
+      description: Controller-role request acknowledge.
+      bit_offset: 17
+      bit_size: 1
+    - name: IBIDEN
+      description: In-band interrupt payload enable.
+      bit_offset: 18
+      bit_size: 1
+    - name: SUSP
+      description: Suspend or stop the transfer on a received in-band interrupt.
+      bit_offset: 19
+      bit_size: 1
+    - name: DIS
+      description: Write to the dynamic address disabled.
+      bit_offset: 31
+      bit_size: 1
+
+fieldset/TIMINGR0:
+  description: Timing register 0, bus timing in the different bus modes.
+  fields:
+    - name: SCLL_PP
+      description: SCL low period, push-pull mode.
+      bit_offset: 0
+      bit_size: 8
+    - name: SCLH_I3C
+      description: SCL high period, I3C mode.
+      bit_offset: 8
+      bit_size: 8
+    - name: SCLL_OD
+      description: SCL low period, open-drain mode.
+      bit_offset: 16
+      bit_size: 8
+    - name: SCLH_I2C
+      description: SCL high period, I2C mode.
+      bit_offset: 24
+      bit_size: 8
+
+fieldset/TIMINGR1:
+  description: Timing register 1.
+  fields:
+    - name: AVAL
+      description: Bus available condition timing.
+      bit_offset: 0
+      bit_size: 8
+    - name: ASNCR
+      description: Bus available to start condition delay.
+      bit_offset: 8
+      bit_size: 2
+    - name: FREE
+      description: Free condition timing.
+      bit_offset: 16
+      bit_size: 7
+    - name: SDA_HD
+      description: SDA hold time.
+      bit_offset: 28
+      bit_size: 1
+
+fieldset/TIMINGR2:
+  description: Timing register 2.
+  fields:
+    - name: STALLT
+      description: Stalling of the transfer is enabled.
+      bit_offset: 0
+      bit_size: 1
+    - name: STALLD
+      description: Stalling on data phase.
+      bit_offset: 1
+      bit_size: 1
+    - name: STALLC
+      description: Stalling on control word.
+      bit_offset: 2
+      bit_size: 1
+    - name: STALLA
+      description: Stalling on acknowledge.
+      bit_offset: 3
+      bit_size: 1
+    - name: STALL
+      description: Stalling time.
+      bit_offset: 8
+      bit_size: 8
+
+fieldset/GETMDSR:
+  description: Get maximum data speed register.
+  fields:
+    - name: TSCO
+      description: Target supports clock stretching only.
+      bit_offset: 24
+      bit_size: 1

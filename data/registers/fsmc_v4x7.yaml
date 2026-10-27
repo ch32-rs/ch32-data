@@ -1,0 +1,228 @@
+block/FSMC:
+  description: Flexible static memory controller.
+  items:
+    - name: BCR1
+      description: SRAM/NOR-Flash chip-select control register 1.
+      byte_offset: 0
+      fieldset: BCR1
+    - name: BTR1
+      description: SRAM/NOR-Flash chip-select timing register 1.
+      byte_offset: 4
+      fieldset: BTR1
+    - name: PCR2
+      description: PC Card/NAND Flash control register 2.
+      byte_offset: 96
+      fieldset: PCR2
+    - name: SR2
+      description: FIFO status and interrupt register 2.
+      byte_offset: 100
+      fieldset: SR2
+    - name: PMEM2
+      description: Common memory space timing register 2.
+      byte_offset: 104
+      fieldset: PMEM2
+    - name: PATT2
+      description: Attribute memory space timing register 2.
+      byte_offset: 108
+      fieldset: PATT2
+    - name: ECCR2
+      description: ECC result register 2.
+      byte_offset: 116
+      access: Read
+      fieldset: ECCR2
+    - name: BWTR1
+      description: SRAM/NOR-Flash write timing registers 1.
+      byte_offset: 260
+      fieldset: BWTR1
+fieldset/BCR1:
+  description: SRAM/NOR-Flash chip-select control register 1.
+  fields:
+    - name: MBKEN
+      description: Memory bank enable bit.
+      bit_offset: 0
+      bit_size: 1
+    - name: MUXEN
+      description: Address/data multiplexing enable bit.
+      bit_offset: 1
+      bit_size: 1
+    - name: MTYP
+      description: Memory type.
+      bit_offset: 2
+      bit_size: 2
+    - name: MWID
+      description: Memory databus width.
+      bit_offset: 4
+      bit_size: 2
+    - name: FACCEN
+      description: Flash access enable.
+      bit_offset: 6
+      bit_size: 1
+    - name: BURSTEN
+      description: Burst enable bit.
+      bit_offset: 8
+      bit_size: 1
+    - name: WAITPOL
+      description: Wait signal polarity bit.
+      bit_offset: 9
+      bit_size: 1
+    - name: WAITCFG
+      description: Wait timing configuration.
+      bit_offset: 11
+      bit_size: 1
+    - name: WREN
+      description: Write enable bit.
+      bit_offset: 12
+      bit_size: 1
+    - name: WAITEN
+      description: Wait enable bit.
+      bit_offset: 13
+      bit_size: 1
+    - name: EXTMOD
+      description: Extended mode enable.
+      bit_offset: 14
+      bit_size: 1
+    - name: ASYNCWAIT
+      description: Wait signal during asynchronous transfers.
+      bit_offset: 15
+      bit_size: 1
+    - name: CBURSTRW
+      description: Write burst enable.
+      bit_offset: 19
+      bit_size: 1
+fieldset/BTR1:
+  description: SRAM/NOR-Flash chip-select timing register 1.
+  fields:
+    - name: ADDSET
+      description: Address setup phase duration.
+      bit_offset: 0
+      bit_size: 4
+    - name: ADDHLD
+      description: Address-hold phase duration.
+      bit_offset: 4
+      bit_size: 4
+    - name: DATAST
+      description: Data-phase duration.
+      bit_offset: 8
+      bit_size: 8
+    - name: BUSTURN
+      description: Bus turnaround phase duration.
+      bit_offset: 16
+      bit_size: 4
+    - name: CLKDIV
+      description: Clock divide ratio (for FSMC_CLK signal).
+      bit_offset: 20
+      bit_size: 4
+    - name: DATLAT
+      description: Data latency for synchronous NOR Flash memory.
+      bit_offset: 24
+      bit_size: 4
+    - name: ACCMOD
+      description: Access mode.
+      bit_offset: 28
+      bit_size: 2
+fieldset/BWTR1:
+  description: SRAM/NOR-Flash write timing registers 1.
+  fields:
+    - name: ADDSET
+      description: Address setup phase duration.
+      bit_offset: 0
+      bit_size: 4
+    - name: ADDHLD
+      description: Address-hold phase duration.
+      bit_offset: 4
+      bit_size: 4
+    - name: DATAST
+      description: Data-phase duration.
+      bit_offset: 8
+      bit_size: 8
+    - name: ACCMOD
+      description: Access mode.
+      bit_offset: 28
+      bit_size: 2
+fieldset/ECCR2:
+  description: ECC result register 2.
+  fields:
+    - name: ECCx
+      description: ECC result.
+      bit_offset: 0
+      bit_size: 32
+fieldset/PATT2:
+  description: Attribute memory space timing register 2.
+  fields:
+    - name: ATTSETx
+      description: Attribute memory x setup time.
+      bit_offset: 0
+      bit_size: 8
+    - name: ATTWAITx
+      description: Attribute memory x wait time.
+      bit_offset: 8
+      bit_size: 8
+    - name: ATTHOLDx
+      description: Attribute memory x hold time.
+      bit_offset: 16
+      bit_size: 8
+    - name: ATTHIZx
+      description: Attribute memory x databus HiZ time.
+      bit_offset: 24
+      bit_size: 8
+fieldset/PCR2:
+  description: PC Card/NAND Flash control register 2.
+  fields:
+    - name: PWAITEN
+      description: Wait feature enable bit.
+      bit_offset: 1
+      bit_size: 1
+    - name: PBKEN
+      description: PC Card/NAND Flash memory bank enable bit.
+      bit_offset: 2
+      bit_size: 1
+    - name: PTYP
+      description: Memory type.
+      bit_offset: 3
+      bit_size: 1
+    - name: PWID
+      description: Databus width.
+      bit_offset: 4
+      bit_size: 2
+    - name: ECCEN
+      description: ECC computation logic enable bit.
+      bit_offset: 6
+      bit_size: 1
+    - name: TCLR
+      description: CLE to RE delay.
+      bit_offset: 9
+      bit_size: 4
+    - name: TAR
+      description: ALE to RE delay.
+      bit_offset: 13
+      bit_size: 4
+    - name: ECCPS
+      description: ECC page size.
+      bit_offset: 17
+      bit_size: 3
+fieldset/PMEM2:
+  description: Common memory space timing register 2.
+  fields:
+    - name: MEMSETx
+      description: Common memory x setup time.
+      bit_offset: 0
+      bit_size: 8
+    - name: MEMWAITx
+      description: Common memory x wait time.
+      bit_offset: 8
+      bit_size: 8
+    - name: MEMHOLDx
+      description: Common memory x hold time.
+      bit_offset: 16
+      bit_size: 8
+    - name: MEMHIZx
+      description: Common memory x databus HiZ time.
+      bit_offset: 24
+      bit_size: 8
+fieldset/SR2:
+  description: FIFO status and interrupt register 2.
+  fields:
+    - name: FEMPT
+      description: FIFO empty.
+      bit_offset: 6
+      bit_size: 1

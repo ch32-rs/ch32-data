@@ -1,0 +1,67 @@
+name: CH32V467VET6
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: Interconnectivity with on-chip PSRAM (USB high-speed, Ethernet, CAN, DVP, SDIO, FSMC, LTDC)
+product_type: QingKe V4F floating-point core, main frequency <= 200M
+keywords:
+  - USBHS
+  - ETH
+  - CAN
+  - SDIO
+  - DVP
+  - LTDC
+  - FSMC
+  - PSRAM
+  - I3C
+  - ARGB
+packages:
+  - name: CH32V467VET6
+    package: LQFP100
+    device_id: 0x46730000
+include_memory: ../memory/CH32V4X7.yaml
+memory_ram_code_config:
+  total_flash: 992K
+  default: c512_r200
+  configs:
+    - { name: c512_r200, code: 512K, ram: 200K }
+    - { name: c576_r136, code: 576K, ram: 136K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32V467.html
+cores:
+  - name: qingke-v4f
+    arch: riscv
+    peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v4x7
+          block: RCC
+        pins:
+          - pin: PA8
+            signal: MCO
+    include_peripherals:
+      - "../family/CH32V4X7.yaml"
+      - "../peripherals/V4x7_USART1.yaml"
+      - "../peripherals/V4x7_USART2_5.yaml"
+      - "../peripherals/V4x7_USART6_10.yaml"
+      - "../peripherals/V4x7_TIM1.yaml"
+      - "../peripherals/V4x7_TIM2_4.yaml"
+      - "../peripherals/V4x7_TIM5_8.yaml"
+      - "../peripherals/V4x7_SPI1_3.yaml"
+      - "../peripherals/V4x7_I2C_I3C.yaml"
+      - "../peripherals/V4x7_ADC_DAC.yaml"
+      - "../peripherals/V4x7_CAN_SDIO.yaml"
+      - "../peripherals/V4x7_USB_ETH.yaml"
+      - "../peripherals/V4x7_USBHS2.yaml"
+      - "../peripherals/V4x7_FSMC.yaml"
+      - "../peripherals/V4x7_EXTMEM.yaml"
+      - "../peripherals/V4x7_BKP_ARGB.yaml"
+      - "../peripherals/V4x7_PSRAM.yaml"
+      - "../peripherals/V4x7_MISC.yaml"
+    include_interrupts: "../interrupts/CH32V4X7.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4X7_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4X7_DMA2.yaml"

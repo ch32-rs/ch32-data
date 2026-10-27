@@ -1,0 +1,99 @@
+# Backup registers (CH32V407RM §4).
+#
+# No existing file — the V3 family has no BKP peripheral in use. The 42 data
+# registers are split in two runs because OCTLR/TPCTLR/TPCSR sit between them:
+# DATAR1..10 at 0x04..0x28 and DATAR11..42 at 0x40..0xBC.
+
+block/BKP:
+  description: Backup registers.
+  items:
+    - name: DATAR
+      description: Backup data register 1. Index 0 is DATAR1.
+      array:
+        len: 10
+        stride: 4
+      byte_offset: 4
+      fieldset: DATAR
+    - name: OCTLR
+      description: RTC clock calibration register.
+      byte_offset: 0x2C
+      fieldset: OCTLR
+    - name: TPCTLR
+      description: Tamper control register.
+      byte_offset: 0x30
+      fieldset: TPCTLR
+    - name: TPCSR
+      description: Tamper control/status register.
+      byte_offset: 0x34
+      fieldset: TPCSR
+    - name: DATAR_H
+      description: Backup data register 11. Index 0 is DATAR11.
+      array:
+        len: 32
+        stride: 4
+      byte_offset: 0x40
+      fieldset: DATAR
+
+fieldset/DATAR:
+  description: Backup data register.
+  fields:
+    - name: D
+      description: Backup data.
+      bit_offset: 0
+      bit_size: 16
+
+fieldset/OCTLR:
+  description: RTC clock calibration register.
+  fields:
+    - name: CAL
+      description: Calibration value, number of clock pulses skipped out of every 2^20.
+      bit_offset: 0
+      bit_size: 7
+    - name: CCO
+      description: Calibration clock output, RTC clock divided by 64 on the TAMPER pin.
+      bit_offset: 7
+      bit_size: 1
+    - name: ASOE
+      description: Alarm or second pulse output enable.
+      bit_offset: 8
+      bit_size: 1
+    - name: ASOS
+      description: Alarm or second pulse output selection.
+      bit_offset: 9
+      bit_size: 1
+
+fieldset/TPCTLR:
+  description: Tamper control register.
+  fields:
+    - name: TPE
+      description: Tamper pin enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: TPAL
+      description: Tamper pin active level.
+      bit_offset: 1
+      bit_size: 1
+
+fieldset/TPCSR:
+  description: Tamper control/status register.
+  fields:
+    - name: CTE
+      description: Clear tamper event.
+      bit_offset: 0
+      bit_size: 1
+    - name: CTI
+      description: Clear tamper interrupt.
+      bit_offset: 1
+      bit_size: 1
+    - name: TPIE
+      description: Tamper pin interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TEF
+      description: Tamper event flag.
+      bit_offset: 8
+      bit_size: 1
+    - name: TIF
+      description: Tamper interrupt flag.
+      bit_offset: 9
+      bit_size: 1

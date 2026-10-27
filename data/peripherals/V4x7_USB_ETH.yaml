@@ -1,0 +1,65 @@
+# USBHS1 and the Ethernet controller on CH32V407/CH32V467
+# (datasheet V1.3 tables 2-3-15 and 2-3-13).
+#
+# USBHS2 (0x40023400) is in V4x7_USBHS2.yaml: the LQFP64 parts have only
+# USBHS1. USBHS1 sits at 0x40024000.
+
+- name: USBHS1
+  address: 0x40024000
+  registers:
+    kind: usbhs
+    version: v4x7
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: USBHSPLLCLK
+    enable:
+      register: HBPCENR
+      field: USBHS1EN
+    reset:
+      register: HBRSTR
+      field: USBHS1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBHS1
+    - signal: WAKEUP
+      interrupt: USBHS1WakeUP
+  pins:
+    - { pin: "PA12", signal: "DP" }
+    - { pin: "PA11", signal: "DM" }
+
+# Ethernet MAC with the integrated 10/100M PHY. The RM places the block at
+# 0x40028000; the MAC registers are at +0x000, MMC at +0x100, IEEE 1588 at
+# +0x700 and the DMA at +0x1000, all inside this one peripheral.
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: emac
+    version: v4x7
+    block: ETH
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: ETHMACEN
+    reset:
+      register: HBRSTR
+      field: ETHMACRST
+  remap:
+    register: PCFR1
+    field: ETHPHY_LED_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ETH
+    - signal: WAKEUP
+      interrupt: ETH_WKUP
+  pins:
+    # The PHY differential pairs (MDITP/MDITN/MDIRP/MDIRN) are dedicated
+    # package pins, not GPIOs, so they are not listed here.
+    #
+    # PHY status LEDs, moved together by ETHPHY_LED_RM.
+    - { pin: "PE8", signal: "LED0", remap: 0 }
+    - { pin: "PE9", signal: "LED1", remap: 0 }
+    - { pin: "PD14", signal: "LED0", remap: 1 }
+    - { pin: "PD15", signal: "LED1", remap: 1 }

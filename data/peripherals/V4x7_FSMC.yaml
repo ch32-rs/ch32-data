@@ -1,0 +1,58 @@
+# FSMC on CH32V407/CH32V467 (datasheet V1.3 table 2-3-8).
+#
+# Only the LQFP100 parts (VET6) bring the FSMC pins out; the QFN68 and LQFP64
+# variants omit this file from their include list.
+- name: FSMC
+  address: 0xA0000000
+  registers:
+    kind: fsmc
+    version: v4x7
+    block: FSMC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: FSMCEN
+  remap:
+    register: PCFR2
+    field: FSMC_RM
+  pins:
+    # Address/data/control lines. D4 moves to PC4 when FSMC_RM = 1. NADV is
+    # on PB7 and only moves to PD2 when USBHS2 is enabled with its SIE held in
+    # reset -- that is the USB controller's doing, not a user remap bit, so
+    # only the PB7 default is listed here.
+    - { pin: "PE0", signal: "NBL0" }
+    - { pin: "PE1", signal: "NBL1" }
+    - { pin: "PD3", signal: "CLK" }
+    - { pin: "PD4", signal: "NOE" }
+    - { pin: "PD5", signal: "NWE" }
+    - { pin: "PD6", signal: "NWAIT" }
+    - { pin: "PD7", signal: "NE1" }
+    - { pin: "PD7", signal: "NCE2" }
+    - { pin: "PB7", signal: "NADV" }
+    - { pin: "PD11", signal: "A16" }
+    - { pin: "PD12", signal: "A17" }
+    - { pin: "PD13", signal: "A18" }
+    - { pin: "PE3", signal: "A19" }
+    - { pin: "PE4", signal: "A20" }
+    - { pin: "PE5", signal: "A21" }
+    - { pin: "PE6", signal: "A22" }
+    - { pin: "PE2", signal: "A23" }
+    - { pin: "PD14", signal: "D0" }
+    - { pin: "PD15", signal: "D1" }
+    - { pin: "PD0", signal: "D2" }
+    - { pin: "PD1", signal: "D3" }
+    - { pin: "PE7", signal: "D4", remap: 0 }
+    - { pin: "PC4", signal: "D4", remap: 1 }
+    - { pin: "PE8", signal: "D5" }
+    - { pin: "PE9", signal: "D6" }
+    - { pin: "PE10", signal: "D7" }
+    - { pin: "PE11", signal: "D8" }
+    - { pin: "PB11", signal: "D9" }
+    - { pin: "PB12", signal: "D10" }
+    - { pin: "PB13", signal: "D11" }
+    - { pin: "PB14", signal: "D12" }
+    - { pin: "PD8", signal: "D13" }
+    - { pin: "PD9", signal: "D14" }
+    - { pin: "PD10", signal: "D15" }

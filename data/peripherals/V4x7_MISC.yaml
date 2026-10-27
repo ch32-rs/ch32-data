@@ -1,0 +1,113 @@
+# Small peripherals on CH32V407/CH32V467: RNG, the two watchdogs, the CRC
+# unit, RTC and the EXTEND block with its single OPA.
+
+- name: RNG
+  address: 0x40023C00
+  registers:
+    kind: rng
+    version: v3
+    block: RNG
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: TRNGEN
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RNG
+
+- name: WWDG
+  address: 0x40002C00
+  registers:
+    kind: wwdg
+    version: common
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: WWDGEN
+    reset:
+      register: PB1PRSTR
+      field: WWDGRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: WWDG
+
+# Driven by LSI; no clock gate.
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: v00x
+    block: IWDG
+
+- name: CRC
+  address: 0x40023000
+  registers:
+    kind: crc
+    version: h4
+    block: CRC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: CRCEN
+
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: v4x7
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: PWREN
+    reset:
+      register: PB1PRSTR
+      field: PWRRST
+
+- name: RTC
+  address: 0x40002800
+  registers:
+    kind: rtc
+    version: common
+    block: RTC
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RTC
+    - signal: ALARM
+      interrupt: RTCAlarm
+  pins:
+    - { pin: "PC13", signal: "TAMPER" }
+
+# EXTEND_CTR at 0x00 plus the OPA control register at 0x04.
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: v4x7
+    block: EXTEND
+
+- name: OPA
+  address: 0x40023804
+  registers:
+    kind: extend
+    version: v4x7
+    block: OPA
+  pins:
+    # PSEL1 picks P (0: PB12, 1: PA6), NSEL1 picks N (0: PB13, 1: PA5) and
+    # MODE1 picks OUT (0: PB1, 1: PA7). NSEL1 = 2..5 select the internal PGA
+    # gain with no external negative pin.
+    - { pin: "PB12", signal: "CH0P" }
+    - { pin: "PA6", signal: "CH1P" }
+    - { pin: "PB13", signal: "CH0N" }
+    - { pin: "PA5", signal: "CH1N" }
+    - { pin: "PB1", signal: "OUT0" }
+    - { pin: "PA7", signal: "OUT1" }

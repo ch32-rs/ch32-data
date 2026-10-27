@@ -1,0 +1,392 @@
+block/LTDC:
+  description: LCD-TFT Controller.
+  items:
+    - name: SSCR
+      description: Synchronization Size Configuration Register.
+      byte_offset: 0
+      fieldset: SSCR
+    - name: BPCR
+      description: Back Porch Configuration Register.
+      byte_offset: 4
+      fieldset: BPCR
+    - name: AWCR
+      description: Active Width Configuration Register.
+      byte_offset: 8
+      fieldset: AWCR
+    - name: TWCR
+      description: Total Width Configuration Register.
+      byte_offset: 12
+      fieldset: TWCR
+    - name: GCR
+      description: Global Control Register.
+      byte_offset: 16
+      fieldset: GCR
+    - name: SRCR
+      description: Shadow Reload Configuration Register.
+      byte_offset: 20
+      fieldset: SRCR
+    - name: BCCR
+      description: Background Color Configuration Register.
+      byte_offset: 24
+      fieldset: BCCR
+    - name: IER
+      description: Interrupt Enable Register.
+      byte_offset: 28
+      fieldset: IER
+    - name: ISR
+      description: Interrupt Status Register.
+      byte_offset: 32
+      access: Read
+      fieldset: ISR
+    - name: ICR
+      description: Interrupt Clear Register.
+      byte_offset: 36
+      access: Write
+      fieldset: ICR
+    - name: LIPCR
+      description: Line Interrupt Position Configuration Register.
+      byte_offset: 40
+      fieldset: LIPCR
+    - name: CPSR
+      description: Current Position Status Register.
+      byte_offset: 44
+      fieldset: CPSR
+    - name: CDSR
+      description: Current Display Status Register.
+      byte_offset: 48
+      access: Read
+      fieldset: CDSR
+    - name: L1CR
+      description: Layerx Control Register.
+      byte_offset: 52
+      fieldset: L1CR
+    - name: LWHPCR
+      description: Layerx Window Horizontal Position Configuration Register.
+      byte_offset: 56
+      fieldset: LWHPCR
+    - name: LWVPCR
+      description: Layerx Window Vertical Position Configuration Register.
+      byte_offset: 60
+      fieldset: LWVPCR
+    - name: LCKCR
+      description: Layerx Color Keying Configuration Register.
+      byte_offset: 64
+      fieldset: LCKCR
+    - name: LPFCR
+      description: Layerx Pixel Format Configuration Register.
+      byte_offset: 68
+      fieldset: LPFCR
+    - name: LDCCR
+      description: Layerx Default Color Configuration Register.
+      byte_offset: 76
+      fieldset: LDCCR
+    - name: LCFBAR
+      description: Layerx Color Frame Buffer Address Register.
+      byte_offset: 84
+      fieldset: LCFBAR
+    - name: LCFBLR
+      description: Layerx Color Frame Buffer Length Register.
+      byte_offset: 88
+      fieldset: LCFBLR
+    - name: LCFBLNR
+      description: Layerx ColorFrame Buffer Line Number Register.
+      byte_offset: 92
+      fieldset: LCFBLNR
+    - name: LCLUTWR
+      description: Layerx CLUT Write Register.
+      byte_offset: 96
+      access: Write
+      fieldset: LCLUTWR
+fieldset/AWCR:
+  description: Active Width Configuration Register.
+  fields:
+    - name: AAH
+      description: Accumulated Active Height (in units of horizontal scan line).
+      bit_offset: 0
+      bit_size: 11
+    - name: AAW
+      description: Accumulated Active Width (in units of pixel clock period).
+      bit_offset: 16
+      bit_size: 12
+fieldset/BCCR:
+  description: Background Color Configuration Register.
+  fields:
+    - name: BCBLUE
+      description: Background Color Blue value.
+      bit_offset: 0
+      bit_size: 8
+    - name: BCGREEN
+      description: Background Color Green value.
+      bit_offset: 8
+      bit_size: 8
+    - name: BCRED
+      description: Background Color Red value.
+      bit_offset: 16
+      bit_size: 8
+fieldset/BPCR:
+  description: Back Porch Configuration Register.
+  fields:
+    - name: AVBP
+      description: Accumulated Vertical back porch (in units of horizontal scan line).
+      bit_offset: 0
+      bit_size: 11
+    - name: AHBP
+      description: Accumulated Horizontal back porch (in units of pixel clock period).
+      bit_offset: 16
+      bit_size: 12
+fieldset/CDSR:
+  description: Current Display Status Register.
+  fields:
+    - name: VDES
+      description: Vertical Data Enable display Status.
+      bit_offset: 0
+      bit_size: 1
+    - name: HDES
+      description: Horizontal Data Enable display Status.
+      bit_offset: 1
+      bit_size: 1
+    - name: VSYNCS
+      description: Vertical Synchronization display Status.
+      bit_offset: 2
+      bit_size: 1
+    - name: HSYNCS
+      description: Horizontal Synchronization display Status.
+      bit_offset: 3
+      bit_size: 1
+fieldset/CPSR:
+  description: Current Position Status Register.
+  fields:
+    - name: CYPOS
+      description: Current Y Position.
+      bit_offset: 0
+      bit_size: 16
+    - name: CXPOS
+      description: Current X Position.
+      bit_offset: 16
+      bit_size: 16
+fieldset/GCR:
+  description: Global Control Register.
+  fields:
+    - name: LTDCEN
+      description: LCD-TFT controller enable bit.
+      bit_offset: 0
+      bit_size: 1
+    - name: PCPOL
+      description: Pixel Clock Polarity.
+      bit_offset: 28
+      bit_size: 1
+    - name: DEPOL
+      description: Data Enable Polarity.
+      bit_offset: 29
+      bit_size: 1
+    - name: VSPOL
+      description: Vertical Synchronization Polarity.
+      bit_offset: 30
+      bit_size: 1
+    - name: HSPOL
+      description: Horizontal Synchronization Polarity.
+      bit_offset: 31
+      bit_size: 1
+fieldset/ICR:
+  description: Interrupt Clear Register.
+  fields:
+    - name: CLIF
+      description: Clears the Line Interrupt Flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: CFUIF
+      description: Clears the FIFO Underrun Interrupt flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: CRRIF
+      description: Clears Register Reload Interrupt Flag.
+      bit_offset: 3
+      bit_size: 1
+fieldset/IER:
+  description: Interrupt Enable Register.
+  fields:
+    - name: LIE
+      description: Line Interrupt Enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: FUIE
+      description: FIFO Underrun Interrupt Enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: RRIE
+      description: Register Reload interrupt enable.
+      bit_offset: 3
+      bit_size: 1
+fieldset/ISR:
+  description: Interrupt Status Register.
+  fields:
+    - name: LIF
+      description: Line Interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: FUIF
+      description: FIFO Underrun Interrupt flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: RRIF
+      description: Register Reload Interrupt Flag.
+      bit_offset: 3
+      bit_size: 1
+fieldset/L1CR:
+  description: Layerx Control Register.
+  fields:
+    - name: LEN
+      description: Layer Enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: COLKEN
+      description: Color Keying Enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: CLUTEN
+      description: Color Look-Up Table Enable.
+      bit_offset: 4
+      bit_size: 1
+fieldset/LCFBAR:
+  description: Layerx Color Frame Buffer Address Register.
+  fields:
+    - name: CFBADD
+      description: Color Frame Buffer Start Address.
+      bit_offset: 0
+      bit_size: 32
+fieldset/LCFBLNR:
+  description: Layerx ColorFrame Buffer Line Number Register.
+  fields:
+    - name: CFBLNBR
+      description: Frame Buffer Line Number.
+      bit_offset: 0
+      bit_size: 11
+fieldset/LCFBLR:
+  description: Layerx Color Frame Buffer Length Register.
+  fields:
+    - name: CFBLL
+      description: Color Frame Buffer Line Length.
+      bit_offset: 0
+      bit_size: 13
+    - name: CFBP
+      description: Color Frame Buffer Pitch in bytes.
+      bit_offset: 16
+      bit_size: 13
+fieldset/LCKCR:
+  description: Layerx Color Keying Configuration Register.
+  fields:
+    - name: CKBLUE
+      description: Color Key Blue value.
+      bit_offset: 0
+      bit_size: 8
+    - name: CKGREEN
+      description: Color Key Green value.
+      bit_offset: 8
+      bit_size: 8
+    - name: CKRED
+      description: Color Key Red value.
+      bit_offset: 16
+      bit_size: 8
+fieldset/LCLUTWR:
+  description: Layerx CLUT Write Register.
+  fields:
+    - name: BLUE
+      description: Blue value.
+      bit_offset: 0
+      bit_size: 8
+    - name: GREEN
+      description: Green value.
+      bit_offset: 8
+      bit_size: 8
+    - name: RED
+      description: Red value.
+      bit_offset: 16
+      bit_size: 8
+    - name: CLUTADD
+      description: CLUT Address.
+      bit_offset: 24
+      bit_size: 8
+fieldset/LDCCR:
+  description: Layerx Default Color Configuration Register.
+  fields:
+    - name: DCBLUE
+      description: Default Color Blue.
+      bit_offset: 0
+      bit_size: 8
+    - name: DCGREEN
+      description: Default Color Green.
+      bit_offset: 8
+      bit_size: 8
+    - name: DCRED
+      description: Default Color Red.
+      bit_offset: 16
+      bit_size: 8
+fieldset/LIPCR:
+  description: Line Interrupt Position Configuration Register.
+  fields:
+    - name: LIPOS
+      description: Line Interrupt Position.
+      bit_offset: 0
+      bit_size: 11
+fieldset/LPFCR:
+  description: Layerx Pixel Format Configuration Register.
+  fields:
+    - name: PF
+      description: Pixel Format.
+      bit_offset: 0
+      bit_size: 3
+fieldset/LWHPCR:
+  description: Layerx Window Horizontal Position Configuration Register.
+  fields:
+    - name: WHSTPOS
+      description: Window Horizontal Start Position.
+      bit_offset: 0
+      bit_size: 12
+    - name: WHSPPOS
+      description: Window Horizontal Stop Position.
+      bit_offset: 16
+      bit_size: 12
+fieldset/LWVPCR:
+  description: Layerx Window Vertical Position Configuration Register.
+  fields:
+    - name: WVSTPOS
+      description: Window Vertical Start Position.
+      bit_offset: 0
+      bit_size: 11
+    - name: WVSPPOS
+      description: Window Vertical Stop Position.
+      bit_offset: 16
+      bit_size: 11
+fieldset/SRCR:
+  description: Shadow Reload Configuration Register.
+  fields:
+    - name: IMR
+      description: Immediate Reload.
+      bit_offset: 0
+      bit_size: 1
+    - name: VBR
+      description: Vertical Blanking Reload.
+      bit_offset: 1
+      bit_size: 1
+fieldset/SSCR:
+  description: Synchronization Size Configuration Register.
+  fields:
+    - name: VSH
+      description: Vertical Synchronization Height (in units of horizontal scan line).
+      bit_offset: 0
+      bit_size: 11
+    - name: HSW
+      description: Horizontal Synchronization Width (in units of pixel clock period).
+      bit_offset: 16
+      bit_size: 12
+fieldset/TWCR:
+  description: Total Width Configuration Register.
+  fields:
+    - name: TOTALH
+      description: Total Height (in units of horizontal scan line).
+      bit_offset: 0
+      bit_size: 11
+    - name: TOTALW
+      description: Total Width (in units of pixel clock period).
+      bit_offset: 16
+      bit_size: 12

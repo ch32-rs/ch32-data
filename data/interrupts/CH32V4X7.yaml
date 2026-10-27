@@ -1,0 +1,127 @@
+# CH32V407/CH32V467, CH32V407RM V1.2 table 9-5 (vector table).
+# Number is the vector index, i.e. the "编号" column; the address is 4*n.
+# Note this is NOT the CH32V3 layout: single I2C, no CAN2, no TIM9/TIM10,
+# and DMA1_CH8..13 / DMA2_CH6..11 take the slots V3 uses for other things.
+
+# 16 - Window watchdog
+WWDG: 16
+# 17 - PVD through EXTI line detection
+PVD: 17
+# 18 - Tamper
+TAMPER: 18
+# 19 - RTC global
+RTC: 19
+# 20 - Flash global
+FLASH: 20
+# 21 - RCC global
+RCC: 21
+# 22..26 - EXTI lines 0..4
+EXTI0: 22
+EXTI1: 23
+EXTI2: 24
+EXTI3: 25
+EXTI4: 26
+# 27..33 - DMA1 channels 1..7
+DMA1_CHANNEL1: 27
+DMA1_CHANNEL2: 28
+DMA1_CHANNEL3: 29
+DMA1_CHANNEL4: 30
+DMA1_CHANNEL5: 31
+DMA1_CHANNEL6: 32
+DMA1_CHANNEL7: 33
+# 34 - ADC1/ADC2 global
+ADC1_2: 34
+# 35..38 - CAN1
+CAN1_TX: 35
+CAN1_RX0: 36
+CAN1_RX1: 37
+CAN1_SCE: 38
+# 39 - EXTI lines [9:5]
+EXTI9_5: 39
+# 40..43 - TIM1
+TIM1_BRK: 40
+TIM1_UP: 41
+TIM1_TRG_COM: 42
+TIM1_CC: 43
+# 44..46 - TIM2, TIM3, TIM4
+TIM2: 44
+TIM3: 45
+TIM4: 46
+# 47/48 - I2C event / error (single I2C instance)
+I2C_EV: 47
+I2C_ER: 48
+# 49/50 - I3C event / error
+I3C_EV: 49
+I3C_ER: 50
+# 51..55
+SPI1: 51
+SPI2: 52
+USART1: 53
+USART2: 54
+USART3: 55
+# 56 - EXTI lines [15:10]
+EXTI15_10: 56
+# 57 - RTC alarm through EXTI
+RTCAlarm: 57
+# 58 - USBHS1 wakeup through EXTI
+USBHS1WakeUP: 58
+# 59..62 - TIM8
+TIM8_BRK: 59
+TIM8_UP: 60
+TIM8_TRG_COM: 61
+TIM8_CC: 62
+# 63 - RNG global
+RNG: 63
+# 65 - SDIO global (64 is reserved)
+SDIO: 65
+# 66..71
+TIM5: 66
+SPI3: 67
+USART4: 68
+USART5: 69
+TIM6: 70
+TIM7: 71
+# 72..76 - DMA2 channels 1..5
+DMA2_CHANNEL1: 72
+DMA2_CHANNEL2: 73
+DMA2_CHANNEL3: 74
+DMA2_CHANNEL4: 75
+DMA2_CHANNEL5: 76
+# 77/78 - Ethernet
+ETH: 77
+ETH_WKUP: 78
+# 79 - LTDC global
+LTDC: 79
+# 80 - PSRAM global (CH32V467 only in practice; the vector exists on both)
+PSRAM: 80
+# 81/82 - high-numbered USARTs
+USART9: 81
+USART10: 82
+# 83..85 - USBHS1 / USBHS2
+USBHS1: 83
+USBHS2WakeUP: 84
+USBHS2: 85
+# 86 - DVP global
+DVP: 86
+# 87..89
+USART6: 87
+USART7: 88
+USART8: 89
+# 90..95 - DMA1 channels 8..13
+DMA1_CHANNEL8: 90
+DMA1_CHANNEL9: 91
+DMA1_CHANNEL10: 92
+DMA1_CHANNEL11: 93
+DMA1_CHANNEL12: 94
+DMA1_CHANNEL13: 95
+# 96 - I3C wakeup through EXTI
+I3CWakeUP: 96
+# 97 - ARGB global
+ARGB: 97
+# 98..103 - DMA2 channels 6..11
+DMA2_CHANNEL6: 98
+DMA2_CHANNEL7: 99
+DMA2_CHANNEL8: 100
+DMA2_CHANNEL9: 101
+DMA2_CHANNEL10: 102
+DMA2_CHANNEL11: 103

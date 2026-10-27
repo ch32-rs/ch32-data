@@ -1,0 +1,270 @@
+block/PSRAM:
+  description: PSRAM.
+  items:
+    - name: CTLR
+      description: PSRAM control register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: TIMING
+      description: PSRAM time series register.
+      byte_offset: 4
+      fieldset: TIMING
+    - name: DATA
+      description: PSRAM DATA Register.
+      byte_offset: 8
+      bit_size: 16
+      fieldset: DATA
+    - name: ADDR
+      description: PSRAM Address Register.
+      byte_offset: 12
+      fieldset: ADDR
+    - name: CMD0_CFG
+      description: PSRAM Command Word 0 Configuration Register.
+      byte_offset: 16
+      fieldset: CMD0_CFG
+    - name: CMD1_CFG
+      description: PSRAM Command Word 1 Configuration Register.
+      byte_offset: 20
+      fieldset: CMD1_CFG
+    - name: DMACR
+      description: PSRAM DMA Control Register.
+      byte_offset: 24
+      fieldset: DMACR
+    - name: DATA_NUM
+      description: PSRAM Data Transmission Quantity Register.
+      byte_offset: 28
+      fieldset: DATA_NUM
+    - name: DMA_MEM_ADDR
+      description: Start address register of memory during DMA transmission.
+      byte_offset: 32
+      fieldset: DMA_MEM_ADDR
+    - name: DMA_PSRAM_ADDR
+      description: Start Address Register of PSRAM during DMA Transmission.
+      byte_offset: 36
+      fieldset: DMA_PSRAM_ADDR
+    - name: ISR
+      description: PSRAM Interrupt State Register.
+      byte_offset: 40
+      fieldset: ISR
+    - name: IER
+      description: PSRAM Interrupt Error Enable Register.
+      byte_offset: 44
+      fieldset: IER
+    - name: STATUS
+      description: PSRAM controller state machine register.
+      byte_offset: 48
+      fieldset: STATUS
+    - name: CECFG
+      description: PSRAM CE Pulse Configuration Register.
+      byte_offset: 52
+      fieldset: CECFG
+    - name: LATENCY
+      description: PSRAM Read/Write Delay Register.
+      byte_offset: 56
+      fieldset: LATENCY
+fieldset/ADDR:
+  description: PSRAM Address Register.
+  fields:
+    - name: BUSY
+      description: BUSY.
+      bit_offset: 0
+      bit_size: 1
+    - name: MW
+      description: Inform PSRAM the nest operation.
+      bit_offset: 1
+      bit_size: 1
+    - name: CMD
+      description: Commands executed.
+      bit_offset: 8
+      bit_size: 8
+    - name: MR_ADDR0
+      description: The register 0 address to be manipulated.
+      bit_offset: 16
+      bit_size: 8
+fieldset/CECFG:
+  description: PSRAM CE Pulse Configuration Register.
+  fields:
+    - name: CELPD
+      description: 'Maximum duration of CE low pulse.  (excluding withdrawal of half sleep):  T= N*PSRAM clock period.'
+      bit_offset: 0
+      bit_size: 12
+    - name: CEPWEN
+      description: CE pulse width detection enables.
+      bit_offset: 16
+      bit_size: 1
+fieldset/CMD0_CFG:
+  description: PSRAM Command Word 0 Configuration Register.
+  fields:
+    - name: SR
+      description: Configurable synchronous read commands.
+      bit_offset: 0
+      bit_size: 8
+    - name: SW
+      description: Configurable synchronous write commands.
+      bit_offset: 8
+      bit_size: 8
+    - name: SR_LB
+      description: Configurable synchronous read (linear burst) commands.
+      bit_offset: 16
+      bit_size: 8
+    - name: SW_LB
+      description: Configurable synchronous write (linear burst) commands.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CMD1_CFG:
+  description: PSRAM Command Word 1 Configuration Register.
+  fields:
+    - name: MREGR
+      description: Configurable register read commands.
+      bit_offset: 0
+      bit_size: 8
+    - name: MREGW
+      description: Configurable register write commands.
+      bit_offset: 8
+      bit_size: 8
+    - name: GLRST
+      description: Configurable global reset commands.
+      bit_offset: 16
+      bit_size: 8
+    - name: REFRESH
+      description: Configurable refresh command command.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CTLR:
+  description: PSRAM control register.
+  fields:
+    - name: CFIFO
+      description: Empty Read FIFO Method Select.
+      bit_offset: 4
+      bit_size: 1
+    - name: DFIFO
+      description: DMA write operation for clearing FIFO mode Selection.
+      bit_offset: 5
+      bit_size: 1
+    - name: CAP_CFG
+      description: PSRAM capacity configuration.
+      bit_offset: 8
+      bit_size: 3
+    - name: EXIT_LPMD
+      description: PSRAM exits the current low-power state enable.
+      bit_offset: 16
+      bit_size: 1
+fieldset/DATA:
+  description: PSRAM DATA Register.
+  bit_size: 16
+  fields:
+    - name: RW_LDATA
+      description: Low-byte data written or read.
+      bit_offset: 0
+      bit_size: 8
+    - name: RW_HDATA
+      description: High-byte data written or read.
+      bit_offset: 8
+      bit_size: 8
+fieldset/DATA_NUM:
+  description: PSRAM Data Transmission Quantity Register.
+  fields:
+    - name: DATA_NUM
+      description: Number of data transfers.
+      bit_offset: 0
+      bit_size: 16
+fieldset/DMACR:
+  description: PSRAM DMA Control Register.
+  fields:
+    - name: DMAEN
+      description: DMA Enables.
+      bit_offset: 0
+      bit_size: 1
+    - name: DAT_DIR
+      description: Data transmission direction.
+      bit_offset: 4
+      bit_size: 1
+    - name: MEMORY_SIZE
+      description: Memory Data Width.
+      bit_offset: 10
+      bit_size: 2
+    - name: DMA_ONEBL
+      description: DMA burst length.
+      bit_offset: 16
+      bit_size: 4
+    - name: TOWBL_TOUT
+      description: 'Pause time between bursts, in HCLK.'
+      bit_offset: 20
+      bit_size: 4
+fieldset/DMA_MEM_ADDR:
+  description: Start address register of memory during DMA transmission.
+  fields:
+    - name: DMA_MEM_ADDR
+      description: The start address of the memory (single-byte alignment) when DMA is in transit.
+      bit_offset: 0
+      bit_size: 32
+fieldset/DMA_PSRAM_ADDR:
+  description: Start Address Register of PSRAM during DMA Transmission.
+  fields:
+    - name: DMA_PSRAM_ADDR
+      description: The start address of the PSRAM when DMA is transmitted (32 bytes aligned in 4 mode and 16 bytes aligned in 2 mode).
+      bit_offset: 0
+      bit_size: 32
+fieldset/IER:
+  description: PSRAM Interrupt Error Enable Register.
+  fields:
+    - name: DMATEN
+      description: DMA bus transmission completion enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: CENEIEN
+      description: CEM error interrupt marker enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: AEIEN
+      description: Address error interrupt enable.
+      bit_offset: 3
+      bit_size: 1
+fieldset/ISR:
+  description: PSRAM Interrupt State Register.
+  fields:
+    - name: DMATF
+      description: 'DMA bus transmission completion flag, write 1 to clear zero.'
+      bit_offset: 1
+      bit_size: 1
+    - name: CENEIF
+      description: 'CEM Error Interrupt Flag, write 1 to clear zero.'
+      bit_offset: 2
+      bit_size: 1
+    - name: AEIF
+      description: 'Address error interrupt flag, address exceeds MEM capacity.'
+      bit_offset: 3
+      bit_size: 1
+fieldset/LATENCY:
+  description: PSRAM Read/Write Delay Register.
+  fields:
+    - name: RLATENCY
+      description: Read the delay.
+      bit_offset: 0
+      bit_size: 8
+    - name: WLATENCY
+      description: Write the delay.
+      bit_offset: 8
+      bit_size: 8
+fieldset/STATUS:
+  description: PSRAM controller state machine register.
+  fields:
+    - name: PSRAM_STATE
+      description: PSRAM controller state machine.
+      bit_offset: 0
+      bit_size: 5
+fieldset/TIMING:
+  description: PSRAM time series register.
+  fields:
+    - name: TRC
+      description: Minimum time for read/write cycles.
+      bit_offset: 0
+      bit_size: 8
+    - name: TCPH
+      description: The minimum interval between two consecutive bursts.
+      bit_offset: 16
+      bit_size: 8
+    - name: TXLPD
+      description: Sustained pulse width when exiting low power CE_n.
+      bit_offset: 24
+      bit_size: 8
