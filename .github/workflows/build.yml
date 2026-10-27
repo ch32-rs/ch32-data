@@ -21,6 +21,7 @@ jobs:
           rustup target add thumbv7m-none-eabi
       - name: Build
         run: |
+          cargo test -p ch32-data-gen
           ./d gen
       - name: Test
         run: |

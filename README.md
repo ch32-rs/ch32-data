@@ -34,7 +34,7 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32V1, General purpose (V3A)
 - CH32V203/CH32V303, General purpose (V4B)
 - CH32V305/CH32V307/CH32V317, High speed interconnect (V4F)
-- CH32V407/CH32V467, High speed interconnect, USBHS, Ethernet, PSRAM (V4F)
+- CH32V407/CH32V467, High speed interconnect, USBHS, Ethernet, PSRAM
 - CH32V208, BLE 5.3 (V4C)
 - CH32X0, PDUSB (V4C)
 - CH32L1, Low power, PDUSB (V4C)
@@ -42,6 +42,12 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32H4, Dual-core V3F+V5F, USB 3.0, Gigabit Ethernet, SerDes
 - CH643, RGB driver (V4C)
 - CH641, USB PD, (V2A)
+
+CH32V407/CH32V467 data covers the VET6, WEU6 and RET6 variants of each family.
+Register definitions are checked against CH32V407RM V1.2 and CH32V407DS0 V1.3.
+SysTick retains the project's overlapping 64-bit `CNT`/`CMP` and 32-bit low/high-word access views.
+The manuals describe a RISC-V3V core; the chip metadata currently uses `qingke-v4f`.
+PAC generation and cross-compilation are checked, but runtime compatibility and hardware behavior remain unverified.
 
 Families that not implemented yet(planing to implement using another crate, as they are using different peripherals and features):
 
@@ -104,7 +110,12 @@ All kinds of contributions are welcome.
 - Editing existing peripherals requires the following:
   - Refer both EVT demo code and datasheet to make sure the data is correct, ref: [openwch](https://github.com/openwch) project
     - Use the newest version of the datasheet! (and Chinese version might be newer than English version)
+  - Compare register counts and names first, resolving aliases by offset and function, then compare fields, widths, access and encodings
+  - Reuse an existing peripheral version only when the complete register block matches; treat the reference manual as the final authority
+  - Preserve intentional project register extensions, such as overlapping SysTick access views
   - Make sure the editing does not breaks [ch32-hal](https://github.com/ch32-rs/ch32-hal)
+
+Run `cargo test -p ch32-data-gen` for register regression tests and `./d gen` to regenerate chip data and PACs.
 
 ## License
 

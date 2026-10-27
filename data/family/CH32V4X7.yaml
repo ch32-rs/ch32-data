@@ -14,14 +14,14 @@
   address: 0xE000E000
   registers:
     kind: pfic
-    version: rv4
+    version: v4x7
     block: PFIC
 
 - name: SYSTICK
   address: 0xE000F000
   registers:
     kind: systick
-    version: rv4
+    version: v4x7
     block: SYSTICK
   # SysTick interrupt handling lives in qingke-rt; no peripheral interrupt.
 
@@ -39,7 +39,7 @@
   address: 0x40010400
   registers:
     kind: exti
-    version: common
+    version: v4x7
     block: EXTI
   # Lines 16..21 are the internal wake-up sources (PVD, RTC alarm, USBHS1,
   # ETH, USBHS2, I3C); only the RTC one is visible as an interrupt here, the

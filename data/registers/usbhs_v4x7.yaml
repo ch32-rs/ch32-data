@@ -34,7 +34,7 @@ block/USB:
     - name: USB_WAKE_CTRL
       description: USB remote wake up register.
       byte_offset: 4
-      bit_size: 16
+      bit_size: 8
       fieldset: USB_WAKE_CTRL
     - name: USB_TEST_MODE
       description: USB test mode register.
@@ -1749,9 +1749,9 @@ fieldset/UH_RX_DMA:
   description: DMA receive address register.
   fields:
     - name: UH_RX_DMA
-      description: Received address.
+      description: Receive buffer address. Must be 4-byte aligned (CH32V407RM 22.2.2.14).
       bit_offset: 0
-      bit_size: 17
+      bit_size: 32
 fieldset/UH_RX_LEN:
   description: USB host receive length register.
   fields:
@@ -1777,9 +1777,9 @@ fieldset/UH_TX_DMA:
   description: DMA send address register.
   fields:
     - name: UH_TX_DMA
-      description: Send address.
+      description: Transmit buffer address (CH32V407RM 22.2.2.15).
       bit_offset: 0
-      bit_size: 17
+      bit_size: 32
 fieldset/UH_TX_LEN:
   description: USB host send length register.
   fields:
@@ -2013,7 +2013,7 @@ fieldset/USB_TEST_MODE:
       bit_size: 1
 fieldset/USB_WAKE_CTRL:
   description: USB remote wake up register.
-  bit_size: 16
+  bit_size: 8
   fields:
     - name: UD_REMOTE_WKUP
       description: remote wake up.

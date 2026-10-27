@@ -1,0 +1,90 @@
+# CH32V407RM V1.2 section 9.4.4, table 9-7.
+# Six registers as in exti_common, but bits 31:22 are reserved in all six.
+
+block/EXTI:
+  description: CH32V407/CH32V467 external interrupt and event controller, lines 0..21.
+  items:
+  - name: INTENR
+    description: Interrupt mask register (EXTI_INTENR).
+    byte_offset: 0
+    fieldset: INTENR
+  - name: EVENR
+    description: Event mask register (EXTI_EVENR).
+    byte_offset: 4
+    fieldset: EVENR
+  - name: RTENR
+    description: Rising Trigger selection register (EXTI_RTENR).
+    byte_offset: 8
+    fieldset: RTENR
+  - name: FTENR
+    description: Falling Trigger selection register (EXTI_FTENR).
+    byte_offset: 12
+    fieldset: FTENR
+  - name: SWIEVR
+    description: Software interrupt event register (EXTI_SWIEVR).
+    byte_offset: 16
+    fieldset: SWIEVR
+  - name: INTFR
+    description: Interrupt flag register (EXTI_INTFR).
+    byte_offset: 20
+    fieldset: INTFR
+fieldset/EVENR:
+  description: Event mask register (EXTI_EVENR).
+  fields:
+  - name: MR
+    description: Event Mask on line 0.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1
+fieldset/FTENR:
+  description: Falling Trigger selection register (EXTI_FTENR).
+  fields:
+  - name: TR
+    description: Falling trigger event configuration of line 0.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1
+fieldset/INTENR:
+  description: Interrupt mask register (EXTI_INTENR).
+  fields:
+  - name: MR
+    description: Interrupt Mask on line 0.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1
+fieldset/INTFR:
+  description: Interrupt flag register (EXTI_INTFR).
+  fields:
+  - name: IF
+    description: Pending flag for the selected line. Write 1 to clear.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1
+fieldset/RTENR:
+  description: Rising Trigger selection register (EXTI_RTENR).
+  fields:
+  - name: TR
+    description: Rising trigger event configuration of line 0.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1
+fieldset/SWIEVR:
+  description: Software interrupt event register (EXTI_SWIEVR).
+  fields:
+  - name: SWIE
+    description: Software Interrupt on line 0.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 22
+      stride: 1

@@ -3,7 +3,7 @@
 # Derived from spi_v3.yaml. The register map is the same; the model is
 # the union of SPI1, SPI2 and SPI3:
 #   * DATAR's field is DR;
-#   * HSCR gains HSRXEN2 on all instances and I2S_WS_SYNC on SPI1 only;
+#   * HSCR gains HSRXEN2 and I2S_WS_SYNC (RM 20.4.10 covers SPI1/2/3);
 #   * I2SPR at 0x20 exists on SPI2/SPI3 only — SPI1 has no I2S divider
 #     (its I2S configuration register is still at 0x1C).
 

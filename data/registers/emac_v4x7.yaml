@@ -1,7 +1,8 @@
 # CH32V407 / CH32V467 Ethernet controller (CH32V407RM §29).
 #
-# Derived from emac_v1.yaml — the MAC and DMA register blocks are identical
-# to the CH32V307 one. Added here, all from the RM register tables:
+# Derived from emac_v1.yaml. Common MAC/DMA offsets are retained, but MACCR,
+# MACFCR and MACPMTCSR have different fields; this is not an identical IP
+# version. Added here, all from the RM register tables:
 #   * PHY_CR at 0x080, control for the integrated 10/100M PHY
 #     (PHY_RSTN / PHY_PD must both be released before use);
 #   * the MMC statistics block at 0x100;
