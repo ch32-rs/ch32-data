@@ -1,0 +1,80 @@
+# CH32V407 / CH32V467 memory map (CH32V407RM §1.2, datasheet V1.3 §1.2.1).
+#
+# 992K code flash: 512K zero-wait + 480K non-zero-wait by default. The
+# remaining 64K of the 200K SRAM can be traded for flash through the
+# RAM_CODE_MOD option bit, which moves the split to 576K + 136K. The split is
+# applied by each chip's `memory_ram_code_config`.
+memory:
+  - name: USR_1
+    kind: flash
+    address: 0x08000000
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: SYS_1
+    kind: flash
+    address: 0x1FFF8000
+    size: 28K
+    modes:
+      - type: fast
+        page_size: 256
+        load_size: 4
+      - type: standard
+        erase_size: 4K
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: true
+  - name: VND
+    kind: flash
+    address: 0x1FFFF700
+    size: 256
+    access:
+      read: true
+      write: false
+      execute: false
+    structs:
+      - name: ESIG
+        offset: 0xE0
+        kind: esig
+        version: common
+        block: ESIG
+  - name: OPT
+    kind: flash
+    address: 0x1FFFF800
+    size: 128
+    modes:
+      - type: standard
+        erase_size: 128
+        write_size: 2
+    access:
+      read: true
+      write: true
+      execute: false
+    structs:
+      - name: OB
+        offset: 0
+        kind: ob
+        version: v4x7_ram_code
+        block: OB
+        defaults:
+          RDPR: 0xA5
+          NRDPR: 0x5A
+          USER: 0xBF
+          NUSER: 0x40
+  - name: RAM
+    kind: ram
+    address: 0x20000000
+    access:
+      read: true
+      write: true
+      execute: true

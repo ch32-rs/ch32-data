@@ -1,0 +1,70 @@
+# I2C and I3C on CH32V407/CH32V467 (datasheet V1.3 tables 2-3-6 and 2-3-7).
+#
+# The V407 family has a single I2C instance, so the interrupt vectors are
+# I2C_EV / I2C_ER rather than the V3 I2C1_EV / I2C1_ER.
+
+- name: I2C
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: I2CEN
+    reset:
+      register: PB1PRSTR
+      field: I2CRST
+  remap:
+    register: PCFR1
+    field: I2C_RM
+  interrupts:
+    - signal: ER
+      interrupt: I2C_ER
+    - signal: EV
+      interrupt: I2C_EV
+  pins:
+    # SMBA is fixed on PB5
+    - { pin: "PB5", signal: "SMBA" }
+    # 0: default (SCL/PB6, SDA/PB7)
+    - { pin: "PB6", signal: "SCL", remap: 0 }
+    - { pin: "PB7", signal: "SDA", remap: 0 }
+    # 1: remapped (SCL/PB8, SDA/PB9)
+    - { pin: "PB8", signal: "SCL", remap: 1 }
+    - { pin: "PB9", signal: "SDA", remap: 1 }
+
+- name: I3C
+  address: 0x40024C00
+  registers:
+    kind: i3c
+    version: v4x7
+    block: I3C
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: I3CEN
+    reset:
+      register: HBRSTR
+      field: I3CRST
+  remap:
+    register: PCFR2
+    field: I3C_RM
+  interrupts:
+    - signal: EV
+      interrupt: I3C_EV
+    - signal: ER
+      interrupt: I3C_ER
+    - signal: WAKEUP
+      interrupt: I3CWakeUP
+  pins:
+    # 0: default (SCL/PB10, SDA/PB11)
+    - { pin: "PB10", signal: "SCL", remap: 0 }
+    - { pin: "PB11", signal: "SDA", remap: 0 }
+    # 1: remapped (SCL/PB4, SDA/PB5)
+    - { pin: "PB4", signal: "SCL", remap: 1 }
+    - { pin: "PB5", signal: "SDA", remap: 1 }

@@ -1,0 +1,271 @@
+# CH32V407 / CH32V467 DMA controller (CH32V407RM §11).
+#
+# Channel layout differs from the CH32V3 controller in dma_v1.yaml:
+#
+#   * channels 1..7 sit at a 20-byte stride, with 4 reserved bytes after
+#     MADDR (CH1 MADDR is at 0x14, CH2 CFGR at 0x1C);
+#   * channels 8..13 are packed at a 16-byte stride from 0x90, and their
+#     interrupt flags live in a separate EXTEM_INTFR/EXTEM_INTFCR pair at the
+#     end of the block;
+#   * DMA1 has 13 channels, DMA2 has 11, so the two need separate blocks.
+#
+# "CH9" in the DMA request tables is index 0 of ECH, "CH1" is index 0 of CH.
+
+block/CH:
+  description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
+  items:
+    - name: CFGR
+      description: DMA channel configuration register.
+      byte_offset: 0
+      fieldset: CFGR
+    - name: CNTR
+      description: DMA channel number of data register.
+      byte_offset: 4
+      fieldset: CNTR
+    - name: PADDR
+      description: DMA channel peripheral address register.
+      byte_offset: 8
+    - name: MADDR
+      description: DMA channel memory address register.
+      byte_offset: 12
+
+block/DMA:
+  description: DMA1 controller (13 channels).
+  items:
+    - name: INTFR
+      description: DMA1 interrupt status register.
+      byte_offset: 0
+      access: Read
+      fieldset: INTFR
+    - name: INTFCR
+      description: DMA1 interrupt flag clear register.
+      byte_offset: 4
+      access: Write
+      fieldset: INTFR
+    - name: CH
+      description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
+      array:
+        len: 7
+        stride: 20
+      byte_offset: 8
+      block: CH
+    - name: ECH
+      description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
+      array:
+        len: 6
+        stride: 16
+      byte_offset: 0x90
+      block: CH
+    - name: EXTEM_INTFR
+      description: DMA1 extended interrupt status register.
+      byte_offset: 0xF0
+      access: Read
+      fieldset: EXTEM_INTFR
+    - name: EXTEM_INTFCR
+      description: DMA1 extended interrupt flag clear register.
+      byte_offset: 0xF4
+      access: Write
+      fieldset: EXTEM_INTFR
+
+block/DMA2:
+  description: DMA2 controller (11 channels).
+  items:
+    - name: INTFR
+      description: DMA2 interrupt status register.
+      byte_offset: 0
+      access: Read
+      fieldset: INTFR
+    - name: INTFCR
+      description: DMA2 interrupt flag clear register.
+      byte_offset: 4
+      access: Write
+      fieldset: INTFR
+    - name: CH
+      description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
+      array:
+        len: 7
+        stride: 20
+      byte_offset: 8
+      block: CH
+    - name: ECH
+      description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
+      array:
+        len: 4
+        stride: 16
+      byte_offset: 0x90
+      block: CH
+    - name: EXTEM_INTFR
+      description: DMA2 extended interrupt status register.
+      byte_offset: 0xD0
+      access: Read
+      fieldset: EXTEM_INTFR
+    - name: EXTEM_INTFCR
+      description: DMA2 extended interrupt flag clear register.
+      byte_offset: 0xD4
+      access: Write
+      fieldset: EXTEM_INTFR
+
+fieldset/CFGR:
+  description: DMA channel configuration register.
+  fields:
+    - name: EN
+      description: Channel enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: TCIE
+      description: Transfer complete interrupt enable.
+      bit_offset: 1
+      bit_size: 1
+    - name: HTIE
+      description: Half transfer interrupt enable.
+      bit_offset: 2
+      bit_size: 1
+    - name: TEIE
+      description: Transfer error interrupt enable.
+      bit_offset: 3
+      bit_size: 1
+    - name: DIR
+      description: Data transfer direction.
+      bit_offset: 4
+      bit_size: 1
+      enum: DIR
+    - name: CIRC
+      description: Circular mode.
+      bit_offset: 5
+      bit_size: 1
+    - name: PINC
+      description: Peripheral increment mode.
+      bit_offset: 6
+      bit_size: 1
+    - name: MINC
+      description: Memory increment mode.
+      bit_offset: 7
+      bit_size: 1
+    - name: PSIZE
+      description: Peripheral size.
+      bit_offset: 8
+      bit_size: 2
+      enum: SIZE
+    - name: MSIZE
+      description: Memory size.
+      bit_offset: 10
+      bit_size: 2
+      enum: SIZE
+    - name: PL
+      description: Channel priority level.
+      bit_offset: 12
+      bit_size: 2
+      enum: PL
+    - name: MEM2MEM
+      description: Memory to memory mode enable.
+      bit_offset: 14
+      bit_size: 1
+
+fieldset/CNTR:
+  description: DMA channel number of data register.
+  fields:
+    - name: NDT
+      description: Number of data to transfer.
+      bit_offset: 0
+      bit_size: 16
+
+fieldset/INTFR:
+  description: DMA interrupt status register, channels 1..7. Index 0 is channel 1.
+  fields:
+    - name: GIF
+      description: Channel global interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 7
+        stride: 4
+    - name: TCIF
+      description: Channel transfer complete flag.
+      bit_offset: 1
+      bit_size: 1
+      array:
+        len: 7
+        stride: 4
+    - name: HTIF
+      description: Channel half transfer complete flag.
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 7
+        stride: 4
+    - name: TEIF
+      description: Channel transfer error flag.
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 7
+        stride: 4
+
+fieldset/EXTEM_INTFR:
+  description: DMA extended interrupt status register, channels 8..13. Index 0 is channel 8.
+  fields:
+    - name: GIF
+      description: Channel global interrupt flag.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 6
+        stride: 4
+    - name: TCIF
+      description: Channel transfer complete flag.
+      bit_offset: 1
+      bit_size: 1
+      array:
+        len: 6
+        stride: 4
+    - name: HTIF
+      description: Channel half transfer complete flag.
+      bit_offset: 2
+      bit_size: 1
+      array:
+        len: 6
+        stride: 4
+    - name: TEIF
+      description: Channel transfer error flag.
+      bit_offset: 3
+      bit_size: 1
+      array:
+        len: 6
+        stride: 4
+
+enum/DIR:
+  bit_size: 1
+  variants:
+    - name: FromPeripheral
+      description: Read from peripheral.
+      value: 0
+    - name: FromMemory
+      description: Read from memory.
+      value: 1
+enum/PL:
+  bit_size: 2
+  variants:
+    - name: Low
+      description: Low priority.
+      value: 0
+    - name: Medium
+      description: Medium priority.
+      value: 1
+    - name: High
+      description: High priority.
+      value: 2
+    - name: VeryHigh
+      description: Very high priority.
+      value: 3
+enum/SIZE:
+  bit_size: 2
+  variants:
+    - name: Bits8
+      description: 8-bit size.
+      value: 0
+    - name: Bits16
+      description: 16-bit size.
+      value: 1
+    - name: Bits32
+      description: 32-bit size.
+      value: 2

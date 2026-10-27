@@ -1,0 +1,80 @@
+# CH32V407 / CH32V467 extension block (CH32V407RM §33 and §21.3.1).
+#
+# Unlike extend_v3.yaml this block carries two registers:
+#   * EXTEN_CTR at 0x00 — V407 has no USB / Ethernet trims here, only the
+#     ULLDO trim, lockup monitor and VDD18 adjustment;
+#   * OPA_CTLR at 0x04, the single op-amp in this family.
+
+block/EXTEND:
+  description: Extend configuration.
+  items:
+    - name: CTR
+      description: Extension control register.
+      byte_offset: 0
+      fieldset: CTR
+    - name: OPA
+      description: OPA configuration register.
+      byte_offset: 4
+      fieldset: OPA
+
+# The OPA register is reachable both through EXTEND (offset 0x04) and at its
+# own base address 0x40023804, so it is published as a block of its own too.
+block/OPA:
+  description: OPA configuration register block.
+  items:
+    - name: CTLR
+      description: OPA configuration register.
+      byte_offset: 0
+      fieldset: OPA
+
+fieldset/CTR:
+  description: Extension control register.
+  fields:
+    - name: LKUPEN
+      description: Lock-up monitoring enable. Resets the system when the core locks up.
+      bit_offset: 6
+      bit_size: 1
+    - name: LKUPRST
+      description: Lock-up reset flag. Write 1 to clear.
+      bit_offset: 7
+      bit_size: 1
+    - name: ULLDOTRIM
+      description: ULLDO voltage trim in low-power mode.
+      bit_offset: 8
+      bit_size: 2
+    - name: LDO18_ADJ
+      description: VDD18 regulation, 0 is 1.8 V and 1 is 1.9 V.
+      bit_offset: 12
+      bit_size: 1
+
+fieldset/OPA:
+  description: OPA configuration register.
+  fields:
+    - name: EN1
+      description: OPA1 enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: MODE1
+      description: OPA1 mode selection.
+      bit_offset: 1
+      bit_size: 1
+    - name: NSEL1
+      description: OPA1 negative input and PGA gain selection.
+      bit_offset: 2
+      bit_size: 3
+    - name: PSEL1
+      description: OPA1 positive input selection, 0 is PB12 and 1 is PA6.
+      bit_offset: 5
+      bit_size: 1
+    - name: PGADIF1
+      description: OPA1 differential PGA mode.
+      bit_offset: 6
+      bit_size: 1
+    - name: FB_EN1
+      description: OPA1 PGA feedback enable.
+      bit_offset: 7
+      bit_size: 1
+    - name: HS1
+      description: OPA1 high-speed mode enable.
+      bit_offset: 8
+      bit_size: 1

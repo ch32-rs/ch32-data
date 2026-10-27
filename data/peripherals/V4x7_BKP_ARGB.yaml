@@ -1,0 +1,39 @@
+# Backup registers and ARGB (CH32V407RM §7 and §30).
+
+- name: BKP
+  address: 0x40006C00
+  registers:
+    kind: bkp
+    version: v4x7
+    block: BKP
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: BKPEN
+    reset:
+      register: PB1PRSTR
+      field: BKPRST
+
+- name: ARGB
+  address: 0x40025000
+  registers:
+    kind: argb
+    version: v4x7
+    block: ARGB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: ARGBEN
+    reset:
+      register: HBRSTR
+      field: ARGBRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ARGB
+  pins:
+    # Shares PA15 (LTDC_B7) on this family.
+    - { pin: "PA15", signal: "OUT" }

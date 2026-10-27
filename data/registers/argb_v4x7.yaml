@@ -1,0 +1,168 @@
+block/ARGB:
+  description: ARGB.
+  items:
+    - name: CTLR
+      description: ARGB Control Register.
+      byte_offset: 0
+      fieldset: CTLR
+    - name: DAT_ARR
+      description: ARGB 0/1 Code Period Configuration Register.
+      byte_offset: 4
+      fieldset: DAT_ARR
+    - name: RST_ARR
+      description: ARGB RESET Code Width Configuration Register.
+      byte_offset: 8
+      fieldset: RST_ARR
+    - name: CCRL
+      description: High Level T0H Width Configuration Register.
+      byte_offset: 12
+      fieldset: CCRL
+    - name: CCRH
+      description: 1-yard high-level T1H width configuration register for ARGB.
+      byte_offset: 16
+      fieldset: CCRH
+    - name: DAT_CYC
+      description: ARGB Data Refresh Cycle Length Configuration Register.
+      byte_offset: 20
+      fieldset: DAT_CYC
+    - name: DATAR
+      description: ARGB Data Register.
+      byte_offset: 24
+      fieldset: DATAR
+    - name: STATR
+      description: ARGB State Register.
+      byte_offset: 28
+      access: Read
+      fieldset: STATR
+    - name: CNTR
+      description: ARGB Counter Register.
+      byte_offset: 32
+      access: Read
+      fieldset: CNTR
+fieldset/CCRH:
+  description: 1-yard high-level T1H width configuration register for ARGB.
+  fields:
+    - name: CCRH
+      description: 1 yard high level T1H width.
+      bit_offset: 0
+      bit_size: 10
+fieldset/CCRL:
+  description: High Level T0H Width Configuration Register.
+  fields:
+    - name: CCRL
+      description: 0 yard high level T0H width.
+      bit_offset: 0
+      bit_size: 10
+fieldset/CNTR:
+  description: ARGB Counter Register.
+  fields:
+    - name: CNT
+      description: ARGB base counter.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CTLR:
+  description: ARGB Control Register.
+  fields:
+    - name: TE
+      description: Send Enable.
+      bit_offset: 0
+      bit_size: 1
+    - name: DMAEN
+      description: DMA Enables.
+      bit_offset: 1
+      bit_size: 1
+    - name: MODE
+      description: Send mode configuration bits.
+      bit_offset: 2
+      bit_size: 1
+    - name: LSB
+      description: Data Send Mode Enabling Bits.
+      bit_offset: 3
+      bit_size: 1
+    - name: FRHIE
+      description: Data refresh cycle end interrupt enabled.
+      bit_offset: 8
+      bit_size: 1
+    - name: RSTIE
+      description: RESET code sending is interrupted.
+      bit_offset: 9
+      bit_size: 1
+    - name: TCIE
+      description: Send completion interrupt enable.
+      bit_offset: 10
+      bit_size: 1
+    - name: BYTEIE
+      description: Byte send completion interrupt enable.
+      bit_offset: 11
+      bit_size: 1
+    - name: HALFIE
+      description: Data Brush Sends More Than Half Interrupt Enable.
+      bit_offset: 12
+      bit_size: 1
+    - name: TXEIE
+      description: Send buffer empty interrupt enable.
+      bit_offset: 13
+      bit_size: 1
+fieldset/DATAR:
+  description: ARGB Data Register.
+  fields:
+    - name: DATA
+      description: ARGB sends data.
+      bit_offset: 0
+      bit_size: 8
+fieldset/DAT_ARR:
+  description: ARGB 0/1 Code Period Configuration Register.
+  fields:
+    - name: DAT_ARR
+      description: 0/1 yard cycle.
+      bit_offset: 0
+      bit_size: 10
+fieldset/DAT_CYC:
+  description: ARGB Data Refresh Cycle Length Configuration Register.
+  fields:
+    - name: DAT_CYC
+      description: ARGB data refresh cycle length in bytes.
+      bit_offset: 0
+      bit_size: 4
+fieldset/RST_ARR:
+  description: ARGB RESET Code Width Configuration Register.
+  fields:
+    - name: RST_ARR
+      description: 0/1 yard cycle.
+      bit_offset: 0
+      bit_size: 17
+fieldset/STATR:
+  description: ARGB State Register.
+  fields:
+    - name: FRHIF
+      description: 'The data refresh cycle has been sent to the interrupt signal, and 1 is written to clear it.'
+      bit_offset: 0
+      bit_size: 1
+    - name: RSTIF
+      description: 'RESET code sends the interrupt mark, writes 1 to clear.'
+      bit_offset: 1
+      bit_size: 1
+    - name: TCIF
+      description: 'Send the interrupt sign completed, write 1 to clear.'
+      bit_offset: 2
+      bit_size: 1
+    - name: BYTEIF
+      description: 'The byte sending completion interrupt mark, write 1 to clear.'
+      bit_offset: 3
+      bit_size: 1
+    - name: HALFIF
+      description: 'Send more than half of the interrupt flag, write 1 to clear.'
+      bit_offset: 4
+      bit_size: 1
+    - name: TXEIF
+      description: 'Send a buffer empty interrupt flag, writing DATAR will clear the subflag.'
+      bit_offset: 5
+      bit_size: 1
+    - name: BIT_CNT
+      description: Send bit counter.
+      bit_offset: 8
+      bit_size: 3
+    - name: BYTE_CNT
+      description: Send byte counters.
+      bit_offset: 11
+      bit_size: 5

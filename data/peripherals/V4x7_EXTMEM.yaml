@@ -1,0 +1,140 @@
+# DVP and LTDC on CH32V407/CH32V467 (datasheet V1.3 tables 2-3-9 and 2-3-11).
+#
+# Both share PCFR2 with FSMC and PSRAM, which live in their own files.
+
+- name: DVP
+  address: 0x50050000
+  registers:
+    kind: dvp
+    version: v3
+    block: DVP
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DVPEN
+    reset:
+      register: HBRSTR
+      field: DVPRST
+  remap:
+    register: PCFR2
+    field: DVP_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: DVP
+  pins:
+    # 0: default; 1: remapped. D5 also moves to PB3 when USBHS1 is enabled
+    # with its SIE held in reset, which is the same pin as the remapped D5.
+    - { pin: "PA4", signal: "HSYNC", remap: 0 }
+    - { pin: "PA5", signal: "VSYNC", remap: 0 }
+    - { pin: "PA6", signal: "PCLK", remap: 0 }
+    - { pin: "PA9", signal: "D0", remap: 0 }
+    - { pin: "PA10", signal: "D1", remap: 0 }
+    - { pin: "PC8", signal: "D2", remap: 0 }
+    - { pin: "PC9", signal: "D3", remap: 0 }
+    - { pin: "PC11", signal: "D4", remap: 0 }
+    - { pin: "PB6", signal: "D5", remap: 0 }
+    - { pin: "PB8", signal: "D6", remap: 0 }
+    - { pin: "PB9", signal: "D7", remap: 0 }
+    - { pin: "PC10", signal: "D8", remap: 0 }
+    - { pin: "PC12", signal: "D9", remap: 0 }
+    - { pin: "PD6", signal: "D10", remap: 0 }
+    - { pin: "PD2", signal: "D11", remap: 0 }
+    # 1: remapped
+    - { pin: "PA4", signal: "HSYNC", remap: 1 }
+    - { pin: "PA5", signal: "VSYNC", remap: 1 }
+    - { pin: "PA6", signal: "PCLK", remap: 1 }
+    - { pin: "PA9", signal: "D0", remap: 1 }
+    - { pin: "PA10", signal: "D1", remap: 1 }
+    - { pin: "PA8", signal: "D2", remap: 1 }
+    - { pin: "PB4", signal: "D3", remap: 1 }
+    - { pin: "PC11", signal: "D4", remap: 1 }
+    - { pin: "PB3", signal: "D5", remap: 1 }
+    - { pin: "PB8", signal: "D6", remap: 1 }
+    - { pin: "PB9", signal: "D7", remap: 1 }
+    - { pin: "PC10", signal: "D8", remap: 1 }
+    - { pin: "PC12", signal: "D9", remap: 1 }
+    - { pin: "PB5", signal: "D10", remap: 1 }
+    - { pin: "PD2", signal: "D11", remap: 1 }
+
+- name: LTDC
+  address: 0x40024800
+  registers:
+    kind: ltdc
+    version: v4x7
+    block: LTDC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: LTDCEN
+    reset:
+      register: HBRSTR
+      field: LTDCRST
+  remap:
+    register: PCFR2
+    field: LTDC_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LTDC
+  pins:
+    # 0: default
+    - { pin: "PE1", signal: "CLK", remap: 0 }
+    - { pin: "PB4", signal: "HSYNC", remap: 0 }
+    - { pin: "PB5", signal: "VSYNC", remap: 0 }
+    - { pin: "PE0", signal: "DE", remap: 0 }
+    - { pin: "PC0", signal: "R0", remap: 0 }
+    - { pin: "PC1", signal: "R1", remap: 0 }
+    - { pin: "PC2", signal: "R2", remap: 0 }
+    - { pin: "PC3", signal: "R3", remap: 0 }
+    - { pin: "PA1", signal: "R4", remap: 0 }
+    - { pin: "PA2", signal: "R5", remap: 0 }
+    - { pin: "PA3", signal: "R6", remap: 0 }
+    - { pin: "PA7", signal: "R7", remap: 0 }
+    - { pin: "PC4", signal: "G0", remap: 0 }
+    - { pin: "PC5", signal: "G1", remap: 0 }
+    - { pin: "PB0", signal: "G2", remap: 0 }
+    - { pin: "PB1", signal: "G3", remap: 0 }
+    - { pin: "PB2", signal: "G4", remap: 0 }
+    - { pin: "PD8", signal: "G5", remap: 0 }
+    - { pin: "PB12", signal: "G6", remap: 0 }
+    - { pin: "PB13", signal: "G7", remap: 0 }
+    - { pin: "PB14", signal: "B0", remap: 0 }
+    - { pin: "PB15", signal: "B1", remap: 0 }
+    - { pin: "PB11", signal: "B2", remap: 0 }
+    - { pin: "PB10", signal: "B3", remap: 0 }
+    - { pin: "PA8", signal: "B4", remap: 0 }
+    - { pin: "PA13", signal: "B5", remap: 0 }
+    - { pin: "PA14", signal: "B6", remap: 0 }
+    - { pin: "PA15", signal: "B7", remap: 0 }
+    # 1: remapped
+    - { pin: "PA10", signal: "CLK", remap: 1 }
+    - { pin: "PB8", signal: "HSYNC", remap: 1 }
+    - { pin: "PB9", signal: "VSYNC", remap: 1 }
+    - { pin: "PA9", signal: "DE", remap: 1 }
+    - { pin: "PC0", signal: "R0", remap: 1 }
+    - { pin: "PC1", signal: "R1", remap: 1 }
+    - { pin: "PC2", signal: "R2", remap: 1 }
+    - { pin: "PC3", signal: "R3", remap: 1 }
+    - { pin: "PA1", signal: "R4", remap: 1 }
+    - { pin: "PA2", signal: "R5", remap: 1 }
+    - { pin: "PA3", signal: "R6", remap: 1 }
+    - { pin: "PA7", signal: "R7", remap: 1 }
+    - { pin: "PC4", signal: "G0", remap: 1 }
+    - { pin: "PC5", signal: "G1", remap: 1 }
+    - { pin: "PB0", signal: "G2", remap: 1 }
+    - { pin: "PB1", signal: "G3", remap: 1 }
+    - { pin: "PB3", signal: "G4", remap: 1 }
+    - { pin: "PA4", signal: "G5", remap: 1 }
+    - { pin: "PB12", signal: "G6", remap: 1 }
+    - { pin: "PB13", signal: "G7", remap: 1 }
+    - { pin: "PB14", signal: "B0", remap: 1 }
+    - { pin: "PB15", signal: "B1", remap: 1 }
+    - { pin: "PB11", signal: "B2", remap: 1 }
+    - { pin: "PB10", signal: "B3", remap: 1 }
+    - { pin: "PA8", signal: "B4", remap: 1 }
+    - { pin: "PA13", signal: "B5", remap: 1 }
+    - { pin: "PA14", signal: "B6", remap: 1 }
+    - { pin: "PA15", signal: "B7", remap: 1 }

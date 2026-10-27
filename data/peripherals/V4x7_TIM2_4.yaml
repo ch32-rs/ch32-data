@@ -1,0 +1,137 @@
+# TIM2, TIM3, TIM4 — general-purpose 16-bit timers (datasheet V1.3 table 2-3-3).
+
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: v4x7
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM2EN
+    reset:
+      register: PB1PRSTR
+      field: TIM2RST
+  remap:
+    register: PCFR1
+    field: TIM2_RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM2
+    - signal: TRG
+      interrupt: TIM2
+    - signal: CC
+      interrupt: TIM2
+  pins:
+    # 00: default (CH1/ETR/PA0, CH2/PA1, CH3/PA2, CH4/PA3)
+    - { pin: "PA0", signal: "CH1", remap: 0b00 }
+    - { pin: "PA0", signal: "ETR", remap: 0b00 }
+    - { pin: "PA1", signal: "CH2", remap: 0b00 }
+    - { pin: "PA2", signal: "CH3", remap: 0b00 }
+    - { pin: "PA3", signal: "CH4", remap: 0b00 }
+    # 01: partial (CH1/ETR/PA15, CH2/PB3, CH3/PA2, CH4/PA3)
+    - { pin: "PA15", signal: "CH1", remap: 0b01 }
+    - { pin: "PA15", signal: "ETR", remap: 0b01 }
+    - { pin: "PB3", signal: "CH2", remap: 0b01 }
+    - { pin: "PA2", signal: "CH3", remap: 0b01 }
+    - { pin: "PA3", signal: "CH4", remap: 0b01 }
+    # 10: partial (CH1/ETR/PA0, CH2/PA1, CH3/PB10, CH4/PB11)
+    - { pin: "PA0", signal: "CH1", remap: 0b10 }
+    - { pin: "PA0", signal: "ETR", remap: 0b10 }
+    - { pin: "PA1", signal: "CH2", remap: 0b10 }
+    - { pin: "PB10", signal: "CH3", remap: 0b10 }
+    - { pin: "PB11", signal: "CH4", remap: 0b10 }
+    # 11: full (CH1/ETR/PA15, CH2/PB3, CH3/PB10, CH4/PB11)
+    - { pin: "PA15", signal: "CH1", remap: 0b11 }
+    - { pin: "PA15", signal: "ETR", remap: 0b11 }
+    - { pin: "PB3", signal: "CH2", remap: 0b11 }
+    - { pin: "PB10", signal: "CH3", remap: 0b11 }
+    - { pin: "PB11", signal: "CH4", remap: 0b11 }
+
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: timer
+    version: v4x7
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM3EN
+    reset:
+      register: PB1PRSTR
+      field: TIM3RST
+  remap:
+    register: PCFR1
+    field: TIM3_RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM3
+    - signal: TRG
+      interrupt: TIM3
+    - signal: CC
+      interrupt: TIM3
+  pins:
+    # 00: default (CH1/PA6, CH2/PA7, CH3/PB0, CH4/PB1, ETR/PD2)
+    - { pin: "PA6", signal: "CH1", remap: 0b00 }
+    - { pin: "PA7", signal: "CH2", remap: 0b00 }
+    - { pin: "PB0", signal: "CH3", remap: 0b00 }
+    - { pin: "PB1", signal: "CH4", remap: 0b00 }
+    - { pin: "PD2", signal: "ETR", remap: 0b00 }
+    # 01: reserved
+    # 10: partial (CH1/PB4, CH2/PB5, CH3/PB0, CH4/PB1)
+    - { pin: "PB4", signal: "CH1", remap: 0b10 }
+    - { pin: "PB5", signal: "CH2", remap: 0b10 }
+    - { pin: "PB0", signal: "CH3", remap: 0b10 }
+    - { pin: "PB1", signal: "CH4", remap: 0b10 }
+    - { pin: "PD2", signal: "ETR", remap: 0b10 }
+    # 11: full (CH1/PC6, CH2/PC7, CH3/PC8, CH4/PC9)
+    - { pin: "PC6", signal: "CH1", remap: 0b11 }
+    - { pin: "PC7", signal: "CH2", remap: 0b11 }
+    - { pin: "PC8", signal: "CH3", remap: 0b11 }
+    - { pin: "PC9", signal: "CH4", remap: 0b11 }
+    - { pin: "PD2", signal: "ETR", remap: 0b11 }
+
+- name: TIM4
+  address: 0x40000800
+  registers:
+    kind: timer
+    version: v4x7
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM4EN
+    reset:
+      register: PB1PRSTR
+      field: TIM4RST
+  remap:
+    register: PCFR1
+    field: TIM4_RM
+  interrupts:
+    - signal: UP
+      interrupt: TIM4
+    - signal: TRG
+      interrupt: TIM4
+    - signal: CC
+      interrupt: TIM4
+  pins:
+    # 0: default (CH1/PB6, CH2/PB7, CH3/PB8, CH4/PB9, ETR/PE0)
+    - { pin: "PB6", signal: "CH1", remap: 0 }
+    - { pin: "PB7", signal: "CH2", remap: 0 }
+    - { pin: "PB8", signal: "CH3", remap: 0 }
+    - { pin: "PB9", signal: "CH4", remap: 0 }
+    - { pin: "PE0", signal: "ETR", remap: 0 }
+    # 1: remapped (CH1/PD12, CH2/PD13, CH3/PD14, CH4/PD15)
+    - { pin: "PD12", signal: "CH1", remap: 1 }
+    - { pin: "PD13", signal: "CH2", remap: 1 }
+    - { pin: "PD14", signal: "CH3", remap: 1 }
+    - { pin: "PD15", signal: "CH4", remap: 1 }
+    - { pin: "PE0", signal: "ETR", remap: 1 }

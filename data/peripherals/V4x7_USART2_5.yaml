@@ -1,0 +1,166 @@
+# USART2..USART5 on CH32V407/CH32V467 (datasheet V1.3 table 2-3-4).
+
+- name: USART2
+  address: 0x40004400
+  registers:
+    kind: usart
+    version: v4x7
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART2EN
+    reset:
+      register: PB1PRSTR
+      field: USART2RST
+  remap:
+    register: PCFR1
+    field: USART2_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART2
+  pins:
+    # 0: default (CK/PA4, TX/PA2, RX/PA3, CTS/PA0, RTS/PA1)
+    - { pin: "PA4", signal: "CK", remap: 0 }
+    - { pin: "PA2", signal: "TX", remap: 0 }
+    - { pin: "PA3", signal: "RX", remap: 0 }
+    - { pin: "PA0", signal: "CTS", remap: 0 }
+    - { pin: "PA1", signal: "RTS", remap: 0 }
+    # 1: remapped (CK/PD7, TX/PD5, RX/PD6, CTS/PD3, RTS/PD4)
+    - { pin: "PD7", signal: "CK", remap: 1 }
+    - { pin: "PD5", signal: "TX", remap: 1 }
+    - { pin: "PD6", signal: "RX", remap: 1 }
+    - { pin: "PD3", signal: "CTS", remap: 1 }
+    - { pin: "PD4", signal: "RTS", remap: 1 }
+
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: v4x7
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART3EN
+    reset:
+      register: PB1PRSTR
+      field: USART3RST
+  remap:
+    register: PCFR1
+    field: USART3_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART3
+  pins:
+    # 00: default (CK/PB12, TX/PB10, RX/PB11, CTS/PB13, RTS/PB14)
+    - { pin: "PB12", signal: "CK", remap: 0b00 }
+    - { pin: "PB10", signal: "TX", remap: 0b00 }
+    - { pin: "PB11", signal: "RX", remap: 0b00 }
+    - { pin: "PB13", signal: "CTS", remap: 0b00 }
+    - { pin: "PB14", signal: "RTS", remap: 0b00 }
+    # 01: remapped (CK/PC12, TX/PC10, RX/PC11, CTS/PB13, RTS/PB14)
+    - { pin: "PC12", signal: "CK", remap: 0b01 }
+    - { pin: "PC10", signal: "TX", remap: 0b01 }
+    - { pin: "PC11", signal: "RX", remap: 0b01 }
+    - { pin: "PB13", signal: "CTS", remap: 0b01 }
+    - { pin: "PB14", signal: "RTS", remap: 0b01 }
+    # 10: remapped (CK/PD10, TX/PA13, RX/PA14, CTS/PD11, RTS/PD12).
+    # Only TX/RX differ from 11; the datasheet merges the identical cells.
+    - { pin: "PD10", signal: "CK", remap: 0b10 }
+    - { pin: "PA13", signal: "TX", remap: 0b10 }
+    - { pin: "PA14", signal: "RX", remap: 0b10 }
+    - { pin: "PD11", signal: "CTS", remap: 0b10 }
+    - { pin: "PD12", signal: "RTS", remap: 0b10 }
+    # 11: remapped (CK/PD10, TX/PD8, RX/PD9, CTS/PD11, RTS/PD12)
+    - { pin: "PD10", signal: "CK", remap: 0b11 }
+    - { pin: "PD8", signal: "TX", remap: 0b11 }
+    - { pin: "PD9", signal: "RX", remap: 0b11 }
+    - { pin: "PD11", signal: "CTS", remap: 0b11 }
+    - { pin: "PD12", signal: "RTS", remap: 0b11 }
+
+- name: USART4
+  address: 0x40004C00
+  registers:
+    kind: usart
+    version: v4x7
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART4EN
+    reset:
+      register: PB1PRSTR
+      field: USART4RST
+  remap:
+    register: PCFR2
+    field: USART4_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART4
+  pins:
+    # 00: default (CK/PC12, TX/PC10, RX/PC11, CTS/PA13, RTS/PD2)
+    - { pin: "PC12", signal: "CK", remap: 0b00 }
+    - { pin: "PC10", signal: "TX", remap: 0b00 }
+    - { pin: "PC11", signal: "RX", remap: 0b00 }
+    - { pin: "PA13", signal: "CTS", remap: 0b00 }
+    - { pin: "PD2", signal: "RTS", remap: 0b00 }
+    # 01: remapped (CK/PB2, TX/PB0, RX/PB1, CTS/PC4, RTS/PC5)
+    - { pin: "PB2", signal: "CK", remap: 0b01 }
+    - { pin: "PB0", signal: "TX", remap: 0b01 }
+    - { pin: "PB1", signal: "RX", remap: 0b01 }
+    - { pin: "PC4", signal: "CTS", remap: 0b01 }
+    - { pin: "PC5", signal: "RTS", remap: 0b01 }
+    # 1x: remapped (CK/PE12, TX/PE0, RX/PE1, CTS/PB8, RTS/PB9)
+    - { pin: "PE12", signal: "CK", remap: 0b10 }
+    - { pin: "PE0", signal: "TX", remap: 0b10 }
+    - { pin: "PE1", signal: "RX", remap: 0b10 }
+    - { pin: "PB8", signal: "CTS", remap: 0b10 }
+    - { pin: "PB9", signal: "RTS", remap: 0b10 }
+
+- name: USART5
+  address: 0x40005000
+  registers:
+    kind: usart
+    version: v4x7
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART5EN
+    reset:
+      register: PB1PRSTR
+      field: USART5RST
+  remap:
+    register: PCFR2
+    field: USART5_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART5
+  pins:
+    # 00: default (CK/PB5, TX/PC12, RX/PD2, CTS/PB3, RTS/PB4)
+    - { pin: "PB5", signal: "CK", remap: 0b00 }
+    - { pin: "PC12", signal: "TX", remap: 0b00 }
+    - { pin: "PD2", signal: "RX", remap: 0b00 }
+    - { pin: "PB3", signal: "CTS", remap: 0b00 }
+    - { pin: "PB4", signal: "RTS", remap: 0b00 }
+    # 01: remapped (CK/PB3, TX/PB4, RX/PB5, CTS/PB8, RTS/PB9)
+    - { pin: "PB3", signal: "CK", remap: 0b01 }
+    - { pin: "PB4", signal: "TX", remap: 0b01 }
+    - { pin: "PB5", signal: "RX", remap: 0b01 }
+    - { pin: "PB8", signal: "CTS", remap: 0b01 }
+    - { pin: "PB9", signal: "RTS", remap: 0b01 }
+    # 1x: remapped (CK/PB2, TX/PE8, RX/PE9, CTS/PB0, RTS/PB1)
+    - { pin: "PB2", signal: "CK", remap: 0b10 }
+    - { pin: "PE8", signal: "TX", remap: 0b10 }
+    - { pin: "PE9", signal: "RX", remap: 0b10 }
+    - { pin: "PB0", signal: "CTS", remap: 0b10 }
+    - { pin: "PB1", signal: "RTS", remap: 0b10 }

@@ -1,0 +1,84 @@
+# CAN and SDIO on CH32V407/CH32V467 (datasheet V1.3 tables 2-3-10 and 2-3-12).
+
+- name: CAN1
+  address: 0x40006400
+  registers:
+    kind: can
+    version: v4x7
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: CAN1EN
+    reset:
+      register: PB1PRSTR
+      field: CAN1RST
+  remap:
+    register: PCFR1
+    field: CAN1_RM
+  interrupts:
+    - signal: TX
+      interrupt: CAN1_TX
+    - signal: RX0
+      interrupt: CAN1_RX0
+    - signal: RX1
+      interrupt: CAN1_RX1
+    - signal: SCE
+      interrupt: CAN1_SCE
+  pins:
+    # 00: default (RX/PA11, TX/PA12)
+    - { pin: "PA11", signal: "RX", remap: 0b00 }
+    - { pin: "PA12", signal: "TX", remap: 0b00 }
+    # 01: reserved
+    # 10: remapped (RX/PB8, TX/PB9)
+    - { pin: "PB8", signal: "RX", remap: 0b10 }
+    - { pin: "PB9", signal: "TX", remap: 0b10 }
+    # 11: remapped (RX/PD0, TX/PD1)
+    - { pin: "PD0", signal: "RX", remap: 0b11 }
+    - { pin: "PD1", signal: "TX", remap: 0b11 }
+
+- name: SDIO
+  address: 0x40018000
+  registers:
+    kind: sdio
+    version: v4x7
+    block: SDIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: SDIOEN
+    # RCC_HBRSTR has no SDIO reset bit on this family.
+  remap:
+    register: PCFR2
+    field: SDIO_RM
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SDIO
+  pins:
+    # CK and CMD are fixed; the data lines move as a group with SDIO_RM,
+    # except D0/D1 which have a third location when ETHMACEN and SDIOEN
+    # are both set.
+    - { pin: "PC12", signal: "CK" }
+    - { pin: "PD2", signal: "CMD" }
+    # 0: default
+    - { pin: "PC8", signal: "D0", remap: 0 }
+    - { pin: "PC9", signal: "D1", remap: 0 }
+    - { pin: "PC10", signal: "D2", remap: 0 }
+    - { pin: "PC11", signal: "D3", remap: 0 }
+    - { pin: "PB8", signal: "D4", remap: 0 }
+    - { pin: "PB9", signal: "D5", remap: 0 }
+    - { pin: "PC6", signal: "D6", remap: 0 }
+    - { pin: "PC7", signal: "D7", remap: 0 }
+    # 1: remapped
+    - { pin: "PB14", signal: "D0", remap: 1 }
+    - { pin: "PB15", signal: "D1", remap: 1 }
+    - { pin: "PC10", signal: "D2", remap: 1 }
+    - { pin: "PC11", signal: "D3", remap: 1 }
+    - { pin: "PB8", signal: "D4", remap: 1 }
+    - { pin: "PB9", signal: "D5", remap: 1 }
+    - { pin: "PA9", signal: "D6", remap: 1 }
+    - { pin: "PA10", signal: "D7", remap: 1 }

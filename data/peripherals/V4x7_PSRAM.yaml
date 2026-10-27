@@ -1,0 +1,22 @@
+# PSRAM controller (CH32V407RM §1.2 memory map, CH32V467 only).
+#
+# CH32V467 adds 4M or 8M bytes of on-chip PSRAM at 0x80800000 with a DMA
+# front end; CH32V407 has neither the memory nor this block.
+- name: PSRAM
+  address: 0x40024400
+  registers:
+    kind: psram
+    version: v4x7
+    block: PSRAM
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: PSRAMEN
+    reset:
+      register: HBRSTR
+      field: PSRAMRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: PSRAM

@@ -1,0 +1,98 @@
+# ADC1/ADC2 and the DAC block on CH32V407/CH32V467
+# (datasheet V1.3 tables 2-3-1 and 2-3-2).
+#
+# Both ADCs share one interrupt vector (ADC1_2). The two DAC units live in a
+# single register block at 0x40007400 and are driven by one peripheral here:
+# DAC1_OUT on PA4 and DAC2_OUT on PA5. The peripheral is named DAC1 to match
+# the DMA channel table (DAC1_CH1 / DAC1_CH2).
+
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v4x7
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: PB2PCENR
+      field: ADC1EN
+    reset:
+      register: PB2PRSTR
+      field: ADC1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC1_2
+  pins:
+    - { pin: "PA0", signal: "IN0" }
+    - { pin: "PA1", signal: "IN1" }
+    - { pin: "PA2", signal: "IN2" }
+    - { pin: "PA3", signal: "IN3" }
+    - { pin: "PA4", signal: "IN4" }
+    - { pin: "PA5", signal: "IN5" }
+    - { pin: "PA6", signal: "IN6" }
+    - { pin: "PA7", signal: "IN7" }
+    - { pin: "PB0", signal: "IN8" }
+    - { pin: "PB1", signal: "IN9" }
+    - { pin: "PC0", signal: "IN10" }
+    - { pin: "PC1", signal: "IN11" }
+    - { pin: "PC2", signal: "IN12" }
+    - { pin: "PC3", signal: "IN13" }
+    - { pin: "PC4", signal: "IN14" }
+    - { pin: "PC5", signal: "IN15" }
+
+- name: ADC2
+  address: 0x40012800
+  registers:
+    kind: adc
+    version: v4x7
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: PB2PCENR
+      field: ADC2EN
+    reset:
+      register: PB2PRSTR
+      field: ADC2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC1_2
+  pins:
+    - { pin: "PA0", signal: "IN0" }
+    - { pin: "PA1", signal: "IN1" }
+    - { pin: "PA2", signal: "IN2" }
+    - { pin: "PA3", signal: "IN3" }
+    - { pin: "PA4", signal: "IN4" }
+    - { pin: "PA5", signal: "IN5" }
+    - { pin: "PA6", signal: "IN6" }
+    - { pin: "PA7", signal: "IN7" }
+    - { pin: "PB0", signal: "IN8" }
+    - { pin: "PB1", signal: "IN9" }
+    - { pin: "PC0", signal: "IN10" }
+    - { pin: "PC1", signal: "IN11" }
+    - { pin: "PC2", signal: "IN12" }
+    - { pin: "PC3", signal: "IN13" }
+    - { pin: "PC4", signal: "IN14" }
+    - { pin: "PC5", signal: "IN15" }
+
+- name: DAC1
+  address: 0x40007400
+  registers:
+    kind: dac
+    version: h4
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: DACEN
+    reset:
+      register: PB1PRSTR
+      field: DACRST
+  pins:
+    - { pin: "PA4", signal: "OUT1" }
+    - { pin: "PA5", signal: "OUT2" }

@@ -1,0 +1,65 @@
+# TIM1, advanced timer (datasheet V1.3 table 2-3-3).
+#
+# Remap is AFIO_PCFR1 TIM1_RM. Note remap 0b10 is reserved on this family.
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: v4x7
+    block: ADTM
+  rcc:
+    bus_clock: PCLK2_TIM
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: TIM1EN
+    reset:
+      register: PB2PRSTR
+      field: TIM1RST
+  remap:
+    register: PCFR1
+    field: TIM1_RM
+  interrupts:
+    - signal: BRK
+      interrupt: TIM1_BRK
+    - signal: UP
+      interrupt: TIM1_UP
+    - signal: TRG
+      interrupt: TIM1_TRG_COM
+    - signal: COM
+      interrupt: TIM1_TRG_COM
+    - signal: CC
+      interrupt: TIM1_CC
+  pins:
+    # 00: default (ETR/PA12, CH1/PA8, CH2/PA9, CH3/PA10, CH4/PA11,
+    #     BKIN/PB12, CH1N/PB13, CH2N/PB14, CH3N/PB15)
+    - { pin: "PA12", signal: "ETR", remap: 0b00 }
+    - { pin: "PA8", signal: "CH1", remap: 0b00 }
+    - { pin: "PA9", signal: "CH2", remap: 0b00 }
+    - { pin: "PA10", signal: "CH3", remap: 0b00 }
+    - { pin: "PA11", signal: "CH4", remap: 0b00 }
+    - { pin: "PB12", signal: "BKIN", remap: 0b00 }
+    - { pin: "PB13", signal: "CH1N", remap: 0b00 }
+    - { pin: "PB14", signal: "CH2N", remap: 0b00 }
+    - { pin: "PB15", signal: "CH3N", remap: 0b00 }
+    # 01: partial (BKIN/PA6, CH1N/PA7, CH2N/PB0, CH3N/PB1; channels stay put)
+    - { pin: "PA12", signal: "ETR", remap: 0b01 }
+    - { pin: "PA8", signal: "CH1", remap: 0b01 }
+    - { pin: "PA9", signal: "CH2", remap: 0b01 }
+    - { pin: "PA10", signal: "CH3", remap: 0b01 }
+    - { pin: "PA11", signal: "CH4", remap: 0b01 }
+    - { pin: "PA6", signal: "BKIN", remap: 0b01 }
+    - { pin: "PA7", signal: "CH1N", remap: 0b01 }
+    - { pin: "PB0", signal: "CH2N", remap: 0b01 }
+    - { pin: "PB1", signal: "CH3N", remap: 0b01 }
+    # 11: full (ETR/PE7, CH1/PE9, CH2/PE11, CH3/PB8, CH4/PA7,
+    #     BKIN/PB10, CH1N/PE8, CH2N/PE10, CH3N/PE12)
+    - { pin: "PE7", signal: "ETR", remap: 0b11 }
+    - { pin: "PE9", signal: "CH1", remap: 0b11 }
+    - { pin: "PE11", signal: "CH2", remap: 0b11 }
+    - { pin: "PB8", signal: "CH3", remap: 0b11 }
+    - { pin: "PA7", signal: "CH4", remap: 0b11 }
+    - { pin: "PB10", signal: "BKIN", remap: 0b11 }
+    - { pin: "PE8", signal: "CH1N", remap: 0b11 }
+    - { pin: "PE10", signal: "CH2N", remap: 0b11 }
+    - { pin: "PE12", signal: "CH3N", remap: 0b11 }

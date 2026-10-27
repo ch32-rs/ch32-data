@@ -1,0 +1,26 @@
+# USBHS2 on CH32V407/CH32V467 (datasheet V1.3 table 2-3-15).
+#
+# The LQFP64 parts (RET6) have USBHS1 only and omit this file.
+- name: USBHS2
+  address: 0x40023400
+  registers:
+    kind: usbhs
+    version: v4x7
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: USBHSPLLCLK
+    enable:
+      register: HBPCENR
+      field: USBHS2EN
+    reset:
+      register: HBRSTR
+      field: USBHS2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBHS2
+    - signal: WAKEUP
+      interrupt: USBHS2WakeUP
+  pins:
+    - { pin: "PB7", signal: "DP" }
+    - { pin: "PB6", signal: "DM" }
