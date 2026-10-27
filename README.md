@@ -115,7 +115,7 @@ All kinds of contributions are welcome.
   - Preserve intentional project register extensions, such as overlapping SysTick access views
   - Make sure the editing does not breaks [ch32-hal](https://github.com/ch32-rs/ch32-hal)
 
-Run `cargo test -p ch32-data-gen` for register regression tests and `./d gen` to regenerate chip data and PACs.
+Run `./d gen` to regenerate chip data and PACs.
 
 ## License
 
