@@ -9,7 +9,7 @@
 #     end of the block;
 #   * DMA1 has 13 channels, DMA2 has 11, so the two need separate blocks.
 #
-# "CH9" in the DMA request tables is index 0 of ECH, "CH1" is index 0 of CH.
+# "CH8" in the DMA request tables is index 0 of ECH, "CH1" is index 0 of CH.
 
 block/CH:
   description: "Channel cluster: CFGR, CNTR, PADDR and MADDR registers."
@@ -269,3 +269,6 @@ enum/SIZE:
     - name: Bits32
       description: 32-bit size.
       value: 2
+    - name: Bits64
+      description: 64-bit size. Non-zero-wait regions require a supported chip revision.
+      value: 3

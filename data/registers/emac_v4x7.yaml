@@ -275,14 +275,15 @@ fieldset/MACCR:
       description: Duplex mode.
       bit_offset: 11
       bit_size: 1
-    - name: LM
-      description: Loopback mode.
-      bit_offset: 12
+    - name: RD
+      description: Retry disable.
+      bit_offset: 9
       bit_size: 1
     - name: FES
       description: Fast Ethernet speed.
       bit_offset: 14
       bit_size: 1
+      access: Read
     - name: IFG
       description: Interframe gap.
       bit_offset: 17
@@ -596,42 +597,10 @@ fieldset/DMABMR:
       description: Software reset
       bit_offset: 0
       bit_size: 1
-    - name: DA
-      description: DMA arbitration
-      bit_offset: 1
-      bit_size: 1
     - name: DSL
       description: Descriptor skip length
       bit_offset: 2
       bit_size: 5
-    - name: PBL
-      description: Programmable burst length
-      bit_offset: 8
-      bit_size: 6
-    - name: RTPR
-      description: Rx Tx priority ratio
-      bit_offset: 14
-      bit_size: 2
-    - name: FB
-      description: Fixed burst
-      bit_offset: 16
-      bit_size: 1
-    - name: RDP
-      description: Rx DMA PBL
-      bit_offset: 17
-      bit_size: 6
-    - name: USP
-      description: Use separate PBL
-      bit_offset: 23
-      bit_size: 1
-    - name: FPM
-      description: 4xPBL mode
-      bit_offset: 24
-      bit_size: 1
-    - name: AAB
-      description: Address-aligned beats
-      bit_offset: 25
-      bit_size: 1
 fieldset/DMATPDR:
   description: Ethernet DMA transmit poll demand register
   fields:
@@ -707,9 +676,9 @@ fieldset/DMASR:
       description: Early transmit status
       bit_offset: 10
       bit_size: 1
-    - name: FBES
-      description: Fatal bus error status
-      bit_offset: 13
+    - name: PHYLINK_SR
+      description: Integrated PHY interrupt status, write one to clear.
+      bit_offset: 11
       bit_size: 1
     - name: ERS
       description: Early receive status
@@ -753,10 +722,6 @@ fieldset/DMASR:
       bit_offset: 29
       bit_size: 1
       access: Read
-    - name: IPLS
-      description: 10M PHY physical layer status (write 1 to clear)
-      bit_offset: 31
-      bit_size: 1
 fieldset/DMAOMR:
   description: Ethernet DMA operation mode register
   fields:
@@ -764,14 +729,6 @@ fieldset/DMAOMR:
       description: Start/stop receive
       bit_offset: 1
       bit_size: 1
-    - name: OSF
-      description: Operate on second frame
-      bit_offset: 2
-      bit_size: 1
-    - name: RTC
-      description: Receive threshold control
-      bit_offset: 3
-      bit_size: 2
     - name: FUGF
       description: Forward undersized good frames
       bit_offset: 6
@@ -784,10 +741,6 @@ fieldset/DMAOMR:
       description: Start/stop transmission
       bit_offset: 13
       bit_size: 1
-    - name: TTC
-      description: Transmit threshold control
-      bit_offset: 14
-      bit_size: 3
     - name: FTF
       description: Flush transmit FIFO
       bit_offset: 20
@@ -795,14 +748,6 @@ fieldset/DMAOMR:
     - name: TSF
       description: Transmit store and forward
       bit_offset: 21
-      bit_size: 1
-    - name: DFRF
-      description: Disable flushing of received frames
-      bit_offset: 24
-      bit_size: 1
-    - name: RSF
-      description: Receive store and forward
-      bit_offset: 25
       bit_size: 1
     - name: DTCEFD
       description: Dropping of TCP/IP checksum error frames disable
@@ -855,9 +800,9 @@ fieldset/DMAIER:
       description: Early transmit interrupt enable
       bit_offset: 10
       bit_size: 1
-    - name: FBEIE
-      description: Fatal bus error interrupt enable
-      bit_offset: 13
+    - name: PHYLINK_IER
+      description: Integrated PHY interrupt enable.
+      bit_offset: 11
       bit_size: 1
     - name: ERIE
       description: Early receive interrupt enable
@@ -870,10 +815,6 @@ fieldset/DMAIER:
     - name: NISE
       description: Normal interrupt summary enable
       bit_offset: 16
-      bit_size: 1
-    - name: IPLE
-      description: 10M PHY link status change interrupt enable
-      bit_offset: 31
       bit_size: 1
 fieldset/DMAMFBOCR:
   description: Ethernet DMA missed frame and buffer overflow counter register
@@ -1145,7 +1086,7 @@ fieldset/STATE:
       bit_offset: 8
       bit_size: 3
 fieldset/PHY_CR:
-  description: PHY configure register.
+  description: PHY configure register; all bits read as zero (RM section 29.2.1.20). Write complete control values, do not use read-modify-write.
   fields:
     - name: REPHYADDR
       description: 'When bit7 is set to 1,bit4 to 0 serve as the address of the PHY.'
@@ -1159,10 +1100,12 @@ fieldset/PHY_CR:
       description: Speed selection.
       bit_offset: 9
       bit_size: 1
+      access: Read
     - name: DUPlEX
       description: connection mode selection.
       bit_offset: 10
       bit_size: 1
+      access: Read
     - name: PHY_PD
       description: PHY power-down mode.
       bit_offset: 30

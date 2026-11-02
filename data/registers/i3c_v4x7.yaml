@@ -127,7 +127,7 @@ fieldset/CTLR:
       bit_offset: 27
       bit_size: 4
     - name: MEND
-      description: Last message of the frame, terminated by a stop rather than a repeated start.
+      description: Last message of the frame, terminated by a stop rather than a repeated start. Must be set for legacy I2C messages (MTYPE=4).
       bit_offset: 31
       bit_size: 1
 
@@ -147,7 +147,7 @@ fieldset/CTLR_CCC:
       bit_offset: 27
       bit_size: 4
     - name: MEND
-      description: Last message of the frame, terminated by a stop rather than a repeated start.
+      description: Last message of the frame, terminated by a stop rather than a repeated start. Must be set for legacy I2C messages (MTYPE=4).
       bit_offset: 31
       bit_size: 1
 
@@ -207,7 +207,7 @@ fieldset/CFGR:
       bit_offset: 14
       bit_size: 1
     - name: TMODE
-      description: Target mode enable.
+      description: Preload control and transmit FIFOs before starting a controller frame.
       bit_offset: 19
       bit_size: 1
     - name: CDMAEN
@@ -262,11 +262,11 @@ fieldset/STATR:
   description: Status register.
   fields:
     - name: XDCNT
-      description: Transferred byte count of the current or last frame.
+      description: Transferred byte count of the last message, or number of assigned targets during ENTDAA.
       bit_offset: 0
       bit_size: 16
     - name: ABT
-      description: Frame transfer aborted.
+      description: Target ended a private read message before the requested byte count.
       bit_offset: 17
       bit_size: 1
     - name: DIR
@@ -274,7 +274,7 @@ fieldset/STATR:
       bit_offset: 18
       bit_size: 1
     - name: MID
-      description: Master or manufacturer identifier.
+      description: Message index within the frame, starting at zero.
       bit_offset: 24
       bit_size: 8
 
@@ -286,7 +286,7 @@ fieldset/STATER:
       bit_offset: 0
       bit_size: 4
     - name: PERR
-      description: Parity error.
+      description: Protocol error.
       bit_offset: 4
       bit_size: 1
     - name: DOVR
@@ -350,11 +350,11 @@ fieldset/EVR:
       bit_offset: 5
       bit_size: 1
     - name: TXLASTF
-      description: Transmit FIFO last byte transmitted.
+      description: Last byte or word of the message must still be written to the transmit FIFO.
       bit_offset: 6
       bit_size: 1
     - name: RXLASTF
-      description: Receive FIFO last byte received.
+      description: Last byte or word of the message must still be read from the receive FIFO.
       bit_offset: 7
       bit_size: 1
     - name: FCF

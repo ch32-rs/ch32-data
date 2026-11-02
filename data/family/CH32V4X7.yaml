@@ -114,7 +114,7 @@
     enable:
       register: HBPCENR
       field: DMA2EN
-  # 11 channels, all in the second register window (CH6..CH11 at 98..103).
+  # 11 channels. CH8..CH11 use the extended register window; CH6..CH11 IRQs are 98..103.
   interrupts:
     - signal: CH1
       interrupt: DMA2_CHANNEL1

@@ -1,4 +1,4 @@
-# CH32V407/CH32V467, CH32V407RM V1.2 table 11-3 (DMA2 peripheral/channel map).
+# CH32V407/CH32V467, CH32V407RM V1.3 table 11-3 (DMA2 peripheral/channel map).
 # DMA2 has 11 channels; DMA1 has 13 (see CH32V_V4X7_DMA1.yaml).
 #
 # The two DAC units share one register block, so they are the two channels of
@@ -32,11 +32,11 @@ TIM5_CH2: 4
 TIM7_UP: 4
 SDIO: 4
 DAC1_CH2: 4
+USART5_TX: 4
 
 # channel 5
 TIM5_CH1: 5
 USART4_TX: 5
-USART5_TX: 5
 TIM8_CH2: 5
 
 # channel 6

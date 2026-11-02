@@ -9,7 +9,7 @@
     block: RNG
   rcc:
     bus_clock: HCLK
-    kernel_clock: HCLK
+    kernel_clock: RNG
     enable:
       register: HBPCENR
       field: TRNGEN

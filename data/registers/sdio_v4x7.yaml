@@ -1,4 +1,4 @@
-# CH32V407 / CH32V467 SDIO (CH32V407RM §21).
+# CH32V407 / CH32V467 SDIO (CH32V407RM §24).
 #
 # Derived from sdio_v3.yaml: identical register map and field layout, plus a
 # DCTRL2 register at 0x60 for the arbitrary-byte-length block transfer mode.
@@ -223,7 +223,7 @@ fieldset/DCTRL2:
       bit_offset: 25
       bit_size: 1
     - name: SLV_CK_PHASE
-      description: Data output clock phase in slave mode.
+      description: Data output clock phase in slave mode; in host mode, setting this bit preserves the FIFO when DTEN is cleared.
       bit_offset: 26
       bit_size: 1
 fieldset/DLEN:
