@@ -528,7 +528,7 @@ fieldset/UEP0_DMA:
     - name: UEP0_DMA
       description: The start address of the endpoint 0 buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP0_MAX_LEN:
   description: endpoint 0 max length packet register.
   fields:
@@ -645,7 +645,7 @@ fieldset/UEP1_RX_DMA:
     - name: UEP1_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP1_RX_LEN:
   description: endpoint 1 receives the lenth register in a single pass.
   bit_size: 16
@@ -688,7 +688,7 @@ fieldset/UEP1_TX_DMA:
     - name: UEP1_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP1_T_LEN:
   description: endpoint 1 send the length register.
   bit_size: 16
@@ -738,7 +738,7 @@ fieldset/UEP2_RX_DMA:
     - name: UEP2_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP2_RX_LEN:
   description: endpoint 2 receives the lenth register in a single pass.
   bit_size: 16
@@ -781,7 +781,7 @@ fieldset/UEP2_TX_DMA:
     - name: UEP2_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP2_T_LEN:
   description: endpoint 2 send the length register.
   bit_size: 16
@@ -831,7 +831,7 @@ fieldset/UEP3_RX_DMA:
     - name: UEP3_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP3_RX_LEN:
   description: endpoint 3 receives the lenth register in a single pass.
   bit_size: 16
@@ -874,7 +874,7 @@ fieldset/UEP3_TX_DMA:
     - name: UEP3_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP3_T_LEN:
   description: endpoint 3 send the length register.
   bit_size: 16
@@ -924,7 +924,7 @@ fieldset/UEP4_RX_DMA:
     - name: UEP4_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP4_RX_LEN:
   description: endpoint 4 receives the lenth register in a single pass.
   bit_size: 16
@@ -967,7 +967,7 @@ fieldset/UEP4_TX_DMA:
     - name: UEP4_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP4_T_LEN:
   description: endpoint 4 send the length register.
   bit_size: 16
@@ -1017,7 +1017,7 @@ fieldset/UEP5_RX_DMA:
     - name: UEP5_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP5_RX_LEN:
   description: endpoint 5 receives the lenth register in a single pass.
   bit_size: 16
@@ -1060,7 +1060,7 @@ fieldset/UEP5_TX_DMA:
     - name: UEP5_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP5_T_LEN:
   description: endpoint 5 send the length register.
   bit_size: 16
@@ -1110,7 +1110,7 @@ fieldset/UEP6_RX_DMA:
     - name: UEP6_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP6_RX_LEN:
   description: endpoint 6 receives the lenth register in a single pass.
   bit_size: 16
@@ -1153,7 +1153,7 @@ fieldset/UEP6_TX_DMA:
     - name: UEP6_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP6_T_LEN:
   description: endpoint 6 send the length register.
   bit_size: 16
@@ -1203,7 +1203,7 @@ fieldset/UEP7_RX_DMA:
     - name: UEP7_RX_DMA
       description: endpoint receives the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP7_RX_LEN:
   description: endpoint 7 receives the lenth register in a single pass.
   bit_size: 16
@@ -1246,7 +1246,7 @@ fieldset/UEP7_TX_DMA:
     - name: UEP7_TX_DMA
       description: endpoint sends the start address register of the buffer.
       bit_offset: 0
-      bit_size: 24
+      bit_size: 32
 fieldset/UEP7_T_LEN:
   description: endpoint 7 send the length register.
   bit_size: 16
