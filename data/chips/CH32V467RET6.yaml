@@ -1,7 +1,7 @@
 name: CH32V467RET6
 family: QingKe RISC-V-based, general-purpose MCU
 subfamily: Interconnectivity with on-chip PSRAM (USB high-speed, Ethernet, CAN, DVP, SDIO, LTDC)
-product_type: QingKe V4F floating-point core, main frequency <= 200M
+product_type: QingKe V3V vector core, main frequency <= 200M
 keywords:
   - USBHS
   - ETH
@@ -29,7 +29,7 @@ docs:
     name: ""
     url: http://www.wch.cn/products/CH32V467.html
 cores:
-  - name: qingke-v4f
+  - name: qingke-v3v
     arch: riscv
     peripherals:
       - name: RCC

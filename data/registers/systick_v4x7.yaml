@@ -1,10 +1,9 @@
 # CH32V407RM V1.2 section 9.3, table 9-4.
-# SWIE is in SR, unlike rv4. CNT/CMP and the high-word views are project
-# register extensions retained alongside the manual's low-word registers.
+# SWIE is in SR, unlike rv4. CNT and CMP are 32-bit; 0x0c and 0x14 are reserved.
 # CMPL retains the existing API spelling of the manual's STK_CMPLR register.
 
 block/SYSTICK:
-  description: CH32V407/CH32V467 system counter with 32-bit and 64-bit access views.
+  description: CH32V407/CH32V467 32-bit system counter.
   items:
   - name: CTLR
     description: System count control register.
@@ -17,23 +16,9 @@ block/SYSTICK:
   - name: CNTL
     description: 32-bit system counter value (STK_CNTL).
     byte_offset: 8
-  - name: CNTH
-    description: System counter high word (project register extension).
-    byte_offset: 12
-  - name: CNT
-    description: 64-bit system counter view (project register extension).
-    byte_offset: 8
-    bit_size: 64
-  - name: CMP
-    description: 64-bit compare value view (project register extension).
-    byte_offset: 16
-    bit_size: 64
   - name: CMPL
     description: 32-bit compare value (STK_CMPLR).
     byte_offset: 16
-  - name: CMPH
-    description: Compare value high word (project register extension).
-    byte_offset: 20
 fieldset/CTLR:
   description: System count control register.
   fields:
