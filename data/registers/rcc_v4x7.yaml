@@ -228,8 +228,8 @@ fieldset/CTLR:
       description: USBHS PLL enable.
       bit_offset: 20
       bit_size: 1
-    - name: USNHS_PLLRDY
-      description: USNHS PLL clock ready flag.
+    - name: USBHS_PLLRDY
+      description: USBHS PLL clock ready flag.
       bit_offset: 21
       bit_size: 1
     - name: ETH_PLLON
