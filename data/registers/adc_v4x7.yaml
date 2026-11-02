@@ -1,4 +1,4 @@
-# CH32V407 / CH32V467 ADC (CH32V407RM §13).
+# CH32V407 / CH32V467 ADC (CH32V407RM §12).
 #
 # Derived from adc_h4.yaml: same register map, minus the H4 touch-key and
 # analog-configuration fields. Differences, all per the RM register tables:
@@ -6,7 +6,7 @@
 #   * CTLR1: no TKENABLE/TKITUNE/BUFEN/PGA (no touch key, no PGA in this ADC);
 #   * CTLR2: no CAL_VOL/CAL_AUTO/ADC_LP;
 #   * SAMPTR1/2: fields are plain SMPx, the _TKCG aliases are H4-only;
-#   * IDATAR1: injected data is two bytes, not a TKCGOFFSET word;
+#   * IDATAR1: JDATA is one 16-bit field;
 #   * AUX: no ADC_TO_DFSDM routing bit.
 
 block/ADC:
@@ -17,7 +17,7 @@ block/ADC:
     byte_offset: 0
     fieldset: STATR
   - name: CTLR1
-    description: control register 1/TKEY_V_CTLR.
+    description: control register 1.
     byte_offset: 4
     fieldset: CTLR1
   - name: CTLR2
@@ -28,10 +28,10 @@ block/ADC:
     description: sample time register 1.
     byte_offset: 12
     fieldset: SAMPTR1
-  - name: SAMPTR2_CHARGE2
+  - name: SAMPTR2
     description: sample time register 2.
     byte_offset: 16
-    fieldset: SAMPTR2_CHARGE2
+    fieldset: SAMPTR2
   - name: IOFR1
     description: injected channel data offset register x.
     byte_offset: 20
@@ -73,7 +73,7 @@ block/ADC:
     byte_offset: 56
     fieldset: ISQR
   - name: IDATAR1
-    description: injected data register x_Charge data offset for injected channel x.
+    description: injected data register 1.
     byte_offset: 60
     access: Read
     fieldset: IDATAR1
@@ -177,7 +177,7 @@ fieldset/AUX:
     bit_offset: 17
     bit_size: 1
 fieldset/CTLR1:
-  description: control register 1/TKEY_V_CTLR.
+  description: control register 1.
   fields:
   - name: AWDCH
     description: Analog watchdog channel select bits.
@@ -297,14 +297,10 @@ fieldset/CTLR2:
 fieldset/IDATAR1:
   description: Injected data register 1.
   fields:
-  - name: IDATA0_7
-    description: Injected data, bits 0-7.
+  - name: JDATA
+    description: Injected data.
     bit_offset: 0
-    bit_size: 8
-  - name: IDATA8_15
-    description: Injected data, bits 8-15.
-    bit_offset: 8
-    bit_size: 8
+    bit_size: 16
 fieldset/IDATAR2:
   description: injected data register x.
   fields:
@@ -380,14 +376,10 @@ fieldset/ISQR:
 fieldset/RDATAR:
   description: regular data register.
   fields:
-  - name: DATA0_7
+  - name: DATA
     description: Regular data.
     bit_offset: 0
-    bit_size: 8
-  - name: DATA8_15
-    description: Regular data.
-    bit_offset: 8
-    bit_size: 8
+    bit_size: 16
   - name: ADC2DATA
     description: converter data.
     bit_offset: 16
@@ -504,7 +496,7 @@ fieldset/SAMPTR1:
     description: Channel 17 sample time selection.
     bit_offset: 21
     bit_size: 3
-fieldset/SAMPTR2_CHARGE2:
+fieldset/SAMPTR2:
   description: sample time register 2.
   fields:
   - name: SMP0

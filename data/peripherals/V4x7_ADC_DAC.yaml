@@ -82,7 +82,7 @@
   address: 0x40007400
   registers:
     kind: dac
-    version: h4
+    version: v3
     block: DAC
   rcc:
     bus_clock: PCLK1
