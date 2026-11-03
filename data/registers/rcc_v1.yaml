@@ -354,6 +354,7 @@ fieldset/CFGR0:
       description: Microcontroller clock output.
       bit_offset: 24
       bit_size: 3
+      enum: MCO
 fieldset/CTLR:
   description: Clock control register.
   fields:
@@ -653,3 +654,22 @@ enum/USBPRE:
     - name: DIV1_5
       description: PLL clock divided by 1.5(PLLCLK=72MHz).
       value: 0b0
+enum/MCO:
+  description: Microcontroller clock output.
+  bit_size: 3
+  variants:
+    - name: NO_CLK
+      description: No clock.
+      value: 0b000
+    - name: SYSCLK
+      description: SYSCLK selected.
+      value: 0b100
+    - name: HSI
+      description: HSI selected.
+      value: 0b101
+    - name: HSE
+      description: HSE selected.
+      value: 0b110
+    - name: PLL_DIV2
+      description: PLL clock divided by 2.
+      value: 0b111

@@ -119,6 +119,7 @@ fieldset/CFGR0:
       description: Microcontroller clock output.
       bit_offset: 24
       bit_size: 4
+      enum: MCO
     - name: ADCSRC
       description: ADC input clock source selection.
       bit_offset: 28
@@ -732,3 +733,28 @@ fieldset/RSTSCKR:
       description: Window watchdog reset flag.
       bit_offset: 30
       bit_size: 1
+enum/MCO:
+  description: Microcontroller clock output.
+  bit_size: 4
+  variants:
+    - name: NO_CLK
+      description: No clock.
+      value: 0b0000
+    - name: SYSCLK
+      description: SYSCLK selected.
+      value: 0b0100
+    - name: HSI
+      description: HSI selected.
+      value: 0b0101
+    - name: HSE
+      description: HSE selected.
+      value: 0b0110
+    - name: UTMI
+      description: UTMI clock selected.
+      value: 0b0111
+    - name: ETH_PLL_DIV8
+      description: ETH_PLL clock divided by 8.
+      value: 0b1000
+    - name: XT1
+      description: XT1 selected.
+      value: 0b1010

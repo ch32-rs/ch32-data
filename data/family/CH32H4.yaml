@@ -133,8 +133,11 @@
     kind: rcc
     version: h4
     block: RCC
-  # MCO pin and per-chip clock-source variability handled at chip yaml
-  # level when needed.
+  # MCO is PB0 on every CH32H417 package (DS table 2-2-30, AF0).
+  pins:
+    - pin: PB0
+      signal: MCO
+      af: 0
   interrupts:
     - signal: GLOBAL
       interrupt: RCC
