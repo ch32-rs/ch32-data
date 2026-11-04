@@ -739,3 +739,29 @@
   interrupts:
     - signal: GLOBAL
       interrupt: AWU
+
+- name: WWDG
+  address: 0x40002C00
+  registers:
+    kind: wwdg
+    version: v00x
+    block: WWDG
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: APB1PCENR
+      field: WWDGEN
+    reset:
+      register: APB1PRSTR
+      field: WWDGRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: WWDG
+
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: v00x
+    block: IWDG
