@@ -46,11 +46,11 @@ fieldset/PCFR1:
       description: Port A1/Port A2 mapping on OSCIN/OSCOUT.
       bit_offset: 15
       bit_size: 1
-    - name: ADC1_ETRGINJ__RM
+    - name: ADC1_ETRGINJ_RM
       description: ADC 1 External trigger injected conversion remapping.
       bit_offset: 17
       bit_size: 1
-    - name: ADC1_ETRGREG__RM
+    - name: ADC1_ETRGREG_RM
       description: ADC 1 external trigger regular conversion remapping.
       bit_offset: 18
       bit_size: 1

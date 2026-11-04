@@ -369,7 +369,7 @@
       remap: 0
 
 - name: USBPD
-  address: 0x40027000
+  address: 0x40024000
   registers:
     kind: usbpd
     version: ch641

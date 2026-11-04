@@ -134,6 +134,14 @@ block/USBSS_DEVICE:
     description: Endpoint 0 receives control registers.
     byte_offset: 136
     fieldset: UEP0_RX_CTRL
+  - name: U3EP0_TX_DMA
+    description: DMA start address for Endpoint 0 sending.
+    byte_offset: 140
+    fieldset: U3EP0_TX_DMA
+  - name: U3EP0_RX_DMA
+    description: DMA start address for Endpoint 0 receiving.
+    byte_offset: 144
+    fieldset: U3EP0_RX_DMA
   - name: UEP1_TX_CFG
     description: Endpoint 1 Configuration Register.
     byte_offset: 192
@@ -902,14 +910,14 @@ block/USBSS_HOST:
     description: Host receives control registers.
     byte_offset: 136
     fieldset: UH_RX_CTRL
-  - name: UH_TX_DMA_U3EP0_TX_DMA
+  - name: UH_TX_DMA
     description: Send buffer address registers.
     byte_offset: 140
-    fieldset: UH_TX_DMA_U3EP0_TX_DMA
-  - name: UH_RX_DMA_U3EP0_RX_DMA
+    fieldset: UH_TX_DMA
+  - name: UH_RX_DMA
     description: Receive buffer address registers.
     byte_offset: 144
-    fieldset: UH_RX_DMA_U3EP0_RX_DMA
+    fieldset: UH_RX_DMA
   - name: UH_TX_DMA_OFS
     description: Host Transmit Address Offset Register.
     byte_offset: 148
@@ -1621,12 +1629,20 @@ fieldset/STATUS:
     description: USB Transaction Completion Interrupt Flag.
     bit_offset: 0
     bit_size: 1
-  - name: UHIF_ERDY__UDIF_SETUP
-    description: 'Host Mode: Receive ERDY-TP Complete Interrupt Flag;. Device Mode: Receive SETUP Transaction Completion Interrupt Flag.'
+  - name: UDIF_SETUP
+    description: Receive SETUP Transaction Completion Interrupt Flag.
     bit_offset: 1
     bit_size: 1
-  - name: UHIF_NOTIF__UDIF_STATUS
-    description: 'Host Mode: Receive DEV_NOTIF-TP Complete Interrupt Flag;. Device Mode: Receive STATUS Transaction Completion Interrupt Flag.'
+  - name: UHIF_ERDY
+    description: Receive ERDY-TP Complete Interrupt Flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: UDIF_STATUS
+    description: Receive STATUS Transaction Completion Interrupt Flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: UHIF_NOTIF
+    description: Receive DEV_NOTIF-TP Complete Interrupt Flag.
     bit_offset: 2
     bit_size: 1
   - name: UIF_RX_PING
@@ -1684,6 +1700,20 @@ fieldset/TP_RX_DATA2:
   fields:
   - name: USB3_NOTIF_DATA2
     description: After the DEV_NOTIF-TP is received, the HP data is stored in this register.
+    bit_offset: 0
+    bit_size: 32
+fieldset/U3EP0_RX_DMA:
+  description: DMA start address for endpoint 0 receiving.
+  fields:
+  - name: U3EP0_RX_DMA
+    description: The start address of the endpoint 0 receiving buffer.
+    bit_offset: 0
+    bit_size: 32
+fieldset/U3EP0_TX_DMA:
+  description: DMA start address for endpoint 0 sending.
+  fields:
+  - name: U3EP0_TX_DMA
+    description: The start address of the endpoint 0 sending buffer.
     bit_offset: 0
     bit_size: 32
 fieldset/UEP0_RX_CTRL:
@@ -4220,11 +4250,11 @@ fieldset/UH_RX_DMA_OFS:
     description: After the host receives it, the DMA's address is offset by a large amount.
     bit_offset: 0
     bit_size: 32
-fieldset/UH_RX_DMA_U3EP0_RX_DMA:
+fieldset/UH_RX_DMA:
   description: Receive buffer address registers.
   fields:
-  - name: U3EP0_RX_DMA
-    description: Host Mode:The start address of the host receiving buffer.. Device Mode:Endpoint 0 receives the start of the buffer.
+  - name: UH_RX_DMA
+    description: The start address of the host receiving buffer.
     bit_offset: 0
     bit_size: 32
 fieldset/UH_TX_CTRL:
@@ -4273,11 +4303,11 @@ fieldset/UH_TX_DMA_OFS:
     description: After the host sends the DMA, the size of the DMA address offset.
     bit_offset: 0
     bit_size: 32
-fieldset/UH_TX_DMA_U3EP0_TX_DMA:
+fieldset/UH_TX_DMA:
   description: Send buffer address registers.
   fields:
-  - name: U3EP0_TX_DMA
-    description: Host Mode:The start address of the host sending buffer.. Device Mode:Endpoint 0 sends the start of the buffer.
+  - name: UH_TX_DMA
+    description: The start address of the host sending buffer.
     bit_offset: 0
     bit_size: 32
 fieldset/USBSS_CTRL:
@@ -4323,12 +4353,20 @@ fieldset/USBSS_CTRL:
     description: USB Transaction Completion Interrupt Enabled.
     bit_offset: 16
     bit_size: 1
-  - name: UDIE_SETUP__UHIE_ERDY
-    description: 'Device Mode: Receive SETUP Transaction Completion Interrupt Enabled;. Host mode:Receive SETUP Transaction Completion Interrupt Enabled.'
+  - name: UDIE_SETUP
+    description: Receive SETUP Transaction Completion Interrupt Enabled.
     bit_offset: 17
     bit_size: 1
-  - name: UDIE_STATUS__UHIE_NOTIF
-    description: 'Device mode: Receiving STATUS transaction completion interrupt enabled;. Host mode: Interrupt enabled for receiving DEV_NOTIF-TP.'
+  - name: UHIE_ERDY
+    description: Receive ERDY-TP Complete Interrupt Enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: UDIE_STATUS
+    description: Receiving STATUS transaction completion interrupt enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: UHIE_NOTIF
+    description: Interrupt enabled for receiving DEV_NOTIF-TP.
     bit_offset: 18
     bit_size: 1
   - name: UIE_RX_PING

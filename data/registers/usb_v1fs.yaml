@@ -481,11 +481,11 @@ fieldset/UH_SETUP:
   fields:
     - name: SOF_EN
       description: SOF packet en
-      bit_offset: 2
+      bit_offset: 6
       bit_size: 1
     - name: PRE_PID_EN
       description: pre pid en
-      bit_offset: 3
+      bit_offset: 7
       bit_size: 1
 fieldset/UH_EP_PID:
   description: USB host endpoint PID.

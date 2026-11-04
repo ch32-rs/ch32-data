@@ -127,7 +127,7 @@ block/USBH:
     - name: SETUP
       description: USB host setup.
       byte_offset: 54 # 0x36
-      bit_size: 8
+      bit_size: 16
       fieldset: UH_SETUP
     - name: EP_PID
       description: USB host endpoint PID.
@@ -136,9 +136,13 @@ block/USBH:
       fieldset: UH_EP_PID
     - name: RX_CTRL
       description: USB host receiving control.
-      byte_offset: 58 # 0x3A
+      byte_offset: 59 # 0x3B
       bit_size: 8
       fieldset: UH_RX_CTRL
+    - name: TX_LEN
+      description: USB host transmittal length.
+      byte_offset: 60 # 0x3C
+      bit_size: 16
     - name: TX_CTRL
       description: USB host transmittal control.
       byte_offset: 62 # 0x3E
@@ -490,7 +494,7 @@ fieldset/UH_EP_MOD:
       bit_size: 1
 fieldset/UH_SETUP:
   description: USB host setup.
-  bit_size: 8
+  bit_size: 16
   fields:
     - name: SOF_EN
       description: SOF packet en
@@ -498,7 +502,7 @@ fieldset/UH_SETUP:
       bit_size: 1
     - name: PRE_PID_EN
       description: pre pid en
-      bit_offset: 3
+      bit_offset: 10
       bit_size: 1
 fieldset/UH_EP_PID:
   description: USB host endpoint PID.

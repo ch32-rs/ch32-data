@@ -72,20 +72,21 @@ block/USBD:
       fieldset: UEP7_MOD
     - name: UEP_DMA
       description: endpoint DMA buffer address.
-      byte_offset: 32
+      byte_offset: 16 # 0x10
       array:
         len: 8
         stride: 4
       fieldset: UEP_DMA
     - name: UEP_T_LEN
-      description: endpoint transmit length.
+      description: endpoint transmit length. Low half of R32_USB_EPn_CTRL.
       byte_offset: 48 # 0x30
+      bit_size: 16
       array:
         len: 8
         stride: 4
       fieldset: UEP_T_LEN
     - name: UEP_CTRL
-      description: endpoint control.
+      description: endpoint control. High half of R32_USB_EPn_CTRL.
       byte_offset: 50 # 0x32
       bit_size: 16
       array:
@@ -118,7 +119,7 @@ block/USBH:
     - name: SETUP
       description: USB host setup.
       byte_offset: 54 # 0x36
-      bit_size: 8
+      bit_size: 16
       fieldset: UH_SETUP
     - name: EP_PID
       description: USB host endpoint PID.
@@ -127,7 +128,7 @@ block/USBH:
       fieldset: UH_EP_PID
     - name: RX_CTRL
       description: USB host receiving control.
-      byte_offset: 58 # 0x3A
+      byte_offset: 59 # 0x3B
       bit_size: 8
       fieldset: UH_RX_CTRL
     - name: TX_LEN
@@ -417,14 +418,14 @@ fieldset/UEP_DMA:
       bit_size: 15
 fieldset/UEP_T_LEN:
   description: endpoint transmit length.
-  bit_size: 32
+  bit_size: 16
   fields:
     - name: HOST_PID3
-      description: USB host PID[3]
+      description: USB host PID[3], endpoint 2 only.
       bit_offset: 7
       bit_size: 1
     - name: TX_LEN
-      description: transmit length of USB endpoint X. The length varies with the endpoint type.
+      description: transmit length of USB endpoint X. 7 bits for endpoints 0-2 and 4-7, 10 bits for endpoint 3.
       bit_offset: 0
       bit_size: 10
 fieldset/UEP_CTRL:
