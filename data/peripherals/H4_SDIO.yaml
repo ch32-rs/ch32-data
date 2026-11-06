@@ -1,0 +1,43 @@
+# SDIO on CH32H417 (datasheet V1.9, SDIO multiplexing table).
+# The register block matches V4x7 (`sdio_v4x7.yaml`), but the pin mux is the
+# H4 per-pin AF number rather than the PCFR2 SDIO_RM group remap.
+
+- name: SDIO
+  address: 0x40018000
+  registers:
+    kind: sdio
+    version: v4x7
+    block: SDIO
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HB2PCENR
+      field: SDIOEN
+    reset:
+      register: HB2PRSTR
+      field: SDIORST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SDIO
+  pins:
+    - { pin: PB11, signal: CK, af: 8 }
+    - { pin: PC1, signal: CK, af: 11 }
+    - { pin: PB10, signal: CMD, af: 8 }
+    - { pin: PA0, signal: CMD, af: 9 }
+    - { pin: PE8, signal: D0, af: 8 }
+    - { pin: PB14, signal: D0, af: 9 }
+    - { pin: PE9, signal: D1, af: 8 }
+    - { pin: PB15, signal: D1, af: 9 }
+    - { pin: PE10, signal: D2, af: 8 }
+    - { pin: PB3, signal: D2, af: 9 }
+    - { pin: PE11, signal: D3, af: 8 }
+    - { pin: PB4, signal: D3, af: 9 }
+    - { pin: PE12, signal: D4, af: 8 }
+    - { pin: PB8, signal: D4, af: 10 }
+    - { pin: PE13, signal: D5, af: 8 }
+    - { pin: PB9, signal: D5, af: 10 }
+    - { pin: PE14, signal: D6, af: 8 }
+    - { pin: PC6, signal: D6, af: 9 }
+    - { pin: PE15, signal: D7, af: 8 }
+    - { pin: PC7, signal: D7, af: 9 }
