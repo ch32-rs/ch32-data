@@ -40,7 +40,7 @@
   address: 0x40010800
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2
@@ -55,7 +55,7 @@
   address: 0x40010C00
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2
@@ -70,7 +70,7 @@
   address: 0x40011000
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2
@@ -85,7 +85,7 @@
   address: 0x40011400
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2
@@ -100,7 +100,7 @@
   address: 0x40011800
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2
@@ -115,7 +115,7 @@
   address: 0x40011C00
   registers:
     kind: gpio
-    version: v3
+    version: h4
     block: GPIO
   rcc:
     bus_clock: PCLK2

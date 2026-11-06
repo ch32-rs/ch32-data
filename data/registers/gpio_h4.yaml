@@ -1,0 +1,196 @@
+block/GPIO:
+  description: General purpose I/O. 16 lines per port.
+  items:
+    - name: CFGLR
+      description: Port configuration register low (GPIOn_CFGLR).
+      byte_offset: 0
+      fieldset: CFGLR
+    - name: CFGHR
+      description: Port configuration register high (GPIOn_CFGHR).
+      byte_offset: 4
+      fieldset: CFGHR
+    - name: INDR
+      description: Port input data register (GPIOn_INDR).
+      byte_offset: 8
+      access: Read
+      fieldset: INDR
+    - name: OUTDR
+      description: Port output data register (GPIOn_OUTDR).
+      byte_offset: 12
+      fieldset: OUTDR
+    - name: BSHR
+      description: Port bit set/reset register (GPIOn_BSHR).
+      byte_offset: 16
+      access: Write
+      fieldset: BSHR
+    - name: BCR
+      description: Port bit reset register (GPIOn_BCR).
+      byte_offset: 20
+      access: Write
+      fieldset: BCR
+    - name: LCKR
+      description: Port configuration lock register.
+      byte_offset: 24
+      fieldset: LCKR
+    - name: SPEED
+      description: Port output speed register (GPIOn_SPEED).
+      byte_offset: 28
+      fieldset: SPEED
+fieldset/BCR:
+  description: Port bit reset register (GPIOn_BCR).
+  fields:
+    - name: BR
+      description: Reset bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/BSHR:
+  description: Port bit set/reset register (GPIOn_BSHR).
+  fields:
+    - name: BS
+      description: Set bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+    - name: BR
+      description: Reset bit 0.
+      bit_offset: 16
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/CFGHR:
+  description: Port configuration register high (GPIOn_CFGHR).
+  fields:
+    - name: MODE
+      description: Port n.8 mode bits.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+      enum: MODE
+    - name: CNF
+      description: Port n.8 configuration bits.
+      bit_offset: 2
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+      enum: CNF
+fieldset/CFGLR:
+  description: Port configuration register low (GPIOn_CFGLR).
+  fields:
+    - name: MODE
+      description: Port n.0 mode bits.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+      enum: MODE
+    - name: CNF
+      description: Port n.0 configuration bits.
+      bit_offset: 2
+      bit_size: 2
+      array:
+        len: 8
+        stride: 4
+      enum: CNF
+fieldset/INDR:
+  description: Port input data register (GPIOn_INDR).
+  fields:
+    - name: IDR
+      description: Port input data.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+fieldset/LCKR:
+  description: Port configuration lock register.
+  fields:
+    - name: LCK
+      description: Port A Lock bit 0.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+    - name: LCKK
+      description: Lock key.
+      bit_offset: 16
+      bit_size: 1
+fieldset/OUTDR:
+  description: Port output data register (GPIOn_OUTDR).
+  fields:
+    - name: ODR
+      description: Port output data.
+      bit_offset: 0
+      bit_size: 1
+      array:
+        len: 16
+        stride: 1
+enum/MODE:
+  bit_size: 2
+  desscription: port x mode selection, configure the corresponding port by these bits.
+  variants:
+    - name: INPUT
+      description: Input mode.
+      value: 0b00
+    - name: OUTPUT_10MHZ
+      description: Output mode.
+      value: 0b01
+    - name: OUTPUT_2MHZ
+      description: Output mode.
+      value: 0b10
+    - name: OUTPUT_50MHZ
+      description: Output mode.
+      value: 0b11
+enum/CNF:
+  bit_size: 2
+  description: port x configuration selection, configure the corresponding port by these bits.
+  variants:
+    - name: ANALOG_IN__PUSH_PULL_OUT
+      description: Analog input / push-pull output.
+      value: 0b00
+    - name: FLOATING_IN__OPEN_DRAIN_OUT
+      description: Floating input / open-drain output.
+      value: 0b01
+    - name: PULL_IN__AF_PUSH_PULL_OUT
+      description: Input with pull-up / AF pull-down.
+      value: 0b10
+    - name: AF_OPEN_DRAIN_OUT
+      description: Alternate function output push-pull
+      value: 0b11
+fieldset/SPEED:
+  description: Port output speed register (GPIOn_SPEED).
+  fields:
+    - name: SPEED
+      description: Port n output speed bits.
+      bit_offset: 0
+      bit_size: 2
+      array:
+        len: 16
+        stride: 2
+      enum: SPEED
+enum/SPEED:
+  bit_size: 2
+  description: Port output speed selection.
+  variants:
+    - name: LOW
+      description: 10 MHz.
+      value: 0b00
+    - name: MEDIUM
+      description: 50 MHz.
+      value: 0b01
+    - name: HIGH
+      description: 100 MHz.
+      value: 0b10
+    - name: VERY_HIGH
+      description: 180 MHz.
+      value: 0b11
