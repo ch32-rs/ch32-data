@@ -1,86 +1,69 @@
 block/SYSTICK:
-  description: Systick registers for V3F + V5F dual-core (currently CH32H417). Two independent 32-bit up/down counters with per-counter core ID (CID) routing for interrupts.
+  description: Systick registers for the CH32H4 dual-core SysTick. Two independent 32-bit counters, indexed by hart, and one status register shared by both.
   items:
-  - name: CTLR_0
-    description: System count control register for counter 0.
+  - name: CTLR
+    description: System count control register.
     byte_offset: 0
+    array:
+      len: 2
+      stride: 128
     fieldset: CTLR
-  - name: ISR
-    description: System counter interrupt status register (shared by both counters).
+  - name: SR
+    description: System counter interrupt status register. Shared by both counters.
     byte_offset: 4
-    fieldset: ISR
-  - name: CNT_0
-    description: System counter 0 count register.
-    byte_offset: 8
-    fieldset: CNT
-  - name: CMP_0
-    description: System counter 0 compare register.
-    byte_offset: 16
-    fieldset: CMP
-  - name: CTLR_1
-    description: System count control register for counter 1.
-    byte_offset: 128
-    fieldset: CTLR
-  - name: CNT_1
-    description: System counter 1 count register.
-    byte_offset: 136
-    fieldset: CNT
-  - name: CMP_1
-    description: System counter 1 compare register.
-    byte_offset: 144
-    fieldset: CMP
-fieldset/CMP:
-  description: System count compare register.
-  fields:
-  - name: CMP
-    description: 32-bit compare value (used as reload value when counting down).
-    bit_offset: 0
-    bit_size: 32
-fieldset/CNT:
-  description: System counter register.
-  fields:
+    fieldset: SR
   - name: CNT
-    description: 32-bit Systick counter value.
-    bit_offset: 0
+    description: System counter count register.
+    byte_offset: 8
     bit_size: 32
+    array:
+      len: 2
+      stride: 128
+  - name: CMP
+    description: System count compare register.
+    byte_offset: 16
+    bit_size: 32
+    array:
+      len: 2
+      stride: 128
 fieldset/CTLR:
   description: System count control register.
   fields:
-  - name: EN
+  - name: STE
     description: Counter enable.
     bit_offset: 0
     bit_size: 1
-  - name: IE
+  - name: STIE
     description: Counter interrupt enable.
     bit_offset: 1
     bit_size: 1
-  - name: NO_RTC
-    description: Counter clock source selection.
+  - name: STCLK
+    description: Counter clock source. Both counters are clocked from the V3F HCLK domain.
     bit_offset: 2
     bit_size: 1
     enum: STCLK
-  - name: AUTO_RELOAD
-    description: Auto reload enable.
+  - name: STRE
+    description: Auto reload enable. Leave clear for a free-running counter.
     bit_offset: 3
     bit_size: 1
-  - name: DOWN_MODE
+  - name: MODE
     description: Count mode.
     bit_offset: 4
     bit_size: 1
     enum: MODE
   - name: CID
-    description: Core ID for routing the counter interrupt to a specific hart. Auto-updated when EN is set to the operating hart's core ID.
+    description: Hart the counter interrupt is routed to. Updated to the operating hart when STE is set.
     bit_offset: 6
     bit_size: 1
-fieldset/ISR:
+fieldset/SR:
   description: System counter interrupt status register (shared).
   fields:
-  - name: ISR0
-    description: Systick0 interrupt flag.
+  - name: CNTIF0
+    description: Counter 0 compare flag.
     bit_offset: 0
     bit_size: 1
-  - name: ISR1
-    description: Systick1 interrupt flag.
+  - name: CNTIF1
+    description: Counter 1 compare flag.
     bit_offset: 1
     bit_size: 1
 enum/MODE:
@@ -96,8 +79,8 @@ enum/STCLK:
   bit_size: 1
   variants:
   - name: HCLK_DIV8
-    description: HCLK/8.
+    description: V3F HCLK/8.
     value: 0
   - name: HCLK
-    description: HCLK.
+    description: V3F HCLK.
     value: 1
