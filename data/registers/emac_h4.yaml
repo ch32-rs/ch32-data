@@ -1,0 +1,1139 @@
+# CH32H417 gigabit Ethernet MAC (CH32H417 RM §31).
+#
+# Rebuilt from the vendor SVD, which splits the block into four peripherals
+# at 0x40028000 / 0x40028100 / 0x40028700 / 0x40029000. The RM register map
+# (table 31-24) puts the same ranges inside one MAC block, so this file keeps
+# the V4x7 layout: MAC at +0x000, MMC at +0x100, IEEE 1588 at +0x700 and the
+# DMA at +0x1000.
+#
+# The internal 10M/100M PHY registers (BMCR at SMI offset 0x00 and so on,
+# RM §31.8.5) are reached over SMI rather than the HB bus, so they are not
+# block items; use MACMIIAR/MACMIIDR.
+#
+# The SVD, the RM and the EVT SDK header (`ch32h417_eth.h`) do not always
+# agree. The RM and the SDK take precedence here:
+#   * The SDK still defines fields copied from the 10/100-only MAC:
+#     MACCR.BL/DC/RD/ROD/CSD, MACFCR.ZQPD/PLT, DMAOMR.RSF/DFRF/TTC/RTC/OSF,
+#     DMASR.FBES, DMAIER.FBEIE/ERIE, DMABMR.AAB/FPM/USP/RDP/FB/RTPR/PBL/EDE/
+#     DA, MMCCR.MCFHP/MCP, MMCRIR.RFAES, MMCTIR.TGFMSCS/TGFSCS and the
+#     PTPTSSR/TSCNT bits. The RM marks all of them reserved and the SVD
+#     agrees, so they are omitted.
+#   * The SVD's MACCR speed field is two bits wide, which is correct; the
+#     SDK spells the two bits `ETH_Speed_100M` and `ETH_Speed_1000M`. Field
+#     names follow the RM, with the SDK spelling noted where it differs.
+#   * The SDK struct still declares MACCFG0 at +0x98, but neither the RM nor
+#     the SVD defines it and the SDK has no bit definitions for it, so it is
+#     not modelled.
+
+block/ETH:
+  description: Ethernet MAC, integrated 10/100M PHY control, MMC and IEEE 1588.
+  items:
+  - name: MACCR
+    description: MAC control register. `FES=0b10` selects gigabit; `TCD` delays the RGMII transmit clock by 0.5 ns per step.
+    byte_offset: 0
+    fieldset: MACCR
+  - name: MACFFR
+    description: MAC frame filter register.
+    byte_offset: 4
+    fieldset: MACFFR
+  - name: MACHTHR
+    description: MAC hash table high register.
+    byte_offset: 8
+    fieldset: MACHTHR
+  - name: MACHTLR
+    description: MAC hash table low register.
+    byte_offset: 12
+    fieldset: MACHTLR
+  - name: MACMIIAR
+    description: MII address register.
+    byte_offset: 16
+    fieldset: MACMIIAR
+  - name: MACMIIDR
+    description: MII data register.
+    byte_offset: 20
+    fieldset: MACMIIDR
+  - name: MACFCR
+    description: MAC flow control register.
+    byte_offset: 24
+    fieldset: MACFCR
+  - name: MACVLAN
+    description: VLAN tag register.
+    byte_offset: 28
+    fieldset: MACVLAN
+  - name: MACRWUFFR
+    description: Remote wake-up frame filter register. Eight consecutive accesses reach all eight filters.
+    byte_offset: 40
+    fieldset: MACRWUFFR
+  - name: MACPMTCSR
+    description: PMT control and status register.
+    byte_offset: 44
+    fieldset: MACPMTCSR
+  - name: MACSR
+    description: MAC interrupt status register.
+    byte_offset: 56
+    access: Read
+    fieldset: MACSR
+  - name: MACIMR
+    description: MAC interrupt mask register.
+    byte_offset: 60
+    fieldset: MACIMR
+  - name: MACA0HR
+    description: MAC address 0 high register.
+    byte_offset: 64
+    fieldset: MACA0HR
+  - name: MACA0LR
+    description: MAC address 0 low register.
+    byte_offset: 68
+    fieldset: MACA0LR
+  - name: MACA1HR
+    description: MAC address 1 high register.
+    byte_offset: 72
+    fieldset: MACA1HR
+  - name: MACA1LR
+    description: MAC address 1 low register.
+    byte_offset: 76
+    fieldset: MACA1LR
+  - name: MACA2HR
+    description: MAC address 2 high register.
+    byte_offset: 80
+    fieldset: MACA2HR
+  - name: MACA2LR
+    description: MAC address 2 low register.
+    byte_offset: 84
+    fieldset: MACA2LR
+  - name: MACA3HR
+    description: MAC address 3 high register.
+    byte_offset: 88
+    fieldset: MACA3HR
+  - name: MACA3LR
+    description: MAC address 3 low register.
+    byte_offset: 92
+    fieldset: MACA3LR
+  - name: PHY_CFGR
+    description: Integrated PHY control and status (the SDK calls this MACPHYCR).
+    byte_offset: 128
+    fieldset: PHY_CFGR
+  - name: MMCCR
+    description: MMC control register.
+    byte_offset: 256
+    fieldset: MMCCR
+  - name: MMCRIR
+    description: MMC receive interrupt register.
+    byte_offset: 260
+    access: Read
+    fieldset: MMCRIR
+  - name: MMCTIR
+    description: MMC transmit interrupt register.
+    byte_offset: 264
+    access: Read
+    fieldset: MMCTIR
+  - name: MMCRIMR
+    description: MMC receive interrupt mask register.
+    byte_offset: 268
+    fieldset: MMCRIMR
+  - name: MMCTIMR
+    description: MMC transmit interrupt mask register.
+    byte_offset: 272
+    fieldset: MMCTIMR
+  - name: MMCTGFSCCR
+    description: Frames transmitted after a single collision, half duplex.
+    byte_offset: 332
+    access: Read
+    fieldset: MMCTGFSCCR
+  - name: MMCTGFMSCCR
+    description: Frames transmitted after more than one collision, half duplex.
+    byte_offset: 336
+    access: Read
+    fieldset: MMCTGFMSCCR
+  - name: MMCTGFCR
+    description: Good frames transmitted.
+    byte_offset: 360
+    access: Read
+    fieldset: MMCTGFCR
+  - name: MMCRFCECR
+    description: Frames received with a CRC error.
+    byte_offset: 404
+    access: Read
+    fieldset: MMCRFCECR
+  - name: MMCRFAECR
+    description: Frames received with an alignment error.
+    byte_offset: 408
+    access: Read
+    fieldset: MMCRFAECR
+  - name: MMCRAFCR
+    description: All frames received, errored or not.
+    byte_offset: 412
+    access: Read
+    fieldset: MMCRAFCR
+  - name: MMCRGUFCR
+    description: Good unicast frames received.
+    byte_offset: 452
+    access: Read
+    fieldset: MMCRGUFCR
+  - name: PTPTSCR
+    description: PTP timestamp control register.
+    byte_offset: 1792
+    fieldset: PTPTSCR
+  - name: PTPSSIR
+    description: PTP sub-second increment register.
+    byte_offset: 1796
+    fieldset: PTPSSIR
+  - name: PTPTSHR
+    description: PTP system time, seconds.
+    byte_offset: 1800
+    access: Read
+    fieldset: PTPTSHR
+  - name: PTPTSLR
+    description: PTP system time, sub-seconds.
+    byte_offset: 1804
+    access: Read
+    fieldset: PTPTSLR
+  - name: PTPTSHUR
+    description: PTP timestamp update, seconds.
+    byte_offset: 1808
+    fieldset: PTPTSHUR
+  - name: PTPTSLUR
+    description: PTP timestamp update, sub-seconds.
+    byte_offset: 1812
+    fieldset: PTPTSLUR
+  - name: PTPTSAR
+    description: PTP timestamp addend.
+    byte_offset: 1816
+    fieldset: PTPTSAR
+  - name: PTPTTHR
+    description: PTP target time, seconds.
+    byte_offset: 1820
+    fieldset: PTPTTHR
+  - name: PTPTTLR
+    description: PTP target time, sub-seconds.
+    byte_offset: 1824
+    fieldset: PTPTTLR
+  - name: DMABMR
+    description: DMA bus mode register.
+    byte_offset: 4096
+    fieldset: DMABMR
+  - name: DMATPDR
+    description: DMA transmit poll demand (the SDK spells the field `TPD`).
+    byte_offset: 4100
+    fieldset: DMATPDR
+  - name: DMARPDR
+    description: DMA receive poll demand (the SDK spells the field `RPD`).
+    byte_offset: 4104
+    fieldset: DMARPDR
+  - name: DMARDLAR
+    description: DMA receive descriptor list address. Descriptors are 32-byte aligned.
+    byte_offset: 4108
+    fieldset: DMARDLAR
+  - name: DMATDLAR
+    description: DMA transmit descriptor list address. Descriptors are 32-byte aligned.
+    byte_offset: 4112
+    fieldset: DMATDLAR
+  - name: DMASR
+    description: DMA status register. Status bits are write-1-to-clear.
+    byte_offset: 4116
+    fieldset: DMASR
+  - name: DMAOMR
+    description: DMA operation mode register.
+    byte_offset: 4120
+    fieldset: DMAOMR
+  - name: DMAIER
+    description: DMA interrupt enable register.
+    byte_offset: 4124
+    fieldset: DMAIER
+  - name: DMAMFBOCR
+    description: DMA missed frame and buffer overflow counter.
+    byte_offset: 4128
+    access: Read
+    fieldset: DMAMFBOCR
+  - name: DMACHTDR
+    description: DMA current transmit descriptor address (the SDK spells the field `HTDAP`).
+    byte_offset: 4168
+    access: Read
+    fieldset: DMACHTDR
+  - name: DMACHRDR
+    description: DMA current receive descriptor address (the SDK spells the field `HRDAP`).
+    byte_offset: 4172
+    access: Read
+    fieldset: DMACHRDR
+  - name: DMACHTBAR
+    description: DMA current transmit buffer address (the SDK spells the field `HTBAP`).
+    byte_offset: 4176
+    access: Read
+    fieldset: DMACHTBAR
+  - name: DMACHRBAR
+    description: DMA current receive buffer address (the SDK spells the field `HRBAP`).
+    byte_offset: 4180
+    access: Read
+    fieldset: DMACHRBAR
+fieldset/MACCR:
+  description: MAC control register.
+  fields:
+  - name: TCF
+    description: Transmit clock inversion.
+    bit_offset: 1
+    bit_size: 1
+  - name: RE
+    description: Receiver enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TE
+    description: Transmitter enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: APCS
+    description: Automatic pad/CRC stripping.
+    bit_offset: 7
+    bit_size: 1
+  - name: IPCO
+    description: IPv4 checksum offload.
+    bit_offset: 10
+    bit_size: 1
+  - name: DM
+    description: Full-duplex mode.
+    bit_offset: 11
+    bit_size: 1
+  - name: LM
+    description: Loopback mode.
+    bit_offset: 12
+    bit_size: 1
+  - name: FES
+    description: Speed. 0b00 = 10M, 0b01 = 100M, 0b10 = 1G, 0b11 reserved.
+    bit_offset: 14
+    bit_size: 2
+  - name: IFG
+    description: Minimum inter-frame gap, from 96 bits (0) down to 40 bits (7).
+    bit_offset: 17
+    bit_size: 3
+  - name: JD
+    description: Jabber disable.
+    bit_offset: 22
+    bit_size: 1
+  - name: WD
+    description: Watchdog disable.
+    bit_offset: 23
+    bit_size: 1
+  - name: TCD
+    description: Transmit clock delay, 0.5 ns per step.
+    bit_offset: 29
+    bit_size: 3
+fieldset/MACFFR:
+  description: MAC frame filter register.
+  fields:
+  - name: PM
+    description: Promiscuous mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: HU
+    description: Hash unicast.
+    bit_offset: 1
+    bit_size: 1
+  - name: HM
+    description: Hash multicast.
+    bit_offset: 2
+    bit_size: 1
+  - name: DAIF
+    description: Destination address inverse filtering.
+    bit_offset: 3
+    bit_size: 1
+  - name: PAM
+    description: Pass all multicast.
+    bit_offset: 4
+    bit_size: 1
+  - name: BFD
+    description: Broadcast frame disable.
+    bit_offset: 5
+    bit_size: 1
+  - name: PCF
+    description: Pass control frames.
+    bit_offset: 6
+    bit_size: 2
+  - name: SAIF
+    description: Source address inverse filtering.
+    bit_offset: 8
+    bit_size: 1
+  - name: SAF
+    description: Source address filter enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: HPF
+    description: Hash or perfect filter.
+    bit_offset: 10
+    bit_size: 1
+  - name: RA
+    description: Receive all frames.
+    bit_offset: 31
+    bit_size: 1
+fieldset/MACHTHR:
+  description: MAC hash table high register.
+  fields:
+  - name: HTH
+    description: Hash table bits 63:32.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACHTLR:
+  description: MAC hash table low register.
+  fields:
+  - name: HTL
+    description: Hash table bits 31:0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACMIIAR:
+  description: MII address register.
+  fields:
+  - name: MB
+    description: MII busy.
+    bit_offset: 0
+    bit_size: 1
+  - name: MW
+    description: MII write; clear for a read.
+    bit_offset: 1
+    bit_size: 1
+  - name: CR
+    description: MDC clock range. 0 = HCLK/42, 2 = HCLK/16, 3 = HCLK/26.
+    bit_offset: 2
+    bit_size: 3
+  - name: MR
+    description: PHY register address.
+    bit_offset: 6
+    bit_size: 5
+  - name: PA
+    description: PHY address.
+    bit_offset: 11
+    bit_size: 5
+fieldset/MACMIIDR:
+  description: MII data register.
+  fields:
+  - name: MD
+    description: Data read from or written to the PHY.
+    bit_offset: 0
+    bit_size: 16
+fieldset/MACFCR:
+  description: MAC flow control register.
+  fields:
+  - name: FCB
+    description: Flow control busy; writing 1 sends one pause frame.
+    bit_offset: 0
+    bit_size: 1
+  - name: TFCE
+    description: Transmit flow control enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: RFCE
+    description: Receive flow control enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: UPFD
+    description: Unicast pause frame detect.
+    bit_offset: 3
+    bit_size: 1
+  - name: PT
+    description: Pause time, in units of a 64-byte slot.
+    bit_offset: 16
+    bit_size: 16
+fieldset/MACVLAN:
+  description: VLAN tag register.
+  fields:
+  - name: VLANTI
+    description: VLAN tag identifier to compare against.
+    bit_offset: 0
+    bit_size: 16
+  - name: VLANT
+    description: Compare only the 12 identifier bits (the SDK calls this `VLANTC`).
+    bit_offset: 16
+    bit_size: 1
+fieldset/MACRWUFFR:
+  description: Remote wake-up frame filter register.
+  fields:
+  - name: RWUFFR
+    description: Wake-up frame filter data; eight sequential accesses reach all eight filters.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACPMTCSR:
+  description: PMT control and status register.
+  fields:
+  - name: PD
+    description: Power down; self-clears when a wake-up frame or magic packet is received.
+    bit_offset: 0
+    bit_size: 1
+  - name: MPE
+    description: Magic packet enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: WFE
+    description: Wake-up frame enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: PHY_PMEB_EN
+    description: Let a wake-up frame from the integrated PHY raise a PMT event.
+    bit_offset: 3
+    bit_size: 1
+  - name: MPR
+    description: Magic packet received; clears on read.
+    bit_offset: 5
+    bit_size: 1
+    access: Read
+  - name: WFR
+    description: Wake-up frame received; clears on read.
+    bit_offset: 6
+    bit_size: 1
+    access: Read
+  - name: PHY_PMEBR
+    description: Integrated PHY wake-up frame received; clears on read.
+    bit_offset: 7
+    bit_size: 1
+    access: Read
+  - name: GU
+    description: Treat every filtered unicast frame as a wake-up frame.
+    bit_offset: 9
+    bit_size: 1
+  - name: WFFRPR
+    description: Reset the wake-up frame filter pointer; self-clears.
+    bit_offset: 31
+    bit_size: 1
+fieldset/MACSR:
+  description: MAC interrupt status register.
+  fields:
+  - name: PMTS
+    description: PMT status; clears when WFR and MPR are both cleared.
+    bit_offset: 3
+    bit_size: 1
+  - name: MMCS
+    description: MMC status.
+    bit_offset: 4
+    bit_size: 1
+  - name: MMCRS
+    description: MMC receive status.
+    bit_offset: 5
+    bit_size: 1
+  - name: MMCTS
+    description: MMC transmit status.
+    bit_offset: 6
+    bit_size: 1
+  - name: TSTS
+    description: Timestamp trigger status; clears on read.
+    bit_offset: 9
+    bit_size: 1
+fieldset/MACIMR:
+  description: MAC interrupt mask register.
+  fields:
+  - name: PMTIM
+    description: PMT interrupt mask.
+    bit_offset: 3
+    bit_size: 1
+  - name: TSTIM
+    description: Timestamp trigger interrupt mask.
+    bit_offset: 9
+    bit_size: 1
+fieldset/MACA0HR:
+  description: MAC address 0 high register.
+  fields:
+  - name: MO
+    description: Always reads 1.
+    bit_offset: 31
+    bit_size: 1
+    access: Read
+  - name: MACA0H
+    description: MAC address bits 47:32.
+    bit_offset: 0
+    bit_size: 16
+fieldset/MACA0LR:
+  description: MAC address 0 low register.
+  fields:
+  - name: MACA0L
+    description: MAC address bits 31:0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACA1HR:
+  description: MAC address 1 high register.
+  fields:
+  - name: AE
+    description: Use this address in the perfect filter.
+    bit_offset: 31
+    bit_size: 1
+  - name: SA
+    description: Compare against the source address instead of the destination.
+    bit_offset: 30
+    bit_size: 1
+  - name: MBC
+    description: Mask byte control; one bit per address byte.
+    bit_offset: 24
+    bit_size: 6
+  - name: MACA1H
+    description: MAC address bits 47:32.
+    bit_offset: 0
+    bit_size: 16
+fieldset/MACA1LR:
+  description: MAC address 1 low register.
+  fields:
+  - name: MACA1L
+    description: MAC address bits 31:0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACA2HR:
+  description: MAC address 2 high register.
+  fields:
+  - name: AE
+    description: Use this address in the perfect filter.
+    bit_offset: 31
+    bit_size: 1
+  - name: SA
+    description: Compare against the source address instead of the destination.
+    bit_offset: 30
+    bit_size: 1
+  - name: MBC
+    description: Mask byte control; one bit per address byte.
+    bit_offset: 24
+    bit_size: 6
+  - name: MACA2H
+    description: MAC address bits 47:32.
+    bit_offset: 0
+    bit_size: 16
+fieldset/MACA2LR:
+  description: MAC address 2 low register.
+  fields:
+  - name: MACA2L
+    description: MAC address bits 31:0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MACA3HR:
+  description: MAC address 3 high register.
+  fields:
+  - name: AE
+    description: Use this address in the perfect filter.
+    bit_offset: 31
+    bit_size: 1
+  - name: SA
+    description: Compare against the source address instead of the destination.
+    bit_offset: 30
+    bit_size: 1
+  - name: MBC
+    description: Mask byte control; one bit per address byte.
+    bit_offset: 24
+    bit_size: 6
+  - name: MACA3H
+    description: MAC address bits 47:32.
+    bit_offset: 0
+    bit_size: 16
+fieldset/MACA3LR:
+  description: MAC address 3 low register.
+  fields:
+  - name: MACA3L
+    description: MAC address bits 31:0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PHY_CFGR:
+  description: Integrated PHY control and status. Link status and speed here describe the internal 10M/100M PHY; under RGMII the external PHY is read over SMI instead.
+  fields:
+  - name: REPHYADDR
+    description: PHY address used when `PHYADDR_EN` is set.
+    bit_offset: 0
+    bit_size: 5
+  - name: PHYADDR_EN
+    description: Use `REPHYADDR` as the PHY address; otherwise the address is 1.
+    bit_offset: 7
+    bit_size: 1
+  - name: LINK_STATUS
+    description: The integrated PHY has a link.
+    bit_offset: 8
+    bit_size: 1
+    access: Read
+  - name: SPEED
+    description: Link speed, 0 = 10M and 1 = 100M.
+    bit_offset: 9
+    bit_size: 1
+    access: Read
+  - name: DUPLEX
+    description: 1 = full duplex, 0 = half duplex (the SVD and RM spell the field `DUPlEX`).
+    bit_offset: 10
+    bit_size: 1
+    access: Read
+  - name: PHY_PD
+    description: Power down the integrated PHY.
+    bit_offset: 30
+    bit_size: 1
+  - name: PHY_RSTN
+    description: Integrated PHY reset, active low.
+    bit_offset: 31
+    bit_size: 1
+fieldset/MMCCR:
+  description: MMC control register.
+  fields:
+  - name: CR
+    description: Reset all counters; self-clears.
+    bit_offset: 0
+    bit_size: 1
+  - name: CSR
+    description: Stop counters at their maximum instead of rolling over.
+    bit_offset: 1
+    bit_size: 1
+  - name: ROR
+    description: Reset a counter when it is read.
+    bit_offset: 2
+    bit_size: 1
+  - name: MCF
+    description: Freeze all counters.
+    bit_offset: 3
+    bit_size: 1
+fieldset/MMCRIR:
+  description: MMC receive interrupt register.
+  fields:
+  - name: RFCES
+    description: CRC-error frames counter reached half its range.
+    bit_offset: 5
+    bit_size: 1
+  - name: RGUFS
+    description: Good unicast frames counter reached half its range.
+    bit_offset: 17
+    bit_size: 1
+fieldset/MMCTIR:
+  description: MMC transmit interrupt register.
+  fields:
+  - name: TGFS
+    description: Good frames transmitted counter reached half its range.
+    bit_offset: 21
+    bit_size: 1
+fieldset/MMCRIMR:
+  description: MMC receive interrupt mask register.
+  fields:
+  - name: RFCEM
+    description: Mask the CRC-error counter interrupt.
+    bit_offset: 5
+    bit_size: 1
+  - name: RGUFM
+    description: Mask the good unicast counter interrupt.
+    bit_offset: 17
+    bit_size: 1
+fieldset/MMCTIMR:
+  description: MMC transmit interrupt mask register.
+  fields:
+  - name: TGFM
+    description: Mask the good transmit frame counter interrupt.
+    bit_offset: 21
+    bit_size: 1
+fieldset/MMCTGFSCCR:
+  description: Frames transmitted after a single collision, half duplex.
+  fields:
+  - name: TGFSCCR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCTGFMSCCR:
+  description: Frames transmitted after more than one collision, half duplex.
+  fields:
+  - name: TGFMSCCR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCTGFCR:
+  description: Good frames transmitted.
+  fields:
+  - name: TGFC
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCRFCECR:
+  description: Frames received with a CRC error.
+  fields:
+  - name: RFCECR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCRFAECR:
+  description: Frames received with an alignment error.
+  fields:
+  - name: RFAECR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCRAFCR:
+  description: All frames received.
+  fields:
+  - name: RAFCR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MMCRGUFCR:
+  description: Good unicast frames received.
+  fields:
+  - name: RGUFCR
+    description: Frame count.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PTPTSCR:
+  description: PTP timestamp control register.
+  fields:
+  - name: TSE
+    description: Enable timestamping into the transmit and receive descriptors.
+    bit_offset: 0
+    bit_size: 1
+  - name: TSFCU
+    description: 1 = fine update mode, 0 = coarse update mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: TSSTI
+    description: Replace the system time with the update registers; self-clears.
+    bit_offset: 2
+    bit_size: 1
+  - name: TSSTU
+    description: Add the update registers to the system time; self-clears.
+    bit_offset: 3
+    bit_size: 1
+  - name: TSITE
+    description: Raise an interrupt when the target time is reached.
+    bit_offset: 4
+    bit_size: 1
+  - name: TSARU
+    description: Add the addend register to the accumulator; self-clears.
+    bit_offset: 5
+    bit_size: 1
+fieldset/PTPSSIR:
+  description: PTP sub-second increment register.
+  fields:
+  - name: STSSI
+    description: Sub-second increment per clock.
+    bit_offset: 0
+    bit_size: 8
+fieldset/PTPTSHR:
+  description: PTP system time, seconds.
+  fields:
+  - name: STS
+    description: Seconds.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PTPTSLR:
+  description: PTP system time, sub-seconds.
+  fields:
+  - name: STSS
+    description: Sub-seconds; a carry increments `STS`.
+    bit_offset: 0
+    bit_size: 31
+  - name: STPNS
+    description: 1 = the system time is negative.
+    bit_offset: 31
+    bit_size: 1
+fieldset/PTPTSHUR:
+  description: PTP timestamp update, seconds.
+  fields:
+  - name: TSUS
+    description: Seconds to load or add.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PTPTSLUR:
+  description: PTP timestamp update, sub-seconds.
+  fields:
+  - name: TSUSS
+    description: Sub-seconds to load or add.
+    bit_offset: 0
+    bit_size: 31
+  - name: TSUPNS
+    description: 1 subtracts the update from the system time, 0 adds it.
+    bit_offset: 31
+    bit_size: 1
+fieldset/PTPTSAR:
+  description: PTP timestamp addend.
+  fields:
+  - name: TSA
+    description: Value added to the accumulator every clock in fine update mode.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PTPTTHR:
+  description: PTP target time, seconds.
+  fields:
+  - name: TTSH
+    description: Target seconds.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PTPTTLR:
+  description: PTP target time, sub-seconds.
+  fields:
+  - name: TTSL
+    description: Target sub-seconds.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMABMR:
+  description: DMA bus mode register.
+  fields:
+  - name: SR
+    description: Software reset; self-clears when the reset completes.
+    bit_offset: 0
+    bit_size: 1
+  - name: DSL
+    description: Descriptor skip length in 32-bit words.
+    bit_offset: 2
+    bit_size: 5
+  - name: DFM
+    description: 1 = enhanced descriptors, 0 = normal descriptors.
+    bit_offset: 7
+    bit_size: 1
+  - name: DMATX_RST
+    description: Reset the DMA transmit datapath.
+    bit_offset: 28
+    bit_size: 1
+  - name: DMARX_RST
+    description: Reset the DMA receive datapath.
+    bit_offset: 29
+    bit_size: 1
+  - name: ETX_RST
+    description: Reset the MAC transmitter.
+    bit_offset: 30
+    bit_size: 1
+  - name: ERX_RST
+    description: Reset the MAC receiver.
+    bit_offset: 31
+    bit_size: 1
+fieldset/DMATPDR:
+  description: DMA transmit poll demand.
+  fields:
+  - name: TPDR
+    description: Write any value to resume a suspended transmit process.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMARPDR:
+  description: DMA receive poll demand.
+  fields:
+  - name: RPDR
+    description: Write any value to resume a suspended receive process.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMARDLAR:
+  description: DMA receive descriptor list address.
+  fields:
+  - name: RDLAR
+    description: Address of the first receive descriptor.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMATDLAR:
+  description: DMA transmit descriptor list address.
+  fields:
+  - name: TDLAR
+    description: Address of the first transmit descriptor.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMASR:
+  description: DMA status register.
+  fields:
+  - name: TS
+    description: Transmit finished.
+    bit_offset: 0
+    bit_size: 1
+  - name: TPSS
+    description: Transmit process stopped.
+    bit_offset: 1
+    bit_size: 1
+  - name: TBUS
+    description: Transmit buffer unavailable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TJTS
+    description: Transmit jabber timeout.
+    bit_offset: 3
+    bit_size: 1
+  - name: ROS
+    description: Receive overflow.
+    bit_offset: 4
+    bit_size: 1
+  - name: TUS
+    description: Transmit underflow.
+    bit_offset: 5
+    bit_size: 1
+  - name: RS
+    description: Receive finished.
+    bit_offset: 6
+    bit_size: 1
+  - name: RBUS
+    description: Receive buffer unavailable.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPSS
+    description: Receive process stopped.
+    bit_offset: 8
+    bit_size: 1
+  - name: RWTS
+    description: Receive watchdog timeout.
+    bit_offset: 9
+    bit_size: 1
+  - name: ETS
+    description: Early transmit.
+    bit_offset: 10
+    bit_size: 1
+  - name: PLS
+    description: Integrated PHY link status changed.
+    bit_offset: 11
+    bit_size: 1
+  - name: ERS
+    description: Early receive.
+    bit_offset: 14
+    bit_size: 1
+  - name: AIS
+    description: Abnormal interrupt summary.
+    bit_offset: 15
+    bit_size: 1
+  - name: NIS
+    description: Normal interrupt summary.
+    bit_offset: 16
+    bit_size: 1
+  - name: RPS
+    description: Receive process state.
+    bit_offset: 17
+    bit_size: 3
+  - name: TPS
+    description: Transmit process state.
+    bit_offset: 20
+    bit_size: 3
+  - name: EBS
+    description: Bus error type.
+    bit_offset: 23
+    bit_size: 3
+  - name: MMCS
+    description: MMC event occurred.
+    bit_offset: 27
+    bit_size: 1
+  - name: PMTS
+    description: PMT event occurred.
+    bit_offset: 28
+    bit_size: 1
+  - name: TSTS
+    description: Timestamp trigger event occurred.
+    bit_offset: 29
+    bit_size: 1
+fieldset/DMAOMR:
+  description: DMA operation mode register.
+  fields:
+  - name: SR
+    description: Start or stop the receive process.
+    bit_offset: 1
+    bit_size: 1
+  - name: FUGF
+    description: Forward undersized good frames.
+    bit_offset: 6
+    bit_size: 1
+  - name: FEF
+    description: Forward errored frames.
+    bit_offset: 7
+    bit_size: 1
+  - name: ST
+    description: Start or stop the transmit process.
+    bit_offset: 13
+    bit_size: 1
+  - name: FTF
+    description: Flush the transmit FIFO.
+    bit_offset: 20
+    bit_size: 1
+  - name: TSF
+    description: Transmit store-and-forward.
+    bit_offset: 21
+    bit_size: 1
+  - name: DTCEFD
+    description: Do not drop frames with a TCP/IP checksum error.
+    bit_offset: 26
+    bit_size: 1
+fieldset/DMAIER:
+  description: DMA interrupt enable register.
+  fields:
+  - name: TIE
+    description: Transmit interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: TPSIE
+    description: Transmit process stopped interrupt.
+    bit_offset: 1
+    bit_size: 1
+  - name: TBUIE
+    description: Transmit buffer unavailable interrupt.
+    bit_offset: 2
+    bit_size: 1
+  - name: TJTIE
+    description: Transmit jabber timeout interrupt.
+    bit_offset: 3
+    bit_size: 1
+  - name: ROIE
+    description: Receive overflow interrupt.
+    bit_offset: 4
+    bit_size: 1
+  - name: TUIE
+    description: Transmit underflow interrupt.
+    bit_offset: 5
+    bit_size: 1
+  - name: RIE
+    description: Receive interrupt.
+    bit_offset: 6
+    bit_size: 1
+  - name: RBUIE
+    description: Receive buffer unavailable interrupt.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPSIE
+    description: Receive process stopped interrupt.
+    bit_offset: 8
+    bit_size: 1
+  - name: RWTIE
+    description: Receive watchdog timeout interrupt.
+    bit_offset: 9
+    bit_size: 1
+  - name: ETIE
+    description: Early transmit interrupt.
+    bit_offset: 10
+    bit_size: 1
+  - name: PLE
+    description: Integrated PHY link status change interrupt.
+    bit_offset: 11
+    bit_size: 1
+  - name: ERS
+    description: Early receive interrupt (the SDK calls this `ERIE`).
+    bit_offset: 14
+    bit_size: 1
+  - name: AISE
+    description: Abnormal interrupt summary.
+    bit_offset: 15
+    bit_size: 1
+  - name: NISE
+    description: Normal interrupt summary.
+    bit_offset: 16
+    bit_size: 1
+fieldset/DMAMFBOCR:
+  description: DMA missed frame and buffer overflow counter.
+  fields:
+  - name: MFC
+    description: Frames missed because the receive buffer was unavailable.
+    bit_offset: 0
+    bit_size: 16
+  - name: OMFC
+    description: The MFC counter overflowed.
+    bit_offset: 16
+    bit_size: 1
+  - name: MFA
+    description: Frames missed by the application.
+    bit_offset: 17
+    bit_size: 11
+  - name: OFOC
+    description: FIFO overflow counter overflowed.
+    bit_offset: 28
+    bit_size: 1
+fieldset/DMACHTDR:
+  description: DMA current transmit descriptor address.
+  fields:
+  - name: HTDAR
+    description: Descriptor being processed.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMACHRDR:
+  description: DMA current receive descriptor address.
+  fields:
+  - name: HRDAR
+    description: Descriptor being processed.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMACHTBAR:
+  description: DMA current transmit buffer address.
+  fields:
+  - name: HTBAR
+    description: Buffer being processed.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DMACHRBAR:
+  description: DMA current receive buffer address.
+  fields:
+  - name: HRBAR
+    description: Buffer being processed.
+    bit_offset: 0
+    bit_size: 32

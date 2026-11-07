@@ -6,6 +6,7 @@ keywords:
   - DUAL_CORE
   - USBHS
   - USBSS
+  - ETH
   - HSADC
   - SAI
   - I3C
@@ -31,6 +32,7 @@ cores:
       - "../peripherals/H4_USBFS.yaml"
       - "../peripherals/H4_USBSS.yaml"
       - "../peripherals/H4_USBPD.yaml"
+      - "../peripherals/H4_ETH.yaml"
     include_interrupts: "../interrupts/CH32H4.yaml"
     include_dma_channels:
       DMAMUX: "../dma/CH32H4.yaml"
@@ -44,6 +46,7 @@ cores:
       - "../peripherals/H4_USBFS.yaml"
       - "../peripherals/H4_USBSS.yaml"
       - "../peripherals/H4_USBPD.yaml"
+      - "../peripherals/H4_ETH.yaml"
     include_interrupts: "../interrupts/CH32H4.yaml"
     include_dma_channels:
       DMAMUX: "../dma/CH32H4.yaml"

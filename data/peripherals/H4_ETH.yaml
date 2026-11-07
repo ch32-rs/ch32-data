@@ -1,0 +1,59 @@
+# Gigabit Ethernet on the CH32H417 (RM §31, datasheet table 2-2-24).
+#
+# One peripheral at 0x40028000 holds the MAC, the integrated 10M/100M PHY
+# control, the MMC counters and the DMA (RM §31.8, table 31-24). The vendor
+# SVD splits it into ETHERNET_MAC / ETHERNET_MMC / ETHERNET_PTP /
+# ETHERNET_DMA; those four base addresses are the same four ranges.
+#
+# Only the H417 variants have Ethernet (the H416/H415 datasheet comparison
+# table marks it absent), so this file is included by the three H417 chips.
+#
+# Clocks: HBPCENR.ETHMACEN gates the MAC, HBRSTR.ETHMACRST resets it. The
+# internal PHY needs CTLR.ETH_PLLON; RGMII needs CFGR0.RGMIION and
+# CFG2.ETH1GSRC for the 125 MHz source (RM §31.4.3).
+
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: emac
+    version: h4
+    block: ETH
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: ETHMACEN
+    reset:
+      register: HBRSTR
+      field: ETHMACRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ETH
+    - signal: WAKEUP
+      interrupt: ETH_WKUP
+  pins:
+    # RGMII and SMI. Outputs are push-pull alternate function, inputs float
+    # (RM table 31-1). The internal PHY's MDIP/MDIN differential pairs are
+    # dedicated package pins, not GPIOs.
+    - { pin: PD15, signal: RGMII_GTXC, af: 10 }
+    - { pin: PD14, signal: RGMII_TXEN, af: 10 }
+    - { pin: PD13, signal: RGMII_TXD0, af: 10 }
+    - { pin: PD12, signal: RGMII_TXD1, af: 10 }
+    - { pin: PD11, signal: RGMII_TXD2, af: 10 }
+    - { pin: PD10, signal: RGMII_TXD3, af: 10 }
+    - { pin: PA15, signal: RGMII_RXC, af: 3 }
+    - { pin: PA14, signal: RGMII_RXDV, af: 12 }
+    - { pin: PC9, signal: RGMII_RD0, af: 12 }
+    - { pin: PC8, signal: RGMII_RD1, af: 12 }
+    - { pin: PC7, signal: RGMII_RD2, af: 12 }
+    - { pin: PC6, signal: RGMII_RD3, af: 12 }
+    - { pin: PC0, signal: MDC, af: 1 }
+    - { pin: PC1, signal: MDIO, af: 1 }
+    - { pin: PC2, signal: PPS, af: 1 }
+    # Internal PHY status LEDs.
+    - { pin: PF0, signal: LED0, af: 10 }
+    - { pin: PF1, signal: LED1, af: 10 }
+    - { pin: PF2, signal: LED2, af: 10 }
+    - { pin: PB13, signal: LED3, af: 10 }
+    - { pin: PB14, signal: LED4, af: 10 }
