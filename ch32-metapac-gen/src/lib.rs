@@ -1,5 +1,5 @@
-use std::collections::{BTreeSet, HashMap, HashSet};
-use std::fmt::Debug;
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
+use std::fmt::{Debug, Write as _};
 use std::fs;
 use std::io::Write;
 use std::path::PathBuf;
@@ -61,6 +61,7 @@ impl Gen {
         fs::create_dir_all(self.opts.out_dir.join("src/chips")).unwrap();
 
         let mut chip_core_names: Vec<String> = Vec::new();
+        let mut peripheral_names = BTreeSet::new();
 
         for chip_name in &self.opts.chips.clone() {
             println!("Generate Chip {}", chip_name);
@@ -93,6 +94,12 @@ impl Gen {
 
             // Generate
             for (core_index, core) in chip.cores.iter().enumerate() {
+                peripheral_names.extend(
+                    core.peripherals
+                        .iter()
+                        .filter(|p| p.registers.is_some())
+                        .map(|p| p.name.clone()),
+                );
                 let chip_core_name = match chip.cores.len() {
                     1 => chip_name.clone(),
                     _ => format!("{}-{}", chip_name, core.name),
@@ -151,11 +158,16 @@ impl Gen {
             chiptool::generate::COMMON_MODULE,
         )
         .unwrap();
-        fs::write(
-            self.opts.out_dir.join("src/metadata.rs"),
-            include_bytes!("../res/src/metadata.rs"),
-        )
-        .unwrap();
+        let mut metadata = include_bytes!("../res/src/metadata.rs").to_vec();
+        metadata.extend_from_slice(
+            metadata_catalogue(
+                &chip_core_names,
+                &self.all_peripheral_versions,
+                &peripheral_names,
+            )
+            .as_bytes(),
+        );
+        fs::write(self.opts.out_dir.join("src/metadata.rs"), metadata).unwrap();
         fs::write(
             self.opts.out_dir.join("src/mem_layout.rs"),
             include_bytes!("../res/src/mem_layout.rs"),
@@ -182,6 +194,34 @@ impl Gen {
     }
 }
 
+fn metadata_catalogue(
+    chips: &[String],
+    peripheral_versions: &HashSet<(String, String)>,
+    peripheral_names: &BTreeSet<String>,
+) -> String {
+    let chips: Vec<_> = chips.iter().collect::<BTreeSet<_>>().into_iter().collect();
+    let names: Vec<_> = peripheral_names.iter().collect();
+    let mut versions: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+    for (kind, version) in peripheral_versions {
+        versions.entry(kind).or_default().insert(version);
+    }
+
+    let mut out = format!(
+        "/// All chip/core identifiers included in this generated PAC, sorted and deduplicated.\n\
+         pub const ALL_CHIPS: &[&str] = &{chips:?};\n\
+         /// All peripheral instances with registers, across the generated chips.\n\
+         pub const ALL_PERIPHERAL_NAMES: &[&str] = &{names:?};\n\
+         /// All peripheral kinds and their versions, across the generated chips.\n\
+         pub const ALL_PERIPHERAL_VERSIONS: &[(&str, &[&str])] = &[\n"
+    );
+    for (kind, versions) in versions {
+        let versions: Vec<_> = versions.into_iter().collect();
+        writeln!(&mut out, "({kind:?}, &{versions:?}),").unwrap();
+    }
+    out.push_str("];\n");
+    out
+}
+
 pub(crate) fn stringify<T: Debug>(metadata: T) -> String {
     let mut metadata = format!("{:#?}", metadata);
     if metadata.starts_with('[') {
@@ -197,3 +237,24 @@ fn gen_opts() -> generate::Options {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn catalogue_is_sorted_and_deduplicated() {
+        let chips = ["CH32V103C8T6", "CH32V003F4U6", "CH32V003F4U6"].map(String::from);
+        let versions = [("gpio", "v3"), ("gpio", "v0"), ("adc", "v1")]
+            .map(|(kind, version)| (kind.into(), version.into()))
+            .into_iter()
+            .collect();
+        let names = ["GPIOB", "GPIOA", "GPIOA"]
+            .map(String::from)
+            .into_iter()
+            .collect();
+        let output = metadata_catalogue(&chips, &versions, &names);
+        assert!(output.contains("ALL_CHIPS: &[&str] = &[\"CH32V003F4U6\", \"CH32V103C8T6\"]"));
+        assert!(output.contains("ALL_PERIPHERAL_NAMES: &[&str] = &[\"GPIOA\", \"GPIOB\"]"));
+        assert!(output.contains("(\"adc\", &[\"v1\"]),\n(\"gpio\", &[\"v0\", \"v3\"]),"));
+    }
+}
