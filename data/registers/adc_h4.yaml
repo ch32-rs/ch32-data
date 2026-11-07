@@ -316,10 +316,10 @@ fieldset/CTLR2:
     bit_offset: 23
     bit_size: 1
 fieldset/IDATAR1:
-  description: injected data register x_Charge data offset for injected channel x.
+  description: injected data register x.
   fields:
-  - name: IDATA_TKCGOFFSET
-    description: Injected data_Touch key charge data offset for injected channel x.
+  - name: JDATA
+    description: Injected data.
     bit_offset: 0
     bit_size: 16
 fieldset/IDATAR2:
@@ -397,14 +397,10 @@ fieldset/ISQR:
 fieldset/RDATAR:
   description: regular data register.
   fields:
-  - name: DATA0_7
+  - name: DATA
     description: Regular data.
     bit_offset: 0
-    bit_size: 8
-  - name: DATA8_15
-    description: Regular data.
-    bit_offset: 8
-    bit_size: 8
+    bit_size: 16
   - name: ADC2DATA
     description: converter data.
     bit_offset: 16
