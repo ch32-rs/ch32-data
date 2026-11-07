@@ -928,7 +928,7 @@
   address: 0x40023C00
   registers:
     kind: rng
-    version: h4
+    version: v3
     block: RNG
   rcc:
     bus_clock: HCLK
