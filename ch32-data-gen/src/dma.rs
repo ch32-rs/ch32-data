@@ -114,10 +114,6 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
 
                 for p in &mut core.peripherals {
                     if p.name == periph {
-                        //println!(
-                        //    "found DMA singal {} {} {}",
-                        //    periph, signal_name, channel_name
-                        //);
                         p.dma_channels
                             .push(ch32_data_serde::chip::core::peripheral::DmaChannel {
                                 signal: signal_name.to_string(),
@@ -129,6 +125,20 @@ pub fn handle_chip_dma_include<P: AsRef<Path>>(
                     }
                 }
             }
+        }
+
+        // The lists above are filled while iterating `HashMap`s, whose order
+        // changes between runs. Sort once here so regenerating an unchanged
+        // tree is a no-op (stm32-data does the same after merging channels).
+        for p in &mut core.peripherals {
+            p.dma_channels.sort_by_key(|ch| {
+                (
+                    ch.channel.clone(),
+                    ch.dmamux.clone(),
+                    ch.request,
+                    ch.signal.clone(),
+                )
+            });
         }
     }
 
