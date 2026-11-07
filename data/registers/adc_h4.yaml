@@ -62,10 +62,15 @@ block/ADC:
     byte_offset: 56
     fieldset: ISQR
   - name: IDATAR1
-    description: injected data register x_Charge data offset for injected channel x.
+    description: injected data register 1, read view of the touch-key charge time.
     byte_offset: 60
     access: Read
     fieldset: IDATAR1
+  - name: TKEY_CHGOFFSET
+    description: touch-key charge time, write view of IDATAR1.
+    byte_offset: 60
+    access: Write
+    fieldset: TKEY_CHGOFFSET
   - name: IDATAR2
     description: injected data register x.
     byte_offset: 64
@@ -86,6 +91,11 @@ block/ADC:
     byte_offset: 76
     access: Read
     fieldset: RDATAR
+  - name: TKEY_ACT_DCG
+    description: touch-key discharge time and start, write view of RDATAR.
+    byte_offset: 76
+    access: Write
+    fieldset: TKEY_ACT_DCG
   - name: AUX
     description: ADC time register.
     byte_offset: 84
@@ -316,10 +326,17 @@ fieldset/CTLR2:
     bit_offset: 23
     bit_size: 1
 fieldset/IDATAR1:
-  description: injected data register x.
+  description: injected data register 1.
   fields:
   - name: JDATA
     description: Injected data.
+    bit_offset: 0
+    bit_size: 16
+fieldset/TKEY_CHGOFFSET:
+  description: touch-key charge time.
+  fields:
+  - name: TKCGOFFSET
+    description: Total charge time TCHG = TKCGOFFSET.
     bit_offset: 0
     bit_size: 16
 fieldset/IDATAR2:
@@ -404,6 +421,13 @@ fieldset/RDATAR:
   - name: ADC2DATA
     description: converter data.
     bit_offset: 16
+    bit_size: 16
+fieldset/TKEY_ACT_DCG:
+  description: touch-key discharge time and start.
+  fields:
+  - name: TKACT_DCG
+    description: Discharge time; writing this field starts one TKEY channel conversion.
+    bit_offset: 0
     bit_size: 16
 fieldset/RSQR1:
   description: regular sequence register 1.
