@@ -1,3 +1,9 @@
+# CH32H417 USBHS controller (CH32H417RM §25).
+#
+# The device block matches usbhs_v4x7.yaml, with endpoints 1-7 modelled as
+# arrays. H4 adds the per-endpoint RX/TX FIFO windows at the end of the device
+# block; a few host fields differ in width.
+
 block/USBHS:
   description: USB register.
   items:
