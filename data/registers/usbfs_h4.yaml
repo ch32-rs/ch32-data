@@ -76,142 +76,37 @@ block/USBFS_DEVICE:
     byte_offset: 15
     bit_size: 8
     fieldset: UEP7_MOD
-  - name: UEP0_DMA
-    description: endpoint 0 DMA buffer address.
+  - name: UEP_DMA
+    description: endpoint DMA buffer address.
     byte_offset: 16
-  - name: UEP1_DMA
-    description: endpoint 1 DMA buffer address.
-    byte_offset: 20
-  - name: UEP2_DMA
-    description: endpoint 2 DMA buffer address.
-    byte_offset: 24
-  - name: UEP3_DMA
-    description: endpoint 3 DMA buffer address.
-    byte_offset: 28
-  - name: UEP4_DMA
-    description: endpoint 4 DMA buffer address.
-    byte_offset: 32
-  - name: UEP5_DMA
-    description: endpoint 5 DMA buffer address.
-    byte_offset: 36
-  - name: UEP6_DMA
-    description: endpoint 6 DMA buffer address.
-    byte_offset: 40
-  - name: UEP7_DMA
-    description: endpoint 7 DMA buffer address.
-    byte_offset: 44
-  - name: UEP0_T_LEN
-    description: endpoint 0 transmittal length.
+    bit_size: 32
+    array:
+      len: 8
+      stride: 4
+  - name: UEP_T_LEN
+    description: endpoint transmittal length. Endpoint 3 uses 10 bits; the other endpoints ignore the upper bits.
     byte_offset: 48
-    bit_size: 8
-  - name: UEP0_T_CTRL
-    description: endpoint 0 control.
+    bit_size: 16
+    array:
+      len: 8
+      stride: 4
+    fieldset: UEP_T_LEN
+  - name: UEP_TX_CTRL
+    description: endpoint control.
     byte_offset: 50
     bit_size: 8
-    fieldset: UEP0_T_CTRL
-  - name: UEP0_R_CTRL
-    description: endpoint 0 control.
+    array:
+      len: 8
+      stride: 4
+    fieldset: UEP_TX_CTRL
+  - name: UEP_RX_CTRL
+    description: endpoint control.
     byte_offset: 51
     bit_size: 8
-    fieldset: UEP0_R_CTRL
-  - name: UEP1_T_LEN
-    description: endpoint 1 transmittal length.
-    byte_offset: 52
-    bit_size: 8
-  - name: UEP1_T_CTRL
-    description: endpoint 1 control.
-    byte_offset: 54
-    bit_size: 8
-    fieldset: UEP1_T_CTRL
-  - name: UEP1_R_CTRL
-    description: endpoint 1 control.
-    byte_offset: 55
-    bit_size: 8
-    fieldset: UEP1_R_CTRL
-  - name: UEP2_T_LEN
-    description: endpoint 2 transmittal length.
-    byte_offset: 56
-    bit_size: 8
-  - name: UEP2_T_CTRL
-    description: endpoint 2 control.
-    byte_offset: 58
-    bit_size: 8
-    fieldset: UEP2_T_CTRL
-  - name: UEP2_R_CTRL
-    description: endpoint 2 control.
-    byte_offset: 59
-    bit_size: 8
-    fieldset: UEP2_R_CTRL
-  - name: UEP3_T_LEN
-    description: endpoint 3 transmittal length.
-    byte_offset: 60
-    bit_size: 16
-  - name: UEP3_T_CTRL
-    description: endpoint 3 control.
-    byte_offset: 62
-    bit_size: 8
-    fieldset: UEP3_T_CTRL
-  - name: UEP3_R_CTRL
-    description: endpoint 3 control.
-    byte_offset: 63
-    bit_size: 8
-    fieldset: UEP3_R_CTRL
-  - name: UEP4_T_LEN
-    description: endpoint 4 transmittal length.
-    byte_offset: 64
-    bit_size: 8
-  - name: UEP4_T_CTRL
-    description: endpoint 4 control.
-    byte_offset: 66
-    bit_size: 8
-    fieldset: UEP4_T_CTRL
-  - name: UEP4_R_CTRL
-    description: endpoint 4 control.
-    byte_offset: 67
-    bit_size: 8
-    fieldset: UEP4_R_CTRL
-  - name: UEP5_T_LEN
-    description: endpoint 5 transmittal length.
-    byte_offset: 68
-    bit_size: 8
-  - name: UEP5_T_CTRL
-    description: endpoint 5 control.
-    byte_offset: 70
-    bit_size: 8
-    fieldset: UEP5_T_CTRL
-  - name: UEP5_R_CTRL
-    description: endpoint 5 control.
-    byte_offset: 71
-    bit_size: 8
-    fieldset: UEP5_R_CTRL
-  - name: UEP6_T_LEN
-    description: endpoint 6 transmittal length.
-    byte_offset: 72
-    bit_size: 8
-  - name: UEP6_T_CTRL
-    description: endpoint 6 control.
-    byte_offset: 74
-    bit_size: 8
-    fieldset: UEP6_T_CTRL
-  - name: UEP6_R_CTRL
-    description: endpoint 6 control.
-    byte_offset: 75
-    bit_size: 8
-    fieldset: UEP6_R_CTRL
-  - name: UEP7_T_LEN
-    description: endpoint 7 transmittal length.
-    byte_offset: 76
-    bit_size: 8
-  - name: UEP7_T_CTRL
-    description: endpoint 7 control.
-    byte_offset: 78
-    bit_size: 8
-    fieldset: UEP7_T_CTRL
-  - name: UEP7_R_CTRL
-    description: endpoint 7 control.
-    byte_offset: 79
-    bit_size: 8
-    fieldset: UEP7_R_CTRL
+    array:
+      len: 8
+      stride: 4
+    fieldset: UEP_RX_CTRL
 
 block/USBFS_HOST:
   extends: USBFS
@@ -314,70 +209,6 @@ fieldset/UHOST_CTRL:
     description: 'disable USB UDP/UDM pulldown resistance: 0=enable pulldown, 1=disable.'
     bit_offset: 7
     bit_size: 1
-fieldset/UEP0_R_CTRL:
-  description: endpoint 0 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP0_T_CTRL:
-  description: endpoint 0 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP1_R_CTRL:
-  description: endpoint 1 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP1_T_CTRL:
-  description: endpoint 1 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
 fieldset/UEP2_3_MOD:
   description: endpoint 2/3 mode.
   bit_size: 8
@@ -405,70 +236,6 @@ fieldset/UEP2_3_MOD:
   - name: UEP3_RX_EN
     description: enable USB endpoint 3 receiving (OUT).
     bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_R_CTRL:
-  description: endpoint 2 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP2_T_CTRL:
-  description: endpoint 2 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP3_R_CTRL:
-  description: endpoint 3 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP3_T_CTRL:
-  description: endpoint 3 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
     bit_size: 1
 fieldset/UEP4_1_MOD:
   description: endpoint 4/1 mode.
@@ -498,38 +265,6 @@ fieldset/UEP4_1_MOD:
     description: enable USB endpoint 1 receiving (OUT).
     bit_offset: 7
     bit_size: 1
-fieldset/UEP4_R_CTRL:
-  description: endpoint 4 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP4_T_CTRL:
-  description: endpoint 4 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
 fieldset/UEP5_6_MOD:
   description: endpoint 5/6 mode.
   bit_size: 8
@@ -558,70 +293,6 @@ fieldset/UEP5_6_MOD:
     description: enable USB endpoint 6 receiving (OUT).
     bit_offset: 7
     bit_size: 1
-fieldset/UEP5_R_CTRL:
-  description: endpoint 5 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP5_T_CTRL:
-  description: endpoint 5 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP6_R_CTRL:
-  description: endpoint 6 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP6_T_CTRL:
-  description: endpoint 6 control.
-  bit_size: 8
-  fields:
-  - name: MASK_UEP_T_RES
-    description: bit mask of handshake response type for USB endpoint X transmittal (IN).
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG
-    description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
 fieldset/UEP7_MOD:
   description: endpoint 7 mode.
   bit_size: 8
@@ -638,30 +309,25 @@ fieldset/UEP7_MOD:
     description: enable USB endpoint 7 receiving (OUT).
     bit_offset: 3
     bit_size: 1
-fieldset/UEP7_R_CTRL:
-  description: endpoint 7 control.
-  bit_size: 8
+
+fieldset/UEP_T_LEN:
+  description: endpoint transmittal length.
+  bit_size: 16
   fields:
-  - name: MASK_UEP_R_RES
-    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
+  - name: UEP_T_LEN
+    description: endpoint 3 transmittal length, 10 bits wide; endpoints 0-2 use the low 8 bits only.
     bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG
-    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
-    bit_offset: 2
-    bit_size: 1
-  - name: UEP_AUTO_TOG
-    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
-    bit_offset: 3
-    bit_size: 1
-fieldset/UEP7_T_CTRL:
-  description: endpoint 7 control.
+    bit_size: 10
+
+fieldset/UEP_TX_CTRL:
+  description: endpoint control.
   bit_size: 8
   fields:
   - name: MASK_UEP_T_RES
     description: bit mask of handshake response type for USB endpoint X transmittal (IN).
     bit_offset: 0
     bit_size: 2
+    enum: EP_TX_RESPONSE
   - name: UEP_T_TOG
     description: 'prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1.'
     bit_offset: 2
@@ -670,6 +336,25 @@ fieldset/UEP7_T_CTRL:
     description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
     bit_offset: 3
     bit_size: 1
+
+fieldset/UEP_RX_CTRL:
+  description: endpoint control.
+  bit_size: 8
+  fields:
+  - name: MASK_UEP_R_RES
+    description: bit mask of handshake response type for USB endpoint X receiving (OUT).
+    bit_offset: 0
+    bit_size: 2
+    enum: EP_RX_RESPONSE
+  - name: UEP_R_TOG
+    description: 'expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1.'
+    bit_offset: 2
+    bit_size: 1
+  - name: UEP_AUTO_TOG
+    description: 'enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle.'
+    bit_offset: 3
+    bit_size: 1
+
 fieldset/UH_EP_MOD:
   description: USB host endpoint mode control register.
   bit_size: 8
@@ -886,6 +571,7 @@ fieldset/USB_INT_ST:
     description: RO, bit mask of current token PID code received for USB device mode.
     bit_offset: 4
     bit_size: 2
+    enum: USB_TOKEN
   - name: UIS_TOG_OK
     description: RO, indicate current USB transfer toggle is OK.
     bit_offset: 6
@@ -976,3 +662,51 @@ fieldset/USB_OTG_SR:
     description: usb otg status.
     bit_offset: 3
     bit_size: 1
+
+enum/EP_TX_RESPONSE:
+  bit_size: 2
+  variants:
+  - name: ACK
+    description: Respond with DATA0/DATA1 and expect ACK.
+    value: 0
+  - name: None
+    description: Respond with DATA0/DATA1 and not expect ACK.
+    value: 1
+  - name: NAK
+    description: Respond with NAK or Busy.
+    value: 2
+  - name: STALL
+    description: Respond with STALL or Error.
+    value: 3
+
+enum/EP_RX_RESPONSE:
+  bit_size: 2
+  variants:
+  - name: ACK
+    description: Respond with ACK.
+    value: 0
+  - name: None
+    description: Timeout / No Response, used for non-EP0 iso/sync transfer.
+    value: 1
+  - name: NAK
+    description: Respond with NAK or Busy.
+    value: 2
+  - name: STALL
+    description: Respond with STALL or Error.
+    value: 3
+
+enum/USB_TOKEN:
+  bit_size: 2
+  variants:
+  - name: OUT
+    description: OUT packet.
+    value: 0
+  - name: Rsvd
+    description: Reserved.
+    value: 1
+  - name: IN
+    description: IN packet.
+    value: 2
+  - name: SETUP
+    description: SETUP packet.
+    value: 3
