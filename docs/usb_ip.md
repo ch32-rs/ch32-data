@@ -137,17 +137,19 @@ Device/host blocks are **byte-for-byte `v2fs`**. Adds `OTG_CR@0x54`,
 
 ### H4 naming variant — `usbfs_h4.yaml` (`kind: usbfs`)
 
-Same offsets as `otg_v2`; register names carry a `USB_` prefix; device
-registers written per-endpoint rather than as arrays. Kept separate so the
-PAC matches the H4 headers. **Not a new FS core.**
+Same offsets as `otg_v2`; register names carry a `USB_` prefix. Device
+registers use the same arrays as `otg_v2` (`UEP_DMA`, `UEP_T_LEN`,
+`UEP_TX_CTRL`, `UEP_RX_CTRL`, stride 4). Kept separate so the PAC matches the
+H4 headers. **Not a new FS core.**
 
 Driver implication: one USBFS stack with **four backends**
 (`v1fs` / `v2fs` / `l1fs` / `x0fs`); `otg` and `usbfs_h4` reuse the `v2fs`
 backend plus OTG bring-up.
 
-HAL today: only `l1fs` is implemented (`ch32-hal::usbfs`, `#[cfg(usb_l1fs)]`).
-`otg_fs` covers the OTG chips. `v1fs` / `v2fs` / `x0fs` have no device driver
-yet.
+HAL today: `crate::usbfs` binds the `l1fs` backend on CH32L103
+(`#[cfg(usb_l1fs)]`) and the OTG-v2 driver on H4 (`#[cfg(all(usbfs_h4,
+feature = "embassy"))]`, same rows as `crate::otg_fs`). `v1fs` / `v2fs` /
+`x0fs` have no device driver yet.
 
 ---
 
@@ -213,6 +215,7 @@ Current modules vs that target:
 | `src/usbd` | `usbd` | IP 1 |
 | `src/usbfs` | `usb_l1fs` | IP 2 / **l1fs only** |
 | `src/otg_fs` | `otg` | IP 2 / v2fs+OTG |
+| `src/otg_fs` via `src/usbfs` | `usbfs_h4` | IP 2 / H4 naming variant |
 | `src/usbhs` (`mod.rs`) | `usbhs_v3` | IP 3 |
 | `src/usbhs/v4x7` | `usbhs_v4x7`, `usbhs_h4` | IP 4 |
 
@@ -230,7 +233,9 @@ parts are a different peripheral.
 2. **Block name `USB` is shared** by `usb_*fs`, `otg_v2`, `usbhs_v3`,
    `usbd_v2`. Newer H4 files already use `USBFS` / `USBHS` / `USBSS`.
 3. **`usbd_v2` and `v2fs` coexist** on the same die on some FV2x parts.
-4. **`kind: usbfs` (H4) ≠ HAL module `usbfs` (l1fs).** Easy to confuse.
+4. **`kind: usbfs` (H4) shares the HAL name `usbfs` with l1fs.** The modules
+   are cfg-exclusive (no chip has both), but the same name points at two
+   different register backends.
 
 ---
 
