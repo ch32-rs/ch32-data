@@ -1,3 +1,8 @@
+# CH32V305 / CH32V307 / CH32V317 USBHS controller (CH32FV2x_V3xRM §22).
+#
+# 16 endpoint slots selected by the EP_CONFIG / EP_TYPE bitmaps. This layout is
+# independent of usbhs_v4x7.yaml: only DEV_AD matches byte for byte.
+
 block/USB:
   description: USB register. USBHS, host/device interface, for V305, and V307
   items:
