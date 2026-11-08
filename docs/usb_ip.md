@@ -6,6 +6,9 @@ than one register layout, and the same layout can appear under more than one
 `kind` in this repo. This document is the census: which files are the same
 IP, which are versions of each other, and how a rename should look.
 
+Canonical family ↔ `(kind, version)` mapping:
+[Proposed data changes](#proposed-data-changes).
+
 **Scope.** Full-Speed and High-Speed only. USB Power Delivery (`usbpd_*`)
 is a separate PHY/protocol block and is **not** counted as a USB IP here.
 USB SuperSpeed (`usbss_h4`) is listed only to park it outside FS/HS.
@@ -39,8 +42,8 @@ Register-level IP count for FS/HS:
 | --- | --- | --- | --- |
 | 1 | Classic device-only (EPR/BTABLE) | USBD | Yes |
 | 2 | WCH FS (`UEP*` + optional OTG) | USBFS / USBFS/OTG_FS | Yes — one family, several layouts |
-| 3 | USBHS (V3 / V4x7) | USBHS | Yes |
-| 4 | USBHS (H4) | USBHS | Yes — different controller, same name |
+| 3 | USBHS V3 | USBHS | Yes — 16-endpoint bitmap layout |
+| 4 | USBHS V4x7 / H4 | USBHS | Yes — 8-endpoint per-endpoint layout; H4 adds FIFO arrays |
 
 That is **four** FS/HS controllers. USBSS would be a fifth product line;
 USBPD is not in this table.
@@ -58,9 +61,9 @@ USBPD is not in this table.
 | USBFS | `usb` | `x0fs` | `usb_x0fs` | X0 / X035 |
 | USBFS/OTG_FS | `otg` | `v2` | `otg_v2` | = `v2fs` device + `OTG_CR`/`OTG_SR` |
 | USBFS/OTG_FS | `usbfs` | `h4` | `usbfs_h4` | Naming variant of `otg_v2` (`USB_` prefixes) |
-| USBHS | `usbhs` | `v3` | `usbhs_v3` | V305/V307/V317 |
-| USBHS | `usbhs` | `v4x7` | `usbhs_v4x7` | V407 USBHS1/2 — same family as v3 |
-| USBHS | `usbhs` | `h4` | `usbhs_h4` | H417 — **different** HS IP |
+| USBHS | `usbhs` | `v3` | `usbhs_v3` | V305/V307/V317 — own layout |
+| USBHS | `usbhs` | `v4x7` | `usbhs_v4x7` | V407 USBHS1/2 — same device block as H4 |
+| USBHS | `usbhs` | `h4` | `usbhs_h4` | H417 — v4x7 map plus RX/TX FIFO arrays |
 | USBSS | `usbss` | `h4` | `usbss_h4` | Parked; not FS/HS |
 
 `kind: usb` alone is therefore not an identity — only `(kind, version)` is.
@@ -150,19 +153,24 @@ yet.
 
 ## IP 3 / 4 — USBHS
 
-### `usbhs_v3` / `usbhs_v4x7` — one family
+There are two HS layouts, not one family with versions.
 
-V305/V307/V317 (`v3`) and V407 (`v4x7`, instances `USBHS1`/`USBHS2`).
-16-endpoint array layout on v3; v4x7 keeps the same kind with geometry
-tweaks. Treat as **one HS IP** with versions.
+### `usbhs_v3` — IP 3
 
-### `usbhs_h4` — second HS IP
+V305/V307/V317. 16 endpoint slots driven by the `EP_CONFIG` / `EP_TYPE`
+bitmaps, and a host block that does not share the V4x7 map. Only `DEV_AD`
+matches V4x7 byte for byte; shared register names elsewhere are cosmetic.
 
-Completely different base map and a separate 256-byte host window. Same
-manual name "USBHS", different silicon. Do not merge with v3.
+### `usbhs_v4x7` / `usbhs_h4` — IP 4
 
-HAL today: `ch32-hal::usbhs` for `usbhs_v3` / `usbhs_v4x7`. H4 is compiled
-out on purpose until a `usbhs_h4` driver exists.
+V407 (`v4x7`, instances `USBHS1`/`USBHS2`) and H417 (`h4`). One device-block
+layout: the same offsets and endpoint fieldsets, with endpoints 1-7 modelled
+as arrays. H4 adds per-endpoint RX/TX FIFO windows (`UEP_RX_FIFO` /
+`UEP_TX_FIFO`) at the end of the device block, and a few host fields differ in
+width (V407 RM §22.2.1, H417 RM §25.2.1).
+
+HAL today: `ch32-hal::usbhs` uses `src/usbhs/v4x7` for both `usbhs_v4x7` and
+`usbhs_h4`; `usbhs_v3` keeps its own `src/usbhs` module.
 
 ---
 
@@ -205,7 +213,8 @@ Current modules vs that target:
 | `src/usbd` | `usbd` | IP 1 |
 | `src/usbfs` | `usb_l1fs` | IP 2 / **l1fs only** |
 | `src/otg_fs` | `otg` | IP 2 / v2fs+OTG |
-| `src/usbhs` | `usbhs_v3`, `usbhs_v4x7` | IP 3 |
+| `src/usbhs` (`mod.rs`) | `usbhs_v3` | IP 3 |
+| `src/usbhs/v4x7` | `usbhs_v4x7`, `usbhs_h4` | IP 4 |
 
 The `build.rs` pin gate that drops `kind: usb` rows unless `version == l1fs`
 exists because `crate::usbfs` is l1fs-only — not because the other `usb_*fs`
@@ -225,27 +234,32 @@ parts are a different peripheral.
 
 ---
 
-## Proposed data changes (not done yet)
+## Proposed data changes
+
+**Decision:** do the **soft path** now; **defer hard kind rename**. The
+research behind it (RM names, the embassy/stm32-data comparison) stays in
+local planning notes, not in this repository.
 
 Goal: make `(kind, version)` match the manual names without a flag-day PAC
 break if we can help it.
 
-### Preferred — soft rename via aliases / docs first
+### Chosen — soft rename via aliases / docs
 
 1. Keep existing `kind`/`version` strings working (PAC stability).
 2. Document the four-IP map above as canonical (this file).
-3. In a follow-up, prefer **block** renames on older files toward
-   `USBFS` / `USBHS` (H4 already did this), leaving kind strings alone.
-4. Optionally introduce **alias kinds** in metadata comments or a
-   `docs/usb_ip_aliases.md` table consumed only by humans/HAL:
+3. Prefer **block** renames on older files toward `USBFS` / `USBHS` only when
+   something else already forces a PAC break (H4 already uses those names).
+4. Keep the canonical alias table here for humans/HAL (it is not a PAC
+   feature):
 
    | Canonical family | Current kinds to treat as one FS stack |
    | --- | --- |
    | `usbd` | `usbd/v2` |
    | `usbfs` | `usb/v1fs`, `usb/v2fs`, `usb/l1fs`, `usb/x0fs`, `otg/v2`, `usbfs/h4` |
-   | `usbhs` | `usbhs/v3`, `usbhs/v4x7`, `usbhs/h4` |
+   | `usbhs/v3` | `usbhs/v3` |
+   | `usbhs/v4x7` | `usbhs/v4x7`, `usbhs/h4` |
 
-### Harder — kind rename in YAML
+### Deferred — kind rename in YAML
 
 Only if we accept regenerating metapac and updating every HAL cfg:
 
@@ -254,18 +268,22 @@ Only if we accept regenerating metapac and updating every HAL cfg:
   `usb/h4fs`.
 - Leave `usbd` and `usbhs` kind names as they are (they already match the
   manuals).
-- Split `usbhs/h4` documentation (and eventually kind) so it cannot be
-  mistaken for a drop-in `v3`.
+- Keep `usbhs/h4` on its own version even though its device block matches
+  `usbhs/v4x7`. H4 adds FIFO arrays, so folding the two versions would lose
+  that distinction; block renames toward `USB_DEVICE` / `USB_HOST` are
+  cosmetic only.
 
-**Recommendation:** do the soft path first; pair any hard kind rename with
-a ch32-metapac + ch32-hal coordinated PR, not with L103 bring-up.
+Hard rename is **optional hygiene**, not required for correctness or for
+porting the missing `v1fs`/`v2fs`/`x0fs` backends. Revisit only when a
+shared USBFS stack wants one `pac::usb` path, maintainers accept a metapac
+break, and HAL/examples move in the same change.
 
-### HAL follow-up (separate PR)
+### HAL follow-up (same refactor effort, separate PR)
 
-1. Introduce `crate::usb` facade (embassy pattern) or rename `usbfs` →
-   something version-explicit (`usb_l1fs`) until the facade exists.
+1. Introduce `crate::usb` facade (embassy pattern) over `usbd` / current
+   `usbfs`(l1fs) / `otg_fs`; keep `usbhs` separate.
 2. Teach pin codegen to key off `(kind, version)`, not bare `kind == usb`.
-3. Port `v2fs` by generalising `otg_fs`'s device path; then `v1fs` / `x0fs`.
+3. Port `v2fs` / `v1fs` / `x0fs` device backends later — **not** Phase 1.
 
 ---
 
