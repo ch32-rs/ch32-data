@@ -78,13 +78,13 @@ block/USBD:
         len: 8
         stride: 4
     - name: UEP_T_LEN
-      # FIXME: UEP3_T_LEN is 10bit
-      description: endpoint transmit length.
+      description: endpoint transmit length. Endpoint 3 uses 10 bits; the other endpoints ignore the upper bits.
       byte_offset: 48 # 0x30
-      bit_size: 8
+      bit_size: 16
       array:
         len: 8
         stride: 4
+      fieldset: UEP_T_LEN
     - name: UEP_TX_CTRL
       description: endpoint control.
       byte_offset: 50 # 0x32
@@ -412,6 +412,14 @@ fieldset/UEP7_MOD:
       description: enable USB endpoint 7 receiving (OUT).
       bit_offset: 3
       bit_size: 1
+fieldset/UEP_T_LEN:
+  description: endpoint transmit length.
+  bit_size: 16
+  fields:
+    - name: T_LEN
+      description: endpoint 3 transmit length, 10 bits wide; endpoints 0-2 use the low 8 bits only.
+      bit_offset: 0
+      bit_size: 10
 fieldset/UEP_TX_CTRL:
   description: endpoint control.
   bit_size: 8

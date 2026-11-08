@@ -303,9 +303,9 @@ break, and HAL/examples move in the same change.
 - `v2fs` / `otg_v2` / `l1fs` host blocks corrected from the V103 layout to
   the FV2x/L103 layout; `TX_LEN@0x3C` restored on `v2fs`/`otg_v2`.
 - `usbfs_h4` field widths aligned with `ch32h417.h`.
+- `v2fs` / `otg_v2` / `usbfs_h4` `UEP_T_LEN` widened to 16 bits so endpoint 3's
+  10-bit length is not truncated (FV2x RM §23.2.2.7, H417 RM §26.2.2.7-8).
 
 ## Still unverified
 
 - **`x0fs` host block** bit positions (no local CH32X0 RM at audit time).
-- Per-endpoint `UEP_T_LEN` width (manuals give 7 bits for most EPs, 10 for
-  EP3; fieldsets still declare a uniform 10-bit field).
