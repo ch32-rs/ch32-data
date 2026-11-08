@@ -36,6 +36,11 @@ block/USBSS:
     byte_offset: 40
     bit_size: 8
     fieldset: LINK_U1_WKUP_FILTER
+  - name: LINK_U1_WKUP_TMR
+    description: U1 wake-up timer. The RM register table omits this register; the EVT device header exposes it and the device SDK writes 120.
+    byte_offset: 42
+    bit_size: 16
+    fieldset: LINK_U1_WKUP_TMR
   - name: LINK_U2_WKUP_FILTER
     description: U2 wakes up the LFPS Duration Register.
     byte_offset: 44
@@ -46,6 +51,23 @@ block/USBSS:
     byte_offset: 48
     bit_size: 8
     fieldset: LINK_U3_WKUP_FILTER
+  - name: LINK_U3_WKUP_TMR
+    description: U3 wake-up timer. The RM register table omits this register; the EVT device header exposes it.
+    byte_offset: 50
+    bit_size: 16
+    fieldset: LINK_U3_WKUP_TMR
+  - name: LINK_U1_EXIT_CFG
+    description: U1 exit configuration. The RM register table omits this register; the EVT device header exposes it and the device SDK sets bit 9 before link training.
+    byte_offset: 52
+    fieldset: LINK_U1_EXIT_CFG
+  - name: LINK_U2_EXIT_CFG
+    description: U2 exit configuration. The RM register table omits this register and the EVT header gives no bit definitions.
+    byte_offset: 56
+    fieldset: LINK_U2_EXIT_CFG
+  - name: LINK_U3_EXIT_CFG
+    description: U3 exit configuration. The RM register table omits this register and the EVT header gives no bit definitions.
+    byte_offset: 60
+    fieldset: LINK_U3_EXIT_CFG
   - name: LINK_ISO_DLY
     description: LINK Synchronous Delay Register.
     byte_offset: 64
@@ -112,6 +134,14 @@ block/USBSS:
     description: DEV_NOTIF-TP Data 2 Register.
     byte_offset: 176
     fieldset: TP_RX_DATA2
+  - name: PHY_CFG_CR
+    description: Indirect PHY configuration command. The RM does not document this register; the device SDK writes `(1 << 23) | (addr << 16) | data`.
+    byte_offset: 504
+    fieldset: PHY_CFG_CR
+  - name: PHY_CFG_DAT
+    description: Indirect PHY configuration data. The RM does not document this register; the device SDK reads the PHY response from it.
+    byte_offset: 508
+    fieldset: PHY_CFG_DAT
 block/USBSS_DEVICE:
   extends: USBSS
   description: USBSS in device mode. Endpoint configuration / TX / RX registers (UEP* family). Offsets overlap with USBSS_HOST host-mode registers; chiptool's overlap check is intra-block only so the two views coexist via the extends mechanism.
@@ -142,6 +172,14 @@ block/USBSS_DEVICE:
     description: DMA start address for Endpoint 0 receiving.
     byte_offset: 144
     fieldset: U3EP0_RX_DMA
+  - name: UEP0_TX_DMA_OFS
+    description: Endpoint 0 transmit DMA offset. The RM register table omits this register; the EVT device header exposes it.
+    byte_offset: 148
+    fieldset: UEP0_TX_DMA_OFS
+  - name: UEP0_RX_DMA_OFS
+    description: Endpoint 0 receive DMA offset. The RM register table omits this register; the EVT device header exposes it.
+    byte_offset: 152
+    fieldset: UEP0_RX_DMA_OFS
   - name: UEP1_TX_CFG
     description: Endpoint 1 Configuration Register.
     byte_offset: 192
@@ -180,7 +218,7 @@ block/USBSS_DEVICE:
   - name: UEP1_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by endpoint 1.
     byte_offset: 200
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP1_TX_CHAIN_EXP_NUMP
   - name: UEP1_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by endpoint n.
@@ -288,7 +326,7 @@ block/USBSS_DEVICE:
   - name: UEP2_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by endpoint 2.
     byte_offset: 232
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP2_TX_CHAIN_EXP_NUMP
   - name: UEP2_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by endpoint 2.
@@ -396,7 +434,7 @@ block/USBSS_DEVICE:
   - name: UEP3_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by endpoint 3.
     byte_offset: 264
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP3_TX_CHAIN_EXP_NUMP
   - name: UEP3_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by endpoint 3.
@@ -504,7 +542,7 @@ block/USBSS_DEVICE:
   - name: UEP4_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by Endpoint 4.
     byte_offset: 296
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP4_TX_CHAIN_EXP_NUMP
   - name: UEP4_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by Endpoint 4.
@@ -612,7 +650,7 @@ block/USBSS_DEVICE:
   - name: UEP5_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by Endpoint 5.
     byte_offset: 328
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP5_TX_CHAIN_EXP_NUMP
   - name: UEP5_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by Endpoint 5.
@@ -720,7 +758,7 @@ block/USBSS_DEVICE:
   - name: UEP6_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by Endpoint 6.
     byte_offset: 360
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP6_TX_CHAIN_EXP_NUMP
   - name: UEP6_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by Endpoint 6.
@@ -828,7 +866,7 @@ block/USBSS_DEVICE:
   - name: UEP7_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by Endpoint 7.
     byte_offset: 392
-    bit_size: 16
+    bit_size: 8
     fieldset: UEP7_TX_CHAIN_EXP_NUMP
   - name: UEP7_TX_CHAIN_NUMP
     description: Number of NUMPs has been sent by Endpoint 7.
@@ -2003,7 +2041,7 @@ fieldset/UEP1_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP1_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by endpoint 1.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -2349,7 +2387,7 @@ fieldset/UEP2_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP2_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by endpoint 2.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -2695,7 +2733,7 @@ fieldset/UEP3_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP3_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by endpoint 3.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -3041,7 +3079,7 @@ fieldset/UEP4_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP4_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by Endpoint 4.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -3387,7 +3425,7 @@ fieldset/UEP5_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP5_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by Endpoint 5.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -3733,7 +3771,7 @@ fieldset/UEP6_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP6_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by Endpoint 6.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -4079,7 +4117,7 @@ fieldset/UEP7_TX_CHAIN_CR:
     bit_size: 2
 fieldset/UEP7_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by Endpoint 7.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: TX_CHAIN_EXP_NUMP
     description: The number of DPP packets that can be sent by the currently completed CHAIN.
@@ -4389,3 +4427,83 @@ fieldset/USBSS_CTRL:
     description: Host Mode.
     bit_offset: 24
     bit_size: 7
+fieldset/LINK_U1_WKUP_TMR:
+  description: U1 wake-up timer.
+  bit_size: 16
+  fields:
+  - name: U1_WKUP_TMR
+    description: U1 wake-up timer value. The device SDK writes 120.
+    bit_offset: 0
+    bit_size: 16
+fieldset/LINK_U3_WKUP_TMR:
+  description: U3 wake-up timer.
+  bit_size: 16
+  fields:
+  - name: U3_WKUP_TMR
+    description: U3 wake-up timer value.
+    bit_offset: 0
+    bit_size: 16
+fieldset/LINK_U1_EXIT_CFG:
+  description: U1 exit configuration.
+  bit_size: 32
+  fields:
+  - name: U1_EXIT_TIME
+    description: U1 exit time enable. The device SDK sets this bit before link training.
+    bit_offset: 9
+    bit_size: 1
+fieldset/LINK_U2_EXIT_CFG:
+  description: U2 exit configuration. The EVT header gives no bit definitions.
+  bit_size: 32
+  fields:
+  - name: EXIT_CFG
+    description: Undocumented configuration value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_U3_EXIT_CFG:
+  description: U3 exit configuration. The EVT header gives no bit definitions.
+  bit_size: 32
+  fields:
+  - name: EXIT_CFG
+    description: Undocumented configuration value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/UEP0_TX_DMA_OFS:
+  description: Endpoint 0 transmit DMA offset.
+  bit_size: 32
+  fields:
+  - name: DMA_OFS
+    description: DMA offset value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/UEP0_RX_DMA_OFS:
+  description: Endpoint 0 receive DMA offset.
+  bit_size: 32
+  fields:
+  - name: DMA_OFS
+    description: DMA offset value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PHY_CFG_CR:
+  description: Indirect PHY configuration command.
+  bit_size: 32
+  fields:
+  - name: PHY_CFG_DATA
+    description: Data written to the addressed PHY register.
+    bit_offset: 0
+    bit_size: 16
+  - name: PHY_CFG_ADDR
+    description: PHY register address.
+    bit_offset: 16
+    bit_size: 5
+  - name: PHY_CFG_WRITE
+    description: Command strobe. The device SDK always sets it together with the address and data.
+    bit_offset: 23
+    bit_size: 1
+fieldset/PHY_CFG_DAT:
+  description: Indirect PHY configuration data.
+  bit_size: 32
+  fields:
+  - name: PHY_CFG_DATA
+    description: Data read back from the PHY.
+    bit_offset: 0
+    bit_size: 32
