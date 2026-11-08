@@ -3,8 +3,9 @@
 # Derived from usbhs_h4.yaml: same register map and naming, with
 #   * no per-endpoint RX/TX FIFO windows, so the device block stops at
 #     0xBE (UEP_R_ISO) instead of running on to 0xF4;
-#   * a few fields that differ in width — see UEPn_MAX_LEN* and
-#     UH_* below.
+#   * 32-bit UEPn_RX_DMA / UEPn_TX_DMA fields where H4 keeps bits 23:0
+#     (V407 RM §22.2.1.23-24, H417 RM §25.2.1.23-24);
+#   * a few host fields that differ in width — see UH_* below.
 #
 # Both USBHS1 (0x40024000) and USBHS2 (0x40023400) use this block.
 
