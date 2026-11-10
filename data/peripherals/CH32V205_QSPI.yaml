@@ -1,9 +1,9 @@
 - name: QSPI1
-  address: 1073892352
+  address: 0x40024c00
   registers:
     kind: qspi
     version: v205
-    block: QSPI1
+    block: QSPI
   rcc:
     bus_clock: HCLK
     kernel_clock: HCLK

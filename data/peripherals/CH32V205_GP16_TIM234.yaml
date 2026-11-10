@@ -1,5 +1,5 @@
 - name: TIM2
-  address: 1073741824
+  address: 0x40000000
   registers:
     kind: timer
     version: v3b
@@ -52,7 +52,7 @@
     signal: CH4
     af: 1
 - name: TIM3
-  address: 1073742848
+  address: 0x40000400
   registers:
     kind: timer
     version: v3b
@@ -108,11 +108,11 @@
     signal: CH4
     af: 1
 - name: TIM4
-  address: 1073743872
+  address: 0x40000800
   registers:
     kind: timer
     version: v3b
-    block: GPTM
+    block: GPTM32
   rcc:
     bus_clock: PCLK1_TIM
     kernel_clock: PCLK1

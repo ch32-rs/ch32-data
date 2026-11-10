@@ -1,5 +1,5 @@
 - name: USART3
-  address: 1073760256
+  address: 0x40004800
   registers:
     kind: usart
     version: common

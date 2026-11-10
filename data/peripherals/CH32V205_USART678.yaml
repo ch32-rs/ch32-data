@@ -1,5 +1,5 @@
 - name: USART6
-  address: 1073747968
+  address: 0x40001800
   registers:
     kind: usart
     version: common
@@ -57,7 +57,7 @@
     signal: CTS
     af: 4
 - name: USART7
-  address: 1073748992
+  address: 0x40001c00
   registers:
     kind: usart
     version: common
@@ -112,7 +112,7 @@
     signal: CTS
     af: 4
 - name: USART8
-  address: 1073750016
+  address: 0x40002000
   registers:
     kind: usart
     version: common

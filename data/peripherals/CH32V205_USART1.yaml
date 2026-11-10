@@ -1,5 +1,5 @@
 - name: USART1
-  address: 1073821696
+  address: 0x40013800
   registers:
     kind: usart
     version: common

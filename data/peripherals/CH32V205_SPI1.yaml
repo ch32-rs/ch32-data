@@ -1,5 +1,5 @@
 - name: SPI1
-  address: 1073819648
+  address: 0x40013000
   registers:
     kind: spi
     version: v0

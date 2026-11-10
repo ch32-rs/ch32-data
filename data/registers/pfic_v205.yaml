@@ -40,6 +40,26 @@ block/PFIC:
     byte_offset: 76
     access: Read
     fieldset: GISR
+  - name: VTFIDR
+    description: ''
+    byte_offset: 80
+    fieldset: VTFIDR
+  - name: VTFADDRR0
+    description: ''
+    byte_offset: 96
+    fieldset: VTFADDRR0
+  - name: VTFADDRR1
+    description: ''
+    byte_offset: 100
+    fieldset: VTFADDRR1
+  - name: VTFADDRR2
+    description: ''
+    byte_offset: 104
+    fieldset: VTFADDRR2
+  - name: VTFADDRR3
+    description: ''
+    byte_offset: 108
+    fieldset: VTFADDRR3
   - name: IENR1
     description: Interrupt Setting Register.
     byte_offset: 256
@@ -394,3 +414,66 @@ fieldset/SCTLR:
     description: System reset.
     bit_offset: 31
     bit_size: 1
+fieldset/VTFIDR:
+  description: ''
+  fields:
+  - name: VTFID0
+    description: VTFID0.
+    bit_offset: 0
+    bit_size: 8
+  - name: VTFID1
+    description: VTFID1.
+    bit_offset: 8
+    bit_size: 8
+  - name: VTFID2
+    description: VTFID2.
+    bit_offset: 16
+    bit_size: 8
+  - name: VTFID3
+    description: VTFID3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/VTFADDRR0:
+  description: ''
+  fields:
+  - name: VTF0EN
+    description: VTF0EN.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR0
+    description: ADDR0.
+    bit_offset: 1
+    bit_size: 31
+fieldset/VTFADDRR1:
+  description: ''
+  fields:
+  - name: VTF1EN
+    description: VTF1EN.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR1
+    description: ADDR1.
+    bit_offset: 1
+    bit_size: 31
+fieldset/VTFADDRR2:
+  description: ''
+  fields:
+  - name: VTF2EN
+    description: VTF2EN.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR2
+    description: ADDR2.
+    bit_offset: 1
+    bit_size: 31
+fieldset/VTFADDRR3:
+  description: ''
+  fields:
+  - name: VTF3EN
+    description: VTF3EN.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR3
+    description: ADDR3.
+    bit_offset: 1
+    bit_size: 31

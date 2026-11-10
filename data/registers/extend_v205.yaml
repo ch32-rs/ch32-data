@@ -9,6 +9,7 @@ block/EXTEND:
     description: EXTEN control register 1.
     byte_offset: 4
     fieldset: EXTEN_CTLR1
+    bit_size: 16
 fieldset/EXTEN_CTLR0:
   description: EXTEN control register 0.
   fields:
@@ -83,3 +84,4 @@ fieldset/EXTEN_CTLR1:
     description: Mapping of TIM4_UP on the DMA channel.
     bit_offset: 11
     bit_size: 1
+  bit_size: 16

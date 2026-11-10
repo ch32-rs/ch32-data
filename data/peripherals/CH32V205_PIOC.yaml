@@ -1,5 +1,5 @@
 - name: PIOC
-  address: 1073896448
+  address: 0x40025c00
   registers:
     kind: pioc
     version: v205

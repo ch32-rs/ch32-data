@@ -1,5 +1,5 @@
 - name: USBFS
-  address: 1342177280
+  address: 0x50000000
   registers:
     kind: usb
     version: v2fs

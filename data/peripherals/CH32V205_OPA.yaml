@@ -1,5 +1,5 @@
 - name: OPA
-  address: 1073897472
+  address: 0x40026000
   registers:
     kind: opa
     version: v205

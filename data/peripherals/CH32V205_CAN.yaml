@@ -1,5 +1,5 @@
 - name: CAN1
-  address: 1073767424
+  address: 0x40006400
   registers:
     kind: can
     version: v205

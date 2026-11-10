@@ -1,5 +1,5 @@
 - name: USBHS
-  address: 1073886208
+  address: 0x40023400
   registers:
     kind: usbhs
     version: v4x7

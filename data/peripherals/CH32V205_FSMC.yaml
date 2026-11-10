@@ -1,5 +1,5 @@
 - name: FSMC
-  address: 2684354560
+  address: 0xa0000000
   registers:
     kind: fsmc
     version: v4x7
