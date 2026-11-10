@@ -558,10 +558,13 @@ fieldset/UEP_R_ISO:
   description: usb endpoint receives a synchronous mode enable register.
   bit_size: 16
   fields:
-  - name: UEPn_R_ISO_EN
+  - name: UEP_R_ISO_EN
     description: down endpoint(OUT) synchronization mode enabled.
     bit_offset: 1
-    bit_size: 7
+    bit_size: 1
+    array:
+      len: 7
+      stride: 1
   - name: UEP_R_FIFO_EN
     description: The FIFO mode of the TX of the endpoint is enabled.
     bit_offset: 9
@@ -610,10 +613,13 @@ fieldset/UEP_T_ISO:
   description: usb endpoint sends a synchronous mode enable register.
   bit_size: 16
   fields:
-  - name: UEPn_T_ISO_EN
+  - name: UEP_T_ISO_EN
     description: upload endpoint(IN) synchronization mode enabled.
     bit_offset: 1
-    bit_size: 7
+    bit_size: 1
+    array:
+      len: 7
+      stride: 1
   - name: UEP_T_FIFO_EN
     description: The FIFO mode of the TX of the endpoint is enabled.
     bit_offset: 9

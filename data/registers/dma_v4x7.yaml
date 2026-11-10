@@ -236,10 +236,10 @@ fieldset/EXTEM_INTFR:
 enum/DIR:
   bit_size: 1
   variants:
-    - name: FromPeripheral
+    - name: FROMPERIPHERAL
       description: Read from peripheral.
       value: 0
-    - name: FromMemory
+    - name: FROMMEMORY
       description: Read from memory.
       value: 1
 enum/PL:
@@ -254,7 +254,7 @@ enum/PL:
     - name: High
       description: High priority.
       value: 2
-    - name: VeryHigh
+    - name: VERYHIGH
       description: Very high priority.
       value: 3
 enum/SIZE:

@@ -142,26 +142,26 @@ fieldset/BWTR1:
 fieldset/ECCR2:
   description: ECC result register 2.
   fields:
-    - name: ECCx
+    - name: ECCX
       description: ECC result.
       bit_offset: 0
       bit_size: 32
 fieldset/PATT2:
   description: Attribute memory space timing register 2.
   fields:
-    - name: ATTSETx
+    - name: ATTSETX
       description: Attribute memory x setup time.
       bit_offset: 0
       bit_size: 8
-    - name: ATTWAITx
+    - name: ATTWAITX
       description: Attribute memory x wait time.
       bit_offset: 8
       bit_size: 8
-    - name: ATTHOLDx
+    - name: ATTHOLDX
       description: Attribute memory x hold time.
       bit_offset: 16
       bit_size: 8
-    - name: ATTHIZx
+    - name: ATTHIZX
       description: Attribute memory x databus HiZ time.
       bit_offset: 24
       bit_size: 8
@@ -203,19 +203,19 @@ fieldset/PCR2:
 fieldset/PMEM2:
   description: Common memory space timing register 2.
   fields:
-    - name: MEMSETx
+    - name: MEMSETX
       description: Common memory x setup time.
       bit_offset: 0
       bit_size: 8
-    - name: MEMWAITx
+    - name: MEMWAITX
       description: Common memory x wait time.
       bit_offset: 8
       bit_size: 8
-    - name: MEMHOLDx
+    - name: MEMHOLDX
       description: Common memory x hold time.
       bit_offset: 16
       bit_size: 8
-    - name: MEMHIZx
+    - name: MEMHIZX
       description: Common memory x databus HiZ time.
       bit_offset: 24
       bit_size: 8

@@ -280,13 +280,13 @@ enum/PORT_CC_PU:
   - name: Closed
     description: No pull up current.
     value: 0
-  - name: uA330
+  - name: UA330
     description: 330uA.
     value: 1
-  - name: uA180
+  - name: UA180
     description: 180uA.
     value: 2
-  - name: uA80
+  - name: UA80
     description: 80uA.
     value: 3
 enum/BMC_AUX:

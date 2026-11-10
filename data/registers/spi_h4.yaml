@@ -300,16 +300,16 @@ enum/I2SCFG:
   description: I2S mode selection
   bit_size: 2
   variants:
-  - name: SlaveTx
+  - name: SLAVETX
     description: Slave transmit.
     value: 0
-  - name: SlaveRx
+  - name: SLAVERX
     description: Slave receive.
     value: 1
-  - name: MasterTx
+  - name: MASTERTX
     description: Master transmit.
     value: 2
-  - name: MasterRx
+  - name: MASTERRX
     description: Master receive.
     value: 3
 enum/I2SDATLEN:

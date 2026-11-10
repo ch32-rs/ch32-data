@@ -402,10 +402,10 @@ enum/CALVOL:
   bit_size: 2
   description: Calibration voltage
   variants:
-    - name: CaliVoltage2_4AVDD
+    - name: CALIVOLTAGE2_4AVDD
       descrption: 2/4 AVDD
       value: 0b01
-    - name: CaliVoltage3_4AVDD
+    - name: CALIVOLTAGE3_4AVDD
       descrption: 3/4 AVDD
       value: 0b10
 

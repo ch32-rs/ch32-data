@@ -1101,7 +1101,7 @@ fieldset/PHY_CR:
       bit_offset: 9
       bit_size: 1
       access: Read
-    - name: DUPlEX
+    - name: DUPLEX
       description: connection mode selection.
       bit_offset: 10
       bit_size: 1

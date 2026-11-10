@@ -642,13 +642,13 @@ fieldset/EP_LEN:
 enum/SPEED_TYPE:
   bit_size: 2
   variants:
-    - name: FullSpeed 
+    - name: FULLSPEED 
       description: USB Full Speed (12Mbps)
       value: 0
-    - name: HighSpeed
+    - name: HIGHSPEED
       description: USB High Speed (480Mbps)
       value: 1
-    - name: LowSpeed
+    - name: LOWSPEED
       description: USB Low Speed (1.5Mbps)
       value: 2
 
