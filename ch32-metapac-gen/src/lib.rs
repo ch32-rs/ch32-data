@@ -7,6 +7,7 @@ use std::str::FromStr;
 
 use chiptool::generate;
 use chiptool::generate::CommonModule;
+use chiptool::transform;
 use proc_macro2::TokenStream;
 
 mod chip;
@@ -192,8 +193,23 @@ pub(crate) fn stringify<T: Debug>(metadata: T) -> String {
 }
 
 fn gen_opts() -> generate::Options {
-    generate::Options {
-        common_module: CommonModule::External(TokenStream::from_str("crate::common").unwrap()),
+    generate::Options::new()
+        .with_common_module(CommonModule::External(TokenStream::from_str("crate::common").unwrap()))
+        // The generated crate has no defmt feature; keep the previous output.
+        .with_defmt(generate::DefmtOption::Disabled)
+}
+
+/// Sanitizer settings matching the pre-upgrade output.
+///
+/// chiptool's default enum-variant case changed from upper snake to Pascal
+/// along with the sanitizer rewrite. The PAC's `vals` types are part of the
+/// HAL API, so keep the upper snake variants.
+pub(crate) fn sanitize() -> transform::sanitize::Sanitize {
+    use transform::sanitize::{Sanitize, SanitizeCase};
+
+    Sanitize {
+        enum_variant: SanitizeCase::Constant,
+        ..Sanitize::default()
     }
 }
 
