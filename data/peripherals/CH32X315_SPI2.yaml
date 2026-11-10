@@ -1,5 +1,5 @@
 - name: SPI2
-  address: 1073756160
+  address: 0x40003800
   registers:
     kind: spi
     version: v0

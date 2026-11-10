@@ -1,5 +1,5 @@
 - name: ARGB
-  address: 1073893376
+  address: 0x40025000
   registers:
     kind: argb
     version: x315

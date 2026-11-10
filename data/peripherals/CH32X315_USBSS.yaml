@@ -1,5 +1,5 @@
 - name: USBSS
-  address: 1073971200
+  address: 0x40038000
   registers:
     kind: usbss
     version: x315

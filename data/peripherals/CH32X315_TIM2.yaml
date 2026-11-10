@@ -1,5 +1,5 @@
 - name: TIM2
-  address: 1073741824
+  address: 0x40000000
   registers:
     kind: timer
     version: x315

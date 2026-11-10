@@ -1,5 +1,5 @@
 - name: ADC3
-  address: 1073822720
+  address: 0x40013c00
   registers:
     kind: adc
     version: x315

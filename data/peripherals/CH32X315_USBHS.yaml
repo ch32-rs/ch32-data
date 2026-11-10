@@ -1,5 +1,5 @@
 - name: USBHS
-  address: 1073938432
+  address: 0x40030000
   registers:
     kind: usbhs
     version: x315
