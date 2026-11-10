@@ -1,3 +1,109 @@
+block/EP_RX:
+  description: Receive (OUT) registers of one device endpoint, 1 to 7. USBSS_EP_RX_TypeDef in the EVT header.
+  items:
+  - name: CFG
+    description: Endpoint n configuration register (R8_UEPn_RX_CFG).
+    byte_offset: 0
+    bit_size: 8
+    fieldset: EP_RX_CFG
+  - name: CR
+    description: Endpoint n control register (R8_UEPn_RX_CR).
+    byte_offset: 1
+    bit_size: 8
+    fieldset: EP_RX_CR
+  - name: SEQ
+    description: Endpoint n sequence number register (R8_UEPn_RX_SEQ).
+    byte_offset: 2
+    bit_size: 8
+    fieldset: EP_RX_SEQ
+  - name: ST
+    description: Endpoint n status register (R8_UEPn_RX_ST).
+    byte_offset: 3
+    bit_size: 8
+    fieldset: EP_RX_ST
+  - name: CHAIN_CR
+    description: Endpoint n CHAIN control register (R8_UEPn_RX_CHAIN_CR).
+    byte_offset: 4
+    bit_size: 8
+    fieldset: EP_RX_CHAIN_CR
+  - name: CHAIN_ST
+    description: Endpoint n CHAIN status register (R8_UEPn_RX_CHAIN_ST).
+    byte_offset: 5
+    bit_size: 8
+    fieldset: EP_RX_CHAIN_ST
+  - name: CHAIN_LEN
+    description: Length of the last packet the CHAIN received (R16_UEPn_RX_CHAIN_LEN).
+    byte_offset: 6
+    bit_size: 16
+    fieldset: EP_RX_CHAIN_LEN
+  - name: CHAIN_MAX_NUMP
+    description: Number of DPPs the CHAIN can receive (R8_UEPn_RX_CHAIN_MAX_NUMP).
+    byte_offset: 8
+    bit_size: 8
+  - name: CHAIN_NUMP
+    description: Number of DPPs the CHAIN has received (R8_UEPn_RX_CHAIN_NUMP).
+    byte_offset: 9
+    bit_size: 8
+  - name: DMA_OFS
+    description: Offset of a DPP in the CHAIN, the distance between two packets in the buffer (R16_UEPn_RX_DMA_OFS). Resets to 0x0400.
+    byte_offset: 10
+    bit_size: 16
+  - name: DMA
+    description: 'Normal mode: DMA start address of the CHAIN. FIFO mode: FIFO start and end addresses (R32_UEPn_RX_DMA).'
+    byte_offset: 12
+block/EP_TX:
+  description: Transmit (IN) registers of one device endpoint, 1 to 7. USBSS_EP_TX_TypeDef in the EVT header.
+  items:
+  - name: CFG
+    description: Endpoint n configuration register (R8_UEPn_TX_CFG).
+    byte_offset: 0
+    bit_size: 8
+    fieldset: EP_TX_CFG
+  - name: CR
+    description: Endpoint n control register (R8_UEPn_TX_CR).
+    byte_offset: 1
+    bit_size: 8
+    fieldset: EP_TX_CR
+  - name: SEQ
+    description: Endpoint n sequence number register (R8_UEPn_TX_SEQ).
+    byte_offset: 2
+    bit_size: 8
+    fieldset: EP_TX_SEQ
+  - name: ST
+    description: Endpoint n status register (R8_UEPn_TX_ST).
+    byte_offset: 3
+    bit_size: 8
+    fieldset: EP_TX_ST
+  - name: CHAIN_CR
+    description: Endpoint n CHAIN control register (R8_UEPn_TX_CHAIN_CR).
+    byte_offset: 4
+    bit_size: 8
+    fieldset: EP_TX_CHAIN_CR
+  - name: CHAIN_ST
+    description: Endpoint n CHAIN status register (R8_UEPn_TX_CHAIN_ST).
+    byte_offset: 5
+    bit_size: 8
+    fieldset: EP_TX_CHAIN_ST
+  - name: CHAIN_LEN
+    description: Length of the last packet the CHAIN sends (R16_UEPn_TX_CHAIN_LEN).
+    byte_offset: 6
+    bit_size: 16
+    fieldset: EP_TX_CHAIN_LEN
+  - name: CHAIN_EXP_NUMP
+    description: Number of DPPs the CHAIN is to send (R8_UEPn_TX_CHAIN_EXP_NUMP).
+    byte_offset: 8
+    bit_size: 8
+  - name: CHAIN_NUMP
+    description: Number of DPPs the CHAIN has sent (R8_UEPn_TX_CHAIN_NUMP).
+    byte_offset: 9
+    bit_size: 8
+  - name: DMA_OFS
+    description: Offset of a DPP in the CHAIN, the distance between two packets in the buffer (R16_UEPn_TX_DMA_OFS). Resets to 0x0400.
+    byte_offset: 10
+    bit_size: 16
+  - name: DMA
+    description: 'Normal mode: DMA start address of the CHAIN. FIFO mode: FIFO start and end addresses (R32_UEPn_TX_DMA).'
+    byte_offset: 12
 block/USBSS:
   description: USB3.0 ultra-high speed host /device controller.
   items:
@@ -82,30 +188,18 @@ block/USBSS:
     description: PORT_CAP Registers.
     byte_offset: 84
     fieldset: LINK_LMP_PORT_CAP
-  - name: LINK_LMP_RX_DATA0
-    description: LMP receives data 0 register.
+  - name: LINK_LMP_RX_DATA
+    description: Header packet of the last LMP received; word n holds bits [32n+31:32n].
+    array:
+      len: 3
+      stride: 4
     byte_offset: 88
-    fieldset: LINK_LMP_RX_DATA0
-  - name: LINK_LMP_RX_DATA1
-    description: LMP receives data 1 register.
-    byte_offset: 92
-    fieldset: LINK_LMP_RX_DATA1
-  - name: LINK_LMP_RX_DATA2
-    description: LMP receives data 2 register.
-    byte_offset: 96
-    fieldset: LINK_LMP_RX_DATA2
-  - name: LINK_LMP_TX_DATA0
-    description: USB Custom HP Data 0 Register.
+  - name: LINK_LMP_TX_DATA
+    description: User-defined header packet to send, such as an LMP; word n holds bits [32n+31:32n].
+    array:
+      len: 3
+      stride: 4
     byte_offset: 100
-    fieldset: LINK_LMP_TX_DATA0
-  - name: LINK_LMP_TX_DATA1
-    description: USB Custom HP Data 1 Register.
-    byte_offset: 104
-    fieldset: LINK_LMP_TX_DATA1
-  - name: LINK_LMP_TX_DATA2
-    description: USB Custom HP Data 2 Register.
-    byte_offset: 108
-    fieldset: LINK_LMP_TX_DATA2
   - name: USBSS_CTRL
     description: USBSS Control Register.
     byte_offset: 112
@@ -122,18 +216,12 @@ block/USBSS:
     description: Interval Adaptive Registers for ITP packets in USB.
     byte_offset: 124
     fieldset: ITP_ADJ
-  - name: TP_RX_DATA0
-    description: DEV_NOTIF-TP Data 0 Register.
+  - name: TP_RX_DATA
+    description: Header packet of the last DEV_NOTIF-TP received; word n holds bits [32n+31:32n].
+    array:
+      len: 3
+      stride: 4
     byte_offset: 168
-    fieldset: TP_RX_DATA0
-  - name: TP_RX_DATA1
-    description: DEV_NOTIF-TP Data 1 Register.
-    byte_offset: 172
-    fieldset: TP_RX_DATA1
-  - name: TP_RX_DATA2
-    description: DEV_NOTIF-TP Data 2 Register.
-    byte_offset: 176
-    fieldset: TP_RX_DATA2
   - name: PHY_CFG_CR
     description: Indirect PHY configuration command. The RM does not document this register; the device SDK writes `(1 << 23) | (addr << 16) | data`.
     byte_offset: 504
@@ -164,778 +252,32 @@ block/USBSS_DEVICE:
     description: Endpoint 0 receives control registers.
     byte_offset: 136
     fieldset: UEP0_RX_CTRL
-  - name: U3EP0_TX_DMA
-    description: DMA start address for Endpoint 0 sending.
+  - name: UEP0_TX_DMA
+    description: Start address of the endpoint 0 transmit buffer.
     byte_offset: 140
-    fieldset: U3EP0_TX_DMA
-  - name: U3EP0_RX_DMA
-    description: DMA start address for Endpoint 0 receiving.
+  - name: UEP0_RX_DMA
+    description: Start address of the endpoint 0 receive buffer.
     byte_offset: 144
-    fieldset: U3EP0_RX_DMA
   - name: UEP0_TX_DMA_OFS
     description: Endpoint 0 transmit DMA offset. The RM register table omits this register; the EVT device header exposes it.
     byte_offset: 148
-    fieldset: UEP0_TX_DMA_OFS
   - name: UEP0_RX_DMA_OFS
     description: Endpoint 0 receive DMA offset. The RM register table omits this register; the EVT device header exposes it.
     byte_offset: 152
-    fieldset: UEP0_RX_DMA_OFS
-  - name: UEP1_TX_CFG
-    description: Endpoint 1 Configuration Register.
+  - name: EP_TX
+    description: Transmit (IN) registers of endpoints 1 to 7. Index 0 is endpoint 1.
+    array:
+      len: 7
+      stride: 32
     byte_offset: 192
-    bit_size: 8
-    fieldset: UEP1_TX_CFG
-  - name: UEP1_TX_CR
-    description: Endpoint 1 control register.
-    byte_offset: 193
-    bit_size: 8
-    fieldset: UEP1_TX_CR
-  - name: UEP1_TX_SEQ
-    description: Endpoint 1 Serial Number Register.
-    byte_offset: 194
-    bit_size: 8
-    fieldset: UEP1_TX_SEQ
-  - name: UEP1_TX_ST
-    description: Endpoint 1 status register.
-    byte_offset: 195
-    bit_size: 8
-    fieldset: UEP1_TX_ST
-  - name: UEP1_TX_CHAIN_CR
-    description: Endpoint 1 CHAIN control register.
-    byte_offset: 196
-    bit_size: 8
-    fieldset: UEP1_TX_CHAIN_CR
-  - name: UEP1_TX_CHAIN_ST
-    description: Endpoint 1 CHAIN state register.
-    byte_offset: 197
-    bit_size: 8
-    fieldset: UEP1_TX_CHAIN_ST
-  - name: UEP1_TX_CHAIN_LEN
-    description: Endpoint 1 CHAIN sends the last packet length.
-    byte_offset: 198
-    bit_size: 16
-    fieldset: UEP1_TX_CHAIN_LEN
-  - name: UEP1_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by endpoint 1.
-    byte_offset: 200
-    bit_size: 8
-    fieldset: UEP1_TX_CHAIN_EXP_NUMP
-  - name: UEP1_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by endpoint n.
-    byte_offset: 201
-    bit_size: 8
-    fieldset: UEP1_TX_CHAIN_NUMP
-  - name: UEP1_TX_DMA_OFS
-    description: DMA offset length for endpoint 1.
-    byte_offset: 202
-    bit_size: 16
-    fieldset: UEP1_TX_DMA_OFS
-  - name: UEP1_TX_DMA
-    description: DMA start address for endpoint 1.
-    byte_offset: 204
-    fieldset: UEP1_TX_DMA
-  - name: UEP1_RX_CFG
-    description: Endpoint 1 Configuration Register.
+    block: EP_TX
+  - name: EP_RX
+    description: Receive (OUT) registers of endpoints 1 to 7. Index 0 is endpoint 1.
+    array:
+      len: 7
+      stride: 32
     byte_offset: 208
-    bit_size: 8
-    fieldset: UEP1_RX_CFG
-  - name: UEP1_RX_CR
-    description: Endpoint 1 control register.
-    byte_offset: 209
-    bit_size: 8
-    fieldset: UEP1_RX_CR
-  - name: UEP1_RX_SEQ
-    description: Endpoint 1 Serial Number Register.
-    byte_offset: 210
-    bit_size: 8
-    fieldset: UEP1_RX_SEQ
-  - name: UEP1_RX_ST
-    description: Endpoint 1 status register.
-    byte_offset: 211
-    bit_size: 8
-    fieldset: UEP1_RX_ST
-  - name: UEP1_RX_CHAIN_CR
-    description: Endpoint 1 CHAIN control register.
-    byte_offset: 212
-    bit_size: 8
-    fieldset: UEP1_RX_CHAIN_CR
-  - name: UEP1_RX_CHAIN_ST
-    description: Endpoint 1 CHAIN state register.
-    byte_offset: 213
-    bit_size: 8
-    fieldset: UEP1_RX_CHAIN_ST
-  - name: UEP1_RX_CHAIN_LEN
-    description: Endpoint 1 CHAIN sends the last packet length.
-    byte_offset: 214
-    bit_size: 16
-    fieldset: UEP1_RX_CHAIN_LEN
-  - name: UEP1_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 1 can receive.
-    byte_offset: 216
-    bit_size: 8
-    fieldset: UEP1_RX_CHAIN_MAX_NUMP
-  - name: UEP1_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by endpoint 1.
-    byte_offset: 217
-    bit_size: 8
-    fieldset: UEP1_RX_CHAIN_NUMP
-  - name: UEP1_RX_DMA_OFS
-    description: DMA offset length for endpoint 1.
-    byte_offset: 218
-    bit_size: 16
-    fieldset: UEP1_RX_DMA_OFS
-  - name: UEP1_RX_DMA
-    description: DMA start address for endpoint 1.
-    byte_offset: 220
-    fieldset: UEP1_RX_DMA
-  - name: UEP2_TX_CFG
-    description: Endpoint 2 Configuration Register.
-    byte_offset: 224
-    bit_size: 8
-    fieldset: UEP2_TX_CFG
-  - name: UEP2_TX_CR
-    description: Endpoint 2 control register.
-    byte_offset: 225
-    bit_size: 8
-    fieldset: UEP2_TX_CR
-  - name: UEP2_TX_SEQ
-    description: Endpoint 2 Serial Number Register.
-    byte_offset: 226
-    bit_size: 8
-    fieldset: UEP2_TX_SEQ
-  - name: UEP2_TX_ST
-    description: Endpoint 2 status register.
-    byte_offset: 227
-    bit_size: 8
-    fieldset: UEP2_TX_ST
-  - name: UEP2_TX_CHAIN_CR
-    description: Endpoint 2 CHAIN control register.
-    byte_offset: 228
-    bit_size: 8
-    fieldset: UEP2_TX_CHAIN_CR
-  - name: UEP2_TX_CHAIN_ST
-    description: Endpoint 2 CHAIN state register.
-    byte_offset: 229
-    bit_size: 8
-    fieldset: UEP2_TX_CHAIN_ST
-  - name: UEP2_TX_CHAIN_LEN
-    description: Endpoint 2 CHAIN sends the last packet length.
-    byte_offset: 230
-    bit_size: 16
-    fieldset: UEP2_TX_CHAIN_LEN
-  - name: UEP2_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by endpoint 2.
-    byte_offset: 232
-    bit_size: 8
-    fieldset: UEP2_TX_CHAIN_EXP_NUMP
-  - name: UEP2_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by endpoint 2.
-    byte_offset: 233
-    bit_size: 8
-    fieldset: UEP2_TX_CHAIN_NUMP
-  - name: UEP2_TX_DMA_OFS
-    description: DMA offset length for endpoint 2.
-    byte_offset: 234
-    bit_size: 16
-    fieldset: UEP2_TX_DMA_OFS
-  - name: UEP2_TX_DMA
-    description: DMA start address for endpoint 2.
-    byte_offset: 236
-    fieldset: UEP2_TX_DMA
-  - name: UEP2_RX_CFG
-    description: Endpoint 2 Configuration Register.
-    byte_offset: 240
-    bit_size: 8
-    fieldset: UEP2_RX_CFG
-  - name: UEP2_RX_CR
-    description: Endpoint 2 control register.
-    byte_offset: 241
-    bit_size: 8
-    fieldset: UEP2_RX_CR
-  - name: UEP2_RX_SEQ
-    description: Endpoint 2 Serial Number Register.
-    byte_offset: 242
-    bit_size: 8
-    fieldset: UEP2_RX_SEQ
-  - name: UEP2_RX_ST
-    description: Endpoint 2 status register.
-    byte_offset: 243
-    bit_size: 8
-    fieldset: UEP2_RX_ST
-  - name: UEP2_RX_CHAIN_CR
-    description: Endpoint 2 CHAIN control register.
-    byte_offset: 244
-    bit_size: 8
-    fieldset: UEP2_RX_CHAIN_CR
-  - name: UEP2_RX_CHAIN_ST
-    description: Endpoint 2 CHAIN state register.
-    byte_offset: 245
-    bit_size: 8
-    fieldset: UEP2_RX_CHAIN_ST
-  - name: UEP2_RX_CHAIN_LEN
-    description: Endpoint 2 CHAIN sends the last packet length.
-    byte_offset: 246
-    bit_size: 16
-    fieldset: UEP2_RX_CHAIN_LEN
-  - name: UEP2_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 2 can receive.
-    byte_offset: 248
-    bit_size: 8
-    fieldset: UEP2_RX_CHAIN_MAX_NUMP
-  - name: UEP2_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by endpoint 2.
-    byte_offset: 249
-    bit_size: 8
-    fieldset: UEP2_RX_CHAIN_NUMP
-  - name: UEP2_RX_DMA_OFS
-    description: DMA offset length for Endpoint 2.
-    byte_offset: 250
-    bit_size: 16
-    fieldset: UEP2_RX_DMA_OFS
-  - name: UEP2_RX_DMA
-    description: DMA start address for Endpoint 2.
-    byte_offset: 252
-    fieldset: UEP2_RX_DMA
-  - name: UEP3_TX_CFG
-    description: Endpoint 3 Configuration Register.
-    byte_offset: 256
-    bit_size: 8
-    fieldset: UEP3_TX_CFG
-  - name: UEP3_TX_CR
-    description: Endpoint 3 control register.
-    byte_offset: 257
-    bit_size: 8
-    fieldset: UEP3_TX_CR
-  - name: UEP3_TX_SEQ
-    description: Endpoint 3 Serial Number Register.
-    byte_offset: 258
-    bit_size: 8
-    fieldset: UEP3_TX_SEQ
-  - name: UEP3_TX_ST
-    description: Endpoint 3 status register.
-    byte_offset: 259
-    bit_size: 8
-    fieldset: UEP3_TX_ST
-  - name: UEP3_TX_CHAIN_CR
-    description: Endpoint 3 CHAIN control register.
-    byte_offset: 260
-    bit_size: 8
-    fieldset: UEP3_TX_CHAIN_CR
-  - name: UEP3_TX_CHAIN_ST
-    description: Endpoint 3 CHAIN state register.
-    byte_offset: 261
-    bit_size: 8
-    fieldset: UEP3_TX_CHAIN_ST
-  - name: UEP3_TX_CHAIN_LEN
-    description: Endpoint 3 CHAIN sends the last packet length.
-    byte_offset: 262
-    bit_size: 16
-    fieldset: UEP3_TX_CHAIN_LEN
-  - name: UEP3_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by endpoint 3.
-    byte_offset: 264
-    bit_size: 8
-    fieldset: UEP3_TX_CHAIN_EXP_NUMP
-  - name: UEP3_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by endpoint 3.
-    byte_offset: 265
-    bit_size: 8
-    fieldset: UEP3_TX_CHAIN_NUMP
-  - name: UEP3_TX_DMA_OFS
-    description: DMA offset length for endpoint 3.
-    byte_offset: 266
-    bit_size: 16
-    fieldset: UEP3_TX_DMA_OFS
-  - name: UEP3_TX_DMA
-    description: DMA start address for endpoint 3.
-    byte_offset: 268
-    fieldset: UEP3_TX_DMA
-  - name: UEP3_RX_CFG
-    description: Endpoint 3 Configuration Register.
-    byte_offset: 272
-    bit_size: 8
-    fieldset: UEP3_RX_CFG
-  - name: UEP3_RX_CR
-    description: Endpoint 3 control register.
-    byte_offset: 273
-    bit_size: 8
-    fieldset: UEP3_RX_CR
-  - name: UEP3_RX_SEQ
-    description: Endpoint 3 Serial Number Register.
-    byte_offset: 274
-    bit_size: 8
-    fieldset: UEP3_RX_SEQ
-  - name: UEP3_RX_ST
-    description: Endpoint 3 status register.
-    byte_offset: 275
-    bit_size: 8
-    fieldset: UEP3_RX_ST
-  - name: UEP3_RX_CHAIN_CR
-    description: Endpoint 3 CHAIN control register.
-    byte_offset: 276
-    bit_size: 8
-    fieldset: UEP3_RX_CHAIN_CR
-  - name: UEP3_RX_CHAIN_ST
-    description: Endpoint 3 CHAIN state register.
-    byte_offset: 277
-    bit_size: 8
-    fieldset: UEP3_RX_CHAIN_ST
-  - name: UEP3_RX_CHAIN_LEN
-    description: Endpoint 3 CHAIN sends the last packet length.
-    byte_offset: 278
-    bit_size: 16
-    fieldset: UEP3_RX_CHAIN_LEN
-  - name: UEP3_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 3 can receive.
-    byte_offset: 280
-    bit_size: 8
-    fieldset: UEP3_RX_CHAIN_MAX_NUMP
-  - name: UEP3_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by Endpoint 3.
-    byte_offset: 281
-    bit_size: 8
-    fieldset: UEP3_RX_CHAIN_NUMP
-  - name: UEP3_RX_DMA_OFS
-    description: DMA offset length for Endpoint 3.
-    byte_offset: 282
-    bit_size: 16
-    fieldset: UEP3_RX_DMA_OFS
-  - name: UEP3_RX_DMA
-    description: DMA start address for Endpoint 3.
-    byte_offset: 284
-    fieldset: UEP3_RX_DMA
-  - name: UEP4_TX_CFG
-    description: Endpoint 4 Configuration Register.
-    byte_offset: 288
-    bit_size: 8
-    fieldset: UEP4_TX_CFG
-  - name: UEP4_TX_CR
-    description: Endpoint 4 control register.
-    byte_offset: 289
-    bit_size: 8
-    fieldset: UEP4_TX_CR
-  - name: UEP4_TX_SEQ
-    description: Endpoint 4 Serial Number Register.
-    byte_offset: 290
-    bit_size: 8
-    fieldset: UEP4_TX_SEQ
-  - name: UEP4_TX_ST
-    description: Endpoint 4 status register.
-    byte_offset: 291
-    bit_size: 8
-    fieldset: UEP4_TX_ST
-  - name: UEP4_TX_CHAIN_CR
-    description: Endpoint 4 CHAIN control register.
-    byte_offset: 292
-    bit_size: 8
-    fieldset: UEP4_TX_CHAIN_CR
-  - name: UEP4_TX_CHAIN_ST
-    description: Endpoint 4 CHAIN state register.
-    byte_offset: 293
-    bit_size: 8
-    fieldset: UEP4_TX_CHAIN_ST
-  - name: UEP4_TX_CHAIN_LEN
-    description: Endpoint 4 CHAIN sends the last packet length.
-    byte_offset: 294
-    bit_size: 16
-    fieldset: UEP4_TX_CHAIN_LEN
-  - name: UEP4_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by Endpoint 4.
-    byte_offset: 296
-    bit_size: 8
-    fieldset: UEP4_TX_CHAIN_EXP_NUMP
-  - name: UEP4_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by Endpoint 4.
-    byte_offset: 297
-    bit_size: 8
-    fieldset: UEP4_TX_CHAIN_NUMP
-  - name: UEP4_TX_DMA_OFS
-    description: DMA offset length for Endpoint 4.
-    byte_offset: 298
-    bit_size: 16
-    fieldset: UEP4_TX_DMA_OFS
-  - name: UEP4_TX_DMA
-    description: DMA start address for Endpoint 4.
-    byte_offset: 300
-    fieldset: UEP4_TX_DMA
-  - name: UEP4_RX_CFG
-    description: Endpoint 4 Configuration Register.
-    byte_offset: 304
-    bit_size: 8
-    fieldset: UEP4_RX_CFG
-  - name: UEP4_RX_CR
-    description: Endpoint 4 control register.
-    byte_offset: 305
-    bit_size: 8
-    fieldset: UEP4_RX_CR
-  - name: UEP4_RX_SEQ
-    description: Endpoint 4 Serial Number Register.
-    byte_offset: 306
-    bit_size: 8
-    fieldset: UEP4_RX_SEQ
-  - name: UEP4_RX_ST
-    description: Endpoint 4 status register.
-    byte_offset: 307
-    bit_size: 8
-    fieldset: UEP4_RX_ST
-  - name: UEP4_RX_CHAIN_CR
-    description: Endpoint 4 CHAIN control register.
-    byte_offset: 308
-    bit_size: 8
-    fieldset: UEP4_RX_CHAIN_CR
-  - name: UEP4_RX_CHAIN_ST
-    description: Endpoint 4 CHAIN state register.
-    byte_offset: 309
-    bit_size: 8
-    fieldset: UEP4_RX_CHAIN_ST
-  - name: UEP4_RX_CHAIN_LEN
-    description: Endpoint 4 CHAIN sends the last packet length.
-    byte_offset: 310
-    bit_size: 16
-    fieldset: UEP4_RX_CHAIN_LEN
-  - name: UEP4_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 4 can receive.
-    byte_offset: 312
-    bit_size: 8
-    fieldset: UEP4_RX_CHAIN_MAX_NUMP
-  - name: UEP4_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by Endpoint 4.
-    byte_offset: 313
-    bit_size: 8
-    fieldset: UEP4_RX_CHAIN_NUMP
-  - name: UEP4_RX_DMA_OFS
-    description: DMA offset length for Endpoint 4.
-    byte_offset: 314
-    bit_size: 16
-    fieldset: UEP4_RX_DMA_OFS
-  - name: UEP4_RX_DMA
-    description: DMA start address for Endpoint 4.
-    byte_offset: 316
-    fieldset: UEP4_RX_DMA
-  - name: UEP5_TX_CFG
-    description: Endpoint 5 Configuration Register.
-    byte_offset: 320
-    bit_size: 8
-    fieldset: UEP5_TX_CFG
-  - name: UEP5_TX_CR
-    description: Endpoint 5 control register.
-    byte_offset: 321
-    bit_size: 8
-    fieldset: UEP5_TX_CR
-  - name: UEP5_TX_SEQ
-    description: Endpoint 5 Serial Number Register.
-    byte_offset: 322
-    bit_size: 8
-    fieldset: UEP5_TX_SEQ
-  - name: UEP5_TX_ST
-    description: Endpoint 5 status register.
-    byte_offset: 323
-    bit_size: 8
-    fieldset: UEP5_TX_ST
-  - name: UEP5_TX_CHAIN_CR
-    description: Endpoint 5 CHAIN control register.
-    byte_offset: 324
-    bit_size: 8
-    fieldset: UEP5_TX_CHAIN_CR
-  - name: UEP5_TX_CHAIN_ST
-    description: Endpoint 5 CHAIN state register.
-    byte_offset: 325
-    bit_size: 8
-    fieldset: UEP5_TX_CHAIN_ST
-  - name: UEP5_TX_CHAIN_LEN
-    description: Endpoint 5 CHAIN sends the last packet length.
-    byte_offset: 326
-    bit_size: 16
-    fieldset: UEP5_TX_CHAIN_LEN
-  - name: UEP5_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by Endpoint 5.
-    byte_offset: 328
-    bit_size: 8
-    fieldset: UEP5_TX_CHAIN_EXP_NUMP
-  - name: UEP5_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by Endpoint 5.
-    byte_offset: 329
-    bit_size: 8
-    fieldset: UEP5_TX_CHAIN_NUMP
-  - name: UEP5_TX_DMA_OFS
-    description: DMA offset length for Endpoint 5.
-    byte_offset: 330
-    bit_size: 16
-    fieldset: UEP5_TX_DMA_OFS
-  - name: UEP5_TX_DMA
-    description: DMA start address for Endpoint 5.
-    byte_offset: 332
-    fieldset: UEP5_TX_DMA
-  - name: UEP5_RX_CFG
-    description: Endpoint 5 Configuration Register.
-    byte_offset: 336
-    bit_size: 8
-    fieldset: UEP5_RX_CFG
-  - name: UEP5_RX_CR
-    description: Endpoint 5 control register.
-    byte_offset: 337
-    bit_size: 8
-    fieldset: UEP5_RX_CR
-  - name: UEP5_RX_SEQ
-    description: Endpoint 5 Serial Number Register.
-    byte_offset: 338
-    bit_size: 8
-    fieldset: UEP5_RX_SEQ
-  - name: UEP5_RX_ST
-    description: Endpoint 5 status register.
-    byte_offset: 339
-    bit_size: 8
-    fieldset: UEP5_RX_ST
-  - name: UEP5_RX_CHAIN_CR
-    description: Endpoint 5 CHAIN control register.
-    byte_offset: 340
-    bit_size: 8
-    fieldset: UEP5_RX_CHAIN_CR
-  - name: UEP5_RX_CHAIN_ST
-    description: Endpoint 5 CHAIN state register.
-    byte_offset: 341
-    bit_size: 8
-    fieldset: UEP5_RX_CHAIN_ST
-  - name: UEP5_RX_CHAIN_LEN
-    description: Endpoint 5 CHAIN sends the last packet length.
-    byte_offset: 342
-    bit_size: 16
-    fieldset: UEP5_RX_CHAIN_LEN
-  - name: UEP5_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 5 can receive.
-    byte_offset: 344
-    bit_size: 8
-    fieldset: UEP5_RX_CHAIN_MAX_NUMP
-  - name: UEP5_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by Endpoint 5.
-    byte_offset: 345
-    bit_size: 8
-    fieldset: UEP5_RX_CHAIN_NUMP
-  - name: UEP5_RX_DMA_OFS
-    description: DMA offset length for Endpoint 5.
-    byte_offset: 346
-    bit_size: 16
-    fieldset: UEP5_RX_DMA_OFS
-  - name: UEP5_RX_DMA
-    description: DMA start address for Endpoint 5.
-    byte_offset: 348
-    fieldset: UEP5_RX_DMA
-  - name: UEP6_TX_CFG
-    description: Endpoint 6 Configuration Register.
-    byte_offset: 352
-    bit_size: 8
-    fieldset: UEP6_TX_CFG
-  - name: UEP6_TX_CR
-    description: Endpoint 6 control register.
-    byte_offset: 353
-    bit_size: 8
-    fieldset: UEP6_TX_CR
-  - name: UEP6_TX_SEQ
-    description: Endpoint 6 Serial Number Register.
-    byte_offset: 354
-    bit_size: 8
-    fieldset: UEP6_TX_SEQ
-  - name: UEP6_TX_ST
-    description: Endpoint 6 status register.
-    byte_offset: 355
-    bit_size: 8
-    fieldset: UEP6_TX_ST
-  - name: UEP6_TX_CHAIN_CR
-    description: Endpoint 6 CHAIN control register.
-    byte_offset: 356
-    bit_size: 8
-    fieldset: UEP6_TX_CHAIN_CR
-  - name: UEP6_TX_CHAIN_ST
-    description: Endpoint 6 CHAIN state register.
-    byte_offset: 357
-    bit_size: 8
-    fieldset: UEP6_TX_CHAIN_ST
-  - name: UEP6_TX_CHAIN_LEN
-    description: Endpoint 6 CHAIN sends the last packet length.
-    byte_offset: 358
-    bit_size: 16
-    fieldset: UEP6_TX_CHAIN_LEN
-  - name: UEP6_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by Endpoint 6.
-    byte_offset: 360
-    bit_size: 8
-    fieldset: UEP6_TX_CHAIN_EXP_NUMP
-  - name: UEP6_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by Endpoint 6.
-    byte_offset: 361
-    bit_size: 8
-    fieldset: UEP6_TX_CHAIN_NUMP
-  - name: UEP6_TX_DMA_OFS
-    description: DMA offset length for Endpoint 6.
-    byte_offset: 362
-    bit_size: 16
-    fieldset: UEP6_TX_DMA_OFS
-  - name: UEP6_TX_DMA
-    description: DMA start address for Endpoint 6.
-    byte_offset: 364
-    fieldset: UEP6_TX_DMA
-  - name: UEP6_RX_CFG
-    description: Endpoint 6 Configuration Register.
-    byte_offset: 368
-    bit_size: 8
-    fieldset: UEP6_RX_CFG
-  - name: UEP6_RX_CR
-    description: Endpoint 6 control register.
-    byte_offset: 369
-    bit_size: 8
-    fieldset: UEP6_RX_CR
-  - name: UEP6_RX_SEQ
-    description: Endpoint 6 Serial Number Register.
-    byte_offset: 370
-    bit_size: 8
-    fieldset: UEP6_RX_SEQ
-  - name: UEP6_RX_ST
-    description: Endpoint 6 status register.
-    byte_offset: 371
-    bit_size: 8
-    fieldset: UEP6_RX_ST
-  - name: UEP6_RX_CHAIN_CR
-    description: Endpoint 6 CHAIN control register.
-    byte_offset: 372
-    bit_size: 8
-    fieldset: UEP6_RX_CHAIN_CR
-  - name: UEP6_RX_CHAIN_ST
-    description: Endpoint 6 CHAIN state register.
-    byte_offset: 373
-    bit_size: 8
-    fieldset: UEP6_RX_CHAIN_ST
-  - name: UEP6_RX_CHAIN_LEN
-    description: Endpoint 6 CHAIN sends the last packet length.
-    byte_offset: 374
-    bit_size: 16
-    fieldset: UEP6_RX_CHAIN_LEN
-  - name: UEP6_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 6 can receive.
-    byte_offset: 376
-    bit_size: 8
-    fieldset: UEP6_RX_CHAIN_MAX_NUMP
-  - name: UEP6_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by Endpoint 6.
-    byte_offset: 377
-    bit_size: 8
-    fieldset: UEP6_RX_CHAIN_NUMP
-  - name: UEP6_RX_DMA_OFS
-    description: DMA offset length for Endpoint 6.
-    byte_offset: 378
-    bit_size: 16
-    fieldset: UEP6_RX_DMA_OFS
-  - name: UEP6_RX_DMA
-    description: DMA start address for Endpoint 6.
-    byte_offset: 380
-    fieldset: UEP6_RX_DMA
-  - name: UEP7_TX_CFG
-    description: Endpoint 7 Configuration Register.
-    byte_offset: 384
-    bit_size: 8
-    fieldset: UEP7_TX_CFG
-  - name: UEP7_TX_CR
-    description: Endpoint 7 control register.
-    byte_offset: 385
-    bit_size: 8
-    fieldset: UEP7_TX_CR
-  - name: UEP7_TX_SEQ
-    description: Endpoint 7 Serial Number Register.
-    byte_offset: 386
-    bit_size: 8
-    fieldset: UEP7_TX_SEQ
-  - name: UEP7_TX_ST
-    description: Endpoint 7 status register.
-    byte_offset: 387
-    bit_size: 8
-    fieldset: UEP7_TX_ST
-  - name: UEP7_TX_CHAIN_CR
-    description: Endpoint 7 CHAIN control register.
-    byte_offset: 388
-    bit_size: 8
-    fieldset: UEP7_TX_CHAIN_CR
-  - name: UEP7_TX_CHAIN_ST
-    description: Endpoint 7 CHAIN state register.
-    byte_offset: 389
-    bit_size: 8
-    fieldset: UEP7_TX_CHAIN_ST
-  - name: UEP7_TX_CHAIN_LEN
-    description: Endpoint 7 CHAIN sends the last packet length.
-    byte_offset: 390
-    bit_size: 16
-    fieldset: UEP7_TX_CHAIN_LEN
-  - name: UEP7_TX_CHAIN_EXP_NUMP
-    description: Number of NUMPs expected to be sent by Endpoint 7.
-    byte_offset: 392
-    bit_size: 8
-    fieldset: UEP7_TX_CHAIN_EXP_NUMP
-  - name: UEP7_TX_CHAIN_NUMP
-    description: Number of NUMPs has been sent by Endpoint 7.
-    byte_offset: 393
-    bit_size: 8
-    fieldset: UEP7_TX_CHAIN_NUMP
-  - name: UEP7_TX_DMA_OFS
-    description: DMA offset length for Endpoint 7.
-    byte_offset: 394
-    bit_size: 16
-    fieldset: UEP7_TX_DMA_OFS
-  - name: UEP7_TX_DMA
-    description: DMA start address for Endpoint 7.
-    byte_offset: 396
-    fieldset: UEP7_TX_DMA
-  - name: UEP7_RX_CFG
-    description: Endpoint 7 Configuration Register.
-    byte_offset: 400
-    bit_size: 8
-    fieldset: UEP7_RX_CFG
-  - name: UEP7_RX_CR
-    description: Endpoint 7 control register.
-    byte_offset: 401
-    bit_size: 8
-    fieldset: UEP7_RX_CR
-  - name: UEP7_RX_SEQ
-    description: Endpoint 7 Serial Number Register.
-    byte_offset: 402
-    bit_size: 8
-    fieldset: UEP7_RX_SEQ
-  - name: UEP7_RX_ST
-    description: Endpoint 7 status register.
-    byte_offset: 403
-    bit_size: 8
-    fieldset: UEP7_RX_ST
-  - name: UEP7_RX_CHAIN_CR
-    description: Endpoint 7 CHAIN control register.
-    byte_offset: 404
-    bit_size: 8
-    fieldset: UEP7_RX_CHAIN_CR
-  - name: UEP7_RX_CHAIN_ST
-    description: Endpoint 7 CHAIN state register.
-    byte_offset: 405
-    bit_size: 8
-    fieldset: UEP7_RX_CHAIN_ST
-  - name: UEP7_RX_CHAIN_LEN
-    description: Endpoint 7 CHAIN sends the last packet length.
-    byte_offset: 406
-    bit_size: 16
-    fieldset: UEP7_RX_CHAIN_LEN
-  - name: UEP7_RX_CHAIN_MAX_NUMP
-    description: Number of NUMPs that Endpoint 7 can receive.
-    byte_offset: 408
-    bit_size: 8
-    fieldset: UEP7_RX_CHAIN_MAX_NUMP
-  - name: UEP7_RX_CHAIN_NUMP
-    description: Number of NUMPs has been received by Endpoint 7.
-    byte_offset: 409
-    bit_size: 8
-    fieldset: UEP7_RX_CHAIN_NUMP
-  - name: UEP7_RX_DMA_OFS
-    description: DMA offset length for Endpoint 7.
-    byte_offset: 410
-    bit_size: 16
-    fieldset: UEP7_RX_DMA_OFS
-  - name: UEP7_RX_DMA
-    description: DMA start address for Endpoint 7.
-    byte_offset: 412
-    fieldset: UEP7_RX_DMA
+    block: EP_RX
 block/USBSS_HOST:
   extends: USBSS
   description: USBSS in host mode. UH_* / HOST_* registers. Offsets overlap with USBSS_DEVICE.
@@ -983,6 +325,290 @@ block/USBSS_HOST:
     byte_offset: 166
     bit_size: 16
     fieldset: HOST_RX_FC_STATUS
+fieldset/EP_RX_CFG:
+  description: Endpoint n receive configuration register.
+  bit_size: 8
+  fields:
+  - name: ISO_MODE
+    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
+    bit_offset: 0
+    bit_size: 1
+  - name: SEQ_AUTO
+    description: '1: software cannot write SEQ_NUM, hardware maintains it. 0: software may write SEQ_NUM.'
+    bit_offset: 1
+    bit_size: 1
+  - name: ERDY_AUTO
+    description: ERDY automatic mode, the hardware sends ERDY without software control. The RM recommends clearing this bit on a synchronous endpoint.
+    bit_offset: 2
+    bit_size: 1
+  - name: EOB_MODE
+    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
+    bit_offset: 3
+    bit_size: 1
+  - name: TOUT_MODE
+    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
+    bit_offset: 4
+    bit_size: 1
+  - name: FIFO_CFG
+    description: Access offset address 0xC~0xF, and the operation object.
+    bit_offset: 5
+    bit_size: 1
+  - name: FIFO_MODE
+    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHAIN_AUTO
+    description: CHAIN automatically switches modes, and this mode is recommended.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_RX_CHAIN_CR:
+  description: Endpoint n receive CHAIN control register.
+  bit_size: 8
+  fields:
+  - name: RET_SEL
+    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: FORCE_RET
+    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: CUR_CFG
+    description: The chain serial number of the current configuration.
+    bit_offset: 4
+    bit_size: 2
+  - name: CUR_USE
+    description: The CHAIN serial number currently in use.
+    bit_offset: 6
+    bit_size: 2
+fieldset/EP_RX_CHAIN_LEN:
+  description: Endpoint n CHAIN receive packet length.
+  bit_size: 16
+  fields:
+  - name: LEN
+    description: The length of the last packet received by the CHAIN.
+    bit_offset: 0
+    bit_size: 11
+fieldset/EP_RX_CHAIN_ST:
+  description: Endpoint n receive CHAIN status register.
+  bit_size: 8
+  fields:
+  - name: CHAIN_NO
+    description: The serial number of the CHAIN that is currently interrupting.
+    bit_offset: 0
+    bit_size: 2
+  - name: DPH_PP
+    description: The status of the PP bits in the currently received DPH.
+    bit_offset: 2
+    bit_size: 1
+  - name: NUMP_EMPTY
+    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
+    bit_offset: 3
+    bit_size: 1
+  - name: LPF_FLAG
+    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
+    bit_offset: 5
+    bit_size: 1
+  - name: CHAIN_IF
+    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHAIN_EN
+    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_RX_CR:
+  description: Endpoint n receive control register.
+  bit_size: 8
+  fields:
+  - name: ERDY_NUMP
+    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
+    bit_offset: 0
+    bit_size: 5
+  - name: CHAIN_CLR
+    description: Write 1 clears all CHAIN configuration values and statuses.
+    bit_offset: 5
+    bit_size: 1
+  - name: CLR
+    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
+    bit_offset: 6
+    bit_size: 1
+  - name: HALT
+    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_RX_SEQ:
+  description: Endpoint n receive sequence number register.
+  bit_size: 8
+  fields:
+  - name: SEQ_NUM
+    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
+    bit_offset: 0
+    bit_size: 5
+fieldset/EP_RX_ST:
+  description: Endpoint n receive status register.
+  bit_size: 8
+  fields:
+  - name: CHAIN_EN
+    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
+    bit_offset: 0
+    bit_size: 4
+  - name: CHAIN_RES
+    description: CHAIN response state, corresponding to 4 separate CHAINS.
+    bit_offset: 4
+    bit_size: 1
+  - name: ERDY_REQ
+    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: FC_ST
+    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
+    bit_offset: 6
+    bit_size: 1
+  - name: INT_FLAG
+    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_TX_CFG:
+  description: Endpoint n transmit configuration register.
+  bit_size: 8
+  fields:
+  - name: ISO_MODE
+    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
+    bit_offset: 0
+    bit_size: 1
+  - name: SEQ_AUTO
+    description: '1: software cannot write SEQ_NUM, hardware maintains it. 0: software may write SEQ_NUM.'
+    bit_offset: 1
+    bit_size: 1
+  - name: ERDY_AUTO
+    description: ERDY automatic mode, the hardware sends ERDY without software control. The RM recommends clearing this bit on a synchronous endpoint.
+    bit_offset: 2
+    bit_size: 1
+  - name: EOB_MODE
+    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
+    bit_offset: 3
+    bit_size: 1
+  - name: FIFO_CFG
+    description: Access offset address 0xC~0xF, and the operation object.
+    bit_offset: 5
+    bit_size: 1
+  - name: FIFO_MODE
+    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHAIN_AUTO
+    description: CHAIN automatically switches modes, and this mode is recommended.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_TX_CHAIN_CR:
+  description: Endpoint n transmit CHAIN control register.
+  bit_size: 8
+  fields:
+  - name: RET_SEL
+    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: FORCE_RET
+    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: CUR_CFG
+    description: The chain serial number of the current configuration.
+    bit_offset: 4
+    bit_size: 2
+  - name: CUR_USE
+    description: The CHAIN serial number currently in use.
+    bit_offset: 6
+    bit_size: 2
+fieldset/EP_TX_CHAIN_LEN:
+  description: Endpoint n CHAIN transmit packet length.
+  bit_size: 16
+  fields:
+  - name: LEN
+    description: The length of the last packet sent by the CHAIN.
+    bit_offset: 0
+    bit_size: 11
+fieldset/EP_TX_CHAIN_ST:
+  description: Endpoint n transmit CHAIN status register.
+  bit_size: 8
+  fields:
+  - name: CHAIN_NO
+    description: The serial number of the CHAIN that is currently interrupting.
+    bit_offset: 0
+    bit_size: 2
+  - name: DPH_PP
+    description: The status of the PP bits in the currently received DPH.
+    bit_offset: 2
+    bit_size: 1
+  - name: NUMP_EMPTY
+    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
+    bit_offset: 3
+    bit_size: 1
+  - name: EOB_LPF
+    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
+    bit_offset: 5
+    bit_size: 1
+  - name: CHAIN_IF
+    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
+    bit_offset: 6
+    bit_size: 1
+  - name: CHAIN_EN
+    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_TX_CR:
+  description: Endpoint n transmit control register.
+  bit_size: 8
+  fields:
+  - name: ERDY_NUMP
+    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
+    bit_offset: 0
+    bit_size: 5
+  - name: CHAIN_CLR
+    description: Write 1 clears all CHAIN configuration values and statuses.
+    bit_offset: 5
+    bit_size: 1
+  - name: CLR
+    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
+    bit_offset: 6
+    bit_size: 1
+  - name: HALT
+    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EP_TX_SEQ:
+  description: Endpoint n transmit sequence number register.
+  bit_size: 8
+  fields:
+  - name: SEQ_NUM
+    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
+    bit_offset: 0
+    bit_size: 5
+fieldset/EP_TX_ST:
+  description: Endpoint n transmit status register.
+  bit_size: 8
+  fields:
+  - name: CHAIN_EN
+    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
+    bit_offset: 0
+    bit_size: 4
+  - name: CHAIN_RES
+    description: CHAIN response state, corresponding to 4 separate CHAINS.
+    bit_offset: 4
+    bit_size: 1
+  - name: ERDY_REQ
+    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: FC_ST
+    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
+    bit_offset: 6
+    bit_size: 1
+  - name: INT_FLAG
+    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
+    bit_offset: 7
+    bit_size: 1
 fieldset/HOST_RX_FC_STATUS:
   description: The host endpoint receives the flow control register.
   bit_size: 16
@@ -1489,48 +1115,6 @@ fieldset/LINK_LMP_PORT_CAP:
     description: A valid PORT_CAP-LMP is received, and the protocol stipulates that. the two LINK parties exchange PORT_CAP-LMP within 20 years after entering the U0 state.
     bit_offset: 31
     bit_size: 1
-fieldset/LINK_LMP_RX_DATA0:
-  description: LMP receives data 0 register.
-  fields:
-  - name: LINK_LMP_RX_DATA0
-    description: Once the LMP is received, the HP data is stored in this register [31:0].
-    bit_offset: 0
-    bit_size: 32
-fieldset/LINK_LMP_RX_DATA1:
-  description: LMP receives data 1 register.
-  fields:
-  - name: LINK_LMP_RX_DATA1
-    description: Once the LMP is received, the HP data is stored in this register [63:32].
-    bit_offset: 0
-    bit_size: 32
-fieldset/LINK_LMP_RX_DATA2:
-  description: LMP receives data 2 register.
-  fields:
-  - name: LINK_LMP_RX_DATA1
-    description: Once the LMP is received, the HP data is stored in this register [95:64].
-    bit_offset: 0
-    bit_size: 32
-fieldset/LINK_LMP_TX_DATA0:
-  description: USB Custom HP Data 0 Register.
-  fields:
-  - name: LINK_LMP_TX_DATA0
-    description: The data of the user-defined HP is sent [31:0].
-    bit_offset: 0
-    bit_size: 32
-fieldset/LINK_LMP_TX_DATA1:
-  description: USB Custom HP Data 1 Register.
-  fields:
-  - name: LINK_LMP_TX_DATA1
-    description: The data of the user-defined HP is sent [63:32].
-    bit_offset: 0
-    bit_size: 32
-fieldset/LINK_LMP_TX_DATA2:
-  description: USB Custom HP Data 2 Register.
-  fields:
-  - name: LINK_LMP_TX_DATA2
-    description: The data of the user-defined HP is sent [95:64].
-    bit_offset: 0
-    bit_size: 32
 fieldset/LINK_LPM_CR:
   description: Link Power Management Registers.
   bit_size: 16
@@ -1725,41 +1309,6 @@ fieldset/STATUS:
     description: A reply TP is received from the device back.
     bit_offset: 30
     bit_size: 2
-fieldset/TP_RX_DATA0:
-  description: DEV_NOTIF-TP Data 0 Register.
-  fields:
-  - name: USB3_NOTIF_DATA0
-    description: After the DEV_NOTIF-TP is received, the HP data is stored in this register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/TP_RX_DATA1:
-  description: DEV_NOTIF-TP Data 1 Register.
-  fields:
-  - name: USB3_NOTIF_DATA1
-    description: After the DEV_NOTIF-TP is received, the HP data is stored in this register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/TP_RX_DATA2:
-  description: DEV_NOTIF-TP Data 2 Register.
-  fields:
-  - name: USB3_NOTIF_DATA2
-    description: After the DEV_NOTIF-TP is received, the HP data is stored in this register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/U3EP0_RX_DMA:
-  description: DMA start address for endpoint 0 receiving.
-  fields:
-  - name: U3EP0_RX_DMA
-    description: The start address of the endpoint 0 receiving buffer.
-    bit_offset: 0
-    bit_size: 32
-fieldset/U3EP0_TX_DMA:
-  description: DMA start address for endpoint 0 sending.
-  fields:
-  - name: U3EP0_TX_DMA
-    description: The start address of the endpoint 0 sending buffer.
-    bit_offset: 0
-    bit_size: 32
 fieldset/UEP0_RX_CTRL:
   description: Endpoint 0 receives control registers.
   fields:
@@ -1818,2444 +1367,28 @@ fieldset/UEP0_TX_CTRL:
     description: The upload transaction is interrupted, the software writes 0 to zero, and the hardware sets 1.
     bit_offset: 31
     bit_size: 1
-fieldset/UEP1_RX_CFG:
-  description: Endpoint 1 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_RX_CHAIN_CR:
-  description: Endpoint 1 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP1_RX_CHAIN_LEN:
-  description: Endpoint 1 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP1_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 1 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP1_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by endpoint 1.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP1_RX_CHAIN_ST:
-  description: Endpoint 1 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_RX_CR:
-  description: Endpoint 1 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_RX_DMA:
-  description: DMA start address for endpoint 1.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP1_RX_DMA_OFS:
-  description: DMA offset length for endpoint 1.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP1_RX_SEQ:
-  description: Endpoint 1 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP1_RX_ST:
-  description: Endpoint 1 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_TX_CFG:
-  description: Endpoint 1 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_TX_CHAIN_CR:
-  description: Endpoint 1 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP1_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by endpoint 1.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP1_TX_CHAIN_LEN:
-  description: Endpoint 1 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP1_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by endpoint n.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP1_TX_CHAIN_ST:
-  description: Endpoint 1 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_TX_CR:
-  description: Endpoint 1 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_TX_DMA:
-  description: DMA start address for endpoint 1.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP1_TX_DMA_OFS:
-  description: DMA offset length for endpoint 1.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP1_TX_SEQ:
-  description: Endpoint 1 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP1_TX_ST:
-  description: Endpoint 1 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_RX_CFG:
-  description: Endpoint 2 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_RX_CHAIN_CR:
-  description: Endpoint 2 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP2_RX_CHAIN_LEN:
-  description: Endpoint 2 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP2_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 2 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP2_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by endpoint 2.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP2_RX_CHAIN_ST:
-  description: Endpoint 2 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_RX_CR:
-  description: Endpoint 2 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_RX_DMA:
-  description: DMA start address for Endpoint 2.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP2_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 2.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP2_RX_SEQ:
-  description: Endpoint 2 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP2_RX_ST:
-  description: Endpoint 2 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_TX_CFG:
-  description: Endpoint 2 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_TX_CHAIN_CR:
-  description: Endpoint 2 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP2_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by endpoint 2.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP2_TX_CHAIN_LEN:
-  description: Endpoint 2 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP2_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by endpoint 2.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP2_TX_CHAIN_ST:
-  description: Endpoint 2 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_TX_CR:
-  description: Endpoint 2 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_TX_DMA:
-  description: DMA start address for endpoint 2.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP2_TX_DMA_OFS:
-  description: DMA offset length for endpoint 2.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP2_TX_SEQ:
-  description: Endpoint 2 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP2_TX_ST:
-  description: Endpoint 2 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_RX_CFG:
-  description: Endpoint 3 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_RX_CHAIN_CR:
-  description: Endpoint 3 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP3_RX_CHAIN_LEN:
-  description: Endpoint 3 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP3_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 3 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP3_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by Endpoint 3.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP3_RX_CHAIN_ST:
-  description: Endpoint 3 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_RX_CR:
-  description: Endpoint 3 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_RX_DMA:
-  description: DMA start address for Endpoint 3.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP3_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 3.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP3_RX_SEQ:
-  description: Endpoint 3 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP3_RX_ST:
-  description: Endpoint 3 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_TX_CFG:
-  description: Endpoint 3 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_TX_CHAIN_CR:
-  description: Endpoint 3 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP3_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by endpoint 3.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP3_TX_CHAIN_LEN:
-  description: Endpoint 3 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP3_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by endpoint 3.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP3_TX_CHAIN_ST:
-  description: Endpoint 3 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_TX_CR:
-  description: Endpoint 3 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_TX_DMA:
-  description: DMA start address for endpoint 3.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP3_TX_DMA_OFS:
-  description: DMA offset length for endpoint 3.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP3_TX_SEQ:
-  description: Endpoint 3 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP3_TX_ST:
-  description: Endpoint 3 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_RX_CFG:
-  description: Endpoint 4 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_RX_CHAIN_CR:
-  description: Endpoint 4 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP4_RX_CHAIN_LEN:
-  description: Endpoint 4 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP4_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 4 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP4_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by Endpoint 4.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP4_RX_CHAIN_ST:
-  description: Endpoint 4 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_RX_CR:
-  description: Endpoint 4 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_RX_DMA:
-  description: DMA start address for Endpoint 4.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP4_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 4.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP4_RX_SEQ:
-  description: Endpoint 4 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP4_RX_ST:
-  description: Endpoint 4 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_TX_CFG:
-  description: Endpoint 4 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_TX_CHAIN_CR:
-  description: Endpoint 4 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP4_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by Endpoint 4.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP4_TX_CHAIN_LEN:
-  description: Endpoint 4 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP4_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by Endpoint 4.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP4_TX_CHAIN_ST:
-  description: Endpoint 4 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_TX_CR:
-  description: Endpoint 4 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_TX_DMA:
-  description: DMA start address for Endpoint 4.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP4_TX_DMA_OFS:
-  description: DMA offset length for Endpoint 4.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP4_TX_SEQ:
-  description: Endpoint 4 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP4_TX_ST:
-  description: Endpoint 4 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_RX_CFG:
-  description: Endpoint 5 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_RX_CHAIN_CR:
-  description: Endpoint 5 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP5_RX_CHAIN_LEN:
-  description: Endpoint 5 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP5_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 5 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP5_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by Endpoint 5.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP5_RX_CHAIN_ST:
-  description: Endpoint 5 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_RX_CR:
-  description: Endpoint 5 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_RX_DMA:
-  description: DMA start address for Endpoint 5.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP5_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 5.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP5_RX_SEQ:
-  description: Endpoint 5 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP5_RX_ST:
-  description: Endpoint 5 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_TX_CFG:
-  description: Endpoint 5 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_TX_CHAIN_CR:
-  description: Endpoint 5 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP5_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by Endpoint 5.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP5_TX_CHAIN_LEN:
-  description: Endpoint 5 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP5_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by Endpoint 5.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP5_TX_CHAIN_ST:
-  description: Endpoint 5 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_TX_CR:
-  description: Endpoint 5 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_TX_DMA:
-  description: DMA start address for Endpoint 5.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP5_TX_DMA_OFS:
-  description: DMA offset length for Endpoint 5.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP5_TX_SEQ:
-  description: Endpoint 5 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP5_TX_ST:
-  description: Endpoint 5 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_CFG:
-  description: Endpoint 6 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_CHAIN_CR:
-  description: Endpoint 6 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP6_RX_CHAIN_LEN:
-  description: Endpoint 6 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP6_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 6 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP6_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by Endpoint 6.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP6_RX_CHAIN_ST:
-  description: Endpoint 6 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_CR:
-  description: Endpoint 6 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_DMA:
-  description: DMA start address for Endpoint 6.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP6_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 6.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP6_RX_SEQ:
-  description: Endpoint 6 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP6_RX_ST:
-  description: Endpoint 6 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_TX_CFG:
-  description: Endpoint 6 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_TX_CHAIN_CR:
-  description: Endpoint 6 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP6_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by Endpoint 6.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP6_TX_CHAIN_LEN:
-  description: Endpoint 6 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP6_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by Endpoint 6.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP6_TX_CHAIN_ST:
-  description: Endpoint 6 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_TX_CR:
-  description: Endpoint 6 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_TX_DMA:
-  description: DMA start address for Endpoint 6.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP6_TX_DMA_OFS:
-  description: DMA offset length for Endpoint 6.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP6_TX_SEQ:
-  description: Endpoint 6 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP6_TX_ST:
-  description: Endpoint 6 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_RX_CFG:
-  description: Endpoint 7 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_RX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_RX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_RX_CHAIN_CR:
-  description: Endpoint 7 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: EP_RX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP7_RX_CHAIN_LEN:
-  description: Endpoint 7 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: EP_RX_CHAIN_RX_LEN
-    description: The length of the currently completed CHAIN to the last packet.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP7_RX_CHAIN_MAX_NUMP:
-  description: Number of NUMPs that Endpoint 7 can receive.
-  bit_size: 8
-  fields:
-  - name: RX_CHAIN_MAX_NUMP
-    description: The number of DPP packets that can be received by the CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP7_RX_CHAIN_NUMP:
-  description: Number of NUMPs has been received by Endpoint 7.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that has received.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP7_RX_CHAIN_ST:
-  description: Endpoint 7 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: EP_RX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_RX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_RX_LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_RX_CR:
-  description: Endpoint 7 control register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_RX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_RX_DMA:
-  description: DMA start address for Endpoint 7.
-  fields:
-  - name: CHAIN_RX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to receive data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP7_RX_DMA_OFS:
-  description: DMA offset length for Endpoint 7.
-  bit_size: 16
-  fields:
-  - name: CHAIN_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP7_RX_SEQ:
-  description: Endpoint 7 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: EP_RX_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP7_RX_ST:
-  description: Endpoint 7 status register.
-  bit_size: 8
-  fields:
-  - name: ER_RX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: EP_RX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: EP_RX_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_RX_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_RX_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_TX_CFG:
-  description: Endpoint 7 Configuration Register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ISO_MODE
-    description: A value of 1 indicates that the current endpoint is a synchronous endpoint.
-    bit_offset: 0
-    bit_size: 1
-  - name: EP_TX_SEQ_AUTO
-    description: '1: It is forbidden to write R16_EPn_ST->EP_SEQ_NUM software;. 0: allows the software to write R16_EPn_ST->EP_SEQ_NUM.'
-    bit_offset: 1
-    bit_size: 1
-  - name: EP_TX_ERDY_AUTO
-    description: ERDY automatic mode, the hardware will send ERDY,. no software control required; It is recommended that the synchronization endpoint zero out this bit.
-    bit_offset: 2
-    bit_size: 1
-  - name: EP_TX_EOB_MODE
-    description: If a short packet is sent, EOB/LPF=0 in ACK-TP;If a short packet is sent, EOB/LPF=1 in ACK-TP.
-    bit_offset: 3
-    bit_size: 1
-  - name: EP_TX_FIFO_CFG
-    description: Access offset address 0xC~0xF, and the operation object.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_FIFO_MODE
-    description: If the bit is 1, the current endpoint uses FIFO mode,. and the start and end addresses of the FIFO should be configured before the bit is 1.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_CHAIN_AUTO
-    description: CHAIN automatically switches modes, and this mode is recommended.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_TX_CHAIN_CR:
-  description: Endpoint 7 CHAIN control register.
-  bit_size: 8
-  fields:
-  - name: TX_RET_SEL
-    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN status and configuration.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_FORCE_RET
-    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_CUR_CFG
-    description: The chain serial number of the current configuration.
-    bit_offset: 4
-    bit_size: 2
-  - name: TX_CUR_USE
-    description: The CHAIN serial number currently in use.
-    bit_offset: 6
-    bit_size: 2
-fieldset/UEP7_TX_CHAIN_EXP_NUMP:
-  description: Number of NUMPs expected to be sent by Endpoint 7.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EXP_NUMP
-    description: The number of DPP packets that can be sent by the currently completed CHAIN.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP7_TX_CHAIN_LEN:
-  description: Endpoint 7 CHAIN sends the last packet length.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_LEN
-    description: The length of the last packet sent by the CHAIN.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP7_TX_CHAIN_NUMP:
-  description: Number of NUMPs has been sent by Endpoint 7.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NUMP
-    description: The number of DPP packets that have been transmitted.
-    bit_offset: 0
-    bit_size: 8
-fieldset/UEP7_TX_CHAIN_ST:
-  description: Endpoint 7 CHAIN state register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_NO
-    description: The serial number of the CHAIN that is currently interrupting.
-    bit_offset: 0
-    bit_size: 2
-  - name: TX_DPH_PP
-    description: The status of the PP bits in the currently received DPH.
-    bit_offset: 2
-    bit_size: 1
-  - name: TX_NUMP_EMPTY
-    description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
-    bit_offset: 3
-    bit_size: 1
-  - name: TX_EOB_LPF
-    description: EOB/LPF bits in the last packet of DPH in the current CHAIN.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_CHAIN_IF
-    description: This bit is only written, and 1 is written to release the current CHAIN_IF.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_CHAIN_EN
-    description: The currently used CHAIN enables the automatic hardware setting of 1 after the UEP_CHAIN_NUMP register is configured,. and the CHAIN is automatically cleared to zero after the transmission is completed.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_TX_CR:
-  description: Endpoint 7 control register.
-  bit_size: 8
-  fields:
-  - name: EP_TX_ERDY_NUMP
-    description: The nump field of ERDY-TP is sent by the hardware,. and the value is generally set to the number of supported bursts.  For example, if you support 16 bursts, the value of this field is 16.
-    bit_offset: 0
-    bit_size: 5
-  - name: EP_TX_CHAIN_CLR
-    description: Write 1 clears all CHAIN configuration values and statuses.
-    bit_offset: 5
-    bit_size: 1
-  - name: EP_TX_CLR
-    description: Write 1 clears all configuration values and status of the endpoint, except for UEP_CFG.
-    bit_offset: 6
-    bit_size: 1
-  - name: EP_TX_HALT
-    description: Endpoint Stop, High Validity, Endpoint Stop Answering STALL to DPH.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_TX_DMA:
-  description: DMA start address for Endpoint 7.
-  fields:
-  - name: CHAIN_TX_DMA
-    description: Normal mode:The DMA start address of the CHAIN to send data.. FIFO mode:16~23 bits of the FIFO start address in SRAM;The FIFO end address is 16~23 bits of the mapped address in SRAM.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP7_TX_DMA_OFS:
-  description: DMA offset length for Endpoint 7.
-  bit_size: 16
-  fields:
-  - name: CHAIN_TX_DMA_OFS
-    description: The offset address of the DPP in that CHAIN.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP7_TX_SEQ:
-  description: Endpoint 7 Serial Number Register.
-  bit_size: 8
-  fields:
-  - name: TX_EP_SEQ_NUM
-    description: The current serial number of the endpoint,. writable in non-SEQ_AUTO mode,  read-only in SEQ_AUTO mode.
-    bit_offset: 0
-    bit_size: 5
-fieldset/UEP7_TX_ST:
-  description: Endpoint 7 status register.
-  bit_size: 8
-  fields:
-  - name: TX_CHAIN_EN
-    description: The CHAIN enabled state, which corresponds to 4 independent CHAINS.
-    bit_offset: 0
-    bit_size: 4
-  - name: TX_CHAIN_RES
-    description: CHAIN response state, corresponding to 4 separate CHAINS.
-    bit_offset: 4
-    bit_size: 1
-  - name: TX_EP_ERDY_REQ
-    description: Indicates that the ERDY is currently being sent;. Writing 1 to that bit will send ERDY, which is used in non-ERDY_AUTO mode.
-    bit_offset: 5
-    bit_size: 1
-  - name: TX_EP_FC_ST
-    description: The endpoint is in the current throttling state, and write 1 is cleared to zero.
-    bit_offset: 6
-    bit_size: 1
-  - name: TX_EP_INT_FLAG
-    description: The current break flag for the endpoint, the bit is read-only,. and all CHAIN_IF are 0 if the bit is 0, otherwise it is 1.
-    bit_offset: 7
-    bit_size: 1
 fieldset/UEP_RX_EN:
   description: Endpoint Receive Enable Register.
   bit_size: 16
   fields:
   - name: EP_RX_EN
-    description: Endpoints 1~15 downpass enabled.
+    description: Endpoints 1~15 downpass enabled. Index 0 is endpoint 1.
     bit_offset: 1
-    bit_size: 15
+    bit_size: 1
+    array:
+      len: 15
+      stride: 1
 fieldset/UEP_TX_EN:
   description: Endpoint Sends Enable Register.
   bit_size: 16
   fields:
   - name: EP_TX_EN
-    description: Endpoints 1~15 upload enabled.
+    description: Endpoints 1~15 upload enabled. Index 0 is endpoint 1.
     bit_offset: 1
-    bit_size: 15
+    bit_size: 1
+    array:
+      len: 15
+      stride: 1
 fieldset/UH_RX_CTRL:
   description: Host receives control registers.
   fields:
@@ -4471,22 +1604,6 @@ fieldset/LINK_U3_EXIT_CFG:
   fields:
   - name: EXIT_CFG
     description: Undocumented configuration value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP0_TX_DMA_OFS:
-  description: Endpoint 0 transmit DMA offset.
-  bit_size: 32
-  fields:
-  - name: DMA_OFS
-    description: DMA offset value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/UEP0_RX_DMA_OFS:
-  description: Endpoint 0 receive DMA offset.
-  bit_size: 32
-  fields:
-  - name: DMA_OFS
-    description: DMA offset value.
     bit_offset: 0
     bit_size: 32
 fieldset/PHY_CFG_CR:
