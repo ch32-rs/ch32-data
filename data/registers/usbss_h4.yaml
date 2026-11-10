@@ -306,6 +306,11 @@ block/USBSS_HOST:
     description: Host Receive Address Offset Register.
     byte_offset: 152
     fieldset: UH_RX_DMA_OFS
+  - name: HOST_TX_NUMP
+    description: The host transmits the NUMP register.
+    byte_offset: 156
+    bit_size: 16
+    fieldset: HOST_TX_NUMP
   - name: HOST_RX_NUMP
     description: The host receives the NUMP register.
     byte_offset: 158
@@ -341,12 +346,12 @@ fieldset/EP_RX_CFG:
     description: ERDY automatic mode, the hardware sends ERDY without software control. The RM recommends clearing this bit on a synchronous endpoint.
     bit_offset: 2
     bit_size: 1
-  - name: EOB_MODE
-    description: This bit is 1, and when a short packet or DP(PP=0) is received,. clearing all CHAIN_EN will result in an NRDY response to the subsequent DPH;  Software reconfiguration required.
+  - name: NRDY_MODE
+    description: After a short packet or a DPH with PP=0, clear every CHAIN_EN, so that later DPHs get NRDY until software configures a CHAIN again. RB_EP_RX_NRDY_MODE in the RM; the EVT header still calls it USBSS_EP_RX_EOB_MODE.
     bit_offset: 3
     bit_size: 1
   - name: TOUT_MODE
-    description: This bit is 1, and when a continuous burst packet is received,. PP=1 and not a short packet is not received, and DPH is not received after the timeout, resulting in TOUT_IF interrupt.
+    description: After a burst packet with PP=1 that is not a short packet, raise the TOUT_IF interrupt when no DPH follows within the timeout.
     bit_offset: 4
     bit_size: 1
   - name: FIFO_CFG
@@ -405,8 +410,12 @@ fieldset/EP_RX_CHAIN_ST:
     description: IF THE NUMP IN THE CHAIN IS 0, THE POSITION IS 1.
     bit_offset: 3
     bit_size: 1
+  - name: ISO_PKT_ERR
+    description: Synchronous OUT endpoints only. The DPP just received has a CRC32 error.
+    bit_offset: 4
+    bit_size: 1
   - name: LPF_FLAG
-    description: Only the synchronous downhaul endpoint is used to currently receive the LPF status in the DPH.
+    description: Synchronous OUT endpoints only. LPF bit of the DPH just received.
     bit_offset: 5
     bit_size: 1
   - name: CHAIN_IF
@@ -670,6 +679,14 @@ fieldset/HOST_TX_FC_STATUS:
     array:
       len: 15
       stride: 1
+fieldset/HOST_TX_NUMP:
+  description: The host transmits the NUMP register.
+  bit_size: 16
+  fields:
+  - name: UH_TX_NUMP
+    description: The number of packets that the host expects to send; the hardware subtracts 1 for each packet it sends.
+    bit_offset: 0
+    bit_size: 8
 fieldset/ITP:
   description: Interval Registers for ITP packets in USB.
   fields:
@@ -728,7 +745,7 @@ fieldset/LINK_CFG:
     bit_offset: 7
     bit_size: 1
   - name: LINK_TX_DEEMPH
-    description: Transmitter de-emphasis control.
+    description: 'Transmitter de-emphasis control. 0: -6.0 dB; 1: -3.5 dB (reset value); 2: none; 3: reserved. The RM allows only 0 and 1 in normal operation; the device SDK writes 3.'
     bit_offset: 8
     bit_size: 2
   - name: LINK_CP78_SEL
@@ -743,7 +760,7 @@ fieldset/LINK_CFG:
     description: The LOOPBACK enable bit is allowed, which is highly active, and can be used with the LOOKBACK enable in TX/RX_TS_CFG [3],. both of which are valid before LINK can enter the LOOKBACK mode  (used to enable the data loopback and error counting of the LOOPBACK slave,  and the LOOPBACK master remains 0).
     bit_offset: 13
     bit_size: 1
-  - name: LINK_LOOKBACK_ACT
+  - name: LINK_LOOPBACK_ACT
     description: It is used in LOOPBACK mode for the LOOPBACK master to control the pattern transmission (the LOOPBACK slave keeps 0),. and the ACT is a high-level signal that lasts for a period of time.
     bit_offset: 14
     bit_size: 1
@@ -756,16 +773,28 @@ fieldset/LINK_CFG:
     bit_offset: 16
     bit_size: 1
   - name: LINK_U2_ALLOW
-    description: High validity, after receiving the LGO_U2, the response LXU allows to enter the U2 state,. otherwise after receiving the LGO_U2, the response LXU refuses to enter the U2 state.
+    description: High validity, after receiving the LGO_U2, the response LAU allows to enter the U2 state,. otherwise after receiving the LGO_U2, the response LXU refuses to enter the U2 state.
     bit_offset: 17
     bit_size: 1
+  - name: LINK_SKP_MODE
+    description: 'SKP discard control for descrambling. 0: a byte pair is not descrambled when its low byte is SKP; 1 or 3: when both of its bytes are SKP; 2: when either of its bytes is SKP.'
+    bit_offset: 18
+    bit_size: 2
   - name: LINK_U1_PING_EN
     description: Send PING_FPFS under U1 to enable.
     bit_offset: 20
     bit_size: 1
   - name: LINK_TOUT_MODE
-    description: SPEC configure.
+    description: 'Link timer values. 1: USB 3.2 (PM_LC_TIMER 4 us, PM_ENTRY_TIMER 8 us, PENDING_HP_TIMER 10 us); 0: USB 3.0 (3 us, 6 us, 3 us).'
     bit_offset: 21
+    bit_size: 1
+  - name: LINK_FORCE_POLLING
+    description: Not in the RM, which marks bits 30:22 reserved. Defined by the EVT header; the SDK examples do not use it.
+    bit_offset: 22
+    bit_size: 1
+  - name: LINK_FORCE_RXTERM
+    description: Not in the RM, which marks bits 30:22 reserved. Defined by the EVT header; the SDK examples do not use it.
+    bit_offset: 23
     bit_size: 1
   - name: LINK_RESET
     description: LINK reset, including the reset state machine and all interrupt flags, is highly effective.
@@ -909,6 +938,10 @@ fieldset/LINK_INT_CTRL:
     description: BUF sends FIFO full interrupt enable.
     bit_offset: 17
     bit_size: 1
+  - name: LINK_IE_RX_SET_FC
+    description: EVT header name for bit 17, which the RM documents as LINK_IE_HPBUF_FULL. The device SDK enables it on chip revision 3 and later only.
+    bit_offset: 17
+    bit_size: 1
   - name: LINK_IE_COMPLIANCE
     description: The link enters the compliance test,. and the interrupt is enabled by the compatibility test or the physical layer conformance test.
     bit_offset: 18
@@ -969,7 +1002,7 @@ fieldset/LINK_INT_FLAG:
     bit_offset: 1
     bit_size: 1
   - name: LINK_IF_INACTIVE
-    description: LINK ENTERS THE SS.ACTIVE STATE INTERRUPT FLAG.
+    description: LINK ENTERS THE SS.INACTIVE STATE INTERRUPT FLAG.
     bit_offset: 2
     bit_size: 1
   - name: LINK_IF_DISABLE
@@ -1025,11 +1058,15 @@ fieldset/LINK_INT_FLAG:
     bit_offset: 15
     bit_size: 1
   - name: LINK_IF_HPBUF_EMPTY
-    description: he device receives the HOT RESET interrupt flag.
+    description: Header Packet buffer empty interrupt flag.
     bit_offset: 16
     bit_size: 1
   - name: LINK_IF_HPBUF_FULL
     description: Header Packet buffer full interrupt flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: LINK_IF_RX_SET_FC
+    description: EVT header name for bit 17, which the RM documents as LINK_IF_HPBUF_FULL. On chip revision 3 and later the device SDK takes it as a received Set Link Function LMP and then reads FORCE_PM in LINK_LMP_PORT_CAP.
     bit_offset: 17
     bit_size: 1
   - name: LINK_IF_COMPLIANCE
@@ -1077,7 +1114,7 @@ fieldset/LINK_INT_FLAG:
     bit_offset: 30
     bit_size: 1
   - name: LINK_IF_STATE_CHG
-    description: link_reset reset to 0.
+    description: Link state machine change flag. Write 1 to clear; LINK_RESET also clears it.
     bit_offset: 31
     bit_size: 1
 fieldset/LINK_ISO_DLY:
@@ -1107,12 +1144,16 @@ fieldset/LINK_LMP_PORT_CAP:
     description: '[24] Position 1, indicating that the supported device supports USB3.2 Gen1 (5Gbps).'
     bit_offset: 24
     bit_size: 6
+  - name: FORCE_PM
+    description: Force_LinkPM_Accept of the received Set Link Function LMP. Not in the RM, where bit 29 is part of LINK_SPEED. Defined by the EVT header; the device SDK reads it after LINK_IF_RX_SET_FC on chip revision 3 and later.
+    bit_offset: 29
+    bit_size: 1
   - name: LINK_LMP_TX_CAP_VLD
     description: PORT Capability configuration completion flag.
     bit_offset: 30
     bit_size: 1
   - name: LINK_LMP_RX_CAP_VLD
-    description: A valid PORT_CAP-LMP is received, and the protocol stipulates that. the two LINK parties exchange PORT_CAP-LMP within 20 years after entering the U0 state.
+    description: A valid PORT_CAP-LMP is received, and the protocol stipulates that. the two LINK parties exchange PORT_CAP-LMP within 20 microseconds after entering the U0 state.
     bit_offset: 31
     bit_size: 1
 fieldset/LINK_LPM_CR:
@@ -1503,11 +1544,15 @@ fieldset/USBSS_CTRL:
     bit_offset: 2
     bit_size: 1
   - name: DMA_MODE
-    description: When DPH is transmitted in bursts, the next packet of data status.
+    description: '1: do not prefetch the next packet of a burst into the FIFO; 0: prefetch it (reset value), which shortens the gap between the DPHs of a burst.'
     bit_offset: 3
     bit_size: 1
+  - name: DIR_ABORT
+    description: Not in the RM, which marks bit 4 reserved. Defined by the EVT header; the SDK examples do not use it.
+    bit_offset: 4
+    bit_size: 1
   - name: SETUP_FLOW
-    description: SETUP transaction throttling.
+    description: 'SETUP flow control. 1: the control endpoint enters flow control when a SETUP transaction arrives; 0: it does not.'
     bit_offset: 5
     bit_size: 1
   - name: ITP_EN
@@ -1519,12 +1564,16 @@ fieldset/USBSS_CTRL:
     bit_offset: 7
     bit_size: 1
   - name: REG_HP_PEND
-    description: Packet Pending control bit for sending TP/DP packets.
+    description: Packet Pending bit of the TPs and DPs sent. In a burst, bit 0 is the PP of the last packet and bit 1 the PP of the others; otherwise only bit 0 is used.
     bit_offset: 8
     bit_size: 2
   - name: TX_ERDY_MODE
-    description: Use in device mode.
+    description: 'Device mode. 1: no ERDY-TP is inserted between two DPHs; 0: an ERDY-TP may be inserted between two DPHs.'
     bit_offset: 14
+    bit_size: 1
+  - name: CHAIN_CONFLICT
+    description: Not in the RM, which marks bit 15 reserved. Defined by the EVT header; the SDK examples do not use it.
+    bit_offset: 15
     bit_size: 1
   - name: UIE_TRANSFER
     description: USB Transaction Completion Interrupt Enabled.
@@ -1563,7 +1612,7 @@ fieldset/USBSS_CTRL:
     bit_offset: 23
     bit_size: 1
   - name: DEV_ADDR
-    description: Host Mode.
+    description: 'Host mode: address of the device being accessed. Device mode: address of this device.'
     bit_offset: 24
     bit_size: 7
 fieldset/LINK_U1_WKUP_TMR:
