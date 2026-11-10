@@ -10,7 +10,7 @@ anyhow = "1.0.79"
 glob = "0.3.1"
 serde = { version = "1.0.157", features = ["derive"] }
 serde_yaml = "0.9.19"
-chiptool = { git = "https://github.com/ch32-rs/chiptool", rev = "1c198ae678ebd426751513f0deab6fbd6f8b8211" }
+chiptool = { git = "https://github.com/ch32-rs/chiptool", rev = "e8902440a6eee471a9b14b38ee1cd2e526d2c495" }
 serde_json = "1.0.94"
 ch32-data-serde = { version = "0.1.0", path = "../ch32-data-serde" }
 pretty_env_logger = "0.5.0"

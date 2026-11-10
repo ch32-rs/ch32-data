@@ -8,7 +8,7 @@ default-run = "ch32-metapac-gen"
 
 [dependencies]
 regex = "1.7.1"
-chiptool = { git = "https://github.com/ch32-rs/chiptool", rev = "305bd6ee3e57009ae93be2c81d6e94b9896a03b1" }
+chiptool = { git = "https://github.com/ch32-rs/chiptool", rev = "e8902440a6eee471a9b14b38ee1cd2e526d2c495" }
 serde = { version = "1.0.157", features = ["derive"] }
 serde_json = "1.0.94"
 proc-macro2 = "1.0.52"
