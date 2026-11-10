@@ -1,0 +1,18 @@
+- name: ADC3
+  address: 1073822720
+  registers:
+    kind: adc
+    version: x315
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: HB2PCENR
+      field: ADC3EN
+    reset:
+      register: HB2PRSTR
+      field: ADC3RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: ADC3

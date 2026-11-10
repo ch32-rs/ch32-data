@@ -1,0 +1,22 @@
+- name: USBSS
+  address: 1073971200
+  registers:
+    kind: usbss
+    version: x315
+    block: USBSS
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: USBSSPLLCLK
+    enable:
+      register: HBPCENR
+      field: USBSSEN
+    reset:
+      register: HBRSTR
+      field: USBSSRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USBSS
+  - signal: LINK
+    interrupt: USBSS_LINK
+  - signal: WAKEUP
+    interrupt: USBSS_WKUP

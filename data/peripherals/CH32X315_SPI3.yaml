@@ -1,0 +1,18 @@
+- name: SPI3
+  address: 1073757184
+  registers:
+    kind: spi
+    version: v0
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: SPI3EN
+    reset:
+      register: HB1PRSTR
+      field: SPI3RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: SPI3

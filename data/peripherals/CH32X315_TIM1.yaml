@@ -1,0 +1,26 @@
+- name: TIM1
+  address: 1073818624
+  registers:
+    kind: timer
+    version: x315
+    block: ADTM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: TIM1EN
+    reset:
+      register: HB2PRSTR
+      field: TIM1RST
+  interrupts:
+  - signal: BRK
+    interrupt: TIM1_BRK
+  - signal: UP
+    interrupt: TIM1_UP
+  - signal: TRG
+    interrupt: TIM1_TRG_COM
+  - signal: COM
+    interrupt: TIM1_TRG_COM
+  - signal: CC
+    interrupt: TIM1_CC
