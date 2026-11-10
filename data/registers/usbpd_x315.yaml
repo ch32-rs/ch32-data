@@ -48,6 +48,7 @@ block/USBPD:
       len: 2
       stride: 2
     fieldset: PORT_CC
+    bit_size: 16
   - name: DMA
     description: PD buffer start address register.
     byte_offset: 16
@@ -59,6 +60,7 @@ fieldset/BMC_BYTE_CNT:
     description: BMC_BYTE_CNT value.
     bit_offset: 0
     bit_size: 9
+  bit_size: 16
 fieldset/BMC_CLK_CNT:
   description: BMC sampling clock counter.
   fields:
@@ -66,6 +68,7 @@ fieldset/BMC_CLK_CNT:
     description: R/T counter.
     bit_offset: 0
     bit_size: 10
+  bit_size: 16
 fieldset/BMC_TX_SZ:
   description: PD send length register.
   fields:
@@ -73,6 +76,7 @@ fieldset/BMC_TX_SZ:
     description: BMC_TX_SZ value.
     bit_offset: 0
     bit_size: 9
+  bit_size: 16
 fieldset/CONFIG:
   description: PD interrupt enable register.
   fields:
@@ -136,6 +140,7 @@ fieldset/CONFIG:
     description: transfer complete interrupt register.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/CONTROL:
   description: PD Send and receive enable register.
   fields:
@@ -163,6 +168,7 @@ fieldset/CONTROL:
     description: BMC_BYTE_HI value.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/DATA_BUF:
   description: DMA cache data register.
   fields:
@@ -170,6 +176,7 @@ fieldset/DATA_BUF:
     description: DATA_BUF value.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/DMA:
   description: PD buffer start address register.
   fields:
@@ -208,6 +215,7 @@ fieldset/STATUS:
     description: IF_TX_END value.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/TX_SEL:
   description: SOP port selection register.
   fields:
@@ -227,6 +235,7 @@ fieldset/TX_SEL:
     description: TX_SEL4 value.
     bit_offset: 6
     bit_size: 2
+  bit_size: 8
 fieldset/PORT_CC:
   description: CC port control.
   fields:
@@ -245,3 +254,4 @@ fieldset/PORT_CC:
   - name: CC_CE
     bit_offset: 5
     bit_size: 3
+  bit_size: 16

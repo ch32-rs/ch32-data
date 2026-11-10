@@ -126,6 +126,12 @@ block/USBSS:
     description: Receive Buffer Address Register.
     byte_offset: 144
     fieldset: UEP0_RX_DMA
+  - name: UEP0_TX_DMA_OFS
+    description: endpoint 0 transmit DMA offset.
+    byte_offset: 148
+  - name: UEP0_RX_DMA_OFS
+    description: endpoint 0 receive DMA offset.
+    byte_offset: 152
   - name: UEP_TX_CFG
     description: Endpoint 1 configures the registers.
     byte_offset: 192
@@ -133,6 +139,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CFG
+    bit_size: 8
   - name: UEP_TX_CR
     description: Endpoint 1 Control Register.
     byte_offset: 193
@@ -140,6 +147,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CR
+    bit_size: 8
   - name: UEP_TX_SEQ
     description: Endpoint 1 serial number register.
     byte_offset: 194
@@ -147,6 +155,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_SEQ
+    bit_size: 8
   - name: UEP_TX_ST
     description: Endpoint 1 state register.
     byte_offset: 195
@@ -154,6 +163,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_ST
+    bit_size: 8
   - name: UEP_TX_CHAIN_CR
     description: Endpoint 1 CHAIN control register.
     byte_offset: 196
@@ -161,6 +171,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CHAIN_CR
+    bit_size: 8
   - name: UEP_TX_CHAIN_ST
     description: Endpoint 1 CHAIN status register.
     byte_offset: 197
@@ -168,6 +179,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CHAIN_ST
+    bit_size: 8
   - name: UEP_TX_CHAIN_LEN
     description: Endpoint 1 CHAIN sends the last packet length.
     byte_offset: 198
@@ -175,6 +187,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CHAIN_LEN
+    bit_size: 16
   - name: UEP_TX_CHAIN_EXP_NUMP
     description: Number of NUMPs expected to be sent by endpoint 1.
     byte_offset: 200
@@ -182,6 +195,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CHAIN_EXP_NUMP
+    bit_size: 8
   - name: UEP_TX_CHAIN_NUMP
     description: Number of NUMPs sent by endpoint 1.
     byte_offset: 201
@@ -189,6 +203,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_CHAIN_NUMP
+    bit_size: 8
   - name: UEP_TX_DMA_OFS
     description: DMA offset length of endpoint 1.
     byte_offset: 202
@@ -196,6 +211,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_TX_DMA_OFS
+    bit_size: 16
   - name: UEP_TX_DMA
     description: DMA start address of endpoint 1.
     byte_offset: 204
@@ -210,6 +226,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CFG
+    bit_size: 8
   - name: UEP_RX_CR
     description: Endpoint 1 Control Register.
     byte_offset: 209
@@ -217,6 +234,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CR
+    bit_size: 8
   - name: UEP_RX_SEQ
     description: Endpoint 1 serial number register.
     byte_offset: 210
@@ -224,6 +242,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_SEQ
+    bit_size: 8
   - name: UEP_RX_ST
     description: Endpoint 1 state register.
     byte_offset: 211
@@ -231,6 +250,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_ST
+    bit_size: 8
   - name: UEP_RX_CHAIN_CR
     description: Endpoint 1 CHAIN control register.
     byte_offset: 212
@@ -238,6 +258,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CHAIN_CR
+    bit_size: 8
   - name: UEP_RX_CHAIN_ST
     description: Endpoint 1 CHAIN status register.
     byte_offset: 213
@@ -245,6 +266,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CHAIN_ST
+    bit_size: 8
   - name: UEP_RX_CHAIN_LEN
     description: The length of the last packet received by the endpoint 1 CHAIN.
     byte_offset: 214
@@ -252,6 +274,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CHAIN_LEN
+    bit_size: 16
   - name: UEP_RX_CHAIN_MAX_NUMP
     description: Number of NUMPs that endpoint 1 can receive.
     byte_offset: 216
@@ -259,6 +282,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CHAIN_MAX_NUMP
+    bit_size: 8
   - name: UEP_RX_CHAIN_NUMP
     description: Number of NUMPs received by endpoint 1.
     byte_offset: 217
@@ -266,6 +290,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_CHAIN_NUMP
+    bit_size: 8
   - name: UEP_RX_DMA_OFS
     description: DMA offset length of endpoint 1.
     byte_offset: 218
@@ -273,6 +298,7 @@ block/USBSS:
       len: 4
       stride: 32
     fieldset: UEP_RX_DMA_OFS
+    bit_size: 16
   - name: UEP_RX_DMA
     description: DMA start address of endpoint 1.
     byte_offset: 220
@@ -772,6 +798,7 @@ fieldset/LINK_ISO_DLY:
     description: The delay time for serial bit stream parsing to parallel data is 40ns by default,.  as the device writes the delay information to the register,   which is invalid by 3 bits lower (because the clock frequency is 125MHz, the delay time needs to be set to 8*n).
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/LINK_ITP_PRE:
   description: LINK ITP timeout mode register.
   fields:
@@ -779,6 +806,7 @@ fieldset/LINK_ITP_PRE:
     description: ITP Timeout Mode.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/LINK_LMP_PORT_CAP:
   description: PORT_CAP Register.
   fields:
@@ -903,6 +931,7 @@ fieldset/LINK_LPM_CR:
     description: The channel type of the PHY layer is automatically selected.
     bit_offset: 13
     bit_size: 1
+  bit_size: 16
 fieldset/LINK_STATUS:
   description: LINK Status Register.
   fields:
@@ -981,6 +1010,7 @@ fieldset/LINK_U1_WKUP_FILTER:
     description: 'The effective duration of the LFPS received when U1 exits..  When the receiving LFPS reaches this time, the received U1 EXIT can be considered valid, and the transmitted LFPS_LAST is raised, and the handshake is successful, which defaults to 600ns.   U1_WKUP_FILTER [7]: the unit of time that controls U1_WKUP_FILTER [6:0].'
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/LINK_U2_INACT_TIMER:
   description: LINK U2 Inactivity Timeout Counter Threshold Register.
   fields:
@@ -988,6 +1018,7 @@ fieldset/LINK_U2_INACT_TIMER:
     description: Values of the inactivity timeout counter threshold for U2.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/LINK_U2_WKUP_FILTER:
   description: U2 Wake LFPS Effective Time Register.
   fields:
@@ -995,6 +1026,7 @@ fieldset/LINK_U2_WKUP_FILTER:
     description: When the received LFPS reaches this time, the transmitted LFPS_LAST is raised and the handshake is successful,.  and the received U2 EXIT is considered valid, the duration is (n)us, and the default is 2us.
     bit_offset: 0
     bit_size: 7
+  bit_size: 8
 fieldset/LINK_U3_WKUP_FILTER:
   description: U3 Wake LFPS Effective Time Register.
   fields:
@@ -1002,6 +1034,7 @@ fieldset/LINK_U3_WKUP_FILTER:
     description: When the received LFPS reaches this time, the transmitted LFPS_LAST is raised and the handshake is successful,.  and the received U3 EXIT is considered valid, the duration is (n)us, and the default is 100us.
     bit_offset: 0
     bit_size: 7
+  bit_size: 8
 fieldset/UEP0_RX_DMA:
   description: Receive Buffer Address Register.
   fields:
@@ -1120,6 +1153,7 @@ fieldset/UEP_TX_EN:
     description: Endpoint 1~15 Upload Enable.
     bit_offset: 1
     bit_size: 15
+  bit_size: 16
 fieldset/UEP_RX_EN:
   description: Endpoint Receive Enable Register.
   fields:
@@ -1127,6 +1161,7 @@ fieldset/UEP_RX_EN:
     description: Endpoint 1~15 downpass Enable.
     bit_offset: 1
     bit_size: 15
+  bit_size: 16
 fieldset/UEP_TX_CFG:
   description: Endpoint 1 configures the registers.
   fields:
@@ -1158,6 +1193,7 @@ fieldset/UEP_TX_CFG:
     description: CHAIN automatically switches mode, this mode is recommended.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_TX_CR:
   description: Endpoint 1 Control Register.
   fields:
@@ -1177,6 +1213,7 @@ fieldset/UEP_TX_CR:
     description: Endpoint stop, high efficiency, endpoint stop response STALL to DPH.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_TX_SEQ:
   description: Endpoint 1 serial number register.
   fields:
@@ -1184,6 +1221,7 @@ fieldset/UEP_TX_SEQ:
     description: The current serial number of the endpoint is writable in non-SEQ_AUTO mode and read-only in SEQ_AUTO mode.
     bit_offset: 0
     bit_size: 5
+  bit_size: 8
 fieldset/UEP_TX_ST:
   description: Endpoint 1 state register.
   fields:
@@ -1207,6 +1245,7 @@ fieldset/UEP_TX_ST:
     description: The endpoint is currently interrupted, the bit is read-only, and if all CHAIN_IF is 0, the bit is 0, otherwise it is 1.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_TX_CHAIN_CR:
   description: Endpoint 1 CHAIN control register.
   fields:
@@ -1226,6 +1265,7 @@ fieldset/UEP_TX_CHAIN_CR:
     description: The CHAIN serial number currently in use.
     bit_offset: 6
     bit_size: 2
+  bit_size: 8
 fieldset/UEP_TX_CHAIN_ST:
   description: Endpoint 1 CHAIN status register.
   fields:
@@ -1253,6 +1293,7 @@ fieldset/UEP_TX_CHAIN_ST:
     description: The currently used CHAIN enables the hardware to.  automatically set 1 after the UEP_CHAIN_NUMP register is configured, and the CHAIN is automatically cleared   after the transmission is completed.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_TX_CHAIN_LEN:
   description: Endpoint 1 CHAIN sends the last packet length.
   fields:
@@ -1260,6 +1301,7 @@ fieldset/UEP_TX_CHAIN_LEN:
     description: The CHAIN sends the length of the last packet.
     bit_offset: 0
     bit_size: 11
+  bit_size: 16
 fieldset/UEP_TX_CHAIN_EXP_NUMP:
   description: Number of NUMPs expected to be sent by endpoint 1.
   fields:
@@ -1267,6 +1309,7 @@ fieldset/UEP_TX_CHAIN_EXP_NUMP:
     description: The number of DPP packets that can be sent by the CHAIN that has been completed.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_TX_CHAIN_NUMP:
   description: Number of NUMPs sent by endpoint 1.
   fields:
@@ -1274,6 +1317,7 @@ fieldset/UEP_TX_CHAIN_NUMP:
     description: The number of DPP packets that have been transmitted; When the CHIN_EN is 0,.  the register is automatically cleared at the same time as the UEP_CHAIN_NUMP is written.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_TX_DMA_OFS:
   description: DMA offset length of endpoint 1.
   fields:
@@ -1281,6 +1325,7 @@ fieldset/UEP_TX_DMA_OFS:
     description: The offset address of the DPP in the CHAIN.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_TX_DMA:
   description: DMA start address of endpoint 1.
   fields:
@@ -1323,6 +1368,7 @@ fieldset/UEP_RX_CFG:
     description: CHAIN automatically switches mode, this mode is recommended.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_CR:
   description: Endpoint 1 Control Register.
   fields:
@@ -1342,6 +1388,7 @@ fieldset/UEP_RX_CR:
     description: Endpoint stop, high efficiency, endpoint stop response STALL to DPH.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_SEQ:
   description: Endpoint 1 serial number register.
   fields:
@@ -1349,6 +1396,7 @@ fieldset/UEP_RX_SEQ:
     description: The current serial number of the endpoint is writable in non-SEQ_AUTO mode and read-only in SEQ_AUTO mode.
     bit_offset: 0
     bit_size: 5
+  bit_size: 8
 fieldset/UEP_RX_ST:
   description: Endpoint 1 state register.
   fields:
@@ -1372,6 +1420,7 @@ fieldset/UEP_RX_ST:
     description: The endpoint is currently interrupted, the bit is read-only, and if all CHAIN_IF is 0, the bit is 0, otherwise it is 1.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_CHAIN_CR:
   description: Endpoint 1 CHAIN control register.
   fields:
@@ -1391,6 +1440,7 @@ fieldset/UEP_RX_CHAIN_CR:
     description: The CHAIN serial number currently in use.
     bit_offset: 6
     bit_size: 2
+  bit_size: 8
 fieldset/UEP_RX_CHAIN_ST:
   description: Endpoint 1 CHAIN status register.
   fields:
@@ -1422,6 +1472,7 @@ fieldset/UEP_RX_CHAIN_ST:
     description: The currently used CHAIN enables the hardware to.  automatically set 1 after the UEP_CHAIN_NUMP register is configured, and the CHAIN is automatically cleared   after the transmission is completed.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_CHAIN_LEN:
   description: The length of the last packet received by the endpoint 1 CHAIN.
   fields:
@@ -1429,6 +1480,7 @@ fieldset/UEP_RX_CHAIN_LEN:
     description: The currently completed CHAIN receives the length of the last package.
     bit_offset: 0
     bit_size: 11
+  bit_size: 16
 fieldset/UEP_RX_CHAIN_MAX_NUMP:
   description: Number of NUMPs that endpoint 1 can receive.
   fields:
@@ -1436,6 +1488,7 @@ fieldset/UEP_RX_CHAIN_MAX_NUMP:
     description: The number of DPP packets that the CHAIN can receive.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_RX_CHAIN_NUMP:
   description: Number of NUMPs received by endpoint 1.
   fields:
@@ -1443,6 +1496,7 @@ fieldset/UEP_RX_CHAIN_NUMP:
     description: The number of DPP packets that the CHAIN has received.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_RX_DMA_OFS:
   description: DMA offset length of endpoint 1.
   fields:
@@ -1450,6 +1504,7 @@ fieldset/UEP_RX_DMA_OFS:
     description: The offset address of the DPP in the CHAIN.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_RX_DMA:
   description: DMA start address of endpoint 1.
   fields:

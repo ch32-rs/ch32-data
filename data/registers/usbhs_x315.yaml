@@ -24,7 +24,7 @@ block/USB:
   - name: USB_WAKE_CTRL
     description: USB remote wake up register.
     byte_offset: 4
-    bit_size: 16
+    bit_size: 8
     fieldset: USB_WAKE_CTRL
   - name: USB_TEST_MODE
     description: USB test mode register.
@@ -149,6 +149,7 @@ block/USB:
       len: 7
       stride: 4
     fieldset: UEP_RX_LEN
+    bit_size: 16
   - name: UEP_R_SIZE
     description: endpoint 1-7 receive size register.
     byte_offset: 130
@@ -156,6 +157,7 @@ block/USB:
       len: 7
       stride: 4
     fieldset: UEP_R_SIZE
+    bit_size: 16
   - name: UEP0_T_LEN
     description: endpoint 0 send the length.
     byte_offset: 156
@@ -178,6 +180,7 @@ block/USB:
       len: 7
       stride: 4
     fieldset: UEP_T_LEN
+    bit_size: 16
   - name: UEP_TX_CTRL
     description: endpoint 1-7 transmit control register.
     byte_offset: 162
@@ -185,6 +188,7 @@ block/USB:
       len: 7
       stride: 4
     fieldset: UEP_TX_CTRL
+    bit_size: 8
   - name: UEP_RX_CTRL
     description: endpoint 1-7 receive control register.
     byte_offset: 163
@@ -192,6 +196,7 @@ block/USB:
       len: 7
       stride: 4
     fieldset: UEP_RX_CTRL
+    bit_size: 8
   - name: UEP_T_ISO
     description: usb endpoint sends a synchronous mode enable register.
     byte_offset: 188
@@ -334,6 +339,7 @@ fieldset/UEP0_RX_LEN:
     description: endpoint 0 acceptable data length.
     bit_offset: 0
     bit_size: 7
+  bit_size: 16
 fieldset/UEP0_T_LEN:
   description: endpoint 0 send the length.
   fields:
@@ -341,6 +347,7 @@ fieldset/UEP0_T_LEN:
     description: endpoint 0 send the length.
     bit_offset: 0
     bit_size: 7
+  bit_size: 16
 fieldset/UEP_R_ISO:
   description: usb endpoint receives a synchronous mode enable register.
   fields:
@@ -352,6 +359,7 @@ fieldset/UEP_R_ISO:
     description: The FIFO mode of the TX of the endpoint is enabled.
     bit_offset: 9
     bit_size: 7
+  bit_size: 16
 fieldset/UEP_R_TOG_AUTO:
   description: USB endpoint receive the auto-filp enable register.
   fields:
@@ -359,6 +367,7 @@ fieldset/UEP_R_TOG_AUTO:
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
     bit_offset: 0
     bit_size: 8
+  bit_size: 16
 fieldset/UEP_T_BURST_MODE:
   description: USB endpoint send the mode register.
   fields:
@@ -366,6 +375,7 @@ fieldset/UEP_T_BURST_MODE:
     description: 0 to 7 endpoint send the mode enable.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_T_ISO:
   description: usb endpoint sends a synchronous mode enable register.
   fields:
@@ -377,6 +387,7 @@ fieldset/UEP_T_ISO:
     description: The FIFO mode of the TX of the endpoint is enabled.
     bit_offset: 9
     bit_size: 7
+  bit_size: 16
 fieldset/UEP_T_TOG_AUTO:
   description: USB endpoint sends the auto-filp enable register.
   fields:
@@ -384,6 +395,7 @@ fieldset/UEP_T_TOG_AUTO:
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
     bit_offset: 0
     bit_size: 8
+  bit_size: 16
 fieldset/UH_PORT_ST:
   description: USB host port status register.
   fields:
@@ -419,6 +431,7 @@ fieldset/UH_PORT_ST:
     description: whether the port is in test mode.
     bit_offset: 11
     bit_size: 1
+  bit_size: 16
 fieldset/USB_BUS:
   description: USB bus.
   fields:
@@ -434,6 +447,7 @@ fieldset/USB_BUS:
     description: UDM status.
     bit_offset: 3
     bit_size: 1
+  bit_size: 16
 fieldset/USB_FRAM_NO:
   description: USB frame number.
   fields:
@@ -445,6 +459,7 @@ fieldset/USB_FRAM_NO:
     description: Received micro frame number.
     bit_offset: 13
     bit_size: 3
+  bit_size: 16
 fieldset/USB_LPM_DATA:
   description: USB power management register.
   fields:
@@ -456,6 +471,7 @@ fieldset/USB_LPM_DATA:
     description: power management busy.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/HSI_CAL_CR:
   description: HSI calibration control register.
   fields:
@@ -724,6 +740,7 @@ fieldset/UEP0_RX_CTRL:
     description: endpoint 0 receives the end flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP0_TX_CTRL:
   description: endpoint 0 send control register.
   fields:
@@ -743,6 +760,7 @@ fieldset/UEP0_TX_CTRL:
     description: endpoint 0 sends the end of NAK flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_R_BURST:
   description: USB endpoint receives the burst register.
   fields:
@@ -750,6 +768,7 @@ fieldset/UEP_R_BURST:
     description: 0 to 7 endpoint receive burst enable.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_R_RES_MODE:
   description: USB endpoint reply mode register.
   fields:
@@ -757,6 +776,7 @@ fieldset/UEP_R_RES_MODE:
     description: 0 to 7 endpoint reply mode.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UEP_T_BURST:
   description: USB endpoint sends a burst register.
   fields:
@@ -764,6 +784,7 @@ fieldset/UEP_T_BURST:
     description: 0 to 7 endpoint send burst enable.
     bit_offset: 0
     bit_size: 8
+  bit_size: 8
 fieldset/UH_CFG:
   description: USB host Configuration register.
   fields:
@@ -799,6 +820,7 @@ fieldset/UH_CFG:
     description: LPM enable.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UH_DEV_AD:
   description: USB host device address register.
   fields:
@@ -806,6 +828,7 @@ fieldset/UH_DEV_AD:
     description: device address.
     bit_offset: 0
     bit_size: 7
+  bit_size: 8
 fieldset/UH_INT_EN:
   description: USB host interrupt enable register.
   fields:
@@ -833,6 +856,7 @@ fieldset/UH_INT_EN:
     description: FIFO overflow interrupt enable.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UH_INT_FLAG:
   description: USB HOST interrupt flag register.
   fields:
@@ -860,6 +884,7 @@ fieldset/UH_INT_FLAG:
     description: FIFO overflow interrupt flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UH_INT_ST:
   description: USB host interrupt status.
   fields:
@@ -871,6 +896,7 @@ fieldset/UH_INT_ST:
     description: A bit of indicates that the port received a wakeup signal.
     bit_offset: 4
     bit_size: 1
+  bit_size: 8
 fieldset/UH_MIS_ST:
   description: USB host miscellaneous status.
   fields:
@@ -902,6 +928,7 @@ fieldset/UH_MIS_ST:
     description: SE0 on USB bus.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UH_PORT_CFG:
   description: USB host port Configuration register.
   fields:
@@ -913,6 +940,7 @@ fieldset/UH_PORT_CFG:
     description: the 15k resistance drop-down function is enable in host. mode.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UH_PORT_CHG:
   description: USB host port state charge register.
   fields:
@@ -936,6 +964,7 @@ fieldset/UH_PORT_CHG:
     description: port sleep state charge.
     bit_offset: 5
     bit_size: 1
+  bit_size: 16
 fieldset/UH_PORT_INT_EN:
   description: USB host port interrupt enable register.
   fields:
@@ -959,6 +988,7 @@ fieldset/UH_PORT_INT_EN:
     description: port sleep state change interrupt enabled.
     bit_offset: 5
     bit_size: 1
+  bit_size: 8
 fieldset/UH_PORT_TEST_CT:
   description: USB host port test mode register.
   fields:
@@ -982,6 +1012,7 @@ fieldset/UH_PORT_TEST_CT:
     description: test SE0 NAK.
     bit_offset: 4
     bit_size: 1
+  bit_size: 8
 fieldset/USB_BASE_MODE:
   description: USB mode control register.
   fields:
@@ -989,6 +1020,7 @@ fieldset/USB_BASE_MODE:
     description: The desired speed mode of the device.
     bit_offset: 0
     bit_size: 2
+  bit_size: 8
 fieldset/USB_CTRL:
   description: USB base control register.
   fields:
@@ -1020,6 +1052,7 @@ fieldset/USB_CTRL:
     description: LPM enable.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/USB_DEV_AD:
   description: USB device address.
   fields:
@@ -1027,6 +1060,7 @@ fieldset/USB_DEV_AD:
     description: bit mask for USB device address.
     bit_offset: 0
     bit_size: 7
+  bit_size: 8
 fieldset/USB_INT_EN:
   description: USB interrupt enable register.
   fields:
@@ -1062,6 +1096,7 @@ fieldset/USB_INT_EN:
     description: USB Overflow interrupt enable.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/USB_INT_FG:
   description: USB interrupt flag register.
   fields:
@@ -1097,6 +1132,7 @@ fieldset/USB_INT_FG:
     description: USB Overflow interrupt flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/USB_INT_ST:
   description: USB interrupt status.
   fields:
@@ -1108,6 +1144,7 @@ fieldset/USB_INT_ST:
     description: Endpoint data transmission direction.
     bit_offset: 4
     bit_size: 1
+  bit_size: 8
 fieldset/USB_MIS_ST:
   description: USB miscellaneous status.
   fields:
@@ -1135,6 +1172,7 @@ fieldset/USB_MIS_ST:
     description: whether the host is high-speed.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/USB_TEST_MODE:
   description: USB test mode register.
   fields:
@@ -1158,6 +1196,7 @@ fieldset/USB_TEST_MODE:
     description: test mode enable.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/USB_WAKE_CTRL:
   description: USB remote wake up register.
   fields:
@@ -1165,6 +1204,7 @@ fieldset/USB_WAKE_CTRL:
     description: remote wake up.
     bit_offset: 0
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_EN:
   description: USB endpoint receive the enable registers.
   fields:
@@ -1172,6 +1212,7 @@ fieldset/UEP_RX_EN:
     description: Endpoint 0 to 15 receive enable.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_TX_EN:
   description: USB endpoint sends the enable register.
   fields:
@@ -1179,6 +1220,7 @@ fieldset/UEP_TX_EN:
     description: Endpoint 0 to 15 sends enable.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_RX_DMA:
   description: endpoint 1 receives the start address register of the buffer.
   fields:
@@ -1207,6 +1249,7 @@ fieldset/UEP_RX_LEN:
     description: the length of data received by endpoint 1 in a single pass.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_R_SIZE:
   description: the length register of the total received data at endpoint 1.
   fields:
@@ -1214,6 +1257,7 @@ fieldset/UEP_R_SIZE:
     description: the length of the total received data at endpoint 1.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_T_LEN:
   description: endpoint 1 send the length register.
   fields:
@@ -1221,6 +1265,7 @@ fieldset/UEP_T_LEN:
     description: endpoint 1 send the length.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/UEP_TX_CTRL:
   description: endpoint 1 send control register.
   fields:
@@ -1240,6 +1285,7 @@ fieldset/UEP_TX_CTRL:
     description: endpoint 1 sends the end of NAK flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_CTRL:
   description: endpoint 1 receive control.
   fields:
@@ -1267,6 +1313,7 @@ fieldset/UEP_RX_CTRL:
     description: endpoint 1 receives the end flag.
     bit_offset: 7
     bit_size: 1
+  bit_size: 8
 fieldset/UEP_RX_FIFO:
   description: Receive FIFO address of usb endpoint 1.
   fields:
