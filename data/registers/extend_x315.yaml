@@ -1,0 +1,46 @@
+block/EXTEND:
+  description: Extended configuration.
+  items:
+  - name: EXTEN_CTR
+    description: Configuration extension control register.
+    byte_offset: 0
+    fieldset: EXTEN_CTR
+fieldset/EXTEN_CTR:
+  description: System control register.
+  fields:
+  - name: SPI1_DMA_RM
+    description: SPI1 DMA channel mapping.
+    bit_offset: 0
+    bit_size: 1
+  - name: SPI2_DMA_RM
+    description: SPI2 DMA channel mapping.
+    bit_offset: 1
+    bit_size: 1
+  - name: SPI3_DMA_RM
+    description: SPI3 DMA channel mapping.
+    bit_offset: 2
+    bit_size: 1
+  - name: USART1_DMA_RM
+    description: USART1 DMA channel mapping.
+    bit_offset: 3
+    bit_size: 1
+  - name: USART2_DMA_RM
+    description: USART2 DMA channel mapping.
+    bit_offset: 4
+    bit_size: 1
+  - name: USART3_DMA_RM
+    description: USART3 DMA channel mapping.
+    bit_offset: 5
+    bit_size: 1
+  - name: USART4_DMA_RM
+    description: USART4 DMA channel mapping.
+    bit_offset: 6
+    bit_size: 1
+  - name: I2C2_DMA_RM
+    description: I2C2 DMA channel mapping.
+    bit_offset: 7
+    bit_size: 1
+  - name: ADC_SCAN_SEL
+    description: Scan cycle counter output ADC selection.
+    bit_offset: 8
+    bit_size: 2

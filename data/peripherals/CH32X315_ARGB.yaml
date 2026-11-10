@@ -1,0 +1,18 @@
+- name: ARGB
+  address: 1073893376
+  registers:
+    kind: argb
+    version: x315
+    block: ARGB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: ARGBEN
+    reset:
+      register: HBRSTR
+      field: ARGBRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: ARGB

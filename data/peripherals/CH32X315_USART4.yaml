@@ -1,0 +1,18 @@
+- name: USART4
+  address: 1073761280
+  registers:
+    kind: usart
+    version: h4
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: USART4EN
+    reset:
+      register: HB1PRSTR
+      field: USART4RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART4

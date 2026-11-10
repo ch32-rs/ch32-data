@@ -1,0 +1,68 @@
+name: CH32X315MCU6
+family: QingKe RISC-V-based, multi-ADC MCU
+subfamily: Multi-channel ADC, USB 3.0
+product_type: QingKe V3F core, main frequency <= 480M
+keywords:
+- ADC
+- USBHS
+- USBPD
+- ARGB
+- USBSS
+packages:
+- name: CH32X315MCU6
+  package: QFN76
+  device_id: 0x31500000
+include_memory: ../memory/CH32X315.yaml
+memory_sizes:
+  RAM: 64K
+docs:
+- type: homepage
+  title: Homepage
+  name: ''
+  url: http://www.wch.cn/products/CH32X315M.html
+cores:
+- name: qingke-v3f
+  arch: riscv
+  peripherals: []
+  include_peripherals:
+  - ../family/CH32X315.yaml
+  - ../peripherals/CH32X315_ADC1.yaml
+  - ../peripherals/CH32X315_ADC2.yaml
+  - ../peripherals/CH32X315_ADC3.yaml
+  - ../peripherals/CH32X315_ADC4.yaml
+  - ../peripherals/CH32X315_TIM1.yaml
+  - ../peripherals/CH32X315_TIM2.yaml
+  - ../peripherals/CH32X315_TIM3.yaml
+  - ../peripherals/CH32X315_TIM4.yaml
+  - ../peripherals/CH32X315_USART1.yaml
+  - ../peripherals/CH32X315_USART2.yaml
+  - ../peripherals/CH32X315_USART3.yaml
+  - ../peripherals/CH32X315_USART4.yaml
+  - ../peripherals/CH32X315_SPI1.yaml
+  - ../peripherals/CH32X315_SPI2.yaml
+  - ../peripherals/CH32X315_SPI3.yaml
+  - ../peripherals/CH32X315_I2C1.yaml
+  - ../peripherals/CH32X315_I2C2.yaml
+  - ../peripherals/CH32X315_ARGB.yaml
+  - ../peripherals/CH32X315_USBHS.yaml
+  - ../peripherals/CH32X315_USBPD.yaml
+  - ../peripherals/CH32X315_USBSS.yaml
+  include_interrupts: ../interrupts/CH32X315.yaml
+  include_dma_channels:
+    DMA1: ../dma/CH32X315_DMA1.yaml
+_raw:
+  Part NO.: CH32X315MCU6
+  Package: QFN76
+  GPIO: '64'
+  Freq: 480MHz
+  Flash: 480K
+  SRAM: 64K
+  ADC: 12+12+12+12
+  USART: '4'
+  SPI: '3'
+  IIC: '2'
+  ARGB: '1'
+  USBHS: '1'
+  USBPD: '1'
+  USBSS: '1'
+  VDD: 2.8/3.6

@@ -1,0 +1,1514 @@
+block/USBSS:
+  description: USB3.0 ultra-high speed host /device controller.
+  items:
+  - name: LINK_CFG
+    description: LINK Configuration Register.
+    byte_offset: 0
+    fieldset: LINK_CFG
+  - name: LINK_CTRL
+    description: LINK Control Register.
+    byte_offset: 4
+    fieldset: LINK_CTRL
+  - name: LINK_INT_CTRL
+    description: LINK Interrupt Enable Register.
+    byte_offset: 8
+    fieldset: LINK_INT_CTRL
+  - name: LINK_INT_FLAG
+    description: LINK Interrupt Flag Register.
+    byte_offset: 12
+    fieldset: LINK_INT_FLAG
+  - name: LINK_STATUS
+    description: LINK Status Register.
+    byte_offset: 16
+    fieldset: LINK_STATUS
+  - name: LINK_ITP_PRE
+    description: LINK ITP timeout mode register.
+    byte_offset: 23
+    bit_size: 8
+    fieldset: LINK_ITP_PRE
+  - name: LINK_U2_INACT_TIMER
+    description: LINK U2 Inactivity Timeout Counter Threshold Register.
+    byte_offset: 29
+    bit_size: 8
+    fieldset: LINK_U2_INACT_TIMER
+  - name: LINK_U1_WKUP_FILTER
+    description: U1 Wake Up LFPS Effective Time Register.
+    byte_offset: 40
+    bit_size: 8
+    fieldset: LINK_U1_WKUP_FILTER
+  - name: LINK_U2_WKUP_FILTER
+    description: U2 Wake LFPS Effective Time Register.
+    byte_offset: 44
+    bit_size: 8
+    fieldset: LINK_U2_WKUP_FILTER
+  - name: LINK_U3_WKUP_FILTER
+    description: U3 Wake LFPS Effective Time Register.
+    byte_offset: 48
+    bit_size: 8
+    fieldset: LINK_U3_WKUP_FILTER
+  - name: LINK_ISO_DLY
+    description: LINK Synchronous Delay Register.
+    byte_offset: 64
+    bit_size: 16
+    fieldset: LINK_ISO_DLY
+  - name: LINK_LPM_CR
+    description: Link Power Management Registers.
+    byte_offset: 80
+    bit_size: 16
+    fieldset: LINK_LPM_CR
+  - name: LINK_LMP_PORT_CAP
+    description: PORT_CAP Register.
+    byte_offset: 84
+    fieldset: LINK_LMP_PORT_CAP
+  - name: LINK_LMP_RX_DATA0
+    description: LMP Receive Data 0 Register.
+    byte_offset: 88
+    fieldset: LINK_LMP_RX_DATA0
+  - name: LINK_LMP_RX_DATA1
+    description: LMP Receives Data 1 Register.
+    byte_offset: 92
+    fieldset: LINK_LMP_RX_DATA1
+  - name: LINK_LMP_RX_DATA2
+    description: LMP Receives Data 2 Register.
+    byte_offset: 96
+    fieldset: LINK_LMP_RX_DATA2
+  - name: LINK_LMP_TX_DATA0
+    description: USB Custom HP Data 0 Register.
+    byte_offset: 100
+    fieldset: LINK_LMP_TX_DATA0
+  - name: LINK_LMP_TX_DATA1
+    description: USB Custom HP Data 1 Register.
+    byte_offset: 104
+    fieldset: LINK_LMP_TX_DATA1
+  - name: LINK_LMP_TX_DATA2
+    description: USB Custom HP Data 2 Register.
+    byte_offset: 108
+    fieldset: LINK_LMP_TX_DATA2
+  - name: CTRL
+    description: Flash capecity register.
+    byte_offset: 112
+    fieldset: CTRL
+  - name: STATUS
+    description: USBSS Status Register.
+    byte_offset: 116
+    fieldset: STATUS
+  - name: ITP
+    description: The Interval register for the ITP package in USB.
+    byte_offset: 120
+    fieldset: ITP
+  - name: ITP_ADJ
+    description: Interval adaptive registers for ITP packets in USB.
+    byte_offset: 124
+    fieldset: ITP_ADJ
+  - name: UEP_TX_EN
+    description: Endpoint Send Enable Register.
+    byte_offset: 128
+    bit_size: 16
+    fieldset: UEP_TX_EN
+  - name: UEP_RX_EN
+    description: Endpoint Receive Enable Register.
+    byte_offset: 130
+    bit_size: 16
+    fieldset: UEP_RX_EN
+  - name: UEP0_TX_CTRL
+    description: Endpoint 0 Transmit Control Register.
+    byte_offset: 132
+    fieldset: UEP0_TX_CTRL
+  - name: UEP0_RX_CTRL
+    description: Endpoint 0 Receives Control Register.
+    byte_offset: 136
+    fieldset: UEP0_RX_CTRL
+  - name: UEP0_TX_DMA
+    description: Sending Buffer Address Register.
+    byte_offset: 140
+    fieldset: UEP0_TX_DMA
+  - name: UEP0_RX_DMA
+    description: Receive Buffer Address Register.
+    byte_offset: 144
+    fieldset: UEP0_RX_DMA
+  - name: UEP0_TX_DMA_OFS
+    description: endpoint 0 transmit DMA offset.
+    byte_offset: 148
+  - name: UEP0_RX_DMA_OFS
+    description: endpoint 0 receive DMA offset.
+    byte_offset: 152
+  - name: UEP_TX_CFG
+    description: Endpoint 1 configures the registers.
+    byte_offset: 192
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CFG
+    bit_size: 8
+  - name: UEP_TX_CR
+    description: Endpoint 1 Control Register.
+    byte_offset: 193
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CR
+    bit_size: 8
+  - name: UEP_TX_SEQ
+    description: Endpoint 1 serial number register.
+    byte_offset: 194
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_SEQ
+    bit_size: 8
+  - name: UEP_TX_ST
+    description: Endpoint 1 state register.
+    byte_offset: 195
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_ST
+    bit_size: 8
+  - name: UEP_TX_CHAIN_CR
+    description: Endpoint 1 CHAIN control register.
+    byte_offset: 196
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CHAIN_CR
+    bit_size: 8
+  - name: UEP_TX_CHAIN_ST
+    description: Endpoint 1 CHAIN status register.
+    byte_offset: 197
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CHAIN_ST
+    bit_size: 8
+  - name: UEP_TX_CHAIN_LEN
+    description: Endpoint 1 CHAIN sends the last packet length.
+    byte_offset: 198
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CHAIN_LEN
+    bit_size: 16
+  - name: UEP_TX_CHAIN_EXP_NUMP
+    description: Number of NUMPs expected to be sent by endpoint 1.
+    byte_offset: 200
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CHAIN_EXP_NUMP
+    bit_size: 8
+  - name: UEP_TX_CHAIN_NUMP
+    description: Number of NUMPs sent by endpoint 1.
+    byte_offset: 201
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_CHAIN_NUMP
+    bit_size: 8
+  - name: UEP_TX_DMA_OFS
+    description: DMA offset length of endpoint 1.
+    byte_offset: 202
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_DMA_OFS
+    bit_size: 16
+  - name: UEP_TX_DMA
+    description: DMA start address of endpoint 1.
+    byte_offset: 204
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_TX_DMA
+  - name: UEP_RX_CFG
+    description: Endpoint 1 Configuration Register.
+    byte_offset: 208
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CFG
+    bit_size: 8
+  - name: UEP_RX_CR
+    description: Endpoint 1 Control Register.
+    byte_offset: 209
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CR
+    bit_size: 8
+  - name: UEP_RX_SEQ
+    description: Endpoint 1 serial number register.
+    byte_offset: 210
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_SEQ
+    bit_size: 8
+  - name: UEP_RX_ST
+    description: Endpoint 1 state register.
+    byte_offset: 211
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_ST
+    bit_size: 8
+  - name: UEP_RX_CHAIN_CR
+    description: Endpoint 1 CHAIN control register.
+    byte_offset: 212
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CHAIN_CR
+    bit_size: 8
+  - name: UEP_RX_CHAIN_ST
+    description: Endpoint 1 CHAIN status register.
+    byte_offset: 213
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CHAIN_ST
+    bit_size: 8
+  - name: UEP_RX_CHAIN_LEN
+    description: The length of the last packet received by the endpoint 1 CHAIN.
+    byte_offset: 214
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CHAIN_LEN
+    bit_size: 16
+  - name: UEP_RX_CHAIN_MAX_NUMP
+    description: Number of NUMPs that endpoint 1 can receive.
+    byte_offset: 216
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CHAIN_MAX_NUMP
+    bit_size: 8
+  - name: UEP_RX_CHAIN_NUMP
+    description: Number of NUMPs received by endpoint 1.
+    byte_offset: 217
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_CHAIN_NUMP
+    bit_size: 8
+  - name: UEP_RX_DMA_OFS
+    description: DMA offset length of endpoint 1.
+    byte_offset: 218
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_DMA_OFS
+    bit_size: 16
+  - name: UEP_RX_DMA
+    description: DMA start address of endpoint 1.
+    byte_offset: 220
+    array:
+      len: 4
+      stride: 32
+    fieldset: UEP_RX_DMA
+fieldset/CTRL:
+  description: Flash capecity register.
+  fields:
+  - name: DMA_EN
+    description: Enable DMA.
+    bit_offset: 0
+    bit_size: 1
+  - name: USB_CLR_ALL
+    description: Reset all software configuration registers, high efficiency, need software clearing.
+    bit_offset: 1
+    bit_size: 1
+  - name: FORCE_RST
+    description: To reset the protocol layer and FIFO module, software clearing is required.
+    bit_offset: 2
+    bit_size: 1
+  - name: DMA_MODE
+    description: When performing burst DPH transmission, the operation of the next packet.
+    bit_offset: 3
+    bit_size: 1
+  - name: SETUP_FLOW
+    description: SETUP Transaction Flow Control.
+    bit_offset: 5
+    bit_size: 1
+  - name: TX_ERDY_MODE
+    description: Use in device mode.
+    bit_offset: 14
+    bit_size: 1
+  - name: UIE_TRANSFER
+    description: USB transaction completion interrupt enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: UDIE_SETUP
+    description: 'Device mode: Receive SETUP transaction to complete interrupt enablement.'
+    bit_offset: 17
+    bit_size: 1
+  - name: UDIE_STATUS
+    description: 'Device mode: Receive STATUS transaction to complete interrupt enable.'
+    bit_offset: 18
+    bit_size: 1
+  - name: UIE_RX_PING
+    description: Receive PING-TP to complete the interrupt enablement.
+    bit_offset: 19
+    bit_size: 1
+  - name: UIE_ITP
+    description: Send ITP to complete interrupt enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: UIE_FIFO_TXOV
+    description: Sending FIFO Overflow Interrupt Enabled.
+    bit_offset: 22
+    bit_size: 1
+  - name: UIE_FIFO_RXOV
+    description: Receive FIFO overflow interrupt enable.
+    bit_offset: 23
+    bit_size: 1
+  - name: DEV_ADDR
+    description: The address of the USB device.
+    bit_offset: 24
+    bit_size: 1
+fieldset/ITP:
+  description: The Interval register for the ITP package in USB.
+  fields:
+  - name: REG_ITP_INTERVAL
+    description: The Bus interval Counter field in the received ITP.
+    bit_offset: 0
+    bit_size: 14
+fieldset/ITP_ADJ:
+  description: Interval adaptive registers for ITP packets in USB.
+  fields:
+  - name: ITP_ADJ_CR
+    description: In device mode, the Bus Interval Adjustment Control field in the received ITP.
+    bit_offset: 0
+    bit_size: 7
+  - name: ITP_DELAYED
+    description: In device mode, the delayed bit of the Link Control Word in the received ITP is 1 when the ITP is delayed.
+    bit_offset: 7
+    bit_size: 1
+  - name: ITP_DELTA
+    description: The high 13bit (delta) of ITS in the ITP received in device mode represents the time difference from.  the start of the current ITP packet to the boundary of the previous bus interval.
+    bit_offset: 8
+    bit_size: 13
+fieldset/LINK_CFG:
+  description: LINK Configuration Register.
+  fields:
+  - name: LINK_DOWN_MODE
+    description: Peripheral Type.
+    bit_offset: 0
+    bit_size: 1
+  - name: LINK_RX_TERM_EN
+    description: Receiving terminal resistance control.
+    bit_offset: 1
+    bit_size: 1
+  - name: LINK_SS_PLR_SWAP
+    description: Swap SSTX and SSRX polarity as follows.
+    bit_offset: 2
+    bit_size: 1
+  - name: LINK_PHY_RESET
+    description: PIPE Interface Reset.
+    bit_offset: 3
+    bit_size: 1
+  - name: LINK_COMPLIANCE_EN
+    description: POLLING_LFPS whether the timeout enters COMPLIANCE mode.
+    bit_offset: 4
+    bit_size: 1
+  - name: LINK_LFPS_RX_PD
+    description: LFPS receive control, where the bit 1 indicates that LFPS receive is disabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: LINK_RX_EQ_EN
+    description: Receiver equalization enables control, protocol specifics are optional.
+    bit_offset: 6
+    bit_size: 1
+  - name: LINK_TX_SWING
+    description: Transmitter signal swing control, low swing power consumption, but affect the transmission distance.
+    bit_offset: 7
+    bit_size: 1
+  - name: LINK_TX_DEEMPH
+    description: Transmitter De-Emphasis control.
+    bit_offset: 8
+    bit_size: 2
+  - name: LINK_CP78_SEL
+    description: In Compliance Pattern 7/8, send a length of consecutive 0 or consecutive 1.
+    bit_offset: 10
+    bit_size: 2
+  - name: LINK_U2_DET_EN
+    description: Detection method of connected devices in U2 state.
+    bit_offset: 12
+    bit_size: 1
+  - name: LINK_LOOPBACK_EN
+    description: Allow to enter the LOOPBACK enable bit, high efficiency, use with the LOOKBACK enable in TX/RX_TS_CFG [3], both are valid,.  LINK can enter the LOOKBACK mode (used to enable the LOOPBACK slave data loop and error counting, the LOOPBACK host maintains 0).
+    bit_offset: 13
+    bit_size: 1
+  - name: LINK_LOOKBACK_ACT
+    description: Used in LOOPBACK mode for LOOPBACK host control pattern transmission (LOOPBACK slave holds 0),.  ACT is a high-level signal that lasts for a period of time.
+    bit_offset: 14
+    bit_size: 1
+  - name: LINK_LTSSM_MODE
+    description: The link state machine enters DISABLE mode.
+    bit_offset: 15
+    bit_size: 1
+  - name: LINK_U1_ALLOW
+    description: High efficiency, after receiving the LGO_U1, the response LAU is allowed to enter the U1 state,.  otherwise the response LXU refuses to enter the U1 state after receiving the LGO_U1.
+    bit_offset: 16
+    bit_size: 1
+  - name: LINK_U2_ALLOW
+    description: High efficiency, after receiving the LGO_U2,.  the response LAU allows it to enter the U2 state,   otherwise after receiving the LGO_U2, the response LXU refuses to enter the U2 state.
+    bit_offset: 17
+    bit_size: 1
+  - name: LINK_SKP_MODE
+    description: SKP rejection control for descrambling.
+    bit_offset: 18
+    bit_size: 2
+  - name: LINK_U1_PING_EN
+    description: U1 sends PING_FPFS enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: LINK_TOUT_MODE
+    description: protocol version.
+    bit_offset: 21
+    bit_size: 1
+  - name: LINK_RESET
+    description: LINK reset, including the reset status machine and all interrupt flags, is highly effective.
+    bit_offset: 31
+    bit_size: 1
+fieldset/LINK_CTRL:
+  description: LINK Control Register.
+  fields:
+  - name: LINK_PD_MODE
+    description: Configure the current power mode of the PHY, corresponding to PO/P1/P2/P3 in the PIPE.
+    bit_offset: 0
+    bit_size: 2
+  - name: LINK_GO_DISABLED
+    description: RW Set LINK to SS.DISABLED, which is highly effective and requires software to clear it.. If the hardware automatically goes to SS.DIABLED, then the bit is automatically set to 1 by the hardware.  In device mode, if the USB2.0 bus reset is received, the software should first set the PD_MODE to P2 mode, and then clear this bit,  LTSSM will automatically enter the SS.RX_DETECT, the device will be detected 8 times (every 12ms), if no TERM is detected, it will enter the DISABLE state,  and communicate in USB2.0 mode at the same time.  In host mode, a BUS_RESET signal should be sent through the USB2.0 controller, the software should first set the PD_MODE to P2 mode,  then clear this bit, and if a TERM is detected, a POLLING_LFPS handshake will be made.  Otherwise, the software should set the power mode to P3 and communicate in USB2.0 mode.
+    bit_offset: 4
+    bit_size: 1
+  - name: LINK_GO_INACTIVE
+    description: Set LINK to SS.INACTIVE, high efficiency, hardware automatic clearing.
+    bit_offset: 5
+    bit_size: 1
+  - name: LINK_GO_RECOVERY
+    description: Set the LINK to SS.RECOVERY, which is highly effective and the hardware is automatically cleared.
+    bit_offset: 6
+    bit_size: 1
+  - name: LINK_GO_RX_DET
+    description: Before setting this bit, the PD_MODE should be set to P2 mode, and the LINK should be set to enter the SS.RX_DETECT,.  and the software query TERM_PRESENT know whether there is a connection or whether the connection is disconnected.   High effectiveness, automatic clearing.
+    bit_offset: 7
+    bit_size: 1
+  - name: LINK_TX_WARM_RST
+    description: 'High effectiveness, cleared by software. This bit is valid and will send WARM_RESET.. In device mode: After detecting that the host has continuously sent WARM_RESET for 18 ms,  the device controller will automatically declare that it has detected WARM_RESET and reset it.'
+    bit_offset: 8
+    bit_size: 1
+  - name: LINK_TX_UX_EXIT
+    description: High efficiency, hardware automatic clearing.
+    bit_offset: 9
+    bit_size: 1
+  - name: LINK_U3_WKUP_EN
+    description: Receive U3 exti LPFS signal enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: LINK_POLLING_EN
+    description: High validity, if the SS.RX_DETECT detects the TERM, the POLLING handshake will be performed after the software sets the bit to be valid.
+    bit_offset: 12
+    bit_size: 1
+  - name: LINK_TX_LGO_U1
+    description: After the bit is valid, it will send LGO_U1, high efficiency, and the hardware will be automatically cleared.. If the other party responds with LXU, it indicates that it refuses to enter U1 mode;  If the query LINK status is U1, it indicates that the other party accepts to enter the U1 low-power state,  and the software should change the current power mode to P1.
+    bit_offset: 13
+    bit_size: 1
+  - name: LINK_TX_LGO_U2
+    description: After the bit is valid, it will send LGO_U2, high efficiency, and the hardware will be automatically cleared;. If the other party responds with LXU, it indicates that it refuses to enter the U2 state;  If the query LINK status is U2, it indicates that the other party accepts to enter the U2 low-power state,  and the software should change the current power mode to P2.
+    bit_offset: 14
+    bit_size: 1
+  - name: LINK_TX_LGO_U3
+    description: After the bit is valid, it will be sent LGO_U3, high effectiveness, and the hardware will be automatically cleared.
+    bit_offset: 15
+    bit_size: 1
+  - name: LINK_TX_TS_CFG
+    description: Link Configuration for Sending TS1/TS2 Training Sequences.
+    bit_offset: 16
+    bit_size: 8
+  - name: LINK_RX_TS_CFG
+    description: Received link control.
+    bit_offset: 24
+    bit_size: 8
+fieldset/LINK_INT_CTRL:
+  description: LINK Interrupt Enable Register.
+  fields:
+  - name: LINK_IE_READY
+    description: LINK is initialized, including two ports before (Heade Sequence Number Advertisement).  and (RX Headr Buffer Credit Advertisement) interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: LINK_IE_RECOVERY
+    description: Due to the error LINK in RECOVERY interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: LINK_IE_INACTIVE
+    description: LINK is in INACTIVE interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: LINK_IE_DISABLE
+    description: LINK in DISABLED interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: LINK_IE_GO_U3
+    description: LINK is in U3 interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: LINK_IE_GO_U2
+    description: LINK is in 2 interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: LINK_IE_GO_U1
+    description: LINK is in U1 interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: LINK_IE_GO_U0
+    description: LINK in U0 interrupt enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: LINK_IE_U3_WK_TOUT
+    description: When requesting an exit U3 command timeout interrupt enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: LINK_IE_UX_REJ
+    description: Send LGO_ Ux, receive LXU interrupt enablement that refuses to enter the ux send.
+    bit_offset: 9
+    bit_size: 1
+  - name: LINK_IE_TERM_PRES
+    description: LINK entry RX_DETECT to detect the impedance detection interruption of the trace segment of the remote receiver enables the following functions.
+    bit_offset: 10
+    bit_size: 1
+  - name: LINK_IE_TXEQ
+    description: LINK into POLLING_RXEQ for receiver equalization training interrupt enablement.
+    bit_offset: 11
+    bit_size: 1
+  - name: LINK_IE_UX_EXIT
+    description: Receiving a request to exit the UX interrupts the enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: LINK_IE_WARM_RST
+    description: Warm reset (unconnected) interrupt enable with LPFS.
+    bit_offset: 13
+    bit_size: 1
+  - name: LINK_IE_U3_WAKEUP
+    description: In the U3 state, receive the low-frequency periodic signal (LFPS) wake-up interrupt enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: LINK_IE_HOT_RST
+    description: HOT RESET, which uses the reset interrupt of the TS1/TS2 ordered set.
+    bit_offset: 15
+    bit_size: 1
+  - name: LINK_IE_HPBUF_EMPTY
+    description: HP_BUF send FIFO null interrupt enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: LINK_IE_HPBUF_FULL
+    description: HP_BUF send FIFO full interrupt enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: LINK_IE_COMPLIANCE
+    description: Link entry compliance tests, interrupted with compatibility tests or physical layer conformance tests.
+    bit_offset: 18
+    bit_size: 1
+  - name: LINK_IE_LOOPBACK
+    description: Link enters loopback mode for testing and fault isolation interrupt enablement.
+    bit_offset: 19
+    bit_size: 1
+  - name: LINK_IE_RX_DET
+    description: Link enters Rx.Detect state interrupt enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: LINK_IE_RX_LMP
+    description: Receive a link command flag interrupt enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: LINK_IE_TX_LMP
+    description: Successfully entering U0, you can send HP packet interrupt enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: LINK_IE_RX_LMP_TOUT
+    description: Receive LMP timeout interrupt enable.
+    bit_offset: 23
+    bit_size: 1
+  - name: RX_CAP_FAIL_INT_EN
+    description: The CAP of the other party receiving the link cannot be combined with its own CAP to make an interrupt enable of the uplink and downlink ports.
+    bit_offset: 24
+    bit_size: 1
+  - name: CONFIG_DONE_INT_EN
+    description: Link receives or sends to PORT_Capability LMP interrupt enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: LINK_IE_UX_EXIT_FAIL
+    description: Exit UX failure interrupt enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: LINK_IE_TX_WARMRST
+    description: Send WARM_RESET end interrupt enable.
+    bit_offset: 27
+    bit_size: 1
+  - name: LINK_IE_UX_FAIL
+    description: UX conversion failure interrupt enable.
+    bit_offset: 28
+    bit_size: 1
+  - name: LINK_IE_U2_TOUT
+    description: U2 timeout interrupt enable.
+    bit_offset: 29
+    bit_size: 1
+  - name: LINK_IE_U1_TOUT
+    description: U1 Timeout Interrupt Enable.
+    bit_offset: 30
+    bit_size: 1
+  - name: LINK_IE_STATE_CHG
+    description: Link state machine change flag interrupt enable.
+    bit_offset: 31
+    bit_size: 1
+fieldset/LINK_INT_FLAG:
+  description: LINK Interrupt Flag Register.
+  fields:
+  - name: LINK_IF_READY
+    description: LINK enters the U0 state and completes the LINK initialization interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: LINK_IF_RECOVERY
+    description: LINK enters the SS.RECOVERY status interrupt flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: LINK_IF_INACTIVE
+    description: LINK enters the SS.INACTIVE state interrupt flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: LINK_IF_DISABLE
+    description: LINK to enter the SS.DISABLE state interrupt flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: LINK_IF_GO_U3
+    description: LINK enters the U3 state interrupt flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: LINK_IF_GO_U2
+    description: LINK enters the U2 state interrupt flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: LINK_IF_GO_U1
+    description: LINK enters the U1 state interrupt flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: LINK_IF_GO_U0
+    description: LINK enters the U0 state interrupt flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: LINK_IF_U3_WK_TOUT
+    description: Wake up timeout interrupt flag (10ms) from U3.
+    bit_offset: 8
+    bit_size: 1
+  - name: LINK_IF_UX_REJ
+    description: LINK refuses to enter low power mode (U1/U2) interrupt flag.
+    bit_offset: 9
+    bit_size: 1
+  - name: LINK_IF_TERM_PRES
+    description: TERM disconnected or connection interrupted flag detected.
+    bit_offset: 10
+    bit_size: 1
+  - name: LINK_IF_TXEQ
+    description: LINK enters TXEQ state outage flag:. Indicates completion of the POLLING handshake and waits for the software  to set the PWR_MODE to P0 in order to enter the TXEQ stage.
+    bit_offset: 11
+    bit_size: 1
+  - name: LINK_IF_UX_EXIT
+    description: LINK receives the LFPS ready to exit U1/U2/U3 request interrupt flag,.  after this position 1, the software should set the PWR_MODE to P0, after setting the PWR_MODE to P0,   the UX exit timer starts to time, after reaching U1_EXIT_TIMER,   U2_EXIT_TIMER, U3_WAKE_TIMER, LINK exits the Ux state, Go to Recovery.
+    bit_offset: 12
+    bit_size: 1
+  - name: LINK_IF_WARM_RST
+    description: The WARM_RESET state change (valid-> invalid or invalid->valid).  received by the device interrupted the flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: LINK_IF_WAKEUP
+    description: The power supply is in P3 mode and the LFPS signal interrupt flag is detected.
+    bit_offset: 14
+    bit_size: 1
+  - name: LINK_IF_HOT_RST
+    description: The device receives the HOT RESET interrupt flag.
+    bit_offset: 15
+    bit_size: 1
+  - name: LINK_IF_HPBUF_EMPTY
+    description: Header Packet buffer empty interrupt flag.
+    bit_offset: 16
+    bit_size: 1
+  - name: LINK_IF_HPBUF_FULL
+    description: Header Packet buffer full interrupt flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: LINK_IF_COMPLIANCE
+    description: LINK enters the COMPLIANCE status interrupt flag.
+    bit_offset: 18
+    bit_size: 1
+  - name: LINK_IF_LOOPBACK
+    description: LINK enters the LOOPBACK state interrupt flag.
+    bit_offset: 19
+    bit_size: 1
+  - name: LINK_IF_RX_DET
+    description: After entering the RX_DETECT state interrupt flag, this position 1,.  the software will set the PWR_MODE to P2, ready for RX_DETECT.
+    bit_offset: 20
+    bit_size: 1
+  - name: LINK_IF_RX_LMP
+    description: Receiving LMP interrupt flags.
+    bit_offset: 21
+    bit_size: 1
+  - name: LINK_IF_TX_LMP
+    description: LINK initializes the interrupt flag,.  and the software configures to send Port Capabilities LMP for port capability switching.
+    bit_offset: 22
+    bit_size: 1
+  - name: LINK_IF_RX_LMP_TOUT
+    description: After LINK initialization is complete,.  the Port Capabilities/Configuration LMPs timeout (20us) interrupt flag is exchanged.
+    bit_offset: 23
+    bit_size: 1
+  - name: RX_CAP_FAIL_FLAG
+    description: The CAP of the other party received by the link cannot be combined with its own CAP to form an interrupt.  at the uplink and downlink ports (write 1 to clear it).
+    bit_offset: 24
+    bit_size: 1
+  - name: CONFIG_DONE_FLAG
+    description: The link receives or sends to PORT_Capability LMP interrupt (write 1 to zero).
+    bit_offset: 25
+    bit_size: 1
+  - name: LINK_IF_UX_EXIT_FAIL
+    description: Exit UX fails to interrupt; (write 1 clear).
+    bit_offset: 26
+    bit_size: 1
+  - name: LINK_IF_TX_WARMRST
+    description: Interruption at the end of the WARM_RESET send; (write 1 clear).
+    bit_offset: 27
+    bit_size: 1
+  - name: LINK_IF_UX_FAIL
+    description: Failed to enter the UX interrupted; (write 1 clear).
+    bit_offset: 28
+    bit_size: 1
+  - name: LINK_IF_U2_TOUT
+    description: U2 timeout interrupt; (write 1 clear).
+    bit_offset: 29
+    bit_size: 1
+  - name: LINK_IF_U1_TOUT
+    description: U1 timeout interrupt; (write 1 clear).
+    bit_offset: 30
+    bit_size: 1
+  - name: LINK_IF_STATE_CHG
+    description: LINK_RESET reset to 0 (write 1 clear).
+    bit_offset: 31
+    bit_size: 1
+fieldset/LINK_ISO_DLY:
+  description: LINK Synchronous Delay Register.
+  fields:
+  - name: LINK_ISOCH_DLY
+    description: The delay time for serial bit stream parsing to parallel data is 40ns by default,.  as the device writes the delay information to the register,   which is invalid by 3 bits lower (because the clock frequency is 125MHz, the delay time needs to be set to 8*n).
+    bit_offset: 0
+    bit_size: 16
+  bit_size: 16
+fieldset/LINK_ITP_PRE:
+  description: LINK ITP timeout mode register.
+  fields:
+  - name: ITP_PRE
+    description: ITP Timeout Mode.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/LINK_LMP_PORT_CAP:
+  description: PORT_CAP Register.
+  fields:
+  - name: AUTO_CAP
+    description: When the automatic configuration of Port Capability fails, the bit is automatically cleared.
+    bit_offset: 0
+    bit_size: 1
+  - name: CFG_OTG_CAPABLE
+    description: Configure the OTG bits in the LMP of the port capability of this port; Used for whether to.  go to this OTG function.
+    bit_offset: 1
+    bit_size: 1
+  - name: CFG_DOWN_MODE
+    description: Configure the Direction low in the LMP of the port capability.
+    bit_offset: 2
+    bit_size: 1
+  - name: CFG_UP_MODE
+    description: Configure the Direction bit in the LMP of the port capability of this port.
+    bit_offset: 3
+    bit_size: 1
+  - name: CFG_TIEBREAKER
+    description: Configure the Tiebreaker bit in the LMP of the Port Capability of this port;. The higher the value, the lower exit.
+    bit_offset: 4
+    bit_size: 4
+  - name: LINK_DOWN_MODE
+    description: Decide on your port configuration according to your and the other party's PORT Capability.
+    bit_offset: 16
+    bit_size: 1
+  - name: RX_CAP_DIR
+    description: '[17]: If the position is 1, it means that the port can be configured as a downbound port;. [18]: If the position is 1, it means that the port can be configured as an upbound port.'
+    bit_offset: 17
+    bit_size: 2
+  - name: RX_CAP_OTG
+    description: OTG bits in LMP that receive Port Capability; Used for whether to go to this OTG function.
+    bit_offset: 19
+    bit_size: 1
+  - name: RX_CAP_TIEBRK
+    description: Tiebreaker, used for PORT type quorum when two PORTs (REG_PORT_CAP[17:16]=11) with both uplink and.  downlink capabilities are connected, the port with the higher value becomes the downstream port,   and if the tiebreakers of the two PORTs are equal, the PORT_CAP will be re-exchanged.
+    bit_offset: 20
+    bit_size: 4
+  - name: LINK_SPEED
+    description: '[24] Position 1, indicating that the supported device supports USB3.2 Gen1 (5Gbps).'
+    bit_offset: 24
+    bit_size: 6
+  - name: LINK_LMP_TX_CAP_VLD
+    description: PORT Capability configuration completion flag (software operation, write 1 clear 0).
+    bit_offset: 30
+    bit_size: 1
+  - name: LINK_LMP_RX_CAP_VLD
+    description: Upon receipt of a valid PORT_CAP_LMP, the protocol stipulates that.  the two parties will exchange PORT_CAP_LMP within 20us after entering the U0 state.
+    bit_offset: 31
+    bit_size: 1
+fieldset/LINK_LMP_RX_DATA0:
+  description: LMP Receive Data 0 Register.
+  fields:
+  - name: LINK_LMP_RX_DATA0
+    description: After LMP reception is complete, HP data is stored in this register [31:0].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LMP_RX_DATA1:
+  description: LMP Receives Data 1 Register.
+  fields:
+  - name: LINK_LMP_RX_DATA1
+    description: After LMP reception is complete, HP data is stored in this register [63:32].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LMP_RX_DATA2:
+  description: LMP Receives Data 2 Register.
+  fields:
+  - name: LINK_LMP_RX_DATA2
+    description: After LMP reception is complete, HP data is stored in this register [95:64].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LMP_TX_DATA0:
+  description: USB Custom HP Data 0 Register.
+  fields:
+  - name: LINK_LMP_TX_DATA0
+    description: User-defined data sent to HP [31:0].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LMP_TX_DATA1:
+  description: USB Custom HP Data 1 Register.
+  fields:
+  - name: LINK_LMP_TX_DATA1
+    description: User-defined data sent to HP [63:32].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LMP_TX_DATA2:
+  description: USB Custom HP Data 2 Register.
+  fields:
+  - name: LINK_LMP_TX_DATA2
+    description: User-defined data sent to HP [95:64].
+    bit_offset: 0
+    bit_size: 32
+fieldset/LINK_LPM_CR:
+  description: Link Power Management Registers.
+  fields:
+  - name: RXDET_EXP
+    description: Detect external device counter registers.
+    bit_offset: 0
+    bit_size: 8
+  - name: LPM_RST
+    description: Reset signal for LPM-related registers.
+    bit_offset: 8
+    bit_size: 1
+  - name: LPM_EN
+    description: CLKLPM is fixed at 12MHz, when LINK_PD_MODE=3 and LPM_EN=0 and OSCOUTEN=0 and PLLALIV=0,.  CLKOSCO will stop and the crystal oscillator will stop.
+    bit_offset: 9
+    bit_size: 1
+  - name: LPM_TERM_CHG
+    description: The connected device changes, plugs in the device or unplugs the device.
+    bit_offset: 10
+    bit_size: 1
+  - name: LPM_TERM_PRESENT
+    description: The PHY layer detects the device connection.
+    bit_offset: 11
+    bit_size: 1
+  - name: LPM_RXDET_EN
+    description: When the LPM count reaches the desired value, it is confirmed that a device is connected to the PHY RXDET_EXP this bit is elevated.
+    bit_offset: 12
+    bit_size: 1
+  - name: PHY_CHSEL_AUTO
+    description: The channel type of the PHY layer is automatically selected.
+    bit_offset: 13
+    bit_size: 1
+  bit_size: 16
+fieldset/LINK_STATUS:
+  description: LINK Status Register.
+  fields:
+  - name: LINK_RX_TERM_PRES
+    description: After RX_DETECT, if there is a receiver terminal resistor, the bit is 1.
+    bit_offset: 0
+    bit_size: 1
+  - name: LINK_RX_WARM_RST
+    description: Receive a valid WARM_RESET signal from the host.  (the hardware will automatically pull up after receiving the host's WARM_RESET 18ms).
+    bit_offset: 1
+    bit_size: 1
+  - name: LINK_BUSY
+    description: LINK busy state, the bit is 1 when the switching PD_MODE is completed,.  and the hardware will automatically clear it after the switching is completed.
+    bit_offset: 2
+    bit_size: 1
+  - name: LINK_READY
+    description: When the LINK enters the U0 state, the position 1 will be automatically.  cleared after the initialization (broadcast) is completed,   and the bit will be automatically cleared when it exits the U0 state.
+    bit_offset: 3
+    bit_size: 1
+  - name: LINK_PD_MODE_MASK
+    description: Link Power Status.
+    bit_offset: 4
+    bit_size: 2
+  - name: LINK_TXEQ
+    description: The link is in POLLING_RXEQ.
+    bit_offset: 6
+    bit_size: 1
+  - name: LINK_STATE
+    description: Link Status.
+    bit_offset: 8
+    bit_size: 4
+  - name: LINK_RX_UX_EXIT_REQ
+    description: Received a request to exit the UX.
+    bit_offset: 16
+    bit_size: 1
+  - name: LINK_RX_DETECT
+    description: The link is at P2 and is RX_DETECT underway.
+    bit_offset: 17
+    bit_size: 1
+  - name: LINK_RX_LFPS
+    description: The link receives an LFPS signal.
+    bit_offset: 18
+    bit_size: 1
+  - name: LINK_WAKUP
+    description: A link wake-up signal is received.
+    bit_offset: 19
+    bit_size: 1
+  - name: LINK_RXDET_SLEEP_ALLOW
+    description: The link is in the RXDET state, allowing sleep.
+    bit_offset: 20
+    bit_size: 1
+  - name: LINK_U2_SLEEP_ALLOW
+    description: The link is in the U2 state, allowing sleep.
+    bit_offset: 21
+    bit_size: 1
+  - name: LINK_U3_SLEEP_ALLOW
+    description: The link is in the U3 state, allowing sleep.
+    bit_offset: 22
+    bit_size: 1
+  - name: LINK_HPBUF_IDLE
+    description: HP_BUF the status of sending FIFO IDLE.
+    bit_offset: 29
+    bit_size: 1
+  - name: LINK_HPBUF_FULL
+    description: HP buffer is full.
+    bit_offset: 30
+    bit_size: 1
+  - name: LINK_HPBUF_EMPTY
+    description: HP buffer is empty.
+    bit_offset: 31
+    bit_size: 1
+fieldset/LINK_U1_WKUP_FILTER:
+  description: U1 Wake Up LFPS Effective Time Register.
+  fields:
+  - name: U1_WKUP_FILTER
+    description: 'The effective duration of the LFPS received when U1 exits..  When the receiving LFPS reaches this time, the received U1 EXIT can be considered valid, and the transmitted LFPS_LAST is raised, and the handshake is successful, which defaults to 600ns.   U1_WKUP_FILTER [7]: the unit of time that controls U1_WKUP_FILTER [6:0].'
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/LINK_U2_INACT_TIMER:
+  description: LINK U2 Inactivity Timeout Counter Threshold Register.
+  fields:
+  - name: U2_INACTIVE_TIMER
+    description: Values of the inactivity timeout counter threshold for U2.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/LINK_U2_WKUP_FILTER:
+  description: U2 Wake LFPS Effective Time Register.
+  fields:
+  - name: U2_WKUP_FILTER
+    description: When the received LFPS reaches this time, the transmitted LFPS_LAST is raised and the handshake is successful,.  and the received U2 EXIT is considered valid, the duration is (n)us, and the default is 2us.
+    bit_offset: 0
+    bit_size: 7
+  bit_size: 8
+fieldset/LINK_U3_WKUP_FILTER:
+  description: U3 Wake LFPS Effective Time Register.
+  fields:
+  - name: U3_WKUP_FILTER
+    description: When the received LFPS reaches this time, the transmitted LFPS_LAST is raised and the handshake is successful,.  and the received U3 EXIT is considered valid, the duration is (n)us, and the default is 100us.
+    bit_offset: 0
+    bit_size: 7
+  bit_size: 8
+fieldset/UEP0_RX_DMA:
+  description: Receive Buffer Address Register.
+  fields:
+  - name: U3EP0_RX_DMA
+    description: Endpoint 0 receives the buffer start address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/UEP0_TX_DMA:
+  description: Sending Buffer Address Register.
+  fields:
+  - name: U3EP0_TX_DMA
+    description: Endpoint 0 sends the buffer start address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/STATUS:
+  description: USBSS Status Register.
+  fields:
+  - name: UIF_TRANSFER
+    description: USB transaction completion interrupt flag bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: UDIF_SETUP
+    description: 'Device mode: Receives the SETUP transaction completion interrupt flag bit.'
+    bit_offset: 1
+    bit_size: 1
+  - name: UDIF_STATUS
+    description: 'Device mode: Receives the STATUS transaction to complete the interrupt flag.'
+    bit_offset: 2
+    bit_size: 1
+  - name: UIF_RX_PING
+    description: Receive PING-TP completion interrupt flag bit.
+    bit_offset: 3
+    bit_size: 1
+  - name: UIF_ITP
+    description: Send ITP completion interrupt flag bit.
+    bit_offset: 4
+    bit_size: 1
+  - name: UIF_FIFO_TXOV
+    description: Send FIFO overflow interrupt flag bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: UIF_FIFO_RXOV
+    description: Receive FIFO overflow interrupt flag bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: EP_ID
+    description: 'If multiple endpoints have an interrupt flag at the same time,.  the priority order is as follows (high-> low): Synchronous transmission > control transmission>block   transmission/interrupted transmission, the smaller the endpoint number of the same endpoint type,   the higher the priority.'
+    bit_offset: 8
+    bit_size: 3
+  - name: EP_DIR
+    description: If the transmission and reception have an interrupt flag.  at the same time, the bit is 1, which prioritizes transmission   (SETUP/STATUS independent interrupt).
+    bit_offset: 12
+    bit_size: 1
+fieldset/UEP0_RX_CTRL:
+  description: Endpoint 0 Receives Control Register.
+  fields:
+  - name: EP0_RX_LEN
+    description: The endpoint receives the length register.
+    bit_offset: 0
+    bit_size: 11
+  - name: EP0_RX_SEQ
+    description: The serial number that the endpoint expects to receive.
+    bit_offset: 16
+    bit_size: 5
+  - name: EP0_RX_RES
+    description: Response to DPH.
+    bit_offset: 21
+    bit_size: 2
+  - name: EP0_RX_ERDY
+    description: The bit writes 1, sends ERDY, and the hardware of the bit is automatically cleared after the ERDY is sent.
+    bit_offset: 23
+    bit_size: 1
+  - name: EP0_RX_PP
+    description: The PP bit in the received DPH.
+    bit_offset: 24
+    bit_size: 1
+  - name: UIF_EP0_RX_ACT
+    description: The downstream transaction completes the interrupt flag,.  the software writes 0 to clear zero, and the hardware sets it to 1.
+    bit_offset: 31
+    bit_size: 1
+fieldset/UEP0_TX_CTRL:
+  description: Endpoint 0 Transmit Control Register.
+  fields:
+  - name: EP0_TX_LEN
+    description: The endpoint sends length registers with a maximum value of 512B.
+    bit_offset: 0
+    bit_size: 11
+  - name: EP0_TX_SEQ
+    description: The current sequence number of the endpoint is automatically cleared after receiving the SETUP transaction.
+    bit_offset: 16
+    bit_size: 5
+  - name: EP0_TX_RES
+    description: Response to ACK-TP.
+    bit_offset: 21
+    bit_size: 2
+  - name: EP0_TX_ERDY
+    description: The bit writes 1, sends ERDY, and the hardware of the bit is automatically cleared after the ERDY is sent.
+    bit_offset: 23
+    bit_size: 1
+  - name: EP0_TX_PP
+    description: The PP bit in the received ACK-TP.
+    bit_offset: 24
+    bit_size: 1
+  - name: EP0_TX_FLOW
+    description: Flag to complete NRDY-TP send (answer).
+    bit_offset: 25
+    bit_size: 1
+  - name: UIF_EP0_TX_ACT
+    description: The upload transaction is interrupted, the software writes 0 to clear zero, and the hardware sets it to 1.
+    bit_offset: 31
+    bit_size: 1
+fieldset/UEP_TX_EN:
+  description: Endpoint Send Enable Register.
+  fields:
+  - name: EP_TX_EN
+    description: Endpoint 1~15 Upload Enable.
+    bit_offset: 1
+    bit_size: 15
+  bit_size: 16
+fieldset/UEP_RX_EN:
+  description: Endpoint Receive Enable Register.
+  fields:
+  - name: EP_RX_EN
+    description: Endpoint 1~15 downpass Enable.
+    bit_offset: 1
+    bit_size: 15
+  bit_size: 16
+fieldset/UEP_TX_CFG:
+  description: Endpoint 1 configures the registers.
+  fields:
+  - name: EP_TX_ISO_MODE
+    description: 1 means that the current endpoint is a synchronous endpoint.
+    bit_offset: 0
+    bit_size: 1
+  - name: EP_TX_SEQ_AUTO
+    description: Allow the software to write R16_EPn_ST->EP_SEQ_NUM.
+    bit_offset: 1
+    bit_size: 1
+  - name: EP_TX_ERDY_AUTO
+    description: ERDY automatic mode, the hardware will send ERDY, no software control required;.  The synchronous endpoint recommends clearing the bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: EP_TX_EOB_MODE
+    description: If a short packet is sent, then EOB/LPF in ACK-TP.
+    bit_offset: 3
+    bit_size: 1
+  - name: EP_TX_FIFO_CFG
+    description: The object being operated on when the access offset address is 0xC~0xF.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_TX_FIFO_MODE
+    description: A bit of 1 indicates that the current endpoint is using the FIFO mode,.  and the start and end addresses of the FIFO should be configured before the bit is 1.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_TX_CHAIN_AUTO
+    description: CHAIN automatically switches mode, this mode is recommended.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_TX_CR:
+  description: Endpoint 1 Control Register.
+  fields:
+  - name: EP_TX_ERDY_NUMP
+    description: The hardware sends the NUMP field of ERDY-TP,.  and the general configuration value is the number of bursts supported.   For example, if you support level 16 bursts, the field is configured to be 16.
+    bit_offset: 0
+    bit_size: 5
+  - name: EP_TX_CHAIN_CLR
+    description: Write 1 to clear all CHAIN configuration values and statuses.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_TX_CLR
+    description: Write 1 to clear all configuration values and states of the endpoint, except for UEP_CFG.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_TX_HALT
+    description: Endpoint stop, high efficiency, endpoint stop response STALL to DPH.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_TX_SEQ:
+  description: Endpoint 1 serial number register.
+  fields:
+  - name: TX_EP_SEQ_NUM
+    description: The current serial number of the endpoint is writable in non-SEQ_AUTO mode and read-only in SEQ_AUTO mode.
+    bit_offset: 0
+    bit_size: 5
+  bit_size: 8
+fieldset/UEP_TX_ST:
+  description: Endpoint 1 state register.
+  fields:
+  - name: TX_CHAIN_EN
+    description: CHAIN enabled state, corresponding to 4 independent CHAINs.
+    bit_offset: 0
+    bit_size: 4
+  - name: TX_CHAIN_RES
+    description: CHAIN response state, corresponding to 4 independent CHAINs.
+    bit_offset: 4
+    bit_size: 1
+  - name: TX_EP_ERDY_REQ
+    description: It indicates that it is currently in the sending ERDY;. Writing 1 to that bit will send ERDY, used in non-ERDY_AUTO mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: TX_EP_FC_ST
+    description: The endpoint is currently in the flow control state, write 1 to clear it.
+    bit_offset: 6
+    bit_size: 1
+  - name: TX_EP_INT_FLAG
+    description: The endpoint is currently interrupted, the bit is read-only, and if all CHAIN_IF is 0, the bit is 0, otherwise it is 1.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_TX_CHAIN_CR:
+  description: Endpoint 1 CHAIN control register.
+  fields:
+  - name: TX_RET_SEL
+    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN state and configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: TX_FORCE_RET
+    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: TX_CUR_CFG
+    description: The currently configured CHAIN serial number.
+    bit_offset: 4
+    bit_size: 2
+  - name: TX_CUR_USE
+    description: The CHAIN serial number currently in use.
+    bit_offset: 6
+    bit_size: 2
+  bit_size: 8
+fieldset/UEP_TX_CHAIN_ST:
+  description: Endpoint 1 CHAIN status register.
+  fields:
+  - name: TX_CHAIN_NO
+    description: The CHAIN serial number that is currently generating the outage.
+    bit_offset: 0
+    bit_size: 2
+  - name: TX_DPH_PP
+    description: The current status of the PP bit in the DPH.
+    bit_offset: 2
+    bit_size: 1
+  - name: TX_NUMP_EMPTY
+    description: If the NUMP in the current CHAIN is 0, then the position is 1.
+    bit_offset: 3
+    bit_size: 1
+  - name: TX_EOB_LPF
+    description: The EOB/LPF bits in the last pack of DPH of the current CHAIN.
+    bit_offset: 5
+    bit_size: 1
+  - name: TX_CHAIN_IF
+    description: The bit is only written, write 1 to release the current CHAIN_IF;. The current CHAIN NUMP_EMPTY is 1 to cause this outage.
+    bit_offset: 6
+    bit_size: 1
+  - name: TX_CHAIN_EN
+    description: The currently used CHAIN enables the hardware to.  automatically set 1 after the UEP_CHAIN_NUMP register is configured, and the CHAIN is automatically cleared   after the transmission is completed.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_TX_CHAIN_LEN:
+  description: Endpoint 1 CHAIN sends the last packet length.
+  fields:
+  - name: CHAIN_TX_LEN
+    description: The CHAIN sends the length of the last packet.
+    bit_offset: 0
+    bit_size: 11
+  bit_size: 16
+fieldset/UEP_TX_CHAIN_EXP_NUMP:
+  description: Number of NUMPs expected to be sent by endpoint 1.
+  fields:
+  - name: TX_CHAIN_EXP_NUMP
+    description: The number of DPP packets that can be sent by the CHAIN that has been completed.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/UEP_TX_CHAIN_NUMP:
+  description: Number of NUMPs sent by endpoint 1.
+  fields:
+  - name: TX_CHAIN_NUMP
+    description: The number of DPP packets that have been transmitted; When the CHIN_EN is 0,.  the register is automatically cleared at the same time as the UEP_CHAIN_NUMP is written.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/UEP_TX_DMA_OFS:
+  description: DMA offset length of endpoint 1.
+  fields:
+  - name: CHAIN_TX_DMA_OFS
+    description: The offset address of the DPP in the CHAIN.
+    bit_offset: 0
+    bit_size: 16
+  bit_size: 16
+fieldset/UEP_TX_DMA:
+  description: DMA start address of endpoint 1.
+  fields:
+  - name: CHAIN_TX_DMA
+    description: 'In normal mode:. The DMA start address of the CHAIN sending data.  In FIFO mode:  The FIFO start address is 16~23 bits of the mapping address in SRAM;  The FIFO ends 16~23 bits of the mapped address in SRAM.'
+    bit_offset: 0
+    bit_size: 32
+fieldset/UEP_RX_CFG:
+  description: Endpoint 1 Configuration Register.
+  fields:
+  - name: EP_RX_ISO_MODE
+    description: 1 means that the current endpoint is a synchronous endpoint.
+    bit_offset: 0
+    bit_size: 1
+  - name: EP_RX_SEQ_AUTO
+    description: Allow the software to write R16_EPn_ST->EP_SEQ_NUM.
+    bit_offset: 1
+    bit_size: 1
+  - name: EP_RX_ERDY_AUTO
+    description: ERDY automatic mode, the hardware will send ERDY, no software control required;.  The synchronous endpoint recommends clearing the bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: EP_RX_NRDY_MODE
+    description: This bit is 1, and when a short packet or DPH (PP=0) is received,.  all CHAIN_EN are cleared, which will cause the DPH to respond to NRDY.   Software reconfiguration required.
+    bit_offset: 3
+    bit_size: 1
+  - name: EP_RX_TOUT_MODE
+    description: This bit is 1, and when the continuous burst packet is received, PP=1 and not a short packet,.  the DPH is not received after the timeout, resulting in TOUT_IF interrupt.
+    bit_offset: 4
+    bit_size: 1
+  - name: EP_RX_FIFO_CFG
+    description: The object being operated on when the access offset address is 0xC~0xF.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_RX_FIFO_MODE
+    description: A bit of 1 indicates that the current endpoint is using the FIFO mode,.  and the start and end addresses of the FIFO should be configured before the bit is 1.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_RX_CHAIN_AUTO
+    description: CHAIN automatically switches mode, this mode is recommended.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_RX_CR:
+  description: Endpoint 1 Control Register.
+  fields:
+  - name: EP_RX_ERDY_NUMP
+    description: The hardware sends the NUMP field of ERDY-TP,.  and the general configuration value is the number of bursts supported.   For example, if you support level 16 bursts, the field is configured to be 16.
+    bit_offset: 0
+    bit_size: 5
+  - name: EP_RX_CHAIN_CLR
+    description: Write 1 to clear all CHAIN configuration values and statuses.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_RX_CLR
+    description: Write 1 to clear all configuration values and states of the endpoint, except for UEP_CFG.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_RX_HALT
+    description: Endpoint stop, high efficiency, endpoint stop response STALL to DPH.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_RX_SEQ:
+  description: Endpoint 1 serial number register.
+  fields:
+  - name: EP_RX_SEQ_NUM
+    description: The current serial number of the endpoint is writable in non-SEQ_AUTO mode and read-only in SEQ_AUTO mode.
+    bit_offset: 0
+    bit_size: 5
+  bit_size: 8
+fieldset/UEP_RX_ST:
+  description: Endpoint 1 state register.
+  fields:
+  - name: EP_RX_CHAIN_EN
+    description: CHAIN enabled state, corresponding to 4 independent CHAINs.
+    bit_offset: 0
+    bit_size: 4
+  - name: EP_RX_CHAIN_RES
+    description: CHAIN response state, corresponding to 4 independent CHAINs.
+    bit_offset: 4
+    bit_size: 1
+  - name: EP_RX_ERDY_REQ
+    description: It indicates that it is currently in the sending ERDY;. Writing 1 to that bit will send ERDY, used in non-ERDY_AUTO mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_RX_FC_ST
+    description: The endpoint is currently in the flow control state, write 1 to clear it.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_RX_INT_FLAG
+    description: The endpoint is currently interrupted, the bit is read-only, and if all CHAIN_IF is 0, the bit is 0, otherwise it is 1.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_RX_CHAIN_CR:
+  description: Endpoint 1 CHAIN control register.
+  fields:
+  - name: EP_RX_RET_SEL
+    description: When the FORCE_RET is valid, this bit indicates the returned CHAIN state and configuration.
+    bit_offset: 0
+    bit_size: 2
+  - name: EP_RX_FORCE_RET
+    description: This bit effectively forces the return of the selected CHAIN state machine configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: EP_RX_CUR_CFG
+    description: The currently configured CHAIN serial number.
+    bit_offset: 4
+    bit_size: 2
+  - name: EP_RX_CUR_USE
+    description: The CHAIN serial number currently in use.
+    bit_offset: 6
+    bit_size: 2
+  bit_size: 8
+fieldset/UEP_RX_CHAIN_ST:
+  description: Endpoint 1 CHAIN status register.
+  fields:
+  - name: EP_RX_CHAIN_NO
+    description: The CHAIN serial number that is currently generating the outage.
+    bit_offset: 0
+    bit_size: 2
+  - name: EP_RX_DPH_PP
+    description: The current status of the PP bit in the DPH.
+    bit_offset: 2
+    bit_size: 1
+  - name: EP_RX_NUMP_EMPTY
+    description: If the NUMP in the current CHAIN is 0, then the position is 1.
+    bit_offset: 3
+    bit_size: 1
+  - name: EP_RX_ISO_PKT_ERR
+    description: Only the synchronous downhaul endpoint is used, and there is a CRC32 error in the currently receiving DPP.
+    bit_offset: 4
+    bit_size: 1
+  - name: EP_RX_LPF_FLAG
+    description: Only the synchronous downhaul endpoint is used to receive the LPF status in the DPH currently received.
+    bit_offset: 5
+    bit_size: 1
+  - name: EP_RX_CHAIN_IF
+    description: The bit is only written, write 1 to release the current CHAIN_IF;. The interrupt occurs when any of the following conditions are met.
+    bit_offset: 6
+    bit_size: 1
+  - name: EP_RX_CHAIN_EN
+    description: The currently used CHAIN enables the hardware to.  automatically set 1 after the UEP_CHAIN_NUMP register is configured, and the CHAIN is automatically cleared   after the transmission is completed.
+    bit_offset: 7
+    bit_size: 1
+  bit_size: 8
+fieldset/UEP_RX_CHAIN_LEN:
+  description: The length of the last packet received by the endpoint 1 CHAIN.
+  fields:
+  - name: EP_RX_CHAIN_RX_LEN
+    description: The currently completed CHAIN receives the length of the last package.
+    bit_offset: 0
+    bit_size: 11
+  bit_size: 16
+fieldset/UEP_RX_CHAIN_MAX_NUMP:
+  description: Number of NUMPs that endpoint 1 can receive.
+  fields:
+  - name: RX_CHAIN_MAX_NUMP
+    description: The number of DPP packets that the CHAIN can receive.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/UEP_RX_CHAIN_NUMP:
+  description: Number of NUMPs received by endpoint 1.
+  fields:
+  - name: TX_CHAIN_NUMP
+    description: The number of DPP packets that the CHAIN has received.
+    bit_offset: 0
+    bit_size: 8
+  bit_size: 8
+fieldset/UEP_RX_DMA_OFS:
+  description: DMA offset length of endpoint 1.
+  fields:
+  - name: CHAIN_DMA_OFS
+    description: The offset address of the DPP in the CHAIN.
+    bit_offset: 0
+    bit_size: 16
+  bit_size: 16
+fieldset/UEP_RX_DMA:
+  description: DMA start address of endpoint 1.
+  fields:
+  - name: CHAIN_DMA_BA
+    description: 'In normal mode:. The DMA start address of the CHAIN receiving data.  In FIFO mode:  The FIFO start address is 16~23 bits of the mapping address in SRAM;  The FIFO ends 16~23 bits of the mapped address in SRAM.'
+    bit_offset: 0
+    bit_size: 32

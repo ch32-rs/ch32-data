@@ -1,0 +1,212 @@
+- name: PFIC
+  address: 3758153728
+  registers:
+    kind: pfic
+    version: v4x7
+    block: PFIC
+- name: SYSTICK
+  address: 3758157824
+  registers:
+    kind: systick
+    version: rv4
+    block: SYSTICK
+- name: FLASH
+  address: 1073881088
+  registers:
+    kind: flash
+    version: x315
+    block: FLASH
+- name: EXTI
+  address: 1073808384
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+  - signal: EXTI0
+    interrupt: EXTI7_0
+  - signal: EXTI7
+    interrupt: EXTI7_0
+  - signal: EXTI8
+    interrupt: EXTI15_8
+  - signal: EXTI15
+    interrupt: EXTI15_8
+- name: RCC
+  address: 1073876992
+  registers:
+    kind: rcc
+    version: x315
+    block: RCC
+  pins:
+  - pin: PA8
+    signal: MCO
+- name: DMA1
+  address: 1073872896
+  registers:
+    kind: dma
+    version: x315
+    block: DMA1
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: DMA1EN
+  interrupts:
+  - signal: CH1
+    interrupt: DMA1_CH1
+  - signal: CH2
+    interrupt: DMA1_CH2
+  - signal: CH3
+    interrupt: DMA1_CH3
+  - signal: CH4
+    interrupt: DMA1_CH4
+  - signal: CH5
+    interrupt: DMA1_CH5
+  - signal: CH6
+    interrupt: DMA1_CH6
+  - signal: CH7
+    interrupt: DMA1_CH7
+  - signal: CH8
+    interrupt: DMA1_CH8
+  - signal: CH9
+    interrupt: DMA1_CH9
+  - signal: CH10
+    interrupt: DMA1_CH10
+  - signal: CH11
+    interrupt: DMA1_CH11
+- name: PWR
+  address: 1073770496
+  registers:
+    kind: pwr
+    version: x315
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: PWREN
+    reset:
+      register: HB1PRSTR
+      field: PWRRST
+- name: GPIOA
+  address: 1073809408
+  registers:
+    kind: gpio
+    version: h4
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: IOPAEN
+    reset:
+      register: HB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 1073810432
+  registers:
+    kind: gpio
+    version: h4
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: IOPBEN
+    reset:
+      register: HB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 1073811456
+  registers:
+    kind: gpio
+    version: h4
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: IOPCEN
+    reset:
+      register: HB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 1073812480
+  registers:
+    kind: gpio
+    version: h4
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: IOPDEN
+    reset:
+      register: HB2PRSTR
+      field: IOPDRST
+- name: AFIO
+  address: 1073807360
+  registers:
+    kind: afio
+    version: x315
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: HB2PCENR
+      field: AFIOEN
+    reset:
+      register: HB2PRSTR
+      field: AFIORST
+- name: RTC
+  address: 1073752064
+  registers:
+    kind: rtc
+    version: common
+    block: RTC
+- name: WWDG
+  address: 1073753088
+  registers:
+    kind: wwdg
+    version: v00x
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: HB1PCENR
+      field: WWDGEN
+    reset:
+      register: HB1PRSTR
+      field: WWDGRST
+- name: IWDG
+  address: 1073754112
+  registers:
+    kind: iwdg
+    version: v00x
+    block: IWDG
+- name: CRC
+  address: 1073885184
+  registers:
+    kind: crc
+    version: h4
+    block: CRC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: CRCEN
+- name: EXTEND
+  address: 1073881280
+  registers:
+    kind: extend
+    version: x315
+    block: EXTEND
