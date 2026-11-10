@@ -94,6 +94,7 @@ block/CAN:
       len: 2
       stride: 16
     fieldset: RXMDLR
+    access: Read
   - name: RXMDHR
     description: CAN receive FIFO mailbox data high register.
     byte_offset: 444
@@ -101,6 +102,7 @@ block/CAN:
       len: 2
       stride: 16
     fieldset: RXMDHR
+    access: Read
   - name: FCTLR
     description: CAN filter master register.
     byte_offset: 512
