@@ -1,9 +1,3 @@
-# CH32H417 USBHS controller (CH32H417RM §25).
-#
-# The device block matches usbhs_v4x7.yaml, with endpoints 1-7 modelled as
-# arrays. H4 adds the per-endpoint RX/TX FIFO windows at the end of the device
-# block; a few host fields differ in width.
-
 block/USBHS:
   description: USB register.
   items:
@@ -30,7 +24,7 @@ block/USBHS:
   - name: USB_WAKE_CTRL
     description: USB remote wake up register.
     byte_offset: 4
-    bit_size: 16
+    bit_size: 8
     fieldset: USB_WAKE_CTRL
   - name: USB_TEST_MODE
     description: USB test mode register.
@@ -328,7 +322,7 @@ block/USBHS_HOST:
   - name: UH_PORT_CHG
     description: USB host port state charge register.
     byte_offset: 310
-    bit_size: 16
+    bit_size: 8
     fieldset: UH_PORT_CHG
   - name: UH_BC_CTRL
     description: USB host BC charging control register.
@@ -583,8 +577,8 @@ fieldset/UEP_R_TOG_AUTO:
   fields:
   - name: UEP_R_TOG_AUTO
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
-    bit_offset: 0
-    bit_size: 8
+    bit_offset: 1
+    bit_size: 7
 fieldset/UEP_TX_EN:
   description: USB endpoint sends the enable register.
   bit_size: 16
@@ -630,8 +624,8 @@ fieldset/UEP_T_TOG_AUTO:
   fields:
   - name: UEP_T_TOG_AUTO
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
-    bit_offset: 0
-    bit_size: 8
+    bit_offset: 1
+    bit_size: 7
 fieldset/UH_BC_CTRL:
   description: USB host BC charging control register.
   fields:
@@ -902,7 +896,7 @@ fieldset/UH_PORT_CFG:
     bit_size: 1
 fieldset/UH_PORT_CHG:
   description: USB host port state charge register.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: UHIF_PORT_CONNECT
     description: port connection state charge.
@@ -1315,7 +1309,7 @@ fieldset/USB_TEST_MODE:
     bit_size: 1
 fieldset/USB_WAKE_CTRL:
   description: USB remote wake up register.
-  bit_size: 16
+  bit_size: 8
   fields:
   - name: UD_REMOTE_WKUP
     description: remote wake up.

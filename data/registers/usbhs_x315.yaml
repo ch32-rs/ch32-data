@@ -322,7 +322,7 @@ block/USB:
   - name: UH_PORT_CHG
     description: USB host port state charge register.
     byte_offset: 310
-    bit_size: 16
+    bit_size: 8
     fieldset: UH_PORT_CHG
   - name: UH_BC_CTRL
     description: USB host BC charging control register.
@@ -365,8 +365,8 @@ fieldset/UEP_R_TOG_AUTO:
   fields:
   - name: UEP_R_TOG_AUTO
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
-    bit_offset: 0
-    bit_size: 8
+    bit_offset: 1
+    bit_size: 7
   bit_size: 16
 fieldset/UEP_T_BURST_MODE:
   description: USB endpoint send the mode register.
@@ -393,8 +393,8 @@ fieldset/UEP_T_TOG_AUTO:
   fields:
   - name: UEP_T_TOG_AUTO
     description: 0 to 7 endpoint synchronization triggers bit auto-filp. enable.
-    bit_offset: 0
-    bit_size: 8
+    bit_offset: 1
+    bit_size: 7
   bit_size: 16
 fieldset/UH_PORT_ST:
   description: USB host port status register.
@@ -964,7 +964,7 @@ fieldset/UH_PORT_CHG:
     description: port sleep state charge.
     bit_offset: 5
     bit_size: 1
-  bit_size: 16
+  bit_size: 8
 fieldset/UH_PORT_INT_EN:
   description: USB host port interrupt enable register.
   fields:
