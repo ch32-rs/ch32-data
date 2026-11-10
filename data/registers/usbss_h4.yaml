@@ -987,10 +987,13 @@ fieldset/HOST_RX_FC_STATUS:
   description: The host endpoint receives the flow control register.
   bit_size: 16
   fields:
-  - name: EPx_RX_FC
+  - name: EP_RX_FC
     description: The flow control status of the host to receiving endpoints 1-15.
     bit_offset: 1
-    bit_size: 15
+    bit_size: 1
+    array:
+      len: 15
+      stride: 1
 fieldset/HOST_RX_NUMP:
   description: The host receives the NUMP register.
   bit_size: 16
@@ -1034,10 +1037,13 @@ fieldset/HOST_TX_FC_STATUS:
   description: The host endpoint sends flow control register.
   bit_size: 16
   fields:
-  - name: EPx_TX_FC
+  - name: EP_TX_FC
     description: The flow control status of the host to send endpoints 1-15.
     bit_offset: 1
-    bit_size: 15
+    bit_size: 1
+    array:
+      len: 15
+      stride: 1
 fieldset/ITP:
   description: Interval Registers for ITP packets in USB.
   fields:
