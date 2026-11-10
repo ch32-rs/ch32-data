@@ -205,7 +205,7 @@ fieldset/IACTR3:
   - name: IACTS
     description: IACTS64_84.
     bit_offset: 0
-    bit_size: 32
+    bit_size: 21
 fieldset/IENR1:
   description: Interrupt Setting Register.
   fields:
