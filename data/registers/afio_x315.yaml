@@ -23,7 +23,7 @@ block/AFIO:
     fieldset: EXTICR4
   - name: CR
     description: control register.
-    byte_offset: 28
+    byte_offset: 24
     fieldset: CR
   - name: GPIOA_AFLR
     description: PA port multiplexing function register.

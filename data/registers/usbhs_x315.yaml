@@ -112,169 +112,50 @@ block/USB:
     description: The start address register of the endpoint 0 buffer.
     byte_offset: 32
     fieldset: UEP0_DMA
-  - name: UEP1_RX_DMA
-    description: endpoint 1 receives the start address register of the buffer.
+  - name: UEP_RX_DMA
+    description: endpoint 1-7 receive buffer start address register.
     byte_offset: 36
-    fieldset: UEP1_RX_DMA
-  - name: UEP2_RX_DMA
-    description: endpoint 2 receives the start address register of the buffer.
-    byte_offset: 40
-    fieldset: UEP2_RX_DMA
-  - name: UEP3_RX_DMA
-    description: endpoint 3 receives the start address register of the buffer.
-    byte_offset: 44
-    fieldset: UEP3_RX_DMA
-  - name: UEP4_RX_DMA
-    description: endpoint 4 receives the start address register of the buffer.
-    byte_offset: 48
-    fieldset: UEP4_RX_DMA
-  - name: UEP5_RX_DMA
-    description: endpoint 5 receives the start address register of the buffer.
-    byte_offset: 52
-    fieldset: UEP5_RX_DMA
-  - name: UEP6_RX_DMA
-    description: endpoint 6 receives the start address register of the buffer.
-    byte_offset: 56
-    fieldset: UEP6_RX_DMA
-  - name: UEP7_RX_DMA
-    description: endpoint 7 receives the start address register of the buffer.
-    byte_offset: 60
-    fieldset: UEP7_RX_DMA
-  - name: UEP1_TX_DMA
-    description: endpoint 1 sends the start address register of the buffer.
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_RX_DMA
+  - name: UEP_TX_DMA
+    description: endpoint 1-7 transmit buffer start address register.
     byte_offset: 64
-    fieldset: UEP1_TX_DMA
-  - name: UEP2_TX_DMA
-    description: endpoint 2 sends the start address register of the buffer.
-    byte_offset: 68
-    fieldset: UEP2_TX_DMA
-  - name: UEP3_TX_DMA
-    description: endpoint 3 sends the start address register of the buffer.
-    byte_offset: 72
-    fieldset: UEP3_TX_DMA
-  - name: UEP4_TX_DMA
-    description: endpoint 4 sends the start address register of the buffer.
-    byte_offset: 76
-    fieldset: UEP4_TX_DMA
-  - name: UEP5_TX_DMA
-    description: endpoint 5 sends the start address register of the buffer.
-    byte_offset: 80
-    fieldset: UEP5_TX_DMA
-  - name: UEP6_TX_DMA
-    description: endpoint 6 sends the start address register of the buffer.
-    byte_offset: 84
-    fieldset: UEP6_TX_DMA
-  - name: UEP7_TX_DMA
-    description: endpoint 7 sends the start address register of the buffer.
-    byte_offset: 88
-    fieldset: UEP7_TX_DMA
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_TX_DMA
   - name: UEP0_MAX_LEN
     description: endpoint 0 max length packet register.
     byte_offset: 92
     fieldset: UEP0_MAX_LEN
-  - name: UEP1_MAX_LEN
-    description: endpoint 1 max length packet register.
+  - name: UEP_MAX_LEN
+    description: endpoint 1-7 max packet length register.
     byte_offset: 96
-    fieldset: UEP1_MAX_LEN
-  - name: UEP2_MAX_LEN
-    description: endpoint 2 max length packet register.
-    byte_offset: 100
-    fieldset: UEP2_MAX_LEN
-  - name: UEP3_MAX_LEN
-    description: endpoint 3 max length packet register.
-    byte_offset: 104
-    fieldset: UEP3_MAX_LEN
-  - name: UEP4_MAX_LEN
-    description: endpoint 4 max length packet register.
-    byte_offset: 108
-    fieldset: UEP4_MAX_LEN
-  - name: UEP5_MAX_LEN
-    description: endpoint 5 max length packet register.
-    byte_offset: 112
-    fieldset: UEP5_MAX_LEN
-  - name: UEP6_MAX_LEN
-    description: endpoint 6 max length packet register.
-    byte_offset: 116
-    fieldset: UEP6_MAX_LEN
-  - name: UEP7_MAX_LEN
-    description: endpoint 7 max length packet register.
-    byte_offset: 120
-    fieldset: UEP7_MAX_LEN
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_MAX_LEN
   - name: UEP0_RX_LEN
     description: endpoint 0 acceptable length.
     byte_offset: 124
     bit_size: 16
     fieldset: UEP0_RX_LEN
-  - name: UEP1_RX_LEN
-    description: endpoint 1 receives the lenth register in a single pass.
+  - name: UEP_RX_LEN
+    description: endpoint 1-7 receive length register.
     byte_offset: 128
-    bit_size: 16
-    fieldset: UEP1_RX_LEN
-  - name: UEP1_R_SIZE
-    description: the length register of the total received data at endpoint 1.
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_RX_LEN
+  - name: UEP_R_SIZE
+    description: endpoint 1-7 receive size register.
     byte_offset: 130
-    bit_size: 16
-    fieldset: UEP1_R_SIZE
-  - name: UEP2_RX_LEN
-    description: endpoint 2 receives the lenth register in a single pass.
-    byte_offset: 132
-    bit_size: 16
-    fieldset: UEP2_RX_LEN
-  - name: UEP2_R_SIZE
-    description: the length register of the total received data at endpoint 2.
-    byte_offset: 134
-    bit_size: 16
-    fieldset: UEP2_R_SIZE
-  - name: UEP3_RX_LEN
-    description: endpoint 3 receives the lenth register in a single pass.
-    byte_offset: 136
-    bit_size: 16
-    fieldset: UEP3_RX_LEN
-  - name: UEP3_R_SIZE
-    description: the length register of the total received data at endpoint 3.
-    byte_offset: 138
-    bit_size: 16
-    fieldset: UEP3_R_SIZE
-  - name: UEP4_RX_LEN
-    description: endpoint 4 receives the lenth register in a single pass.
-    byte_offset: 140
-    bit_size: 16
-    fieldset: UEP4_RX_LEN
-  - name: UEP4_R_SIZE
-    description: the length register of the total received data at endpoint 4.
-    byte_offset: 142
-    bit_size: 16
-    fieldset: UEP4_R_SIZE
-  - name: UEP5_RX_LEN
-    description: endpoint 5 receives the lenth register in a single pass.
-    byte_offset: 144
-    bit_size: 16
-    fieldset: UEP5_RX_LEN
-  - name: UEP5_R_SIZE
-    description: the length register of the total received data at endpoint 5.
-    byte_offset: 146
-    bit_size: 16
-    fieldset: UEP5_R_SIZE
-  - name: UEP6_RX_LEN
-    description: endpoint 6 receives the lenth register in a single pass.
-    byte_offset: 148
-    bit_size: 16
-    fieldset: UEP6_RX_LEN
-  - name: UEP6_R_SIZE
-    description: the length register of the total received data at endpoint 6.
-    byte_offset: 150
-    bit_size: 16
-    fieldset: UEP6_R_SIZE
-  - name: UEP7_RX_LEN
-    description: endpoint 7 receives the lenth register in a single pass.
-    byte_offset: 152
-    bit_size: 16
-    fieldset: UEP7_RX_LEN
-  - name: UEP7_R_SIZE
-    description: the length register of the total received data at endpoint 7.
-    byte_offset: 154
-    bit_size: 16
-    fieldset: UEP7_R_SIZE
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_R_SIZE
   - name: UEP0_T_LEN
     description: endpoint 0 send the length.
     byte_offset: 156
@@ -290,111 +171,27 @@ block/USB:
     byte_offset: 159
     bit_size: 8
     fieldset: UEP0_RX_CTRL
-  - name: UEP1_T_LEN
-    description: endpoint 1 send the length register.
+  - name: UEP_T_LEN
+    description: endpoint 1-7 transmit length register.
     byte_offset: 160
-    bit_size: 16
-    fieldset: UEP1_T_LEN
-  - name: UEP1_TX_CTRL
-    description: endpoint 1 send control register.
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_T_LEN
+  - name: UEP_TX_CTRL
+    description: endpoint 1-7 transmit control register.
     byte_offset: 162
-    bit_size: 8
-    fieldset: UEP1_TX_CTRL
-  - name: UEP1_RX_CTRL
-    description: endpoint 1 receive control.
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_TX_CTRL
+  - name: UEP_RX_CTRL
+    description: endpoint 1-7 receive control register.
     byte_offset: 163
-    bit_size: 8
-    fieldset: UEP1_RX_CTRL
-  - name: UEP2_T_LEN
-    description: endpoint 2 send the length register.
-    byte_offset: 164
-    bit_size: 16
-    fieldset: UEP2_T_LEN
-  - name: UEP2_TX_CTRL
-    description: endpoint 2 send control register.
-    byte_offset: 166
-    bit_size: 8
-    fieldset: UEP2_TX_CTRL
-  - name: UEP2_RX_CTRL
-    description: endpoint 2 receive control.
-    byte_offset: 167
-    bit_size: 8
-    fieldset: UEP2_RX_CTRL
-  - name: UEP3_T_LEN
-    description: endpoint 3 send the length register.
-    byte_offset: 168
-    bit_size: 16
-    fieldset: UEP3_T_LEN
-  - name: UEP3_TX_CTRL
-    description: endpoint 3 send control register.
-    byte_offset: 170
-    bit_size: 8
-    fieldset: UEP3_TX_CTRL
-  - name: UEP3_RX_CTRL
-    description: endpoint 3 receive control.
-    byte_offset: 171
-    bit_size: 8
-    fieldset: UEP3_RX_CTRL
-  - name: UEP4_T_LEN
-    description: endpoint 4 send the length register.
-    byte_offset: 172
-    bit_size: 16
-    fieldset: UEP4_T_LEN
-  - name: UEP4_TX_CTRL
-    description: endpoint 4 send control register.
-    byte_offset: 174
-    bit_size: 8
-    fieldset: UEP4_TX_CTRL
-  - name: UEP4_RX_CTRL
-    description: endpoint 4 receive control.
-    byte_offset: 175
-    bit_size: 8
-    fieldset: UEP4_RX_CTRL
-  - name: UEP5_T_LEN
-    description: endpoint 5 send the length register.
-    byte_offset: 176
-    bit_size: 16
-    fieldset: UEP5_T_LEN
-  - name: UEP5_TX_CTRL
-    description: endpoint 5 send control register.
-    byte_offset: 178
-    bit_size: 8
-    fieldset: UEP5_TX_CTRL
-  - name: UEP5_RX_CTRL
-    description: endpoint 5 receive control.
-    byte_offset: 179
-    bit_size: 8
-    fieldset: UEP5_RX_CTRL
-  - name: UEP6_T_LEN
-    description: endpoint 6 send the length register.
-    byte_offset: 180
-    bit_size: 16
-    fieldset: UEP6_T_LEN
-  - name: UEP6_TX_CTRL
-    description: endpoint 6 send control register.
-    byte_offset: 182
-    bit_size: 8
-    fieldset: UEP6_TX_CTRL
-  - name: UEP6_RX_CTRL
-    description: endpoint 6 receive control.
-    byte_offset: 183
-    bit_size: 8
-    fieldset: UEP6_RX_CTRL
-  - name: UEP7_T_LEN
-    description: endpoint 7 send the length register.
-    byte_offset: 184
-    bit_size: 16
-    fieldset: UEP7_T_LEN
-  - name: UEP7_TX_CTRL
-    description: endpoint 7 send control register.
-    byte_offset: 186
-    bit_size: 8
-    fieldset: UEP7_TX_CTRL
-  - name: UEP7_RX_CTRL
-    description: endpoint 7 receive control.
-    byte_offset: 187
-    bit_size: 8
-    fieldset: UEP7_RX_CTRL
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_RX_CTRL
   - name: UEP_T_ISO
     description: usb endpoint sends a synchronous mode enable register.
     byte_offset: 188
@@ -405,70 +202,28 @@ block/USB:
     byte_offset: 190
     bit_size: 16
     fieldset: UEP_R_ISO
-  - name: UEP1_RX_FIFO
-    description: Receive FIFO address of usb endpoint 1.
+  - name: UEP_RX_FIFO
+    description: endpoint 1-7 receive FIFO register.
     byte_offset: 192
-    fieldset: UEP1_RX_FIFO
-  - name: UEP2_RX_FIFO
-    description: Receive FIFO address of usb endpoint 2.
-    byte_offset: 196
-    fieldset: UEP2_RX_FIFO
-  - name: UEP3_RX_FIFO
-    description: Receive FIFO address of usb endpoint 3.
-    byte_offset: 200
-    fieldset: UEP3_RX_FIFO
-  - name: UEP4_RX_FIFO
-    description: Receive FIFO address of usb endpoint 4.
-    byte_offset: 204
-    fieldset: UEP4_RX_FIFO
-  - name: UEP5_RX_FIFO
-    description: Receive FIFO address of usb endpoint 5.
-    byte_offset: 208
-    fieldset: UEP5_RX_FIFO
-  - name: UEP6_RX_FIFO
-    description: Receive FIFO address of usb endpoint 6.
-    byte_offset: 212
-    fieldset: UEP6_RX_FIFO
-  - name: UEP7_RX_FIFO
-    description: Receive FIFO address of usb endpoint 7.
-    byte_offset: 216
-    fieldset: UEP7_RX_FIFO
-  - name: UEP1_TX_FIFO
-    description: The sending FIFO address of usb endpoint 1.
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_RX_FIFO
+  - name: UEP_TX_FIFO
+    description: endpoint 1-7 transmit FIFO register.
     byte_offset: 220
-    fieldset: UEP1_TX_FIFO
-  - name: UEP2_TX_FIFO
-    description: The sending FIFO address of usb endpoint 2.
-    byte_offset: 224
-    fieldset: UEP2_TX_FIFO
-  - name: UEP3_TX_FIFO
-    description: The sending FIFO address of usb endpoint 3.
-    byte_offset: 228
-    fieldset: UEP3_TX_FIFO
-  - name: UEP4_TX_FIFO
-    description: The sending FIFO address of usb endpoint 4.
-    byte_offset: 232
-    fieldset: UEP4_TX_FIFO
-  - name: UEP5_TX_FIFO
-    description: The sending FIFO address of usb endpoint 5.
-    byte_offset: 236
-    fieldset: UEP5_TX_FIFO
-  - name: UEP6_TX_FIFO
-    description: The sending FIFO address of usb endpoint 6.
-    byte_offset: 240
-    fieldset: UEP6_TX_FIFO
-  - name: UEP7_TX_FIFO
-    description: The sending FIFO address of usb endpoint 7.
-    byte_offset: 244
-    fieldset: UEP7_TX_FIFO
-  - name: 16K_MODE_CTRL
+    array:
+      len: 7
+      stride: 4
+    fieldset: UEP_TX_FIFO
+  - name: UEP_16KMODE_CTRL
     description: USBHS 16K mode control register.
     byte_offset: 248
-    fieldset: 16K_MODE_CTRL
-  - name: 16K_MODE_TIME
+    fieldset: UEP_16KMODE_CTRL
+  - name: UEP_16KMODE_TIME
     description: USBHS 16K mode time control register.
     byte_offset: 252
-    fieldset: 16K_MODE_TIME
+    fieldset: UEP_16KMODE_TIME
   - name: UH_CFG
     description: USB host Configuration register.
     byte_offset: 256
@@ -586,150 +341,10 @@ fieldset/UEP0_T_LEN:
     description: endpoint 0 send the length.
     bit_offset: 0
     bit_size: 7
-fieldset/UEP1_RX_LEN:
-  description: endpoint 1 receives the lenth register in a single pass.
-  fields:
-  - name: UEP1_RX_LEN
-    description: the length of data received by endpoint 1 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP1_R_SIZE:
-  description: the length register of the total received data at endpoint 1.
-  fields:
-  - name: UEP1_R_SIZE
-    description: the length of the total received data at endpoint 1.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP1_T_LEN:
-  description: endpoint 1 send the length register.
-  fields:
-  - name: UEP1_T_LEN
-    description: endpoint 1 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP2_RX_LEN:
-  description: endpoint 2 receives the lenth register in a single pass.
-  fields:
-  - name: UEP2_RX_LEN
-    description: the length of data received by endpoint 2 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP2_R_SIZE:
-  description: the length register of the total received data at endpoint 2.
-  fields:
-  - name: UEP2_R_SIZE
-    description: the length of the total received data at endpoint 2.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP2_T_LEN:
-  description: endpoint 2 send the length register.
-  fields:
-  - name: UEP2_T_LEN
-    description: endpoint 2 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP3_RX_LEN:
-  description: endpoint 3 receives the lenth register in a single pass.
-  fields:
-  - name: UEP3_RX_LEN
-    description: the length of data received by endpoint 3 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP3_R_SIZE:
-  description: the length register of the total received data at endpoint 3.
-  fields:
-  - name: UEP3_R_SIZE
-    description: the length of the total received data at endpoint 3.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP3_T_LEN:
-  description: endpoint 3 send the length register.
-  fields:
-  - name: UEP3_T_LEN
-    description: endpoint 3 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP4_RX_LEN:
-  description: endpoint 4 receives the lenth register in a single pass.
-  fields:
-  - name: UEP4_RX_LEN
-    description: the length of data received by endpoint 4 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP4_R_SIZE:
-  description: the length register of the total received data at endpoint 4.
-  fields:
-  - name: UEP4_R_SIZE
-    description: the length of the total received data at endpoint 4.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP4_T_LEN:
-  description: endpoint 4 send the length register.
-  fields:
-  - name: UEP4_T_LEN
-    description: endpoint 4 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP5_RX_LEN:
-  description: endpoint 5 receives the lenth register in a single pass.
-  fields:
-  - name: UEP5_RX_LEN
-    description: the length of data received by endpoint 5 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP5_R_SIZE:
-  description: the length register of the total received data at endpoint 5.
-  fields:
-  - name: UEP5_R_SIZE
-    description: the length of the total received data at endpoint 5.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP5_T_LEN:
-  description: endpoint 5 send the length register.
-  fields:
-  - name: UEP5_T_LEN
-    description: endpoint 5 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP6_R_SIZE:
-  description: the length register of the total received data at endpoint 6.
-  fields:
-  - name: UEP6_R_SIZE
-    description: the length of the total received data at endpoint 6.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP6_T_LEN:
-  description: endpoint 6 send the length register.
-  fields:
-  - name: UEP6_T_LEN
-    description: endpoint 6 send the length.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP7_RX_LEN:
-  description: endpoint 7 receives the lenth register in a single pass.
-  fields:
-  - name: UEP7_RX_LEN
-    description: the length of data received by endpoint 7 in a single pass.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP7_R_SIZE:
-  description: the length register of the total received data at endpoint 7.
-  fields:
-  - name: UEP7_R_SIZE
-    description: the length of the total received data at endpoint 7.
-    bit_offset: 0
-    bit_size: 16
-fieldset/UEP7_T_LEN:
-  description: endpoint 7 send the length register.
-  fields:
-  - name: UEP7_T_LEN
-    description: endpoint 7 send the length.
-    bit_offset: 0
-    bit_size: 16
 fieldset/UEP_R_ISO:
   description: usb endpoint receives a synchronous mode enable register.
   fields:
-  - name: UEPn_R_ISO_EN
+  - name: UEP_R_ISO_EN
     description: down endpoint(OUT) synchronization mode enabled.
     bit_offset: 1
     bit_size: 7
@@ -754,7 +369,7 @@ fieldset/UEP_T_BURST_MODE:
 fieldset/UEP_T_ISO:
   description: usb endpoint sends a synchronous mode enable register.
   fields:
-  - name: UEPn_T_ISO_EN
+  - name: UEP_T_ISO_EN
     description: upload endpoint(IN) synchronization mode enabled.
     bit_offset: 1
     bit_size: 7
@@ -772,7 +387,7 @@ fieldset/UEP_T_TOG_AUTO:
 fieldset/UH_PORT_ST:
   description: USB host port status register.
   fields:
-  - name: UHIS_PORT_C0NNECT
+  - name: UHIS_PORT_CONNECT
     description: port connection state.
     bit_offset: 0
     bit_size: 1
@@ -841,32 +456,6 @@ fieldset/USB_LPM_DATA:
     description: power management busy.
     bit_offset: 15
     bit_size: 1
-fieldset/16K_MODE_CTRL:
-  description: USBHS 16K mode control register.
-  fields:
-  - name: UEP_16KMODE_EN
-    description: the USBHS endpoint 16K mode.
-    bit_offset: 1
-    bit_size: 7
-fieldset/16K_MODE_TIME:
-  description: USBHS 16K mode time control register.
-  fields:
-  - name: TIMER_1US
-    description: 1 microsecond sa the basic timing unit.
-    bit_offset: 0
-    bit_size: 8
-  - name: TIMER_FST
-    description: The first time window for delivery.
-    bit_offset: 8
-    bit_size: 8
-  - name: TIMER_SEC
-    description: The second time window for delivery.
-    bit_offset: 16
-    bit_size: 8
-  - name: TIMER_END
-    description: Stop the time window for delivery.
-    bit_offset: 24
-    bit_size: 8
 fieldset/HSI_CAL_CR:
   description: HSI calibration control register.
   fields:
@@ -904,307 +493,6 @@ fieldset/UEP0_MAX_LEN:
     description: endpoint 0 max acceptable offset length.
     bit_offset: 0
     bit_size: 7
-fieldset/UEP1_MAX_LEN:
-  description: endpoint 1 max length packet register.
-  fields:
-  - name: UEP1_MAX_LEN
-    description: endpoint 1 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP1_RX_DMA:
-  description: endpoint 1 receives the start address register of the buffer.
-  fields:
-  - name: UEP1_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP1_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 1.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP1_TX_DMA:
-  description: endpoint 1 sends the start address register of the buffer.
-  fields:
-  - name: UEP1_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP1_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 1.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP2_MAX_LEN:
-  description: endpoint 2 max length packet register.
-  fields:
-  - name: UEP2_MAX_LEN
-    description: endpoint 2 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP2_RX_DMA:
-  description: endpoint 2 receives the start address register of the buffer.
-  fields:
-  - name: UEP2_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP2_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 2.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP2_TX_DMA:
-  description: endpoint 2 sends the start address register of the buffer.
-  fields:
-  - name: UEP2_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP2_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 2.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP3_MAX_LEN:
-  description: endpoint 3 max length packet register.
-  fields:
-  - name: UEP3_MAX_LEN
-    description: endpoint 3 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP3_RX_DMA:
-  description: endpoint 3 receives the start address register of the buffer.
-  fields:
-  - name: UEP3_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP3_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 3.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP3_TX_DMA:
-  description: endpoint 3 sends the start address register of the buffer.
-  fields:
-  - name: UEP3_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP3_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 3.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP4_MAX_LEN:
-  description: endpoint 4 max length packet register.
-  fields:
-  - name: UEP4_MAX_LEN
-    description: endpoint 4 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP4_RX_DMA:
-  description: endpoint 4 receives the start address register of the buffer.
-  fields:
-  - name: UEP4_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP4_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 4.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP4_TX_DMA:
-  description: endpoint 4 sends the start address register of the buffer.
-  fields:
-  - name: UEP4_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP4_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 4.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP5_MAX_LEN:
-  description: endpoint 5 max length packet register.
-  fields:
-  - name: UEP5_MAX_LEN
-    description: endpoint 5 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP5_RX_DMA:
-  description: endpoint 5 receives the start address register of the buffer.
-  fields:
-  - name: UEP5_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP5_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 5.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP5_TX_DMA:
-  description: endpoint 5 sends the start address register of the buffer.
-  fields:
-  - name: UEP5_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP5_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 5.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP6_MAX_LEN:
-  description: endpoint 6 max length packet register.
-  fields:
-  - name: UEP6_MAX_LEN
-    description: endpoint 6 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP6_RX_DMA:
-  description: endpoint 6 receives the start address register of the buffer.
-  fields:
-  - name: UEP6_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP6_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 6.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP6_TX_DMA:
-  description: endpoint 6 sends the start address register of the buffer.
-  fields:
-  - name: UEP6_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP6_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 6.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP7_MAX_LEN:
-  description: endpoint 7 max length packet register.
-  fields:
-  - name: UEP7_MAX_LEN
-    description: endpoint 7 max acceptable offset length.
-    bit_offset: 0
-    bit_size: 11
-fieldset/UEP7_RX_DMA:
-  description: endpoint 7 receives the start address register of the buffer.
-  fields:
-  - name: UEP7_RX_DMA
-    description: endpoint receives the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP7_RX_FIFO:
-  description: Receive FIFO address of usb endpoint 7.
-  fields:
-  - name: UEP_RX_FIFO_S
-    description: The FIFO start address of the receiving endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_RX_FIFO_E
-    description: The end FIFO address of the receiving endpoint.
-    bit_offset: 16
-    bit_size: 16
-fieldset/UEP7_TX_DMA:
-  description: endpoint 7 sends the start address register of the buffer.
-  fields:
-  - name: UEP7_TX_DMA
-    description: endpoint sends the start address register of the buffer.
-    bit_offset: 0
-    bit_size: 24
-fieldset/UEP7_TX_FIFO:
-  description: The sending FIFO address of usb endpoint 7.
-  fields:
-  - name: UEP_TX_FIFO_S
-    description: The FIFO start address of the sending endpoint.
-    bit_offset: 0
-    bit_size: 16
-  - name: UEP_TX_FIFO_E
-    description: The end FIFO address of the sending endpoint.
-    bit_offset: 16
-    bit_size: 16
 fieldset/UEP_AF_MODE:
   description: USB endpoint muitiplexing register.
   fields:
@@ -1453,263 +741,6 @@ fieldset/UEP0_TX_CTRL:
     bit_size: 1
   - name: UEP_T_DONE
     description: endpoint 0 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_RX_CTRL:
-  description: endpoint 1 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 1 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 1 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 1 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 1 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 1 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP1_TX_CTRL:
-  description: endpoint 1 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 1 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 1 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 1 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 1 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP2_RX_CTRL:
-  description: endpoint 2 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 2 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 2 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 2 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 2 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 2 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_TX_CTRL:
-  description: endpoint 3 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 3 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 3 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 3 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 3 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_RX_CTRL:
-  description: endpoint 4 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 4 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 4 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 4 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 4 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 4 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_RX_CTRL:
-  description: endpoint 5 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 5 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 5 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 5 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 5 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 5 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP5_TX_CTRL:
-  description: endpoint 5 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 5 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 5 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 5 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 5 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_CTRL:
-  description: endpoint 6 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 6 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 6 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 6 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 6 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 6 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_TX_CTRL:
-  description: endpoint 6 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 6 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 6 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 6 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 6 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_RX_CTRL:
-  description: endpoint 7 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 7 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 7 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 7 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 7 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 7 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP7_TX_CTRL:
-  description: endpoint 7 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 7 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 7 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 7 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 7 sends the end of NAK flag.
     bit_offset: 7
     bit_size: 1
 fieldset/UEP_R_BURST:
@@ -2134,78 +1165,6 @@ fieldset/USB_WAKE_CTRL:
     description: remote wake up.
     bit_offset: 0
     bit_size: 1
-fieldset/UEP2_TX_CTRL:
-  description: endpoint 2 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 2 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MAS
-    description: endpoint 2 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 2 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 2 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP3_RX_CTRL:
-  description: endpoint 3 receive control.
-  fields:
-  - name: UEP_R_RES_MASK
-    description: endpoint 3 has control over the received response.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_R_TOG_MASK
-    description: the reception of endpoint 3 expects a synchronous trigger. bit.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_R_TOG_MATCH
-    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
-    bit_offset: 4
-    bit_size: 1
-  - name: UEP_R_NAK_TOG
-    description: endpoint 3 for the received return NAK,packet type.
-    bit_offset: 5
-    bit_size: 1
-  - name: UEP_R_NAK_ACT
-    description: endpoint 3 receives the end of NAK flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_R_DONE
-    description: endpoint 3 receives the end flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP4_TX_CTRL:
-  description: endpoint 4 send control register.
-  fields:
-  - name: UEP_T_RES_MASK
-    description: endpoint 4 control of the send response to IN transactions.
-    bit_offset: 0
-    bit_size: 2
-  - name: UEP_T_TOG_MASK
-    description: endpoint 4 synchronous trigger bit for the sender to. prepare.
-    bit_offset: 2
-    bit_size: 2
-  - name: UEP_T_NAK_ACT
-    description: endpoint 4 sends the end flag.
-    bit_offset: 6
-    bit_size: 1
-  - name: UEP_T_DONE
-    description: endpoint 4 sends the end of NAK flag.
-    bit_offset: 7
-    bit_size: 1
-fieldset/UEP6_RX_LEN:
-  description: endpoint 6 receives the lenth register in a single pass.
-  fields:
-  - name: UEP6_RX_LEN
-    description: the length of data received by endpoint 6 in a single pass.
-    bit_offset: 0
-    bit_size: 16
 fieldset/UEP_RX_EN:
   description: USB endpoint receive the enable registers.
   fields:
@@ -2220,3 +1179,139 @@ fieldset/UEP_TX_EN:
     description: Endpoint 0 to 15 sends enable.
     bit_offset: 0
     bit_size: 16
+fieldset/UEP_RX_DMA:
+  description: endpoint 1 receives the start address register of the buffer.
+  fields:
+  - name: RX_DMA
+    description: endpoint receives the start address register of the buffer.
+    bit_offset: 0
+    bit_size: 24
+fieldset/UEP_TX_DMA:
+  description: endpoint 1 sends the start address register of the buffer.
+  fields:
+  - name: TX_DMA
+    description: endpoint sends the start address register of the buffer.
+    bit_offset: 0
+    bit_size: 24
+fieldset/UEP_MAX_LEN:
+  description: endpoint 1 max length packet register.
+  fields:
+  - name: MAX_LEN
+    description: endpoint 1 max acceptable offset length.
+    bit_offset: 0
+    bit_size: 11
+fieldset/UEP_RX_LEN:
+  description: endpoint 1 receives the lenth register in a single pass.
+  fields:
+  - name: RX_LEN
+    description: the length of data received by endpoint 1 in a single pass.
+    bit_offset: 0
+    bit_size: 16
+fieldset/UEP_R_SIZE:
+  description: the length register of the total received data at endpoint 1.
+  fields:
+  - name: R_SIZE
+    description: the length of the total received data at endpoint 1.
+    bit_offset: 0
+    bit_size: 16
+fieldset/UEP_T_LEN:
+  description: endpoint 1 send the length register.
+  fields:
+  - name: T_LEN
+    description: endpoint 1 send the length.
+    bit_offset: 0
+    bit_size: 16
+fieldset/UEP_TX_CTRL:
+  description: endpoint 1 send control register.
+  fields:
+  - name: UEP_T_RES_MASK
+    description: endpoint 1 control of the send response to IN transactions.
+    bit_offset: 0
+    bit_size: 2
+  - name: UEP_T_TOG_MASK
+    description: endpoint 1 synchronous trigger bit for the sender to. prepare.
+    bit_offset: 2
+    bit_size: 2
+  - name: UEP_T_NAK_ACT
+    description: endpoint 1 sends the end flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: UEP_T_DONE
+    description: endpoint 1 sends the end of NAK flag.
+    bit_offset: 7
+    bit_size: 1
+fieldset/UEP_RX_CTRL:
+  description: endpoint 1 receive control.
+  fields:
+  - name: UEP_R_RES_MASK
+    description: endpoint 1 has control over the received response.
+    bit_offset: 0
+    bit_size: 2
+  - name: UEP_R_TOG_MASK
+    description: the reception of endpoint 1 expects a synchronous trigger. bit.
+    bit_offset: 2
+    bit_size: 2
+  - name: UEP_R_TOG_MATCH
+    description: received synchronization trigger bit matches the desired. synchronization trigger bit state.
+    bit_offset: 4
+    bit_size: 1
+  - name: UEP_R_NAK_TOG
+    description: endpoint 1 for the received return NAK,packet type.
+    bit_offset: 5
+    bit_size: 1
+  - name: UEP_R_NAK_ACT
+    description: endpoint 1 receives the end of NAK flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: UEP_R_DONE
+    description: endpoint 1 receives the end flag.
+    bit_offset: 7
+    bit_size: 1
+fieldset/UEP_RX_FIFO:
+  description: Receive FIFO address of usb endpoint 1.
+  fields:
+  - name: UEP_RX_FIFO_S
+    description: The FIFO start address of the receiving endpoint.
+    bit_offset: 0
+    bit_size: 16
+  - name: UEP_RX_FIFO_E
+    description: The end FIFO address of the receiving endpoint.
+    bit_offset: 16
+    bit_size: 16
+fieldset/UEP_TX_FIFO:
+  description: The sending FIFO address of usb endpoint 1.
+  fields:
+  - name: UEP_TX_FIFO_S
+    description: The FIFO start address of the sending endpoint.
+    bit_offset: 0
+    bit_size: 16
+  - name: UEP_TX_FIFO_E
+    description: The end FIFO address of the sending endpoint.
+    bit_offset: 16
+    bit_size: 16
+fieldset/UEP_16KMODE_CTRL:
+  description: USBHS 16K mode control register.
+  fields:
+  - name: UEP_16KMODE_EN
+    description: the USBHS endpoint 16K mode.
+    bit_offset: 1
+    bit_size: 7
+fieldset/UEP_16KMODE_TIME:
+  description: USBHS 16K mode time control register.
+  fields:
+  - name: TIMER_1US
+    description: 1 microsecond sa the basic timing unit.
+    bit_offset: 0
+    bit_size: 8
+  - name: TIMER_FST
+    description: The first time window for delivery.
+    bit_offset: 8
+    bit_size: 8
+  - name: TIMER_SEC
+    description: The second time window for delivery.
+    bit_offset: 16
+    bit_size: 8
+  - name: TIMER_END
+    description: Stop the time window for delivery.
+    bit_offset: 24
+    bit_size: 8

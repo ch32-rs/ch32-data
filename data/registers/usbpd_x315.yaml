@@ -41,16 +41,13 @@ block/USBPD:
     byte_offset: 10
     bit_size: 16
     fieldset: BMC_BYTE_CNT
-  - name: PORT_CC1
-    description: CC1 port control register.
+  - name: PORT_CC
+    description: CC1/CC2 port control.
     byte_offset: 12
-    bit_size: 16
-    fieldset: PORT_CC1
-  - name: PORT_CC2
-    description: CC2 port control register.
-    byte_offset: 14
-    bit_size: 16
-    fieldset: PORT_CC2
+    array:
+      len: 2
+      stride: 2
+    fieldset: PORT_CC
   - name: DMA
     description: PD buffer start address register.
     byte_offset: 16
@@ -180,52 +177,6 @@ fieldset/DMA:
     description: USBPD_DMA_ADDR value.
     bit_offset: 0
     bit_size: 16
-fieldset/PORT_CC1:
-  description: CC1 port control register.
-  fields:
-  - name: PA_CC1_AI
-    description: PA_CC1_AI value.
-    bit_offset: 0
-    bit_size: 1
-  - name: CC1_PD
-    description: port pull-down resistor enable.
-    bit_offset: 1
-    bit_size: 1
-  - name: CC1_PU
-    description: CC1_PU value.
-    bit_offset: 2
-    bit_size: 2
-  - name: CC1_LVE
-    description: CC1_LVE value.
-    bit_offset: 4
-    bit_size: 1
-  - name: CC1_CE
-    description: CC1_CE value.
-    bit_offset: 5
-    bit_size: 3
-fieldset/PORT_CC2:
-  description: CC2 port control register.
-  fields:
-  - name: PA_CC2_AI
-    description: PA_CC2_AI value.
-    bit_offset: 0
-    bit_size: 1
-  - name: CC2_PD
-    description: port pull-down resistor enable.
-    bit_offset: 1
-    bit_size: 1
-  - name: CC2_PU
-    description: CC2_PU value.
-    bit_offset: 2
-    bit_size: 2
-  - name: CC2_LVE
-    description: CC2_LVE value.
-    bit_offset: 4
-    bit_size: 1
-  - name: CC2_CE
-    description: CC2_CE value.
-    bit_offset: 5
-    bit_size: 3
 fieldset/STATUS:
   description: PD interrupt flag register.
   fields:
@@ -276,3 +227,21 @@ fieldset/TX_SEL:
     description: TX_SEL4 value.
     bit_offset: 6
     bit_size: 2
+fieldset/PORT_CC:
+  description: CC port control.
+  fields:
+  - name: PA_CC_AI
+    bit_offset: 0
+    bit_size: 1
+  - name: CC_PD
+    bit_offset: 1
+    bit_size: 1
+  - name: CC_PU
+    bit_offset: 2
+    bit_size: 2
+  - name: CC_LVE
+    bit_offset: 4
+    bit_size: 1
+  - name: CC_CE
+    bit_offset: 5
+    bit_size: 3

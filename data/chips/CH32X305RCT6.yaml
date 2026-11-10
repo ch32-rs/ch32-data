@@ -10,7 +10,7 @@ keywords:
 packages:
 - name: CH32X305RCT6
   package: LQFP64
-  device_id: 827523075
+  device_id: 0x31530003
 include_memory: ../memory/CH32X315.yaml
 memory_sizes:
   RAM: 64K

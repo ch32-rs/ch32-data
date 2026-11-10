@@ -514,11 +514,11 @@ fieldset/RSTSCKR:
     description: LOCKUP reset flag.
     bit_offset: 18
     bit_size: 1
-  - name: ADC4AWDRSTF
+  - name: ADC3AWDRSTF
     description: ADC4 watchdog flag.
     bit_offset: 19
     bit_size: 1
-  - name: ADC3AWDRSTF
+  - name: ADC4AWDRSTF
     description: ADC3 watchdog reset flag.
     bit_offset: 20
     bit_size: 1

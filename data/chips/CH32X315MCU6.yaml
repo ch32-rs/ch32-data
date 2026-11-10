@@ -11,7 +11,7 @@ keywords:
 packages:
 - name: CH32X315MCU6
   package: QFN76
-  device_id: 827326464
+  device_id: 0x31500000
 include_memory: ../memory/CH32X315.yaml
 memory_sizes:
   RAM: 64K

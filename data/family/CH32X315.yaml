@@ -204,3 +204,9 @@
     enable:
       register: HBPCENR
       field: CRCEN
+- name: EXTEND
+  address: 1073881280
+  registers:
+    kind: extend
+    version: x315
+    block: EXTEND

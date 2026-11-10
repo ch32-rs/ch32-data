@@ -32,25 +32,22 @@ block/ADTM:
     access: Write
     bit_size: 16
     fieldset: ADTM_SWEVGR
-  - name: CHCTLR1_Input
-    description: capture/compare mode register 1 (input mode).
+  - name: CHCTLR_Input
+    description: capture/compare mode register (input mode).
     byte_offset: 24
-    fieldset: ADTM_CHCTLR1_Input
-  - name: CHCTLR1_Output
+    bit_size: 16
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Input
+  - name: CHCTLR_Output
     description: capture/compare mode register (output mode).
     byte_offset: 24
     bit_size: 16
-    fieldset: CHCTLR1_Output
-  - name: CHCTLR2_Input
-    description: capture/compare mode register 2 (input mode).
-    byte_offset: 28
-    bit_size: 16
-    fieldset: CHCTLR2_Input
-  - name: CHCTLR2_Output
-    description: capture/compare mode register (output mode).
-    byte_offset: 28
-    bit_size: 16
-    fieldset: CHCTLR2_Output
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Output
   - name: CCER
     description: capture/compare enable register.
     byte_offset: 32
@@ -76,22 +73,14 @@ block/ADTM:
     byte_offset: 48
     bit_size: 16
     fieldset: RPTCR
-  - name: CH1CVR
-    description: capture/compare register 1.
+  - name: CHCVR
+    description: capture/compare register.
     byte_offset: 52
-    fieldset: ADTM_CH1CVR
-  - name: CH2CVR
-    description: capture/compare register 2.
-    byte_offset: 56
-    fieldset: ADTM_CH2CVR
-  - name: CH3CVR
-    description: capture/compare register 3.
-    byte_offset: 60
-    fieldset: ADTM_CH3CVR
-  - name: CH4CVR
-    description: capture/compare register 4.
-    byte_offset: 64
-    fieldset: ADTM_CH4CVR
+    bit_size: 32
+    array:
+      len: 4
+      stride: 4
+    fieldset: CHCVR
   - name: BDTR
     description: break and dead-time register.
     byte_offset: 68
@@ -134,22 +123,22 @@ block/GPTM:
     byte_offset: 20
     access: Write
     fieldset: GPTM_SWEVGR
-  - name: CHCTLR1_Input
-    description: capture/compare mode register 1 (input mode).
+  - name: CHCTLR_Input
+    description: capture/compare mode register (input mode).
     byte_offset: 24
-    fieldset: GPTM_CHCTLR1_Input
-  - name: CHCTLR1_Output
-    description: capture/compare mode register 1 (output mode).
+    bit_size: 16
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Input
+  - name: CHCTLR_Output
+    description: capture/compare mode register (output mode).
     byte_offset: 24
-    fieldset: CHCTLR1_Output
-  - name: CHCTLR2_Input
-    description: capture/compare mode register 2 (input mode).
-    byte_offset: 28
-    fieldset: CHCTLR2_Input
-  - name: CHCTLR2_Output
-    description: capture/compare mode register 2 (output mode).
-    byte_offset: 28
-    fieldset: CHCTLR2_Output
+    bit_size: 16
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Output
   - name: CCER
     description: capture/compare enable register.
     byte_offset: 32
@@ -158,30 +147,25 @@ block/GPTM:
     description: counter.
     byte_offset: 36
     fieldset: GPTM_CNT
+    bit_size: 16
   - name: PSC
     description: prescaler.
     byte_offset: 40
     fieldset: PSC
+    bit_size: 16
   - name: ATRLR
     description: auto-reload register.
     byte_offset: 44
     fieldset: GPTM_ATRLR
-  - name: CH1CVR
-    description: capture/compare register 1.
+    bit_size: 16
+  - name: CHCVR
+    description: capture/compare register.
     byte_offset: 52
-    fieldset: GPTM_CH1CVR
-  - name: CH2CVR
-    description: capture/compare register 2.
-    byte_offset: 56
-    fieldset: GPTM_CH2CVR
-  - name: CH3CVR
-    description: capture/compare register 3.
-    byte_offset: 60
-    fieldset: GPTM_CH3CVR
-  - name: CH4CVR
-    description: capture/compare register 4.
-    byte_offset: 64
-    fieldset: GPTM_CH4CVR
+    bit_size: 32
+    array:
+      len: 4
+      stride: 4
+    fieldset: CHCVR
   - name: DMACFGR
     description: DMA control register.
     byte_offset: 72
@@ -218,22 +202,22 @@ block/GPTM32:
     byte_offset: 20
     access: Write
     fieldset: GPTM32_SWEVGR
-  - name: CHCTLR1_Input
-    description: capture/compare mode register 1 (input mode).
+  - name: CHCTLR_Input
+    description: capture/compare mode register (input mode).
     byte_offset: 24
-    fieldset: GPTM32_CHCTLR1_Input
-  - name: CHCTLR1_Output
-    description: capture/compare mode register 1 (output mode).
+    bit_size: 16
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Input
+  - name: CHCTLR_Output
+    description: capture/compare mode register (output mode).
     byte_offset: 24
-    fieldset: CHCTLR1_Output
-  - name: CHCTLR2_Input
-    description: capture/compare mode register 2 (input mode).
-    byte_offset: 28
-    fieldset: CHCTLR2_Input
-  - name: CHCTLR2_Output
-    description: capture/compare mode register 2 (output mode).
-    byte_offset: 28
-    fieldset: CHCTLR2_Output
+    bit_size: 16
+    array:
+      len: 2
+      stride: 4
+    fieldset: CHCTLR_Output
   - name: CCER
     description: capture/compare enable register.
     byte_offset: 32
@@ -242,30 +226,25 @@ block/GPTM32:
     description: counter.
     byte_offset: 36
     fieldset: GPTM32_CNT
+    bit_size: 32
   - name: PSC
     description: prescaler.
     byte_offset: 40
     fieldset: PSC
+    bit_size: 16
   - name: ATRLR
     description: auto-reload register.
     byte_offset: 44
     fieldset: GPTM32_ATRLR
-  - name: CH1CVR
-    description: capture/compare register 1.
+    bit_size: 32
+  - name: CHCVR
+    description: capture/compare register.
     byte_offset: 52
-    fieldset: GPTM32_CH1CVR
-  - name: CH2CVR
-    description: capture/compare register 2.
-    byte_offset: 56
-    fieldset: GPTM32_CH2CVR
-  - name: CH3CVR
-    description: capture/compare register 3.
-    byte_offset: 60
-    fieldset: GPTM32_CH3CVR
-  - name: CH4CVR
-    description: capture/compare register 4.
-    byte_offset: 64
-    fieldset: GPTM32_CH4CVR
+    bit_size: 32
+    array:
+      len: 4
+      stride: 4
+    fieldset: CHCVR
   - name: DMACFGR
     description: DMA control register.
     byte_offset: 72
@@ -458,316 +437,6 @@ fieldset/GPTM32_CCER:
   - name: CC4P
     description: Capture/Compare 3 output Polarity.
     bit_offset: 13
-    bit_size: 1
-fieldset/ADTM_CH1CVR:
-  description: capture/compare register 1.
-  fields:
-  - name: CCR1
-    description: Capture/Compare 1 value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL1
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM_CH1CVR:
-  description: capture/compare register 1.
-  fields:
-  - name: CCR1
-    description: Capture/Compare 1 value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL1
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM32_CH1CVR:
-  description: capture/compare register 1.
-  fields:
-  - name: CCR1
-    description: Capture/Compare 1 value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/ADTM_CH2CVR:
-  description: capture/compare register 2.
-  fields:
-  - name: CCR2
-    description: Capture/Compare 2 value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL2
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM_CH2CVR:
-  description: capture/compare register 2.
-  fields:
-  - name: CCR2
-    description: Capture/Compare 2 value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL1
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM32_CH2CVR:
-  description: capture/compare register 2.
-  fields:
-  - name: CCR2
-    description: Capture/Compare 2 value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/ADTM_CH3CVR:
-  description: capture/compare register 3.
-  fields:
-  - name: CCR3
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL3
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM_CH3CVR:
-  description: capture/compare register 3.
-  fields:
-  - name: CCR3
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL1
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM32_CH3CVR:
-  description: capture/compare register 3.
-  fields:
-  - name: CCR3
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/ADTM_CH4CVR:
-  description: capture/compare register 4.
-  fields:
-  - name: CCR4
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL4
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM_CH4CVR:
-  description: capture/compare register 4.
-  fields:
-  - name: CCR4
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 16
-  - name: LEVEL1
-    description: Level indicating bit.
-    bit_offset: 16
-    bit_size: 1
-fieldset/GPTM32_CH4CVR:
-  description: capture/compare register 4.
-  fields:
-  - name: CCR4
-    description: Capture/Compare value.
-    bit_offset: 0
-    bit_size: 32
-fieldset/ADTM_CHCTLR1_Input:
-  description: capture/compare mode register 1 (input mode).
-  fields:
-  - name: CC1S
-    description: Capture/Compare 1 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: IC1PSC
-    description: Input capture 1 prescaler.
-    bit_offset: 2
-    bit_size: 2
-  - name: IC1F
-    description: Input capture 1 filter.
-    bit_offset: 4
-    bit_size: 4
-  - name: CC2S
-    description: Capture/Compare 2 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: IC2PCS
-    description: Input capture 2 prescaler.
-    bit_offset: 10
-    bit_size: 2
-  - name: IC2F
-    description: Input capture 2 filter.
-    bit_offset: 12
-    bit_size: 4
-fieldset/GPTM_CHCTLR1_Input:
-  description: capture/compare mode register 1 (input mode).
-  fields:
-  - name: CC1S
-    description: Capture/Compare 1 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: IC1PSC
-    description: Input capture 1 prescaler.
-    bit_offset: 2
-    bit_size: 2
-  - name: IC1F
-    description: Input capture 1 filter.
-    bit_offset: 4
-    bit_size: 4
-  - name: CC2S
-    description: Capture/compare 2 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: IC2PSC
-    description: Input capture 2 prescaler.
-    bit_offset: 10
-    bit_size: 2
-  - name: IC2F
-    description: Input capture 2 filter.
-    bit_offset: 12
-    bit_size: 4
-fieldset/GPTM32_CHCTLR1_Input:
-  description: capture/compare mode register 1 (input mode).
-  fields:
-  - name: CC1S
-    description: Capture/Compare 1 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: IC1PSC
-    description: Input capture 1 prescaler.
-    bit_offset: 2
-    bit_size: 2
-  - name: IC1F
-    description: Input capture 1 filter.
-    bit_offset: 4
-    bit_size: 4
-  - name: CC2S
-    description: Capture/compare 2 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: IC2PSC
-    description: Input capture 2 prescaler.
-    bit_offset: 10
-    bit_size: 2
-  - name: IC2F
-    description: Input capture 2 filter.
-    bit_offset: 12
-    bit_size: 4
-fieldset/CHCTLR1_Output:
-  description: capture/compare mode register (output mode).
-  fields:
-  - name: CC1S
-    description: Capture/Compare 1 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: OC1FE
-    description: Output Compare 1 fast enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: OC1PE
-    description: Output Compare 1 preload enable.
-    bit_offset: 3
-    bit_size: 1
-  - name: OC1M
-    description: Output Compare 1 mode.
-    bit_offset: 4
-    bit_size: 3
-  - name: OC1CE
-    description: Output Compare 1 clear enable.
-    bit_offset: 7
-    bit_size: 1
-  - name: CC2S
-    description: Capture/Compare 2 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: OC2FE
-    description: Output Compare 2 fast enable.
-    bit_offset: 10
-    bit_size: 1
-  - name: OC2PE
-    description: Output Compare 2 preload enable.
-    bit_offset: 11
-    bit_size: 1
-  - name: OC2M
-    description: Output Compare 2 mode.
-    bit_offset: 12
-    bit_size: 3
-  - name: OC2CE
-    description: Output Compare 2 clear enable.
-    bit_offset: 15
-    bit_size: 1
-fieldset/CHCTLR2_Input:
-  description: capture/compare mode register 2 (input mode).
-  fields:
-  - name: CC3S
-    description: Capture/compare 3 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: IC3PSC
-    description: Input capture 3 prescaler.
-    bit_offset: 2
-    bit_size: 2
-  - name: IC3F
-    description: Input capture 3 filter.
-    bit_offset: 4
-    bit_size: 4
-  - name: CC4S
-    description: Capture/Compare 4 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: IC4PSC
-    description: Input capture 4 prescaler.
-    bit_offset: 10
-    bit_size: 2
-  - name: IC4F
-    description: Input capture 4 filter.
-    bit_offset: 12
-    bit_size: 4
-fieldset/CHCTLR2_Output:
-  description: capture/compare mode register (output mode).
-  fields:
-  - name: CC3S
-    description: Capture/Compare 3 selection.
-    bit_offset: 0
-    bit_size: 2
-  - name: OC3FE
-    description: Output compare 3 fast enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: OC3PE
-    description: Output compare 3 preload enable.
-    bit_offset: 3
-    bit_size: 1
-  - name: OC3M
-    description: Output compare 3 mode.
-    bit_offset: 4
-    bit_size: 3
-  - name: OC3CE
-    description: Output compare 3 clear enable.
-    bit_offset: 7
-    bit_size: 1
-  - name: CC4S
-    description: Capture/Compare 4 selection.
-    bit_offset: 8
-    bit_size: 2
-  - name: OC4FE
-    description: Output compare 4 fast enable.
-    bit_offset: 10
-    bit_size: 1
-  - name: OC4PE
-    description: Output compare 4 preload enable.
-    bit_offset: 11
-    bit_size: 1
-  - name: OC4M
-    description: Output compare 4 mode.
-    bit_offset: 12
-    bit_size: 3
-  - name: OC4CE
-    description: Output compare 4 clear enable.
-    bit_offset: 15
     bit_size: 1
 fieldset/ADTM_CNT:
   description: counter.
@@ -1463,4 +1132,81 @@ fieldset/GPTM32_SWEVGR:
   - name: TG
     description: Trigger generation.
     bit_offset: 6
+    bit_size: 1
+fieldset/CHCVR:
+  description: capture/compare register 1.
+  fields:
+  - name: CCR1
+    description: Capture/Compare 1 value.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CHCTLR_Input:
+  description: capture/compare mode register 1 (input mode).
+  fields:
+  - name: CC1S
+    description: Capture/Compare 1 selection.
+    bit_offset: 0
+    bit_size: 2
+  - name: IC1PSC
+    description: Input capture 1 prescaler.
+    bit_offset: 2
+    bit_size: 2
+  - name: IC1F
+    description: Input capture 1 filter.
+    bit_offset: 4
+    bit_size: 4
+  - name: CC2S
+    description: Capture/compare 2 selection.
+    bit_offset: 8
+    bit_size: 2
+  - name: IC2PSC
+    description: Input capture 2 prescaler.
+    bit_offset: 10
+    bit_size: 2
+  - name: IC2F
+    description: Input capture 2 filter.
+    bit_offset: 12
+    bit_size: 4
+fieldset/CHCTLR_Output:
+  description: capture/compare mode register (output mode).
+  fields:
+  - name: CC1S
+    description: Capture/Compare 1 selection.
+    bit_offset: 0
+    bit_size: 2
+  - name: OC1FE
+    description: Output Compare 1 fast enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: OC1PE
+    description: Output Compare 1 preload enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: OC1M
+    description: Output Compare 1 mode.
+    bit_offset: 4
+    bit_size: 3
+  - name: OC1CE
+    description: Output Compare 1 clear enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: CC2S
+    description: Capture/Compare 2 selection.
+    bit_offset: 8
+    bit_size: 2
+  - name: OC2FE
+    description: Output Compare 2 fast enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: OC2PE
+    description: Output Compare 2 preload enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: OC2M
+    description: Output Compare 2 mode.
+    bit_offset: 12
+    bit_size: 3
+  - name: OC2CE
+    description: Output Compare 2 clear enable.
+    bit_offset: 15
     bit_size: 1

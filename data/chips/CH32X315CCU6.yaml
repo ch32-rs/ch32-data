@@ -11,7 +11,7 @@ keywords:
 packages:
 - name: CH32X315CCU6
   package: QFN48
-  device_id: 827392001
+  device_id: 0x31510001
 include_memory: ../memory/CH32X315.yaml
 memory_sizes:
   RAM: 64K

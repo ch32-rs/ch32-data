@@ -11,7 +11,7 @@ keywords:
 packages:
 - name: CH32X315WCU6
   package: QFN68X7
-  device_id: 827457538
+  device_id: 0x31520002
 include_memory: ../memory/CH32X315.yaml
 memory_sizes:
   RAM: 64K
