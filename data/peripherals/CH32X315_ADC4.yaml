@@ -1,5 +1,5 @@
 - name: ADC4
-  address: 1073823744
+  address: 0x40014000
   registers:
     kind: adc
     version: x315

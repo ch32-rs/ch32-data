@@ -1,5 +1,5 @@
 - name: TIM4
-  address: 1073743872
+  address: 0x40000800
   registers:
     kind: timer
     version: x315

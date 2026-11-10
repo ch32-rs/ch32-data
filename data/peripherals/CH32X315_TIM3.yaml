@@ -1,5 +1,5 @@
 - name: TIM3
-  address: 1073742848
+  address: 0x40000400
   registers:
     kind: timer
     version: x315

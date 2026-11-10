@@ -1,5 +1,5 @@
 - name: I2C1
-  address: 1073763328
+  address: 0x40005400
   registers:
     kind: i2c
     version: v0

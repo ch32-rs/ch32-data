@@ -1,5 +1,5 @@
 - name: USART2
-  address: 1073759232
+  address: 0x40004400
   registers:
     kind: usart
     version: h4

@@ -1,5 +1,5 @@
 - name: ADC2
-  address: 1073817600
+  address: 0x40012800
   registers:
     kind: adc
     version: x315

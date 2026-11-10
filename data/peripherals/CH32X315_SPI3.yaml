@@ -1,5 +1,5 @@
 - name: SPI3
-  address: 1073757184
+  address: 0x40003c00
   registers:
     kind: spi
     version: v0
