@@ -745,9 +745,10 @@ fieldset/LINK_CFG:
     bit_offset: 7
     bit_size: 1
   - name: LINK_TX_DEEMPH
-    description: 'Transmitter de-emphasis control. 0: -6.0 dB; 1: -3.5 dB (reset value); 2: none; 3: reserved. The RM allows only 0 and 1 in normal operation; the device SDK writes 3.'
+    description: Transmitter de-emphasis control, -3.5 dB after reset. The RM allows only -6.0 dB and -3.5 dB in normal operation; the device SDK writes the reserved value 3.
     bit_offset: 8
     bit_size: 2
+    enum: TX_DEEMPH
   - name: LINK_CP78_SEL
     description: In Compliance Pattern 7/8, send a length of consecutive 0 or consecutive 1.
     bit_offset: 10
@@ -804,9 +805,10 @@ fieldset/LINK_CTRL:
   description: LINK control registers.
   fields:
   - name: LINK_PD_MODE
-    description: Configure the current power mode of the PHY, corresponding to PO/P1/P2/P3 in the PIPE.
+    description: Configure the current power mode of the PHY, corresponding to P0/P1/P2/P3 in the PIPE. P3 after reset.
     bit_offset: 0
     bit_size: 2
+    enum: PD_MODE
   - name: LINK_GO_DISABLED
     description: SET LINK TO ENTER SS.DISABLED, WHICH IS HIGHLY VALID,. AND REQUIRES SOFTWARE TO CLEAR.
     bit_offset: 4
@@ -1208,17 +1210,19 @@ fieldset/LINK_STATUS:
     bit_offset: 3
     bit_size: 1
   - name: LINK_PD_MODE_MASK
-    description: Link Power Status.
+    description: Current power mode of the PHY.
     bit_offset: 4
     bit_size: 2
+    enum: PD_MODE
   - name: LINK_TXEQ
     description: The link is in POLLING_RXEQ.
     bit_offset: 6
     bit_size: 1
   - name: LINK_STATE
-    description: Link Status.
+    description: Link state. DISABLED after reset.
     bit_offset: 8
     bit_size: 4
+    enum: LINK_STATE
   - name: LINK_RX_UX_EXIT_REQ
     description: Received a request to exit Ux.
     bit_offset: 16
@@ -1362,9 +1366,10 @@ fieldset/UEP0_RX_CTRL:
     bit_offset: 16
     bit_size: 5
   - name: EP0_RX_RES
-    description: Response to DPH.
+    description: Response to DPH. Cleared by hardware when the OUT transaction completes. A SETUP packet is always answered with ACK-TP.
     bit_offset: 21
     bit_size: 2
+    enum: EP0_RX_RES
   - name: EP0_RX_ERDY
     description: ERDY received.
     bit_offset: 23
@@ -1389,9 +1394,10 @@ fieldset/UEP0_TX_CTRL:
     bit_offset: 16
     bit_size: 5
   - name: EP0_TX_RES
-    description: Response to ACK-TP.
+    description: Response to an ACK-TP with a non-zero NumP. Cleared by hardware when the IN transaction completes.
     bit_offset: 21
     bit_size: 2
+    enum: EP0_TX_RES
   - name: EP0_TX_ERDY
     description: ERDY received.
     bit_offset: 23
@@ -1679,3 +1685,98 @@ fieldset/PHY_CFG_DAT:
     description: Data read back from the PHY.
     bit_offset: 0
     bit_size: 32
+enum/EP0_RX_RES:
+  description: Endpoint 0 response to a DPH. The value 3 is invalid (no response).
+  bit_size: 2
+  variants:
+  - name: NRDY
+    description: NRDY-TP.
+    value: 0
+  - name: ACK
+    description: ACK-TP.
+    value: 1
+  - name: STALL
+    description: STALL-TP.
+    value: 2
+enum/EP0_TX_RES:
+  description: Endpoint 0 response to an ACK-TP. The value 3 is invalid (no response).
+  bit_size: 2
+  variants:
+  - name: NRDY
+    description: NRDY-TP.
+    value: 0
+  - name: DPH
+    description: Data packet.
+    value: 1
+  - name: STALL
+    description: STALL-TP.
+    value: 2
+enum/LINK_STATE:
+  description: Link state (LTSSM). Other values are reserved.
+  bit_size: 4
+  variants:
+  - name: U0
+    description: U0.
+    value: 0
+  - name: U1
+    description: U1.
+    value: 1
+  - name: U2
+    description: U2.
+    value: 2
+  - name: U3
+    description: U3.
+    value: 3
+  - name: DISABLED
+    description: SS.Disabled.
+    value: 4
+  - name: RXDET
+    description: Rx.Detect.
+    value: 5
+  - name: INACTIVE
+    description: SS.Inactive.
+    value: 6
+  - name: POLLING
+    description: Polling.
+    value: 7
+  - name: RECOVERY
+    description: Recovery.
+    value: 8
+  - name: HOTRST
+    description: Hot Reset.
+    value: 9
+  - name: COMPLIANCE
+    description: Compliance Mode.
+    value: 10
+  - name: LOOPBACK
+    description: Loopback.
+    value: 11
+enum/PD_MODE:
+  description: PHY power mode, P0 to P3 of the PIPE.
+  bit_size: 2
+  variants:
+  - name: P0
+    description: Normal operation.
+    value: 0
+  - name: P1
+    description: Low power. Both ends of the port send PING.LFPS periodically to keep the connection.
+    value: 1
+  - name: P2
+    description: Lower power than P1, with a longer exit time.
+    value: 2
+  - name: P3
+    description: Lowest power, the 125 MHz PHY clock is off.
+    value: 3
+enum/TX_DEEMPH:
+  description: Transmitter de-emphasis, TxDeemph of the PIPE. The value 3 is reserved.
+  bit_size: 2
+  variants:
+  - name: DB6
+    description: -6.0 dB.
+    value: 0
+  - name: DB3_5
+    description: -3.5 dB.
+    value: 1
+  - name: NONE
+    description: No de-emphasis.
+    value: 2
