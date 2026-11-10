@@ -35,6 +35,7 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32V203/CH32V303, General purpose (V4B)
 - CH32V305/CH32V307/CH32V317, High speed interconnect (V4F)
 - CH32V407/CH32V467, High speed interconnect, USBHS, Ethernet, PSRAM
+- CH32V205, General purpose, USBFS/USBHS, USB PD, CAN, QSPI, PIOC (V3B)
 - CH32V208, BLE 5.3 (V4C)
 - CH32X0, PDUSB (V4C)
 - CH32X315/CH32X305, Quad ADC, USB 3.0, USB PD, ARGB (V3F)

@@ -1,0 +1,396 @@
+block/PFIC:
+  description: Programmable Fast Interrupt Controller.
+  items:
+  - name: ISR1
+    description: Interrupt Status Register.
+    byte_offset: 0
+    access: Read
+    fieldset: ISR1
+  - name: ISR2
+    description: Interrupt Status Register.
+    byte_offset: 4
+    access: Read
+    fieldset: ISR2
+  - name: ISR3
+    description: Interrupt Status Register.
+    byte_offset: 8
+    access: Read
+    fieldset: ISR3
+  - name: IPR1
+    description: Interrupt Pending Register.
+    byte_offset: 32
+    access: Read
+    fieldset: IPR1
+  - name: IPR2
+    description: Interrupt Pending Register.
+    byte_offset: 36
+    access: Read
+    fieldset: IPR2
+  - name: IPR3
+    description: Interrupt Pending Register.
+    byte_offset: 40
+    access: Read
+    fieldset: IPR3
+  - name: ITHRESDR
+    description: Interrupt Priority Register.
+    byte_offset: 64
+    fieldset: ITHRESDR
+  - name: GISR
+    description: Interrupt Global Register.
+    byte_offset: 76
+    access: Read
+    fieldset: GISR
+  - name: IENR1
+    description: Interrupt Setting Register.
+    byte_offset: 256
+    access: Write
+    fieldset: IENR1
+  - name: IENR2
+    description: Interrupt Setting Register.
+    byte_offset: 260
+    access: Write
+    fieldset: IENR2
+  - name: IENR3
+    description: Interrupt Setting Register.
+    byte_offset: 264
+    access: Write
+    fieldset: IENR3
+  - name: IRER1
+    description: Interrupt Clear Register.
+    byte_offset: 384
+    access: Write
+    fieldset: IRER1
+  - name: IRER2
+    description: Interrupt Clear Register.
+    byte_offset: 388
+    access: Write
+    fieldset: IRER2
+  - name: IRER3
+    description: Interrupt Clear Register.
+    byte_offset: 392
+    access: Write
+    fieldset: IRER3
+  - name: IPSR1
+    description: Interrupt Pending Register.
+    byte_offset: 512
+    access: Write
+    fieldset: IPSR1
+  - name: IPSR2
+    description: Interrupt Pending Register.
+    byte_offset: 516
+    access: Write
+    fieldset: IPSR2
+  - name: IPSR3
+    description: Interrupt Pending Register.
+    byte_offset: 520
+    access: Write
+    fieldset: IPSR3
+  - name: IPRR1
+    description: Interrupt Pending Clear Register.
+    byte_offset: 640
+    access: Write
+    fieldset: IPRR1
+  - name: IPRR2
+    description: Interrupt Pending Clear Register.
+    byte_offset: 644
+    access: Write
+    fieldset: IPRR2
+  - name: IPRR3
+    description: Interrupt Pending Clear Register.
+    byte_offset: 648
+    access: Write
+    fieldset: IPRR3
+  - name: IACTR1
+    description: Interrupt ACTIVE Register.
+    byte_offset: 768
+    access: Write
+    fieldset: IACTR1
+  - name: IACTR2
+    description: Interrupt ACTIVE Register.
+    byte_offset: 772
+    access: Write
+    fieldset: IACTR2
+  - name: IACTR3
+    description: Interrupt ACTIVE Register.
+    byte_offset: 776
+    access: Write
+    fieldset: IACTR3
+  - name: IPRIOR
+    description: Interrupt priority byte. Bits 7:4 select the priority.
+    byte_offset: 1024
+    bit_size: 8
+    array:
+      len: 256
+      stride: 1
+  - name: SCTLR
+    description: System Control Register.
+    byte_offset: 3344
+    fieldset: SCTLR
+fieldset/GISR:
+  description: Interrupt Global Register.
+  fields:
+  - name: NESTSTA
+    description: interrupt nesting.
+    bit_offset: 0
+    bit_size: 8
+  - name: GACTSTA
+    description: interrupt execution.
+    bit_offset: 8
+    bit_size: 1
+  - name: GPENDSTA
+    description: interrupt pending.
+    bit_offset: 9
+    bit_size: 1
+  - name: GLOBLIE
+    description: global interrupt enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: DBGMODE
+    description: debug mode.
+    bit_offset: 12
+    bit_size: 1
+  - name: LOCKSTA
+    description: lock-out state.
+    bit_offset: 13
+    bit_size: 1
+fieldset/IACTR1:
+  description: Interrupt ACTIVE Register.
+  fields:
+  - name: IACTS2_3
+    description: IACTS.
+    bit_offset: 2
+    bit_size: 2
+  - name: IACTS5
+    description: IACTS.
+    bit_offset: 5
+    bit_size: 1
+  - name: IACTS8_9
+    description: IACTS.
+    bit_offset: 8
+    bit_size: 2
+  - name: IACTS12_31
+    description: IACTS.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IACTR2:
+  description: Interrupt ACTIVE Register.
+  fields:
+  - name: IACTS
+    description: IACTS32_63.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IACTR3:
+  description: Interrupt ACTIVE Register.
+  fields:
+  - name: IACTS
+    description: IACTS64_84.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IENR1:
+  description: Interrupt Setting Register.
+  fields:
+  - name: INTEN12_31
+    description: INTEN12_31.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IENR2:
+  description: Interrupt Setting Register.
+  fields:
+  - name: INTEN
+    description: INTEN32_63.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IENR3:
+  description: Interrupt Setting Register.
+  fields:
+  - name: INTEN
+    description: INTEN64_84.
+    bit_offset: 0
+    bit_size: 21
+fieldset/IPR1:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSTA2_3
+    description: PENDSTA.
+    bit_offset: 2
+    bit_size: 2
+  - name: PENDSTA5
+    description: PENDSTA.
+    bit_offset: 5
+    bit_size: 1
+  - name: INTENSTA8_9
+    description: PENDSTA.
+    bit_offset: 8
+    bit_size: 2
+  - name: INTENSTA12_31
+    description: PENDSTA.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IPR2:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSTA
+    description: PENDSTA.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IPR3:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSTA
+    description: PENDSTA.
+    bit_offset: 0
+    bit_size: 21
+fieldset/IPRR1:
+  description: Interrupt Pending Clear Register.
+  fields:
+  - name: PENDRST2_3
+    description: PENDRESET.
+    bit_offset: 2
+    bit_size: 2
+  - name: PENDRST5
+    description: PENDRESET.
+    bit_offset: 5
+    bit_size: 1
+  - name: PENDRST8
+    description: PENDRESET.
+    bit_offset: 8
+    bit_size: 2
+  - name: PENDRST12_31
+    description: PENDRESET.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IPRR2:
+  description: Interrupt Pending Clear Register.
+  fields:
+  - name: PENDRST
+    description: PENDRESET32_63.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IPRR3:
+  description: Interrupt Pending Clear Register.
+  fields:
+  - name: PENDRST
+    description: PENDRESET64_84.
+    bit_offset: 0
+    bit_size: 21
+fieldset/IPSR1:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSET2_3
+    description: PENDSET.
+    bit_offset: 2
+    bit_size: 2
+  - name: PENDSET5
+    description: PENDSET.
+    bit_offset: 5
+    bit_size: 1
+  - name: PENDSET8_9
+    description: PENDSET.
+    bit_offset: 8
+    bit_size: 2
+  - name: PENDSET12_31
+    description: PENDSET.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IPSR2:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSET
+    description: PENDSET32_63.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IPSR3:
+  description: Interrupt Pending Register.
+  fields:
+  - name: PENDSET
+    description: PENDSET64_84.
+    bit_offset: 0
+    bit_size: 21
+fieldset/IRER1:
+  description: Interrupt Clear Register.
+  fields:
+  - name: INTRSET12_31
+    description: INTRSET12_31.
+    bit_offset: 12
+    bit_size: 20
+fieldset/IRER2:
+  description: Interrupt Clear Register.
+  fields:
+  - name: INTRSET
+    description: INTRSET38_63.
+    bit_offset: 0
+    bit_size: 32
+fieldset/IRER3:
+  description: Interrupt Clear Register.
+  fields:
+  - name: INTRSET
+    description: INTRSET64_84.
+    bit_offset: 0
+    bit_size: 21
+fieldset/ISR1:
+  description: Interrupt Status Register.
+  fields:
+  - name: INTENSTA2_3
+    description: Interrupt ID Status.
+    bit_offset: 2
+    bit_size: 2
+  - name: INTENSTA5
+    description: Interrupt ID Status.
+    bit_offset: 5
+    bit_size: 1
+  - name: INTENSTA8_9
+    description: Interrupt ID Status.
+    bit_offset: 8
+    bit_size: 2
+  - name: INTENSTA12_31
+    description: Interrupt ID Status.
+    bit_offset: 12
+    bit_size: 20
+fieldset/ISR2:
+  description: Interrupt Status Register.
+  fields:
+  - name: INTENSTA
+    description: Interrupt ID Status.
+    bit_offset: 0
+    bit_size: 32
+fieldset/ISR3:
+  description: Interrupt Status Register.
+  fields:
+  - name: INTENSTA
+    description: Interrupt ID Status.
+    bit_offset: 0
+    bit_size: 21
+fieldset/ITHRESDR:
+  description: Interrupt Priority Register.
+  fields:
+  - name: THRESHOLD
+    description: THRESHOLD.
+    bit_offset: 0
+    bit_size: 8
+fieldset/SCTLR:
+  description: System Control Register.
+  fields:
+  - name: SLEEPONEXIT
+    description: system leaves the state after an interruption.
+    bit_offset: 1
+    bit_size: 1
+  - name: SLEEPDEEP
+    description: low power mode selection.
+    bit_offset: 2
+    bit_size: 1
+  - name: WFITOWFE
+    description: ues WFI as WFE.
+    bit_offset: 3
+    bit_size: 1
+  - name: SEVONPEND
+    description: SEVONPEND.
+    bit_offset: 4
+    bit_size: 1
+  - name: SETEVENT
+    description: set event.
+    bit_offset: 5
+    bit_size: 1
+  - name: SYSRST
+    description: System reset.
+    bit_offset: 31
+    bit_size: 1

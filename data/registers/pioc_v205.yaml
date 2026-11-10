@@ -1,0 +1,356 @@
+block/PIOC:
+  description: Programmable protocol I/O microcontroller.
+  items:
+  - name: SFR_INDIR_PORT
+    description: Indirectly addressed data read/write ports.
+    byte_offset: 0
+    bit_size: 8
+  - name: RSFR_INDIR_PORT2
+    description: Indirectly addresses the data read/write port of 2.
+    byte_offset: 1
+    bit_size: 8
+  - name: SFR_PRG_COUNT
+    description: Program counters for the low bytes of the PC.
+    byte_offset: 2
+    bit_size: 8
+  - name: SFR_STATUS_REG
+    description: Status registers.
+    byte_offset: 3
+    bit_size: 8
+    fieldset: SFR_STATUS_REG
+  - name: SFR_INDIR_ADDR
+    description: Indirectly addressed address registers.
+    byte_offset: 4
+    access: Read
+    bit_size: 8
+  - name: SFR_TMR0_COUNT
+    description: The counter register of timer 0.
+    byte_offset: 5
+    access: Read
+    bit_size: 8
+  - name: SFR_TIMER_CTRL
+    description: The control register of the timer.
+    byte_offset: 6
+    access: Read
+    bit_size: 8
+  - name: SFR_TMR0_INIT
+    description: The initial register of timer 0.
+    byte_offset: 7
+    access: Read
+    bit_size: 8
+  - name: SFR_BIT_CYCLE
+    description: Periodic registers for coded bits.
+    byte_offset: 8
+    bit_size: 8
+    fieldset: SFR_BIT_CYCLE
+  - name: SFR_INDIR_ADDR2
+    description: Address registers for indirect address 2.
+    byte_offset: 9
+    access: Read
+    bit_size: 8
+  - name: SFR_PORT_DIR
+    description: The port direction sets the register.
+    byte_offset: 10
+    access: Read
+    bit_size: 8
+    fieldset: SFR_PORT_DIR
+  - name: SFR_PORT_IO
+    description: Port input and output registers.
+    byte_offset: 11
+    access: Read
+    bit_size: 8
+  - name: SFR_BIT_CONFIG
+    description: Coded bit configuration registers.
+    byte_offset: 12
+    access: Read
+    bit_size: 8
+    fieldset: SFR_BIT_CONFIG
+  - name: SFR_SYS_CFG
+    description: System configuration registers.
+    byte_offset: 28
+    bit_size: 8
+    fieldset: SFR_SYS_CFG
+  - name: SFR_CTRL_RD
+    description: The eMCU reads and writes and the host reads only the registers.
+    byte_offset: 29
+    access: Read
+    bit_size: 8
+  - name: SFR_CTRL_WR
+    description: The host reads and writes and the eMCU reads only registers.
+    byte_offset: 30
+    bit_size: 8
+  - name: SFR_DATA_EXCH
+    description: Data exchange registers.
+    byte_offset: 31
+    bit_size: 8
+  - name: SFR_DATA_REG0
+    description: Data register 0.
+    byte_offset: 32
+    bit_size: 8
+  - name: SFR_DATA_REG1
+    description: Data register 1.
+    byte_offset: 33
+    bit_size: 8
+  - name: SFR_DATA_REG2
+    description: Data register 2.
+    byte_offset: 34
+    bit_size: 8
+  - name: SFR_DATA_REG3
+    description: Data register 3.
+    byte_offset: 35
+    bit_size: 8
+  - name: SFR_DATA_REG4
+    description: Data register 4.
+    byte_offset: 36
+    bit_size: 8
+  - name: SFR_DATA_REG5
+    description: Data register 5.
+    byte_offset: 37
+    bit_size: 8
+  - name: SFR_DATA_REG6
+    description: Data register 6.
+    byte_offset: 38
+    bit_size: 8
+  - name: SFR_DATA_REG7
+    description: Data register 7.
+    byte_offset: 39
+    bit_size: 8
+  - name: SFR_DATA_REG8
+    description: Data register 8.
+    byte_offset: 40
+    bit_size: 8
+  - name: SFR_DATA_REG9
+    description: Data register 9.
+    byte_offset: 41
+    bit_size: 8
+  - name: SFR_DATA_REG10
+    description: Data register 10.
+    byte_offset: 42
+    bit_size: 8
+  - name: SFR_DATA_REG11
+    description: Data register 11.
+    byte_offset: 43
+    bit_size: 8
+  - name: SFR_DATA_REG12
+    description: Data register 12.
+    byte_offset: 44
+    bit_size: 8
+  - name: SFR_DATA_REG13
+    description: Data register 13.
+    byte_offset: 45
+    bit_size: 8
+  - name: SFR_DATA_REG14
+    description: Data register 14.
+    byte_offset: 46
+    bit_size: 8
+  - name: SFR_DATA_REG15
+    description: Data register 15.
+    byte_offset: 47
+    bit_size: 8
+  - name: SFR_DATA_REG16
+    description: Data register 16.
+    byte_offset: 48
+    bit_size: 8
+  - name: SFR_DATA_REG17
+    description: Data register 17.
+    byte_offset: 49
+    bit_size: 8
+  - name: SFR_DATA_REG18
+    description: Data register 18.
+    byte_offset: 50
+    bit_size: 8
+  - name: SFR_DATA_REG19
+    description: Data register 19.
+    byte_offset: 51
+    bit_size: 8
+  - name: SFR_DATA_REG20
+    description: Data register 20.
+    byte_offset: 52
+    bit_size: 8
+  - name: SFR_DATA_REG21
+    description: Data register 21.
+    byte_offset: 53
+    bit_size: 8
+  - name: SFR_DATA_REG22
+    description: Data register 22.
+    byte_offset: 54
+    bit_size: 8
+  - name: SFR_DATA_REG23
+    description: Data register 23.
+    byte_offset: 55
+    bit_size: 8
+  - name: SFR_DATA_REG24
+    description: Data register 24.
+    byte_offset: 56
+    bit_size: 8
+  - name: SFR_DATA_REG25
+    description: Data register 25.
+    byte_offset: 57
+    bit_size: 8
+  - name: SFR_DATA_REG26
+    description: Data register 26.
+    byte_offset: 58
+    bit_size: 8
+  - name: SFR_DATA_REG27
+    description: Data register 27.
+    byte_offset: 59
+    bit_size: 8
+  - name: SFR_DATA_REG28
+    description: Data register 28.
+    byte_offset: 60
+    bit_size: 8
+  - name: SFR_DATA_REG29
+    description: Data register 29.
+    byte_offset: 61
+    bit_size: 8
+  - name: SFR_DATA_REG30
+    description: Data register 30.
+    byte_offset: 62
+    bit_size: 8
+  - name: SFR_DATA_REG31
+    description: Data register 31.
+    byte_offset: 63
+    bit_size: 8
+fieldset/SFR_BIT_CONFIG:
+  description: Coded bit configuration registers.
+  fields:
+  - name: SB_BIT_CYC_CNT3
+    description: The periodic timing state of the encoded bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: SB_BIT_CYC_CNT4
+    description: The periodic timing state of the encoded bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: SB_BIT_CYC_CNT5
+    description: The periodic timing state of the encoded bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: SB_BIT_CYC_CNT6
+    description: The periodic timing state of the encoded bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: SB_BIT_CYC_TAIL
+    description: Periodic state of the encoded bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: SB_PORT_IN_EDGE
+    description: Pin input level sampling point selection.
+    bit_offset: 5
+    bit_size: 1
+  - name: SB_BIT_CODE_MOD
+    description: How the coded bits are modulated.
+    bit_offset: 6
+    bit_size: 1
+  - name: SB_BIT_TX_EN
+    description: The transmission of the coded bits is enabled.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SFR_BIT_CYCLE:
+  description: Periodic registers for coded bits.
+  fields:
+  - name: SB_BIT_CYCLE
+    description: Sets the width of the encoded bits in clock cycles, which is the actual number of bits minus 1.
+    bit_offset: 0
+    bit_size: 7
+  - name: SB_BIT_TX_O0
+    description: The raw bit data of the encoded bit to be sent, which is a double-buffered structure.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SFR_PORT_DIR:
+  description: The port direction sets the register.
+  fields:
+  - name: SB_PORT_DIR0
+    description: IO0 Pin Direction Control.
+    bit_offset: 0
+    bit_size: 1
+  - name: SB_PORT_DIR1
+    description: IO1 Pin Direction Control.
+    bit_offset: 1
+    bit_size: 1
+  - name: SB_PORT_PU0
+    description: IO0 Pin Pull-Up Enables.
+    bit_offset: 2
+    bit_size: 1
+  - name: SB_PORT_PU1
+    description: IO1 Pin Pull-Up Enables.
+    bit_offset: 3
+    bit_size: 1
+  - name: SB_PORT_MOD0
+    description: Pin mode control, host side defines the purpose.
+    bit_offset: 4
+    bit_size: 1
+  - name: SB_PORT_MOD1
+    description: Pin mode control, host side defines the purpose.
+    bit_offset: 5
+    bit_size: 1
+  - name: SB_PORT_MOD2
+    description: Pin mode control, host side defines the purpose.
+    bit_offset: 6
+    bit_size: 1
+  - name: SB_PORT_MOD3
+    description: Pin mode control, host side defines the purpose.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SFR_STATUS_REG:
+  description: Status registers.
+  fields:
+  - name: SB_FLAG_C
+    description: ALU carry flag, whether the result is carried or produced by displacement.
+    bit_offset: 0
+    bit_size: 1
+  - name: SB_GP_BIT_X
+    description: A generic bit variable X, defined and used by the application.
+    bit_offset: 1
+    bit_size: 1
+  - name: SB_FLAG_Z
+    description: ALU zero flag, whether the result is 00H.
+    bit_offset: 2
+    bit_size: 1
+  - name: SB_GP_BIT_Y
+    description: a generic bit variable Y, defined and used by the application.
+    bit_offset: 3
+    bit_size: 1
+  - name: SB_EN_TOUT_RST
+    description: Timer Timeout Reset Enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: SB_STACK_USED
+    description: Current stack usage flags.
+    bit_offset: 5
+    bit_size: 1
+fieldset/SFR_SYS_CFG:
+  description: System configuration registers.
+  fields:
+  - name: SB_MST_CLK_GATE
+    description: Global Clock Control for eMCUs.
+    bit_offset: 0
+    bit_size: 1
+  - name: SB_MST_RESET
+    description: Force eMCU Reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: SB_MST_IO_EN0
+    description: Mode and output control switches for IO0 pins.
+    bit_offset: 2
+    bit_size: 1
+  - name: SB_MST_IO_EN1
+    description: Mode and output control switches for IO1 pins.
+    bit_offset: 3
+    bit_size: 1
+  - name: SB_MST_CFG_B4
+    description: Configure information bits, software-defined uses.
+    bit_offset: 4
+    bit_size: 1
+  - name: SB_DATA_MW_SR
+    description: SFR_CTRL_WR waiting to read the status bit.
+    bit_offset: 5
+    bit_size: 1
+  - name: SB_DATA_SW_MR
+    description: SFR_CTRL_RD wait to read the status bit.
+    bit_offset: 6
+    bit_size: 1
+  - name: SB_INT_REQ
+    description: Interrupt Request Activation Bits.
+    bit_offset: 7
+    bit_size: 1

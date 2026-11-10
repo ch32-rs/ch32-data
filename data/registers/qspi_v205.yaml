@@ -1,0 +1,287 @@
+block/QSPI1:
+  description: QSPI1.
+  items:
+  - name: CR
+    description: QSPI control register.
+    byte_offset: 0
+    fieldset: CR
+  - name: DCR
+    description: QSPI device configuration register.
+    byte_offset: 4
+    fieldset: DCR
+  - name: SR
+    description: QSPI status register.
+    byte_offset: 8
+    access: Read
+    fieldset: SR
+  - name: FCR
+    description: QSPI flag clear register.
+    byte_offset: 12
+    fieldset: FCR
+  - name: DLR
+    description: QSPI data length register.
+    byte_offset: 16
+    fieldset: DLR
+  - name: CCR
+    description: QSPI communication configuration register.
+    byte_offset: 20
+    fieldset: CCR
+  - name: AR
+    description: QSPI address register.
+    byte_offset: 24
+    fieldset: AR
+  - name: ABR
+    description: QSPI alternate bytes registers.
+    byte_offset: 28
+    fieldset: ABR
+  - name: DR
+    description: QSPI data register.
+    byte_offset: 32
+    fieldset: DR
+  - name: PSMKR
+    description: QSPI polling status mask register.
+    byte_offset: 36
+    fieldset: PSMKR
+  - name: PSMAR
+    description: QSPI polling status match register.
+    byte_offset: 40
+    fieldset: PSMAR
+  - name: PIR
+    description: QSPI polling interval register.
+    byte_offset: 44
+    fieldset: PIR
+  - name: LPTR
+    description: QSPI low-power timeout register.
+    byte_offset: 48
+    fieldset: LPTR
+fieldset/ABR:
+  description: QSPI alternate bytes registers.
+  fields:
+  - name: ALTERNATE
+    description: Alternate Bytes Optional data to be send to the external SPI device right after the address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/AR:
+  description: QSPI address register.
+  fields:
+  - name: ADDRESS
+    description: QSPI Address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CCR:
+  description: QSPI communication configuration register.
+  fields:
+  - name: INSTRUCTION
+    description: Instruction.
+    bit_offset: 0
+    bit_size: 8
+  - name: IMODE
+    description: Instruction mode.
+    bit_offset: 8
+    bit_size: 2
+  - name: ADMODE
+    description: Address mode.
+    bit_offset: 10
+    bit_size: 2
+  - name: ADSIZE
+    description: Address size.
+    bit_offset: 12
+    bit_size: 2
+  - name: ABMODE
+    description: Alternate bytes mode.
+    bit_offset: 14
+    bit_size: 2
+  - name: ABSIZE
+    description: Alternate bytes size.
+    bit_offset: 16
+    bit_size: 2
+  - name: DCYC
+    description: Number of dummy cycles.
+    bit_offset: 18
+    bit_size: 5
+  - name: DMODE
+    description: Data mode.
+    bit_offset: 24
+    bit_size: 2
+  - name: FMODE
+    description: Functional mode.
+    bit_offset: 26
+    bit_size: 2
+  - name: SIOO
+    description: Send instruction only once mode.
+    bit_offset: 28
+    bit_size: 1
+fieldset/CR:
+  description: QSPI control register.
+  fields:
+  - name: EN
+    description: Enable Enable the QSPI.
+    bit_offset: 0
+    bit_size: 1
+  - name: ABORT
+    description: Abort request This bit aborts the on-going command sequence.
+    bit_offset: 1
+    bit_size: 1
+  - name: DMAEN
+    description: DMA mode enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: TCEN
+    description: Timeout counter enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: START
+    description: start the FLASH command sequence.
+    bit_offset: 5
+    bit_size: 1
+  - name: DFM
+    description: Dual-flash mode This bit activates dual-flash mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: FSEL
+    description: Flash memory selection.
+    bit_offset: 7
+    bit_size: 1
+  - name: FTHRES
+    description: FIFO threshold level Defines.
+    bit_offset: 8
+    bit_size: 5
+  - name: TEIE
+    description: Transfer error interrupt enable This bit enables the transfer error interrupt.
+    bit_offset: 16
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable This bit enables the transfer complete interrupt.
+    bit_offset: 17
+    bit_size: 1
+  - name: FTIE
+    description: FIFO threshold interrupt enable This bit enables the FIFO threshold interrupt.
+    bit_offset: 18
+    bit_size: 1
+  - name: SMIE
+    description: Status match interrupt enable This bit enables the status match interrupt.
+    bit_offset: 19
+    bit_size: 1
+  - name: TOIE
+    description: TimeOut interrupt enable This bit enables the TimeOut interrupt.
+    bit_offset: 20
+    bit_size: 1
+  - name: APMS
+    description: Automatic poll mode stop.
+    bit_offset: 22
+    bit_size: 1
+  - name: PMM
+    description: Polling match mode.
+    bit_offset: 23
+    bit_size: 1
+  - name: PRESCALER
+    description: clock prescaler.
+    bit_offset: 24
+    bit_size: 8
+fieldset/DCR:
+  description: QSPI device configuration register.
+  fields:
+  - name: CKMODE
+    description: indicates the level that clk takes between command.
+    bit_offset: 0
+    bit_size: 1
+  - name: CSHT
+    description: Chip select high time.
+    bit_offset: 8
+    bit_size: 3
+  - name: FSIZE
+    description: Flash memory size.
+    bit_offset: 16
+    bit_size: 5
+fieldset/DLR:
+  description: QSPI data length register.
+  fields:
+  - name: DL
+    description: Data length.
+    bit_offset: 0
+    bit_size: 32
+fieldset/DR:
+  description: QSPI data register.
+  fields:
+  - name: DATA
+    description: Data.
+    bit_offset: 0
+    bit_size: 32
+fieldset/FCR:
+  description: QSPI flag clear register.
+  fields:
+  - name: CTEF
+    description: Clear transfer error flag Writing 1 clears the TEF flag in the QSPI_SR register.
+    bit_offset: 0
+    bit_size: 1
+  - name: CTCF
+    description: Clear transfer complete flag Writing 1 clears the TCF flag in the QSPI_SR register.
+    bit_offset: 1
+    bit_size: 1
+  - name: CSMF
+    description: Clear status match flag Writing 1 clears the SMF flag in the QSPI_SR register.
+    bit_offset: 3
+    bit_size: 1
+  - name: CTOF
+    description: Clear timeout flag Writing 1 clears the TOF flag in the QSPI_SR register.
+    bit_offset: 4
+    bit_size: 1
+fieldset/LPTR:
+  description: QSPI low-power timeout register.
+  fields:
+  - name: TIMEOUT
+    description: Timeout.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PIR:
+  description: QSPI polling interval register.
+  fields:
+  - name: INTERVAL
+    description: Polling interval Number of CLK cycles between to read during automatic polling phases. This field can be written only when BUSY = 0.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PSMAR:
+  description: QSPI polling status match register.
+  fields:
+  - name: MATCH
+    description: Status match Value to be compared with the masked status register to get a match. This field can be written only when BUSY = 0.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PSMKR:
+  description: QSPI polling status mask register.
+  fields:
+  - name: MASK
+    description: Status mask Mask to be applied to the status bytes received in polling mode.
+    bit_offset: 0
+    bit_size: 32
+fieldset/SR:
+  description: QSPI status register.
+  fields:
+  - name: TEF
+    description: Transfer error flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCF
+    description: Transfer complete flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: FTF
+    description: FIFO threshold flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: SMF
+    description: Status match flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: TOF
+    description: Timeout flag This bit is set when timeout occurs.
+    bit_offset: 4
+    bit_size: 1
+  - name: BUSY
+    description: Busy This bit is set when an operation is on going.
+    bit_offset: 5
+    bit_size: 1
+  - name: FLEVEL
+    description: FIFO level.
+    bit_offset: 8
+    bit_size: 6

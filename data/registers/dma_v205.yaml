@@ -1,0 +1,1067 @@
+block/DMA:
+  description: DMA1 controller.
+  items:
+  - name: INTFR
+    description: DMA interrupt status register (DMA_INTFR).
+    byte_offset: 0
+    access: Read
+    fieldset: INTFR
+  - name: INTFCR
+    description: DMA interrupt flag clear register (DMA_INTFCR).
+    byte_offset: 4
+    access: Write
+    fieldset: INTFCR
+  - name: CFGR1
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 8
+    fieldset: CFGR1
+  - name: CNTR1
+    description: DMA channel 1 number of data register.
+    byte_offset: 12
+    fieldset: CNTR1
+  - name: PADDR1
+    description: DMA channel 1 peripheral address register.
+    byte_offset: 16
+    fieldset: PADDR1
+  - name: MADDR1
+    description: DMA channel 1 memory address register.
+    byte_offset: 20
+    fieldset: MADDR1
+  - name: M1ADDR1
+    description: DMA channel 1 memory address1 register.
+    byte_offset: 24
+    fieldset: M1ADDR1
+  - name: CFGR2
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 28
+    fieldset: CFGR2
+  - name: CNTR2
+    description: DMA channel 2 number of data register.
+    byte_offset: 32
+    fieldset: CNTR2
+  - name: PADDR2
+    description: DMA channel 2 peripheral address register.
+    byte_offset: 36
+    fieldset: PADDR2
+  - name: MADDR2
+    description: DMA channel 2 memory address register.
+    byte_offset: 40
+    fieldset: MADDR2
+  - name: M1ADDR2
+    description: DMA channel 2 memory address 1 register.
+    byte_offset: 44
+    fieldset: M1ADDR2
+  - name: CFGR3
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 48
+    fieldset: CFGR3
+  - name: CNTR3
+    description: DMA channel 3 number of data register.
+    byte_offset: 52
+    fieldset: CNTR3
+  - name: PADDR3
+    description: DMA channel 3 peripheral address register.
+    byte_offset: 56
+    fieldset: PADDR3
+  - name: MADDR3
+    description: DMA channel 3 memory address register.
+    byte_offset: 60
+    fieldset: MADDR3
+  - name: M1ADDR3
+    description: DMA channel 3 memory address 1 register.
+    byte_offset: 64
+    fieldset: M1ADDR3
+  - name: CFGR4
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 68
+    fieldset: CFGR4
+  - name: CNTR4
+    description: DMA channel 4 number of data register.
+    byte_offset: 72
+    fieldset: CNTR4
+  - name: PADDR4
+    description: DMA channel 4 peripheral address register.
+    byte_offset: 76
+    fieldset: PADDR4
+  - name: MADDR4
+    description: DMA channel 4 memory address register.
+    byte_offset: 80
+    fieldset: MADDR4
+  - name: M1ADDR4
+    description: DMA channel 4 memory address 2 register.
+    byte_offset: 84
+    fieldset: M1ADDR4
+  - name: CFGR5
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 88
+    fieldset: CFGR5
+  - name: CNTR5
+    description: DMA channel 5 number of data register.
+    byte_offset: 92
+    fieldset: CNTR5
+  - name: PADDR5
+    description: DMA channel 5 peripheral address register.
+    byte_offset: 96
+    fieldset: PADDR5
+  - name: MADDR5
+    description: DMA channel 5 memory address register.
+    byte_offset: 100
+    fieldset: MADDR5
+  - name: M1ADDR5
+    description: DMA channel 5 memory address 2 register.
+    byte_offset: 104
+    fieldset: M1ADDR5
+  - name: CFGR6
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 108
+    fieldset: CFGR6
+  - name: CNTR6
+    description: DMA channel 6 number of data register.
+    byte_offset: 112
+    fieldset: CNTR6
+  - name: PADDR6
+    description: DMA channel 6 peripheral address register.
+    byte_offset: 116
+    fieldset: PADDR6
+  - name: MADDR6
+    description: DMA channel 6 memory address register.
+    byte_offset: 120
+    fieldset: MADDR6
+  - name: M1ADDR6
+    description: DMA channel 6 memory address 2 register.
+    byte_offset: 124
+    fieldset: M1ADDR6
+  - name: CFGR7
+    description: DMA channel configuration register (DMA_CFGR).
+    byte_offset: 128
+    fieldset: CFGR7
+  - name: CNTR7
+    description: DMA channel 7 number of data register.
+    byte_offset: 132
+    fieldset: CNTR7
+  - name: PADDR7
+    description: DMA channel 7 peripheral address register.
+    byte_offset: 136
+    fieldset: PADDR7
+  - name: MADDR7
+    description: DMA channel 7 memory address register.
+    byte_offset: 140
+    fieldset: MADDR7
+  - name: M1ADDR7
+    description: DMA channel 7 memory address 2 register.
+    byte_offset: 144
+    fieldset: M1ADDR7
+  - name: CFGR8
+    description: DMA channel configuration register (DMA_CFGR) use in ch32v20_D8/D8W/D6.
+    byte_offset: 148
+    fieldset: CFGR8
+  - name: CNTR8
+    description: DMA channel 8 number of data register use in ch32v20_D8/D8W/D6.
+    byte_offset: 152
+    fieldset: CNTR8
+  - name: PADDR8
+    description: DMA channel 8 peripheral address register use in ch32v20_D8/D8W/D6.
+    byte_offset: 156
+    fieldset: PADDR8
+  - name: MADDR8
+    description: DMA channel 8 memory address register use in ch32v20_D8/D8W/D6.
+    byte_offset: 160
+    fieldset: MADDR8
+  - name: M1ADDR8
+    description: DMA channel 8 memory address 2 register.
+    byte_offset: 164
+    fieldset: M1ADDR8
+fieldset/CFGR1:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR2:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR3:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR4:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR5:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR6:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR7:
+  description: DMA channel configuration register (DMA_CFGR).
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CFGR8:
+  description: DMA channel configuration register (DMA_CFGR) use in ch32v20_D8/D8W/D6.
+  fields:
+  - name: EN
+    description: Channel enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIE
+    description: Transfer complete interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIE
+    description: Half Transfer interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIE
+    description: Transfer error interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: DIR
+    description: Data transfer direction.
+    bit_offset: 4
+    bit_size: 1
+  - name: CIRC
+    description: Circular mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: PINC
+    description: Peripheral increment mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: MINC
+    description: Memory increment mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: PSIZE
+    description: Peripheral size.
+    bit_offset: 8
+    bit_size: 2
+  - name: MSIZE
+    description: Memory size.
+    bit_offset: 10
+    bit_size: 2
+  - name: PL
+    description: Channel Priority level.
+    bit_offset: 12
+    bit_size: 2
+  - name: MEM2MEM
+    description: Memory to memory mode.
+    bit_offset: 14
+    bit_size: 1
+fieldset/CNTR1:
+  description: DMA channel 1 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR2:
+  description: DMA channel 2 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR3:
+  description: DMA channel 3 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR4:
+  description: DMA channel 4 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR5:
+  description: DMA channel 5 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR6:
+  description: DMA channel 6 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR7:
+  description: DMA channel 7 number of data register.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTR8:
+  description: DMA channel 8 number of data register use in ch32v20_D8/D8W/D6.
+  fields:
+  - name: NDT
+    description: Number of data to transfer.
+    bit_offset: 0
+    bit_size: 16
+fieldset/INTFCR:
+  description: DMA interrupt flag clear register (DMA_INTFCR).
+  fields:
+  - name: CGIF1
+    description: Channel 1 Global interrupt clear.
+    bit_offset: 0
+    bit_size: 1
+  - name: CTCIF1
+    description: Channel 1 Transfer Complete clear.
+    bit_offset: 1
+    bit_size: 1
+  - name: CHTIF1
+    description: Channel 1 Half Transfer clear.
+    bit_offset: 2
+    bit_size: 1
+  - name: CTEIF1
+    description: Channel 1 Transfer Error clear.
+    bit_offset: 3
+    bit_size: 1
+  - name: CGIF2
+    description: Channel 2 Global interrupt clear.
+    bit_offset: 4
+    bit_size: 1
+  - name: CTCIF2
+    description: Channel 2 Transfer Complete clear.
+    bit_offset: 5
+    bit_size: 1
+  - name: CHTIF2
+    description: Channel 2 Half Transfer clear.
+    bit_offset: 6
+    bit_size: 1
+  - name: CTEIF2
+    description: Channel 2 Transfer Error clear.
+    bit_offset: 7
+    bit_size: 1
+  - name: CGIF3
+    description: Channel 3 Global interrupt clear.
+    bit_offset: 8
+    bit_size: 1
+  - name: CTCIF3
+    description: Channel 3 Transfer Complete clear.
+    bit_offset: 9
+    bit_size: 1
+  - name: CHTIF3
+    description: Channel 3 Half Transfer clear.
+    bit_offset: 10
+    bit_size: 1
+  - name: CTEIF3
+    description: Channel 3 Transfer Error clear.
+    bit_offset: 11
+    bit_size: 1
+  - name: CGIF4
+    description: Channel 4 Global interrupt clear.
+    bit_offset: 12
+    bit_size: 1
+  - name: CTCIF4
+    description: Channel 4 Transfer Complete clear.
+    bit_offset: 13
+    bit_size: 1
+  - name: CHTIF4
+    description: Channel 4 Half Transfer clear.
+    bit_offset: 14
+    bit_size: 1
+  - name: CTEIF4
+    description: Channel 4 Transfer Error clear.
+    bit_offset: 15
+    bit_size: 1
+  - name: CGIF5
+    description: Channel 5 Global interrupt clear.
+    bit_offset: 16
+    bit_size: 1
+  - name: CTCIF5
+    description: Channel 5 Transfer Complete clear.
+    bit_offset: 17
+    bit_size: 1
+  - name: CHTIF5
+    description: Channel 5 Half Transfer clear.
+    bit_offset: 18
+    bit_size: 1
+  - name: CTEIF5
+    description: Channel 5 Transfer Error clear.
+    bit_offset: 19
+    bit_size: 1
+  - name: CGIF6
+    description: Channel 6 Global interrupt clear.
+    bit_offset: 20
+    bit_size: 1
+  - name: CTCIF6
+    description: Channel 6 Transfer Complete clear.
+    bit_offset: 21
+    bit_size: 1
+  - name: CHTIF6
+    description: Channel 6 Half Transfer clear.
+    bit_offset: 22
+    bit_size: 1
+  - name: CTEIF6
+    description: Channel 6 Transfer Error clear.
+    bit_offset: 23
+    bit_size: 1
+  - name: CGIF7
+    description: Channel 7 Global interrupt clear.
+    bit_offset: 24
+    bit_size: 1
+  - name: CTCIF7
+    description: Channel 7 Transfer Complete clear.
+    bit_offset: 25
+    bit_size: 1
+  - name: CHTIF7
+    description: Channel 7 Half Transfer clear.
+    bit_offset: 26
+    bit_size: 1
+  - name: CTEIF7
+    description: Channel 7 Transfer Error clear.
+    bit_offset: 27
+    bit_size: 1
+  - name: CGIF8
+    description: Channel 8 Global interrupt clear use in ch32v20_D8/D8W/D6.
+    bit_offset: 28
+    bit_size: 1
+  - name: CTCIF8
+    description: Channel 8 Transfer Complete clear use in ch32v20_D8/D8W/D6.
+    bit_offset: 29
+    bit_size: 1
+  - name: CHTIF8
+    description: Channel 8 Half Transfer clear use in ch32v20_D8/D8W/D6.
+    bit_offset: 30
+    bit_size: 1
+  - name: CTEIF8
+    description: Channel 8 Transfer Error clear use in ch32v20_D8/D8W/D6.
+    bit_offset: 31
+    bit_size: 1
+fieldset/INTFR:
+  description: DMA interrupt status register (DMA_INTFR).
+  fields:
+  - name: GIF1
+    description: Channel 1 Global interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: TCIF1
+    description: Channel 1 Transfer Complete flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: HTIF1
+    description: Channel 1 Half Transfer Complete flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: TEIF1
+    description: Channel 1 Transfer Error flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: GIF2
+    description: Channel 2 Global interrupt flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: TCIF2
+    description: Channel 2 Transfer Complete flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: HTIF2
+    description: Channel 2 Half Transfer Complete flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: TEIF2
+    description: Channel 2 Transfer Error flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: GIF3
+    description: Channel 3 Global interrupt flag.
+    bit_offset: 8
+    bit_size: 1
+  - name: TCIF3
+    description: Channel 3 Transfer Complete flag.
+    bit_offset: 9
+    bit_size: 1
+  - name: HTIF3
+    description: Channel 3 Half Transfer Complete flag.
+    bit_offset: 10
+    bit_size: 1
+  - name: TEIF3
+    description: Channel 3 Transfer Error flag.
+    bit_offset: 11
+    bit_size: 1
+  - name: GIF4
+    description: Channel 4 Global interrupt flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: TCIF4
+    description: Channel 4 Transfer Complete flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: HTIF4
+    description: Channel 4 Half Transfer Complete flag.
+    bit_offset: 14
+    bit_size: 1
+  - name: TEIF4
+    description: Channel 4 Transfer Error flag.
+    bit_offset: 15
+    bit_size: 1
+  - name: GIF5
+    description: Channel 5 Global interrupt flag.
+    bit_offset: 16
+    bit_size: 1
+  - name: TCIF5
+    description: Channel 5 Transfer Complete flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: HTIF5
+    description: Channel 5 Half Transfer Complete flag.
+    bit_offset: 18
+    bit_size: 1
+  - name: TEIF5
+    description: Channel 5 Transfer Error flag.
+    bit_offset: 19
+    bit_size: 1
+  - name: GIF6
+    description: Channel 6 Global interrupt flag.
+    bit_offset: 20
+    bit_size: 1
+  - name: TCIF6
+    description: Channel 6 Transfer Complete flag.
+    bit_offset: 21
+    bit_size: 1
+  - name: HTIF6
+    description: Channel 6 Half Transfer Complete flag.
+    bit_offset: 22
+    bit_size: 1
+  - name: TEIF6
+    description: Channel 6 Transfer Error flag.
+    bit_offset: 23
+    bit_size: 1
+  - name: GIF7
+    description: Channel 7 Global interrupt flag.
+    bit_offset: 24
+    bit_size: 1
+  - name: TCIF7
+    description: Channel 7 Transfer Complete flag.
+    bit_offset: 25
+    bit_size: 1
+  - name: HTIF7
+    description: Channel 7 Half Transfer Complete flag.
+    bit_offset: 26
+    bit_size: 1
+  - name: TEIF7
+    description: Channel 7 Transfer Error flag.
+    bit_offset: 27
+    bit_size: 1
+  - name: GIF8
+    description: Channel 8 Global interrupt flag use in ch32v20_D8/D8W/D6.
+    bit_offset: 28
+    bit_size: 1
+  - name: TCIF8
+    description: Channel 8 Transfer Complete flag use in ch32v20_D8/D8W/D6.
+    bit_offset: 29
+    bit_size: 1
+  - name: HTIF8
+    description: Channel 8 Half Transfer Complete flag use in ch32v20_D8/D8W/D6.
+    bit_offset: 30
+    bit_size: 1
+  - name: TEIF8
+    description: Channel 8 Transfer Error flag use in ch32v20_D8/D8W/D6.
+    bit_offset: 31
+    bit_size: 1
+fieldset/M1ADDR1:
+  description: DMA channel 1 memory address1 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR2:
+  description: DMA channel 2 memory address 1 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR3:
+  description: DMA channel 3 memory address 1 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR4:
+  description: DMA channel 4 memory address 2 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR5:
+  description: DMA channel 5 memory address 2 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR6:
+  description: DMA channel 6 memory address 2 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR7:
+  description: DMA channel 7 memory address 2 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/M1ADDR8:
+  description: DMA channel 8 memory address 2 register.
+  fields:
+  - name: M1A
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR1:
+  description: DMA channel 1 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR2:
+  description: DMA channel 2 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR3:
+  description: DMA channel 3 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR4:
+  description: DMA channel 4 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR5:
+  description: DMA channel 5 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR6:
+  description: DMA channel 6 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR7:
+  description: DMA channel 7 memory address register.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MADDR8:
+  description: DMA channel 8 memory address register use in ch32v20_D8/D8W/D6.
+  fields:
+  - name: MA
+    description: Memory address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR1:
+  description: DMA channel 1 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR2:
+  description: DMA channel 2 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR3:
+  description: DMA channel 3 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR4:
+  description: DMA channel 4 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR5:
+  description: DMA channel 5 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR6:
+  description: DMA channel 6 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR7:
+  description: DMA channel 7 peripheral address register.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/PADDR8:
+  description: DMA channel 8 peripheral address register use in ch32v20_D8/D8W/D6.
+  fields:
+  - name: PA
+    description: Peripheral address.
+    bit_offset: 0
+    bit_size: 32

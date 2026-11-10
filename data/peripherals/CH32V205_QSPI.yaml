@@ -1,0 +1,91 @@
+- name: QSPI1
+  address: 1073892352
+  registers:
+    kind: qspi
+    version: v205
+    block: QSPI1
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: QSPI1EN
+    reset:
+      register: HBRSTR
+      field: QSPI1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: QSPI1
+  pins:
+  - pin: PA12
+    signal: SCK
+    af: 5
+  - pin: PB2
+    signal: SCK
+    af: 5
+  - pin: PB0
+    signal: SCSN
+    af: 5
+  - pin: PB6
+    signal: SCSN
+    af: 5
+  - pin: PA2
+    signal: SIO0
+    af: 5
+  - pin: PC9
+    signal: SIO0
+    af: 5
+  - pin: PD11
+    signal: SIO0
+    af: 5
+  - pin: PA3
+    signal: SIO1
+    af: 5
+  - pin: PC10
+    signal: SIO1
+    af: 5
+  - pin: PD12
+    signal: SIO1
+    af: 5
+  - pin: PA0
+    signal: SIO2
+    af: 5
+  - pin: PE6
+    signal: SIO2
+    af: 5
+  - pin: PA1
+    signal: SIO3
+    af: 5
+  - pin: PD13
+    signal: SIO3
+    af: 5
+  - pin: PB1
+    signal: SCSXN
+    af: 5
+  - pin: PC11
+    signal: SCSXN
+    af: 5
+  - pin: PB8
+    signal: SIOX0
+    af: 5
+  - pin: PE7
+    signal: SIOX0
+    af: 5
+  - pin: PB9
+    signal: SIOX1
+    af: 5
+  - pin: PE8
+    signal: SIOX1
+    af: 5
+  - pin: PB10
+    signal: SIOX2
+    af: 5
+  - pin: PE9
+    signal: SIOX2
+    af: 5
+  - pin: PB11
+    signal: SIOX3
+    af: 5
+  - pin: PE10
+    signal: SIOX3
+    af: 5

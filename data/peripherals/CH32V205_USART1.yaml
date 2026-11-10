@@ -1,0 +1,79 @@
+- name: USART1
+  address: 1073821696
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: USART1EN
+    reset:
+      register: PB2PRSTR
+      field: USART1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART1
+  pins:
+  - pin: PA5
+    signal: CK
+    af: 3
+  - pin: PA8
+    signal: CK
+    af: 2
+  - pin: PA10
+    signal: CK
+    af: 3
+  - pin: PA7
+    signal: RX
+    af: 2
+  - pin: PA8
+    signal: RX
+    af: 3
+  - pin: PA10
+    signal: RX
+    af: 2
+  - pin: PB7
+    signal: RX
+    af: 2
+  - pin: PA6
+    signal: TX
+    af: 2
+  - pin: PA9
+    signal: TX
+    af: 2
+  - pin: PB6
+    signal: TX
+    af: 2
+  - pin: PB15
+    signal: TX
+    af: 2
+  - pin: PA11
+    signal: TX
+    af: 3
+  - pin: PA9
+    signal: RTS
+    af: 3
+  - pin: PA12
+    signal: RTS
+    af: 2
+  - pin: PB4
+    signal: RTS
+    af: 4
+  - pin: PC5
+    signal: RTS
+    af: 2
+  - pin: PA5
+    signal: CTS
+    af: 2
+  - pin: PA11
+    signal: CTS
+    af: 2
+  - pin: PB5
+    signal: CTS
+    af: 4
+  - pin: PC4
+    signal: CTS
+    af: 2

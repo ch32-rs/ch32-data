@@ -1,0 +1,4927 @@
+block/CAN:
+  description: Controller area network.
+  items:
+  - name: CTLR
+    description: CAN Master control register.
+    byte_offset: 0
+    fieldset: CTLR
+  - name: STATR
+    description: CAN master status register.
+    byte_offset: 4
+    fieldset: STATR
+  - name: TSTATR
+    description: CAN transmit status register.
+    byte_offset: 8
+    fieldset: TSTATR
+  - name: RFIFO0
+    description: CAN receive FIFO 0 register.
+    byte_offset: 12
+    fieldset: RFIFO0
+  - name: RFIFO1
+    description: CAN receive FIFO 1 register.
+    byte_offset: 16
+    fieldset: RFIFO1
+  - name: INTENR
+    description: CAN interrupt enable register.
+    byte_offset: 20
+    fieldset: INTENR
+  - name: ERRSR
+    description: CAN error status register.
+    byte_offset: 24
+    fieldset: ERRSR
+  - name: BTIMR
+    description: CAN bit timing register.
+    byte_offset: 28
+    fieldset: BTIMR
+  - name: TTCTLR
+    description: CAN time trigger control register.
+    byte_offset: 32
+    fieldset: TTCTLR
+  - name: TTCNT
+    description: CAN Time Trigger Count Value Register.
+    byte_offset: 36
+    fieldset: TTCNT
+  - name: TERR_CNT
+    description: CAN offline recovery error counter.
+    byte_offset: 40
+    fieldset: TERR_CNT
+  - name: TXMI0R
+    description: CAN TX mailbox identifier register.
+    byte_offset: 384
+    fieldset: TXMI0R
+  - name: TXMDT0R
+    description: CAN mailbox data length control and time stamp register.
+    byte_offset: 388
+    fieldset: TXMDT0R
+  - name: TXMDL0R
+    description: CAN mailbox data low register.
+    byte_offset: 392
+    fieldset: TXMDL0R
+  - name: TXMDH0R
+    description: CAN mailbox data high register.
+    byte_offset: 396
+    fieldset: TXMDH0R
+  - name: TXMI1R
+    description: CAN TX mailbox identifier register.
+    byte_offset: 400
+    fieldset: TXMI1R
+  - name: TXMDT1R
+    description: CAN mailbox data length control and time stamp register.
+    byte_offset: 404
+    fieldset: TXMDT1R
+  - name: TXMDL1R
+    description: CAN mailbox data low register.
+    byte_offset: 408
+    fieldset: TXMDL1R
+  - name: TXMDH1R
+    description: CAN mailbox data high register.
+    byte_offset: 412
+    fieldset: TXMDH1R
+  - name: TXMI2R
+    description: CAN TX mailbox identifier register.
+    byte_offset: 416
+    fieldset: TXMI2R
+  - name: TXMDT2R
+    description: CAN mailbox data length control and time stamp register.
+    byte_offset: 420
+    fieldset: TXMDT2R
+  - name: TXMDL2R
+    description: CAN mailbox data low register.
+    byte_offset: 424
+    fieldset: TXMDL2R
+  - name: TXMDH2R
+    description: CAN mailbox data high register.
+    byte_offset: 428
+    fieldset: TXMDH2R
+  - name: RXMI0R
+    description: CAN receive FIFO mailbox identifier register.
+    byte_offset: 432
+    fieldset: RXMI0R
+  - name: RXMDT0R
+    description: CAN receive FIFO mailbox data length control and time stamp register.
+    byte_offset: 436
+    fieldset: RXMDT0R
+  - name: RXMDL0R
+    description: CAN receive FIFO mailbox data low register.
+    byte_offset: 440
+    access: Read
+    fieldset: RXMDL0R
+  - name: RXMDH0R
+    description: CAN receive FIFO mailbox data high register.
+    byte_offset: 444
+    access: Read
+    fieldset: RXMDH0R
+  - name: RXMI1R
+    description: CAN receive FIFO mailbox identifier register.
+    byte_offset: 448
+    fieldset: RXMI1R
+  - name: RXMDT1R
+    description: CAN receive FIFO mailbox data length control and time stamp register.
+    byte_offset: 452
+    fieldset: RXMDT1R
+  - name: RXMDL1R
+    description: CAN receive FIFO mailbox data low register.
+    byte_offset: 456
+    access: Read
+    fieldset: RXMDL1R
+  - name: RXMDH1R
+    description: CAN receive FIFO mailbox data high register.
+    byte_offset: 460
+    access: Read
+    fieldset: RXMDH1R
+  - name: FCTLR
+    description: CAN filter master register.
+    byte_offset: 512
+    fieldset: FCTLR
+  - name: FMCFGR
+    description: CAN filter mode register.
+    byte_offset: 516
+    fieldset: FMCFGR
+  - name: FSCFGR
+    description: CAN filter scale register.
+    byte_offset: 524
+    fieldset: FSCFGR
+  - name: FAFIFOR
+    description: CAN filter FIFO assignment register.
+    byte_offset: 532
+    fieldset: FAFIFOR
+  - name: FWR
+    description: CAN filter activation register.
+    byte_offset: 540
+    fieldset: FWR
+  - name: F0R1
+    description: Filter bank 0 register 1.
+    byte_offset: 576
+    fieldset: F0R1
+  - name: F0R2
+    description: Filter bank 0 register 2.
+    byte_offset: 580
+    fieldset: F0R2
+  - name: F1R1
+    description: Filter bank 1 register 1.
+    byte_offset: 584
+    fieldset: F1R1
+  - name: F1R2
+    description: Filter bank 1 register 2.
+    byte_offset: 588
+    fieldset: F1R2
+  - name: F2R1
+    description: Filter bank 2 register 1.
+    byte_offset: 592
+    fieldset: F2R1
+  - name: F2R2
+    description: Filter bank 2 register 2.
+    byte_offset: 596
+    fieldset: F2R2
+  - name: F3R1
+    description: Filter bank 3 register 1.
+    byte_offset: 600
+    fieldset: F3R1
+  - name: F3R2
+    description: Filter bank 3 register 2.
+    byte_offset: 604
+    fieldset: F3R2
+  - name: F4R1
+    description: Filter bank 4 register 1.
+    byte_offset: 608
+    fieldset: F4R1
+  - name: F4R2
+    description: Filter bank 4 register 2.
+    byte_offset: 612
+    fieldset: F4R2
+  - name: F5R1
+    description: Filter bank 5 register 1.
+    byte_offset: 616
+    fieldset: F5R1
+  - name: F5R2
+    description: Filter bank 5 register 2.
+    byte_offset: 620
+    fieldset: F5R2
+  - name: F6R1
+    description: Filter bank 6 register 1.
+    byte_offset: 624
+    fieldset: F6R1
+  - name: F6R2
+    description: Filter bank 6 register 2.
+    byte_offset: 628
+    fieldset: F6R2
+  - name: F7R1
+    description: Filter bank 7 register 1.
+    byte_offset: 632
+    fieldset: F7R1
+  - name: F7R2
+    description: Filter bank 7 register 2.
+    byte_offset: 636
+    fieldset: F7R2
+  - name: F8R1
+    description: Filter bank 8 register 1.
+    byte_offset: 640
+    fieldset: F8R1
+  - name: F8R2
+    description: Filter bank 8 register 2.
+    byte_offset: 644
+    fieldset: F8R2
+  - name: F9R1
+    description: Filter bank 9 register 1.
+    byte_offset: 648
+    fieldset: F9R1
+  - name: F9R2
+    description: Filter bank 9 register 2.
+    byte_offset: 652
+    fieldset: F9R2
+  - name: F10R1
+    description: Filter bank 10 register 1.
+    byte_offset: 656
+    fieldset: F10R1
+  - name: F10R2
+    description: Filter bank 10 register 2.
+    byte_offset: 660
+    fieldset: F10R2
+  - name: F11R1
+    description: Filter bank 11 register 1.
+    byte_offset: 664
+    fieldset: F11R1
+  - name: F11R2
+    description: Filter bank 11 register 2.
+    byte_offset: 668
+    fieldset: F11R2
+  - name: F12R1
+    description: Filter bank 4 register 1.
+    byte_offset: 672
+    fieldset: F12R1
+  - name: F12R2
+    description: Filter bank 12 register 2.
+    byte_offset: 676
+    fieldset: F12R2
+  - name: F13R1
+    description: Filter bank 13 register 1.
+    byte_offset: 680
+    fieldset: F13R1
+  - name: F13R2
+    description: Filter bank 13 register 2.
+    byte_offset: 684
+    fieldset: F13R2
+fieldset/BTIMR:
+  description: CAN bit timing register.
+  fields:
+  - name: BRP
+    description: minimum time unit length setting value.
+    bit_offset: 0
+    bit_size: 10
+  - name: BTR_TS1_T
+    description: CLAS_LONG_TS1=0;TS1 is TS[3:0](4bit);CLAS_LONG_TS1=1,TS1 is.  TS[1:0]+BTR_TS1_T[15:12](6bit).
+    bit_offset: 12
+    bit_size: 4
+  - name: TS1
+    description: Time segment 1.
+    bit_offset: 16
+    bit_size: 4
+  - name: TS2
+    description: Time segment 2.
+    bit_offset: 20
+    bit_size: 4
+  - name: SJW
+    description: Resynchronization jump width.
+    bit_offset: 24
+    bit_size: 4
+  - name: LBKM
+    description: Loop back mode (debug).
+    bit_offset: 30
+    bit_size: 1
+  - name: SILM
+    description: Silent mode (debug).
+    bit_offset: 31
+    bit_size: 1
+fieldset/CTLR:
+  description: CAN Master control register.
+  fields:
+  - name: INRQ
+    description: Initialization request.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLEEP
+    description: Sleep mode request bit.
+    bit_offset: 1
+    bit_size: 1
+  - name: TXFP
+    description: Transmit FIFO priority.
+    bit_offset: 2
+    bit_size: 1
+  - name: RFLM
+    description: Receive FIFO locked mode.
+    bit_offset: 3
+    bit_size: 1
+  - name: NART
+    description: No automatic retransmission.
+    bit_offset: 4
+    bit_size: 1
+  - name: AWUM
+    description: Automatic wakeup mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: ABOM
+    description: Automatic bus-off management.
+    bit_offset: 6
+    bit_size: 1
+  - name: TTCM
+    description: Time triggered communication mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: RST
+    description: Software master reset.
+    bit_offset: 15
+    bit_size: 1
+  - name: DBF
+    description: Debug freeze.
+    bit_offset: 16
+    bit_size: 1
+fieldset/ERRSR:
+  description: CAN error status register.
+  fields:
+  - name: EWGF
+    description: Error warning flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: EPVF
+    description: Error passive flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: BOFF
+    description: Bus-off flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: LEC
+    description: Last error code.
+    bit_offset: 4
+    bit_size: 3
+  - name: TEC
+    description: Least significant byte of the 9-bit transmit error counter.
+    bit_offset: 16
+    bit_size: 8
+  - name: REC
+    description: Receive error counter.
+    bit_offset: 24
+    bit_size: 8
+fieldset/F0R1:
+  description: Filter bank 0 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F0R2:
+  description: Filter bank 0 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F10R1:
+  description: Filter bank 10 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F10R2:
+  description: Filter bank 10 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F11R1:
+  description: Filter bank 11 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F11R2:
+  description: Filter bank 11 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F12R1:
+  description: Filter bank 4 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F12R2:
+  description: Filter bank 12 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F13R1:
+  description: Filter bank 13 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F13R2:
+  description: Filter bank 13 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F1R1:
+  description: Filter bank 1 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F1R2:
+  description: Filter bank 1 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F2R1:
+  description: Filter bank 2 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F2R2:
+  description: Filter bank 2 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F3R1:
+  description: Filter bank 3 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F3R2:
+  description: Filter bank 3 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F4R1:
+  description: Filter bank 4 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F4R2:
+  description: Filter bank 4 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F5R1:
+  description: Filter bank 5 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F5R2:
+  description: Filter bank 5 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F6R1:
+  description: Filter bank 6 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F6R2:
+  description: Filter bank 6 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F7R1:
+  description: Filter bank 7 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F7R2:
+  description: Filter bank 7 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F8R1:
+  description: Filter bank 8 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F8R2:
+  description: Filter bank 8 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F9R1:
+  description: Filter bank 9 register 1.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/F9R2:
+  description: Filter bank 9 register 2.
+  fields:
+  - name: FB0
+    description: Filter bits.
+    bit_offset: 0
+    bit_size: 1
+  - name: FB1
+    description: Filter bits.
+    bit_offset: 1
+    bit_size: 1
+  - name: FB2
+    description: Filter bits.
+    bit_offset: 2
+    bit_size: 1
+  - name: FB3
+    description: Filter bits.
+    bit_offset: 3
+    bit_size: 1
+  - name: FB4
+    description: Filter bits.
+    bit_offset: 4
+    bit_size: 1
+  - name: FB5
+    description: Filter bits.
+    bit_offset: 5
+    bit_size: 1
+  - name: FB6
+    description: Filter bits.
+    bit_offset: 6
+    bit_size: 1
+  - name: FB7
+    description: Filter bits.
+    bit_offset: 7
+    bit_size: 1
+  - name: FB8
+    description: Filter bits.
+    bit_offset: 8
+    bit_size: 1
+  - name: FB9
+    description: Filter bits.
+    bit_offset: 9
+    bit_size: 1
+  - name: FB10
+    description: Filter bits.
+    bit_offset: 10
+    bit_size: 1
+  - name: FB11
+    description: Filter bits.
+    bit_offset: 11
+    bit_size: 1
+  - name: FB12
+    description: Filter bits.
+    bit_offset: 12
+    bit_size: 1
+  - name: FB13
+    description: Filter bits.
+    bit_offset: 13
+    bit_size: 1
+  - name: FB14
+    description: Filter bits.
+    bit_offset: 14
+    bit_size: 1
+  - name: FB15
+    description: Filter bits.
+    bit_offset: 15
+    bit_size: 1
+  - name: FB16
+    description: Filter bits.
+    bit_offset: 16
+    bit_size: 1
+  - name: FB17
+    description: Filter bits.
+    bit_offset: 17
+    bit_size: 1
+  - name: FB18
+    description: Filter bits.
+    bit_offset: 18
+    bit_size: 1
+  - name: FB19
+    description: Filter bits.
+    bit_offset: 19
+    bit_size: 1
+  - name: FB20
+    description: Filter bits.
+    bit_offset: 20
+    bit_size: 1
+  - name: FB21
+    description: Filter bits.
+    bit_offset: 21
+    bit_size: 1
+  - name: FB22
+    description: Filter bits.
+    bit_offset: 22
+    bit_size: 1
+  - name: FB23
+    description: Filter bits.
+    bit_offset: 23
+    bit_size: 1
+  - name: FB24
+    description: Filter bits.
+    bit_offset: 24
+    bit_size: 1
+  - name: FB25
+    description: Filter bits.
+    bit_offset: 25
+    bit_size: 1
+  - name: FB26
+    description: Filter bits.
+    bit_offset: 26
+    bit_size: 1
+  - name: FB27
+    description: Filter bits.
+    bit_offset: 27
+    bit_size: 1
+  - name: FB28
+    description: Filter bits.
+    bit_offset: 28
+    bit_size: 1
+  - name: FB29
+    description: Filter bits.
+    bit_offset: 29
+    bit_size: 1
+  - name: FB30
+    description: Filter bits.
+    bit_offset: 30
+    bit_size: 1
+  - name: FB31
+    description: Filter bits.
+    bit_offset: 31
+    bit_size: 1
+fieldset/FAFIFOR:
+  description: CAN filter FIFO assignment register.
+  fields:
+  - name: FFA0
+    description: Filter FIFO assignment for filter 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: FFA1
+    description: Filter FIFO assignment for filter 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: FFA2
+    description: Filter FIFO assignment for filter 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: FFA3
+    description: Filter FIFO assignment for filter 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: FFA4
+    description: Filter FIFO assignment for filter 4.
+    bit_offset: 4
+    bit_size: 1
+  - name: FFA5
+    description: Filter FIFO assignment for filter 5.
+    bit_offset: 5
+    bit_size: 1
+  - name: FFA6
+    description: Filter FIFO assignment for filter 6.
+    bit_offset: 6
+    bit_size: 1
+  - name: FFA7
+    description: Filter FIFO assignment for filter 7.
+    bit_offset: 7
+    bit_size: 1
+  - name: FFA8
+    description: Filter FIFO assignment for filter 8.
+    bit_offset: 8
+    bit_size: 1
+  - name: FFA9
+    description: Filter FIFO assignment for filter 9.
+    bit_offset: 9
+    bit_size: 1
+  - name: FFA10
+    description: Filter FIFO assignment for filter 10.
+    bit_offset: 10
+    bit_size: 1
+  - name: FFA11
+    description: Filter FIFO assignment for filter 11.
+    bit_offset: 11
+    bit_size: 1
+  - name: FFA12
+    description: Filter FIFO assignment for filter 12.
+    bit_offset: 12
+    bit_size: 1
+  - name: FFA13
+    description: Filter FIFO assignment for filter 13.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FCTLR:
+  description: CAN filter master register.
+  fields:
+  - name: FINIT
+    description: Filter init mode.
+    bit_offset: 0
+    bit_size: 1
+fieldset/FMCFGR:
+  description: CAN filter mode register.
+  fields:
+  - name: FBM0
+    description: Filter mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: FBM1
+    description: Filter mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: FBM2
+    description: Filter mode.
+    bit_offset: 2
+    bit_size: 1
+  - name: FBM3
+    description: Filter mode.
+    bit_offset: 3
+    bit_size: 1
+  - name: FBM4
+    description: Filter mode.
+    bit_offset: 4
+    bit_size: 1
+  - name: FBM5
+    description: Filter mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: FBM6
+    description: Filter mode.
+    bit_offset: 6
+    bit_size: 1
+  - name: FBM7
+    description: Filter mode.
+    bit_offset: 7
+    bit_size: 1
+  - name: FBM8
+    description: Filter mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: FBM9
+    description: Filter mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: FBM10
+    description: Filter mode.
+    bit_offset: 10
+    bit_size: 1
+  - name: FBM11
+    description: Filter mode.
+    bit_offset: 11
+    bit_size: 1
+  - name: FBM12
+    description: Filter mode.
+    bit_offset: 12
+    bit_size: 1
+  - name: FBM13
+    description: Filter mode.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FSCFGR:
+  description: CAN filter scale register.
+  fields:
+  - name: FSC0
+    description: Filter scale configuration.
+    bit_offset: 0
+    bit_size: 1
+  - name: FSC1
+    description: Filter scale configuration.
+    bit_offset: 1
+    bit_size: 1
+  - name: FSC2
+    description: Filter scale configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: FSC3
+    description: Filter scale configuration.
+    bit_offset: 3
+    bit_size: 1
+  - name: FSC4
+    description: Filter scale configuration.
+    bit_offset: 4
+    bit_size: 1
+  - name: FSC5
+    description: Filter scale configuration.
+    bit_offset: 5
+    bit_size: 1
+  - name: FSC6
+    description: Filter scale configuration.
+    bit_offset: 6
+    bit_size: 1
+  - name: FSC7
+    description: Filter scale configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: FSC8
+    description: Filter scale configuration.
+    bit_offset: 8
+    bit_size: 1
+  - name: FSC9
+    description: Filter scale configuration.
+    bit_offset: 9
+    bit_size: 1
+  - name: FSC10
+    description: Filter scale configuration.
+    bit_offset: 10
+    bit_size: 1
+  - name: FSC11
+    description: Filter scale configuration.
+    bit_offset: 11
+    bit_size: 1
+  - name: FSC12
+    description: Filter scale configuration.
+    bit_offset: 12
+    bit_size: 1
+  - name: FSC13
+    description: Filter scale configuration.
+    bit_offset: 13
+    bit_size: 1
+fieldset/FWR:
+  description: CAN filter activation register.
+  fields:
+  - name: FACT0
+    description: Filter active.
+    bit_offset: 0
+    bit_size: 1
+  - name: FACT1
+    description: Filter active.
+    bit_offset: 1
+    bit_size: 1
+  - name: FACT2
+    description: Filter active.
+    bit_offset: 2
+    bit_size: 1
+  - name: FACT3
+    description: Filter active.
+    bit_offset: 3
+    bit_size: 1
+  - name: FACT4
+    description: Filter active.
+    bit_offset: 4
+    bit_size: 1
+  - name: FACT5
+    description: Filter active.
+    bit_offset: 5
+    bit_size: 1
+  - name: FACT6
+    description: Filter active.
+    bit_offset: 6
+    bit_size: 1
+  - name: FACT7
+    description: Filter active.
+    bit_offset: 7
+    bit_size: 1
+  - name: FACT8
+    description: Filter active.
+    bit_offset: 8
+    bit_size: 1
+  - name: FACT9
+    description: Filter active.
+    bit_offset: 9
+    bit_size: 1
+  - name: FACT10
+    description: Filter active.
+    bit_offset: 10
+    bit_size: 1
+  - name: FACT11
+    description: Filter active.
+    bit_offset: 11
+    bit_size: 1
+  - name: FACT12
+    description: Filter active.
+    bit_offset: 12
+    bit_size: 1
+  - name: FACT13
+    description: Filter active.
+    bit_offset: 13
+    bit_size: 1
+fieldset/INTENR:
+  description: CAN interrupt enable register.
+  fields:
+  - name: TMEIE
+    description: Transmit mailbox empty interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: FMPIE0
+    description: FIFO message pending interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: FFIE0
+    description: FIFO full interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: FOVIE0
+    description: FIFO overrun interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: FMPIE1
+    description: FIFO message pending interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: FFIE1
+    description: FIFO full interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: FOVIE1
+    description: FIFO overrun interrupt enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: EWGIE
+    description: Error warning interrupt enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: EPVIE
+    description: Error passive interrupt enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: BOFIE
+    description: Bus-off interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: LECIE
+    description: Last error code interrupt enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: WKUIE
+    description: Wakeup interrupt enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: SLKIE
+    description: Sleep interrupt enable.
+    bit_offset: 17
+    bit_size: 1
+fieldset/RFIFO0:
+  description: CAN receive FIFO 0 register.
+  fields:
+  - name: FMP0
+    description: FIFO 0 message pending.
+    bit_offset: 0
+    bit_size: 2
+  - name: FULL0
+    description: FIFO 0 full.
+    bit_offset: 3
+    bit_size: 1
+  - name: FOVR0
+    description: FIFO 0 overrun.
+    bit_offset: 4
+    bit_size: 1
+  - name: RFOM0
+    description: Release FIFO 0 output mailbox.
+    bit_offset: 5
+    bit_size: 1
+fieldset/RXMDH0R:
+  description: CAN receive FIFO mailbox data high register.
+  fields:
+  - name: DATA4
+    description: DATA4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: DATA5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: DATA6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: DATA7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDH1R:
+  description: CAN receive FIFO mailbox data high register.
+  fields:
+  - name: DATA4
+    description: DATA4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: DATA5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: DATA6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: DATA7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDL0R:
+  description: CAN receive FIFO mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data Byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data Byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data Byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data Byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDL1R:
+  description: CAN receive FIFO mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data Byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data Byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data Byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data Byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/RXMDT0R:
+  description: CAN receive FIFO mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: BRS
+    description: BRS bit of the received frame.
+    bit_offset: 4
+    bit_size: 1
+  - name: ESI
+    description: ESI bit of the received frame.
+    bit_offset: 5
+    bit_size: 1
+  - name: RES
+    description: RES bit of the received frame.
+    bit_offset: 6
+    bit_size: 1
+  - name: FMI
+    description: Filter match index.
+    bit_offset: 8
+    bit_size: 8
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/RXMDT1R:
+  description: CAN receive FIFO mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: BRS
+    description: BRS bit of the received frame.
+    bit_offset: 4
+    bit_size: 1
+  - name: ESI
+    description: ESI bit of the received frame.
+    bit_offset: 5
+    bit_size: 1
+  - name: RES
+    description: RES bit of the received frame.
+    bit_offset: 6
+    bit_size: 1
+  - name: FMI
+    description: Filter match index.
+    bit_offset: 8
+    bit_size: 8
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/RXMI0R:
+  description: CAN receive FIFO mailbox identifier register.
+  fields:
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/RXMI1R:
+  description: CAN receive FIFO mailbox identifier register.
+  fields:
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/STATR:
+  description: CAN master status register.
+  fields:
+  - name: INAK
+    description: Initialization acknowledge.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLAK
+    description: Sleep acknowledge.
+    bit_offset: 1
+    bit_size: 1
+  - name: ERRI
+    description: Error interrupt.
+    bit_offset: 2
+    bit_size: 1
+  - name: WKUI
+    description: Wakeup interrupt.
+    bit_offset: 3
+    bit_size: 1
+  - name: SLAKI
+    description: Sleep acknowledge interrupt.
+    bit_offset: 4
+    bit_size: 1
+  - name: TXM
+    description: Transmit mode.
+    bit_offset: 8
+    bit_size: 1
+  - name: RXM
+    description: Receive mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: SAMP
+    description: Last sample point.
+    bit_offset: 10
+    bit_size: 1
+  - name: RX
+    description: Rx signal.
+    bit_offset: 11
+    bit_size: 1
+fieldset/TERR_CNT:
+  description: CAN offline recovery error counter.
+  fields:
+  - name: TX_ERR_CNT
+    description: Offline recovery error count values.
+    bit_offset: 0
+    bit_size: 9
+fieldset/TSTATR:
+  description: CAN transmit status register.
+  fields:
+  - name: RQCP0
+    description: Request completed mailbox0.
+    bit_offset: 0
+    bit_size: 1
+  - name: TXOK0
+    description: Transmission OK of mailbox0.
+    bit_offset: 1
+    bit_size: 1
+  - name: ALST0
+    description: Arbitration lost for mailbox0.
+    bit_offset: 2
+    bit_size: 1
+  - name: TERR0
+    description: Transmission error of mailbox0.
+    bit_offset: 3
+    bit_size: 1
+  - name: ABRQ0
+    description: Abort request for mailbox0.
+    bit_offset: 7
+    bit_size: 1
+  - name: RQCP1
+    description: Request completed mailbox1.
+    bit_offset: 8
+    bit_size: 1
+  - name: TXOK1
+    description: Transmission OK of mailbox1.
+    bit_offset: 9
+    bit_size: 1
+  - name: ALST1
+    description: Arbitration lost for mailbox1.
+    bit_offset: 10
+    bit_size: 1
+  - name: TERR1
+    description: Transmission error of mailbox1.
+    bit_offset: 11
+    bit_size: 1
+  - name: ABRQ1
+    description: Abort request for mailbox 1.
+    bit_offset: 15
+    bit_size: 1
+  - name: RQCP2
+    description: Request completed mailbox2.
+    bit_offset: 16
+    bit_size: 1
+  - name: TXOK2
+    description: Transmission OK of mailbox 2.
+    bit_offset: 17
+    bit_size: 1
+  - name: ALST2
+    description: Arbitration lost for mailbox 2.
+    bit_offset: 18
+    bit_size: 1
+  - name: TERR2
+    description: Transmission error of mailbox 2.
+    bit_offset: 19
+    bit_size: 1
+  - name: ABRQ2
+    description: Abort request for mailbox 2.
+    bit_offset: 23
+    bit_size: 1
+  - name: CODE
+    description: Mailbox code.
+    bit_offset: 24
+    bit_size: 2
+  - name: TME0
+    description: Transmit mailbox 0 empty.
+    bit_offset: 26
+    bit_size: 1
+  - name: TME1
+    description: Transmit mailbox 1 empty.
+    bit_offset: 27
+    bit_size: 1
+  - name: TME2
+    description: Transmit mailbox 2 empty.
+    bit_offset: 28
+    bit_size: 1
+  - name: LOW0
+    description: Lowest priority flag for mailbox0.
+    bit_offset: 29
+    bit_size: 1
+  - name: LOW1
+    description: Lowest priority flag for mailbox1.
+    bit_offset: 30
+    bit_size: 1
+  - name: LOW2
+    description: Lowest priority flag for mailbox2.
+    bit_offset: 31
+    bit_size: 1
+fieldset/TTCNT:
+  description: CAN Time Trigger Count Value Register.
+  fields:
+  - name: TIMCNT
+    description: time-triggered count value.
+    bit_offset: 0
+    bit_size: 16
+fieldset/TTCTLR:
+  description: CAN time trigger control register.
+  fields:
+  - name: TIMCMV
+    description: Internal counter count end value.
+    bit_offset: 0
+    bit_size: 16
+  - name: TIMRST
+    description: Internal counter reset control.
+    bit_offset: 16
+    bit_size: 1
+  - name: MODE
+    description: Time-triggered mode selection.
+    bit_offset: 17
+    bit_size: 1
+fieldset/TXMDH0R:
+  description: CAN mailbox data high register.
+  fields:
+  - name: DATA4
+    description: Data byte 4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: Data byte 5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: Data byte 6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: Data byte 7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDH1R:
+  description: CAN mailbox data high register.
+  fields:
+  - name: DATA4
+    description: Data byte 4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: Data byte 5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: Data byte 6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: Data byte 7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDH2R:
+  description: CAN mailbox data high register.
+  fields:
+  - name: DATA4
+    description: Data byte 4.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA5
+    description: Data byte 5.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA6
+    description: Data byte 6.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA7
+    description: Data byte 7.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDL0R:
+  description: CAN mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDL1R:
+  description: CAN mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDL2R:
+  description: CAN mailbox data low register.
+  fields:
+  - name: DATA0
+    description: Data byte 0.
+    bit_offset: 0
+    bit_size: 8
+  - name: DATA1
+    description: Data byte 1.
+    bit_offset: 8
+    bit_size: 8
+  - name: DATA2
+    description: Data byte 2.
+    bit_offset: 16
+    bit_size: 8
+  - name: DATA3
+    description: Data byte 3.
+    bit_offset: 24
+    bit_size: 8
+fieldset/TXMDT0R:
+  description: CAN mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: TGT
+    description: Transmit global time.
+    bit_offset: 8
+    bit_size: 1
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/TXMDT1R:
+  description: CAN mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: TGT
+    description: Transmit global time.
+    bit_offset: 8
+    bit_size: 1
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/TXMDT2R:
+  description: CAN mailbox data length control and time stamp register.
+  fields:
+  - name: DLC
+    description: Data length code.
+    bit_offset: 0
+    bit_size: 4
+  - name: TGT
+    description: Transmit global time.
+    bit_offset: 8
+    bit_size: 1
+  - name: TIME
+    description: Message time stamp.
+    bit_offset: 16
+    bit_size: 16
+fieldset/TXMI0R:
+  description: CAN TX mailbox identifier register.
+  fields:
+  - name: TXRQ
+    description: Transmit mailbox request.
+    bit_offset: 0
+    bit_size: 1
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID_EXID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/TXMI1R:
+  description: CAN TX mailbox identifier register.
+  fields:
+  - name: TXRQ
+    description: Transmit mailbox request.
+    bit_offset: 0
+    bit_size: 1
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/TXMI2R:
+  description: CAN TX mailbox identifier register.
+  fields:
+  - name: TXRQ
+    description: Transmit mailbox request.
+    bit_offset: 0
+    bit_size: 1
+  - name: RTR
+    description: Remote transmission request.
+    bit_offset: 1
+    bit_size: 1
+  - name: IDE
+    description: Identifier extension.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXID
+    description: extended identifier.
+    bit_offset: 3
+    bit_size: 18
+  - name: STID
+    description: Standard identifier.
+    bit_offset: 21
+    bit_size: 11
+fieldset/RFIFO1:
+  description: CAN receive FIFO 1 register.
+  fields:
+  - name: FMP1
+    description: FIFO 1 message pending.
+    bit_offset: 0
+    bit_size: 2
+  - name: FULL1
+    description: FIFO 1 full.
+    bit_offset: 3
+    bit_size: 1
+  - name: FOVR1
+    description: FIFO 1 overrun.
+    bit_offset: 4
+    bit_size: 1
+  - name: RFOM1
+    description: Release FIFO 1 output mailbox.
+    bit_offset: 5
+    bit_size: 1

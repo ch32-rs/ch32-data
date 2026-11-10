@@ -1,0 +1,46 @@
+# CH32V205, CH32V205RM V1.2 table 11-3 (DMA2 peripheral/channel map).
+# DMA1 and DMA2 both have 8 channels; see CH32V205_DMA1.yaml.
+#
+# Signals marked * in the RM can be moved to the channel listed in table 11-3
+# by EXTEN_CTLR1.DMA_*_RM. Only the default mapping is recorded where a
+# signal appears twice.
+#
+# channel 1
+QSPI1: 1
+USART7_RX: 1
+TIM3_CH3: 1
+
+# channel 2
+USART5_RX: 2
+TIM3_CH4: 2
+
+# channel 3
+USART5_TX: 3
+USART8_RX: 3
+TIM3_CH1: 3
+
+# channel 4
+SPI2_RX: 4
+TIM4_CH1: 4
+
+# channel 5
+SPI2_TX: 5
+TIM4_CH3: 5
+
+# channel 6
+SPI1_RX: 6
+USART6_TX: 6
+TIM1_UP: 6
+TIM4_CH2: 6
+
+# channel 7
+SPI1_TX: 7
+USART6_RX: 7
+TIM2_UP: 7
+TIM4_CH4: 7
+
+# channel 8
+ADC1: 8
+USART7_TX: 8
+TIM3_CH2: 8
+TIM4_UP: 8

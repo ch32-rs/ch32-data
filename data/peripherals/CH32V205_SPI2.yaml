@@ -1,0 +1,31 @@
+- name: SPI2
+  address: 1073756160
+  registers:
+    kind: spi
+    version: v0
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: SPI2EN
+    reset:
+      register: PB1PRSTR
+      field: SPI2RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: SPI2
+  pins:
+  - pin: PB12
+    signal: NSS
+    af: 5
+  - pin: PB13
+    signal: SCK
+    af: 5
+  - pin: PB15
+    signal: MOSI
+    af: 5
+  - pin: PB14
+    signal: MISO
+    af: 5

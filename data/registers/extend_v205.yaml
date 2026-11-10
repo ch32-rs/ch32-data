@@ -1,0 +1,85 @@
+block/EXTEND:
+  description: Exten configuration.
+  items:
+  - name: CTR0
+    description: EXTEN control register 0.
+    byte_offset: 0
+    fieldset: EXTEN_CTLR0
+  - name: CTR1
+    description: EXTEN control register 1.
+    byte_offset: 4
+    fieldset: EXTEN_CTLR1
+fieldset/EXTEN_CTLR0:
+  description: EXTEN control register 0.
+  fields:
+  - name: HSIPRE
+    description: Whether HSI is divided.
+    bit_offset: 4
+    bit_size: 1
+  - name: LKUPEN
+    description: LOCKUP_Eable.
+    bit_offset: 6
+    bit_size: 1
+  - name: LKUPRST
+    description: LOCKUP RESET.
+    bit_offset: 7
+    bit_size: 1
+  - name: ULLDOTRIM
+    description: ULLDOTRIM.
+    bit_offset: 8
+    bit_size: 3
+  - name: LDOTRIM
+    description: LDOTRIM.
+    bit_offset: 12
+    bit_size: 2
+fieldset/EXTEN_CTLR1:
+  description: EXTEN control register 1.
+  fields:
+  - name: DMA_ADC_RM
+    description: Mapping of ADC on the DMA channel.
+    bit_offset: 0
+    bit_size: 1
+  - name: DMA_SPI1_RM
+    description: Mapping of SPI1 on the DMA channel.
+    bit_offset: 1
+    bit_size: 1
+  - name: DMA_SPI2_RM
+    description: Mapping of SPI2 on the DMA channel.
+    bit_offset: 2
+    bit_size: 1
+  - name: DMA_TIM1_UP_RM
+    description: Mapping of TIM1_UP on the DMA channel.
+    bit_offset: 3
+    bit_size: 1
+  - name: DMA_TIM2_CH4_RM
+    description: Mapping of TIM2_CH4 on the DMA channel.
+    bit_offset: 4
+    bit_size: 1
+  - name: DMA_TIM2_UP_RM
+    description: Mapping of TIM2_UP on the DMA channel.
+    bit_offset: 5
+    bit_size: 1
+  - name: DMA_TIM3_CH1_RM
+    description: Mapping of TIM3_CH1 on the DMA channel.
+    bit_offset: 6
+    bit_size: 1
+  - name: DMA_TIM3_CH3_RM
+    description: Mapping of TIM3_CH3 on the DMA channel.
+    bit_offset: 7
+    bit_size: 1
+  - name: DMA_TIM3_CH4_RM
+    description: Mapping of TIM3_CH4 on the DMA channel.
+    bit_offset: 8
+    bit_size: 1
+  - name: DMA_TIM4_CH1_RM
+    description: Mapping of TIM4_CH1 on the DMA channel.
+    bit_offset: 9
+    bit_size: 1
+  - name: DMA_TIM4_CH3_RM
+    description: Mapping of IM4_CH3 on the DMA channel.
+    bit_offset: 10
+    bit_size: 1
+  - name: DMA_TIM4_UP_RM
+    description: Mapping of TIM4_UP on the DMA channel.
+    bit_offset: 11
+    bit_size: 1
