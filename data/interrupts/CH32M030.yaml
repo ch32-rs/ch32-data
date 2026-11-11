@@ -1,4 +1,4 @@
-# CH32M030 interrupt vector table (CH32M030RM V1.2 table 9-2).
+# CH32M030 interrupt vector table (CH32M030RM V1.2 table 5-1).
 WWDG: 16
 OPA: 17
 FLASH: 18

@@ -12,70 +12,13 @@ block/AFIO:
 fieldset/EXTICR:
   description: External interrupt configuration register (AFIO_EXTICR).
   fields:
-  - name: EXTI0
-    description: EXTI0 configuration.
+  - name: EXTI
+    description: EXTI line configuration (00=PA, 01=PB, 10=PC).
     bit_offset: 0
-    bit_size: 1
-  - name: EXTI1
-    description: EXTI1 configuration.
-    bit_offset: 1
-    bit_size: 1
-  - name: EXTI2
-    description: EXTI2 configuration.
-    bit_offset: 2
-    bit_size: 1
-  - name: EXTI3
-    description: EXTI3 configuration.
-    bit_offset: 3
-    bit_size: 1
-  - name: EXTI4
-    description: EXTI4 configuration.
-    bit_offset: 4
-    bit_size: 1
-  - name: EXTI5
-    description: EXTI5 configuration.
-    bit_offset: 5
-    bit_size: 1
-  - name: EXTI6
-    description: EXTI6 configuration.
-    bit_offset: 6
-    bit_size: 1
-  - name: EXTI7
-    description: EXTI7 configuration.
-    bit_offset: 7
-    bit_size: 1
-  - name: EXTI8
-    description: EXTI8 configuration.
-    bit_offset: 8
-    bit_size: 1
-  - name: EXTI9
-    description: EXTI9 configuration.
-    bit_offset: 9
-    bit_size: 1
-  - name: EXTI10
-    description: EXTI10 configuration.
-    bit_offset: 10
-    bit_size: 1
-  - name: EXTI11
-    description: EXTI11 configuration.
-    bit_offset: 11
-    bit_size: 1
-  - name: EXTI12
-    description: EXTI12 configuration.
-    bit_offset: 12
-    bit_size: 1
-  - name: EXTI13
-    description: EXTI13 configuration.
-    bit_offset: 13
-    bit_size: 1
-  - name: EXTI14
-    description: EXTI14 configuration.
-    bit_offset: 14
-    bit_size: 1
-  - name: EXTI15
-    description: EXTI15 configuration.
-    bit_offset: 15
-    bit_size: 1
+    bit_size: 2
+    array:
+      len: 16
+      stride: 2
 fieldset/PCFR1:
   description: AF remap and debug I/O configuration register (AFIO_PCFR1).
   fields:

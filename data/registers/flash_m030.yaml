@@ -10,11 +10,11 @@ block/FLASH:
     byte_offset: 4
     access: Write
     fieldset: KEYR
-  - name: OBTKEYR
+  - name: OBKEYR
     description: Flash option key register.
     byte_offset: 8
     access: Write
-    fieldset: OBTKEYR
+    fieldset: OBKEYR
   - name: STATR
     description: Status register.
     byte_offset: 12
@@ -43,11 +43,6 @@ block/FLASH:
     byte_offset: 36
     access: Write
     fieldset: MODEKEYR
-  - name: BOOT_MODEKEYP
-    description: Boot mode key register.
-    byte_offset: 40
-    access: Write
-    fieldset: BOOT_MODEKEYP
   - name: CTLR2
     description: configuration register 2.
     byte_offset: 47
@@ -65,13 +60,6 @@ fieldset/ADDR:
   fields:
   - name: FAR
     description: Flash Address.
-    bit_offset: 0
-    bit_size: 32
-fieldset/BOOT_MODEKEYP:
-  description: Boot mode key register.
-  fields:
-  - name: MODEKEYR
-    description: Boot mode key.
     bit_offset: 0
     bit_size: 32
 fieldset/CTLR:
@@ -190,13 +178,6 @@ fieldset/OBR:
     description: User configuration bit of the overvoltage protection detection function.
     bit_offset: 9
     bit_size: 1
-fieldset/OBTKEYR:
-  description: Flash option key register.
-  fields:
-  - name: OBKEYR
-    description: Option byte key.
-    bit_offset: 0
-    bit_size: 32
 fieldset/STATR:
   description: Status register.
   fields:
@@ -233,5 +214,12 @@ fieldset/WPR:
   fields:
   - name: WRP
     description: Write protect.
+    bit_offset: 0
+    bit_size: 32
+fieldset/OBKEYR:
+  description: Flash option key register.
+  fields:
+  - name: OBKEYR
+    description: Option byte key.
     bit_offset: 0
     bit_size: 32
