@@ -179,6 +179,9 @@ block/USBSS:
     byte_offset: 64
     bit_size: 16
     fieldset: LINK_ISO_DLY
+  - name: LINK_TX_ROUTE
+    description: Hub routing for host transactions. The RM register table omits this register; the EVT host header exposes it and the hub host SDK writes the downstream hub port number to reach a device behind a hub, or 0 for the root hub port.
+    byte_offset: 76
   - name: LINK_LPM_CR
     description: Link Power Management Registers.
     byte_offset: 80
