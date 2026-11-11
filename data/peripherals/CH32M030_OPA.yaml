@@ -1,5 +1,5 @@
 - name: OPA
-  address: 0x40024800
+  address: 1073891328
   registers:
     kind: opa
     version: m030
@@ -16,3 +16,30 @@
   interrupts:
   - signal: GLOBAL
     interrupt: OPA
+  pins:
+  - pin: PA3
+    signal: CMP3_P0
+  - pin: PA4
+    signal: CMP3_N0
+  - pin: PA5
+    signal: CMP3_N1
+  - pin: PA6
+    signal: CMP3_N2
+  - pin: PA7
+    signal: CMP3_OUT0
+  - pin: PB0
+    signal: CMP3_P1
+  - pin: PB1
+    signal: CMP3_P2
+  - pin: PB2
+    signal: CMP3_N3
+  - pin: PB3
+    signal: CMP3_P3
+  - pin: PB4
+    signal: CMP3_OUT1
+  - pin: PB5
+    signal: CMP3_OUT2
+  - pin: PB5
+    signal: CMP2_P0
+  - pin: PB6
+    signal: CMP2_N0

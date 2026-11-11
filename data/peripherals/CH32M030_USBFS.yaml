@@ -1,5 +1,5 @@
 - name: USBFS
-  address: 0x40023400
+  address: 1073886208
   registers:
     kind: usb
     version: v2fs
@@ -18,3 +18,8 @@
     interrupt: USBFS
   - signal: WAKEUP
     interrupt: USBFSWakeUP
+  pins:
+  - pin: PB0
+    signal: DP
+  - pin: PB1
+    signal: DM

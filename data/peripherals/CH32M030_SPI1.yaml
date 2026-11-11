@@ -1,5 +1,5 @@
 - name: SPI1
-  address: 0x40013000
+  address: 1073819648
   registers:
     kind: spi
     version: m030
@@ -16,3 +16,55 @@
   interrupts:
   - signal: GLOBAL
     interrupt: SPI1
+  remap:
+    register: PCFR1
+    field: SPI1_RM
+  pins:
+  - pin: PA0
+    signal: NSS
+    remap: 0
+  - pin: PA1
+    signal: SCK
+    remap: 0
+  - pin: PC4
+    signal: MISO
+    remap: 0
+  - pin: PC3
+    signal: MOSI
+    remap: 0
+  - pin: PA2
+    signal: NSS
+    remap: 1
+  - pin: PB6
+    signal: SCK
+    remap: 1
+  - pin: PA4
+    signal: MISO
+    remap: 1
+  - pin: PB5
+    signal: MOSI
+    remap: 1
+  - pin: PA0
+    signal: NSS
+    remap: 2
+  - pin: PA1
+    signal: SCK
+    remap: 2
+  - pin: PC4
+    signal: MISO
+    remap: 2
+  - pin: PA11
+    signal: MOSI
+    remap: 2
+  - pin: PA2
+    signal: NSS
+    remap: 3
+  - pin: PA1
+    signal: SCK
+    remap: 3
+  - pin: PA4
+    signal: MISO
+    remap: 3
+  - pin: PA8
+    signal: MOSI
+    remap: 3

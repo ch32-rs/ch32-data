@@ -1,5 +1,5 @@
 - name: TIM1
-  address: 0x40012c00
+  address: 1073818624
   registers:
     kind: timer
     version: m030
@@ -24,3 +24,160 @@
     interrupt: TIM1TRG
   - signal: CC
     interrupt: TIM1CC
+  remap:
+    register: PCFR1
+    field: TIM1_RM
+  pins:
+  - pin: PC1
+    signal: ETR
+    remap: 0
+  - pin: PB9
+    signal: CH1
+    remap: 0
+  - pin: PB11
+    signal: CH2
+    remap: 0
+  - pin: PB13
+    signal: CH3
+    remap: 0
+  - pin: PC0
+    signal: CH4
+    remap: 0
+  - pin: PA15
+    signal: BKIN
+    remap: 0
+  - pin: PB8
+    signal: CH1N
+    remap: 0
+  - pin: PB10
+    signal: CH2N
+    remap: 0
+  - pin: PB12
+    signal: CH3N
+    remap: 0
+  - pin: PC1
+    signal: ETR
+    remap: 1
+  - pin: PB9
+    signal: CH1
+    remap: 1
+  - pin: PB11
+    signal: CH2
+    remap: 1
+  - pin: PB13
+    signal: CH3
+    remap: 1
+  - pin: PB15
+    signal: CH4
+    remap: 1
+  - pin: PA13
+    signal: BKIN
+    remap: 1
+  - pin: PB8
+    signal: CH1N
+    remap: 1
+  - pin: PB10
+    signal: CH2N
+    remap: 1
+  - pin: PB12
+    signal: CH3N
+    remap: 1
+  - pin: PA4
+    signal: ETR
+    remap: 2
+  - pin: PB9
+    signal: CH1
+    remap: 2
+  - pin: PB11
+    signal: CH2
+    remap: 2
+  - pin: PB15
+    signal: CH3
+    remap: 2
+  - pin: PC2
+    signal: CH4
+    remap: 2
+  - pin: PA15
+    signal: BKIN
+    remap: 2
+  - pin: PB8
+    signal: CH1N
+    remap: 2
+  - pin: PB10
+    signal: CH2N
+    remap: 2
+  - pin: PB14
+    signal: CH3N
+    remap: 2
+  - pin: PA4
+    signal: ETR
+    remap: 3
+  - pin: PC3
+    signal: CH1
+    remap: 3
+  - pin: PC4
+    signal: CH2
+    remap: 3
+  - pin: PA0
+    signal: CH3
+    remap: 3
+  - pin: PC5
+    signal: CH4
+    remap: 3
+  - pin: PA15
+    signal: BKIN
+    remap: 3
+  - pin: PC2
+    signal: CH1N
+    remap: 3
+  - pin: PC1
+    signal: CH2N
+    remap: 3
+  - pin: PC0
+    signal: CH3N
+    remap: 3
+  - pin: PA4
+    signal: ETR
+    remap: 4
+  - pin: PC3
+    signal: CH1
+    remap: 4
+  - pin: PB9
+    signal: CH1
+    remap: 4
+  - pin: PC4
+    signal: CH2
+    remap: 4
+  - pin: PB11
+    signal: CH2
+    remap: 4
+  - pin: PA0
+    signal: CH3
+    remap: 4
+  - pin: PB13
+    signal: CH3
+    remap: 4
+  - pin: PA1
+    signal: CH4
+    remap: 4
+  - pin: PA15
+    signal: BKIN
+    remap: 4
+  - pin: PC2
+    signal: CH1N
+    remap: 4
+  - pin: PB8
+    signal: CH1N
+    remap: 4
+  - pin: PC1
+    signal: CH2N
+    remap: 4
+  - pin: PB10
+    signal: CH2N
+    remap: 4
+  - pin: PC0
+    signal: CH3N
+    remap: 4
+  - pin: PB12
+    signal: CH3N
+    remap: 4

@@ -1,5 +1,5 @@
 - name: I2C1
-  address: 0x40005400
+  address: 1073763328
   registers:
     kind: i2c
     version: v0
@@ -18,3 +18,31 @@
     interrupt: I2C1_EV
   - signal: ER
     interrupt: I2C1_ER
+  remap:
+    register: PCFR1
+    field: I2C1_RM
+  pins:
+  - pin: PB3
+    signal: SCL
+    remap: 0
+  - pin: PB2
+    signal: SDA
+    remap: 0
+  - pin: PA2
+    signal: SCL
+    remap: 1
+  - pin: PB6
+    signal: SDA
+    remap: 1
+  - pin: PA15
+    signal: SCL
+    remap: 2
+  - pin: PA14
+    signal: SDA
+    remap: 2
+  - pin: PA2
+    signal: SCL
+    remap: 3
+  - pin: PA3
+    signal: SDA
+    remap: 3

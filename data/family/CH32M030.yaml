@@ -37,6 +37,9 @@
     kind: rcc
     version: m030
     block: RCC
+  pins:
+  - pin: PA8
+    signal: MCO
 - name: DMA1
   address: 1073872896
   registers:

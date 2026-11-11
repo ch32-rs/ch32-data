@@ -1,5 +1,5 @@
 - name: USBPD1
-  address: 0x40024400
+  address: 1073890304
   registers:
     kind: usbpd
     version: m030
@@ -18,3 +18,8 @@
     interrupt: USBPD1
   - signal: WKUP
     interrupt: USBPD1WakeUP
+  pins:
+  - pin: PA2
+    signal: CC1
+  - pin: PA3
+    signal: CC2

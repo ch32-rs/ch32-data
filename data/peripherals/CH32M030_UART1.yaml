@@ -1,5 +1,5 @@
 - name: UART1
-  address: 0x40013800
+  address: 1073821696
   registers:
     kind: usart
     version: common
@@ -16,3 +16,79 @@
   interrupts:
   - signal: GLOBAL
     interrupt: UART1
+  remap:
+    register: PCFR1
+    field: UART1_RM
+  pins:
+  - pin: PC1
+    signal: TX
+    remap: 0
+  - pin: PC0
+    signal: RX
+    remap: 0
+  - pin: PA14
+    signal: CTS
+    remap: 0
+  - pin: PA15
+    signal: RTS
+    remap: 0
+  - pin: PC1
+    signal: TX
+    remap: 1
+  - pin: PC2
+    signal: RX
+    remap: 1
+  - pin: PA14
+    signal: CTS
+    remap: 1
+  - pin: PA15
+    signal: RTS
+    remap: 1
+  - pin: PB6
+    signal: TX
+    remap: 2
+  - pin: PB5
+    signal: RX
+    remap: 2
+  - pin: PA2
+    signal: CTS
+    remap: 2
+  - pin: PA4
+    signal: RTS
+    remap: 2
+  - pin: PB1
+    signal: TX
+    remap: 3
+  - pin: PB0
+    signal: RX
+    remap: 3
+  - pin: PB2
+    signal: CTS
+    remap: 3
+  - pin: PB3
+    signal: RTS
+    remap: 3
+  - pin: PA3
+    signal: TX
+    remap: 4
+  - pin: PA2
+    signal: RX
+    remap: 4
+  - pin: PB2
+    signal: CTS
+    remap: 4
+  - pin: PB3
+    signal: RTS
+    remap: 4
+  - pin: PA2
+    signal: TX
+    remap: 5
+  - pin: PA3
+    signal: RX
+    remap: 5
+  - pin: PB2
+    signal: CTS
+    remap: 5
+  - pin: PB3
+    signal: RTS
+    remap: 5
