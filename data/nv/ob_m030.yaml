@@ -1,0 +1,98 @@
+block/OB:
+  description: Persistent flash configuration — read protection, watchdog mode, low-power reset behavior, write protection, and two free user-data bytes.
+  items:
+  - name: RDPR
+    description: Read protection level.
+    byte_offset: 0
+    bit_size: 8
+    fieldset: RDPR
+  - name: NRDPR
+    description: Integrity complement of RDPR (managed automatically).
+    byte_offset: 1
+    bit_size: 8
+    access: Read
+  - name: USER
+    description: User configuration — watchdog mode and stop/standby reset behavior.
+    byte_offset: 2
+    bit_size: 8
+    fieldset: USER
+  - name: NUSER
+    description: Integrity complement of USER (managed automatically).
+    byte_offset: 3
+    bit_size: 8
+    access: Read
+  - name: DATA0
+    description: Free user data byte 0.
+    byte_offset: 4
+    bit_size: 8
+  - name: NDATA0
+    description: Integrity complement of DATA0 (managed automatically).
+    byte_offset: 5
+    bit_size: 8
+    access: Read
+  - name: DATA1
+    description: Free user data byte 1.
+    byte_offset: 6
+    bit_size: 8
+  - name: NDATA1
+    description: Integrity complement of DATA1 (managed automatically).
+    byte_offset: 7
+    bit_size: 8
+    access: Read
+  - name: WRPR0
+    description: Write protection for main-flash sectors 0-7. 1 bit per 4K sector (1 = writable, 0 = protected).
+    byte_offset: 8
+    bit_size: 8
+  - name: NWRPR0
+    description: Integrity complement of WRPR0 (managed automatically).
+    byte_offset: 9
+    bit_size: 8
+    access: Read
+  - name: WRPR1
+    description: Write protection for main-flash sectors 8-15. 1 bit per 4K sector (1 = writable, 0 = protected).
+    byte_offset: 10
+    bit_size: 8
+  - name: NWRPR1
+    description: Integrity complement of WRPR1 (managed automatically).
+    byte_offset: 11
+    bit_size: 8
+    access: Read
+fieldset/RDPR:
+  description: Read protection level.
+  bit_size: 8
+  fields:
+  - name: RDPR
+    description: Set UNPROTECTED (0xA5) to allow debug reads. Any other value blocks the debug interface and auto-write-protects pages 0-15 (4K each).
+    bit_offset: 0
+    bit_size: 8
+    enum: ReadProtection
+fieldset/USER:
+  description: User configuration byte.
+  fields:
+  - name: OV_CFG
+    description: Overvoltage protection source (1 = PWR CTLR).
+    bit_offset: 7
+    bit_size: 1
+  - name: RST_PIN_SEL
+    description: Reset pin select (1 = PA15, 0 = PC0).
+    bit_offset: 5
+    bit_size: 1
+  - name: RST_MODE
+    description: Reset pin mode.
+    bit_offset: 3
+    bit_size: 2
+  - name: STANDYRST
+    description: Standby low-power reset disable.
+    bit_offset: 2
+    bit_size: 1
+  - name: STOPRST
+    description: Stop low-power reset disable.
+    bit_offset: 1
+    bit_size: 1
+enum/ReadProtection:
+  description: Whether flash contents are readable through the debug interface.
+  bit_size: 8
+  variants:
+  - name: UNPROTECTED
+    description: Allow the debug interface to read flash.
+    value: 165

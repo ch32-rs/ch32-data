@@ -1,0 +1,25 @@
+- name: USBPD0
+  address: 0x40024000
+  registers:
+    kind: usbpd
+    version: m030
+    block: USBPD
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBPD0EN
+    reset:
+      register: HBRSTR
+      field: USBPD0RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USBPD0
+  - signal: WKUP
+    interrupt: USBPD0WakeUP
+  pins:
+  - pin: PA0
+    signal: CC1
+  - pin: PA1
+    signal: CC2

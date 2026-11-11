@@ -1,0 +1,190 @@
+block/EXTEN:
+  description: Extend configuration.
+  items:
+  - name: EXTEN_CTLR0
+    description: Configure the extended control register 0.
+    byte_offset: 0
+    fieldset: EXTEN_CTLR0
+  - name: EXTEN_KEYR
+    description: Configure unlock register.
+    byte_offset: 4
+    fieldset: EXTEN_KEYR
+  - name: EXTEN_CTLR1
+    description: Configure the extended control register 1.
+    byte_offset: 8
+    fieldset: EXTEN_CTLR1
+  - name: ISINK1_CFGR
+    description: ISINK1 configuration register.
+    byte_offset: 12
+    bit_size: 16
+    fieldset: ISINK1_CFGR
+  - name: ISINK2_CFGR
+    description: ISINK2 configuration register.
+    byte_offset: 14
+    bit_size: 16
+    fieldset: ISINK2_CFGR
+fieldset/EXTEN_CTLR0:
+  description: Configure the extended control register 0.
+  fields:
+  - name: LKUPEN
+    description: LOCKUP_Enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: LKUPRST
+    description: LOCKUP RESET.
+    bit_offset: 7
+    bit_size: 1
+  - name: WR_LOCK
+    description: Control register 0 and register 1 for configuration locking.
+    bit_offset: 15
+    bit_size: 1
+  - name: USBPD0_CC_REF
+    description: USBPD0 CC pin analog reference enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: USBPD1_CC_REF
+    description: USBPD1 CC pin analog reference enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: USBPD0_CC_HVT
+    description: USBPD0 CC pin high threshold input mode enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: USBPD1_CC_HVT
+    description: USBPD1 CC pin high threshold input mode enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: USBPD0_LVE_T
+    description: CC pin of USBPD0 1.12V output Tr,Tf difference adjustment.
+    bit_offset: 20
+    bit_size: 2
+  - name: USBPD1_LVE_T
+    description: CC pin of USBPD1 1.12V output Tr,Tf difference adjustment.
+    bit_offset: 22
+    bit_size: 2
+  - name: ISRC1_EN
+    description: Source current 1 enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: ISRC1_SEL
+    description: Source current 1 selection.
+    bit_offset: 25
+    bit_size: 1
+  - name: ISRC2_EN
+    description: Source current 2 enable.
+    bit_offset: 26
+    bit_size: 1
+  - name: ISRC2_SEL
+    description: Source current 2 selection.
+    bit_offset: 27
+    bit_size: 1
+fieldset/EXTEN_CTLR1:
+  description: Configure the extended control register 1.
+  fields:
+  - name: UDP_BUFOE
+    description: UDP pin DAC_BUF output enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: UDP_PCS
+    description: Select pull-up current or pull-down current.  built into the UDP pin.
+    bit_offset: 1
+    bit_size: 2
+  - name: UDP_PUE
+    description: UPD port DAC and programmable pull-down.  and pull-up mode selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: UDP_PDE
+    description: UPD port DAC and programmable pull-down.  and pull-up mode selection.
+    bit_offset: 4
+    bit_size: 1
+  - name: UDP_DAC
+    description: UPD port DAC data/programmable pull-down.  resistor and pull-up resistor data.
+    bit_offset: 5
+    bit_size: 6
+  - name: UDP_AE
+    description: Enable of the UDP pin buffer/comparator DAC_BUF.
+    bit_offset: 11
+    bit_size: 1
+  - name: UDP_AI
+    description: Output of the UDP pin comparator DAC_BUF.
+    bit_offset: 12
+    bit_size: 1
+  - name: UDP_RAT
+    description: UDP pin speed selection.
+    bit_offset: 13
+    bit_size: 1
+  - name: UDP_IE
+    description: UDP pin is input enabled when acting as a GPIO.
+    bit_offset: 14
+    bit_size: 1
+  - name: UDM_BUFOE
+    description: UDM pin DAC_BUF output enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: UDM_PCS
+    description: Select pull-up current or pull-down current.  built into the UDM pin.
+    bit_offset: 17
+    bit_size: 2
+  - name: UDM_PUE
+    description: UPM port DAC and programmable pull-down.  and pull-up mode selection.
+    bit_offset: 19
+    bit_size: 1
+  - name: UDM_PDE
+    description: UPM port DAC and programmable pull-down.  and pull-up mode selection.
+    bit_offset: 20
+    bit_size: 1
+  - name: UDM_DAC
+    description: UPM port DAC data/programmable pull-down.  resistor and pull-up resistor data.
+    bit_offset: 21
+    bit_size: 6
+  - name: UDM_AE
+    description: Enable of the UDM pin buffer/comparator DAC_BUF.
+    bit_offset: 27
+    bit_size: 1
+  - name: UDM_AI
+    description: Output of the UDM pin comparator DAC_BUF.
+    bit_offset: 28
+    bit_size: 1
+  - name: UDM_RAT
+    description: UDM pin speed selection.
+    bit_offset: 29
+    bit_size: 1
+  - name: UDM_IE
+    description: UDM pin is input enabled when acting as a GPIO.
+    bit_offset: 30
+    bit_size: 1
+  - name: UDU_SHRT
+    description: UDP pin and UDM pin are shorted to enable.
+    bit_offset: 31
+    bit_size: 1
+fieldset/EXTEN_KEYR:
+  description: Configure unlock register.
+  fields:
+  - name: KEYR
+    description: Control register 0 and register 1 for configuration unlocking.
+    bit_offset: 0
+    bit_size: 1
+fieldset/ISINK1_CFGR:
+  description: ISINK1 configuration register.
+  fields:
+  - name: ISINK1_ADJ
+    description: Sink current 1 calibration value.
+    bit_offset: 0
+    bit_size: 6
+  - name: ISINK1_DAT
+    description: Sink current 1 programmable data bit.
+    bit_offset: 6
+    bit_size: 10
+  bit_size: 16
+fieldset/ISINK2_CFGR:
+  description: ISINK2 configuration register.
+  fields:
+  - name: ISINK2_ADJ
+    description: Sink current 2 calibration value.
+    bit_offset: 0
+    bit_size: 6
+  - name: ISINK2_DAT
+    description: Sink current 2 programmable data bit.
+    bit_offset: 6
+    bit_size: 10
+  bit_size: 16

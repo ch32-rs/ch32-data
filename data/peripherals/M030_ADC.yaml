@@ -1,0 +1,68 @@
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: m030
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: PB2PCENR
+      field: ADCEN
+    reset:
+      register: PB2PRSTR
+      field: ADC1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: ADC
+  remap:
+    register: PCFR1
+    field: ADC_ETRGIN_RM
+  pins:
+  - pin: PA0
+    signal: IN13
+  - pin: PA1
+    signal: IN14
+  - pin: PA2
+    signal: IN15
+  - pin: PA3
+    signal: IN16
+  - pin: PA4
+    signal: IN5
+  - pin: PA5
+    signal: IN6
+  - pin: PA7
+    signal: IN2
+  - pin: PA8
+    signal: IN7
+  - pin: PA11
+    signal: IN8
+  - pin: PA12
+    signal: IN19
+  - pin: PA13
+    signal: IN18
+  - pin: PA14
+    signal: IN9
+  - pin: PA15
+    signal: IN10
+  - pin: PB0
+    signal: IN11
+  - pin: PB1
+    signal: IN12
+  - pin: PB2
+    signal: IN0
+  - pin: PB3
+    signal: IN1
+  - pin: PB4
+    signal: IN17
+  - pin: PB5
+    signal: IN3
+  - pin: PB6
+    signal: IN4
+  - pin: PA14
+    signal: EXT_TRG
+    remap: 0
+  - pin: PB6
+    signal: EXT_TRG
+    remap: 1

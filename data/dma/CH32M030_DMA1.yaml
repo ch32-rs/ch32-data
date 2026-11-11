@@ -1,0 +1,33 @@
+# CH32M030, CH32M030RM V1.2 table 7-2 (7-channel DMA map).
+# channel 1
+ADC: 1
+TIM1_CH1: 1
+TIM3_CH1: 1
+# channel 2
+SPI1_RX: 2
+TIM1_CH2: 2
+TIM2_TRIG: 2
+TIM3_CH2: 2
+# channel 3
+SPI1_TX: 3
+TIM1_CH3: 3
+TIM2_UP: 3
+TIM3_UP: 3
+# channel 4
+I2C1_TX: 4
+TIM1_CH4: 4
+TIM1_COM: 4
+TIM2_CH4: 4
+TIM3_TRIG: 4
+# channel 5
+I2C1_RX: 5
+TIM1_CH5: 5
+TIM2_CH3: 5
+# channel 6
+UART1_TX: 6
+TIM1_UP: 6
+TIM2_CH2: 6
+# channel 7
+UART1_RX: 7
+TIM1_TRIG: 7
+TIM2_CH1: 7

@@ -1,0 +1,57 @@
+name: CH32M030G8R7
+family: QingKe RISC-V-based, motor control MCU
+subfamily: Motor control, half-bridge gate driver
+product_type: QingKe V3B core, main frequency <= 72M
+keywords:
+- MOTOR
+- GATE_DRIVER
+- USBFS
+- USBPD
+- OPA
+- CMP
+packages:
+- name: CH32M030G8R7
+  package: QSOP28
+  device_id: 0x3bb0800
+include_memory: ../memory/CH32M030.yaml
+memory_sizes:
+  USR_1: 64K
+  RAM: 12K
+docs:
+- type: homepage
+  title: Homepage
+  name: ''
+  url: http://www.wch.cn/products/CH32M030.html
+cores:
+- name: qingke-v3b
+  arch: riscv
+  peripherals: []
+  include_peripherals:
+  - ../family/CH32M030.yaml
+  - ../peripherals/M030_TIM1.yaml
+  - ../peripherals/M030_TIM2.yaml
+  - ../peripherals/M030_TIM3.yaml
+  - ../peripherals/M030_ADC.yaml
+  - ../peripherals/M030_I2C1.yaml
+  - ../peripherals/M030_UART1.yaml
+  - ../peripherals/M030_USBFS.yaml
+  - ../peripherals/M030_USBPD0.yaml
+  - ../peripherals/M030_USBPD1.yaml
+  - ../peripherals/M030_OPA.yaml
+  include_interrupts: ../interrupts/CH32M030.yaml
+  include_dma_channels:
+    DMA1: ../dma/CH32M030_DMA1.yaml
+_raw:
+  Part NO.: CH32M030G8R7
+  Package: QSOP28
+  GPIO: '17'
+  Freq: 72MHz
+  Flash: 64K
+  SRAM: 12K
+  ADC: '11'
+  UART: '1'
+  SPI: '-'
+  IIC: '1'
+  OPA: '3'
+  CMP: '2'
+  VHV: 5~28

@@ -1,0 +1,97 @@
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: timer
+    version: m030
+    block: GPTM3
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM3EN
+    reset:
+      register: PB1PRSTR
+      field: TIM3RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: TIM3
+  remap:
+    register: PCFR1
+    field: TIM3_RM
+  pins:
+  - pin: PC0
+    signal: CH1
+    remap: 0
+  - pin: PC0
+    signal: ETR
+    remap: 0
+  - pin: PC1
+    signal: CH2
+    remap: 0
+  - pin: PB2
+    signal: CH1N
+    remap: 0
+  - pin: PB3
+    signal: CH2N
+    remap: 0
+  - pin: PC0
+    signal: CH1
+    remap: 1
+  - pin: PC0
+    signal: ETR
+    remap: 1
+  - pin: PB2
+    signal: CH2
+    remap: 1
+  - pin: PC1
+    signal: CH1N
+    remap: 1
+  - pin: PB3
+    signal: CH2N
+    remap: 1
+  - pin: PB2
+    signal: CH1
+    remap: 2
+  - pin: PB2
+    signal: ETR
+    remap: 2
+  - pin: PB3
+    signal: CH2
+    remap: 2
+  - pin: PB4
+    signal: CH1N
+    remap: 2
+  - pin: PB5
+    signal: CH2N
+    remap: 2
+  - pin: PA2
+    signal: CH1
+    remap: 3
+  - pin: PA2
+    signal: ETR
+    remap: 3
+  - pin: PB5
+    signal: CH2
+    remap: 3
+  - pin: PA4
+    signal: CH1N
+    remap: 3
+  - pin: PB6
+    signal: CH2N
+    remap: 3
+  - pin: PB13
+    signal: CH1
+    remap: 4
+  - pin: PB13
+    signal: ETR
+    remap: 4
+  - pin: PB15
+    signal: CH2
+    remap: 4
+  - pin: PB12
+    signal: CH1N
+    remap: 4
+  - pin: PB14
+    signal: CH2N
+    remap: 4
