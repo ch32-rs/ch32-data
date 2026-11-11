@@ -1,5 +1,5 @@
 - name: USBPD1
-  address: 1073890304
+  address: 0x40024400
   registers:
     kind: usbpd
     version: m030

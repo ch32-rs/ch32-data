@@ -1,5 +1,5 @@
 - name: ADC1
-  address: 1073816576
+  address: 0x40012400
   registers:
     kind: adc
     version: m030

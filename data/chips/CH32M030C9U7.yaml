@@ -28,17 +28,17 @@ cores:
   peripherals: []
   include_peripherals:
   - ../family/CH32M030.yaml
-  - ../peripherals/CH32M030_TIM1.yaml
-  - ../peripherals/CH32M030_TIM2.yaml
-  - ../peripherals/CH32M030_TIM3.yaml
-  - ../peripherals/CH32M030_ADC.yaml
-  - ../peripherals/CH32M030_I2C1.yaml
-  - ../peripherals/CH32M030_UART1.yaml
-  - ../peripherals/CH32M030_SPI1.yaml
-  - ../peripherals/CH32M030_USBFS.yaml
-  - ../peripherals/CH32M030_USBPD0.yaml
-  - ../peripherals/CH32M030_USBPD1.yaml
-  - ../peripherals/CH32M030_OPA.yaml
+  - ../peripherals/M030_TIM1.yaml
+  - ../peripherals/M030_TIM2.yaml
+  - ../peripherals/M030_TIM3.yaml
+  - ../peripherals/M030_ADC.yaml
+  - ../peripherals/M030_I2C1.yaml
+  - ../peripherals/M030_UART1.yaml
+  - ../peripherals/M030_SPI1.yaml
+  - ../peripherals/M030_USBFS.yaml
+  - ../peripherals/M030_USBPD0.yaml
+  - ../peripherals/M030_USBPD1.yaml
+  - ../peripherals/M030_OPA.yaml
   include_interrupts: ../interrupts/CH32M030.yaml
   include_dma_channels:
     DMA1: ../dma/CH32M030_DMA1.yaml

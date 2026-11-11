@@ -1,5 +1,5 @@
 - name: USBPD0
-  address: 1073889280
+  address: 0x40024000
   registers:
     kind: usbpd
     version: m030

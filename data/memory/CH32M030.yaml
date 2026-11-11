@@ -1,7 +1,7 @@
 memory:
 - name: USR_1
   kind: flash
-  address: 134217728
+  address: 0x8000000
   size: 64K
   modes:
   - type: fast
@@ -16,7 +16,7 @@ memory:
     execute: true
 - name: VND
   kind: flash
-  address: 536867712
+  address: 0x1ffff380
   size: 128
   access:
     read: true
@@ -30,7 +30,7 @@ memory:
     block: ESIG
 - name: OPT
   kind: flash
-  address: 536867584
+  address: 0x1ffff300
   size: 128
   modes:
   - type: standard
@@ -53,7 +53,7 @@ memory:
       NUSER: 64
 - name: RAM
   kind: ram
-  address: 536870912
+  address: 0x20000000
   access:
     read: true
     write: true

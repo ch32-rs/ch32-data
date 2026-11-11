@@ -1,5 +1,5 @@
 - name: OPA
-  address: 1073891328
+  address: 0x40024800
   registers:
     kind: opa
     version: m030

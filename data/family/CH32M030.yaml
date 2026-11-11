@@ -1,23 +1,23 @@
 - name: PFIC
-  address: 3758153728
+  address: 0xe000e000
   registers:
     kind: pfic
     version: m030
     block: PFIC
 - name: SYSTICK
-  address: 3758157824
+  address: 0xe000f000
   registers:
     kind: systick
     version: rv4
     block: SYSTICK
 - name: FLASH
-  address: 1073881088
+  address: 0x40022000
   registers:
     kind: flash
     version: m030
     block: FLASH
 - name: EXTI
-  address: 1073808384
+  address: 0x40010400
   registers:
     kind: exti
     version: common
@@ -32,7 +32,7 @@
   - signal: EXTI15
     interrupt: EXTI15_8
 - name: RCC
-  address: 1073876992
+  address: 0x40021000
   registers:
     kind: rcc
     version: m030
@@ -41,7 +41,7 @@
   - pin: PA8
     signal: MCO
 - name: DMA1
-  address: 1073872896
+  address: 0x40020000
   registers:
     kind: dma
     version: m030
@@ -68,7 +68,7 @@
   - signal: CH7
     interrupt: DMA1_Channel7
 - name: GPIOA
-  address: 1073809408
+  address: 0x40010800
   registers:
     kind: gpio
     version: v3
@@ -83,7 +83,7 @@
       register: PB2PRSTR
       field: IOPARST
 - name: GPIOB
-  address: 1073810432
+  address: 0x40010c00
   registers:
     kind: gpio
     version: v3
@@ -98,7 +98,7 @@
       register: PB2PRSTR
       field: IOPBRST
 - name: GPIOC
-  address: 1073811456
+  address: 0x40011000
   registers:
     kind: gpio
     version: v3
@@ -113,7 +113,7 @@
       register: PB2PRSTR
       field: IOPCRST
 - name: AFIO
-  address: 1073807360
+  address: 0x40010000
   registers:
     kind: afio
     version: m030
@@ -128,7 +128,7 @@
       register: PB2PRSTR
       field: AFIORST
 - name: PWR
-  address: 1073770496
+  address: 0x40007000
   registers:
     kind: pwr
     version: m030
@@ -143,13 +143,13 @@
       register: PB1PRSTR
       field: PWRRST
 - name: EXTEND
-  address: 1073887232
+  address: 0x40023800
   registers:
     kind: extend
     version: m030
     block: EXTEN
 - name: WWDG
-  address: 1073753088
+  address: 0x40002c00
   registers:
     kind: wwdg
     version: v00x
