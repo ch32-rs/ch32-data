@@ -1,23 +1,23 @@
 - name: PFIC
-  address: 3758153728
+  address: 0xe000e000
   registers:
     kind: pfic
     version: v4x7
     block: PFIC
 - name: SYSTICK
-  address: 3758157824
+  address: 0xe000f000
   registers:
     kind: systick
     version: rv4
     block: SYSTICK
 - name: FLASH
-  address: 1073881088
+  address: 0x40022000
   registers:
     kind: flash
     version: x315
     block: FLASH
 - name: EXTI
-  address: 1073808384
+  address: 0x40010400
   registers:
     kind: exti
     version: common
@@ -32,7 +32,7 @@
   - signal: EXTI15
     interrupt: EXTI15_8
 - name: RCC
-  address: 1073876992
+  address: 0x40021000
   registers:
     kind: rcc
     version: x315
@@ -41,7 +41,7 @@
   - pin: PA8
     signal: MCO
 - name: DMA1
-  address: 1073872896
+  address: 0x40020000
   registers:
     kind: dma
     version: x315
@@ -76,7 +76,7 @@
   - signal: CH11
     interrupt: DMA1_CH11
 - name: PWR
-  address: 1073770496
+  address: 0x40007000
   registers:
     kind: pwr
     version: x315
@@ -91,7 +91,7 @@
       register: HB1PRSTR
       field: PWRRST
 - name: GPIOA
-  address: 1073809408
+  address: 0x40010800
   registers:
     kind: gpio
     version: h4
@@ -106,7 +106,7 @@
       register: HB2PRSTR
       field: IOPARST
 - name: GPIOB
-  address: 1073810432
+  address: 0x40010c00
   registers:
     kind: gpio
     version: h4
@@ -121,7 +121,7 @@
       register: HB2PRSTR
       field: IOPBRST
 - name: GPIOC
-  address: 1073811456
+  address: 0x40011000
   registers:
     kind: gpio
     version: h4
@@ -136,7 +136,7 @@
       register: HB2PRSTR
       field: IOPCRST
 - name: GPIOD
-  address: 1073812480
+  address: 0x40011400
   registers:
     kind: gpio
     version: h4
@@ -151,7 +151,7 @@
       register: HB2PRSTR
       field: IOPDRST
 - name: AFIO
-  address: 1073807360
+  address: 0x40010000
   registers:
     kind: afio
     version: x315
@@ -166,13 +166,13 @@
       register: HB2PRSTR
       field: AFIORST
 - name: RTC
-  address: 1073752064
+  address: 0x40002800
   registers:
     kind: rtc
     version: common
     block: RTC
 - name: WWDG
-  address: 1073753088
+  address: 0x40002c00
   registers:
     kind: wwdg
     version: v00x
@@ -187,13 +187,13 @@
       register: HB1PRSTR
       field: WWDGRST
 - name: IWDG
-  address: 1073754112
+  address: 0x40003000
   registers:
     kind: iwdg
     version: v00x
     block: IWDG
 - name: CRC
-  address: 1073885184
+  address: 0x40023000
   registers:
     kind: crc
     version: h4
@@ -205,7 +205,7 @@
       register: HBPCENR
       field: CRCEN
 - name: EXTEND
-  address: 1073881280
+  address: 0x400220c0
   registers:
     kind: extend
     version: x315
