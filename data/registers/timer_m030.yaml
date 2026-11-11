@@ -107,7 +107,7 @@ block/ADTM:
     description: DMA address for full transfer.
     byte_offset: 76
     bit_size: 16
-    fieldset: DMAR
+    fieldset: DMAADR
   - name: AUX1
     description: Auxiliary configuration register 1.
     byte_offset: 80
@@ -202,10 +202,12 @@ block/GPTM:
     description: counter.
     byte_offset: 36
     fieldset: CNT
+    bit_size: 16
   - name: PSC
     description: prescaler.
     byte_offset: 40
     fieldset: PSC
+    bit_size: 16
   - name: ATRLR
     description: auto-reload register.
     byte_offset: 44
@@ -288,10 +290,12 @@ block/GPTM3:
     description: counter.
     byte_offset: 36
     fieldset: CNT
+    bit_size: 16
   - name: PSC
     description: prescaler.
     byte_offset: 40
     fieldset: PSC
+    bit_size: 16
   - name: ATRLR
     description: auto-reload register.
     byte_offset: 44
@@ -319,6 +323,7 @@ fieldset/GPTM_ATRLR:
     description: Auto-reload value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/GPTM3_ATRLR:
   description: auto-reload register.
   fields:
@@ -326,6 +331,7 @@ fieldset/GPTM3_ATRLR:
     description: Auto-reload value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/AUX1:
   description: Auxiliary configuration register 1.
   fields:
@@ -1366,14 +1372,6 @@ fieldset/GPTM3_DMAINTENR:
     bit_offset: 14
     bit_size: 1
   bit_size: 16
-fieldset/DMAR:
-  description: DMA address for full transfer.
-  fields:
-  - name: DMAB
-    description: DMA register for burst accesses.
-    bit_offset: 0
-    bit_size: 16
-  bit_size: 16
 fieldset/ADTM_INTFR:
   description: status register.
   fields:
@@ -1729,3 +1727,4 @@ fieldset/DTCR:
     description: TIMER2 channel2 dead-time setting.
     bit_offset: 12
     bit_size: 4
+  bit_size: 16
