@@ -1,0 +1,64 @@
+- name: USART3
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART3EN
+    reset:
+      register: PB1PRSTR
+      field: USART3RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART3
+  pins:
+  - pin: PB12
+    signal: CK
+    af: 2
+  - pin: PC12
+    signal: CK
+    af: 2
+  - pin: PD10
+    signal: CK
+    af: 2
+  - pin: PA14
+    signal: RX
+    af: 3
+  - pin: PB11
+    signal: RX
+    af: 2
+  - pin: PC11
+    signal: RX
+    af: 2
+  - pin: PD9
+    signal: RX
+    af: 2
+  - pin: PA13
+    signal: TX
+    af: 2
+  - pin: PB10
+    signal: TX
+    af: 2
+  - pin: PC10
+    signal: TX
+    af: 2
+  - pin: PD8
+    signal: TX
+    af: 2
+  - pin: PB14
+    signal: RTS
+    af: 2
+  - pin: PD12
+    signal: RTS
+    af: 2
+  - pin: PB13
+    signal: CTS
+    af: 2
+  - pin: PD11
+    signal: CTS
+    af: 2

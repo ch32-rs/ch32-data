@@ -1,0 +1,6 @@
+- name: TKEY
+  address: 0x40012400
+  registers:
+    kind: tkey
+    version: v205
+    block: TKEY

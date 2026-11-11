@@ -1,0 +1,159 @@
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: v3b
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM2EN
+    reset:
+      register: PB1PRSTR
+      field: TIM2RST
+  interrupts:
+  - signal: UP
+    interrupt: TIM2
+  - signal: TRG
+    interrupt: TIM2
+  - signal: CC
+    interrupt: TIM2
+  pins:
+  - pin: PA0
+    signal: CH1_ETR
+    af: 1
+  - pin: PA15
+    signal: CH1_ETR
+    af: 1
+  - pin: PA1
+    signal: CH2
+    af: 1
+  - pin: PB3
+    signal: CH2
+    af: 1
+  - pin: PA2
+    signal: CH3
+    af: 1
+  - pin: PA13
+    signal: CH3
+    af: 1
+  - pin: PB10
+    signal: CH3
+    af: 1
+  - pin: PA3
+    signal: CH4
+    af: 1
+  - pin: PA14
+    signal: CH4
+    af: 1
+  - pin: PB11
+    signal: CH4
+    af: 1
+- name: TIM3
+  address: 0x40000400
+  registers:
+    kind: timer
+    version: v3b
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM3EN
+    reset:
+      register: PB1PRSTR
+      field: TIM3RST
+  interrupts:
+  - signal: UP
+    interrupt: TIM3
+  - signal: TRG
+    interrupt: TIM3
+  - signal: CC
+    interrupt: TIM3
+  pins:
+  - pin: PD2
+    signal: ETR
+    af: 1
+  - pin: PA6
+    signal: CH1
+    af: 1
+  - pin: PB4
+    signal: CH1
+    af: 1
+  - pin: PC6
+    signal: CH1
+    af: 1
+  - pin: PA7
+    signal: CH2
+    af: 1
+  - pin: PB5
+    signal: CH2
+    af: 1
+  - pin: PC7
+    signal: CH2
+    af: 1
+  - pin: PB0
+    signal: CH3
+    af: 1
+  - pin: PC8
+    signal: CH3
+    af: 1
+  - pin: PB1
+    signal: CH4
+    af: 1
+  - pin: PC9
+    signal: CH4
+    af: 1
+- name: TIM4
+  address: 0x40000800
+  registers:
+    kind: timer
+    version: v3b
+    block: GPTM32
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM4EN
+    reset:
+      register: PB1PRSTR
+      field: TIM4RST
+  interrupts:
+  - signal: UP
+    interrupt: TIM4
+  - signal: TRG
+    interrupt: TIM4
+  - signal: CC
+    interrupt: TIM4
+  pins:
+  - pin: PE0
+    signal: ETR
+    af: 1
+  - pin: PB6
+    signal: CH1
+    af: 1
+  - pin: PD12
+    signal: CH1
+    af: 1
+  - pin: PB7
+    signal: CH2
+    af: 1
+  - pin: PD13
+    signal: CH2
+    af: 1
+  - pin: PB8
+    signal: CH3
+    af: 1
+  - pin: PD14
+    signal: CH3
+    af: 1
+  - pin: PB9
+    signal: CH4
+    af: 1
+  - pin: PD15
+    signal: CH4
+    af: 1

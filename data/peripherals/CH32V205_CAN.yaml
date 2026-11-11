@@ -1,0 +1,43 @@
+- name: CAN1
+  address: 0x40006400
+  registers:
+    kind: can
+    version: v205
+    block: CAN
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: CANEN
+    reset:
+      register: PB1PRSTR
+      field: CANRST
+  interrupts:
+  - signal: TX
+    interrupt: USB_HP_CAN1_TX
+  - signal: RX0
+    interrupt: USB_LP_CAN1_RX0
+  - signal: RX1
+    interrupt: CAN1_RX1
+  - signal: SCE
+    interrupt: CAN1_SCE
+  pins:
+  - pin: PA11
+    signal: RX
+    af: 6
+  - pin: PB8
+    signal: RX
+    af: 6
+  - pin: PD0
+    signal: RX
+    af: 6
+  - pin: PA12
+    signal: TX
+    af: 6
+  - pin: PB9
+    signal: TX
+    af: 6
+  - pin: PD1
+    signal: TX
+    af: 6

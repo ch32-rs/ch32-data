@@ -1,0 +1,55 @@
+- name: USART5
+  address: 0x40005000
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART5EN
+    reset:
+      register: PB1PRSTR
+      field: USART5RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART5
+  pins:
+  - pin: PC8
+    signal: CK
+    af: 4
+  - pin: PE0
+    signal: CK
+    af: 3
+  - pin: PB5
+    signal: RX
+    af: 2
+  - pin: PD2
+    signal: RX
+    af: 3
+  - pin: PE9
+    signal: RX
+    af: 2
+  - pin: PB3
+    signal: RX
+    af: 3
+  - pin: PB4
+    signal: TX
+    af: 2
+  - pin: PC12
+    signal: TX
+    af: 3
+  - pin: PE8
+    signal: TX
+    af: 2
+  - pin: PB2
+    signal: TX
+    af: 3
+  - pin: PB5
+    signal: RTS
+    af: 3
+  - pin: PB4
+    signal: CTS
+    af: 3

@@ -1,0 +1,43 @@
+- name: PIOC
+  address: 0x40025c00
+  registers:
+    kind: pioc
+    version: v205
+    block: PIOC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: PIOCEN
+    reset:
+      register: HBRSTR
+      field: PIOCRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: PIOC
+  pins:
+  - pin: PA11
+    signal: IO0
+    af: 4
+  - pin: PB10
+    signal: IO0
+    af: 4
+  - pin: PD3
+    signal: IO0
+    af: 4
+  - pin: PE3
+    signal: IO0
+    af: 4
+  - pin: PA12
+    signal: IO1
+    af: 4
+  - pin: PB11
+    signal: IO1
+    af: 4
+  - pin: PD4
+    signal: IO1
+    af: 4
+  - pin: PE4
+    signal: IO1
+    af: 4

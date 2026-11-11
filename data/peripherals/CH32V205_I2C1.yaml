@@ -1,0 +1,42 @@
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v3
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: I2C1EN
+    reset:
+      register: PB1PRSTR
+      field: I2C1RST
+  interrupts:
+  - signal: ER
+    interrupt: I2C1_ER
+  - signal: EV
+    interrupt: I2C1_EV
+  pins:
+  - pin: PB6
+    signal: SCL
+    af: 7
+  - pin: PB8
+    signal: SCL
+    af: 7
+  - pin: PA14
+    signal: SCL
+    af: 7
+  - pin: PB7
+    signal: SDA
+    af: 7
+  - pin: PB9
+    signal: SDA
+    af: 7
+  - pin: PA13
+    signal: SDA
+    af: 7
+  - pin: PB5
+    signal: SMBA
+    af: 7

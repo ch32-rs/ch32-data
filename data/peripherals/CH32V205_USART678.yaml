@@ -1,0 +1,168 @@
+- name: USART6
+  address: 0x40001800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART6EN
+    reset:
+      register: PB1PRSTR
+      field: USART6RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART6
+  pins:
+  - pin: PB15
+    signal: CK
+    af: 4
+  - pin: PD3
+    signal: CK
+    af: 3
+  - pin: PB9
+    signal: RX
+    af: 2
+  - pin: PC1
+    signal: RX
+    af: 2
+  - pin: PE11
+    signal: RX
+    af: 2
+  - pin: PB8
+    signal: TX
+    af: 2
+  - pin: PC0
+    signal: TX
+    af: 2
+  - pin: PE10
+    signal: TX
+    af: 2
+  - pin: PA12
+    signal: TX
+    af: 3
+  - pin: PB8
+    signal: RTS
+    af: 4
+  - pin: PC3
+    signal: RTS
+    af: 4
+  - pin: PB9
+    signal: CTS
+    af: 4
+  - pin: PC2
+    signal: CTS
+    af: 4
+- name: USART7
+  address: 0x40001c00
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART7EN
+    reset:
+      register: PB1PRSTR
+      field: USART7RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART7
+  pins:
+  - pin: PA5
+    signal: CK
+    af: 4
+  - pin: PD4
+    signal: CK
+    af: 3
+  - pin: PA7
+    signal: RX
+    af: 3
+  - pin: PC3
+    signal: RX
+    af: 2
+  - pin: PE13
+    signal: RX
+    af: 2
+  - pin: PC7
+    signal: RX
+    af: 4
+  - pin: PA6
+    signal: TX
+    af: 3
+  - pin: PC2
+    signal: TX
+    af: 2
+  - pin: PE12
+    signal: TX
+    af: 2
+  - pin: PC6
+    signal: TX
+    af: 4
+  - pin: PA7
+    signal: RTS
+    af: 4
+  - pin: PA6
+    signal: CTS
+    af: 4
+- name: USART8
+  address: 0x40002000
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: USART8EN
+    reset:
+      register: PB1PRSTR
+      field: USART8RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USART8
+  pins:
+  - pin: PA15
+    signal: CK
+    af: 3
+  - pin: PD1
+    signal: CK
+    af: 3
+  - pin: PA15
+    signal: RX
+    af: 2
+  - pin: PC5
+    signal: RX
+    af: 3
+  - pin: PE15
+    signal: RX
+    af: 2
+  - pin: PC12
+    signal: RX
+    af: 4
+  - pin: PA14
+    signal: TX
+    af: 2
+  - pin: PC4
+    signal: TX
+    af: 3
+  - pin: PE14
+    signal: TX
+    af: 2
+  - pin: PC9
+    signal: TX
+    af: 4
+  - pin: PB1
+    signal: RTS
+    af: 3
+  - pin: PB0
+    signal: CTS
+    af: 3

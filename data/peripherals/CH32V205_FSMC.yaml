@@ -1,0 +1,115 @@
+- name: FSMC
+  address: 0xa0000000
+  registers:
+    kind: fsmc
+    version: v4x7
+    block: FSMC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: FSMCEN
+  pins:
+  - pin: PD14
+    signal: D0
+    af: 7
+  - pin: PD15
+    signal: D1
+    af: 7
+  - pin: PD0
+    signal: D2
+    af: 7
+  - pin: PD1
+    signal: D3
+    af: 7
+  - pin: PE7
+    signal: D4
+    af: 7
+  - pin: PE8
+    signal: D5
+    af: 7
+  - pin: PE9
+    signal: D6
+    af: 7
+  - pin: PE10
+    signal: D7
+    af: 7
+  - pin: PE11
+    signal: D8
+    af: 7
+  - pin: PE12
+    signal: D9
+    af: 7
+  - pin: PE13
+    signal: D10
+    af: 7
+  - pin: PE14
+    signal: D11
+    af: 7
+  - pin: PE15
+    signal: D12
+    af: 7
+  - pin: PD8
+    signal: D13
+    af: 7
+  - pin: PD9
+    signal: D14
+    af: 7
+  - pin: PD10
+    signal: D15
+    af: 7
+  - pin: PD11
+    signal: A16
+    af: 7
+  - pin: PD12
+    signal: A17
+    af: 7
+  - pin: PD13
+    signal: A18
+    af: 7
+  - pin: PE3
+    signal: A19
+    af: 7
+  - pin: PE4
+    signal: A20
+    af: 7
+  - pin: PE5
+    signal: A21
+    af: 7
+  - pin: PE6
+    signal: A22
+    af: 7
+  - pin: PE2
+    signal: A23
+    af: 7
+  - pin: PB7
+    signal: NADV
+    af: 6
+  - pin: PD2
+    signal: NADV
+    af: 7
+  - pin: PD3
+    signal: CLK
+    af: 7
+  - pin: PD4
+    signal: NOE
+    af: 7
+  - pin: PD5
+    signal: NWE
+    af: 7
+  - pin: PD6
+    signal: NWAIT
+    af: 7
+  - pin: PD7
+    signal: NE1
+    af: 7
+  - pin: PD7
+    signal: NCE2
+    af: 7
+  - pin: PE0
+    signal: NBL0
+    af: 7
+  - pin: PE1
+    signal: NBL1
+    af: 7

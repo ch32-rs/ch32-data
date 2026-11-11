@@ -1,0 +1,177 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+  - name: ECR
+    description: Event Control Register (AFIO_ECR).
+    byte_offset: 0
+    fieldset: ECR
+  - name: PCFR1
+    description: AF remap and debug I/O configuration register 1 (AFIO_PCFR1).
+    byte_offset: 4
+    fieldset: PCFR1
+  - name: EXTICR
+    description: External interrupt configuration registers.
+    byte_offset: 8
+    array:
+      len: 4
+      stride: 4
+    fieldset: EXTICR
+  - name: CR
+    description: AFIO control register (AFIO_CR).
+    byte_offset: 24
+    fieldset: CR
+  - name: GPIO_AFLR
+    description: Port AF low registers.
+    byte_offset: 32
+    array:
+      len: 5
+      stride: 8
+    fieldset: AFLR
+  - name: GPIO_AFHR
+    description: Port AF high registers.
+    byte_offset: 36
+    array:
+      len: 5
+      stride: 8
+    fieldset: AFHR
+fieldset/CR:
+  description: AFIO control register (AFIO_CR).
+  fields:
+  - name: USBPD_IN_HVT
+    description: PD pin PB6/PD7 High threshold input mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: UDP_BC_VSRC
+    description: PA12/UDP pin BC source voltage enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: UDM_BC_VSRC
+    description: PA11/UDM pin BC source voltage enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: UDP_BC_CMPE
+    description: PA12/UDP pin BC protocol comparator enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: UDM_BC_CMPE
+    description: PA11/UDM pin BC protocol comparator enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: UDP_BC_CMPO
+    description: PA12/UDP pin BC protocol comparator status.
+    bit_offset: 20
+    bit_size: 1
+  - name: UDM_BC_CMPO
+    description: PA11/UDM pin BC protocol comparator status.
+    bit_offset: 21
+    bit_size: 1
+fieldset/ECR:
+  description: Event Control Register (AFIO_ECR).
+  fields:
+  - name: PIN
+    description: Pin selection.
+    bit_offset: 0
+    bit_size: 4
+  - name: PORT
+    description: Port selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: EVOE
+    description: Event Output Enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register 1 (AFIO_PCFR1).
+  fields:
+  - name: PD0PD1_RM
+    description: Port D0/Port D1 mapping on OSCIN/OSCOUT.
+    bit_offset: 15
+    bit_size: 1
+  - name: SW_CFG
+    description: Serial wire JTAG configuration.
+    bit_offset: 24
+    bit_size: 3
+  - name: TIM1_CAP_RM
+    description: TIM1 channel capture mapping.
+    bit_offset: 31
+    bit_size: 1
+fieldset/AFLR:
+  description: Port AF low register.
+  fields:
+  - name: AFR0
+    description: selection of multiplexing function for pin 0 of PA port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR1
+    description: selection of multiplexing function for pin 1 of PA port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR2
+    description: selection of multiplexing function for pin 2 of PA port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR3
+    description: selection of multiplexing function for pin 3 of PA port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR4
+    description: selection of multiplexing function for pin 4 of PA port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR5
+    description: selection of multiplexing function for pin 5 of PA port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR6
+    description: selection of multiplexing function for pin 6 of PA port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR7
+    description: selection of multiplexing function for pin 7 of PA port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/AFHR:
+  description: Port AF high register.
+  fields:
+  - name: AFR8
+    description: selection of multiplexing function for pin 8 of PA port.
+    bit_offset: 0
+    bit_size: 4
+  - name: AFR9
+    description: selection of multiplexing function for pin 9 of PA port.
+    bit_offset: 4
+    bit_size: 4
+  - name: AFR10
+    description: selection of multiplexing function for pin 10 of PA port.
+    bit_offset: 8
+    bit_size: 4
+  - name: AFR11
+    description: selection of multiplexing function for pin 11 of PA port.
+    bit_offset: 12
+    bit_size: 4
+  - name: AFR12
+    description: selection of multiplexing function for pin 12 of PA port.
+    bit_offset: 16
+    bit_size: 4
+  - name: AFR13
+    description: selection of multiplexing function for pin 13 of PA port.
+    bit_offset: 20
+    bit_size: 4
+  - name: AFR14
+    description: selection of multiplexing function for pin 14 of PA port.
+    bit_offset: 24
+    bit_size: 4
+  - name: AFR15
+    description: selection of multiplexing function for pin 15 of PA port.
+    bit_offset: 28
+    bit_size: 4
+fieldset/EXTICR:
+  description: External interrupt configuration register.
+  fields:
+  - name: EXTI
+    description: EXTI line configuration.
+    bit_offset: 0
+    bit_size: 4
+    array:
+      len: 4
+      stride: 4

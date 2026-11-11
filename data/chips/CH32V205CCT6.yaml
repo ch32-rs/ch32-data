@@ -1,0 +1,76 @@
+name: CH32V205CCT6
+family: QingKe RISC-V-based, general-purpose MCU
+subfamily: General-purpose, high-speed USB
+product_type: QingKe V3B non-floating-point core, main frequency <= 192M
+keywords:
+- USBFS
+- USBHS
+- USBPD
+- CAN
+- PIOC
+- QSPI
+packages:
+- name: CH32V205CCT6
+  package: LQFP48
+  device_id: 0x20520500
+include_memory: ../memory/CH32V205.yaml
+memory_sizes:
+  USR_1: 256K
+  RAM: 32K
+docs:
+- type: homepage
+  title: Homepage
+  name: ''
+  url: http://www.wch.cn/products/CH32V205.html
+cores:
+- name: qingke-v3b
+  arch: riscv
+  peripherals: []
+  include_peripherals:
+  - ../family/CH32V205.yaml
+  - ../peripherals/CH32V205_USART1.yaml
+  - ../peripherals/CH32V205_USART2.yaml
+  - ../peripherals/CH32V205_USART3.yaml
+  - ../peripherals/CH32V205_USART4.yaml
+  - ../peripherals/CH32V205_USART5.yaml
+  - ../peripherals/CH32V205_USART678.yaml
+  - ../peripherals/CH32V205_ADV_TIM1.yaml
+  - ../peripherals/CH32V205_GP16_TIM234.yaml
+  - ../peripherals/CH32V205_ADC.yaml
+  - ../peripherals/CH32V205_TKEY.yaml
+  - ../peripherals/CH32V205_SPI1.yaml
+  - ../peripherals/CH32V205_SPI2.yaml
+  - ../peripherals/CH32V205_I2C1.yaml
+  - ../peripherals/CH32V205_I2C2.yaml
+  - ../peripherals/CH32V205_CAN.yaml
+  - ../peripherals/CH32V205_USBFS.yaml
+  - ../peripherals/CH32V205_USBHS.yaml
+  - ../peripherals/CH32V205_USBPD.yaml
+  - ../peripherals/CH32V205_PIOC.yaml
+  - ../peripherals/CH32V205_QSPI.yaml
+  - ../peripherals/CH32V205_OPA.yaml
+  include_interrupts: ../interrupts/CH32V205.yaml
+  include_dma_channels:
+    DMA1: ../dma/CH32V205_DMA1.yaml
+    DMA2: ../dma/CH32V205_DMA2.yaml
+_raw:
+  Part NO.: CH32V205CCT6
+  Package: LQFP48
+  GPIO: '41'
+  Freq: 192MHz
+  Flash: 256K
+  SRAM: 32K
+  ADC: 16+3
+  Touchkey: '16'
+  OPA: '2'
+  USART: '8'
+  SPI: '2'
+  IIC: '2'
+  CAN: '1'
+  QSPI: '1'
+  PIOC: '1'
+  USB_20: D/H
+  USB_20H: D/H
+  USBPD: '1'
+  VDD: 1.8/3.3
+  url: http://www.wch.cn/products/CH32V205.html

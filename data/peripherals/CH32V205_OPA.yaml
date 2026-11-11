@@ -1,0 +1,62 @@
+- name: OPA
+  address: 0x40026000
+  registers:
+    kind: opa
+    version: v205
+    block: OPA
+  interrupts:
+  - signal: GLOBAL
+    interrupt: OPA
+  - signal: CMP
+    interrupt: CMP_WKUP
+  pins:
+  - pin: PB1
+    signal: OPA1_OUT1
+  - pin: PA3
+    signal: OPA1_OUT2
+  - pin: PB11
+    signal: OPA1_CHN0
+  - pin: PA6
+    signal: OPA1_CHN1
+  - pin: PB5
+    signal: OPA1_CHP0
+  - pin: PB0
+    signal: OPA1_CHP1
+  - pin: PB12
+    signal: OPA1_CHP2
+  - pin: PB13
+    signal: OPA1_CHNVB
+  - pin: PA4
+    signal: OPA2_OUT1
+  - pin: PA2
+    signal: OPA2_OUT2
+  - pin: PB10
+    signal: OPA2_CHN0
+  - pin: PA5
+    signal: OPA2_CHN1
+  - pin: PB14
+    signal: OPA2_CHP0
+  - pin: PA7
+    signal: OPA2_CHP1
+  - pin: PB15
+    signal: OPA2_CHNVB
+  - pin: PA2
+    signal: CMP1_CHP0
+  - pin: PB2
+    signal: CMP1_CHP1
+  - pin: PB1
+    signal: CMP1_CHN0
+  - pin: PB3
+    signal: CMP1_CHN1
+  - pin: PB12
+    signal: CMP1_OUT
+  - pin: PB8
+    signal: CMP2_CHP0
+  - pin: PA8
+    signal: CMP2_CHP1
+  - pin: PA9
+    signal: CMP2_CHN0
+  - pin: PB11
+    signal: CMP2_CHN1
+  - pin: PA12
+    signal: CMP2_OUT
