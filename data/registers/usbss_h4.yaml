@@ -285,6 +285,16 @@ block/USBSS_HOST:
   extends: USBSS
   description: USBSS in host mode. UH_* / HOST_* registers. Offsets overlap with USBSS_DEVICE.
   items:
+  - name: UEP_TX_EN
+    description: Endpoint Transmit Enable Register. The RM lists it only among the device registers; the EVT host header exposes it and the host SDK sets bit 1.
+    byte_offset: 128
+    bit_size: 16
+    fieldset: UEP_TX_EN
+  - name: UEP_RX_EN
+    description: Endpoint Receive Enable Register. The RM lists it only among the device registers; the EVT host header exposes it and the host SDK sets bit 1.
+    byte_offset: 130
+    bit_size: 16
+    fieldset: UEP_RX_EN
   - name: UH_TX_CTRL
     description: Host Transmit Control Registers.
     byte_offset: 132
