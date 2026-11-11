@@ -1,0 +1,20 @@
+- name: I2C1
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: v0
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: I2C1EN
+    reset:
+      register: PB1PRSTR
+      field: I2C1RST
+  interrupts:
+  - signal: EV
+    interrupt: I2C1_EV
+  - signal: ER
+    interrupt: I2C1_ER

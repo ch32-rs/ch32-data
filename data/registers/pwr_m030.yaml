@@ -1,0 +1,48 @@
+block/PWR:
+  description: Power control.
+  items:
+  - name: CTLR
+    description: Power control register (PWR_CTRL).
+    byte_offset: 0
+    fieldset: CTLR
+  - name: AWUCSR
+    description: Automatic wake-up control state register (PWR_AWUCSR).
+    byte_offset: 8
+    fieldset: AWUCSR
+  - name: AWUWR
+    description: Automatic wake window comparison value register (PWR_AWUWR).
+    byte_offset: 12
+    fieldset: AWUWR
+fieldset/AWUCSR:
+  description: Automatic wake-up control state register (PWR_AWUCSR).
+  fields:
+  - name: AWUEN
+    description: Automatic wake-up enable.
+    bit_offset: 1
+    bit_size: 1
+fieldset/AWUWR:
+  description: Automatic wake window comparison value register (PWR_AWUWR).
+  fields:
+  - name: AWUWR
+    description: AWU window value.
+    bit_offset: 0
+    bit_size: 4
+fieldset/CTLR:
+  description: Power control register (PWR_CTRL).
+  fields:
+  - name: PDDS
+    description: Power Down Deep Sleep.
+    bit_offset: 1
+    bit_size: 1
+  - name: ISINKEN
+    description: ISINK Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: SEL_IO_VHV
+    description: PB4 function Selection.
+    bit_offset: 12
+    bit_size: 2
+  - name: PMUPROEN
+    description: PMU over-temperature protection Enable.
+    bit_offset: 14
+    bit_size: 1

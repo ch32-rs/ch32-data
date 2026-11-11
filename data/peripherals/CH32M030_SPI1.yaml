@@ -1,0 +1,18 @@
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: m030
+    block: SPI
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: SPI1EN
+    reset:
+      register: PB2PRSTR
+      field: SPI1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: SPI1

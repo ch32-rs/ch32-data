@@ -1,0 +1,133 @@
+block/AFIO:
+  description: Alternate function I/O.
+  items:
+  - name: PCFR1
+    description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+    byte_offset: 4
+    fieldset: PCFR1
+  - name: EXTICR
+    description: External interrupt configuration register (AFIO_EXTICR).
+    byte_offset: 8
+    fieldset: EXTICR
+fieldset/EXTICR:
+  description: External interrupt configuration register (AFIO_EXTICR).
+  fields:
+  - name: EXTI0
+    description: EXTI0 configuration.
+    bit_offset: 0
+    bit_size: 1
+  - name: EXTI1
+    description: EXTI1 configuration.
+    bit_offset: 1
+    bit_size: 1
+  - name: EXTI2
+    description: EXTI2 configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: EXTI3
+    description: EXTI3 configuration.
+    bit_offset: 3
+    bit_size: 1
+  - name: EXTI4
+    description: EXTI4 configuration.
+    bit_offset: 4
+    bit_size: 1
+  - name: EXTI5
+    description: EXTI5 configuration.
+    bit_offset: 5
+    bit_size: 1
+  - name: EXTI6
+    description: EXTI6 configuration.
+    bit_offset: 6
+    bit_size: 1
+  - name: EXTI7
+    description: EXTI7 configuration.
+    bit_offset: 7
+    bit_size: 1
+  - name: EXTI8
+    description: EXTI8 configuration.
+    bit_offset: 8
+    bit_size: 1
+  - name: EXTI9
+    description: EXTI9 configuration.
+    bit_offset: 9
+    bit_size: 1
+  - name: EXTI10
+    description: EXTI10 configuration.
+    bit_offset: 10
+    bit_size: 1
+  - name: EXTI11
+    description: EXTI11 configuration.
+    bit_offset: 11
+    bit_size: 1
+  - name: EXTI12
+    description: EXTI12 configuration.
+    bit_offset: 12
+    bit_size: 1
+  - name: EXTI13
+    description: EXTI13 configuration.
+    bit_offset: 13
+    bit_size: 1
+  - name: EXTI14
+    description: EXTI14 configuration.
+    bit_offset: 14
+    bit_size: 1
+  - name: EXTI15
+    description: EXTI15 configuration.
+    bit_offset: 15
+    bit_size: 1
+fieldset/PCFR1:
+  description: AF remap and debug I/O configuration register (AFIO_PCFR1).
+  fields:
+  - name: I2C1_RM
+    description: I2C1 remapping.
+    bit_offset: 0
+    bit_size: 2
+  - name: UART1_RM
+    description: UART1 remapping.
+    bit_offset: 2
+    bit_size: 3
+  - name: SPI1_RM
+    description: SPI1 remapping.
+    bit_offset: 5
+    bit_size: 2
+  - name: TIM1_RM
+    description: TIM1 remapping.
+    bit_offset: 7
+    bit_size: 3
+  - name: TIM2_RM
+    description: TIM2 remapping.
+    bit_offset: 10
+    bit_size: 2
+  - name: TIM3_RM
+    description: TIM3 remapping.
+    bit_offset: 12
+    bit_size: 3
+  - name: ADC_ETRGIN_RM
+    description: ADC External trigger injected conversion remapping.
+    bit_offset: 15
+    bit_size: 1
+  - name: PB5PB6_RM
+    description: PB5 and PB6 remapping.
+    bit_offset: 16
+    bit_size: 1
+  - name: HO_DIO_EN0
+    description: PB9 Vdd8 diode output is enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: HO_DIO_EN1
+    description: PB11 Vdd8 diode output is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: HO_DIO_EN2
+    description: PB13 Vdd8 diode output is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: HO_DIO_EN3
+    description: PB15 Vdd8 diode output is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: SWCFG
+    description: Serial wire JTAG configuration.
+    bit_offset: 24
+    bit_size: 3

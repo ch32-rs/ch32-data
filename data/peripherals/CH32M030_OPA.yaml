@@ -1,0 +1,18 @@
+- name: OPA
+  address: 0x40024800
+  registers:
+    kind: opa
+    version: m030
+    block: OPA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: OPAEN
+    reset:
+      register: HBRSTR
+      field: OPARST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: OPA

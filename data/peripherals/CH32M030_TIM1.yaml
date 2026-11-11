@@ -1,0 +1,26 @@
+- name: TIM1
+  address: 0x40012c00
+  registers:
+    kind: timer
+    version: m030
+    block: ADTM
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: TIM1EN
+    reset:
+      register: PB2PRSTR
+      field: TIM1RST
+  interrupts:
+  - signal: BRK
+    interrupt: TIM1BRK
+  - signal: UP
+    interrupt: TIM1UP
+  - signal: TRG
+    interrupt: TIM1TRG
+  - signal: COM
+    interrupt: TIM1TRG
+  - signal: CC
+    interrupt: TIM1CC

@@ -41,6 +41,7 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH32X315/CH32X305, Quad ADC, USB 3.0, USB PD, ARGB (V3F)
 - CH32L1, Low power, PDUSB (V4C)
 - CH32M103, CH32L103 plus a 3-phase gate driver (V4C)
+- CH32M030, Motor control with half-bridge gate drivers, USB PD (V3B)
 - CH32H4, Dual-core V3F+V5F, USB 3.0, Gigabit Ethernet, SerDes
 - CH643, RGB driver (V4C)
 - CH641, USB PD, (V2A)
@@ -59,7 +60,6 @@ Families that are not yet released(require more info):
 
 - CH564, USBHS, 100M Ethernet (V4J)
 - CH645, USB HUB, SerDes (V4C)
-- CH32M, Motor control (V2C)
 
 ### IP Cores
 

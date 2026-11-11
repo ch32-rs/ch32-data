@@ -1,0 +1,237 @@
+block/FLASH:
+  description: FLASH.
+  items:
+  - name: ACTLR
+    description: Flash key register.
+    byte_offset: 0
+    fieldset: ACTLR
+  - name: KEYR
+    description: Flash key register.
+    byte_offset: 4
+    access: Write
+    fieldset: KEYR
+  - name: OBTKEYR
+    description: Flash option key register.
+    byte_offset: 8
+    access: Write
+    fieldset: OBTKEYR
+  - name: STATR
+    description: Status register.
+    byte_offset: 12
+    fieldset: STATR
+  - name: CTLR
+    description: Control register.
+    byte_offset: 16
+    fieldset: CTLR
+  - name: ADDR
+    description: Flash address register.
+    byte_offset: 20
+    access: Write
+    fieldset: ADDR
+  - name: OBR
+    description: Option byte register.
+    byte_offset: 28
+    access: Read
+    fieldset: OBR
+  - name: WPR
+    description: Write protection register.
+    byte_offset: 32
+    access: Read
+    fieldset: WPR
+  - name: MODEKEYR
+    description: Mode select register.
+    byte_offset: 36
+    access: Write
+    fieldset: MODEKEYR
+  - name: BOOT_MODEKEYP
+    description: Boot mode key register.
+    byte_offset: 40
+    access: Write
+    fieldset: BOOT_MODEKEYP
+  - name: CTLR2
+    description: configuration register 2.
+    byte_offset: 47
+    bit_size: 8
+    fieldset: CTLR2
+fieldset/ACTLR:
+  description: Flash key register.
+  fields:
+  - name: LATENCY
+    description: Number of FLASH wait states.
+    bit_offset: 0
+    bit_size: 3
+fieldset/ADDR:
+  description: Flash address register.
+  fields:
+  - name: FAR
+    description: Flash Address.
+    bit_offset: 0
+    bit_size: 32
+fieldset/BOOT_MODEKEYP:
+  description: Boot mode key register.
+  fields:
+  - name: MODEKEYR
+    description: Boot mode key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/CTLR:
+  description: Control register.
+  fields:
+  - name: PER
+    description: Page Erase.
+    bit_offset: 1
+    bit_size: 1
+  - name: MER
+    description: Mass Erase.
+    bit_offset: 2
+    bit_size: 1
+  - name: OBER
+    description: Option byte erase.
+    bit_offset: 5
+    bit_size: 1
+  - name: STRT
+    description: Start.
+    bit_offset: 6
+    bit_size: 1
+  - name: LOCK
+    description: Lock.
+    bit_offset: 7
+    bit_size: 1
+  - name: OPTWRE
+    description: Option bytes lock.
+    bit_offset: 9
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: EOPIE
+    description: End of operation interrupt enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: FLOCK
+    description: Fast programmable lock.
+    bit_offset: 15
+    bit_size: 1
+  - name: FTPG
+    description: Fast programming.
+    bit_offset: 16
+    bit_size: 1
+  - name: FTER
+    description: Fast erase.
+    bit_offset: 17
+    bit_size: 1
+  - name: BUFLOAD
+    description: Buffer load.
+    bit_offset: 18
+    bit_size: 1
+  - name: BUFRST
+    description: Buffer reset.
+    bit_offset: 19
+    bit_size: 1
+  - name: ECCERRIE
+    description: ECC error interrupt enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: ECCCORIE
+    description: ECC verification error occurs but correction.  is successful,ECC error flag location is selected.
+    bit_offset: 21
+    bit_size: 1
+fieldset/CTLR2:
+  description: configuration register 2.
+  fields:
+  - name: VDD8_SEL
+    description: VDD voltage selection.
+    bit_offset: 5
+    bit_size: 2
+  bit_size: 8
+fieldset/KEYR:
+  description: Flash key register.
+  fields:
+  - name: KEYR
+    description: FPEC key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/MODEKEYR:
+  description: Mode select register.
+  fields:
+  - name: MODEKEYR
+    description: Mode select.
+    bit_offset: 0
+    bit_size: 32
+fieldset/OBR:
+  description: Option byte register.
+  fields:
+  - name: OPTERR
+    description: Option byte error.
+    bit_offset: 0
+    bit_size: 1
+  - name: RDPRT
+    description: Read protection.
+    bit_offset: 1
+    bit_size: 1
+  - name: STOPRST
+    description: STOP_RST.
+    bit_offset: 3
+    bit_size: 1
+  - name: STANDYRST
+    description: STANDY_RST.
+    bit_offset: 4
+    bit_size: 1
+  - name: RST_MODE
+    description: CFG_RST_MODE.
+    bit_offset: 5
+    bit_size: 2
+  - name: RST_PIN_SEL
+    description: RESET PIN selection.
+    bit_offset: 7
+    bit_size: 1
+  - name: OV_CFG
+    description: User configuration bit of the overvoltage protection detection function.
+    bit_offset: 9
+    bit_size: 1
+fieldset/OBTKEYR:
+  description: Flash option key register.
+  fields:
+  - name: OBKEYR
+    description: Option byte key.
+    bit_offset: 0
+    bit_size: 32
+fieldset/STATR:
+  description: Status register.
+  fields:
+  - name: BSY
+    description: Busy.
+    bit_offset: 0
+    bit_size: 1
+  - name: WRPRTERR
+    description: Write protection error.
+    bit_offset: 4
+    bit_size: 1
+  - name: EOP
+    description: End of operation.
+    bit_offset: 5
+    bit_size: 1
+  - name: ERR_FATAL
+    description: Flash module ECC verification error,error correction success failure.
+    bit_offset: 17
+    bit_size: 1
+  - name: ERRCOR
+    description: Flash module ECC verification error,error correction success.
+    bit_offset: 18
+    bit_size: 1
+  - name: NOERR
+    description: ECC verification of Flash module is error-free.
+    bit_offset: 19
+    bit_size: 1
+  - name: ECCERRIF
+    description: Flash module ECC verification error interrupt flag.
+    bit_offset: 20
+    bit_size: 1
+fieldset/WPR:
+  description: Write protection register.
+  fields:
+  - name: WRP
+    description: Write protect.
+    bit_offset: 0
+    bit_size: 32

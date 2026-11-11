@@ -1,0 +1,325 @@
+block/OPA:
+  description: OPA_CMP.
+  items:
+  - name: QII_CFGR
+    description: OPA_CMP_QII configuration register.
+    byte_offset: 0
+    fieldset: QII_CFGR
+  - name: ISP_CTLR
+    description: ISP control register.
+    byte_offset: 4
+    fieldset: ISP_CTLR
+  - name: CMP_CTLR
+    description: CMP1_2_3 control register.
+    byte_offset: 8
+    fieldset: CMP_CTLR
+  - name: CMP3_CFGR
+    description: CMP3 configur register.
+    byte_offset: 12
+    fieldset: CMP3_CFGR
+  - name: CMP3_SW
+    description: CMP3 switch register.
+    byte_offset: 16
+    fieldset: CMP3_SW
+  - name: CMP_STATR
+    description: CMP state register.
+    byte_offset: 20
+    fieldset: CMP_STATR
+fieldset/CMP3_CFGR:
+  description: CMP3 configur register.
+  fields:
+  - name: EN
+    description: CMP3 enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: PSEL
+    description: CMP3 positive channel selection.
+    bit_offset: 1
+    bit_size: 3
+  - name: NSEL
+    description: CMP3 nagetive channel selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: HYS
+    description: CMP3 hysteresis voltage selection.
+    bit_offset: 7
+    bit_size: 2
+  - name: RMID_EN
+    description: CMP3 virtual center point was enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: DACDAT
+    description: CMP3 module DAC output selection.
+    bit_offset: 10
+    bit_size: 4
+  - name: OEN
+    description: enable CMP3 analog output to IO.
+    bit_offset: 14
+    bit_size: 1
+  - name: OE
+    description: IO output is enabled when CMP3 push-pull output is connected to IO.
+    bit_offset: 15
+    bit_size: 1
+  - name: MODE_IOSEL
+    description: pin selection when CMP3 push-pull output is connected to IO.
+    bit_offset: 16
+    bit_size: 1
+fieldset/CMP3_SW:
+  description: CMP3 switch register.
+  fields:
+  - name: CH_NUM
+    description: CMP3 channel number of TIM2 channels to switch.
+    bit_offset: 0
+    bit_size: 2
+  - name: OUT_POL_CH1
+    description: the first channel to compare the output.  polarity configuration bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: OUT_POL_CH2
+    description: the comparison output.  polarity configuration bit for the second channel.
+    bit_offset: 3
+    bit_size: 1
+  - name: OUT_POL_CH3
+    description: the comparison output.  polarity configuration bit for the third channel.
+    bit_offset: 4
+    bit_size: 1
+  - name: OUT_POL_CH4
+    description: the comparison output.  polarity configuration bit for the channel 4.
+    bit_offset: 5
+    bit_size: 1
+fieldset/CMP_CTLR:
+  description: CMP1_2_3 control register.
+  fields:
+  - name: CMP1_FILT_EN
+    description: CMP1 output digital filtering function was enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: CMP1_FILT_CFG
+    description: CMP1 output digital filter length configuration.
+    bit_offset: 1
+    bit_size: 5
+  - name: CMP2_FILT_EN
+    description: CMP2 output digital filtering function was enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: CMP2_FILT_CFG
+    description: CMP2 output digital filter length configuration.
+    bit_offset: 7
+    bit_size: 5
+  - name: CMP2_BK_EN
+    description: Enable CMP2 output connect to timer 1 brake input.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMP2_INT_EN
+    description: Enable CMP2 output interrupt.
+    bit_offset: 13
+    bit_size: 1
+  - name: CMP3_TRG_SRC
+    description: CMP3 hardware trigger source selection.
+    bit_offset: 14
+    bit_size: 3
+  - name: CMP3_TRG_GATE
+    description: CMP3 hardware trigger channel switching.
+    bit_offset: 17
+    bit_size: 1
+  - name: QII_CAP_EN
+    description: The QII output is sent internally directly to the TIM3 capture enable bit.
+    bit_offset: 18
+    bit_size: 1
+  - name: CMP3_COM_MODE
+    description: CMP3 continues comparison mode is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: CMP3_FILT_EN
+    description: CMP3 output digital filtering function was enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: CMP3_FILT_CFG
+    description: CMP3 output digital filter length configuration.
+    bit_offset: 21
+    bit_size: 5
+  - name: CMP3_BK_EN
+    description: Enable CMP3 output connect to timer 1 brake input.
+    bit_offset: 26
+    bit_size: 1
+  - name: CMP3_INT_EN
+    description: Enable CMP3 output interrupt.
+    bit_offset: 27
+    bit_size: 1
+  - name: CMP2_TO_IO
+    description: The CMP2 push-pull output is internally connected to the IO function.
+    bit_offset: 28
+    bit_size: 1
+  - name: CMP1_TO_IO
+    description: The CMP1 push-pull output is internally connected to the IO function.
+    bit_offset: 29
+    bit_size: 1
+  - name: CMP3_CAP
+    description: CMP3 compares the output of the 4 channels internally connected to TIMER2.
+    bit_offset: 30
+    bit_size: 1
+fieldset/CMP_STATR:
+  description: CMP state register.
+  fields:
+  - name: CMP1_OUT
+    description: Turn off the output of CMP1 filter.
+    bit_offset: 0
+    bit_size: 1
+  - name: CMP1_OUT_FILT
+    description: Open the output of CMP1 filter.
+    bit_offset: 1
+    bit_size: 1
+  - name: CMP2_OUT
+    description: Turn off the output of CMP2 filter.
+    bit_offset: 8
+    bit_size: 1
+  - name: CMP2_OUT_FILT
+    description: Open the output of CMP2 filter.
+    bit_offset: 9
+    bit_size: 1
+  - name: CMP2_COMIF
+    description: The CMP2 output is a high level interrupt flag bit.
+    bit_offset: 10
+    bit_size: 1
+  - name: CMP3_OUT
+    description: Turn off the output of CMP3 filter.
+    bit_offset: 16
+    bit_size: 1
+  - name: CMP3_OUT_FILT
+    description: Open the output of CMP3 filter.
+    bit_offset: 17
+    bit_size: 1
+  - name: CMP3_CHOUT0
+    description: CMP3 channel switch the comparison output of the channel 0.
+    bit_offset: 18
+    bit_size: 1
+  - name: CMP3_CHOUT1
+    description: CMP3 channel switch the comparison output of the first channel.
+    bit_offset: 19
+    bit_size: 1
+  - name: CMP3_CHOUT2
+    description: CMP3 channel switch the comparison output of the second channel.
+    bit_offset: 20
+    bit_size: 1
+  - name: CMP3_CHOUT3
+    description: CMP3 channel switch the comparison output of the third channel.
+    bit_offset: 21
+    bit_size: 1
+fieldset/ISP_CTLR:
+  description: ISP control register.
+  fields:
+  - name: ISP1_EN
+    description: ISP1 module enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: ISP1_GAIN
+    description: ISP1_OPA gain selection.
+    bit_offset: 1
+    bit_size: 2
+  - name: ISP1_VFBIAS
+    description: ISP1 module reference voltage selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: ISP1_NSEL
+    description: Input selection at the negative end of the ISP1.
+    bit_offset: 4
+    bit_size: 1
+  - name: ISP1_SEL_IO
+    description: The switch ISP1 module outputs to the ADC.
+    bit_offset: 5
+    bit_size: 1
+  - name: QDET1_EN
+    description: ISP1 module Q value detection enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: QDET1_PD30K
+    description: The Q value of the ISP1 module detects the 30K resistance enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: QDET1_VBSEL
+    description: The ISP1 module Q value detects the reference voltage enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: ISP2_EN
+    description: ISP2 module enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: ISP2_GAIN
+    description: ISP2_OPA gain selection.
+    bit_offset: 17
+    bit_size: 2
+  - name: ISP2_VFBIAS
+    description: ISP2 module reference voltage selection.
+    bit_offset: 19
+    bit_size: 1
+  - name: ISP2_NSEL
+    description: Input selection at the negative end of the ISP2.
+    bit_offset: 20
+    bit_size: 1
+  - name: ISP2_SEL_IO
+    description: The switch ISP2 module outputs to the ADC.
+    bit_offset: 21
+    bit_size: 1
+  - name: QDET2_EN
+    description: ISP2 module Q value detection enabled.
+    bit_offset: 22
+    bit_size: 1
+  - name: QDET2_PD30K
+    description: The Q value of the ISP2 module detects the 30K resistance enabled.
+    bit_offset: 23
+    bit_size: 1
+  - name: QDET2_VBSEL
+    description: The ISP2 module Q value detects the reference voltage enabled.
+    bit_offset: 24
+    bit_size: 1
+fieldset/QII_CFGR:
+  description: OPA_CMP_QII configuration register.
+  fields:
+  - name: QII1_AE
+    description: QII1_CMP enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: QII1_HYPSEL
+    description: QII1_CMP hysteresis selection.
+    bit_offset: 1
+    bit_size: 1
+  - name: QII1_AVSEL
+    description: QII1_OPA gain selection.
+    bit_offset: 2
+    bit_size: 1
+  - name: QII2_AE
+    description: QII2_CMP enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: QII2_OPAEN
+    description: QII2_OPA enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: QII2_SESEL
+    description: QII2 single end amplification mode selection.
+    bit_offset: 5
+    bit_size: 1
+  - name: QII2_AVSEL
+    description: QII2_OPA gain selection.
+    bit_offset: 6
+    bit_size: 2
+  - name: QII2_HYPSEL
+    description: QII2_CMP hysteresis selection.
+    bit_offset: 8
+    bit_size: 3
+  - name: QII2_DACEN
+    description: QII2_DAC enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: QII2_DAC
+    description: QII2_DAC output voltage selection.
+    bit_offset: 13
+    bit_size: 4
+  - name: QII2_CHNSEL
+    description: Input selection at the negative end of the QII2_CMP.
+    bit_offset: 18
+    bit_size: 2
+  - name: QII2_CHPSEL
+    description: Input selection at the positive end of the QII2_CMP.
+    bit_offset: 20
+    bit_size: 2

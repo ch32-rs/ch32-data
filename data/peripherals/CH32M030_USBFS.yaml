@@ -1,0 +1,20 @@
+- name: USBFS
+  address: 0x40023400
+  registers:
+    kind: usb
+    version: v2fs
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: USBFSEN
+    reset:
+      register: HBRSTR
+      field: USBFSRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: USBFS
+  - signal: WAKEUP
+    interrupt: USBFSWakeUP

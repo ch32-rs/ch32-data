@@ -1,0 +1,18 @@
+- name: UART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: PB2PCENR
+      field: UART1EN
+    reset:
+      register: PB2PRSTR
+      field: UART1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: UART1

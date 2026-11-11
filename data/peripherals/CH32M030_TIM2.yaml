@@ -1,0 +1,18 @@
+- name: TIM2
+  address: 0x40000000
+  registers:
+    kind: timer
+    version: m030
+    block: GPTM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: PB1PCENR
+      field: TIM2EN
+    reset:
+      register: PB1PRSTR
+      field: TIM2RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: TIM2
