@@ -1,95 +1,90 @@
-# CH32X315 / CH32X305 memory map (CH32X315RM §1.2, datasheet §1.1).
-#
-# 480K code flash: 192K zero-wait at 0x08000000 + 288K non-zero-wait at
-# 0x08030000. 64K SRAM at 0x20000000. The information block carries the
-# ESIG bytes and the option bytes.
 memory:
-  - name: USR_1
-    kind: flash
-    address: 0x08000000
-    size: 192K
-    modes:
-      - type: fast
-        page_size: 256
-        load_size: 4
-      - type: standard
-        erase_size: 4K
-        write_size: 2
-    access:
-      read: true
-      write: true
-      execute: true
-  - name: USR_2
-    kind: flash
-    address: 0x08030000
-    size: 288K
-    modes:
-      - type: fast
-        page_size: 256
-        load_size: 4
-      - type: standard
-        erase_size: 4K
-        write_size: 2
-    access:
-      read: true
-      write: true
-      execute: true
-  - name: SYS_1
-    kind: flash
-    address: 0x1FFF8000
-    size: 28K
-    modes:
-      - type: fast
-        page_size: 256
-        load_size: 4
-      - type: standard
-        erase_size: 4K
-        write_size: 2
-    access:
-      read: true
-      write: true
-      execute: true
-  - name: VND
-    kind: flash
-    address: 0x1FFFF700
-    size: 256
-    access:
-      read: true
-      write: false
-      execute: false
-    structs:
-      - name: ESIG
-        offset: 0xE0
-        kind: esig
-        version: common
-        block: ESIG
-  - name: OPT
-    kind: flash
-    address: 0x1FFFF800
-    size: 128
-    modes:
-      - type: standard
-        erase_size: 128
-        write_size: 2
-    access:
-      read: true
-      write: true
-      execute: false
-    structs:
-      - name: OB
-        offset: 0
-        kind: ob
-        version: x315
-        block: OB
-        defaults:
-          RDPR: 0xA5
-          NRDPR: 0x5A
-          USER: 0xFF
-          NUSER: 0x00
-  - name: RAM
-    kind: ram
-    address: 0x20000000
-    access:
-      read: true
-      write: true
-      execute: true
+- name: USR_1
+  kind: flash
+  address: 0x8000000
+  size: 192K
+  modes:
+  - type: fast
+    page_size: 256
+    load_size: 4
+  - type: standard
+    erase_size: 4K
+    write_size: 2
+  access:
+    read: true
+    write: true
+    execute: true
+- name: USR_2
+  kind: flash
+  address: 0x8030000
+  size: 288K
+  modes:
+  - type: fast
+    page_size: 256
+    load_size: 4
+  - type: standard
+    erase_size: 4K
+    write_size: 2
+  access:
+    read: true
+    write: true
+    execute: true
+- name: SYS_1
+  kind: flash
+  address: 0x1fff8000
+  size: 28K
+  modes:
+  - type: fast
+    page_size: 256
+    load_size: 4
+  - type: standard
+    erase_size: 4K
+    write_size: 2
+  access:
+    read: true
+    write: true
+    execute: true
+- name: VND
+  kind: flash
+  address: 0x1ffff700
+  size: 256
+  access:
+    read: true
+    write: false
+    execute: false
+  structs:
+  - name: ESIG
+    offset: 224
+    kind: esig
+    version: common
+    block: ESIG
+- name: OPT
+  kind: flash
+  address: 0x1ffff800
+  size: 128
+  modes:
+  - type: standard
+    erase_size: 128
+    write_size: 2
+  access:
+    read: true
+    write: true
+    execute: false
+  structs:
+  - name: OB
+    offset: 0
+    kind: ob
+    version: x315
+    block: OB
+    defaults:
+      RDPR: 165
+      NRDPR: 90
+      USER: 255
+      NUSER: 0
+- name: RAM
+  kind: ram
+  address: 0x20000000
+  access:
+    read: true
+    write: true
+    execute: true

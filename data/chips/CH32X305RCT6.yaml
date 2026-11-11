@@ -25,26 +25,26 @@ cores:
   peripherals: []
   include_peripherals:
   - ../family/CH32X315.yaml
-  - ../peripherals/CH32X315_ADC1.yaml
-  - ../peripherals/CH32X315_ADC2.yaml
-  - ../peripherals/CH32X315_ADC3.yaml
-  - ../peripherals/CH32X315_ADC4.yaml
-  - ../peripherals/CH32X315_TIM1.yaml
-  - ../peripherals/CH32X315_TIM2.yaml
-  - ../peripherals/CH32X315_TIM3.yaml
-  - ../peripherals/CH32X315_TIM4.yaml
-  - ../peripherals/CH32X315_USART1.yaml
-  - ../peripherals/CH32X315_USART2.yaml
-  - ../peripherals/CH32X315_USART3.yaml
-  - ../peripherals/CH32X315_USART4.yaml
-  - ../peripherals/CH32X315_SPI1.yaml
-  - ../peripherals/CH32X315_SPI2.yaml
-  - ../peripherals/CH32X315_SPI3.yaml
-  - ../peripherals/CH32X315_I2C1.yaml
-  - ../peripherals/CH32X315_I2C2.yaml
-  - ../peripherals/CH32X315_ARGB.yaml
-  - ../peripherals/CH32X315_USBHS.yaml
-  - ../peripherals/CH32X315_USBPD.yaml
+  - ../peripherals/X315_ADC1.yaml
+  - ../peripherals/X315_ADC2.yaml
+  - ../peripherals/X315_ADC3.yaml
+  - ../peripherals/X315_ADC4.yaml
+  - ../peripherals/X315_TIM1.yaml
+  - ../peripherals/X315_TIM2.yaml
+  - ../peripherals/X315_TIM3.yaml
+  - ../peripherals/X315_TIM4.yaml
+  - ../peripherals/X315_USART1.yaml
+  - ../peripherals/X315_USART2.yaml
+  - ../peripherals/X315_USART3.yaml
+  - ../peripherals/X315_USART4.yaml
+  - ../peripherals/X315_SPI1.yaml
+  - ../peripherals/X315_SPI2.yaml
+  - ../peripherals/X315_SPI3.yaml
+  - ../peripherals/X315_I2C1.yaml
+  - ../peripherals/X315_I2C2.yaml
+  - ../peripherals/X315_ARGB.yaml
+  - ../peripherals/X315_USBHS.yaml
+  - ../peripherals/X315_USBPD.yaml
   include_interrupts: ../interrupts/CH32X315.yaml
   include_dma_channels:
     DMA1: ../dma/CH32X315_DMA1.yaml
