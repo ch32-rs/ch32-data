@@ -260,6 +260,7 @@ fieldset/ADTM_ATRLR:
     description: Auto-reload value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/GPTM_ATRLR:
   description: auto-reload register.
   fields:
@@ -267,6 +268,7 @@ fieldset/GPTM_ATRLR:
     description: Auto-reload value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/GPTM32_ATRLR:
   description: auto-reload register.
   fields:
@@ -309,6 +311,7 @@ fieldset/BDTR:
     description: Main output enable.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/ADTM_CCER:
   description: capture/compare enable register.
   fields:
@@ -368,6 +371,7 @@ fieldset/ADTM_CCER:
     description: Capture/Compare 3 output Polarity.
     bit_offset: 13
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_CCER:
   description: capture/compare enable register.
   fields:
@@ -562,6 +566,7 @@ fieldset/CHCTLR1_Output:
     description: Output Compare 2 clear enable.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/CHCTLR2_Input:
   description: capture/compare mode register 2 (input mode).
   fields:
@@ -589,6 +594,7 @@ fieldset/CHCTLR2_Input:
     description: Input capture 4 filter.
     bit_offset: 12
     bit_size: 4
+  bit_size: 16
 fieldset/CHCTLR2_Output:
   description: capture/compare mode register (output mode).
   fields:
@@ -632,6 +638,7 @@ fieldset/CHCTLR2_Output:
     description: Output compare 4 clear enable.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/ADTM_CNT:
   description: counter.
   fields:
@@ -639,6 +646,7 @@ fieldset/ADTM_CNT:
     description: counter value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/GPTM_CNT:
   description: counter.
   fields:
@@ -646,6 +654,7 @@ fieldset/GPTM_CNT:
     description: counter value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/GPTM32_CNT:
   description: counter.
   fields:
@@ -700,6 +709,7 @@ fieldset/ADTM_CTLR1:
     description: Directive function enable.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_CTLR1:
   description: control register 1.
   fields:
@@ -829,6 +839,7 @@ fieldset/ADTM_CTLR2:
     description: Output Idle state 4.
     bit_offset: 14
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_CTLR2:
   description: control register 2.
   fields:
@@ -891,6 +902,7 @@ fieldset/DMACFGR:
     description: DMA burst length.
     bit_offset: 8
     bit_size: 5
+  bit_size: 16
 fieldset/ADTM_DMAINTENR:
   description: DMA/Interrupt enable register.
   fields:
@@ -954,6 +966,7 @@ fieldset/ADTM_DMAINTENR:
     description: Trigger DMA request enable.
     bit_offset: 14
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_DMAINTENR:
   description: DMA/Interrupt enable register.
   fields:
@@ -1107,6 +1120,7 @@ fieldset/ADTM_INTFR:
     description: Capture/Compare 4 overcapture flag.
     bit_offset: 12
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_INTFR:
   description: status register.
   fields:
@@ -1200,6 +1214,7 @@ fieldset/PSC:
     description: Prescaler value.
     bit_offset: 0
     bit_size: 16
+  bit_size: 16
 fieldset/RPTCR:
   description: repetition counter register.
   fields:
@@ -1207,6 +1222,7 @@ fieldset/RPTCR:
     description: Repetition counter value.
     bit_offset: 0
     bit_size: 8
+  bit_size: 16
 fieldset/SMCFGR:
   description: slave mode control register.
   fields:
@@ -1238,6 +1254,7 @@ fieldset/SMCFGR:
     description: External trigger polarity.
     bit_offset: 15
     bit_size: 1
+  bit_size: 16
 fieldset/ADTM_SWEVGR:
   description: event generation register.
   fields:
@@ -1273,6 +1290,7 @@ fieldset/ADTM_SWEVGR:
     description: Break generation.
     bit_offset: 7
     bit_size: 1
+  bit_size: 16
 fieldset/GPTM_SWEVGR:
   description: event generation register.
   fields:
