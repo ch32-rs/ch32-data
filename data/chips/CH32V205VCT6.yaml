@@ -29,28 +29,28 @@ cores:
   peripherals: []
   include_peripherals:
   - ../family/CH32V205.yaml
-  - ../peripherals/CH32V205_USART1.yaml
-  - ../peripherals/CH32V205_USART2.yaml
-  - ../peripherals/CH32V205_USART3.yaml
-  - ../peripherals/CH32V205_USART4.yaml
-  - ../peripherals/CH32V205_USART5.yaml
-  - ../peripherals/CH32V205_USART678.yaml
-  - ../peripherals/CH32V205_ADV_TIM1.yaml
-  - ../peripherals/CH32V205_GP16_TIM234.yaml
-  - ../peripherals/CH32V205_ADC.yaml
-  - ../peripherals/CH32V205_TKEY.yaml
-  - ../peripherals/CH32V205_SPI1.yaml
-  - ../peripherals/CH32V205_SPI2.yaml
-  - ../peripherals/CH32V205_I2C1.yaml
-  - ../peripherals/CH32V205_I2C2.yaml
-  - ../peripherals/CH32V205_CAN.yaml
-  - ../peripherals/CH32V205_USBFS.yaml
-  - ../peripherals/CH32V205_USBHS.yaml
-  - ../peripherals/CH32V205_USBPD.yaml
-  - ../peripherals/CH32V205_PIOC.yaml
-  - ../peripherals/CH32V205_QSPI.yaml
-  - ../peripherals/CH32V205_OPA.yaml
-  - ../peripherals/CH32V205_FSMC.yaml
+  - ../peripherals/V205_USART1.yaml
+  - ../peripherals/V205_USART2.yaml
+  - ../peripherals/V205_USART3.yaml
+  - ../peripherals/V205_USART4.yaml
+  - ../peripherals/V205_USART5.yaml
+  - ../peripherals/V205_USART678.yaml
+  - ../peripherals/V205_ADV_TIM1.yaml
+  - ../peripherals/V205_GP16_TIM234.yaml
+  - ../peripherals/V205_ADC.yaml
+  - ../peripherals/V205_TKEY.yaml
+  - ../peripherals/V205_SPI1.yaml
+  - ../peripherals/V205_SPI2.yaml
+  - ../peripherals/V205_I2C1.yaml
+  - ../peripherals/V205_I2C2.yaml
+  - ../peripherals/V205_CAN.yaml
+  - ../peripherals/V205_USBFS.yaml
+  - ../peripherals/V205_USBHS.yaml
+  - ../peripherals/V205_USBPD.yaml
+  - ../peripherals/V205_PIOC.yaml
+  - ../peripherals/V205_QSPI.yaml
+  - ../peripherals/V205_OPA.yaml
+  - ../peripherals/V205_FSMC.yaml
   include_interrupts: ../interrupts/CH32V205.yaml
   include_dma_channels:
     DMA1: ../dma/CH32V205_DMA1.yaml
