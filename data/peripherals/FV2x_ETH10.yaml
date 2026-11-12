@@ -14,6 +14,8 @@
       # with the MAC-10M, it's probably safest to give this field.
       register: AHBPCENR
       field: ETHMACEN
+  # `exten` is not part of ch32-data-serde's Peripheral model and is ignored;
+  # the driver enables the 10M MAC through EXTEN_CTR.ETH10M (bit 2) instead.
   exten:
     # Contrary to other peripherals, the Ethernet MAC is enabled from register EXTEN_CTR
     enable:

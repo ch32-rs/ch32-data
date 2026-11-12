@@ -1,0 +1,74 @@
+name: CH32F203CBT6
+family: ARM Cortex-M-based, general-purpose MCU
+subfamily: General-purpose, large capacity
+product_type: Cortex-M3 core, main frequency <= 144M
+keywords:
+  - USBD
+  - CAN
+  - DAC
+packages:
+  - name: CH32F203CBT6
+    package: LQFP48
+    device_id: 0x20320404
+include_memory: ../memory/CH32V3_XB.yaml
+memory_sizes: { USR_1: 128K, RAM: 32K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32F203.html
+cores:
+  - name: cortex-m3
+    arch: arm
+    peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v3
+          block: RCC
+        pins:
+          - pin: PA8
+            signal: MCO
+    include_peripherals:
+      - "../family/CH32F2_LARGE.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
+      - "../peripherals/FV2x_V3x_USART3.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+      - "../peripherals/FV2x_ADC1_10.yaml"
+      - "../peripherals/FV2x_ADC2_10.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_SPI2.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
+      - "../peripherals/FV2x_V3x_I2C2.yaml"
+      - "../peripherals/FV2x_V3x_USBD.yaml"
+      - "../peripherals/FV2x_V3x_CAN1.yaml"
+      - "../peripherals/FV2x_V3x_OPA.yaml"
+    include_interrupts: "../interrupts/CH32F2_D8.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+
+_raw:
+  Part NO.: CH32F203CBT6
+  Package: LQFP48
+  Freq: 144MHz
+  Flash: 128K
+  SRAM: 32K
+  GPIO: "37"
+  ADC: 2/10
+  Touchkey: "10"
+  Advanced TM: 1/3
+  UART: "3"
+  SPI: 2/-
+  IIC: "2"
+  CAN: "1"
+  DAC: "2"
+  OPA: "4"
+  USB_20: D
+  WDOG: "2"
+  RTC: "1"
+  VDD: 2.5/3.3
+  url: http://www.wch.cn/products/CH32F203.html

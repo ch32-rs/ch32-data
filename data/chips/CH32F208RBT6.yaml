@@ -1,0 +1,82 @@
+name: CH32F208RBT6
+family: ARM Cortex-M-based, general-purpose MCU
+subfamily: Wireless (BLE5.X, CAN, USB, Ethernet)
+product_type: Cortex-M3 core, main frequency <= 144M
+keywords:
+  - BLE
+  - USBD
+  - USBFS
+  - CAN
+  - ETH
+packages:
+  - name: CH32F208RBT6
+    package: LQFP64M
+    device_id: 0x2081040C
+include_memory: ../memory/CH32V2_RC.yaml
+# OB SRAM_CODE_MODE: 00x=128K/64K (default), 01x=144K/48K, 1xx=160K/32K
+memory_ram_code_config:
+  total_flash: 480K
+  default: c128_r64
+  configs:
+    - { name: c128_r64, code: 128K, ram: 64K }
+    - { name: c144_r48, code: 144K, ram: 48K }
+    - { name: c160_r32, code: 160K, ram: 32K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32F208.html
+cores:
+  - name: cortex-m3
+    arch: arm
+    peripherals: []
+    include_peripherals:
+      - "../family/CH32F2_D8W.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
+      - "../peripherals/FV2x_V3x_USART3.yaml"
+      - "../peripherals/V2x_USART4.yaml"
+      - "../peripherals/V1x_V2x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+      - "../peripherals/FV2x_V3x_GP32_TIM5.yaml"
+      - "../peripherals/FV2x_ADC1.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_SPI2.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
+      - "../peripherals/FV2x_V3x_I2C2.yaml"
+      - "../peripherals/FV2x_V3x_USBD.yaml"
+      - "../peripherals/FV2x_USBFS_PB6.yaml"
+      - "../peripherals/FV2x_V3x_CAN1.yaml"
+      - "../peripherals/FV2x_ETH10.yaml"
+      - "../peripherals/FV2x_OPA_D6.yaml"
+      - "../peripherals/V208_BLE_BB.yaml"
+      - "../peripherals/V208_BLE_LLE.yaml"
+      - "../peripherals/V208_BLE_RFEND.yaml"
+      - "../peripherals/V208_BLE_AES.yaml"
+    include_interrupts: "../interrupts/CH32F2_D8W.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4C.yaml"
+
+_raw:
+  Part NO.: CH32F208RBT6
+  Package: LQFP64M
+  Freq: 144MHz
+  Flash: 128K
+  SRAM: 64K
+  GPIO: "49"
+  ADC: 1/16
+  Touchkey: "16"
+  Advanced TM: 1/1
+  General TM: 3/1
+  UART: "4"
+  SPI: 2/-
+  IIC: "2"
+  CAN: "1"
+  OPA: "2"
+  ETH: 10M
+  USB_20: D+H/D
+  BLE: "5.3"
+  WDOG: "2"
+  RTC: "1"
+  VDD: 2.4/3.6
+  url: http://www.wch.cn/products/CH32F208.html

@@ -46,6 +46,14 @@ All Issues/PRs are accepted at <https://github.com/ch32-rs/ch32-data>, not the n
 - CH643, RGB driver (V4C)
 - CH641, USB PD, (V2A)
 
+ARM Cortex-M3 families:
+
+- CH32F1, General purpose, basic version (M3)
+- CH32F203, General purpose, small/large capacity (M3)
+- CH32F205, Connectivity, USBFS/USBHS, CAN, SDIO (M3)
+- CH32F207, Interconnectivity, USBFS/USBHS, Ethernet, DVP, FSMC (M3)
+- CH32F208, BLE 5.3, 10M Ethernet (M3)
+
 Families that not implemented yet(planing to implement using another crate, as they are using different peripherals and features):
 
 - CH57x, BLE 4.2 (V3A)

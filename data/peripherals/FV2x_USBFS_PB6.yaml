@@ -1,0 +1,26 @@
+# USBFS on CH32F203 D6 small-capacity parts and CH32F208 D8W.
+# The vendor calls this block USBHD in the datasheet resource table, but the
+# C SDK and reference manual call it USBFS and it shares the 0x50000000 block.
+# These parts only bring out DM/DP on PB6/PB7 and have no ID/VBUS pins, so the
+# block is device-only (v2fs), like CH32V205's USBFS; the D8C parts (F205/F207)
+# use the OTG-capable variant on PA11/PA12.
+- name: USBFS
+  address: 0x50000000
+  registers:
+    kind: usb
+    version: v2fs
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: OTG_EN
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBFS
+    - signal: WAKEUP
+      interrupt: USBFS_WKUP
+  pins:
+    - { pin: PB6, signal: DM }
+    - { pin: PB7, signal: DP }

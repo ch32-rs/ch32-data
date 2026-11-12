@@ -1,0 +1,23 @@
+# OPA on CH32F20x_D6 and CH32F20x_D8W (CH32F208).
+# Only OPA1 and OPA2 are populated, with identical pins on both variants.
+- name: OPA
+  address: 0x40023804
+  registers:
+    kind: opa
+    version: v3
+    block: OPA
+  pins:
+    # OPA1
+    - { pin: "PB15", signal: "OPA1_CH0P" }
+    - { pin: "PB0",  signal: "OPA1_CH1P" }
+    - { pin: "PB11", signal: "OPA1_CH0N" }
+    - { pin: "PA6",  signal: "OPA1_CH1N" }
+    - { pin: "PA3",  signal: "OPA1_OUT0" }
+    - { pin: "PB1",  signal: "OPA1_OUT1" }
+    # OPA2
+    - { pin: "PB14", signal: "OPA2_CH0P" }
+    - { pin: "PA7",  signal: "OPA2_CH1P" }
+    - { pin: "PB10", signal: "OPA2_CH0N" }
+    - { pin: "PA5",  signal: "OPA2_CH1N" }
+    - { pin: "PA2",  signal: "OPA2_OUT0" }
+    - { pin: "PA4",  signal: "OPA2_OUT1" }

@@ -1,4 +1,4 @@
-# CH32V208 BLE RF Frontend (gptrRFENDReg) — RF analog (PLL/VCO/filter/bias) + calibration.
+# CH32V208 / CH32F208 BLE RF Frontend (gptrRFENDReg) — RF analog + calibration.
 #
 # RCC clocks: AHBPCENR bits 6/16/17 — see V208_BLE_BB.yaml note.
 # Canonical base address: 0x40025000.
