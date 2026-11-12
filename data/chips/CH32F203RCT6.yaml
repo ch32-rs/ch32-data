@@ -1,0 +1,95 @@
+name: CH32F203RCT6
+family: ARM Cortex-M-based, general-purpose MCU
+subfamily: General-purpose, large capacity
+product_type: Cortex-M3 core, main frequency <= 144M
+keywords:
+  - USBD
+  - CAN
+  - DAC
+  - RNG
+  - SDIO
+  - I2S
+packages:
+  - name: CH32F203RCT6
+    package: LQFP64M
+    device_id: 0x20310404
+include_memory: ../memory/CH32V3_RC.yaml
+memory_ram_code_config:
+  total_flash: 480K
+  default: c256_r64
+  configs:
+    - { name: c192_r128, code: 192K, ram: 128K }
+    - { name: c224_r96, code: 224K, ram: 96K }
+    - { name: c256_r64, code: 256K, ram: 64K }
+    - { name: c288_r32, code: 288K, ram: 32K }
+docs:
+  - type: homepage
+    title: Homepage
+    name: ""
+    url: http://www.wch.cn/products/CH32F203.html
+cores:
+  - name: cortex-m3
+    arch: arm
+    peripherals:
+      - name: RCC
+        address: 0x40021000
+        registers:
+          kind: rcc
+          version: v3
+          block: RCC
+        pins:
+          - pin: PA8
+            signal: MCO
+    include_peripherals:
+      - "../family/CH32F2_LARGE.yaml"
+      - "../peripherals/FV2x_V3x_USART1.yaml"
+      - "../peripherals/FV2x_V3x_USART2.yaml"
+      - "../peripherals/FV2x_V3x_USART3.yaml"
+      - "../peripherals/FV2x_V3x_USART4.yaml"
+      - "../peripherals/FV2x_V3x_USART5.yaml"
+      - "../peripherals/FV2x_V3x_USART678.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM1.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM234.yaml"
+      - "../peripherals/FV2x_V3x_GP16_TIM5.yaml"
+      - "../peripherals/FV2x_V3x_BASIC_TIM67.yaml"
+      - "../peripherals/FV2x_V3x_ADV_TIM8910.yaml"
+      - "../peripherals/FV2x_ADC1.yaml"
+      - "../peripherals/FV2x_ADC2.yaml"
+      - "../peripherals/FV2x_V3x_SPI1.yaml"
+      - "../peripherals/FV2x_V3x_SPI2.yaml"
+      - "../peripherals/FV2x_V3x_SPI3.yaml"
+      - "../peripherals/FV2x_V3x_I2C1.yaml"
+      - "../peripherals/FV2x_V3x_I2C2.yaml"
+      - "../peripherals/FV2x_V3x_RNG.yaml"
+      - "../peripherals/FV2x_V3x_SDIO.yaml"
+      - "../peripherals/FV2x_V3x_USBD.yaml"
+      - "../peripherals/FV2x_V3x_CAN1.yaml"
+      - "../peripherals/FV2x_V3x_OPA.yaml"
+    include_interrupts: "../interrupts/CH32F2_D8.yaml"
+    include_dma_channels:
+      DMA1: "../dma/CH32V_V4F_DMA1.yaml"
+      DMA2: "../dma/CH32V_V4F_DMA2.yaml"
+
+_raw:
+  Part NO.: CH32F203RCT6
+  Package: LQFP64M
+  Freq: 144MHz
+  Flash: 256K
+  SRAM: 64K
+  GPIO: "51"
+  ADC: 2/16
+  Touchkey: "16"
+  Advanced TM: 4/4
+  UART: "8"
+  SPI: 3/2
+  IIC: "2"
+  CAN: "1"
+  DAC: "2"
+  OPA: "4"
+  TRNG: "1"
+  SDIO: "1"
+  USB_20: D
+  WDOG: "2"
+  RTC: "1"
+  VDD: 2.5/3.3
+  url: http://www.wch.cn/products/CH32F203.html

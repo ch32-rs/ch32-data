@@ -1,0 +1,268 @@
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: v3
+    block: FLASH
+- name: EXTI
+  address: 0x40010400
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: EXTI0
+      interrupt: EXTI0
+    - signal: EXTI1
+      interrupt: EXTI1
+    - signal: EXTI2
+      interrupt: EXTI2
+    - signal: EXTI3
+      interrupt: EXTI3
+    - signal: EXTI4
+      interrupt: EXTI4
+    - signal: EXTI5
+      interrupt: EXTI9_5
+    - signal: EXTI10
+      interrupt: EXTI15_10
+
+- name: DMA1
+  address: 1073872896 # 0x40020000
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA1EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA1_Channel1
+    - signal: CH2
+      interrupt: DMA1_Channel2
+    - signal: CH3
+      interrupt: DMA1_Channel3
+    - signal: CH4
+      interrupt: DMA1_Channel4
+    - signal: CH5
+      interrupt: DMA1_Channel5
+    - signal: CH6
+      interrupt: DMA1_Channel6
+    - signal: CH7
+      interrupt: DMA1_Channel7
+    # NO CH8
+- name: DMA2
+  address: 0x40020400
+  registers:
+    kind: dma
+    version: v1
+    block: DMA
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: DMA2EN
+  interrupts:
+    - signal: CH1
+      interrupt: DMA2_Channel1
+    - signal: CH2
+      interrupt: DMA2_Channel2
+    - signal: CH3
+      interrupt: DMA2_Channel3
+    - signal: CH4
+      interrupt: DMA2_Channel4
+    - signal: CH5
+      interrupt: DMA2_Channel5
+    - signal: CH6
+      interrupt: DMA2_Channel6
+    - signal: CH7
+      interrupt: DMA2_Channel7
+    - signal: CH8
+      interrupt: DMA2_Channel8
+    - signal: CH9
+      interrupt: DMA2_Channel9
+    - signal: CH10
+      interrupt: DMA2_Channel10
+    - signal: CH11
+      interrupt: DMA2_Channel11
+
+- name: GPIOA
+  address: 0x40010800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPAEN
+    reset:
+      register: APB2PRSTR
+      field: IOPARST
+- name: GPIOB
+  address: 0x40010C00
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPBEN
+    reset:
+      register: APB2PRSTR
+      field: IOPBRST
+- name: GPIOC
+  address: 0x40011000
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPCEN
+    reset:
+      register: APB2PRSTR
+      field: IOPCRST
+- name: GPIOD
+  address: 0x40011400
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPDEN
+    reset:
+      register: APB2PRSTR
+      field: IOPDRST
+- name: GPIOE
+  address: 0x40011800
+  registers:
+    kind: gpio
+    version: v3
+    block: GPIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: IOPEEN
+    reset:
+      register: APB2PRSTR
+      field: IOPERST
+- name: AFIO
+  address: 0x40010000
+  registers:
+    kind: afio
+    version: v3
+    block: AFIO
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2
+    enable:
+      register: APB2PCENR
+      field: AFIOEN
+    reset:
+      register: APB2PRSTR
+      field: AFIORST
+
+# =======
+# 2 ADC
+# =======
+# 2 DAC
+# ========
+# 4 ADTM + 4 GTPM + 2 BCTM
+# ADTM(TIM1/8/9/10)
+# GPTM (TIM2、TIM3、TIM4 和 TIM5)
+# BCTM (TIM6 和 TIM7)
+# GPTM
+
+- name: EXTEND
+  address: 0x40023800
+  registers:
+    kind: extend
+    version: f2
+    block: EXTEND
+
+- name: RTC
+  address: 0x40002800
+  registers:
+    kind: rtc
+    version: common
+    block: RTC
+
+# 2*DAC
+- name: DAC
+  address: 0x40007400
+  registers:
+    kind: dac
+    version: v3
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: DAC
+    enable:
+      register: APB1PCENR
+      field: DACEN
+    reset:
+      register: APB1PRSTR
+      field: DACRST
+  pins:
+    - pin: PA4
+      signal: OUT0
+    - pin: PA5
+      signal: OUT1
+
+- name: WWDG
+  address: 0x40002C00
+  registers:
+    kind: wwdg
+    version: v00x
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: WWDGEN
+    reset:
+      register: APB1PRSTR
+      field: WWDGRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: WWDG
+
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: v00x
+    block: IWDG
+
+- name: CRC
+  address: 0x40023000
+  registers:
+    kind: crc
+    version: h4
+    block: CRC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: CRCEN

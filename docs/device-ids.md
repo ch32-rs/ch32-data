@@ -30,8 +30,10 @@ The IDCODE word lives at a different system-memory address per family:
 | CH32V003                                  | `0x1FFFF7C4` |
 | CH32V002 / 004 / 005 / 006 / 007 / M007   | `0x1FFFF704` |
 | CH32V103                                  | `0x1FFFF884` |
+| CH32F103                                  | `0x1FFFF884` |
 | CH32V20x (V203 / V208)                    | `0x1FFFF704` |
 | CH32V30x (V303 / V305 / V307 / V317)      | `0x1FFFF704` |
+| CH32F20x (F203 / F205 / F207 / F208)      | `0x1FFFF704` |
 | CH32X033 / X035                           | `0x1FFFF704` |
 | CH32L103                                  | `0x1FFFF704` |
 | CH32H415 / H416 / H417                    | `0x1FFFF704` |

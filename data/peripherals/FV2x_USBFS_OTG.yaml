@@ -1,0 +1,21 @@
+# USBFS / OTG_FS on CH32F205 and CH32F207 (D8C).
+- name: USBFS
+  address: 0x50000000
+  registers:
+    kind: otg
+    version: v2
+    block: USB
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: OTG_EN
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USBFS
+  pins:
+    - { pin: PA11, signal: DM }
+    - { pin: PA12, signal: DP }
+    - { pin: PA9, signal: VBUS }
+    - { pin: PA10, signal: ID }

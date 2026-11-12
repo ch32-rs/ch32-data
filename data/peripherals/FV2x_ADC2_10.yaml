@@ -1,0 +1,30 @@
+# Small-capacity / <=48-pin packages (C6/C8/C8U/K8/CB) have 10 ADC channels.
+- name: ADC2
+  address: 0x40012800
+  registers:
+    kind: adc
+    version: f2
+    block: ADC
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: ADC
+    enable:
+      register: APB2PCENR
+      field: ADC2EN
+    reset:
+      register: APB2PRSTR
+      field: ADC2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC
+  pins:
+    - { pin: PA0, signal: IN0 }
+    - { pin: PA1, signal: IN1 }
+    - { pin: PA2, signal: IN2 }
+    - { pin: PA3, signal: IN3 }
+    - { pin: PA4, signal: IN4 }
+    - { pin: PA5, signal: IN5 }
+    - { pin: PA6, signal: IN6 }
+    - { pin: PA7, signal: IN7 }
+    - { pin: PB0, signal: IN8 }
+    - { pin: PB1, signal: IN9 }

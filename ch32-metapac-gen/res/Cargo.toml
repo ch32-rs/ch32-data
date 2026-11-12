@@ -37,6 +37,7 @@ flavors = [
     { regex_feature = "ch32x0.*", target = "riscv32imac-unknown-none-elf" },
     { regex_feature = "ch32l1.*", target = "riscv32imac-unknown-none-elf" },
     { regex_feature = "ch32f1.*", target = "thumbv7m-none-eabi" },
+    { regex_feature = "ch32f2.*", target = "thumbv7m-none-eabi" },
 ]
 
 [dependencies]
