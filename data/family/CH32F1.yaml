@@ -307,7 +307,7 @@
   address: 0x40012400
   registers:
     kind: adc
-    version: v1
+    version: v1_f1
     block: ADC
   rcc:
     bus_clock: PCLK2

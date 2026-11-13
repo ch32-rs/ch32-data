@@ -66,6 +66,18 @@ block/ADC:
       byte_offset: 76
       access: Read
       fieldset: RDATAR
+    # Touch key (TKEY) aliases: TKEY is a mode of this ADC block, enabled
+    # via CTLR1.TKENABLE; the result is read from RDATAR.
+    - name: TKEY_CHG
+      description: Touch key charge time configuration (write alias of IDATAR1).
+      byte_offset: 0x3C
+      access: Write
+      fieldset: TKEY_CHG
+    - name: TKEY_DISCHG
+      description: Touch key start and discharge time; writing starts one conversion (write alias of RDATAR).
+      byte_offset: 0x4C
+      access: Write
+      fieldset: TKEY_DISCHG
     - name: CTLR3
       description: Control register 3.
       byte_offset: 80
@@ -463,3 +475,17 @@ enum/JEXTSEL:
     - name: JSWSTART
       description: Software start.
       value: 0b111
+fieldset/TKEY_CHG:
+  description: Touch key charge time configuration register.
+  fields:
+    - name: TKCHARGE
+      description: Touch key charge time.
+      bit_offset: 0
+      bit_size: 11
+fieldset/TKEY_DISCHG:
+  description: Touch key start and discharge time register.
+  fields:
+    - name: TKACT_DCG
+      description: Touch key start and discharge time.
+      bit_offset: 0
+      bit_size: 11

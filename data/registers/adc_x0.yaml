@@ -64,30 +64,23 @@ block/ADC:
       description: regular data register
       byte_offset: 76
       fieldset: RDATAR
+    # Touch key (TKEY) is a mode of this ADC block, not a separate
+    # peripheral (RM ch.11): TKENABLE lives in CTLR1, the charge times
+    # are SAMPTR1/SAMPTR2, and the result is RDATAR.
+    - name: TKEY_CHGOFFSET
+      description: Touch key charge time offset (write alias of IDATAR1).
+      byte_offset: 0x3C
+      bit_size: 8
+      access: Write
+    - name: TKEY_ACT_DCG
+      description: Touch key activate/discharge time; writing starts one TKEY conversion (write alias of RDATAR).
+      byte_offset: 0x4C
+      bit_size: 8
+      access: Write
     - name: CTLR3
       description: ADC control register 3.
       byte_offset: 80
       fieldset: CTLR3
-block/TKEY:
-  extends: ADC
-  description: Touch key
-  items:
-    # CHARGE1 mapped to SAMPTR1
-    # CHARGE2 mapped to SAMPTR2
-    # DR mapped to RDATAR
-    - name: CHGOFFSET
-      description: Charge time offset register (map of ADC_IDATAR1)
-      byte_offset: 0x3C
-      # change to u8
-      bit_size: 8
-    - name: ACT_DCG
-      description: Activate and discharge time register (map of ADC_RDATAR)
-      byte_offset: 0x4C
-      bit_size: 8
-    - name: DR
-      description: Data register
-      byte_offset: 0x4C
-      bit_size: 16
 fieldset/CTLR1:
   description: control register 1.
   fields:
