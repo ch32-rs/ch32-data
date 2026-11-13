@@ -1,4 +1,7 @@
-# TKEY module is totally different from others
+# ADC block of CH32V103. TKEY_V is folded in: its control bits are in
+# CTLR1, the channel select aliases RSQR3 and the status/data register
+# aliases RDATAR (RM 13.4-13.6). ADC and TKEY_V share the channel
+# selection and cannot be used at the same time.
 block/ADC:
   description: Analog to digital converter of V103
   items:
@@ -66,21 +69,17 @@ block/ADC:
       byte_offset: 76
       access: Read
       fieldset: RDATAR
-block/TKEY:
-  extends: ADC
-  description: Touch key
-  items:
-    - name: CTLR
-      description: TKEY_V control register
-      byte_offset: 0x0C
-      fieldset: TK_CTLR
-    - name: CHANNEL
-      description: Touch key channel selection register
+    # Touch key (TKEY_V) is a mode of this ADC block: control bits live in
+    # CTLR1, the channel select aliases RSQR3 and the data register
+    # aliases RDATAR (RM 13.4).
+    - name: TKEY_CHANNEL
+      description: Touch key channel selection (alias of RSQR3).
       byte_offset: 0x34
       fieldset: TK_CHANNEL
-    - name: SDR
-      description: Status and data register
+    - name: TKEY_SDR
+      description: Touch key status and data (alias of RDATAR).
       byte_offset: 0x4C
+      access: Read
       fieldset: TK_SDR
 fieldset/CTLR1:
   description: control register 1.
@@ -141,6 +140,24 @@ fieldset/CTLR1:
       description: Touch key module enable
       bit_offset: 24
       bit_size: 1
+    - name: TKIEN
+      description: Touch key interrupt enable
+      bit_offset: 25
+      bit_size: 1
+    - name: TKCPS
+      description: Touch key counter period selection
+      bit_offset: 26
+      bit_size: 1
+      enum: TKCPS
+    - name: TKIF
+      description: Touch key conversion finished flag
+      bit_offset: 27
+      bit_size: 1
+    - name: CCSEL
+      description: Touch key counter time base
+      bit_offset: 28
+      bit_size: 3
+      enum: CCSEL
 fieldset/CTLR2:
   description: control register 2.
   fields:
@@ -334,31 +351,6 @@ fieldset/WDLTR:
       bit_offset: 0
       bit_size: 12
 # TKEY part
-fieldset/TK_CTLR:
-  description: Touch key control register
-  fields:
-    - name: TKENABLE
-      description: Touch key module enable
-      bit_offset: 24
-      bit_size: 1
-    - name: TKIEN
-      description: Touch key interrupt enable
-      bit_offset: 25
-      bit_size: 1
-    - name: TKCPS
-      description: Touch key counter period selection
-      bit_offset: 26
-      bit_size: 1
-      enum: TKCPS
-    - name: TKIF
-      description: Touch key conversion finished flag
-      bit_offset: 27
-      bit_size: 1
-    - name: CCSEL
-      description: Touch key counter time base
-      bit_offset: 28
-      bit_size: 3
-      enum: CCSEL
 fieldset/TK_CHANNEL:
   description: Touch key channel selection register
   fields:

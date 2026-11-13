@@ -37,7 +37,6 @@ cores:
   - ../peripherals/V205_ADV_TIM1.yaml
   - ../peripherals/V205_GP16_TIM234.yaml
   - ../peripherals/V205_ADC.yaml
-  - ../peripherals/V205_TKEY.yaml
   - ../peripherals/V205_SPI1.yaml
   - ../peripherals/V205_SPI2.yaml
   - ../peripherals/V205_I2C1.yaml

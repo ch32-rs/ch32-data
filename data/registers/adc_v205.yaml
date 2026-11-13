@@ -86,6 +86,33 @@ block/ADC:
     byte_offset: 76
     access: Read
     fieldset: RDATAR
+  # Touch key (TKEY) control registers of this ADC block (RM ch.13). TKEY
+  # reuses the ADC sequence registers (RSQR1/2/3) and conversion engine;
+  # it is enabled through TKEY_CTLR.TKEN, not via a separate peripheral.
+  - name: TKEY_CTLR
+    description: TKEY control register.
+    byte_offset: 88
+    fieldset: TKEY_CTLR
+  - name: TKEY_TRANS_CFG
+    description: Charge Shift Configuration Register.
+    byte_offset: 92
+    fieldset: TKEY_TRANS_CFG
+  - name: TKEY_CAP_CFG
+    description: Capacitor Configuration Register.
+    byte_offset: 96
+    fieldset: CAP_CFG
+  - name: TKEY_DRV_CFG
+    description: Driver Shield Configuration Register.
+    byte_offset: 100
+    fieldset: DRV_CFG
+  - name: TKEY_CDCC
+    description: TKEY Charge-Discharge Configuration Register.
+    byte_offset: 104
+    fieldset: TKEY_CDCC
+  - name: TKEY_SR
+    description: TKEY Status Register.
+    byte_offset: 108
+    fieldset: TKEY_SR
 fieldset/CTLR1:
   description: control register 1.
   fields:
@@ -506,3 +533,93 @@ fieldset/WDLTR:
     description: Analog watchdog lower threshold.
     bit_offset: 0
     bit_size: 12
+fieldset/TKEY_CTLR:
+  description: TKEY control register.
+  fields:
+  - name: TKEN
+    description: TKEY enabler.
+    bit_offset: 0
+    bit_size: 1
+  - name: ITUNE
+    description: Charging current configuration of the TKEY module.
+    bit_offset: 1
+    bit_size: 1
+  - name: MODE
+    description: TKEY mode configuration.
+    bit_offset: 2
+    bit_size: 1
+  - name: CHSEL
+    description: Channel selection.
+    bit_offset: 3
+    bit_size: 1
+  - name: TKACT
+    description: TKEY triggers the control.
+    bit_offset: 8
+    bit_size: 1
+  - name: SCANIE
+    description: TKEY Channel Scan Interrupt Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: SCANEN
+    description: TKEY channel sweep function enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: SCANNUM
+    description: Configure the number of TKEY scanning channels.
+    bit_offset: 12
+    bit_size: 4
+fieldset/TKEY_TRANS_CFG:
+  description: Charge Shift Configuration Register.
+  fields:
+  - name: TRANSCC
+    description: In charge transfer mode, touch the button capacitor charge charge T2 and charge transfer time T4 configuration bits.
+    bit_offset: 0
+    bit_size: 3
+  - name: TRANSN
+    description: The actual number of transfer cycles is TRANSN+1, that is,.  the maximum number of transfer cycles is 1024.
+    bit_offset: 3
+    bit_size: 10
+  - name: TKSW
+    description: TKEY switch switching time configuration.
+    bit_offset: 13
+    bit_size: 2
+fieldset/CAP_CFG:
+  description: Capacitor Configuration Register.
+  fields:
+  - name: SELCX
+    description: In charge transfer mode, the channel with an external reference capacitor is configured,.  and in current source charging mode, this bit is invalid.
+    bit_offset: 0
+    bit_size: 4
+  - name: SELCS
+    description: In charge transfer mode, a channel for charge transfer is configured.
+    bit_offset: 4
+    bit_size: 16
+fieldset/DRV_CFG:
+  description: Driver Shield Configuration Register.
+  fields:
+  - name: DRVEN
+    description: Drive Shielding Function Enable Position.
+    bit_offset: 0
+    bit_size: 1
+  - name: DRVOUTSEL
+    description: Drive shield channel selection, active high.
+    bit_offset: 16
+    bit_size: 16
+fieldset/TKEY_CDCC:
+  description: TKEY Charge-Discharge Configuration Register.
+  fields:
+  - name: TKCD
+    description: In current source charging mode, the discharge time is configured.
+    bit_offset: 0
+    bit_size: 11
+  - name: TKCC
+    description: In the current source charging mode, the charging time is configured.
+    bit_offset: 16
+    bit_size: 11
+fieldset/TKEY_SR:
+  description: TKEY Status Register.
+  fields:
+  - name: SCANIF
+    description: The TKEY channel scan is interrupted at the end of the mark,.  the software writes 0 clear, and the write 1 is invalid.
+    bit_offset: 0
+    bit_size: 1
