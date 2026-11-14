@@ -84,10 +84,11 @@ EXTI15_10: 56
 RTC_ALARM: 57
 # USB Wake up from suspend
 USB_WKUP: 58
-# USBHD Break
-USBHD: 59
-# USBHD Wake up from suspend
-USBHD_WKUP: 60
+# USBFS global interrupt (USBHD_IRQn in WCH's ch32v20x.h, USBFS_IRQHandler
+# in its startup files; the same name as on the CH32F2 parts)
+USBFS: 59
+# USBFS Wake up from suspend
+USBFS_WKUP: 60
 # ETH global
 ETH: 61
 # ETH Wake up
@@ -107,5 +108,3 @@ DMA1_CHANNEL8: 67
 OSC32KCal: 68
 # OSC Wake Up
 OSC_WKUP: 69
-
-OTG_FS: 83
