@@ -27,6 +27,8 @@ jobs:
           cd build/ch32-metapac/
           cargo build --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
           cargo doc --features pac,metadata,rt,memory-x,ch32v307vct6 --target riscv32imac-unknown-none-elf
+          cargo build --features pac,metadata,rt,memory-x,ch32x035f7p6 --target riscv32imac-unknown-none-elf
+          cargo doc --features pac,metadata,rt,memory-x,ch32x035f7p6 --target riscv32imac-unknown-none-elf
           cargo build --features pac,metadata,rt,memory-x,ch32f103c8t6 --target thumbv7m-none-eabi
           cargo doc --features pac,metadata,rt,memory-x,ch32f103c8t6 --target thumbv7m-none-eabi
           cargo build --features pac,metadata,rt,memory-x,ch32f103c8u6 --target thumbv7m-none-eabi
