@@ -14,11 +14,16 @@ block/CAN:
       description: CAN transmit status register.
       byte_offset: 8
       fieldset: TSTATR
-    # CH32L1 has a single 3-level receive FIFO; 0x10 is reserved.
+    # CH32L1 has a single 3-level receive FIFO; 0x10 is reserved. Keep it
+    # as a one-element array so `rfifo(n)` keeps the same shape as the
+    # other CAN variants; chiptool emits assert!(n < 1) for the accessor.
     - name: RFIFO
       description: CAN receive FIFO 0 register.
       byte_offset: 12
       fieldset: RFIFO
+      array:
+        len: 1
+        stride: 4
     - name: INTENR
       description: CAN interrupt enable register.
       byte_offset: 20
@@ -74,26 +79,40 @@ block/CAN:
       fieldset: TXMDHR
     # Only one receive mailbox window exists (RXMIR0..RXMDHR0 at
     # 0x400065B0-0x400065BF); the FIFO's three levels are read through it.
+    # One-element arrays keep `rxmir(n)`/... uniform with the other CAN
+    # variants; chiptool emits assert!(n < 1) for each accessor.
     - name: RXMIR
       description: CAN receive FIFO 0 mailbox identifier register.
       byte_offset: 432
       access: Read
       fieldset: RXMIR
+      array:
+        len: 1
+        stride: 16
     - name: RXMDTR
       description: CAN receive FIFO 0 mailbox data length control and time stamp register.
       byte_offset: 436
       access: Read
       fieldset: RXMDTR
+      array:
+        len: 1
+        stride: 16
     - name: RXMDLR
       description: CAN receive FIFO 0 mailbox data low register.
       byte_offset: 440
       access: Read
       fieldset: RXMDLR
+      array:
+        len: 1
+        stride: 16
     - name: RXMDHR
       description: CAN receive FIFO 0 mailbox data high register.
       byte_offset: 444
       access: Read
       fieldset: RXMDHR
+      array:
+        len: 1
+        stride: 16
     - name: FCTLR
       description: CAN filter master register.
       byte_offset: 512
