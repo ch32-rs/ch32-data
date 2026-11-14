@@ -1,240 +1,304 @@
 block/PIOC:
   description: Programmable protocol I/O microcontroller.
   items:
-  - name: SFR_INDIR_PORT
+  - name: INDIR_PORT
     description: Indirectly addressed data read/write ports.
     byte_offset: 0
     bit_size: 8
-  - name: RSFR_INDIR_PORT2
+  - name: INDIR_PORT2
     description: Indirectly addresses the data read/write port of 2.
     byte_offset: 1
     bit_size: 8
-  - name: SFR_PRG_COUNT
+  - name: PRG_COUNT
     description: Program counters for the low bytes of the PC.
     byte_offset: 2
     bit_size: 8
-  - name: SFR_STATUS_REG
+  - name: STATUS
     description: Status registers.
     byte_offset: 3
     bit_size: 8
-    fieldset: SFR_STATUS_REG
-  - name: SFR_INDIR_ADDR
+    fieldset: STATUS
+  - name: INDIR_ADDR
     description: Indirectly addressed address registers.
     byte_offset: 4
     access: Read
     bit_size: 8
-  - name: SFR_TMR0_COUNT
+  - name: TMR0_COUNT
     description: The counter register of timer 0.
     byte_offset: 5
     access: Read
     bit_size: 8
-  - name: SFR_TIMER_CTRL
+  - name: TMR0_CTRL
     description: The control register of the timer.
     byte_offset: 6
     access: Read
     bit_size: 8
-  - name: SFR_TMR0_INIT
+    fieldset: TMR0_CTRL
+  - name: TMR0_INIT
     description: The initial register of timer 0.
     byte_offset: 7
     access: Read
     bit_size: 8
-  - name: SFR_BIT_CYCLE
+  - name: BIT_CYCLE
     description: Periodic registers for coded bits.
     byte_offset: 8
     bit_size: 8
-    fieldset: SFR_BIT_CYCLE
-  - name: SFR_INDIR_ADDR2
+    fieldset: BIT_CYCLE
+  - name: INDIR_ADDR2
     description: Address registers for indirect address 2.
     byte_offset: 9
     access: Read
     bit_size: 8
-  - name: SFR_PORT_DIR
+  - name: PORT_DIR
     description: The port direction sets the register.
     byte_offset: 10
     access: Read
     bit_size: 8
-    fieldset: SFR_PORT_DIR
-  - name: SFR_PORT_IO
+    fieldset: PORT_DIR
+  - name: PORT_IO
     description: Port input and output registers.
     byte_offset: 11
     access: Read
     bit_size: 8
-  - name: SFR_BIT_CONFIG
+    fieldset: PORT_IO
+  - name: BIT_CONFIG
     description: Coded bit configuration registers.
     byte_offset: 12
-    access: Read
     bit_size: 8
-    fieldset: SFR_BIT_CONFIG
-  - name: SFR_SYS_CFG
+    fieldset: BIT_CONFIG
+  - name: SYS_CFG
     description: System configuration registers.
     byte_offset: 28
     bit_size: 8
-    fieldset: SFR_SYS_CFG
-  - name: SFR_CTRL_RD
+    fieldset: SYS_CFG
+  - name: CTRL_RD
     description: The eMCU reads and writes and the host reads only the registers.
     byte_offset: 29
-    access: Read
     bit_size: 8
-  - name: SFR_CTRL_WR
+  - name: CTRL_WR
     description: The host reads and writes and the eMCU reads only registers.
     byte_offset: 30
     bit_size: 8
-  - name: SFR_DATA_EXCH
+  - name: DATA_EXCH
     description: Data exchange registers.
     byte_offset: 31
     bit_size: 8
-  - name: SFR_DATA_REG
+  - name: DATA_REG
     description: PIOC data registers 0-31.
     byte_offset: 32
     array:
       len: 32
       stride: 1
     bit_size: 8
-fieldset/SFR_BIT_CONFIG:
+fieldset/BIT_CONFIG:
   description: Coded bit configuration registers.
   bit_size: 8
   fields:
-  - name: SB_BIT_CYC_CNT3
+  - name: BIT_CYC_CNT3
     description: The periodic timing state of the encoded bits.
     bit_offset: 0
     bit_size: 1
-  - name: SB_BIT_CYC_CNT4
+  - name: BIT_CYC_CNT4
     description: The periodic timing state of the encoded bits.
     bit_offset: 1
     bit_size: 1
-  - name: SB_BIT_CYC_CNT5
+  - name: BIT_CYC_CNT5
     description: The periodic timing state of the encoded bits.
     bit_offset: 2
     bit_size: 1
-  - name: SB_BIT_CYC_CNT6
+  - name: BIT_CYC_CNT6
     description: The periodic timing state of the encoded bits.
     bit_offset: 3
     bit_size: 1
-  - name: SB_BIT_CYC_TAIL
+  - name: BIT_CYC_TAIL
     description: Periodic state of the encoded bits.
     bit_offset: 4
     bit_size: 1
-  - name: SB_PORT_IN_EDGE
+  - name: PORT_IN_EDGE
     description: Pin input level sampling point selection.
     bit_offset: 5
     bit_size: 1
-  - name: SB_BIT_CODE_MOD
+  - name: BIT_CODE_MOD
     description: How the coded bits are modulated.
     bit_offset: 6
     bit_size: 1
-  - name: SB_BIT_TX_EN
+  - name: BIT_TX_EN
     description: The transmission of the coded bits is enabled.
     bit_offset: 7
     bit_size: 1
-fieldset/SFR_BIT_CYCLE:
+fieldset/BIT_CYCLE:
   description: Periodic registers for coded bits.
   bit_size: 8
   fields:
-  - name: SB_BIT_CYCLE
+  - name: BIT_CYCLE
     description: Sets the width of the encoded bits in clock cycles, which is the actual number of bits minus 1.
     bit_offset: 0
     bit_size: 7
-  - name: SB_BIT_TX_O0
+  - name: BIT_TX_O0
     description: The raw bit data of the encoded bit to be sent, which is a double-buffered structure.
     bit_offset: 7
     bit_size: 1
-fieldset/SFR_PORT_DIR:
+fieldset/PORT_DIR:
   description: The port direction sets the register.
   bit_size: 8
   fields:
-  - name: SB_PORT_DIR0
+  - name: PORT_DIR0
     description: IO0 Pin Direction Control.
     bit_offset: 0
     bit_size: 1
-  - name: SB_PORT_DIR1
+  - name: PORT_DIR1
     description: IO1 Pin Direction Control.
     bit_offset: 1
     bit_size: 1
-  - name: SB_PORT_PU0
+  - name: PORT_PU0
     description: IO0 Pin Pull-Up Enables.
     bit_offset: 2
     bit_size: 1
-  - name: SB_PORT_PU1
+  - name: PORT_PU1
     description: IO1 Pin Pull-Up Enables.
     bit_offset: 3
     bit_size: 1
-  - name: SB_PORT_MOD0
+  - name: PORT_MOD0
     description: Pin mode control, host side defines the purpose.
     bit_offset: 4
     bit_size: 1
-  - name: SB_PORT_MOD1
+  - name: PORT_MOD1
     description: Pin mode control, host side defines the purpose.
     bit_offset: 5
     bit_size: 1
-  - name: SB_PORT_MOD2
+  - name: PORT_MOD2
     description: Pin mode control, host side defines the purpose.
     bit_offset: 6
     bit_size: 1
-  - name: SB_PORT_MOD3
+  - name: PORT_MOD3
     description: Pin mode control, host side defines the purpose.
     bit_offset: 7
     bit_size: 1
-fieldset/SFR_STATUS_REG:
+fieldset/STATUS:
   description: Status registers.
   bit_size: 8
   fields:
-  - name: SB_FLAG_C
+  - name: FLAG_C
     description: ALU carry flag, whether the result is carried or produced by displacement.
     bit_offset: 0
     bit_size: 1
-  - name: SB_GP_BIT_X
+  - name: GP_BIT_X
     description: A generic bit variable X, defined and used by the application.
     bit_offset: 1
     bit_size: 1
-  - name: SB_FLAG_Z
+  - name: FLAG_Z
     description: ALU zero flag, whether the result is 00H.
     bit_offset: 2
     bit_size: 1
-  - name: SB_GP_BIT_Y
+  - name: GP_BIT_Y
     description: a generic bit variable Y, defined and used by the application.
     bit_offset: 3
     bit_size: 1
-  - name: SB_EN_TOUT_RST
+  - name: EN_TOUT_RST
     description: Timer Timeout Reset Enabled.
     bit_offset: 4
     bit_size: 1
-  - name: SB_STACK_USED
+  - name: STACK_USED
     description: Current stack usage flags.
     bit_offset: 5
     bit_size: 1
-fieldset/SFR_SYS_CFG:
+fieldset/SYS_CFG:
   description: System configuration registers.
   bit_size: 8
   fields:
-  - name: SB_MST_CLK_GATE
+  - name: MST_CLK_GATE
     description: Global Clock Control for eMCUs.
     bit_offset: 0
     bit_size: 1
-  - name: SB_MST_RESET
+  - name: MST_RESET
     description: Force eMCU Reset.
     bit_offset: 1
     bit_size: 1
-  - name: SB_MST_IO_EN0
+  - name: MST_IO_EN0
     description: Mode and output control switches for IO0 pins.
     bit_offset: 2
     bit_size: 1
-  - name: SB_MST_IO_EN1
+  - name: MST_IO_EN1
     description: Mode and output control switches for IO1 pins.
     bit_offset: 3
     bit_size: 1
-  - name: SB_MST_CFG_B4
+  - name: MST_CFG_B4
     description: Configure information bits, software-defined uses.
     bit_offset: 4
     bit_size: 1
-  - name: SB_DATA_MW_SR
+  - name: DATA_MW_SR
     description: SFR_CTRL_WR waiting to read the status bit.
     bit_offset: 5
     bit_size: 1
-  - name: SB_DATA_SW_MR
+  - name: DATA_SW_MR
     description: SFR_CTRL_RD wait to read the status bit.
     bit_offset: 6
     bit_size: 1
-  - name: SB_INT_REQ
+  - name: INT_REQ
     description: Interrupt Request Activation Bits.
+    bit_offset: 7
+    bit_size: 1
+fieldset/PORT_IO:
+  description: Port input and output register.
+  bit_size: 8
+  fields:
+  - name: PORT_OUT0
+    description: IO0 output data; Timer0 output overrides it when enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: PORT_OUT1
+    description: IO1 output data.
+    bit_offset: 1
+    bit_size: 1
+  - name: PORT_XOR0
+    description: IO0 input XOR PORT_OUT0, used for change detection.
+    bit_offset: 2
+    bit_size: 1
+  - name: PORT_XOR1
+    description: IO1 input XOR PORT_OUT1, used for change detection.
+    bit_offset: 3
+    bit_size: 1
+  - name: PORT_IN0
+    description: Resolved IO0 input level.
+    bit_offset: 4
+    bit_size: 1
+  - name: PORT_IN1
+    description: Resolved IO1 input level.
+    bit_offset: 5
+    bit_size: 1
+  - name: BIT_RX_I0
+    description: Bit decoded from IO0 by the hardware codec.
+    bit_offset: 6
+    bit_size: 1
+  - name: PORT_IN_XOR
+    description: IO1 input XOR IO0 input.
+    bit_offset: 7
+    bit_size: 1
+fieldset/TMR0_CTRL:
+  description: Timer0 and pin-level control register.
+  bit_size: 8
+  fields:
+  - name: TMR0_FREQ
+    description: Timer0 clock divider; 000=/1024, 001=/256, 010=/64, 011=/16, 100=/8, 101=/4, 110=/2, 111=/1.
+    bit_offset: 0
+    bit_size: 3
+  - name: TMR0_MODE
+    description: 0=timer, 1=free-running PWM.
+    bit_offset: 3
+    bit_size: 1
+  - name: GP_BIT_X
+    description: Host-visible general-purpose bit X; the eMCU sees SB_TMR0_OUT_EN on this bit.
+    bit_offset: 4
+    bit_size: 1
+  - name: GP_BIT_Y
+    description: Host-visible general-purpose bit Y; the eMCU sees SB_TMR0_ENABLE on this bit.
+    bit_offset: 5
+    bit_size: 1
+  - name: EN_LEVEL0
+    description: IO0 level change can wake or request an interrupt.
+    bit_offset: 6
+    bit_size: 1
+  - name: EN_LEVEL1
+    description: IO1 level change can wake or request an interrupt.
     bit_offset: 7
     bit_size: 1
