@@ -2108,6 +2108,59 @@
     - signal: FLT1
       interrupt: DFSDM1
 
+# PIOC (Programmable Protocol I/O Controller / eMCU).
+# CH32H417EVT places it at HBPERIPH_BASE + 0x25C00 with the same register map
+# as CH32V205, so the existing V205 register version is reused.
+- name: PIOC
+  address: 0x40025C00
+  registers:
+    kind: pioc
+    version: v205
+    block: PIOC
+  rcc:
+    bus_clock: HCLK
+    kernel_clock: HCLK
+    enable:
+      register: HBPCENR
+      field: PIOCEN
+    reset:
+      register: HBRSTR
+      field: PIOCRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: PIOC
+  pins:
+    - pin: PB8
+      signal: IO0
+      af: 5
+    - pin: PC1
+      signal: IO0
+      af: 7
+    - pin: PE3
+      signal: IO0
+      af: 5
+    - pin: PF12
+      signal: IO0
+      af: 3
+    - pin: PB9
+      signal: IO1
+      af: 7
+    - pin: PC0
+      signal: IO1
+      af: 5
+    - pin: PC2
+      signal: IO1
+      af: 8
+    - pin: PE4
+      signal: IO1
+      af: 4
+    - pin: PF13
+      signal: IO1
+      af: 5
+    - pin: PF14
+      signal: IO1
+      af: 5
+
 # USB subsystem: 4 controllers
 # - USBFS (USB1.1 FS host/device/OTG) - device/host registers split via extends
 # - USBHS (USB2.0 HS host/device)
