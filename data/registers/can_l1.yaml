@@ -72,35 +72,25 @@ block/CAN:
         stride: 16
       byte_offset: 396
       fieldset: TXMDHR
+    # Only one receive mailbox window exists (RXMIR0..RXMDHR0 at
+    # 0x400065B0-0x400065BF); the FIFO's three levels are read through it.
     - name: RXMIR
-      description: CAN receive FIFO mailbox identifier register.
-      array:
-        len: 2
-        stride: 16
+      description: CAN receive FIFO 0 mailbox identifier register.
       byte_offset: 432
       access: Read
       fieldset: RXMIR
     - name: RXMDTR
-      description: CAN receive FIFO mailbox data length control and time stamp register.
-      array:
-        len: 2
-        stride: 16
+      description: CAN receive FIFO 0 mailbox data length control and time stamp register.
       byte_offset: 436
       access: Read
       fieldset: RXMDTR
     - name: RXMDLR
-      description: CAN receive FIFO mailbox data low register.
-      array:
-        len: 2
-        stride: 16
+      description: CAN receive FIFO 0 mailbox data low register.
       byte_offset: 440
       access: Read
       fieldset: RXMDLR
     - name: RXMDHR
-      description: CAN receive FIFO mailbox data high register.
-      array:
-        len: 2
-        stride: 16
+      description: CAN receive FIFO 0 mailbox data high register.
       byte_offset: 444
       access: Read
       fieldset: RXMDHR
