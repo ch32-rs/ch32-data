@@ -119,11 +119,11 @@ block/USBH:
     - name: RX_DMA
       description: USB host receiving DMA buffer address.
       byte_offset: 24 # 0x18
-      bit_size: 16
+      bit_size: 32
     - name: TX_DMA
       description: USB host transmittal DMA buffer address.
       byte_offset: 28 # 0x1C
-      bit_size: 16
+      bit_size: 32
     - name: SETUP
       description: USB host setup.
       byte_offset: 54 # 0x36
