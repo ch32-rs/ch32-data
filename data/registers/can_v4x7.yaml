@@ -1,7 +1,8 @@
 # CH32V407 / CH32V467 CAN controller (CH32V407RM §25).
 #
-# Differs from can_l1.yaml (CH32L1, a single receive FIFO at 0x0C, CAN FD
-# block) and from can_v3.yaml (no TERR_CNT, CAN2SB in FCTLR):
+# Differs from can_l1.yaml (CH32L1: single receive FIFO at 0x0C, CAN FD block).
+# Differs from can_v3.yaml (no TERR_CNT, CAN2SB in FCTLR).
+# Specifics of this block:
 #
 #   * one CAN instance, no CAN2 — so no CAN2SB filter split point;
 #   * RFIFO0 and RFIFO1 are adjacent at 0x0C and 0x10;
