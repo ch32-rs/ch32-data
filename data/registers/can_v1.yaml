@@ -20,7 +20,7 @@ block/CAN:
       fieldset: RFIFO
       array:
         len: 2
-        stride: 32
+        stride: 4
     - name: INTENR
       description: CAN interrupt enable register.
       byte_offset: 20

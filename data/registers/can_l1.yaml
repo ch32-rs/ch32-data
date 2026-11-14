@@ -14,13 +14,11 @@ block/CAN:
       description: CAN transmit status register.
       byte_offset: 8
       fieldset: TSTATR
+    # CH32L1 has a single 3-level receive FIFO; 0x10 is reserved.
     - name: RFIFO
-      description: CAN receive FIFO register.
+      description: CAN receive FIFO 0 register.
       byte_offset: 12
       fieldset: RFIFO
-      array:
-        len: 2
-        stride: 32
     - name: INTENR
       description: CAN interrupt enable register.
       byte_offset: 20
