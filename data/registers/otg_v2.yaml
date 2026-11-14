@@ -1,4 +1,4 @@
-# USB_OTG_FS, in CH32V203, CH32V208, CH32V30x
+# USB_OTG_FS, in CH32F205, CH32F207, CH32V305, CH32V307, CH32V317
 # 0x50000000
 # Host register layout: WCH EVT/EXAM/SRC/Peripheral/inc/ch32v30x.h,
 # USBFSH_TypeDef; SETUP masks: ch32v30x_usb.h (USBFS_UH_*).

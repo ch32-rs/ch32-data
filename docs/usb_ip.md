@@ -16,7 +16,9 @@ USB SuperSpeed (`usbss_h4`) is listed only to park it outside FS/HS.
 Sources: `data/registers/*.yaml`, `data/peripherals/*.yaml`,
 `data/family/*.yaml`, the RMs under `~/Downloads` (`CH32V103RM`,
 `CH32FV2x_V3xRM`, `CH32L103RM`, `CH32X035RM`, `CH32V407RM`, `CH32H417RM`),
-and — for H4 naming — `CH32H417EVT/.../ch32h417.h` / `ch32h417_usb.h`.
+the vendor headers from `CH32V103EVT` / `CH32X035EVT`, and upstream
+`ch32v30x.h` / `ch32v20x.h` / `ch32l103.h` (also for H4 naming: `ch32h417.h`
+/ `ch32h417_usb.h`).
 
 ---
 
@@ -107,19 +109,22 @@ Four device layouts; OTG/H4 attach to the `v2fs` layout.
 - `UEP_CTRL` is **one 8-bit** register for both directions.
 - `UEP_DMA` is **16-bit** (`R16_UEPn_DMA`).
 - Host: V103 layout (`SETUP@0x36` 8-bit, `RX_CTRL@0x3A`).
+- Host DMA reuses `UEP2_DMA` / `UEP3_DMA` (`ch32v10x_usb.h`), so
+  `RX_DMA`/`TX_DMA` stay 16-bit here.
 
 ### `v2fs` — `usb_v2fs.yaml` (V203/V208/V303 USBFS)
 
 - 8 endpoints.
 - `UEP_CTRL` split into `UEP_TX_CTRL@0x32` + `UEP_RX_CTRL@0x33`.
 - Host: FV2x layout (`SETUP@0x36` 16-bit, `RX_CTRL@0x3B`, `TX_LEN@0x3C`).
+- Host `RX_DMA@0x18` / `TX_DMA@0x1C` are 32-bit address registers.
 
 ### `l1fs` — `usb_l1fs.yaml` (L103)
 
 - 8 endpoints.
 - `UEP_CTRL` is **one 16-bit** register (TX low byte, RX high byte).
 - `UEP_DMA` 15-bit valid (`[14:0]`); `UEP_T_LEN` 16-bit.
-- Host block matches FV2x, not V103.
+- Host block matches FV2x, not V103, including 32-bit `RX_DMA` / `TX_DMA`.
 - Extra `DETECT` / `ONE_WIRE` on `INT_EN`.
 
 ### `x0fs` — `usb_x0fs.yaml` (X0 / X035)
@@ -127,8 +132,10 @@ Four device layouts; OTG/H4 attach to the `v2fs` layout.
 - **5 endpoints**, registers grouped into range arrays
   (`UEP0123_DMA`, `UEP567_*`, …).
 - Host registers shifted (`SETUP@0x26` …); `TX_LEN` 8-bit.
-- Host bit layout still unverified against an X0 manual (currently matches
-  V103-style positions).
+- Host block verified against `ch32x035.h` / `ch32x035_usb.h`
+  (`CH32X035EVT`): 16-bit `HOST_RX_DMA`/`HOST_TX_DMA` at 0x18/0x1C, 8-bit
+  `HOST_SETUP` at 0x26 (`SOF_EN` bit 6, `PRE_PID_EN` bit 7), `RX_CTRL` at
+  0x2A.
 
 ### OTG derivative — `otg_v2.yaml` (`kind: otg`, V305/V307…)
 
@@ -302,10 +309,15 @@ break, and HAL/examples move in the same change.
 - `usb_l1fs` endpoint DMA/T_LEN offsets and widths fixed to L103 表 20-3.
 - `v2fs` / `otg_v2` / `l1fs` host blocks corrected from the V103 layout to
   the FV2x/L103 layout; `TX_LEN@0x3C` restored on `v2fs`/`otg_v2`.
+- `v2fs` / `otg_v2` / `l1fs` host `RX_DMA`/`TX_DMA` widened from 16 to 32
+  bits per the vendor headers (`ch32v30x.h`, `ch32v20x.h`, `ch32l103.h`).
+  `v1fs` and `x0fs` keep 16-bit: their host DMA aliases the 16-bit endpoint
+  DMA registers.
 - `usbfs_h4` field widths aligned with `ch32h417.h`.
 - `v2fs` / `otg_v2` / `usbfs_h4` `UEP_T_LEN` widened to 16 bits so endpoint 3's
   10-bit length is not truncated (FV2x RM §23.2.2.7, H417 RM §26.2.2.7-8).
 
 ## Still unverified
 
-- **`x0fs` host block** bit positions (no local CH32X0 RM at audit time).
+None. The last open item (`x0fs` host block) is now checked against
+`ch32x035.h` and `ch32x035_usb.h` from `CH32X035EVT`.
