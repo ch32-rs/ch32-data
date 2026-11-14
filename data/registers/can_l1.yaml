@@ -14,13 +14,15 @@ block/CAN:
       description: CAN transmit status register.
       byte_offset: 8
       fieldset: TSTATR
+    # CH32L1 has one 3-level receive FIFO; 0x10 is reserved.
+    # One-element array keeps `rfifo(n)` uniform with the other CAN variants.
     - name: RFIFO
-      description: CAN receive FIFO register.
+      description: CAN receive FIFO 0 register.
       byte_offset: 12
       fieldset: RFIFO
       array:
-        len: 2
-        stride: 32
+        len: 1
+        stride: 4
     - name: INTENR
       description: CAN interrupt enable register.
       byte_offset: 20
@@ -74,38 +76,40 @@ block/CAN:
         stride: 16
       byte_offset: 396
       fieldset: TXMDHR
+    # Only one receive mailbox window exists (RXMIR0..RXMDHR0 at 0x400065B0).
+    # One-element arrays keep `rxmir(n)` and friends uniform across variants.
     - name: RXMIR
-      description: CAN receive FIFO mailbox identifier register.
-      array:
-        len: 2
-        stride: 16
+      description: CAN receive FIFO 0 mailbox identifier register.
       byte_offset: 432
       access: Read
       fieldset: RXMIR
-    - name: RXMDTR
-      description: CAN receive FIFO mailbox data length control and time stamp register.
       array:
-        len: 2
+        len: 1
         stride: 16
+    - name: RXMDTR
+      description: CAN receive FIFO 0 mailbox data length control and time stamp register.
       byte_offset: 436
       access: Read
       fieldset: RXMDTR
-    - name: RXMDLR
-      description: CAN receive FIFO mailbox data low register.
       array:
-        len: 2
+        len: 1
         stride: 16
+    - name: RXMDLR
+      description: CAN receive FIFO 0 mailbox data low register.
       byte_offset: 440
       access: Read
       fieldset: RXMDLR
-    - name: RXMDHR
-      description: CAN receive FIFO mailbox data high register.
       array:
-        len: 2
+        len: 1
         stride: 16
+    - name: RXMDHR
+      description: CAN receive FIFO 0 mailbox data high register.
       byte_offset: 444
       access: Read
       fieldset: RXMDHR
+      array:
+        len: 1
+        stride: 16
     - name: FCTLR
       description: CAN filter master register.
       byte_offset: 512
