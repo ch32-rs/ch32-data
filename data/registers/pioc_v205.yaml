@@ -92,6 +92,7 @@ block/PIOC:
     bit_size: 8
 fieldset/SFR_BIT_CONFIG:
   description: Coded bit configuration registers.
+  bit_size: 8
   fields:
   - name: SB_BIT_CYC_CNT3
     description: The periodic timing state of the encoded bits.
@@ -127,6 +128,7 @@ fieldset/SFR_BIT_CONFIG:
     bit_size: 1
 fieldset/SFR_BIT_CYCLE:
   description: Periodic registers for coded bits.
+  bit_size: 8
   fields:
   - name: SB_BIT_CYCLE
     description: Sets the width of the encoded bits in clock cycles, which is the actual number of bits minus 1.
@@ -138,6 +140,7 @@ fieldset/SFR_BIT_CYCLE:
     bit_size: 1
 fieldset/SFR_PORT_DIR:
   description: The port direction sets the register.
+  bit_size: 8
   fields:
   - name: SB_PORT_DIR0
     description: IO0 Pin Direction Control.
@@ -173,6 +176,7 @@ fieldset/SFR_PORT_DIR:
     bit_size: 1
 fieldset/SFR_STATUS_REG:
   description: Status registers.
+  bit_size: 8
   fields:
   - name: SB_FLAG_C
     description: ALU carry flag, whether the result is carried or produced by displacement.
@@ -200,6 +204,7 @@ fieldset/SFR_STATUS_REG:
     bit_size: 1
 fieldset/SFR_SYS_CFG:
   description: System configuration registers.
+  bit_size: 8
   fields:
   - name: SB_MST_CLK_GATE
     description: Global Clock Control for eMCUs.
