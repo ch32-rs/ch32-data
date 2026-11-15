@@ -1,0 +1,88 @@
+# CH32V20x / CH32V30x power control (CH32FV2x_V3xRM §2.4).
+#
+# Same CTLR/CSR as pwr_v4x7.yaml up to DBP, but PLS is 3 bits wide and bits
+# 16..20 are the RAM retention bits of these parts.
+
+block/PWR:
+  description: Power control.
+  items:
+    - name: CTLR
+      description: Power control register (PWR_CTLR).
+      byte_offset: 0
+      fieldset: CTLR
+    - name: CSR
+      description: Power control/status register (PWR_CSR).
+      byte_offset: 4
+      fieldset: CSR
+
+fieldset/CTLR:
+  description: Power control register.
+  fields:
+    - name: LPDS
+      description: Regulator in low-power mode during Stop.
+      bit_offset: 0
+      bit_size: 1
+    - name: PDDS
+      description: Enter Standby instead of Stop on deep sleep.
+      bit_offset: 1
+      bit_size: 1
+    - name: CWUF
+      description: Clear wake-up flag.
+      bit_offset: 2
+      bit_size: 1
+    - name: CSBF
+      description: Clear standby flag.
+      bit_offset: 3
+      bit_size: 1
+    - name: PVDE
+      description: Power voltage detector enable.
+      bit_offset: 4
+      bit_size: 1
+    - name: PLS
+      description: PVD level selection.
+      bit_offset: 5
+      bit_size: 3
+    - name: DBP
+      description: Disable backup domain write protection.
+      bit_offset: 8
+      bit_size: 1
+    - name: R2KSTY
+      description: Keep the 2K RAM powered in Standby (the 20K RAM on V20x D6).
+      bit_offset: 16
+      bit_size: 1
+    - name: R30KSTY
+      description: Keep the 30K RAM powered in Standby (D8 parts).
+      bit_offset: 17
+      bit_size: 1
+    - name: R2KVBAT
+      description: Keep the 2K RAM powered from VBAT in Standby (the 20K RAM on V20x D6).
+      bit_offset: 18
+      bit_size: 1
+    - name: R30KVBAT
+      description: Keep the 30K RAM powered from VBAT in Standby (D8 parts).
+      bit_offset: 19
+      bit_size: 1
+    - name: RAMLV
+      description: RAM low-voltage mode in Stop (with LPDS).
+      bit_offset: 20
+      bit_size: 1
+
+fieldset/CSR:
+  description: Power control/status register.
+  fields:
+    - name: WUF
+      description: Wake-up flag.
+      bit_offset: 0
+      bit_size: 1
+    - name: SBF
+      description: Standby flag.
+      bit_offset: 1
+      bit_size: 1
+    - name: PVDO
+      description: PVD output.
+      bit_offset: 2
+      bit_size: 1
+    - name: EWUP
+      description: Enable WKUP pin.
+      bit_offset: 8
+      bit_size: 1

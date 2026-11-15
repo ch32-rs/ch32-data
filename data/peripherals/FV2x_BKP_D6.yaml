@@ -1,0 +1,18 @@
+# Backup registers of the CH32V20x D6: 10 data registers
+# (CH32FV2x_V3xRM §4).
+
+- name: BKP
+  address: 0x40006C00
+  registers:
+    kind: bkp
+    version: v3_d6
+    block: BKP
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: BKPEN
+    reset:
+      register: APB1PRSTR
+      field: BKPRST

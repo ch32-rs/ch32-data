@@ -167,6 +167,22 @@
     version: v3
     block: EXTEND
 
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: v3
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APB1PCENR
+      field: PWREN
+    reset:
+      register: APB1PRSTR
+      field: PWRRST
+
 - name: RTC
   address: 0x40002800
   registers:
