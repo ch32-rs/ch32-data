@@ -70,7 +70,7 @@ fieldset/PCFR1:
     description: PB15 Vdd8 diode output is enabled.
     bit_offset: 20
     bit_size: 1
-  - name: SWCFG
+  - name: SW_CFG
     description: Serial wire JTAG configuration.
     bit_offset: 24
     bit_size: 3

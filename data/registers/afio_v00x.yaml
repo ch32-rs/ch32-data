@@ -58,7 +58,7 @@ fieldset/PCFR1:
       description: USART2 remapping.
       bit_offset: 20
       bit_size: 3
-    - name: SWCFG
+    - name: SW_CFG
       description: configure the I/O port with the SW function and tracing function.
       bit_offset: 24
       bit_size: 3

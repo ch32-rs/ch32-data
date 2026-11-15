@@ -42,7 +42,7 @@ fieldset/PCFR1:
     description: ADC External trigger injected conversion remapping.
     bit_offset: 18
     bit_size: 1
-  - name: SWCFG
+  - name: SW_CFG
     description: Serial wire JTAG configuration.
     bit_offset: 24
     bit_size: 3
