@@ -53,6 +53,7 @@ cores:
       - "../peripherals/V208_BLE_LLE.yaml"
       - "../peripherals/V208_BLE_RFEND.yaml"
       - "../peripherals/V208_BLE_AES.yaml"
+      - "../peripherals/FV2x_V3x_BKP.yaml"
 
     include_interrupts: "../interrupts/CH32V2_D8.yaml"
     include_dma_channels:

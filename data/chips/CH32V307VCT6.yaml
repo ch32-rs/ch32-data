@@ -72,6 +72,7 @@ cores:
       - "../peripherals/FV2x_V3x_OPA.yaml"
       - "../peripherals/FV3x_ETH.yaml"
       - "../peripherals/V3x_DVP.yaml"
+      - "../peripherals/FV2x_V3x_BKP.yaml"
 
     include_interrupts: "../interrupts/CH32V3.yaml"
     include_dma_channels:
