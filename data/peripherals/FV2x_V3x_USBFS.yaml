@@ -1,4 +1,4 @@
-# USBFS, without OTG cfg registers
+# USBFS of the CH32V303, without OTG cfg registers. The V20x one is FV2x_USBFS_PB6.yaml.
 - name: USBFS
   address: 0x50000000
   registers:

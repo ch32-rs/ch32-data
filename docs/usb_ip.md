@@ -118,6 +118,9 @@ Four device layouts; OTG/H4 attach to the `v2fs` layout.
 - `UEP_CTRL` split into `UEP_TX_CTRL@0x32` + `UEP_RX_CTRL@0x33`.
 - Host: FV2x layout (`SETUP@0x36` 16-bit, `RX_CTRL@0x3B`, `TX_LEN@0x3C`).
 - Host `RX_DMA@0x18` / `TX_DMA@0x1C` are 32-bit address registers.
+- Interrupt and pins differ by family: the F203 D6/F208 D8W and V203/V208 share
+  `FV2x_USBFS_PB6.yaml` (interrupt `USBFS`, 59; DM/DP on PB6/PB7); the V303
+  (`FV2x_V3x_USBFS.yaml`) uses `OTG_FS` (83).
 
 ### `l1fs` — `usb_l1fs.yaml` (L103)
 
