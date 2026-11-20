@@ -4,6 +4,12 @@ on:
   push:
     branches: ["main"]
 
+# Publish is a full-tree snapshot rebuilt on top of a fresh clone of
+# ch32-metapac/main; it is only a fast-forward if runs are serialized.
+concurrency:
+  group: metapac-publish
+  cancel-in-progress: false
+
 env:
   CARGO_TERM_COLOR: always
 
