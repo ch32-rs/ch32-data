@@ -35,7 +35,7 @@
     - pin: PD2
       signal: CMD
     # For batch number > 1 and RCC_AHBPCENR bit[14] ETHMACEN=1 and bit[10] SDIOEN=1
-    - pin: PB15
+    - pin: PB14
       signal: D0
     - pin: PB15
       signal: D1
