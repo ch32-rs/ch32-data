@@ -66,17 +66,17 @@ block/USBD:
       description: endpoint 4/1 mode.
       byte_offset: 12
       bit_size: 8
-      fieldset: UEP4_1_MOD
+      fieldset: UEP_MOD
     - name: UEP2_3_MOD
       description: Endpoint 2/3 mode control register.
       byte_offset: 13
       bit_size: 8
-      fieldset: UEP2_3_MOD
+      fieldset: UEP_MOD
     - name: UEP5_6_MOD
       description: endpoint 5/6 mode.
       byte_offset: 14
       bit_size: 8
-      fieldset: UEP5_6_MOD
+      fieldset: UEP_MOD
     - name: UEP7_MOD
       description: endpoint 7 mode.
       byte_offset: 15
@@ -429,110 +429,46 @@ fieldset/UDEV_CTRL:
       description: USB device port UD+/UD- pin internal pull-down resistor control.
       bit_offset: 7
       bit_size: 1
-fieldset/UEP4_1_MOD:
-  description: endpoint 4/1 mode.
+fieldset/UEP_MOD:
+  description: mode of the two endpoints a register serves. Index 0 is the first endpoint in the register name (EP4 in UEP4_1_MOD), 1 the second.
   bit_size: 8
   fields:
-    - name: UEP4_BUF_MOD
-      description: buffer mode of USB endpoint 4.
+    - name: BUF_MOD
+      description: buffer mode of USB endpoint.
       bit_offset: 0
       bit_size: 1
+      array:
+        len: 2
+        stride: 4
       enum: BUF_MODE
-    - name: UEP4_TX_EN
-      description: enable USB endpoint 4 transmittal (IN).
+    - name: TX_EN
+      description: enable USB endpoint transmittal (IN).
       bit_offset: 2
       bit_size: 1
-    - name: UEP4_RX_EN
-      description: enable USB endpoint 4 receiving (OUT).
+      array:
+        len: 2
+        stride: 4
+    - name: RX_EN
+      description: enable USB endpoint receiving (OUT).
       bit_offset: 3
       bit_size: 1
-    - name: UEP1_BUF_MOD
-      description: buffer mode of USB endpoint 1.
-      bit_offset: 4
-      bit_size: 1
-      enum: BUF_MODE
-    - name: UEP1_TX_EN
-      description: enable USB endpoint 1 transmittal (IN).
-      bit_offset: 6
-      bit_size: 1
-    - name: UEP1_RX_EN
-      description: enable USB endpoint 1 receiving (OUT).
-      bit_offset: 7
-      bit_size: 1
-fieldset/UEP2_3_MOD:
-  description: endpoint 2/3 mode.
-  bit_size: 8
-  fields:
-    - name: UEP2_BUF_MOD
-      description: buffer mode of USB endpoint 2.
-      bit_offset: 0
-      bit_size: 1
-      enum: BUF_MODE
-    - name: UEP2_TX_EN
-      description: enable USB endpoint 2 transmittal (IN).
-      bit_offset: 2
-      bit_size: 1
-    - name: UEP2_RX_EN
-      description: enable USB endpoint 2 receiving (OUT).
-      bit_offset: 3
-      bit_size: 1
-    - name: UEP3_BUF_MOD
-      description: buffer mode of USB endpoint 3.
-      bit_offset: 4
-      bit_size: 1
-      enum: BUF_MODE
-    - name: UEP3_TX_EN
-      description: enable USB endpoint 3 transmittal (IN).
-      bit_offset: 6
-      bit_size: 1
-    - name: UEP3_RX_EN
-      description: enable USB endpoint 3 receiving (OUT).
-      bit_offset: 7
-      bit_size: 1
-fieldset/UEP5_6_MOD:
-  description: endpoint 5/6 mode.
-  bit_size: 8
-  fields:
-    - name: UEP5_BUF_MOD
-      description: buffer mode of USB endpoint 5.
-      bit_offset: 0
-      bit_size: 1
-      enum: BUF_MODE
-    - name: UEP5_TX_EN
-      description: enable USB endpoint 5 transmittal (IN).
-      bit_offset: 2
-      bit_size: 1
-    - name: UEP5_RX_EN
-      description: enable USB endpoint 5 receiving (OUT).
-      bit_offset: 3
-      bit_size: 1
-    - name: UEP6_BUF_MOD
-      description: buffer mode of USB endpoint 6.
-      bit_offset: 4
-      bit_size: 1
-      enum: BUF_MODE
-    - name: UEP6_TX_EN
-      description: enable USB endpoint 6 transmittal (IN).
-      bit_offset: 6
-      bit_size: 1
-    - name: UEP6_RX_EN
-      description: enable USB endpoint 6 receiving (OUT).
-      bit_offset: 7
-      bit_size: 1
+      array:
+        len: 2
+        stride: 4
 fieldset/UEP7_MOD:
   description: endpoint 7 mode.
   bit_size: 8
   fields:
-    - name: UEP7_BUF_MOD
+    - name: BUF_MOD
       description: buffer mode of USB endpoint 7.
       bit_offset: 0
       bit_size: 1
       enum: BUF_MODE
-    - name: UEP7_TX_EN
+    - name: TX_EN
       description: enable USB endpoint 7 transmittal (IN).
       bit_offset: 2
       bit_size: 1
-    - name: UEP7_RX_EN
+    - name: RX_EN
       description: enable USB endpoint 7 receiving (OUT).
       bit_offset: 3
       bit_size: 1
@@ -659,7 +595,7 @@ fieldset/UH_RX_CTRL:
       description: "expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1."
       bit_offset: 2
       bit_size: 1
-    - name: AUTO_TOG
+    - name: R_AUTO_TOG
       description: "enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle."
       bit_offset: 3
       bit_size: 1
