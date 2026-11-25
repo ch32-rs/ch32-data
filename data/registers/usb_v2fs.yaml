@@ -372,25 +372,26 @@ fieldset/UDEV_CTRL:
       bit_offset: 7
       bit_size: 1
 fieldset/UEP_MOD:
-  description: endpoint a/b mode. lower bits comes first
+  description: mode of the two endpoints a register serves. Index 0 is the first endpoint in the register name (EP4 in UEP4_1_MOD), 1 the second.
   bit_size: 8
   fields:
     - name: BUF_MOD
-      description: buffer mode of USB endpoint
+      description: buffer mode of USB endpoint.
       bit_offset: 0
       bit_size: 1
       array:
         len: 2
         stride: 4
+      enum: BUF_MODE
     - name: TX_EN
-      description: enable USB endpoint 1 transmittal (IN).
+      description: enable USB endpoint transmittal (IN).
       bit_offset: 2
       bit_size: 1
       array:
         len: 2
         stride: 4
     - name: RX_EN
-      description: enable USB endpoint 4 receiving (OUT).
+      description: enable USB endpoint receiving (OUT).
       bit_offset: 3
       bit_size: 1
       array:
@@ -404,6 +405,7 @@ fieldset/UEP7_MOD:
       description: buffer mode of USB endpoint 7.
       bit_offset: 0
       bit_size: 1
+      enum: BUF_MODE
     - name: TX_EN
       description: enable USB endpoint 7 transmittal (IN).
       bit_offset: 2
@@ -600,3 +602,13 @@ enum/USB_TOKEN:
     - name: SETUP
       description: SETUP packet.
       value: 3
+
+enum/BUF_MODE:
+  bit_size: 1
+  variants:
+    - name: SINGLE
+      description: Single Buffer Mode
+      value: 0
+    - name: DOUBLE
+      description: Double Buffer Mode
+      value: 1
