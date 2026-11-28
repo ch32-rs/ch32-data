@@ -68,6 +68,7 @@ cores:
       - "../peripherals/FV2x_V3x_CAN1.yaml"
       - "../peripherals/FV2x_V3x_CAN2.yaml"
       - "../peripherals/FV2x_V3x_OPA.yaml"
+      - "../peripherals/FV317_ETH.yaml"
       - "../peripherals/FV2x_V3x_BKP.yaml"
 
     include_interrupts: "../interrupts/CH32V3.yaml"
@@ -77,3 +78,4 @@ cores:
 
 _raw:
   url: http://www.wch.cn/products/CH32V317.html
+q

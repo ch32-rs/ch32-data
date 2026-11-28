@@ -1,0 +1,17 @@
+# Ethernet 10/100M MAC (Synopsys DWC) + integrated 100M PHY for CH32V317
+- name: ETH
+  address: 0x40028000
+  registers:
+    kind: emac
+    version: v1
+    block: ETH
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: HCLK
+    enable:
+      register: AHBPCENR
+      field: ETHMACEN
+  interrupts:
+    - { "signal": "GLOBAL", "interrupt": "ETH" }
+  pins:
+    # 100M PHY differential pairs are not remappable, as they are not connected to the mux. There is also no (R)(G)MII on the pin mux, as opposed to e.g. the CH32V307
